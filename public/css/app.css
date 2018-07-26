@@ -4,7 +4,9 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
+.container{
+ margin-left: 10px !important;
+}
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;
@@ -1918,12 +1920,16 @@ pre code {
     margin-left: 91.66666667%;
   }
 }
-
+.scroll_table{
+ height:800px;
+ overflow-y: scroll;
+}
 .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
-  background-color: transparent;
+  background-color: white;
+  font-size:12px;
 }
 
 .table th,
@@ -1931,11 +1937,16 @@ pre code {
   padding: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
+   white-space: nowrap;
+
+
 }
 
 .table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+  background-color:lightgray;
 }
 
 .table tbody + tbody {
@@ -10474,4 +10485,3 @@ a.text-dark:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-

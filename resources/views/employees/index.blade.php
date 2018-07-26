@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Employee <a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>Upload New</small></a></h1>
+        <h1>Master Data - Employee <a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>Upload New</small></a></h1>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered table-responsive-md table-striped">
@@ -10,7 +10,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Company</th>
-                    <th scope="col">Total</th>
+                    <th scope="col">No of Employee</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Updated At</th>
                     <th scope="col">Action</th>

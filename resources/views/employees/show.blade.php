@@ -6,12 +6,12 @@
     </div>
 
     <div id="validation" class="alert alert-danger" style="display:none"></div>
-    <div class="table-responsive">
+    <div class="container-fluid">
         <table class="table table-bordered">
-            <thead>
+             <thead>
                 <tr>
                     @foreach($columns as $column)
-                        <th style="width:200px;">{{ ucwords(str_replace('_',' ',$column)) }}</th>
+                        <th style="width:180px">{{ ucwords(str_replace('_',' ',$column)) }}</th>
                     @endforeach
                 </tr>
             </thead>
