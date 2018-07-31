@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGendersTable extends Migration
+class CreateUsertypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateGendersTable extends Migration
      */
     public function up()
     {
-        Schema::create('genders', function (Blueprint $table) {
+        Schema::create('usertypes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('type');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateGendersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genders');
+        Schema::dropIfExists('usertypes');
     }
 }
