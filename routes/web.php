@@ -26,6 +26,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/employees/upload', 'EmployeeController@upload')->name('employees.upload');
     Route::post('/employees/updateCell', 'EmployeeController@updateCell')->name('employees.updateCell');
     Route::get('/users/{id}/edit', 'UserController@editUser')->name('users.edit');
-    Route::put('/users/{id}/edit', 'UserController@updateUser')->name('users.update');
+    Route::put('/users/{id}', 'UserController@updateUser')->name('users.update');
 
 });

@@ -22,7 +22,7 @@ class UserController extends Controller
 
 		$user->usertype_id = $request->input('user_type');
 		$user->save();
-		return view('dashboard');
+		return redirect()->route('home');
 	}
     //
 }
