@@ -18,6 +18,11 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    public function userType()
+    {
+        return $this->belongsTo('App\Models\UserType', 'usertype_id');
+    }
+
     
 
     /**

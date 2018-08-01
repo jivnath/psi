@@ -27,5 +27,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/employees/updateCell', 'EmployeeController@updateCell')->name('employees.updateCell');
     Route::get('/users/{id}/edit', 'UserController@editUser')->name('users.edit');
     Route::put('/users/{id}', 'UserController@updateUser')->name('users.update');
-
+    Route::get('/company/create', 'CompanyController@create')->name('company.create');
+    Route::post('/company/create', 'CompanyController@store')->name('company.store');
+    Route::get('/company/{id}/edit', 'CompanyController@edit')->name('company.edit');
+    Route::put('/company/{id}', 'CompanyController@update')->name('company.update');
 });

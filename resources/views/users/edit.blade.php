@@ -18,6 +18,7 @@
                             <td> {{$user->email}} </td>
                         </tr>
                     </table>
+
                    
                     <form  action="{{ route('users.update', $user->id )}}" method="POST" >
                         <input type="hidden" name="_method" value="PUT">
