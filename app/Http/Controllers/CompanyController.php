@@ -11,8 +11,8 @@ class CompanyController extends Controller
 	public function create()
 	{
 		$master = Company::all();
-		$master = (object)$master;
-		return view('companies.create')->withMaster($master);
+		$companies = Company::all();
+		return view('companies.create')->withMaster($master)->withCompanies($companies);
 
 	}
 
@@ -33,9 +33,10 @@ class CompanyController extends Controller
 	public function edit($id)
 	{
 		$master = Company::all();
+		$companies = Company::all();
 		$company = Company::find($id);
-		$master = (object)$master;
-		return view('companies.edit')->withMaster($master)->withCompany($company);
+		
+		return view('companies.edit')->withMaster($master)->withCompany($company)->withCompanies($companies);
 
 	}
 

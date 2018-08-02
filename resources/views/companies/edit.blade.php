@@ -53,22 +53,22 @@
                         </div>           
                     </form>
                      <div>
-                        {{--<table>
+                        <table class="table-hover" cellpadding="6px" width="100%" style="text-align: center; margin-top:20px;">
                             <tr>
                                 <th>Company Name</th>
                                 <th>Master Company</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
-                            @foreach($master as $master)
+                            @foreach($companies as $company)
                                 <tr>
-                                    <td> {{ $master->name }} </td>
-                                    <td> {{ $master->master_company }} </td>
-                                    <td> {{ $master->status }} </td>
-                                    <td> <a href="{{ route('company.edit', $master->id) }}" class="btn btn-warning btn-sm" > Edit</a> </td>
+                                    <td> {{ $company->name }} </td>
+                                    <td> {{ $company->master_company }} </td>
+                                    <td> {{ $company->status }} </td>
+                                    <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>
                             @endforeach
-                        </table>--}}
+                        </table>
                      </div>
                 </div>
             </div>
