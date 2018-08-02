@@ -8,8 +8,8 @@
                 <div class="card-header">{{ "Please fill out the form below." }}</div>
 
                 <div class="card-body " style="padding: 10px;">
-                    <form  action="{{ route('company.store') }}" method="POST" >
-                        <input type="hidden" name="_method" value="POST">
+                    <form  action="{{ route('company.update', $company->id) }}" method="POST" >
+                        <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         
                         <div class="row" style="text-align: center; margin-top: 5px;">
@@ -17,7 +17,7 @@
                                 <label for="company_name"> Company Name </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="company_name" class="form-control">
+                                <input type="text" name="company_name" value="{{ $company->name }}" class="form-control">
                             </div>
                         </div>
                         <div class="row" style="text-align: center; margin-top: 5px;">
