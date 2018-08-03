@@ -10,9 +10,9 @@ use DB;
 class EmployeeAvailabilityController extends Controller
 {
 	public function index($id=1)
-	{
+	{	
 		$companies = Company::all();
-		$availability = DB::table('employee_availabilities')->where('company_id', '$id')->first();
+		$availability = DB::table('employee_availabilities')->where('company_id', $id)->first();
 		return view('availability.index')->withCompanies($companies)->withAvailability($availability);
 
 	}
@@ -22,7 +22,6 @@ class EmployeeAvailabilityController extends Controller
    {
    		$companies = Company::all();
    		return view('availability.add')->withCompanies($companies);
-
    }
 
    public function store(Request $request)
@@ -43,18 +42,29 @@ class EmployeeAvailabilityController extends Controller
    }
 
 
-   public function show($id)
-   {
-   		$companies = Company::all();
-   		$availability = DB::table('employee_availabilities')->where('company_id', '$id');
-   		return view('availability.index')->withCompanies($companies);
-   }
-
-
    public function edit($id)
    {
-
+   		$companies = Company::all();
+   		$availability = EmployeeAvailability::find($id);
+   		return view('availability.edit')->withCompanies($companies)->withAvailability($availability);
 
    }
 
+
+   public function update(Request $request, $id)
+   {
+   		$availability = EmployeeAvailability::find($id);
+
+	   	$availability->company_id = $request->input('company');
+	   	$availability->sun = $request->input('sun');
+	   	$availability->mon = $request->input('mon');
+	   	$availability->tues = $request->input('tue');
+	   	$availability->wednes = $request->input('wed');
+	   	$availability->thurs = $request->input('thu');
+	   	$availability->fri = $request->input('fri');
+	   	$availability->satur = $request->input('sat');
+
+	   	$availability->save();
+	   	return redirect()->route('availability.index', 1 );	
+   }
 }

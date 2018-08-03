@@ -31,9 +31,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/company/create', 'CompanyController@store')->name('company.store');
     Route::get('/company/{id}/edit', 'CompanyController@edit')->name('company.edit');
     Route::put('/company/{id}', 'CompanyController@update')->name('company.update');
-    Route::get('/availability', 'EmployeeAvailabilityController@index')->name('availability.index');
+    Route::get('/availability/show/{id}', 'EmployeeAvailabilityController@index')->name('availability.index');
     Route::get('/availability/add', 'EmployeeAvailabilityController@add')->name('availability.add');
-    Route::post('/availability/add', 'EmployeeAvailabilityController@store')->name('availability.store');
+    Route::post('/availability/create', 'EmployeeAvailabilityController@store')->name('availability.store');
     Route::get('/availability/{id}/edit', 'EmployeeAvailabilityController@edit')->name('availability.edit');
     Route::put('/availability/{id}', 'EmployeeAvailabilityController@update')->name('availability.update');
 });
