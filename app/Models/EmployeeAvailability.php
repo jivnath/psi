@@ -8,8 +8,8 @@ class EmployeeAvailability extends Model
 {
 	protected $table = 'employee_availabilities';
 
-	public function company()
+	public function employee()
 	{
-		$this->belongsTo('App\Models\Company');
+		return $this->belongsTo('App\Models\Employee', 'psi_number');
 	}   //
 }

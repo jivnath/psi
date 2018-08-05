@@ -16,6 +16,13 @@ class Employee extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function employeeAvailability()
+    {
+        //relation to employee availability
+        return $this->hasOne('App\Models\EmployeeAvailability');
+    } 
+
+
     /**
      * Fetch employee data by grouping company id in descending order
      *

@@ -15,7 +15,7 @@ class CreateEmployeeAvailabilitiesTable extends Migration
     {
         Schema::create('employee_availabilities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('company_id')->unsigned();
+            $table->integer('psi_number')->unsigned();
             $table->integer('sun')->unsigned();
             $table->integer('mon')->unsigned();
             $table->integer('tues')->unsigned();

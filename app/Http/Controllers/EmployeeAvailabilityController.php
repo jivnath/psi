@@ -12,7 +12,7 @@ class EmployeeAvailabilityController extends Controller
 	public function index($id=1)
 	{	
 		$companies = Company::all();
-		$availability = DB::table('employee_availabilities')->where('company_id', $id)->first();
+		$availability = EmployeeAvailability::with('employee')->where('psi_number', $id)->get()->first();
 		return view('availability.index')->withCompanies($companies)->withAvailability($availability);
 
 	}
