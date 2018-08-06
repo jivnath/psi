@@ -25,7 +25,15 @@
                                         data-column = "{{ $column }}"
                                         data-old = "" 
                                         contenteditable="true">
-                                        {{ $cell->{$column} }}
+                                        @if ($column == 'sex')
+                                            <select >
+                                            @foreach($sex as $s)
+                                                <option value="$s->id"> {{ $s->name }} </option>
+                                            @endforeach                                                
+                                            </select>
+                                        @else
+                                            {{ $cell->{$column} }}
+                                        @endif
                                     </td>
                                 @else
                                     <td>{{ $cell->{$column} }}</td>

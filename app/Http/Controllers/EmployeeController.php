@@ -6,6 +6,7 @@ use App\Http\Requests\ExcelReader;
 use App\Models\Employee;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use App\Models\Gender;
 
 class EmployeeController extends Controller
 {
@@ -41,8 +42,9 @@ class EmployeeController extends Controller
         }
 
         $columns = Employee::columns(['id', 'company_id', 'created_at']);
+        $sex = Gender::all();
 
-        return view('employees.show', compact('cells', 'columns', 'companyId'));
+        return view('employees.show', compact('cells', 'columns', 'companyId'))->withSex($sex);
     }
 
     public function updateCell(Request $request)
