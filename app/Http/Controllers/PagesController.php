@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 
 class PagesController extends Controller
 {
@@ -16,5 +17,15 @@ class PagesController extends Controller
 	{
 		return view('pages.employee');
 	}
-    //
+
+	public function generator()
+	{
+		$companies = Company::all();
+		return view('pages.generator')->withCompanies($companies);
+	}
+
+	public function generatorWork()
+	{
+		
+	}
 }

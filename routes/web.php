@@ -44,5 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/pages/user', 'PagesController@getUser')->name('pages.users');
     Route::get('/pages/employee', 'PagesController@getEmployee')->name('pages.employee');
+    Route::get('/generator', 'PagesController@generator')->name('generator');
+    Route::post('/generator', 'PagesController@generatorWork')->name('generator.work');
 
 });
