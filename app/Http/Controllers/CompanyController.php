@@ -8,6 +8,13 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
+	// public function index()
+	// {
+	// 	$master = Company::all();
+	// 	$companies = Company::all();
+	// 	return view('companies.index')->withMaster($master)->withCompanies($companies);	
+	// }
+
 	public function create()
 	{
 		$master = Company::all();

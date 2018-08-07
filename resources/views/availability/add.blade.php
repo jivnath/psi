@@ -14,14 +14,10 @@
 
                         <div class="row" style="text-align: center; margin-top: 5px; margin-bottom: 100px;">
                             <div class="col-md-5">
-                                <label for="company_name"> <h5> Company Name </h5> </label>
+                                <label for="company_name"> <h5> PSI_S No: </h5> </label>
                             </div>
-                            <div class="col-md-7">
-                                <select class="form-control" name="company">
-                                    @foreach($companies as $company)
-                                        <option value="{{ $company->id }}"> {{ $company->name }}  </option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-7" style="text-align: left;">
+                                <input type="text" name="psi_num" placeholder="Enter PSI_s Number">
                             </div>
                         </div>
 

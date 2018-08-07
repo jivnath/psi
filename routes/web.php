@@ -25,15 +25,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/employees/upload', 'EmployeeController@uploadForm')->name('employees.uploadForm');
     Route::post('/employees/upload', 'EmployeeController@upload')->name('employees.upload');
     Route::post('/employees/updateCell', 'EmployeeController@updateCell')->name('employees.updateCell');
+
+    Route::get('/users', 'UserController@index')->name('users.index');
     Route::get('/users/{id}/edit', 'UserController@editUser')->name('users.edit');
     Route::put('/users/{id}', 'UserController@updateUser')->name('users.update');
+
+    // Route::get('/company', 'CompanyController@index')->name('company.index');
     Route::get('/company/create', 'CompanyController@create')->name('company.create');
     Route::post('/company/create', 'CompanyController@store')->name('company.store');
     Route::get('/company/{id}/edit', 'CompanyController@edit')->name('company.edit');
     Route::put('/company/{id}', 'CompanyController@update')->name('company.update');
+
     Route::get('/availability/show/{id}', 'EmployeeAvailabilityController@index')->name('availability.index');
     Route::get('/availability/add', 'EmployeeAvailabilityController@add')->name('availability.add');
     Route::post('/availability/create', 'EmployeeAvailabilityController@store')->name('availability.store');
     Route::get('/availability/{id}/edit', 'EmployeeAvailabilityController@edit')->name('availability.edit');
     Route::put('/availability/{id}', 'EmployeeAvailabilityController@update')->name('availability.update');
+
+    Route::get('/pages/user', 'PagesController@getUser')->name('pages.users');
+    Route::get('/pages/employee', 'PagesController@getEmployee')->name('pages.employee');
+
 });

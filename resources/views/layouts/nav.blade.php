@@ -9,7 +9,40 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="margin-left: 75px;">
+                <li class="nav-item">
+                    <div class="dropdown">
+                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Master Data
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="{{ route('pages.users') }}">Users</a></li>
+                        <li><a href="{{ route('pages.employee') }}">Employee</a></li>
+                        <li><a href="{{ route('company.create') }}">Company</a></li>
+                      </ul>
+                    </div>                        
+                </li>
+
+                <li class="nav-item" style="margin-left: 10px;">
+                    <div class="dropdown">
+                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Shift Management
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Company Shift</a></li>
+                        <li><a href="#">Shift Entry</a></li>
+                        <li><a href="#">Attendance Management</a></li>
+                      </ul>
+                    </div>                        
+                </li>
+
+                <li class="nav-item" style="margin-left: 10px;">
+                    <div class="dropdown">
+                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Setting
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Alert Management</a></li>
+                      </ul>
+                    </div>                        
+                </li>
 
             </ul>
 
@@ -27,6 +60,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
                     </li>
+                    
                     
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

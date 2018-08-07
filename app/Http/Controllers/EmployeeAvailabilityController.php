@@ -28,7 +28,7 @@ class EmployeeAvailabilityController extends Controller
    {
    	$availability = new EmployeeAvailability;
 
-   	$availability->company_id = $request->company;
+   	$availability->psi_number = $request->psi_num;
    	$availability->sun = $request->sun;
    	$availability->mon = $request->mon;
    	$availability->tues = $request->tue;
