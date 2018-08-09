@@ -63,7 +63,11 @@
                             @foreach($companies as $company)
                                 <tr>
                                     <td> {{ $company->name }} </td>
-                                    <td> {{ $company->master_company }} </td>
+                                    <td>
+                                        @php
+                                            echo App\Http\Controllers\CompanyController::master($company->master_company);
+                                        @endphp
+                                    </td>
                                     <td> {{ $company->status }} </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>

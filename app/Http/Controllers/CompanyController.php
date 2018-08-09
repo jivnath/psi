@@ -8,6 +8,11 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware(['auth', 'clearance']);
+    }
+
 	// public function index()
 	// {
 	// 	$master = Company::all();
@@ -61,5 +66,10 @@ class CompanyController extends Controller
 
 	}
 
-    //
+    //function for displaying master company
+    public static function master($id)
+    {
+    	$master = Company::find($id);
+    	return $master['name'];
+    }
 }

@@ -27,14 +27,14 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <select class="form-control" name="user_type">
-                                    @foreach($userType as $type)
-                                        <option value="{{ $type->id }}"> {{ $type->type }}  </option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}"> {{ $role->name }}  </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <button style="margin-top: 5px" type="submit" class="btn btn-primary">
-                                    Change Type
+                                    Change Role
                                 </button>
                             </div>
                         </div>                

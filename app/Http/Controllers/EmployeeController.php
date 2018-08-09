@@ -10,6 +10,11 @@ use App\Models\Gender;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'clearance']);
+    }
+    
     public function index()
     {
         $employees = Employee::groupByCompany();
