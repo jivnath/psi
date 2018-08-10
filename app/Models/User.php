@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -20,9 +21,9 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
-    public function userType()
+    public function role()
     {
-        return $this->belongsTo('App\Models\UserType', 'usertype_id');
+        return $this->belongsTo('App\Models\Role', 'usertype_id');
     }
 
     //encrypting all password field

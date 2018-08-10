@@ -15,7 +15,7 @@
                       <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Master Data
                       <span class="caret"></span></button>
                       <ul class="dropdown-menu">
-                        <li><a href="{{ route('pages.users') }}">Users</a></li>
+                        <li><a href="{{ route('users.index') }}">Users</a></li>
                         <li><a href="{{ route('pages.employee') }}">Employee</a></li>
                         <li><a href="{{ route('company.create') }}">Company</a></li>
                       </ul>
