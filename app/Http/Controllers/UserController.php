@@ -12,10 +12,10 @@ use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
-	public function __construct()
-	{
-        $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
-    }
+	// public function __construct()
+	// {
+ //        $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+ //    }
 
 	public function index()
 	{
@@ -35,6 +35,7 @@ class UserController extends Controller
 		$user = User::find($id);
 
 		$user->usertype_id = $request->input('role');
+		$user->assignRole($request->input('role'));
 		$user->save();
 		return redirect()->route('home');
 	}

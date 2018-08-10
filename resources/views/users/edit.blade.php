@@ -26,7 +26,7 @@
                         
                         <div class="row">
                             <div class="col-md-8">
-                                <select class="form-control" name="user_type">
+                                <select class="form-control" name="role">
                                     @foreach($roles as $role)
                                         <option value="{{ $role->id }}"> {{ $role->name }}  </option>
                                     @endforeach
