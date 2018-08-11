@@ -1,11 +1,18 @@
 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'PSI') }}
-        </a>
+          <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+   @auth
+        <img alt="PSI-S" src="../images/logo_small.png">
+  @else
+   <img alt="PSI-S" src="../images/logo.png">
+  @endauth
+      </a>
+    </div>
+          @auth
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button>  
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto" style="margin-left: 75px;">
@@ -44,21 +51,21 @@
                 </li>
 
             </ul>
-
+ @endauth
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
+                    </li> -->
                 @else
-                    <li class="nav-item">
+                   <!--  <li class="nav-item">
                         <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
-                    </li>
+                    </li> -->
                     
                     
                     <li class="nav-item dropdown">
@@ -79,6 +86,7 @@
                         </div>
                     </li>
                 @endguest
+
             </ul>
         </div>
     </div>
