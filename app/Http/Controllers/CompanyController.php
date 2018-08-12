@@ -69,7 +69,11 @@ class CompanyController extends Controller
     //function for displaying master company
     public static function master($id)
     {
-    	$master = Company::find($id);
-    	return $master['name'];
+    	if ($id==0) {
+    		return 'None';
+    	}
+    	else
+	    	$master = Company::find($id);
+	    	return $master['name'];
     }
 }

@@ -16,7 +16,7 @@
 
     <div class="form-group">
         {{ Form::label('email', 'Email:') }}
-        {{ $user->name }}
+        {{ $user->email }}
     </div>
 
     <h5><b>Give Role</b></h5>

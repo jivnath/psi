@@ -2,10 +2,10 @@
     <div class="container-fluid">
           <div class="navbar-header">
       <a class="navbar-brand" href="#">
-   @auth
-        <img alt="PSI-S" src="../images/logo_small.png">
+  @auth
+    <img alt="PSI-S" src="../images/logo_small.png">
   @else
-   <img alt="PSI-S" src="../images/logo.png">
+    <img alt="PSI-S" src="../images/logo.png">
   @endauth
       </a>
     </div>

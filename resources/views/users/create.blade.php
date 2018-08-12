@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class='col-lg-4 col-lg-offset-4'>
+<div class='col-md-4 offset-4'>
 
     <h1><i class='fa fa-user-plus'></i> Add User</h1>
     <hr>

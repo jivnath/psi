@@ -26,8 +26,13 @@
                             </div>
                             <div class="col-md-7">
                                 <select class="form-control" name="master_company">
+                                    <option >None</option>
                                     @foreach($master as $master)
-                                        <option value="{{ $master->id }}"> {{ $master->name }}  </option>
+                                        @if($company->id==$master->id)
+                                            @continue
+                                        @else
+                                            <option value="{{ $master->id }}"<?=($company->master_company== $master->id)? ' selected="selected"':''?>> {{ $master->name }}  </option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -38,8 +43,8 @@
                             </div>
                             <div class="col-md-7">
                                 <select class="form-control" name="status">
-                                    <option value="1"> Active  </option>
-                                    <option value="2"> Stopped  </option>
+                                    <option value="1"<?=($company->status == 1)? ' selected="selected"':''?>> Active  </option>
+                                    <option value="2"<?=($company->status == 2)? ' selected="selected"':''?>> Stopped  </option>
                                 </select>
                             </div>
                         </div>
@@ -68,7 +73,13 @@
                                             echo App\Http\Controllers\CompanyController::master($company->master_company);
                                         @endphp
                                     </td>
-                                    <td> {{ $company->status }} </td>
+                                    <td>
+                                        @if($company->status==1)
+                                        {{ 'Active' }}
+                                        @else
+                                        {{ 'Stopped' }}
+                                        @endif
+                                    </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>
                             @endforeach

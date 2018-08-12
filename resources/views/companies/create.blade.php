@@ -26,6 +26,7 @@
                             </div>
                             <div class="col-md-7">
                                 <select class="form-control" name="master_company">
+                                    <option>None</option>
                                     @foreach($master as $master)
                                         <option value="{{ $master->id }}"> {{ $master->name }}  </option>
                                     @endforeach
@@ -68,7 +69,13 @@
                                             echo App\Http\Controllers\CompanyController::master($company->master_company);
                                         @endphp
                                     </td>
-                                    <td> {{ $company->status }} </td>
+                                    <td>
+                                        @if($company->status==1)
+                                        {{ 'Active' }}
+                                        @else
+                                        {{ 'Stopped' }}
+                                        @endif
+                                      </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>
                             @endforeach
