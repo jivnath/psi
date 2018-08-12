@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\CompanySchedule' => $baseDir . '/app/CompanySchedule.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -34,6 +35,8 @@ return array(
     'App\\Http\\Requests\\ExcelReader' => $baseDir . '/app/Http/Requests/ExcelReader.php',
     'App\\Model\\Role' => $baseDir . '/app/Models/Role.php',
     'App\\Models\\Company' => $baseDir . '/app/Models/Company.php',
+    'App\\Models\\CompanyTimeSchadule' => $baseDir . '/app/Models/CompanyTimeSchadule.php',
+    'App\\Models\\CompanyTimeTable' => $baseDir . '/app/Models/CompanyTimeTable.php',
     'App\\Models\\Employee' => $baseDir . '/app/Models/Employee.php',
     'App\\Models\\EmployeeAvailability' => $baseDir . '/app/Models/EmployeeAvailability.php',
     'App\\Models\\Gender' => $baseDir . '/app/Models/Gender.php',
