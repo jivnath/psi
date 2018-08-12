@@ -22,11 +22,16 @@
     </div>
 
     <div class='form-group'>
-        @foreach ($roles as $role)
+        <select name="role">
+            @foreach($roles as $role)
+                <option value="{{$role->id}}"> {{$role->name}} </option>
+            @endforeach
+        </select>
+        {{--@foreach ($roles as $role)
             {{ Form::checkbox('roles[]',  $role->id ) }}
             {{ Form::label($role->name, ucfirst($role->name)) }}<br>
 
-        @endforeach
+        @endforeach--}}<br>
     </div>
 
     <div class="form-group">

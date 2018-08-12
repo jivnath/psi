@@ -41,15 +41,15 @@ class UserController extends Controller
 
         $user = User::create($request->only('email', 'name', 'password')); //Retrieving only the email and password data
 
-        $roles = $request['roles']; //Retrieving the roles field
+        $role = $request->role; //Retrieving the roles field
     //Checking if a role was selected
-        if (isset($roles)) {
+        // if (isset($roles)) {
 
-            foreach ($roles as $role) {
-            $role_r = Role::where('id', '=', $role)->firstOrFail();            
-            $user->assignRole($role_r); //Assigning role to user
-            }
-        }        
+        //     foreach ($roles as $role) {
+        //     $role_r = Role::where('id', '=', $role)->firstOrFail();            
+            $user->assignRole($role); //Assigning role to user
+        //     }
+        // }        
     //Redirect to the users.index view and display message
         return redirect()->route('users.index');
     }
@@ -72,16 +72,18 @@ class UserController extends Controller
 	
         $user = User::findOrFail($id); //Get role specified by id
 
-        $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
-        $roles = $request['roles']; //Retreive all roles
-        $user->fill($input)->save();
+        // $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
+        $role = $request->input('role'); //Retreive all roles
+        // $user->fill($input)->save();
+        $user->roles()->detach();
+        $user->assignRole($role);
 
-        if (isset($roles)) {        
-            $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
-        }        
-        else {
-            $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
-        }
+        // if (isset($roles)) {        
+        //     $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
+        // }        
+        // else {
+        //     $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
+        // }
         return redirect()->route('users.index');
 	}
     //
