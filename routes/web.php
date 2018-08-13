@@ -52,5 +52,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
-
+    Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
 });

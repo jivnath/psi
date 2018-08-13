@@ -9,6 +9,30 @@
   @endauth
       </a>
     </div>
+    <div class="container-fluid"><div class="pull-right">  {!! Form::open(['method' => 'POST', 'route' => 'changelocale', 'class' => 'form-inline navbar-select']) !!}
+
+<div class="form-group @if($errors->first('locale')) has-error @endif">
+    <span aria-hidden="true"></span>
+    {!! Form::select(
+        'locale',
+        ['en' => 'EN', 'ja' => 'JA'],
+        \App::getLocale(),
+        [
+            'id'       => 'locale',
+            'class'    => 'form-control',
+            'required' => 'required',
+            'onchange' => 'this.form.submit()',
+        ]
+    ) !!}
+    <small class="text-danger">{{ $errors->first('locale') }}</small>
+</div>
+
+<div class="btn-group pull-right sr-only">
+    {!! Form::submit("Change", ['class' => 'btn btn-success']) !!}
+</div>
+
+{!! Form::close() !!}</div></div>
+    </div>
           @auth
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
