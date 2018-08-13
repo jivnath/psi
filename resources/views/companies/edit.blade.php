@@ -26,7 +26,7 @@
                             </div>
                             <div class="col-md-7">
                                 <select class="form-control" name="master_company">
-                                    <option >None</option>
+                                    <option value="">Choose Master Company</option>
                                     @foreach($master as $master)
                                         @if($company->id==$master->id)
                                             @continue

@@ -16,40 +16,41 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto" style="margin-left: 75px;">
-                <li class="nav-item">
-                    <div class="dropdown">
-                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Master Data
-                      <span class="caret"></span></button>
-                      <ul class="dropdown-menu">
-                        <li><a href="{{ route('users.index') }}">Users</a></li>
-                        <li><a href="{{ route('pages.employee') }}">Employee</a></li>
-                        <li><a href="{{ route('company.create') }}">Company</a></li>
-                      </ul>
-                    </div>                        
+                <li class="nav-item dropdown">
+                  <a id="master_data" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      Master Data <span class="caret"></span>
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="master_data">
+                      <a class="dropdown-item" href="{{ route('users.index') }}">Users</a>
+                      <a class="dropdown-item" href="{{ route('pages.employee') }}">Employee</a>
+                      <a class="dropdown-item" href="{{ route('company.create') }}">Company</a>
+                  </div>
                 </li>
 
-                <li class="nav-item" style="margin-left: 10px;">
-                    <div class="dropdown">
-                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Shift Management
-                      <span class="caret"></span></button>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Company Shift</a></li>
-                        <li><a href="#">Shift Entry</a></li>
-                        <li><a href="#">Attendance Management</a></li>
-                      </ul>
-                    </div>                        
+                <li class="nav-item dropdown">
+                  <a id="shift_management" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      Shift Management <span class="caret"></span>
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
+                      <a class="dropdown-item" href="#"> Company Shift </a>
+                      <a class="dropdown-item" href="#"> Shift Entry </a>
+                      <a class="dropdown-item" href="#"> Attendance Management </a>
+                  </div>
                 </li>
 
-                <li class="nav-item" style="margin-left: 10px;">
-                    <div class="dropdown">
-                      <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Setting
-                      <span class="caret"></span></button>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Alert Management</a></li>
-                      </ul>
-                    </div>                        
-                </li>
+                <li class="nav-item dropdown">
+                  <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      Setting <span class="caret"></span>
+                  </a>
 
+                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="setting">
+                      <a class="dropdown-item" href="#">
+                        Alert Management
+                      </a>
+                  </div>
+                </li>
             </ul>
  @endauth
             <!-- Right Side Of Navbar -->
