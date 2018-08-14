@@ -8,20 +8,12 @@
                 <div class="card-header">{{ 'Employee Availability' }}</div>
 
                 <div class="card-body " style="padding: 20px;">
-                    <div class="row" style="text-align: left; margin-top: 5px;">
-                        <div class="col-md-5">
-                            <label for="company_name"> <h5> Company Name  </h5> </label>
-                        </div>
-                        <div class="col-md-7">
-                            <label> <h5> {{ $availability->employee->company->name }} </h5> </label>
-                        </div>
-                    </div>
                     <div class="row" style="text-align: left; margin-top: 5px; margin-bottom: 100px;">
                         <div class="col-md-5">
                             <label for="company_name"> <h5> PSI-S NO.  </h5> </label>
                         </div>
                         <div class="col-md-7">
-                            <label> <h5> {{ $availability->employee->psi_number }} </h5> </label>
+                            <label> <h5> {{ $availability->psi_number }} </h5> </label>
                         </div>
                     </div>
 

@@ -12,9 +12,9 @@
                         <input type="hidden" name="_method" value="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                        <div class="row" style="text-align: center; margin-top: 5px; margin-bottom: 100px;">
+                        <div class="row" style="text-align: center; margin-top: 5px; margin-bottom: 20px;">
                             <div class="col-md-5">
-                                <label for="company_name"> <h5> PSI_S No: </h5> </label>
+                                <label for="psi_num"> <h5> PSI_S No: </h5> </label>
                             </div>
                             <div class="col-md-7" style="text-align: left;">
                                 <input type="text" name="psi_num" placeholder="Enter PSI_s Number">
@@ -27,94 +27,61 @@
                             <div class="row">
                                 <div class="col-md-6 offset-3" style="text-align: center;">
                                     <label> <h4> Weekdays </h4> </label>
-                                </div>
-                                
-                            </div>
-                            <div class="row" style="text-align: center; margin-top: 5px;">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-2">
-                                    <label for="sunday"> <h5> Sun </h5> </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-control" name="sun">
-                                        @include('availability.dropdown')
-                                    </select>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-2">
-                                    <label for="monday"> <h5> Mon </h5> </label>
-                                </div>
-                                <div class="col-md-2">
-                                   <select class="form-control" name="mon">
-                                        @include('availability.dropdown')
-                                    </select>
-                                </div>
-                                <div class="col-md-1"></div>
+                                </div>                                
                             </div>
 
-                            <div class="row" style="text-align: center; margin-top: 5px;">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-2">
-                                    <label for="tuesday"> <h5> Tue </h5> </label>
+                            @foreach($weekdays->chunk(2) as $weekdays)
+                                <div class="row" style="text-align: center; margin-top: 5px;">
+                                    @foreach ($weekdays as $weekday)
+                                        @if($k < 6)
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-2">
+                                                <label for="{{ $weekday }}"> <h5> {{ ucfirst($weekday) }} </h5> </label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select class="form-control" name="{{ $weekday }}">
+                                                    @for ($i = 1; $i <= 24; $i++)
+                                                        @if($i < 10)
+                                                            <option value="{{ '0'.$i }}"> {{ '0'.$i }} </option>
+                                                        @else
+                                                            <option value="{{ $i }}"> {{ $i }} </option>
+                                                        @endif
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1"></div>
+                                            @php
+                                                $k++
+                                            @endphp
+                                            
+                                        @else
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-2">
+                                                <label for="sat"> <h5> Sat </h5> </label>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select class="form-control" name="sat">
+                                                    @for ($i = 1; $i <= 24; $i++)
+                                                        @if($i < 10)
+                                                            <option value="{{ '0'.$i }}"> {{ '0'.$i }} </option>
+                                                        @else
+                                                            <option value="{{ $i }}"> {{ $i }} </option>
+                                                        @endif
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-2">
+                                                <button style="margin-top: 15px" type="submit" class="btn btn-primary">
+                                                    Save
+                                                </button>
+                                            </div>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-1"></div>
+                                        @endif
+                                    @endforeach                                    
                                 </div>
-                                <div class="col-md-2">
-                                    <select class="form-control" name="tue">
-                                        @include('availability.dropdown')
-                                    </select>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-2">
-                                    <label for="wednesday"> <h5> Wed </h5> </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-control" name="wed">
-                                        @include('availability.dropdown')
-                                    </select>
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-
-                            <div class="row" style="text-align: center; margin-top: 5px;">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-2">
-                                    <label for="thursday"> <h5> Thu </h5> </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-control" name="thu">
-                                        @include('availability.dropdown')
-                                    </select>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-2">
-                                    <label for="friday"> <h5> Fri </h5> </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-control" name="fri">
-                                        @include('availability.dropdown')
-                                    </select>
-                                </div>
-                                <div class="col-md-1"></div>
-                            </div>
-
-                            <div class="row" style="text-align: center; margin-top: 5px;">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-2">
-                                    <label for="saturday"> <h5> Sat </h5> </label>
-                                </div>
-                                <div class="col-md-2">
-                                    <select class="form-control" name="sat">
-                                        @include('availability.dropdown')
-                                    </select>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-2">
-                                    <button style="margin-top: 15px" type="submit" class="btn btn-primary">
-                                        Save
-                                    </button>
-                                </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-1"></div>
-                            </div>
+                            @endforeach
                         </div>
                     </form>   
                 </div>

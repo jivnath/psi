@@ -9,19 +9,19 @@ use App\Models\Company;
 use DB;
 class EmployeeAvailabilityController extends Controller
 {
-	public function index($id=1)
-	{	
-		$companies = Company::all();
-		$availability = EmployeeAvailability::with('employee')->where('psi_number', $id)->get()->first();
-		return view('availability.index')->withCompanies($companies)->withAvailability($availability);
+	public function index($id)
+	{
+		$availability = EmployeeAvailability::/*::with('employee')->where('psi_number', $id)->*/get()->first();
+      return view('availability.index')->withAvailability($availability);
 
 	}
 
    
    public function add()
    {
-   		$companies = Company::all();
-   		return view('availability.add')->withCompanies($companies);
+         $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ]);
+         $k = 0;
+   		return view('availability.add')->withWeekdays($weekdays)->withK($k);
    }
 
    public function store(Request $request)
@@ -44,9 +44,10 @@ class EmployeeAvailabilityController extends Controller
 
    public function edit($id)
    {
-   		$companies = Company::all();
+         $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ]);
+         $k = 0;
    		$availability = EmployeeAvailability::find($id);
-   		return view('availability.edit')->withCompanies($companies)->withAvailability($availability);
+   		return view('availability.edit')->withAvailability($availability)->withWeekdays($weekdays)->withK($k);
 
    }
 
@@ -55,7 +56,7 @@ class EmployeeAvailabilityController extends Controller
    {
    		$availability = EmployeeAvailability::find($id);
 
-	   	$availability->company_id = $request->input('company');
+	   	// $availability->company_id = $request->input('company');
 	   	$availability->sun = $request->input('sun');
 	   	$availability->mon = $request->input('mon');
 	   	$availability->tues = $request->input('tue');

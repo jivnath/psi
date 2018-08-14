@@ -24,7 +24,7 @@
     <div class='form-group'>
         <select name="role">
             @foreach($roles as $role)
-                <option value="{{$role['name']}}"> {{$role['name']}} </option>
+                <option value="{{$role['name']}}" <?=($user->roles()->pluck('name')->first()==$role['name'])? 'selected="selected"':''?>> {{$role['name']}} </option>
             @endforeach
         </select>
         {{--@foreach ($roles as $role)
