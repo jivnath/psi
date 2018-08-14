@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
 use App;
+use Session;
 use Config;
-
+use Auth;
 class SetLocale
 {
     /**

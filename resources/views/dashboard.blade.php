@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Call Logs</div>
+                <div class="card-header">@lang('dashboard.CallLogs')</div>
                 <div class="card-body">
                 </div>
             </div>

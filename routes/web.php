@@ -18,9 +18,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('home');
-
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'DashboardController@index')->name('home');
     Route::get('/employees', 'EmployeeController@index')->name('employees');
     Route::get('/employees/{companyId}/show', 'EmployeeController@show')->name('employees.show');
     Route::get('/employees/upload', 'EmployeeController@uploadForm')->name('employees.uploadForm');
