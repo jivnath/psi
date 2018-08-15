@@ -47,8 +47,7 @@
                         </div>
                     @else
                         <h2> Sorry, No data available </h2>
-                    @endif
-                       
+                    @endif                       
                 </div>
             </div>
         </div>

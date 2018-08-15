@@ -20,34 +20,34 @@
                                 <input type="text" name="company_name" value="{{ $company->name }}" class="form-control">
                             </div>
                         </div>
+
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="master_company"> Master Company </label>
+                                <label for="section1"> Section 1 </label>
                             </div>
                             <div class="col-md-7">
-                                <select class="form-control" name="master_company">
-                                    <option value="">Choose Master Company</option>
-                                    @foreach($master as $master)
-                                        @if($company->id==$master->id)
-                                            @continue
-                                        @else
-                                            <option value="{{ $master->id }}"<?=($company->master_company== $master->id)? ' selected="selected"':''?>> {{ $master->name }}  </option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <input type="text" name="section1" class="form-control">                                    
                             </div>
                         </div>
+
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="status"> Status </label>
+                                <label for="sectioin2"> Section 2 </label>
                             </div>
                             <div class="col-md-7">
-                                <select class="form-control" name="status">
-                                    <option value="1"<?=($company->status == 1)? ' selected="selected"':''?>> Active  </option>
-                                    <option value="2"<?=($company->status == 2)? ' selected="selected"':''?>> Stopped  </option>
-                                </select>
+                                <input type="text" name="section2" class="form-control">                                    
                             </div>
                         </div>
+
+                        <div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="col-md-5">
+                                <label for="address"> Address </label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" name="address" class="form-control">                                    
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-5"></div>
                             <div class="col-md-7">
@@ -57,29 +57,24 @@
                             </div>
                         </div>           
                     </form>
-                     <div>
+                    
+                    <div>
                         <table class="table-hover" cellpadding="6px" width="100%" style="text-align: center; margin-top:20px;">
                             <tr>
                                 <th>Company Name</th>
-                                <th>Master Company</th>
-                                <th>Status</th>
+                                <th>Master Id</th>
+                                <th>Section 1</th>
+                                <th>Section 2</th>
+                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                             @foreach($companies as $company)
                                 <tr>
                                     <td> {{ $company->name }} </td>
-                                    <td>
-                                        @php
-                                            echo App\Http\Controllers\CompanyController::master($company->master_company);
-                                        @endphp
-                                    </td>
-                                    <td>
-                                        @if($company->status==1)
-                                        {{ 'Active' }}
-                                        @else
-                                        {{ 'Stopped' }}
-                                        @endif
-                                    </td>
+                                    <td> {{ $company->master_id }} </td>
+                                    <td> {{ $company->section1 }} </td>
+                                    <td> {{ $company->section2 }} </td>
+                                    <td> {{ $company->address }} </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>
                             @endforeach

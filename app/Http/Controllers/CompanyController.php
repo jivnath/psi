@@ -12,19 +12,11 @@ class CompanyController extends Controller
     {
         $this->middleware(['auth', 'clearance']);
     }
-
-	// public function index()
-	// {
-	// 	$master = Company::all();
-	// 	$companies = Company::all();
-	// 	return view('companies.index')->withMaster($master)->withCompanies($companies);	
-	// }
-
+	
 	public function create()
 	{
-		$master = Company::all();
 		$companies = Company::all();
-		return view('companies.create')->withMaster($master)->withCompanies($companies);
+		return view('companies.create')->withCompanies($companies);
 
 	}
 
@@ -33,8 +25,7 @@ class CompanyController extends Controller
 		$company = new Company;
 
 		$company->name = $request->company_name;
-		$company->master_company= $request->master_company;
-		$company->status = $request->status;
+		$company->address= $request->address;
 
 		$company->save();
 
@@ -44,11 +35,10 @@ class CompanyController extends Controller
 
 	public function edit($id)
 	{
-		$master = Company::all();
 		$companies = Company::all();
 		$company = Company::find($id);
 		
-		return view('companies.edit')->withMaster($master)->withCompany($company)->withCompanies($companies);
+		return view('companies.edit')->withCompany($company)->withCompanies($companies);
 
 	}
 
@@ -57,8 +47,9 @@ class CompanyController extends Controller
 		$company = Company::find($id);
 
 		$company->name = $request->input('company_name');
-		$company->master_company= $request->input('master_company');
-		$company->status = $request->input('status');
+		$company->section1= $request->input('section1');
+		$company->section2= $request->input('section2');
+		$company->address= $request->input('address');
 
 		$company->save();
 
