@@ -11,8 +11,9 @@ class EmployeeAvailabilityController extends Controller
 {
 	public function index($id)
 	{
-		$availability = EmployeeAvailability::/*::with('employee')->where('psi_number', $id)->*/get()->first();
-      return view('availability.index')->withAvailability($availability);
+		$availability = EmployeeAvailability::find($id);
+      $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
+      return view('availability.index')->withAvailability($availability)->withWeekdays($weekdays);
 
 	}
 
@@ -31,11 +32,11 @@ class EmployeeAvailabilityController extends Controller
    	$availability->psi_number = $request->psi_num;
    	$availability->sun = $request->sun;
    	$availability->mon = $request->mon;
-   	$availability->tues = $request->tue;
-   	$availability->wednes = $request->wed;
-   	$availability->thurs = $request->thu;
+   	$availability->tue = $request->tue;
+   	$availability->wed = $request->wed;
+   	$availability->thu = $request->thu;
    	$availability->fri = $request->fri;
-   	$availability->satur = $request->sat;
+   	$availability->sat = $request->sat;
 
    	$availability->save();
    	return redirect()->route('availability.add');
@@ -59,14 +60,14 @@ class EmployeeAvailabilityController extends Controller
 	   	// $availability->company_id = $request->input('company');
 	   	$availability->sun = $request->input('sun');
 	   	$availability->mon = $request->input('mon');
-	   	$availability->tues = $request->input('tue');
-	   	$availability->wednes = $request->input('wed');
-	   	$availability->thurs = $request->input('thu');
+	   	$availability->tue = $request->input('tue');
+	   	$availability->wed = $request->input('wed');
+	   	$availability->thu = $request->input('thu');
 	   	$availability->fri = $request->input('fri');
-	   	$availability->satur = $request->input('sat');
+	   	$availability->sat = $request->input('sat');
 
 	   	$availability->save();
-	   	return redirect()->route('availability.index', 1 );	
+	   	return redirect()->route('availability.index', $id );	
    }
 
    public static function enhanceTime($time)
