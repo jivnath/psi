@@ -12,5 +12,6 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-'CallLogs'=>'This is English'
+'user'=>'Username',
+'pass'=>'Password'
 ];

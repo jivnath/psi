@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background:#21469b">
     <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
