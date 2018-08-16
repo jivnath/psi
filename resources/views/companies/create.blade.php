@@ -62,7 +62,6 @@
                         <table class="table-hover" cellpadding="6px" width="100%" style="text-align: center; margin-top:20px;">
                             <tr>
                                 <th>Company Name</th>
-                                <th>Master Id</th>
                                 <th>Section 1</th>
                                 <th>Section 2</th>
                                 <th>Address</th>
@@ -71,13 +70,29 @@
                             @foreach($companies as $company)
                                 <tr>
                                     <td> {{ $company->name }} </td>
-                                    <td> {{ $company->master_id }} </td>
-                                    <td> {{ $company->section1 }} </td>
-                                    <td> {{ $company->section2 }} </td>
+                                    @php
+                                        $c = App\Http\Controllers\CompanyController::sections($company->id);
+                                    @endphp
+                                    @if(count($c)==0)
+                                        <td>---</td>
+                                        <td>---</td>
+                                    @endif
+                                    @if(count($c)==1)
+                                        @foreach($c as $c)
+                                            <td> {{ $c }} </td>
+                                        @endforeach
+                                        <td>---</td>
+                                    @endif
+                                    @if(count($c)==2)
+                                        @foreach($c as $c)
+                                            <td>{{ $c }}</td>
+                                        @endforeach
+                                    @endif                                        
                                     <td> {{ $company->address }} </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>
                             @endforeach
+
                         </table>
                     </div>
                 </div>

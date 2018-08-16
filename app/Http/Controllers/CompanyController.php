@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use DB;
 
 class CompanyController extends Controller
 {
@@ -15,9 +16,16 @@ class CompanyController extends Controller
 	
 	public function create()
 	{
-		$companies = Company::all();
+		$companies = DB::table('companies')->where('master_id', null)->get();
 		return view('companies.create')->withCompanies($companies);
 
+	}
+
+	public static function sections($id)
+	{
+		$sec = DB::table('companies')->where('master_id', $id)->get();
+		$s = $sec->pluck('name');
+		return $s;
 	}
 
 	public function store(Request $request)
@@ -26,16 +34,34 @@ class CompanyController extends Controller
 
 		$company->name = $request->company_name;
 		$company->address= $request->address;
-
 		$company->save();
+		$id = $company->id;
+
+		if($request->section1){
+			$company = new Company;
+
+			$company->name = $request->section1;
+			$company->master_id = $id;
+			$company->address = $request->address;
+			$company->save();			
+		}
+		if($request->section2){
+			$company = new Company;
+
+			$company->name = $request->section2;
+			$company->master_id = $id;
+			$company->address = $request->address;
+			$company->save();
+		}
 
 		return redirect()->route('company.create');
 
 	}
 
+	
 	public function edit($id)
 	{
-		$companies = Company::all();
+		$companies = DB::table('companies')->where('master_id', null)->get();
 		$company = Company::find($id);
 		
 		return view('companies.edit')->withCompany($company)->withCompanies($companies);
@@ -47,11 +73,27 @@ class CompanyController extends Controller
 		$company = Company::find($id);
 
 		$company->name = $request->input('company_name');
-		$company->section1= $request->input('section1');
-		$company->section2= $request->input('section2');
 		$company->address= $request->input('address');
-
 		$company->save();
+
+		$c = DB::table('companies')->where('master_id', $company->id)->delete();
+
+		if($request->section1){
+			$company = new Company;
+
+			$company->name = $request->section1;
+			$company->master_id = $id;
+			$company->address = $request->address;
+			$company->save();			
+		}
+		if($request->section2){
+			$company = new Company;
+
+			$company->name = $request->section2;
+			$company->master_id = $id;
+			$company->address = $request->address;
+			$company->save();
+		}
 
 		return redirect()->route('company.create');
 

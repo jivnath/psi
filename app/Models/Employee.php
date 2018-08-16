@@ -11,10 +11,10 @@ class Employee extends Model
      *
      * @return Company
      */
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
+    // public function company()
+    // {
+    //     return $this->belongsTo(Company::class);
+    // }
 
     public function employeeAvailability()
     {
