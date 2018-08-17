@@ -12,6 +12,9 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-'user'=>'ユーザー名',
-'pass'=>'パスワード',
+'user'=>'Username',
+'pass'=>'Password',
+'Login'=>'Login',
+'remember_me'=>'Remember Me',
+'forgot_pass'=>'Forgot your password?',
 ];

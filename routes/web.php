@@ -15,6 +15,7 @@
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
 
 Auth::routes();
 
@@ -51,5 +52,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
-    Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
+    
 });

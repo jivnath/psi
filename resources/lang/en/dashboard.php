@@ -13,5 +13,5 @@ return [
     |
     */
 'user'=>'Username',
-'pass'=>'Password'
+'pass'=>'Password',
 ];
