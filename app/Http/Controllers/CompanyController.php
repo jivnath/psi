@@ -75,8 +75,11 @@ class CompanyController extends Controller
 		$company->name = $request->input('company_name');
 		$company->address= $request->input('address');
 		$company->save();
+		$id = $company->id;
 
 		$c = DB::table('companies')->where('master_id', $company->id)->delete();
+
+		// $s = DB::table('companies')->where('master_id', $id)->get();
 
 		if($request->section1){
 			$company = new Company;
