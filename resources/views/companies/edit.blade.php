@@ -74,14 +74,14 @@
                                         $c = App\Http\Controllers\CompanyController::sections($company->id);
                                     @endphp
                                     @if(count($c)==0)
-                                        <td></td>
-                                        <td></td>
+                                        <td>---</td>
+                                        <td>---</td>
                                     @endif
                                     @if(count($c)==1)
                                         @foreach($c as $c)                                        
                                             <td> {{ $c }} </td>
                                         @endforeach
-                                        <td></td>
+                                        <td>---</td>
                                     @endif
                                     @if(count($c)==2)
                                         @foreach($c as $c)

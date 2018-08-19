@@ -2,19 +2,37 @@
 
 @section('content')
     <div class="container">        
-        {!! Form::open(array('route' => 'generator.work')) !!}
+        {!! Form::open(array('route' => 'generator.store')) !!}
         	<div class="row">
 	            <div class="col-md-4" style="text-align: center;">               
 	                <label for="company"> Pick a Company </label>
 	            </div>
 	            <div class="col-md-4">
-	            	<select class="form-control" name="company" style="float: left">
+	            	<select class="form-control" name="company" id="companies" style="float: left">
 	            		@foreach ($companies as $company)
 	            			<option value="$company->id">{{ $company->name }}</option>
 	            		@endforeach
-	            	</select>            	
+	            	</select>
+	            	<br>
+	            	{{--<div style="padding: 10px;">
+		            	<input type="checkbox" name="section" value="section1">Section 1
+		            	<input type="checkbox" name="section" value="section2">Section 2  
+		            </div>--}} 	
 	            </div>
 	            <div class="col-md-4"></div>
+            </div>
+            <br>
+            <div class="row">
+            	<div class="col-md-4" style="text-align: center;">
+            		<label for="shift"> Shifts </label>
+            	</div>
+            	<div class="col-md-4" style="">
+            		@for($i = 1; $i < 25; $i++)
+            			<input type="checkbox" name="shift" value="{{ $i }}">{{ $i }}
+            		@endfor
+            	</div>
+            	<div class="col-md-4"></div>
+            	
             </div>
             <br>
 
@@ -51,8 +69,23 @@
             </div>
            {!! Form::close() !!}
         </div>
-
-
-
-
 @endsection
+<script>
+	$(document).ready(function(){
+		$("#companies").onChange(function(option){
+			var selected = this.$select.val();
+			if(selected)
+			{
+				$.ajax({
+					url:"http://localhost/api/generator",
+					method:"POST",
+					data:{selected:selected},
+					success:function(data){
+						$("input[name='section']").html(data);
+						console.log();
+					}
+				})
+			}
+		})
+	});
+</script>
