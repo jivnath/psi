@@ -12,8 +12,6 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-'user'=>'ユーザー名',
-'pass'=>'パスワード',
 'MasterData' =>'マスターデータ',
 'Users' =>'ユーザー',
 'Employee' =>'従業員',

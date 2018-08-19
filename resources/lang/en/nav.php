@@ -12,14 +12,12 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-'user'=>'ユーザー名',
-'pass'=>'パスワード',
-'MasterData' =>'マスターデータ',
-'Users' =>'ユーザー',
-'Employee' =>'従業員',
-'Company' =>'会社',
-'ActiveUsers' =>'アクティブユーザー',
-'RecentUpdate' =>'最新のアップデート',
-'ShiftManagement' =>'シフト管理',
-'Setting'=>'設定',
+'MasterData' =>'Master Data',
+'Users' =>'Users',
+'Employee' =>'Employee',
+'Company' =>'Company',
+'ActiveUsers' =>'Active Users',
+'RecentUpdate' =>'RecentUpdate',
+'ShiftManagement' =>'Shift Management',
+'Setting'=>'Setting',
 ];

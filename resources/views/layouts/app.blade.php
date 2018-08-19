@@ -20,7 +20,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="background:#21469b">
+  @auth
+ <body style="background:#fff">
+  @else
+   <body style="background:#21469b">
+  @endauth
     <div id="app">
         <div>
             @include('layouts.nav')
