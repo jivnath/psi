@@ -1,5 +1,5 @@
    <div id="navbar-main">
-        <div class="navbar navbar-inverse navbar-fixed-top pull-right">
+        <div class="navbar navbar-inverse navbar-fixed-top pull-right" style="">
            <div class="container">
             <div class="">  {!! Form::open(['method' => 'POST', 'route' => 'changelocale', 'class' => 'form-inline navbar-select']) !!}
                 <div class="form-group @if($errors->first('locale')) has-error @endif">
@@ -27,14 +27,15 @@
         </div>
 
      </div> 
+	   <div class="clearfix"> </div>
         
           @auth
             <nav class="navbar navbar-expand-md navbar-light" style="background:#fff">
             @else
              <nav class="navbar navbar-expand-md navbar-light" style="background:#21469b">
-
             @endauth
-    <div class="container">
+ 
+	 <div class="container" style="padding: 20px ">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             @auth
@@ -44,17 +45,24 @@
             @endauth
           </a>
         </div>
+		<div class="hrms">
+			@auth
+			<img alt="PSI-S" src="../images/hrms1.png">
+			@else
+				  <img alt="PSI-S" src="../images/hrms.png">
+			@endauth
+		</div>
+	</div>
 
-
-    </div>
- <div class="container">
+<div style="background: #21469b">
+	<div class="container" >
     @auth
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>  
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto pull-left" style="margin-left: 75px;">
+            <ul class="navbar-nav mr-auto pull-left" style="">
                 <li class="nav-item dropdown">
                     <a id="master_data" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                       @lang('nav.MasterData') <span class="caret"></span>
@@ -79,17 +87,6 @@
                   </div>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                      @lang('nav.Setting') <span class="caret"></span>
-                    </a>
-
-                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="setting">
-                      <a class="dropdown-item" href="#">
-                        Alert Management
-                      </a>
-                  </div>
-                </li>
             </ul>
     @endauth
             <!-- Right Side Of Navbar -->
@@ -107,7 +104,18 @@
                 <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
             </li> -->--}}
             
-            
+                <li class="nav-item dropdown">
+                    <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                      @lang('nav.Setting') <span class="caret"></span>
+                    </a>
+
+                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="setting">
+                      <a class="dropdown-item" href="#">
+                        Alert Management
+                      </a>
+                  </div>
+                </li>
+
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -131,4 +139,5 @@
         </div>
 
     </div>
+	</div>
 </nav>

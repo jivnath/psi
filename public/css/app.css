@@ -4,9 +4,9 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-.container{
+/*.container{
  margin-left: 10px !important;
-}
+}*/
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;
@@ -80,7 +80,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background: #eaeff2 !important;
 }
 
 [tabindex="-1"]:focus {
@@ -103,6 +103,9 @@ h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
+
+
+
 
 p {
   margin-top: 0;
@@ -221,6 +224,7 @@ pre {
   overflow: auto;
   -ms-overflow-style: scrollbar;
 }
+
 
 figure {
   margin: 0 0 1rem;
@@ -613,9 +617,10 @@ pre code {
 
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140px;
+    max-width: 100%;
   }
 }
+
 
 .container-fluid {
   width: 100%;
@@ -4629,10 +4634,10 @@ input[type="button"].btn-block {
 
 .navbar {
   position: relative;
-  display: -webkit-box;
+/*  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
+*/  -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -4640,8 +4645,8 @@ input[type="button"].btn-block {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 0.5rem 1rem;
-}
+/*  padding: 0.5rem 1rem;
+*/}
 
 .navbar > .container,
 .navbar > .container-fluid {
@@ -5017,7 +5022,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 .navbar-light .navbar-nav .nav-link:hover,
@@ -5125,6 +5130,11 @@ input[type="button"].btn-block {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
+
+main .card{
+	margin-top: 100px;
+}
+
 
 .card > hr {
   margin-right: 0;
