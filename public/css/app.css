@@ -80,7 +80,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background: #eaeff2 !important;
+  background-color: #f8fafc;
 }
 
 [tabindex="-1"]:focus {
@@ -225,7 +225,9 @@ pre {
   -ms-overflow-style: scrollbar;
 }
 
-
+main{
+	background: #;
+}
 figure {
   margin: 0 0 1rem;
 }
