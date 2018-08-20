@@ -35,7 +35,7 @@
              <nav class="navbar navbar-expand-md navbar-light" style="background:#21469b">
           @endauth
  
-	 <div class="container" style="padding: 20px ">
+	 <div class="container" style="padding: 5px 20px 20px">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             @auth
@@ -53,7 +53,6 @@
 			@endauth
 		</div>
 	</div>
-
 <div style="background: #21469b">
 	<div class="container" >
     @auth
@@ -65,7 +64,7 @@
             <ul class="navbar-nav mr-auto pull-left" style="">
                 <li class="nav-item dropdown">
                     <a id="master_data" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                      @lang('nav.MasterData') <span class="caret"></span>
+                    <i class="fas fa-home"></i>  @lang('nav.MasterData') <span class="caret"></span>
                     </a>
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="master_data">
@@ -77,7 +76,9 @@
 
                 <li class="nav-item dropdown">
                     <a id="shift_management" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                      @lang('nav.ShiftManagement') <span class="caret"></span>
+                     <i class="far fa-clock"></i>
+
+ @lang('nav.ShiftManagement') <span class="caret"></span>
                     </a>
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
@@ -106,7 +107,7 @@
             
                 <li class="nav-item dropdown">
                     <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                      @lang('nav.Setting') <span class="caret"></span>
+                     <i class="fas fa-cog"></i> @lang('nav.Setting') <span class="caret"></span>
                     </a>
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="setting">
@@ -118,7 +119,9 @@
 
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                    {{ Auth::user()->name }} <span class="caret"></span>
+                <i class="fas fa-user"></i>
+
+    {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

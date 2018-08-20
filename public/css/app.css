@@ -80,7 +80,7 @@ body {
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: #eaeff2;
 }
 
 [tabindex="-1"]:focus {
@@ -5029,7 +5029,7 @@ input[type="button"].btn-block {
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link:focus {
-  color: rgba(0, 0, 0, 0.7);
+  color:aquamarine;
 }
 
 .navbar-light .navbar-nav .nav-link.disabled {
@@ -5040,7 +5040,7 @@ input[type="button"].btn-block {
 .navbar-light .navbar-nav .active > .nav-link,
 .navbar-light .navbar-nav .nav-link.show,
 .navbar-light .navbar-nav .nav-link.active {
-  color: rgba(0, 0, 0, 0.9);
+  color:aquamarine;
 }
 
 .navbar-light .navbar-toggler {
