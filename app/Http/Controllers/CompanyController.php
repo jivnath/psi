@@ -9,10 +9,10 @@ use DB;
 
 class CompanyController extends Controller
 {
-	public function __construct()
-    {
-        $this->middleware(['auth', 'clearance']);
-    }
+	// public function __construct()
+ //    {
+ //        $this->middleware(['auth', 'clearance']);
+ //    }
 	
 	public function create()
 	{

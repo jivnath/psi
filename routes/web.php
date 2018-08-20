@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pages/employee', 'PagesController@getEmployee')->name('pages.employee');
     Route::get('/generator', 'PagesController@generator')->name('generator');
     Route::post('/generator', 'PagesController@generatorStore')->name('generator.store');
+    Route::get('pages/shift', 'PagesController@shift')->name('pages.shift');
+    Route::post('section', 'PagesController@section')->name('section');
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');

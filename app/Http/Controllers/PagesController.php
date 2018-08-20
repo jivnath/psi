@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyTimeTable;
+use App\Models\CompanyTimeSchedule;
 use DB;
+use Date;
 
 class PagesController extends Controller
 {
@@ -25,43 +28,57 @@ class PagesController extends Controller
 		return view('pages.generator')->withCompanies($companies);
 	}
 
-	public function generatorWork($request)
+	public function section(Request $request)
 	{
 		$id = $request->selected;
-		$company = Company::find($id);
 		$sections = DB::table('companies')->where('master_id', $id)->get();
 
-		return $sections;
+		return response()->json(array('sections'=> $sections));
 	}
 
 	public function generatorStore(Request $request )
 	{
-		$shifts = $request->shift;
-		$timeTable = DB::table('company_time_tables')->insertGetId(
-    		[
-    			'company_id' => $request->company, 'shifts' => $shifts
-    		]
-		);
+		$shifts = serialize($request['shift']);
+		$timeTable = new CompanyTimeTable;
+
+		$timeTable->company_id = $request->company;
+		$timeTable->shifts = $shifts;
+		$timeTable->save();
+
 		$id = $timeTable->id;
 
-		$startDate = strtotime($request->start_date);
-		$endDate = strtotime($request->end_date);
+		$startDate = $request->start_date;
+		$endDate = $request->end_date;
 
-		while ($startDate <= $endDate) {
-			foreach ($shifts as $shift ) {
-				$schedule = DB::table('company_time_schedules')->insertGetId(
-					[
-						'companyTT_id' => $id,
-						'date' => $startDate,
-						'time' => $shift,
-						'normal' => '',
-						'help' => '',
-					 ]
-				);
+
+		$s = $request['shift'];
+
+		foreach ($s as $s )
+		{
+			$i = 1;
+			$startDate = $request->start_date;
+			while ( $startDate <= $endDate)
+			{
+				$schedule = new CompanyTimeSchedule;
+
+				$schedule->companyTT_id = $id;
+				$schedule->date = $startDate;
+				$schedule->time = $s;
+				$schedule->normal = '';
+				$schedule->help = '';
+
+				$schedule->save();
+				$i++;
+				$startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
 			}
-			$startDate = strtotime("+1 day", $startDate);
 		}
+		return redirect()->route('generator');
+	}
 
-
+	public function shift()
+	{
+		$ct = CompanyTimeSchedule::all();
+		$cts = DB::table('company_time_schedules')->groupBy('date')->get();
+		return view('pages.shift')->withCts($cts)->withCt($ct);
 	}
 }

@@ -31,9 +31,9 @@
         
           @auth
             <nav class="navbar navbar-expand-md navbar-light" style="background:#fff">
-            @else
+          @else
              <nav class="navbar navbar-expand-md navbar-light" style="background:#21469b">
-            @endauth
+          @endauth
  
 	 <div class="container" style="padding: 20px ">
         <div class="navbar-header">

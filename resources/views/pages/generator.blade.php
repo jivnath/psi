@@ -8,16 +8,16 @@
 	                <label for="company"> Pick a Company </label>
 	            </div>
 	            <div class="col-md-4">
-	            	<select class="form-control" name="company" id="companies" style="float: left">
+	            	<select onchange="changeSection()" class="form-control" name="company" id="companies" style="float: left">
 	            		@foreach ($companies as $company)
-	            			<option value="$company->id">{{ $company->name }}</option>
+	            			<option value="{{$company->id}}">{{ $company->name }}</option>
 	            		@endforeach
 	            	</select>
 	            	<br>
-	            	{{--<div style="padding: 10px;">
-		            	<input type="checkbox" name="section" value="section1">Section 1
-		            	<input type="checkbox" name="section" value="section2">Section 2  
-		            </div>--}} 	
+	            	<div id="sections" style="padding: 10px;">
+		            {{--	<input type="checkbox" name="section" value="section1">Section 1
+		            	<input type="checkbox" name="section" value="section2">Section 2  --}}
+		            </div> 	
 	            </div>
 	            <div class="col-md-4"></div>
             </div>
@@ -28,7 +28,7 @@
             	</div>
             	<div class="col-md-4" style="">
             		@for($i = 1; $i < 25; $i++)
-            			<input type="checkbox" name="shift" value="{{ $i }}">{{ $i }}
+            			<input type="checkbox" name="shift[]" value="{{ $i }}">{{ $i }}
             		@endfor
             	</div>
             	<div class="col-md-4"></div>
@@ -70,22 +70,26 @@
            {!! Form::close() !!}
         </div>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-	$(document).ready(function(){
-		$("#companies").onChange(function(option){
-			var selected = this.$select.val();
-			if(selected)
-			{
-				$.ajax({
-					url:"http://localhost/api/generator",
-					method:"POST",
-					data:{selected:selected},
-					success:function(data){
-						$("input[name='section']").html(data);
-						console.log();
-					}
-				})
-			}
-		})
-	});
+
+	function changeSection(){
+		var selected = this.$select.value;
+		$.post('/section', {selected:selected}, function(data){
+			$("#sections").innerhtml(#sections) = 'success';
+               			console.log();
+               });
+		
+		{{--$.ajax({
+               type:'POST',
+               url:'/section',
+               data:{'selected = selected'},
+               success:function(data){
+               		$("#sections").innerhtml() = 'success';
+               			{{--// foreach($data in data)
+                			'<input type="checkbox" name="section" value="{{ $data['name'] }}" > {{ $data['name']}} ';--}}
+               }
+            });
+    	}--}}
+
 </script>

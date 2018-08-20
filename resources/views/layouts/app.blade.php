@@ -47,6 +47,7 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
 
     @stack('scripts')
 
