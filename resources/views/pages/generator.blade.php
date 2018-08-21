@@ -1,22 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">        
+    <div class="container">
+    <center><h3>Company Shift</h3></center>
         {!! Form::open(array('route' => 'generator.store')) !!}
         	<div class="row">
 	            <div class="col-md-4" style="text-align: center;">               
-	                <label for="company"> Pick a Company </label>
+	                <label for="company">Company Name</label>
 	            </div>
 	            <div class="col-md-4">
-	            	<select onchange="changeSection()" class="form-control" name="company" id="companies" style="float: left">
+	            	<select onChange="getMessage()" class="form-control" name="company" id="companies" style="float: left">
+	            			<option value="">-- Select Company --</option>
 	            		@foreach ($companies as $company)
 	            			<option value="{{$company->id}}">{{ $company->name }}</option>
 	            		@endforeach
 	            	</select>
 	            	<br>
 	            	<div id="sections" style="padding: 10px;">
-		            {{--	<input type="checkbox" name="section" value="section1">Section 1
-		            	<input type="checkbox" name="section" value="section2">Section 2  --}}
 		            </div> 	
 	            </div>
 	            <div class="col-md-4"></div>
@@ -26,9 +26,19 @@
             	<div class="col-md-4" style="text-align: center;">
             		<label for="shift"> Shifts </label>
             	</div>
-            	<div class="col-md-4" style="">
+            	<div class="col-md-5" style="">
             		@for($i = 1; $i < 25; $i++)
-            			<input type="checkbox" name="shift[]" value="{{ $i }}">{{ $i }}
+            			<input type="checkbox" name="shift[]" value="{{ $i }}">
+            			
+            				@if(strlen($i)==1) 
+            				{{'0'.$i }}
+            				@else 
+            				{{$i}}
+            			@endif
+            			
+            		@if($i==12)
+            		<br />
+            		@endif	
             		@endfor
             	</div>
             	<div class="col-md-4"></div>
@@ -72,24 +82,18 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-
-	function changeSection(){
-		var selected = this.$select.value;
-		$.post('/section', {selected:selected}, function(data){
-			$("#sections").innerhtml(#sections) = 'success';
-               			console.log();
-               });
-		
-		{{--$.ajax({
+         function getMessage(){
+         	company=$('#companies').val();
+            $.ajax({
                type:'POST',
-               url:'/section',
-               data:{'selected = selected'},
+               url:'/getmsg',
+               data:'_token = <?php echo csrf_token() ?>,sections='.company,
+               dataType: "text",
                success:function(data){
-               		$("#sections").innerhtml() = 'success';
-               			{{--// foreach($data in data)
-                			'<input type="checkbox" name="section" value="{{ $data['name'] }}" > {{ $data['name']}} ';--}}
+               		console.log(data);
+                  $("#sections").html(data.msg);
                }
             });
-    	}--}}
-
+         }
+      </script>
 </script>

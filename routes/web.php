@@ -20,6 +20,10 @@ Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationContr
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('ajax',function(){
+   return view('generator');
+});
+    Route::post('/getmsg','AjaxController@index')->name('generator');;
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/employees', 'EmployeeController@index')->name('employees');
     Route::get('/employees/{companyId}/show', 'EmployeeController@show')->name('employees.show');

@@ -57,37 +57,30 @@
                             </div>
                         </div>           
                     </form>
-                    
+                    <br />
                     <div>
-                        <table class="table-hover" cellpadding="6px" width="100%" style="text-align: center; margin-top:20px;">
+                        <table class="table table-striped">
                             <tr>
                                 <th>Company Name</th>
-                                <th>Section 1</th>
-                                <th>Section 2</th>
+                                <th>Section</th>
                                 <th>Address</th>
                                 <th>Action</th>
                             </tr>
-                            @foreach($companies as $company)
+                             @foreach($companies as $company)
                                 <tr>
                                     <td> {{ $company->name }} </td>
                                     @php
                                         $c = App\Http\Controllers\CompanyController::sections($company->id);
                                     @endphp
-                                    @if(count($c)==0)
-                                        <td>---</td>
-                                        <td>---</td>
-                                    @endif
-                                    @if(count($c)==1)
-                                        @foreach($c as $c)                                        
-                                            <td> {{ $c }} </td>
-                                        @endforeach
-                                        <td>---</td>
-                                    @endif
-                                    @if(count($c)==2)
+                                    <td>
+                                    @if(count($c)>0)
                                         @foreach($c as $c)
-                                            <td>{{ $c }}</td>
+                                            {{ $c }}<br />
                                         @endforeach
-                                    @endif                                        
+                                    @else
+                                         --   
+                                    @endif
+                                    </td>                                      
                                     <td> {{ $company->address }} </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>

@@ -39,17 +39,17 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             @auth
-              <img alt="PSI-S" src="../images/logo_small.png">
+              <img alt="PSI-S" src="/images/logo_small.png">
             @else
-              <img alt="PSI-S" src="../images/logo.png">
+              <img alt="PSI-S" src="/images/logo.png">
             @endauth
           </a>
         </div>
 		<div class="hrms">
 			@auth
-			<img alt="PSI-S" src="../images/hrms1.png">
+			<img alt="PSI-S" src="/images/hrms1.png">
 			@else
-				  <img alt="PSI-S" src="../images/hrms.png">
+				  <img alt="PSI-S" src="/images/hrms.png">
 			@endauth
 		</div>
 	</div>

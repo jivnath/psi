@@ -17,7 +17,7 @@
                                 <label for="company_name"> Company Name </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="company_name" class="form-control">
+                                <input type="text" name="company_name" class="form-control" required>
                             </div>
                         </div>
 
@@ -44,7 +44,7 @@
                                 <label for="address"> Address </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="address" class="form-control">
+                                <input type="text" name="address" class="form-control" required>
                             </div>
                         </div>
 
@@ -57,13 +57,12 @@
                             </div>
                         </div>           
                     </form>
-
+<br />
                     <div>
-                        <table class="table-hover" cellpadding="6px" width="100%" style="text-align: center; margin-top:20px;">
+                        <table class="table table-striped">
                             <tr>
                                 <th>Company Name</th>
-                                <th>Section 1</th>
-                                <th>Section 2</th>
+                                <th>Sections</th>
                                 <th>Address</th>
                                 <th>Action</th>
                             </tr>
@@ -73,21 +72,15 @@
                                     @php
                                         $c = App\Http\Controllers\CompanyController::sections($company->id);
                                     @endphp
-                                    @if(count($c)==0)
-                                        <td>---</td>
-                                        <td>---</td>
-                                    @endif
-                                    @if(count($c)==1)
+                                    <td>
+                                    @if(count($c)>0)
                                         @foreach($c as $c)
-                                            <td> {{ $c }} </td>
+                                            {{ $c }}<br />
                                         @endforeach
-                                        <td>---</td>
+                                    @else
+                                         --   
                                     @endif
-                                    @if(count($c)==2)
-                                        @foreach($c as $c)
-                                            <td>{{ $c }}</td>
-                                        @endforeach
-                                    @endif                                        
+                                    </td>                                      
                                     <td> {{ $company->address }} </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>
