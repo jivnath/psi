@@ -2,21 +2,22 @@
 
 @section('content')
     <div class="container">
-    <center><h3>Company Shift</h3></center>        
+    <center><h3>Company Shift</h3></center>
         {!! Form::open(array('route' => 'generator.store')) !!}
         	<div class="row">
 	            <div class="col-md-4" style="text-align: center;">               
-	                <label for="company"> Pick a Company </label>
+	                <label for="company">Company Name</label>
 	            </div>
-	            <div class="col-md-4" style="padding: 5px;">
-	            	<select class="form-control" name="company" id="companies" style="float: left" required>
-	            		<option value="">--Select Company--</option>
+	            <div class="col-md-4">
+	            	<select onChange="getMessage()" class="form-control" name="company" id="companies" style="float: left">
+	            			<option value="">-- Select Company --</option>
 	            		@foreach ($companies as $company)
 	            			<option value="{{$company->id}}">{{ $company->name }}</option>
 	            		@endforeach
 	            	</select>
 	            	<br>
-	            	<div id="sections" style="margin-top: 7px;"></div> 	
+	            	<div id="sections" style="padding: 10px;">Replace this text
+		            </div> 	
 	            </div>
 	            <div class="col-md-4"></div>
             </div>
@@ -40,7 +41,7 @@
             		@endif	
             		@endfor
             	</div>
-            	<div class="col-md-3"></div>
+            	<div class="col-md-4"></div>
             	
             </div>
             <br>
@@ -80,18 +81,26 @@
         </div>
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-	    $("#companies").change(function() {
-	    	var selected = $('#companies').val();
-	    	$.ajax({
-	    		type:'GET',
-	    		url:"{{ route('section') }}",
-	    		data:{ 'selected':selected	},
-	    		success:function(data){
-	    			$("#sections").html(data);
-	    		}
-	    	})
-	    });
-    });
+<script>
+
+         function getMessage(){
+			$.ajaxSetup({
+    beforeSend: function(xhr, type) {
+        if (!type.crossDomain) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        }
+    },
+});
+         	company=$('#companies').val();
+            $.ajax({
+               type:'POST',
+               url:'/getmsg',
+               data:'_token = <?php echo csrf_token() ?>,sections='.company,
+               success:function(data){
+               		console.log(data);
+                  $("#sections").html(data);
+               }
+            });
+         }
+      </script>
 </script>

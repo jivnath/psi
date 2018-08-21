@@ -30,48 +30,76 @@ class PagesController extends Controller
 
 	public function section(Request $request)
 	{
-		$id = $request->selected;
-		$sections = DB::table('companies')->where('master_id', $id)->get();
-
-		return response()->json(array('sections'=> $sections));
+		if($request->ajax())
+		{
+			$id = $request->get('selected');
+			if($id != null)
+			{
+				$sections = DB::table('companies')->where('master_id', $id)->get();
+				$output = '';
+				if($sections->count() > 0)
+				{
+					foreach($sections as $section)
+					{
+						$output .= '
+						<input type="checkbox" style ="margin-left:5px;" name="section[]" value="'.$section->id.'">'.$section->name;
+					}
+				}
+				else
+					$output .= '';
+			}
+			else
+				$output = '';
+		}
+		
+		
+		echo $output;
+		
 	}
 
 	public function generatorStore(Request $request )
 	{
 		$shifts = serialize($request['shift']);
-		$timeTable = new CompanyTimeTable;
-
-		$timeTable->company_id = $request->company;
-		$timeTable->shifts = $shifts;
-		$timeTable->save();
-
-		$id = $timeTable->id;
-
-		$startDate = $request->start_date;
-		$endDate = $request->end_date;
-
-
-		$s = $request['shift'];
-
-		foreach ($s as $s )
+		$section = $request['section'];
+		if (sizeof($section)>0)
 		{
-			$i = 1;
-			$startDate = $request->start_date;
-			while ( $startDate <= $endDate)
+			foreach ($section as $company)
 			{
-				$schedule = new CompanyTimeSchedule;
+				$timeTable = new CompanyTimeTable;
+				
+				$timeTable->company_id = $company;
+				$timeTable->shift = $shifts;
+				$timeTable->save();				
 
-				$schedule->companyTT_id = $id;
-				$schedule->date = $startDate;
-				$schedule->time = $s;
-				$schedule->normal = '';
-				$schedule->help = '';
+				$id = $timeTable->id;
 
-				$schedule->save();
-				$i++;
-				$startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
+				$startDate = $request->start_date;
+				$endDate = $request->end_date;
+
+				$s = $request['shift'];
+
+				foreach ($s as $s )
+				{
+					$startDate = $request->start_date;
+					while ( strtotime($startDate) <= strtotime($endDate))
+					{
+						$schedule = new CompanyTimeSchedule;
+
+						$schedule->companyTT_id = $id;
+						$schedule->date = $startDate;
+						$schedule->time = $s;
+						$schedule->normal = '';
+						$schedule->help = '';
+
+						$schedule->save();
+						$startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
+					}
+				}
 			}
 		}
+		else
+			return redirect()->route('generator');
+
 		return redirect()->route('generator');
 	}
 
