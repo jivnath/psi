@@ -16,7 +16,7 @@
 	            		@endforeach
 	            	</select>
 	            	<br>
-	            	<div id="sections" style="padding: 10px;">
+	            	<div id="sections" style="padding: 10px;">Replace this text
 		            </div> 	
 	            </div>
 	            <div class="col-md-4"></div>
@@ -82,16 +82,23 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
+
          function getMessage(){
+			$.ajaxSetup({
+    beforeSend: function(xhr, type) {
+        if (!type.crossDomain) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        }
+    },
+});
          	company=$('#companies').val();
             $.ajax({
                type:'POST',
                url:'/getmsg',
                data:'_token = <?php echo csrf_token() ?>,sections='.company,
-               dataType: "text",
                success:function(data){
                		console.log(data);
-                  $("#sections").html(data.msg);
+                  $("#sections").html(data);
                }
             });
          }

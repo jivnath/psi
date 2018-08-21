@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class AjaxController extends Controller {
    public function index(){
-      $msg = "This is a simple message.";
-      return response()->json(array('msg'=> $msg), 200);
+      $content = "<br /><input type='checkbox' name='section[]'>Section 1 <input type='checkbox' name='section[]'>Section 2 ";
+      return response()->json($content, 200);
    }
 }
