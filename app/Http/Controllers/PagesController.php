@@ -105,8 +105,17 @@ class PagesController extends Controller
 
 	public function shift()
 	{
-		$ct = CompanyTimeSchedule::all();
-		$cts = DB::table('company_time_schedules')->groupBy('date')->get();
-		return view('pages.shift')->withCts($cts)->withCt($ct);
+		$dates = DB::table('company_time_schedules')->groupBy('date')->get();
+		$times = DB::table('company_time_schedules')->groupBy('time')->get();
+		$companies = CompanyTimeTable::groupBy('company_id')->get();
+		$types = collect(['normal', 'help']);
+
+		return view('pages.shift')->withDates($dates)->withTimes($times)->withCompanies($companies)->withTypes($types);
+	}
+
+	public static function getCtt($time, $company, $date)
+	{
+		$ctt = DB::table('company_time_schedules')->where('time', $time)->where('date', $date)->where('companyTT_id', $company)->first();
+		return $ctt;
 	}
 }

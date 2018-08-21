@@ -8,7 +8,7 @@ class CompanyTimeTable extends Model
 {
     protected $table = 'company_time_tables';
 
-    public function company()
+    public function comp()
     {
         return $this->belongsTo('App\Models\Company', 'company_id');
     }

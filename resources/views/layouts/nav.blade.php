@@ -69,7 +69,7 @@
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="master_data">
                       <a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a>
-                      <a class="dropdown-item" href="{{ route('pages.employee') }}"> @lang('nav.Employee')</a>
+                      <a class="dropdown-item" href="{{ route('employees') }}"> @lang('nav.Employee')</a>
                       <a class="dropdown-item" href="{{ route('company.create') }}"> @lang('nav.Company')</a>
                   </div>
                 </li>
@@ -82,7 +82,7 @@
                     </a>
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
-                      <a class="dropdown-item" href="#"> Company Shift </a>
+                      <a class="dropdown-item" href="{{ route('pages.shift') }}"> Company Shift </a>
                       <a class="dropdown-item" href="#"> Shift Entry </a>
                       <a class="dropdown-item" href="#"> Attendance Management </a>
                   </div>
