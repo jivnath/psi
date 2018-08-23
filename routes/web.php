@@ -64,5 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/shift/add', 'ShiftMasterController@store')->name('shift.store');
     Route::get('/shift/{id}/edit', 'ShiftMasterController@edit')->name('shift.edit');
     Route::put('/shift/{id}', 'ShiftMasterController@update')->name('shift.update');
+
+    Route::get('/pages/total', 'TotalNecessaryController@totalNecessary')->name('total.necessary');
     
 });

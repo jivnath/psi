@@ -14,14 +14,10 @@
                         
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="shiftName"> Shift Name </label>
+                                <label for="shiftName"> Company Name </label>
                             </div>
                             <div class="col-md-7">
-                                <select>
-                                    @for($i = 0; $i<=24; $i++ )
-                                        <option value="{{ $i }}">  </option>
-                                    @endfor
-                                </select>
+                                <input type="text" name="company_name" class="form-control">                                
                             </div>
                         </div>
 
@@ -30,7 +26,7 @@
                                 <label for="startTime"> Start Time </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="startTime" class="form-control">
+                                <input type="time" name="startTime" class="form-control" id="startTime">
                             </div>
                         </div>
 
@@ -81,3 +77,10 @@
     </div>
 </div>
 @endsection
+<script>
+    $('#demo').daterangepicker({
+        "timePicker24Hour": true,
+    }, function(start, end, label) {
+      console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+    });
+</script>
