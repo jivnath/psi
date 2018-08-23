@@ -12,3 +12,4 @@ yarn-error.log
 .env
 .editorconfig
 .gitattributes
+/vendor
