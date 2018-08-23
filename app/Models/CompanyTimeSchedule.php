@@ -8,8 +8,8 @@ class CompanyTimeSchedule extends Model
 {
     protected $table = 'company_time_schedules';
 
-    public function CompanyTimeSchedule()
+    public function companyTimeTable()
     {
-        return $this->belongsTo('App\Models\CompanyTimeSchedule', 'companyTT_id');
+        return $this->belongsTo('App\Models\CompanyTimeTable', 'companyTT_id');
     }
 }

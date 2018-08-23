@@ -55,8 +55,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/generator', 'PagesController@generatorStore')->name('generator.store');
     Route::get('pages/shift', 'PagesController@shift')->name('pages.shift');
     Route::get('/section', 'PagesController@section')->name('section');
+    Route::get('shift/{id}/show', 'PagesController@show')->name('shift.show');
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
+
+    Route::get('/shift/add', 'ShiftMasterController@add')->name('shift.add');
+    Route::post('/shift/add', 'ShiftMasterController@store')->name('shift.store');
+    Route::get('/shift/{id}/edit', 'ShiftMasterController@edit')->name('shift.edit');
+    Route::put('/shift/{id}', 'ShiftMasterController@update')->name('shift.update');
     
 });

@@ -1,67 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <center><h3>Company Shift</h3></center>  <br>
-        <div class="row">
-        	<div class="mo-col-10 offset-1">
-        		<table class="table table-striped">
-        			<thead>
-        				<th> Time </th>
-        				<th> Company </th>
-        				<th> Type </th>
-        				@foreach($dates as $date)
-        					<th>{{ date('m-d', strtotime( $date->date )) }}</th>
-        				@endforeach        		
-        			</thead>
-        			<tbody>
-        				<tr>
-        					@foreach($times as $time)
-                                @foreach($companies as $company)
-
-                                    @foreach($types as $type)
-                                            
-                                    <tr>
-                                        <td> {{ $time->time.':00' }} </td>
-                                            <td > {{ $company->comp->name }} </td>
-                                        <td> {{ ucfirst($type) }} </td>
-                                        
-                                            @foreach($dates as $date)
-                                                @php
-                                                    $ctt = App\Http\Controllers\PagesController::getCtt($time->time, $company->id, $date->date);
-                                                @endphp
-                                                @if ($ctt->$type != 0)
-                                                    <td class="contenteditable"
-                                                        contenteditable="true"> {{ $ctt->$type }} </td>
-                                                @else
-                                                    <td class="contenteditable"
-                                                        contenteditable="true"> {{ '' }} </td>
-                                                @endif
-                                            @endforeach
-                                            </tr>
-                                        @endforeach
-
-                                @endforeach
-                            @endforeach
-        				</tr>
-        			</tbody>
-        		</table>        		
-        	</div>        	
-        </div>        
+    <div class="page-header">
+        <h1>Company Shift <a href="{{ route('generator') }}" class="btn btn-link" style="margin-left:10px"><small>Generate New</small></a></h1>
     </div>
-
+    <div class="table-responsive">
+        <table class="table table-bordered table-responsive-md table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">No of Sub-Companies</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Updated At</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(count($shifts) > 0)
+                    @foreach($shifts as $index => $shift)
+                        <tr>
+                            <th scope="row">{{$index + 1}}</th>
+                            @php
+                                $c = App\Http\Controllers\PagesController::masterCompany($shift->companyTimeTable->comp->master_id);
+                            @endphp
+                            <td>{{ $c }}</td>
+                            
+                            <td>{{ $c }}</td>
+                            <td>{{ Carbon\Carbon::parse($shift->first()->created_at)->format('d-m-Y i:s A') }}</td>
+                            <td>{{ Carbon\Carbon::parse($shift->first()->updated_at)->format('d-m-Y i:s A') }}</td>
+                            <td><a href="{{ route('shift.show',['id' => $shift->companyTimeTable->comp->master_id]) }}">View</a></td>
+                        </tr>
+                    @endforeach
+                @else 
+                    <tr>
+                        <td colspan="6">No employees are uploaded</td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
+        @foreach($s as $ss)
+        {{$ss->companyTimeTable->comp->master_id}}
+        @endforeach
+    </div>
 @endsection
-
-@push('scripts')
-<script>
-    $(document).ready(function(){
-        var tds = document.querySelectorAll("td.contenteditable");
-        tds.forEach(function(el, index){
-            employee.inlineEditable(el, function(response){
-                
-            });
-        })
-    });
-    
-</script>
-@endpush

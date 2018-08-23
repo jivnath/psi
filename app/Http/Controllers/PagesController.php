@@ -88,8 +88,8 @@ class PagesController extends Controller
 						$schedule->companyTT_id = $id;
 						$schedule->date = $startDate;
 						$schedule->time = $s;
-						$schedule->normal = '';
-						$schedule->help = '';
+						$schedule->normal = null;
+						$schedule->help = null;
 
 						$schedule->save();
 						$startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
@@ -105,12 +105,18 @@ class PagesController extends Controller
 
 	public function shift()
 	{
-		$dates = DB::table('company_time_schedules')->groupBy('date')->get();
-		$times = DB::table('company_time_schedules')->groupBy('time')->get();
-		$companies = CompanyTimeTable::groupBy('company_id')->get();
-		$types = collect(['normal', 'help']);
+		$shifts = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
+		    $query->groupBy('master_id');		    
+		})->get();
 
-		return view('pages.shift')->withDates($dates)->withTimes($times)->withCompanies($companies)->withTypes($types);
+		$s = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
+		    $query->distinct('master_id');		    
+		})->get();
+
+		// $s = CompanyTimeSchedule::distinct()->get(['column_nam']);
+
+		return view('pages.shift', compact('shifts'))->withS($s);
+
 	}
 
 	public static function getCtt($time, $company, $date)
@@ -118,4 +124,29 @@ class PagesController extends Controller
 		$ctt = DB::table('company_time_schedules')->where('time', $time)->where('date', $date)->where('companyTT_id', $company)->first();
 		return $ctt;
 	}
+
+	public function show($id)
+	{
+		$dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use($id) {
+		    $query->where('master_id', $id);		    
+		})->groupBy('date')->get();
+
+		$times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use($id) {
+			$query->where('master_id', $id);		    
+		})->groupBy('time')->get();
+
+		$companies = CompanyTimeTable::whereHas('comp', function ($query) use($id) {
+		    	$query->where('master_id', $id);
+		})->groupBy('company_id')->get();
+
+		$types = collect(['normal', 'help']);
+
+		return view('pages.show')->withDates($dates)->withTimes($times)->withCompanies($companies)->withTypes($types);
+	}
+
+	public static function masterCompany($id)
+	{
+		$master = Company::find($id);
+		return $master->name;
+	}	
 }
