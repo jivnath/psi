@@ -33,6 +33,7 @@ class PagesController extends Controller
 		if($request->ajax())
 		{
 			$id = $request->get('selected');
+
 			if($id != null)
 			{
 				$sections = DB::table('companies')->where('master_id', $id)->get();

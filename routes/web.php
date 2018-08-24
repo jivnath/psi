@@ -66,5 +66,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/shift/{id}', 'ShiftMasterController@update')->name('shift.update');
 
     Route::get('/pages/total', 'TotalNecessaryController@totalNecessary')->name('total.necessary');
-    
+
+    Route::get('/leader/create', 'LeaderController@create')->name('leader.create');
+    Route::post('/leader/create', 'LeaderController@store')->name('leader.store');
+//    Route::get('/leader/{id}/edit', 'LeaderController@edit')->name('leader.edit');
+//    Route::get('/leader/{id}', 'LeaderController@update')->name('leader.update');
+    Route::get('/leader', 'LeaderController@showName')->name('leader');
+
 });
