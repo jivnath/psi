@@ -37,7 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/users/{id}/edit', 'UserController@editUser')->name('users.edit');
     Route::put('/users/{id}', 'UserController@updateUser')->name('users.update');
 
-    // Route::get('/company', 'CompanyController@index')->name('company.index');
     Route::get('/company/create', 'CompanyController@create')->name('company.create');
     Route::post('/company/create', 'CompanyController@store')->name('company.store');
     Route::get('/company/{id}/edit', 'CompanyController@edit')->name('company.edit');
@@ -64,6 +63,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/shift/add', 'ShiftMasterController@store')->name('shift.store');
     Route::get('/shift/{id}/edit', 'ShiftMasterController@edit')->name('shift.edit');
     Route::put('/shift/{id}', 'ShiftMasterController@update')->name('shift.update');
+    Route::get('/addmore','ShiftMasterController@addMore');
+    Route::post('/addmore','ShiftMasterController@addMorePost');
 
     Route::get('/pages/total', 'TotalNecessaryController@totalNecessary')->name('total.necessary');
 

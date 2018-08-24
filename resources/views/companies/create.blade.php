@@ -1,41 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" xmlns="http://www.w3.org/1999/html">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ "Please fill out the form below." }}</div>
 
                 <div class="card-body " style="padding: 10px;">
-                    <form  action="{{ route('company.store') }}" method="POST" >
+                    <form name="companyForm" action="{{ route('company.store') }}" method="POST" >
                         <input type="hidden" name="_method" value="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        
+
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="company_name"> Company Name </label>
+                                <label for="company_type"> Company Type </label>
+                            </div>
+                            <div class="col-md-7">
+                                <select class="form-control" name="company_type" id="companytype">
+                                    <option value="0">Master Company</option>
+                                    <option value="1" selected="selected">Sub Company</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="col-md-5">
+                                <label for="company_name" id="companyorsub"> Sub-Company Name </label>
                             </div>
                             <div class="col-md-7">
                                 <input type="text" name="company_name" class="form-control" required>
                             </div>
                         </div>
 
-                        <div class="row" style="text-align: center; margin-top: 5px;">
+                        <div class="row" id="dropdown" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="section1"> Section 1 </label>
+                                <label for="company"> Company Name </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="section1" class="form-control">
+                                <select name="company" class="form-control" id="master_company">
+                                    <option value="">--Select Master Company-- </option>
+                                    @foreach($companies as $company)
+                                        <option value="{{$company->id}}">{{$company->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="section2"> Section 2 </label>
+                                <label for="contact_num"> Contact NO. </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="section2" class="form-control">
+                                <input type="text" name="contact_num" class="form-control">
                             </div>
                         </div>
 
@@ -49,10 +66,14 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-7">
-                                <button style="margin-top: 15px" type="submit" class="btn btn-primary">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-4">
+                                <button style="margin-top: 15px;" type="submit" class="btn btn-primary">
                                     Save
+                                </button>
+
+                                <button  type="reset" style="margin-top: 15px; margin-left: 5px; " class="btn btn-danger">
+                                    Clear
                                 </button>
                             </div>
                         </div>           
@@ -94,3 +115,24 @@
     </div>
 </div>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#companytype").change(function () {
+            var master_company_val = $(this).val();
+            console.log(master_company_val);
+
+            if(master_company_val==0)
+            {
+                $("#dropdown").hide(500);
+                $("#companyorsub").text('Company Name');
+            }
+            else
+            {
+                $("#dropdown").show("fast");
+                $("#companyorsub").text('Sub-Company Name');
+            }
+            $("#master_company").prop('selectedIndex',0);
+        });
+    });
+</script>

@@ -5,20 +5,55 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ShiftMasterData;
-
+use Validator;
+use App\Models\Company;
 class ShiftMasterController extends Controller
 {
+	public function addMore()
+    {
+        return view("addMore");
+    }
+
+
+    public function addMorePost(Request $request)
+    {
+        $rules = [];
+
+
+        foreach($request->input('shift') as $key => $value) {
+            $rules["shift.{$key}"] = 'required';
+        }
+
+
+        $validator = Validator::make($request->all(), $rules);
+
+
+        if ($validator->passes()) {
+
+
+            foreach($request->input('shift') as $key => $value) {
+                ShiftMasterData::create(['shift'=>$value]);
+            }
+
+
+            return response()->json(['success'=>'done']);
+        }
+
+
+        return response()->json(['error'=>$validator->errors()->all()]);
+    }
 	public function add()
 	{
-		$shifts = ShiftMasterData::all();
-		return view('shift.add')->withShifts($shifts);
+		$data['shifts'] = ShiftMasterData::all();
+		$data['companies'] = Company::all();
+		return view('shift.add', $data);
 	}
 
 	public function store(Request $request)
 	{
 		$shift = new ShiftMasterData;
 
-		$shift->shift_name = $request->shiftName;
+		$shift->company_id = $request->shiftName;
 		$shift->start_time = $request->startTime;
 		$shift->end_time = $request->endTime;
 

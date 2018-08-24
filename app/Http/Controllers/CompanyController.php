@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use DB;
-
+use App\Models\Raw;
 class CompanyController extends Controller
 {
 	// public function __construct()
@@ -34,25 +34,9 @@ class CompanyController extends Controller
 
 		$company->name = $request->company_name;
 		$company->address= $request->address;
+        $company->master_id = $request->company;
+        $company->contact_num = $request->contact_num;
 		$company->save();
-		$id = $company->id;
-
-		if($request->section1){
-			$company = new Company;
-
-			$company->name = $request->section1;
-			$company->master_id = $id;
-			$company->address = $request->address;
-			$company->save();			
-		}
-		if($request->section2){
-			$company = new Company;
-
-			$company->name = $request->section2;
-			$company->master_id = $id;
-			$company->address = $request->address;
-			$company->save();
-		}
 
 		return redirect()->route('company.create');
 
@@ -61,10 +45,9 @@ class CompanyController extends Controller
 	
 	public function edit($id)
 	{
-		$companies = DB::table('companies')->where('master_id', null)->get();
-		$company = Company::find($id);
+		$companies = Raw::companies($id);
 		
-		return view('companies.edit')->withCompany($company)->withCompanies($companies);
+		return view('companies.edit')->withCompanies($companies);
 
 	}
 

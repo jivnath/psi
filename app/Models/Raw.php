@@ -40,4 +40,10 @@ WHERE
     cts.companytt_id = ctt.id
     AND companytt_id = 12;");
 	}
+
+	public static function companies($id)
+    {
+        $sql="select * from companies where (id=$id or master_id=$id)";
+        DB::select("$sql");
+    }
 }
