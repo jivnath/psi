@@ -10498,3 +10498,22 @@ a.text-dark:focus {
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+.input-sm{
+  height: 25px;
+  padding: 3px 7px;
+  font-size: 13px;
+  line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+  border-radius: 5px;
+}
+.select-sm {
+  height: 25px !important;
+  padding: 3px 7px;
+  font-size: 13px;
+  line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+  border-radius: 5px;
+}
+
+.small-text{
+  font-size: 13px;
+}

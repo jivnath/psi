@@ -46,8 +46,9 @@ class CompanyController extends Controller
 	public function edit($id)
 	{
 		$companies = Raw::companies($id);
-		
-		return view('companies.edit')->withCompanies($companies);
+		$subCompanies = $companies['sub_com'];
+		$master = Raw::master();
+		return view('companies.edit')->withCompanies($companies)->withSubCompanies($subCompanies)->withMaster($master);/*, compact($companies, $subCompanies));*/
 
 	}
 
@@ -94,5 +95,25 @@ class CompanyController extends Controller
     	else
 	    	$master = Company::find($id);
 	    	return $master['name'];
+    }
+
+    public function sub(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->get('selected');
+            if($id != null) {
+                $sub = DB::table('companies')->where('id', $id)->first();
+                if ($sub)
+                {
+                    $subComp = [
+                        'name' => $sub->name,
+                        'address' => $sub->address,
+                        'contact' => $sub->contact_num
+                    ];
+                }
+            }
+        }
+        echo $subComp;
     }
 }
