@@ -54,7 +54,7 @@ class ViberBitIntegration extends Controller
         $temp = [
             'ActionType' => "reply",
             'ActionBody' => 'reply to me',
-            'reply to me' => 'Key text',
+            'Text' => 'Key text',
             'TextSize' => "regular"
         ];
         $keyboard['keboard']['Buttons'][] = $temp;
