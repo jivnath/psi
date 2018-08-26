@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Raw;
 
 class DashboardController extends Controller
 {
@@ -11,6 +12,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+    	 $expired = Raw::expiredRC();
+    		return view('dashboard',['dashboard'=>$expired]);
     }
 }

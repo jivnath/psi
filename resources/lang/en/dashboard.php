@@ -14,4 +14,10 @@ return [
     */
 'user'=>'Username',
 'pass'=>'Password',
+'psisno'=>'PSI-S No',
+'cardExpire'=>'Residence card expiration by date ',
+'name'=>'Name',
+'cellno'=>'Cell No',
+'expiredate'=>'Expire Date',
+'action'=>'Action',
 ];
