@@ -127,7 +127,6 @@ class PagesController extends Controller
         $times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
             $query->where('master_id', $id);
         })->groupBy('time')->get();
-
         $companies = CompanyTimeTable::whereHas('comp', function ($query) use ($id) {
             $query->where('master_id', $id);
         })->groupBy('company_id')->get();

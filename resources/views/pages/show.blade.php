@@ -16,13 +16,21 @@
         			</thead>
         			<tbody>
         				<tr>
+        				@php
+                        $last=''
+                        @endphp
         					@foreach($times as $time)
                                 @foreach($companies as $company)
 
                                     @foreach($types as $type)
 
                                     <tr>
-                                        <td> {{ $time->time.':00' }} </td>
+                                    	@if($last !==$time->time)
+                                    <td rowspan={{ count($companies)+2}}> {{ $time->time.':00' }} </td>
+                                        @endif
+                                        @php
+											$last=$time->time
+										@endphp
                                             <td > {{ $company->comp->name }} </td>
                                         <td> {{ ucfirst($type) }} </td>
 
