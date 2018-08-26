@@ -4,7 +4,7 @@
         <h3>Company Shift</h3>
         <div class="row">
         	<div class="col-md-12">
-			<div class='container_class' style='width: 100% ;overflow: scroll;'>
+			<div class='container_class' style='overflow: scroll;'>
         		<table class="table table-striped" id='example'>
         			<thead>
         				<th> Time </th>
