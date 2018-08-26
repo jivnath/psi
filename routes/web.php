@@ -42,7 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/company/{id}/edit', 'CompanyController@edit')->name('company.edit');
     Route::put('/company/{id}', 'CompanyController@update')->name('company.update');
     Route::get('/sub', 'CompanyController@sub')->name('company.sub');
-    Route::post('/subCompanyEdit', 'CompanyController@subCompanyEdit')->name('subcompany');
+    Route::post('/subCompanyUpdate', 'CompanyController@subCompanyUpdate')->name('subcompany');
 
     Route::get('/availability/show/{id}', 'EmployeeAvailabilityController@index')->name('availability.index');
     Route::get('/availability/add', 'EmployeeAvailabilityController@add')->name('availability.add');

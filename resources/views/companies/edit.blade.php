@@ -6,9 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ "Please fill out the form below." }}</div>
-
                 <div class="card-body " style="padding: 10px;">
-                    <form>
+                    <form action="{{ route('company.update', $companies['master']['id']) }}" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
                                 <label for="company_name"> Company Name </label>
@@ -24,6 +25,13 @@
                             </div>
                             <div class="col-md-7">
                                 <input type="text" name="address" value="{{ $companies['master']['address'] }}" class="form-control">
+                            </div>
+                        </div><div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="col-md-5">
+                                <label for="contact"> Contact No. </label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" name="contact" value="{{ $companies['master']['contact_num'] }}" class="form-control">
                             </div>
                         </div>
 
@@ -143,6 +151,12 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     function showDropdown(checkbox){
         if(checkbox.checked==true)
             $("#subDropdown").show("fast");
@@ -164,19 +178,39 @@
             $("#subCompany").show("fast");
             $.ajax({
                 type: 'GET',
-                url: "{{ route('leader') }}",
+                url: "{{ route('company.sub') }}",
+                dataType:'json',
                 data: {'selected': selected},
-                success: function (subComp) {
-                    console.log(subComp.name);
-                    $('#subCompany[name="subname"]').attr('value', subComp.name);
-                    $('#subCompany[name="subaddress"]').attr('value', subComp.address);
-                    $('#subCompany[name="subcontact"]').attr('value', subComp.contact);
-
+                success: function (subCom) {
+                    var subCompanyEl = $('#subCompany');
+                    subCompanyEl.find('input[name=subname]').val(subCom.name);
+                    subCompanyEl.find('input[name=subaddress]').val(subCom.address);
+                    subCompanyEl.find('input[name=subcontact]').val(subCom.contact);
                 }
 
             });
         }
+        });
+    });
 
+    $(function(){
+        $("#subsubmit").click(function(){
+            var id = $("#subComp").val();
+            var subCompanyEl = $('#subcompany');
+            var name = subCompanyEl.find('input[name=subname]').val();
+            var address = subCompanyEl.find('input[name=subaddress]').val();
+            var contact = subCompanyEl.find('input[name=subcontact]').val();
+            var master = subCompanyEl.find('input[name=submaster]').val();
+                $.ajax({
+                    type:'POST',
+                    url: '{{ route('subcompany') }}',
+                    data:{'name':name, 'address':address, 'contact':contact, 'master':master, 'id':id, "_token": "{{ csrf_token() }}"},
+                    async: true,
+                    success: function(data){
+                        alert('saved');
+                        $("#subsubmit").text('Saved');
+                    }
+                });
         });
     });
 </script>
