@@ -104,7 +104,6 @@ class PagesController extends Controller
          * })->get();
          */
         $data['results'] = Raw::getShiftView();
-        dd($data['results']);
 
         return view('pages.shift', $data);
     }
