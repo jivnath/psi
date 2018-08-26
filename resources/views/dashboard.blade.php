@@ -23,14 +23,14 @@
                              <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
                         </tr>
                         @endforeach
-                     </table>   
+                     </table>
                      <div style="float:right">  <a href="#" class="btn btn-primary btn-sm">View All</a></div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">@lang('RecentUpdate')</div>
+                <div class="card-header">@lang('Activity Feed')</div>
                 <div class="card-body">
                 </div>
             </div>

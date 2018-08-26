@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,147 +6,159 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyTimeTable;
 use App\Models\CompanyTimeSchedule;
+use App\Models\Raw;
 use DB;
 use Date;
 
 class PagesController extends Controller
 {
-	public function getUser()
-	{
-		return view('pages.users');
-	}
 
-	public function getEmployee()
-	{
-		return view('pages.employee');
-	}
+    public function getUser()
+    {
+        return view('pages.users');
+    }
 
-	public function generator()
-	{
-		$companies = DB::table('companies')->where('master_id', null)->get();
-		return view('pages.generator')->withCompanies($companies);
-	}
+    public function getEmployee()
+    {
+        return view('pages.employee');
+    }
 
-	public function section(Request $request)
-	{
-		if($request->ajax())
-		{
-			$id = $request->get('selected');
+    public function generator()
+    {
+        $companies = DB::table('companies')->where('master_id', null)->get();
+        return view('pages.generator')->withCompanies($companies);
+    }
 
-			if($id != null)
-			{
-				$sections = DB::table('companies')->where('master_id', $id)->get();
-				$output = '';
-				if($sections->count() > 0)
-				{
-					foreach($sections as $section)
-					{
-						$output .= '
-						<input type="checkbox" style ="margin-left:5px;" name="section[]" value="'.$section->id.'">'.$section->name;
-					}
-				}
-				else
-					$output .= '';
-			}
-			else
-				$output = '';
-		}
-		
-		
-		echo $output;
-		
-	}
+    public function section(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->get('selected');
 
-	public function generatorStore(Request $request )
-	{
-		$shifts = serialize($request['shift']);
-		$section = $request['section'];
-		if (sizeof($section)>0)
-		{
-			foreach ($section as $company)
-			{
-				$timeTable = new CompanyTimeTable;
-				
-				$timeTable->company_id = $company;
-				$timeTable->shift = $shifts;
-				$timeTable->save();				
+            if ($id != null) {
+                $sections = DB::table('companies')->where('master_id', $id)->get();
+                $output = '';
+                if ($sections->count() > 0) {
+                    foreach ($sections as $section) {
+                        $output .= '
+						<input type="checkbox" style ="margin-left:5px;" name="section[]" value="' . $section->id . '">' . $section->name;
+                    }
+                } else
+                    $output .= '';
+            } else
+                $output = '';
+        }
 
-				$id = $timeTable->id;
+        echo $output;
+    }
 
-				$startDate = $request->start_date;
-				$endDate = $request->end_date;
+    public function generatorStore(Request $request)
+    {
+        $shifts = serialize($request['shift']);
+        $section = $request['section'];
+        if (sizeof($section) > 0) {
+            foreach ($section as $company) {
+                $timeTable = new CompanyTimeTable();
 
-				$s = $request['shift'];
+                $timeTable->company_id = $company;
+                $timeTable->shift = $shifts;
+                $timeTable->save();
 
-				foreach ($s as $s )
-				{
-					$startDate = $request->start_date;
-					while ( strtotime($startDate) <= strtotime($endDate))
-					{
-						$schedule = new CompanyTimeSchedule;
+                $id = $timeTable->id;
 
-						$schedule->companyTT_id = $id;
-						$schedule->date = $startDate;
-						$schedule->time = $s;
-						$schedule->normal = null;
-						$schedule->help = null;
+                $startDate = $request->start_date;
+                $endDate = $request->end_date;
 
-						$schedule->save();
-						$startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
-					}
-				}
-			}
-		}
-		else
-			return redirect()->route('generator');
+                $s = $request['shift'];
 
-		return redirect()->route('generator');
-	}
+                foreach ($s as $s) {
+                    $startDate = $request->start_date;
+                    while (strtotime($startDate) <= strtotime($endDate)) {
+                        $schedule = new CompanyTimeSchedule();
 
-	public function shift()
-	{
-		$shifts = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
-		    $query->groupBy('master_id');		    
-		})->get();
+                        $schedule->companyTT_id = $id;
+                        $schedule->date = $startDate;
+                        $schedule->time = $s;
+                        $schedule->normal = null;
+                        $schedule->help = null;
 
-		$s = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
-		    $query->distinct('master_id');		    
-		})->get();
+                        $schedule->save();
+                        $startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
+                    }
+                }
+            }
+        } else
+            return redirect()->route('generator');
 
-		// $s = CompanyTimeSchedule::distinct()->get(['column_nam']);
+        return redirect()->route('generator');
+    }
 
-		return view('pages.shift', compact('shifts'))->withS($s);
+    public function shift()
+    {
+        /*
+         * $shifts = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
+         * $query->groupBy('master_id');
+         * })->get();
+         *
+         * $s = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
+         * $query->distinct('master_id');
+         * })->get();
+         */
+        $data['results'] = Raw::getShiftView();
+        dd($data['results']);
 
-	}
+        return view('pages.shift', $data);
+    }
 
-	public static function getCtt($time, $company, $date)
-	{
-		$ctt = DB::table('company_time_schedules')->where('time', $time)->where('date', $date)->where('companyTT_id', $company)->first();
-		return $ctt;
-	}
+    public static function getCtt($time, $company, $date)
+    {
+        $ctt = DB::table('company_time_schedules')->where('time', $time)
+            ->where('date', $date)
+            ->where('companyTT_id', $company)
+            ->first();
+        return $ctt;
+    }
 
-	public function show($id)
-	{
-		$dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use($id) {
-		    $query->where('master_id', $id);		    
-		})->groupBy('date')->get();
+    public function show($id)
+    {
+        $data=[];
+        $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+            $query->where('master_id', $id);
+        })->groupBy('date')->get();
 
-		$times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use($id) {
-			$query->where('master_id', $id);		    
-		})->groupBy('time')->get();
+        $times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+            $query->where('master_id', $id);
+        })->groupBy('time')->get();
 
-		$companies = CompanyTimeTable::whereHas('comp', function ($query) use($id) {
-		    	$query->where('master_id', $id);
-		})->groupBy('company_id')->get();
+        $companies = CompanyTimeTable::whereHas('comp', function ($query) use ($id) {
+            $query->where('master_id', $id);
+        })->groupBy('company_id')->get();
+        $types = collect([
+            'normal',
+            'help'
+        ]);
+        /* please utilize this
+        foreach ($times as $time) {
+            foreach ($companies as $company) {
+                foreach ($types as $type) {
+                    $data[$time->time][] = [
+                        'name' => $company->comp->name,
+                        'id' => $company->comp->id,
+                        'type' => $type
+                    ];
+                }
+            }
+        } */
 
-		$types = collect(['normal', 'help']);
+        return view('pages.show')->withDates($dates)
+            ->withTimes($times)
+            ->withCompanies($companies)
+            ->withTypes($types)
+            ->withData($data);
+    }
 
-		return view('pages.show')->withDates($dates)->withTimes($times)->withCompanies($companies)->withTypes($types);
-	}
-
-	public static function masterCompany($id)
-	{
-		$master = Company::find($id);
-		return $master->name;
-	}	
+    public static function masterCompany($id)
+    {
+        $master = Company::find($id);
+        return $master->name;
+    }
 }
