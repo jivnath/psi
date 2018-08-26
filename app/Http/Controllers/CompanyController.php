@@ -58,31 +58,11 @@ class CompanyController extends Controller
 
 		$company->name = $request->input('company_name');
 		$company->address= $request->input('address');
+        $company->contact_num= $request->input('contact');
+
 		$company->save();
-		$id = $company->id;
 
-		$c = DB::table('companies')->where('master_id', $company->id)->delete();
-
-		// $s = DB::table('companies')->where('master_id', $id)->get();
-
-		if($request->section1){
-			$company = new Company;
-
-			$company->name = $request->section1;
-			$company->master_id = $id;
-			$company->address = $request->address;
-			$company->save();			
-		}
-		if($request->section2){
-			$company = new Company;
-
-			$company->name = $request->section2;
-			$company->master_id = $id;
-			$company->address = $request->address;
-			$company->save();
-		}
-
-		return redirect()->route('company.create');
+		return redirect()->route('company.edit', $id);
 
 	}
 
@@ -114,6 +94,29 @@ class CompanyController extends Controller
                 }
             }
         }
-        echo $subComp;
+        echo json_encode($subComp);
     }
+
+    public function subCompanyUpdate(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->get('id');
+            $name = $request->get('name');
+            $contact = $request->get('contact');
+            $address = $request->get('address');
+            $master = $request->get('master');
+
+
+            $sub = Company::find($id);
+
+            $sub->name = $name;
+            $sub->contact_num = $contact;
+            $sub->address = $address;
+            $sub->master_id = $master;
+
+            $sub->save();
+        }
+    }
+
 }
