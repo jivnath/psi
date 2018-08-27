@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ShiftMasterData;
-use Validator;
 use App\Models\Company;
+use Validator;
 class ShiftMasterController extends Controller
 {
 	public function addMore()
@@ -46,18 +46,25 @@ class ShiftMasterController extends Controller
 	{
 		$data['shifts'] = ShiftMasterData::all();
 		$data['companies'] = Company::all();
-		return view('shift.add', $data);
+		return view('shift.add')->withData($data);
 	}
 
 	public function store(Request $request)
 	{
-		$shift = new ShiftMasterData;
+	    $start_shifts = $request->input('start_shift');
+	    $end_shifts = $request->input('end_shift');
+	    $shifts = array_combine($start_shifts, $end_shifts);
+	    foreach ($shifts as $key=>$value)
+        {
+            $newshift = new ShiftMasterData();
 
-		$shift->company_id = $request->shiftName;
-		$shift->start_time = $request->startTime;
-		$shift->end_time = $request->endTime;
+            $newshift->company_id = $request->company_name;
+            $newshift->start_time = $key;
+            $newshift->end_time = $value;
 
-		$shift->save();
+            $newshift->save();
+        }
+
 
 		return redirect()->route('shift.add');
 	}
@@ -82,4 +89,10 @@ class ShiftMasterController extends Controller
 
 		return redirect()->route('shift.add');
 	}
+
+	public static function findCompany($id)
+    {
+        $company = Company::find($id);
+        return $company->name;
+    }
 }

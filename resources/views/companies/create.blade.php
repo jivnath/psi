@@ -16,12 +16,12 @@
                             <div class="col-md-5">
                                 <label for="company_type"> Company Type </label>
                             </div>
-                            <div class="col-md-7">
-                                <select class="form-control" name="company_type" id="companytype">
-                                    <option value="0">Master Company</option>
-                                    <option value="1" selected="selected">Sub Company</option>
-                                </select>
-                            </div>
+                            {{--<div class="col-md-7">--}}
+                                {{--<select class="form-control" name="company_type" id="companytype">--}}
+                                    {{--<option value="0">Master Company</option>--}}
+                                    {{--<option value="1" selected="selected">Sub Company</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
                         </div>
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
