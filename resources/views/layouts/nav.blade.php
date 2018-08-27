@@ -66,12 +66,11 @@
                     <a id="master_data" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     <i class="fas fa-home"></i>  @lang('nav.MasterData') <span class="caret"></span>
                     </a>
-
-                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="master_data">
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="master_data">
                       <a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a>
                       <a class="dropdown-item" href="{{ route('employees') }}"> @lang('nav.Employee')</a>
                       <a class="dropdown-item" href="{{ route('company.create') }}"> @lang('nav.Company')</a>
-                  </div>
+                    </div>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -144,3 +143,13 @@
     </div>
 	</div>
 </nav>
+
+              <script type="text/javascript">
+                  $(document).ready(function(){
+                      $('.dropdown-menu a.test').on("click", function(e){
+                          $(this).next('ul').toggle();
+                          e.stopPropagation();
+                          e.preventDefault();
+                      });
+                  });
+              </script>
