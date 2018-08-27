@@ -22,6 +22,7 @@
         					@foreach($times as $time)
                                 @foreach($companies as $company)
 
+
                                     @foreach($types as $type)
 
                                     <tr>
@@ -40,10 +41,10 @@
                                                 @endphp
                                                 @if ($ctt->$type != 0)
                                                     <td class="contenteditable"
-                                                        contenteditable="true"> {{ $ctt->$type }} </td>
+                                                        contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}"> {{ $ctt->$type }} </td>
                                                 @else
                                                     <td class="contenteditable"
-                                                        contenteditable="true"> {{ '' }} </td>
+                                                        contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}"> {{ '' }} </td>
                                                 @endif
                                             @endforeach
                                             </tr>
@@ -67,10 +68,11 @@
         var tds = document.querySelectorAll("td.contenteditable");
         tds.forEach(function(el, index){
             employee.inlineEditable(el, function(response){
-
             });
         })
-        $('#example').DataTable();
+        $('.contenteditable').submit(function(e){
+
+         });
     });
 
 </script>
