@@ -2,18 +2,18 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Master Data - Employee <a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>Upload New</small></a></h1>
+        <h1>@lang('employee.MasterDataEmployee')<a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>@lang('employee.UploadNew')</small></a></h1>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered table-responsive-md table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Company</th>
-                    <th scope="col">No of Employee</th>
-                    <th scope="col">Created At</th>
-                    <th scope="col">Updated At</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">@lang('employee.Company')</th>
+                    <th scope="col">@lang('employee.NoofEmployee')</th>
+                    <th scope="col">@lang('employee.CreatedAt')</th>
+                    <th scope="col">@lang('employee.UpdatedAt')</th>
+                    <th scope="col">@lang('employee.Action')</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@
                             <td>{{ $employee->total }}</td>
                             <td>{{ Carbon\Carbon::parse($employee->first()->created_at)->format('d-m-Y i:s A') }}</td>
                             <td>{{ Carbon\Carbon::parse($employee->first()->updated_at)->format('d-m-Y i:s A') }}</td>
-                            <td><a href="{{ route('employees.show',['companyId' => $employee->company->id]) }}">View</a></td>
+                            <td><a href="{{ route('employees.show',['companyId' => $employee->company->id]) }}">@lang('employee.View')</a></td>
                         </tr>
                     @endforeach
                 @else 

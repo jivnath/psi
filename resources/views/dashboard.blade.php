@@ -11,7 +11,7 @@
                             <th>@lang('dashboard.psisno')</th>
                             <th>@lang('dashboard.name')</th>
                             <th>@lang('dashboard.cellno')</th>
-                            <th>@lang('dashboard.expiredate')</th>
+                            <th>@lang('dashboard.expiredate')   </th>
                             <th>@lang('dashboard.action')</th>
                         </tr>
                         @foreach ($dashboard as $card)

@@ -70,9 +70,9 @@ WHERE
         $master = DB::select("$sql");
         return $master;
     }
-        public  static function expiredRC()
+ public  static function expiredRC()
     {
-        $sql="select psi_number,name,cell_no,residence_card_exp_date from employees where `residence_card_exp_date` BETWEEN '2018-08-26' and '2018-10-26'";
+        $sql="select distinct psi_number,name,cell_no,residence_card_exp_date from employees where `residence_card_exp_date` BETWEEN '2018-08-26' and '2018-10-26'";
         $expired = DB::select("$sql");
         return $expired;
     }
