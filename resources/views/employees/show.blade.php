@@ -29,7 +29,7 @@
                                         @if ($column == 'sex')
                                             <select >
                                             @foreach($sex as $s)
-                                                <option value="$s->id"> {{ $s->name }} </option>
+                                                <option <?= ($cell->$column==$s->name)? 'selected="selected"':''?> value="$s->id"> {{ $s->name }} </option>
                                             @endforeach                                                
                                             </select>
                                         @else

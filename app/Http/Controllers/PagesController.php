@@ -134,7 +134,7 @@ class PagesController extends Controller
             'normal',
             'help'
         ]);
-        /* please utilize this
+        /*please utilize this
         foreach ($times as $time) {
             foreach ($companies as $company) {
                 foreach ($types as $type) {
@@ -145,13 +145,17 @@ class PagesController extends Controller
                     ];
                 }
             }
-        } */
+        }*/
 
         return view('pages.show')->withDates($dates)
             ->withTimes($times)
             ->withCompanies($companies)
             ->withTypes($types)
             ->withData($data);
+    }
+
+    public function updateCells(){
+
     }
 
     public static function masterCompany($id)

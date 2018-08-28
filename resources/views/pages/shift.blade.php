@@ -33,7 +33,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="6">No employees are uploaded</td>
+                        <td colspan="6">No Shifts are uploaded</td>
                     </tr>
                 @endif
             </tbody>
