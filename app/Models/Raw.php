@@ -116,7 +116,7 @@ WHERE
             company_time_tables ctt
         WHERE
             cts.companytt_id = ctt.id
-            and company_id=45
+            and company_id=$company_id
         ORDER BY
             cts.DATE,time
             asc";
