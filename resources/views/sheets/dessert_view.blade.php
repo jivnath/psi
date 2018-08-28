@@ -52,6 +52,7 @@
             </table>
 
             <script>
+            var allowed_field=[4,5,6,7];
                 $('body').on('focus', '[contenteditable]', function(ee) {
                     const $this = $(this);
                     $this.data('before', $this.html());
@@ -63,7 +64,16 @@
                         $this.trigger('change');
 
                         console.log('after put');
-                    })
+
+                        	    $(this).closest('tr').find('td').each(
+                        	    function (i) {
+                            	    if($.inArray(i,allowed_field) != -1){
+                            	    	$(this).html(i+' yahoo');
+                        	        	console.log(i+':'+$(this).text());
+                            	    }
+                        	    });
+
+                    }
                 });
                 function findDetails(){
                     alert("success");
