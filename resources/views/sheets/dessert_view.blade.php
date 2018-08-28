@@ -25,7 +25,7 @@
                             <td> {{$dessert_row->date}} </td>
                             <td> {{$dessert_row->time}} </td>
                             <td> {{$i}} </td>
-                            <td>  </td>
+                            <td class="contenteditable" contenteditable="true">  </td>
                             <td>  </td>
                             <td>  </td>
                             <td>  </td>
@@ -50,3 +50,33 @@
                 </tbody>
 
             </table>
+
+            <script>
+                $('body').on('focus', '[contenteditable]', function(ee) {
+                    const $this = $(this);
+                    $this.data('before', $this.html());
+                    console.log('preparation..');
+                }).on('blur keyup paste input', '[contenteditable]', function(e) {
+                    const $this = $(this);
+                    if ($this.data('before') !== $this.html()) {
+                        $this.data('before', $this.html());
+                        $this.trigger('change');
+
+                        console.log('after put');
+                    })
+                });
+                function findDetails(){
+                    alert("success");
+
+                    $.ajax({
+                        type:"GET",
+                        url:"/dessert/findDetails",
+                        data:{'psi_num':psi_num},
+                        dataType:'json',
+                        success:function(data){
+                            console.log(data['name']);
+                        }
+
+                    });
+                }
+            </script>

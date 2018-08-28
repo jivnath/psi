@@ -82,7 +82,7 @@
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
                       <a class="dropdown-item" href="{{ route('pages.shift') }}"> Company Shift </a>
-                      <a class="dropdown-item" href="#"> Shift Entry </a>
+                      <a class="dropdown-item" href="{{route('sheet.dessert')}}"> Dessert </a>
                       <a class="dropdown-item" href="#"> Attendance Management </a>
                   </div>
                 </li>
