@@ -65,6 +65,7 @@
 
 
 								var main_val=$(this).html();
+
                         	    $(this).closest('tr').find('td').each(
                         	    function (i) {
                             	    if($.inArray(i,allowed_field) != -1){

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
@@ -10,6 +9,7 @@ use App\Models\Raw;
 
 class DessertController extends Controller
 {
+
     public function dessert()
     {
         $companies = Company::all();
@@ -18,41 +18,43 @@ class DessertController extends Controller
 
     public function generateDessert(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $id = $request->get('selected');
-            if($id != null) {
+            if ($id != null) {
                 $dessert = Raw::getDessertInfo($id);
-//                dd($dessert);
-                return view('sheets.dessert_view',compact('dessert'));
-
+                // dd($dessert);
+                return view('sheets.dessert_view', compact('dessert'));
             }
         }
     }
 
     public function findDetails(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $psi = $request->get('psi_num');
-            if($psi != null)
-            {
+            if ($psi != null) {
                 $employee = Employee::where('psi_number', $psi)->first();
-
-                $data=[
-                    'country'=>$employee->country_citizenship,
-                    'phoetic'=>$employee->phoetic_kanji,
-                    'name'=>$employee->name,
-                    'tel'=>$employee->cell_no
-                ];
-            }
-            else
-            {
-                $data=[
-                    'country'=>'',
-                    'phoetic'=>'',
-                    'name'=>'',
-                    'tel'=>''
+                if (count($employee) > 0) {
+                    $data = [
+                        4 => $employee->country_citizenship,
+                        5 => $employee->phoetic_kanji,
+                        6 => $employee->name,
+                        7 => $employee->cell_no
+                    ];
+                } else {
+                    $data = [
+                        'country' => '',
+                        'phoetic' => '',
+                        'name' => '',
+                        'tel' => ''
+                    ];
+                }
+            } else {
+                $data = [
+                    'country' => '',
+                    'phoetic' => '',
+                    'name' => '',
+                    'tel' => ''
                 ];
             }
             echo json_encode($data);
