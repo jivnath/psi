@@ -47236,6 +47236,7 @@ function Employee() {
 		data['company_tt_id']=$(event.target).data('company_tt_id');
 		data['schedule_date']=$(event.target).data('schedule_date');
 		data['job_type']=$(event.target).data('job_type');
+		data['application_source']=$(event.target).data('app_source');
 
         var oldValue = $(el).attr('data-old');
         var newValue = data['value'];
@@ -47245,7 +47246,7 @@ function Employee() {
     };
 
     self.updateEmployeeCell = function (data, calback) {
-        alert(data.schedule_date+','+data.company_id+','+data.company_tt_id+','+data.schedule_date+','+data.job_type);
+        alert(data.schedule_date+','+data.company_id+','+data.company_tt_id+','+data.application_source+','+data.job_type);
         axios.post('/employees/updateCell', data).then(function (response) {
             calback(response.data);
         }).catch(function (error) {
