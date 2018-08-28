@@ -41,10 +41,10 @@
                                                 @endphp
                                                 @if ($ctt->$type != 0)
                                                     <td class="contenteditable"
-                                                        contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}"> {{ $ctt->$type }} </td>
+                                                        contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}" data-app_source="shift_update"> {{ $ctt->$type }} </td>
                                                 @else
                                                     <td class="contenteditable"
-                                                        contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}"> {{ '' }} </td>
+                                                        contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}" data-app_source="shift_update"> {{ '' }} </td>
                                                 @endif
                                             @endforeach
                                             </tr>
