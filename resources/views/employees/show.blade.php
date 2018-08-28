@@ -6,13 +6,14 @@
     </div>
 
     <div id="validation" class="alert alert-danger" style="display:none"></div>
-    <div class="container-fluid">
-        <table class="table table-bordered">
+    <div class="container">
+        <table class="table table-striped" >
              <thead>
                 <tr>
                     @foreach($columns as $column)
-                        <th style="width:180px">{{ ucwords(str_replace('_',' ',$column)) }}</th>
+                        <th style="word-wrap:break-word">{{__('employee.'. ucwords(str_replace('_','',ucwords($column,'_'))))}}</th>
                     @endforeach
+
                 </tr>
             </thead>
             <tbody>

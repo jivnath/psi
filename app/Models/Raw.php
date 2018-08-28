@@ -80,7 +80,6 @@ WHERE
         $expired = DB::select("$sql");
         return $expired;
     }
-
     public static function getShiftView()
     {
         $sql = "SELECT
