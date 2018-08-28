@@ -164,6 +164,10 @@ class PagesController extends Controller
         $cts->$type = $value;
         $cts->save();
 
+
+
+
+
     }
 
     public static function masterCompany($id)

@@ -107,7 +107,7 @@ WHERE
         $sql="SELECT
             cts.id,
             companytt_id,
-            DATE,
+            date,
             time,
             ( normal + help ) total_require,
             ctt.company_id
@@ -118,8 +118,7 @@ WHERE
             cts.companytt_id = ctt.id
             and company_id=$company_id
         ORDER BY
-            cts.DATE,time
-            asc";
+            cts.date,time asc";
         return DB::select($sql);
     }
 }
