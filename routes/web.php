@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('pages/shift', 'PagesController@shift')->name('pages.shift');
     Route::get('/section', 'PagesController@section')->name('section');
     Route::get('shift/{id}/show', 'PagesController@show')->name('shift.show');
+    Route::post('shift/updateCell', "PagesController@updateCells");
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');

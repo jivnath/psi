@@ -154,7 +154,13 @@ class PagesController extends Controller
             ->withData($data);
     }
 
-    public function updateCells(){
+    public function updateCells(Request $request)
+    {
+     $id = $request->$data['ctt_id'];
+     $type = $request->$data['job_type'];
+     $cts = CompanyTimeSchedule::find($id);
+
+     $cts->$type = $request->$newValue;
 
     }
 
