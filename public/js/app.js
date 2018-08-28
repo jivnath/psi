@@ -47247,7 +47247,8 @@ function Employee() {
 
     self.updateEmployeeCell = function (data, calback) {
         alert(data.schedule_date+','+data.company_id+','+data.company_tt_id+','+data.application_source+','+data.job_type);
-        axios.post('/employees/updateCell', data).then(function (response) {
+        var application_api_url=(typeof data.application_source!='undefined') ? '/shift/updateCell':'/employees/updateCell';
+        axios.post(application_api_url, data).then(function (response) {
             calback(response.data);
         }).catch(function (error) {
             calback(error.response.data);
