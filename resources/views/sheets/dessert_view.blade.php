@@ -63,12 +63,12 @@
                         $this.data('before', $this.html());
                         $this.trigger('change');
 
-                        console.log('after put');
 
+								var main_val=$(this).html();
                         	    $(this).closest('tr').find('td').each(
                         	    function (i) {
                             	    if($.inArray(i,allowed_field) != -1){
-                            	    	$(this).html(i+' yahoo');
+                            	    	$(this).html(i+' '+main_val);
                         	        	console.log(i+':'+$(this).text());
                             	    }
                         	    });
