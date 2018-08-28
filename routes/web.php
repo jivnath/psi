@@ -78,8 +78,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/leader', 'LeaderController@showName')->name('leader');
 
 
-    Route::get('sheet/dessert', 'DessertController@dessert');
+    Route::get('sheet/dessert', 'DessertController@dessert')->name('sheet.dessert');
     Route::get('/dessert', "DessertController@generateDessert")->name('dessert');
+    Route::get('/dessert/findDetails', "DessertController@findDetails");
 
 });
 Route::any('viber_bot','ViberBitIntegration@handleViberRequest')->name('viber_bot');

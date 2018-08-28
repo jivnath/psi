@@ -20,10 +20,11 @@
         </div>
     </div>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+@push('scripts')
 
 <script>
+
     $(function(){
        $("#company").change(function(){
            var selected = $(this).val();
@@ -39,3 +40,4 @@
     });
 
 </script>
+@endpush
