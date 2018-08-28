@@ -19,9 +19,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <link rel="stylesheet" href="animate.min.css">
-    <link rel="stylesheet" href="bootstrap-dropdownhover.css">
-    <script src="js/bootstrap-dropdownhover.js"></script>
+    <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-dropdownhover.css')}}">
+    <script src="{{asset('js/bootstrap-dropdownhover.js')}}"></script>
 
 
 
@@ -48,7 +48,7 @@
                 @endif
 
                 @yield('content')
-                
+
             </div>
         </main>
     </div>

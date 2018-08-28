@@ -47321,7 +47321,7 @@ window.psi = new PSI();
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__("./resources/assets/js/app.js");
+__webpack_require__("./resources/assets/js/bootstrap.js");
 __webpack_require__("./resources/assets/js/psi.js");
 __webpack_require__("./resources/assets/js/employee.js");
 module.exports = __webpack_require__("./resources/assets/sass/app.scss");
