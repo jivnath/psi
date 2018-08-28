@@ -50,44 +50,45 @@
                 </tbody>
 
             </table>
+            <input type='text' id='all_saved_value'>
 
             <script>
             var allowed_field=[4,5,6,7];
+            var main_val;
                 $('body').on('focus', '[contenteditable]', function(ee) {
                     const $this = $(this);
                     $this.data('before', $this.html());
                     console.log('preparation..');
-                }).on('blur keyup paste input', '[contenteditable]', function(e) {
+                }).on('blur', '[contenteditable]', function(e) {
                     const $this = $(this);
                     if ($this.data('before') !== $this.html()) {
                         $this.data('before', $this.html());
                         $this.trigger('change');
 
 
-								var main_val=$(this).html();
+								main_val=$(this).html();
+								$.ajax({
+			                        type:"GET",
+			                        url:"/dessert/findDetails",
+			                        data:{'psi_num':main_val},
+			                        dataType:'json',
+			                        success:function(data){
+			                        	main_logical_data=data;
+			                        	$.each(data,function(i,v){
+			                        		$('#all_saved_value').data(i,v);
+				                        });
+			                        	findDetails($this);
+			                        }
 
-                        	    $(this).closest('tr').find('td').each(
-                        	    function (i) {
-                            	    if($.inArray(i,allowed_field) != -1){
-                            	    	$(this).html(i+' '+main_val);
-                        	        	console.log(i+':'+$(this).text());
-                            	    }
-                        	    });
-
+			                    });
                     }
                 });
-                function findDetails(){
-                    alert("success");
-
-                    $.ajax({
-                        type:"GET",
-                        url:"/dessert/findDetails",
-                        data:{'psi_num':psi_num},
-                        dataType:'json',
-                        success:function(data){
-                            console.log(data['name']);
-                        }
-
-                    });
+                function findDetails(obj){
+                	obj.closest('tr').find('td').each(
+                    	    function (i) {
+                        	    if($.inArray(i,allowed_field) != -1){
+                            	    $(this).html($('#all_saved_value').data(i.toString()));
+                        	    }
+                    	    });
                 }
             </script>

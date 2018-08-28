@@ -30,6 +30,12 @@ class DessertController extends Controller
 
     public function findDetails(Request $request)
     {
+        $default_arr= [
+            4 => '',
+            5 => '',
+            6 => '',
+            7 => ''
+        ];
         if ($request->ajax()) {
             $psi = $request->get('psi_num');
             if ($psi != null) {
@@ -42,20 +48,10 @@ class DessertController extends Controller
                         7 => $employee->cell_no
                     ];
                 } else {
-                    $data = [
-                        'country' => '',
-                        'phoetic' => '',
-                        'name' => '',
-                        'tel' => ''
-                    ];
+                    $data = $default_arr;
                 }
             } else {
-                $data = [
-                    'country' => '',
-                    'phoetic' => '',
-                    'name' => '',
-                    'tel' => ''
-                ];
+                $data = $default_arr;
             }
             echo json_encode($data);
         }

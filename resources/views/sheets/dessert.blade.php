@@ -6,7 +6,7 @@
             <div class="col-md-1" style="text-align: right;">
                 <label for="company">Company</label>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-5">
                 <select name="company" class="form-control select-sm" id="company">
                 <option>--Select Company--</option>
                     @foreach($companies as $company)
@@ -24,7 +24,7 @@
 @push('scripts')
 
 <script>
-
+var main_logical_data='';
     $(function(){
        $("#company").change(function(){
            var selected = $(this).val();
