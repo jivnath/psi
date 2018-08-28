@@ -8,6 +8,7 @@
             </div>
             <div class="col-md-2">
                 <select name="company" class="form-control select-sm" id="company">
+                <option>--Select Company--</option>
                     @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                     @endforeach
@@ -16,7 +17,6 @@
             <div class="col-md-9" style="float: right"></div>
         </div>
         <div style="margin-top: 20px" id="dessert_response">
-        <p>Loading...</p>
         </div>
     </div>
 @endsection
@@ -31,6 +31,9 @@
                type:'GET',
                url:"{{ route('dessert') }}",
                data:{'selected':selected},
+               beforeSend:function(){
+            	   $('#dessert_response').html('Loading,Please wait....');
+                   },
                success:function(data) {
                     $('#dessert_response').html(data);
                }

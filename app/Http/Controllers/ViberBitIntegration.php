@@ -32,7 +32,7 @@ class ViberBitIntegration extends Controller
                 $message_to_reply = 'hello ' . $sender_name;
             } elseif ($text_received == 'menu') {
                 $message_to_reply = 'select one of the options below';
-                $data['keboard'] = $this->keyboardTemplate()['keboard'];
+                $data['keyboard'] = $this->keyboardTemplate()['keyboard'];
             }
             $data['auth_token'] = $access_token;
             $data['receiver'] = $sender_id;
@@ -57,7 +57,7 @@ class ViberBitIntegration extends Controller
             'reply to me' => 'Key text',
             'TextSize' => "regular"
         ];
-        $keyboard['keboard']['Buttons'][] = $temp;
+        $keyboard['keyboard']['Buttons'][] = $temp;
         return $keyboard;
     }
 
