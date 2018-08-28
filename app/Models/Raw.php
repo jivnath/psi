@@ -110,7 +110,18 @@ WHERE
             date,
             time,
             ( normal + help ) total_require,
-            ctt.company_id
+            ctt.company_id,
+            (
+                SELECT
+                    CASE
+                        WHEN master_id <> ''   THEN master_id
+                        ELSE id
+                    END
+                FROM
+                    companies
+                WHERE
+                    id = ctt.company_id
+            ) master_id
         FROM
             company_time_schedules cts,
             company_time_tables ctt

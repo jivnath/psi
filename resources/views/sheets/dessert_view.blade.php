@@ -41,7 +41,9 @@
                         @endfor
                         @if($dessert_row->total_require==0)
                         <tr>
-                        <td colspan='15'>Not available, <a href="{{Route('shift.show',$dessert_row->master_id)}}" target='_blank'>Add here </a></td>
+                            <td> {{$dessert_row->date}} </td>
+                            <td> {{$dessert_row->time}} </td>
+                        <td colspan='13'>Not available, <a href="{{Route('shift.show',$dessert_row->master_id)}}" target='_blank'>Add here </a></td>
                         </tr>
                         @endif
                     @endforeach
