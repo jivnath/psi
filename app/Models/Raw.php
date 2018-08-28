@@ -103,4 +103,23 @@ WHERE
                 master_id";
         return DB::select($sql);
     }
+    public static function getDessertInfo($company_id){
+        $sql="SELECT
+            cts.id,
+            companytt_id,
+            DATE,
+            time,
+            ( normal + help ) total_require,
+            ctt.company_id
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt
+        WHERE
+            cts.companytt_id = ctt.id
+            and company_id=45
+        ORDER BY
+            cts.DATE,time
+            asc";
+        return DB::select($sql);
+    }
 }
