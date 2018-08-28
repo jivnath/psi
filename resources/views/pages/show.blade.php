@@ -67,10 +67,13 @@
     $(document).ready(function(){
         var tds = document.querySelectorAll("td.contenteditable");
         tds.forEach(function(el, index){
-            $('.contenteditable').submit(function(e){
-
+        	employee.inlineEditable(el, function(response){
             });
-        })
+        });
+        $('.contenteditable').submit(function(e){
+
+		});
+
 
     });
 
