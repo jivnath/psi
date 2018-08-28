@@ -156,11 +156,13 @@ class PagesController extends Controller
 
     public function updateCells(Request $request)
     {
-     $id = $request->$data['ctt_id'];
-     $type = $request->$data['job_type'];
-     $cts = CompanyTimeSchedule::find($id);
+        $id = $request->ctt_id;
+        $type = $request->job_type;
+        $value = $request->value;
+        $cts = CompanyTimeSchedule::find($id);
 
-     $cts->$type = $request->$newValue;
+        $cts->$type = $value;
+        $cts->save();
 
     }
 

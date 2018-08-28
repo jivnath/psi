@@ -68,11 +68,9 @@
     $(document).ready(function(){
         var tds = document.querySelectorAll("td.contenteditable");
         tds.forEach(function(el, index){
-            employee.inlineEditable(el, function(response){
-
-            })
-
-        })
+        	employee.inlineEditable(el, function(response){
+            });
+        });
     });
 
 </script>
