@@ -47232,7 +47232,7 @@ function Employee() {
         data['psi_num'] = $(event.target).parent('tr').find('td:first').text();
         data['column'] = $(event.target).attr('data-column');
         data['value'] = $(event.target).text();
-        data['company_id']=$(event.target).data('company_id');
+        data['schedule_company_id']=$(event.target).data('company_id');
 		data['company_tt_id']=$(event.target).data('company_tt_id');
 		data['schedule_date']=$(event.target).data('schedule_date');
 		data['job_type']=$(event.target).data('job_type');
