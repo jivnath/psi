@@ -26,15 +26,15 @@
             </div>
         </div>
 
-     </div> 
+     </div>
 	   <div class="clearfix"> </div>
-        
+
           @auth
             <nav class="navbar navbar-expand-md navbar-light" style="background:#fff">
           @else
              <nav class="navbar navbar-expand-md navbar-light" style="background:#21469b">
           @endauth
- 
+
 	 <div class="container" style="padding: 5px 20px 20px">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
@@ -58,7 +58,7 @@
     @auth
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
-        </button>  
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto pull-left" style="">
@@ -103,7 +103,7 @@
            {{--<!--  <li class="nav-item">
                 <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
             </li> -->--}}
-            
+
                 <li class="nav-item dropdown">
                     <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                      <i class="fas fa-cog"></i> @lang('nav.Setting') <span class="caret"></span>
