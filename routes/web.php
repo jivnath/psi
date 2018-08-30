@@ -82,5 +82,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dessert', "DessertController@generateDessert")->name('dessert');
     Route::get('/dessert/findDetails', "DessertController@findDetails");
 
+    Route::get('/skill', "EmployeeSkillController@add");
+    Route::post('/skill', "EmployeeSkillController@store")->name('skill.store');
+    Route::post('/skill/addmore', 'EmployeeSkillController@addSkill')->name('skill.addmore');
+
+
 });
 Route::any('viber_bot','ViberBitIntegration@handleViberRequest')->name('viber_bot');

@@ -8537,6 +8537,7 @@ button.bg-dark:focus {
   right: 0;
   bottom: 0;
   left: 0;
+  width: 100%;
   z-index: 1030;
 }
 
@@ -8545,6 +8546,12 @@ button.bg-dark:focus {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 1020;
+  }
+  .sticky-left {
+    position: -webkit-sticky;
+    position: sticky;
+    left:0;
     z-index: 1020;
   }
 }
@@ -10550,4 +10557,15 @@ a.text-dark:focus {
 
 .small-text{
   font-size: 13px;
+}
+body{
+  display: grid;
+}
+body{
+  padding-top:50px;
+}
+table.floatThead-table {
+  border-top: none;
+  border-bottom: none;
+  background-color: #fff;
 }

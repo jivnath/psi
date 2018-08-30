@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="page-header">
-        <h1>{{ $cells->first()->company->name }}</h1>
-    </div>
+
 
     <div id="validation" class="alert alert-danger" style="display:none"></div>
     <div class="container">
-        <table class="table table-striped" >
+        <div style="background-color: rgb(255,255,255);">
+            <h1>{{ $cells->first()->company->name }}</h1>
+        </div>
+        <table class="table table-striped table-fixed" style="text-align: center" >
              <thead>
                 <tr>
                     @foreach($columns as $column)
-                        <th style="word-wrap:break-word">{{__('employee.'. ucwords(str_replace('_','',ucwords($column,'_'))))}}</th>
+                        <th class="sticky" style="word-wrap:break-word">{{__('employee.'. ucwords(str_replace('_','',ucwords($column,'_'))))}}</th>
                     @endforeach
 
                 </tr>
@@ -27,7 +28,7 @@
                                         data-old = "" 
                                         contenteditable="true">
                                         @if ($column == 'sex')
-                                            <select >
+                                            <select name="sex">
                                             @foreach($sex as $s)
                                                 <option <?= ($cell->$column==$s->name)? 'selected="selected"':''?> value="$s->id"> {{ $s->name }} </option>
                                             @endforeach                                                
@@ -55,6 +56,7 @@
 
 
 @push('scripts')
+
 <script>
     $(document).ready(function(){
         var tds = document.querySelectorAll("td.contenteditable");
@@ -67,6 +69,19 @@
             });
         })
     });
-    
-</script>
+
+    var stickyOffset = $('.sticky').offset().top;
+    // var stickyLeftOffset = $('.sticky').offset().left;
+
+    $(window).scroll(function(){
+        var sticky = $('.sticky'),
+            scroll = $(window).scrollTop();
+            // scrollLeft = $(window).scrollLeft();
+
+        if (scroll > stickyOffset) sticky.addClass('sticky-top');
+        else sticky.removeClass('sticky-top');
+    //     if (scrollLeft >= stickyLeftOffset) sticky.addClass('sticky-left');
+    //     else sticky.removeClass('stickey-left');
+    });
+    </script>
 @endpush
