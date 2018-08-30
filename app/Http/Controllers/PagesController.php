@@ -38,17 +38,24 @@ class PagesController extends Controller
                 $sections = DB::table('companies')->where('master_id', $id)->get();
                 $output = '';
                 if ($sections->count() > 0) {
+                    $sec = [];
                     foreach ($sections as $section) {
                         $output .= '
-						<input type="checkbox" style ="margin-left:5px;" name="section[]" value="' . $section->id . '">' . $section->name;
+						<input type="checkbox" style ="margin-left:5px;" id="'.$section->name.'" name="section[]" value="' . $section->id . '">' . $section->name;
+                        array_push($sec, $section->name );
                     }
                 } else
                     $output .= '';
             } else
                 $output = '';
         }
+//        $secs = $section->toArray;
 
-        echo $output;
+        $data=[
+            'output' =>$output,
+            'section'=>$sec
+        ];
+        echo json_encode($data);
     }
 
     public function generatorStore(Request $request)

@@ -6,9 +6,9 @@
         {!! Form::open(array('route' => 'generator.store')) !!}
         	<div class="row">
 	            <div class="col-md-4" style="text-align: center;">               
-	                <label for="company"> Pick a Company </label>
+	                <label for="company"> Company </label>
 	            </div>
-	            <div class="col-md-4" style="padding: 5px;">
+	            <div class="col-md-4" style="">
 	            	<select class="form-control" name="company" id="companies" style="float: left" required>
 	            		<option value="">--Select Company--</option>
 	            		@foreach ($companies as $company)
@@ -21,7 +21,7 @@
 	            <div class="col-md-4"></div>
             </div>
             <br>
-            <div class="row">
+            <div class="row" style="display: none">
             	<div class="col-md-4" style="text-align: center;">
             		<label for="shift"> Shifts </label>
             	</div>
@@ -87,9 +87,17 @@
 	    	$.ajax({
 	    		type:'GET',
 	    		url:"{{ route('section') }}",
+                dataType:'json',
 	    		data:{ 'selected':selected	},
 	    		success:function(data){
-	    			$("#sections").html(data);
+	    			$("#sections").html(data.output);
+
+	    			$(function(){
+                        var i;
+                        for (i = 0; i < data.section.length; ++i) {
+                            console.log(data.section[i]);
+                        }
+					});
 	    		}
 	    	})
 	    });
