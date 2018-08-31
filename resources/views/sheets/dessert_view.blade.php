@@ -117,36 +117,6 @@
                     fixCellValue($this);
 
                     is_model_alert=false;
-
-                   $('.confirmation_1').click(function(){
-                       /* console.log("yesss");
-						var confirmation_data=$(this).val();
-						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
-							if(is_model_alert!=confirmation_data){
-    							is_model_alert=confirmation_data;
-    							$('.modal-title').html('<strong>Conform 3 hours ago </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
-    							$('.showComments').modal('show');
-    							$('.save').click(function(){
-									$('#all_saved_value').data('ctha',$('.comment').val());
-									$('.showComments').modal('hide');
-        						});
-							}
-						}
-						$this.data('confirmation_status_1',confirmation_data);
-						$('#all_saved_value').data('11',confirmation_data);
-						 */
-                	   console.log("yesss");
-						var confirmation_data=$(this).find('option:selected').val();
-						$this.data('confirmation_status_1',confirmation_data);
-						$('#all_saved_value').data('11',confirmation_data);
-                    });
-                   $('.cmt').click(function(){
-                       console.log("yesss");
-						var confirmation_data=$(this).val();
-						$this.data('cmt',confirmation_data);
-						$('#all_saved_value').data('14',confirmation_data);
-                    });
-
                 }).on('blur', '[contenteditable]', function(e) {
                     const $this = $(this);
                     if ($this.data('before') !== $this.html()) {
