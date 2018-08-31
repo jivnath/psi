@@ -41,7 +41,7 @@ class PagesController extends Controller
                     $sec = [];
                     foreach ($sections as $section) {
                         $output .= '
-						<input type="checkbox" style ="margin-left:5px;" id="'.$section->name.'" name="section[]" value="' . $section->id . '">' . $section->name;
+						<input type="checkbox" style ="margin-left:5px;" id="'.$section->name.'" onchange="getShift()" name="section[]" value="' . $section->id . '">' . $section->name;
                         array_push($sec, $section->name );
                     }
                 } else

@@ -81,6 +81,7 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
+    var globalSection;
 	$(function() {
 	    $("#companies").change(function() {
 	    	var selected = $('#companies').val();
@@ -93,13 +94,19 @@
 	    			$("#sections").html(data.output);
 
 	    			$(function(){
+
                         var i;
                         for (i = 0; i < data.section.length; ++i) {
                             console.log(data.section[i]);
+                            $("#"+data.section[i]).change(function () {
+								alert(data.section[i]);
+								console.log(data.section[i]);
+                            });
                         }
 					});
 	    		}
-	    	})
+	    	});
 	    });
     });
+
 </script>
