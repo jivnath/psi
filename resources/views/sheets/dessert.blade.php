@@ -35,8 +35,11 @@ var main_logical_data='';
                beforeSend:function(){
             	   $('#dessert_response').html('Loading,Please wait....');
                    },
-               success:function(data) {
-                    $('#dessert_response').html(data);
+               success:function(data,status) {
+            	   $('#dessert_response').html('');
+                   	if(status=='success'){
+                    	$('#dessert_response').html(data);
+                   	}
                }
            });
         });

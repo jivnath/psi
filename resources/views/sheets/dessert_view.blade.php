@@ -27,15 +27,15 @@
                 <th>Date</th>
                 <th>Time</th>
                 <th>No</th>
-                <th>Staff No.</th>
-                <th>Country</th>
-                <th>Name（フリガナ）</th>
-                <th>Name（氏名）</th>
-                <th>Tel No</th>
-                <th>Responsible</th>
-                <th>Conformation the day before</th>
-                <th>Responsible</th>
-                <th>Conform 3 hours ago</th>
+                <th class="border_field">Staff No.</th>
+                <th class="border_field">Country</th>
+                <th class="border_field">Name（フリガナ）</th>
+                <th class="border_field">Name（氏名）</th>
+                <th class="border_field">Tel No</th>
+                <th class="background_responsible">Responsible</th>
+                <th class="background_responsible">Conformation the day before</th>
+                <th class="background_responsible">Responsible</th>
+                <th class="background_responsible">Conform 3 hours ago</th>
                 <th>Arrival time in case of late arrival</th>
                 <th>Reason for late arrival and absence</th>
                 <th>Call Medium/Through</th>
@@ -47,24 +47,24 @@
                 @foreach($dessert as $dessert_row)
                     @for($i=1;$i<=$dessert_row->total_require;$i++)
                         <tr>
-                            <td> {{$dessert_row->date}} </td>
-                            <td> {{$dessert_row->time}} </td>
-                            <td> {{$i}} </td>
-                            <td class="contenteditable" contenteditable="true">  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td class="contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
-                            <td data-usage='confirmation'>
+                            <td class='background_global'> {{$dessert_row->date}} </td>
+                            <td class='background_global'> {{$dessert_row->time}} </td>
+                            <td class='background_global'> {{$i}} </td>
+                            <td class="border_field contenteditable" contenteditable="true">  </td>
+                            <td  class="border_field">  </td>
+                            <td  class="border_field">  </td>
+                            <td  class="border_field">  </td>
+                            <td  class="border_field">  </td>
+                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
+                            <td class="background_responsible" data-usage='confirmation'>
                                 <select class='form-control confirmation'>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
                                 	<option value='No response'>No response</option>
                                 </select>
                             </td>
-                            <td class="contenteditable" contenteditable="true" data-usage='responsibile_1'>  </td>
-                            <td data-usage='confirmation_1'>
+                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>  </td>
+                            <td class="background_responsible" data-usage='confirmation_1'>
                              <select class='form-control confirmation_1'>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -265,7 +265,7 @@
                     	    });
                 }
                 function fixCellValue(obj){
-
+                	$('.comment').val('');
                 	obj.closest('tr').find('td').each(
                 	    function (i) {
                     	    if($.inArray(i,[9,11,14]) ==-1){

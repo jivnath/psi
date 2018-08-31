@@ -178,7 +178,15 @@ sup {
 sub {
   bottom: -.25em;
 }
-
+.border_field {
+  background-color: aliceblue;
+}
+.background_responsible{
+	background-color: antiquewhite;
+}
+.background_global{
+	    background-color: cornsilk;
+}
 sup {
   top: -.5em;
 }
