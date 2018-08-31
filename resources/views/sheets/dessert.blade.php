@@ -24,7 +24,7 @@
 @push('scripts')
 
 <script>
-var main_logical_data='';
+    var main_logical_data='';
     $(function(){
        $("#company").change(function(){
            var selected = $(this).val();
@@ -41,6 +41,7 @@ var main_logical_data='';
            });
         });
     });
+
 
 </script>
 @endpush

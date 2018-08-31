@@ -297,4 +297,14 @@
                 	    	$('#all_saved_value').data(i.toString(),$(this).html());
                 	    });
                     }
+
+            $(window).scroll(function(){
+                var stickyOffset = $('thead').offset().top
+                var sticky = $("thead th "),
+                    scroll = $(window).scrollTop();
+
+                if (scroll > stickyOffset) sticky.addClass('sticky-top');
+                else sticky.removeClass('sticky-top');
+            });
+
             </script>
