@@ -84,6 +84,8 @@
                              <td style='visibility: hidden;'></td>
                              <td style='visibility: hidden;'></td>
                              <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
                         </tr>
                         @endfor
                         @if($dessert_row->total_require==0)
@@ -166,23 +168,29 @@
 					console.log(all_record);
                 });
                 $('.confirmation').change(function(){
-                    /* console.log("yesss");
-						var confirmation_data=$(this).val();
-						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
-							if(is_model_alert!=confirmation_data){
- 							is_model_alert=confirmation_data;
- 							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
- 							$('.showComments').modal('show');
- 							$('.save').click(function(){
-									$('#all_saved_value').data('ctdb',$('.comment').val());
-									$('.showComments').modal('hide');
-     						});
-							}
-						}
-						$this.data('confirmation_status',confirmation_data);
-						$('#all_saved_value').data('9',confirmation_data); */
+                	is_model_alert='';
              	   		console.log("yesss");
 						var confirmation_data=$(this).find('option:selected').val();
+						var my_this=$(this);
+						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
+							if(is_model_alert!=confirmation_data){
+     							is_model_alert=confirmation_data;
+     							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
+     							$('.showComments').modal('show');
+     							$('.save').click(function(){
+
+    									comment_val=$('.comment').val();
+    									my_this.closest('tr').find('td').each(
+    					                	    function (i) {
+    					                    	    if(i==20){
+    			    		                	    	$('#all_saved_value').data(i.toString(),comment_val);
+    			    		                    	    $(this).html(comment_val);
+    					                    	    }
+    					                	    });
+    									$('.showComments').modal('hide');
+         						});
+							}
+						}
 						$(this).data('confirmation_status',confirmation_data);
 						$(this).closest('tr').find('td').each(
 		                	    function (i) {
@@ -191,28 +199,36 @@
     		                    	    $(this).html(confirmation_data);
 		                    	    }
 		                	    });
+
 						$('#all_saved_value').data('9',confirmation_data);
 
                  });
                 $('.confirmation_1').change(function(){
-                    /* console.log("yesss");
-						var confirmation_data=$(this).val();
-						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
-							if(is_model_alert!=confirmation_data){
- 							is_model_alert=confirmation_data;
- 							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
- 							$('.showComments').modal('show');
- 							$('.save').click(function(){
-									$('#all_saved_value').data('ctdb',$('.comment').val());
-									$('.showComments').modal('hide');
-     						});
-							}
-						}
-						$this.data('confirmation_status',confirmation_data);
-						$('#all_saved_value').data('9',confirmation_data); */
+                		is_model_alert='';
              	   		console.log("yesss");
 						var confirmation_data=$(this).find('option:selected').val();
 						$(this).data('confirmation_status_1',confirmation_data);
+
+						var my_this=$(this);
+						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
+							if(is_model_alert!=confirmation_data){
+     							is_model_alert=confirmation_data;
+     							$('.modal-title').html('<strong>Conform 3 hours ago </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
+     							$('.showComments').modal('show');
+     							$('.save').click(function(){
+
+    									comment_val=$('.comment').val();
+    									my_this.closest('tr').find('td').each(
+    					                	    function (i) {
+    					                    	    if(i==21){
+    			    		                	    	$('#all_saved_value').data(i.toString(),comment_val);
+    			    		                    	    $(this).html(comment_val);
+    					                    	    }
+    					                	    });
+    									$('.showComments').modal('hide');
+         						});
+							}
+						}
 						$(this).closest('tr').find('td').each(
 		                	    function (i) {
 		                    	    if(i==18){
@@ -224,21 +240,6 @@
 
                  });
                 $('.cmt').change(function(){
-                    /* console.log("yesss");
-						var confirmation_data=$(this).val();
-						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
-							if(is_model_alert!=confirmation_data){
- 							is_model_alert=confirmation_data;
- 							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
- 							$('.showComments').modal('show');
- 							$('.save').click(function(){
-									$('#all_saved_value').data('ctdb',$('.comment').val());
-									$('.showComments').modal('hide');
-     						});
-							}
-						}
-						$this.data('confirmation_status',confirmation_data);
-						$('#all_saved_value').data('9',confirmation_data); */
              	   		console.log("yesss");
 						var confirmation_data=$(this).find('option:selected').val();
 						$(this).data('cmt',confirmation_data);
