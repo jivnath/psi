@@ -56,7 +56,7 @@
                             <td>  </td>
                             <td>  </td>
                             <td class="contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
-                            <td class="contenteditable" contenteditable="true" data-usage='confirmation'>
+                            <td data-usage='confirmation'>
                                 <select class='form-control confirmation'>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -64,7 +64,7 @@
                                 </select>
                             </td>
                             <td class="contenteditable" contenteditable="true" data-usage='responsibile_1'>  </td>
-                            <td class="contenteditable" contenteditable="true" data-usage='confirmation_1'>
+                            <td data-usage='confirmation_1'>
                              <select class='form-control confirmation_1'>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -73,7 +73,7 @@
                              </td>
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>  </td>
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>  </td>
-                            <td class="contenteditable" contenteditable="true" data-usage='cmt'>
+                            <td  data-usage='cmt'>
                             <select class='form-control cmt'>
                                 	<option value='viber'>viber</option>
                                 	<option value='call'>call</option>
@@ -81,6 +81,9 @@
                              </td>
                              <td>0</td>
                              <td><button type="button" class="btn btn-primary add_now">Add</button></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
                         </tr>
                         @endfor
                         @if($dessert_row->total_require==0)
@@ -115,27 +118,6 @@
 
                     is_model_alert=false;
 
-                   $('.confirmation').click(function(){
-                       /* console.log("yesss");
-						var confirmation_data=$(this).val();
-						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
-							if(is_model_alert!=confirmation_data){
-    							is_model_alert=confirmation_data;
-    							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
-    							$('.showComments').modal('show');
-    							$('.save').click(function(){
-									$('#all_saved_value').data('ctdb',$('.comment').val());
-									$('.showComments').modal('hide');
-        						});
-							}
-						}
-						$this.data('confirmation_status',confirmation_data);
-						$('#all_saved_value').data('9',confirmation_data); */
-                	   console.log("yesss");
-						var confirmation_data=$(this).find('option:selected').val();
-						$this.data('confirmation_status',confirmation_data);
-						$('#all_saved_value').data('9',confirmation_data);
-                    });
                    $('.confirmation_1').click(function(){
                        /* console.log("yesss");
 						var confirmation_data=$(this).val();
@@ -209,9 +191,97 @@
                     }
                 });
                 $('.add_now').click(function(){
+                	getCell($(this));
 					all_record=$('#all_saved_value').data();
 					console.log(all_record);
                 });
+                $('.confirmation').change(function(){
+                    /* console.log("yesss");
+						var confirmation_data=$(this).val();
+						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
+							if(is_model_alert!=confirmation_data){
+ 							is_model_alert=confirmation_data;
+ 							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
+ 							$('.showComments').modal('show');
+ 							$('.save').click(function(){
+									$('#all_saved_value').data('ctdb',$('.comment').val());
+									$('.showComments').modal('hide');
+     						});
+							}
+						}
+						$this.data('confirmation_status',confirmation_data);
+						$('#all_saved_value').data('9',confirmation_data); */
+             	   		console.log("yesss");
+						var confirmation_data=$(this).find('option:selected').val();
+						$(this).data('confirmation_status',confirmation_data);
+						$(this).closest('tr').find('td').each(
+		                	    function (i) {
+		                    	    if(i==17){
+    		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
+    		                    	    $(this).html(confirmation_data);
+		                    	    }
+		                	    });
+						$('#all_saved_value').data('9',confirmation_data);
+
+                 });
+                $('.confirmation_1').change(function(){
+                    /* console.log("yesss");
+						var confirmation_data=$(this).val();
+						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
+							if(is_model_alert!=confirmation_data){
+ 							is_model_alert=confirmation_data;
+ 							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
+ 							$('.showComments').modal('show');
+ 							$('.save').click(function(){
+									$('#all_saved_value').data('ctdb',$('.comment').val());
+									$('.showComments').modal('hide');
+     						});
+							}
+						}
+						$this.data('confirmation_status',confirmation_data);
+						$('#all_saved_value').data('9',confirmation_data); */
+             	   		console.log("yesss");
+						var confirmation_data=$(this).find('option:selected').val();
+						$(this).data('confirmation_status_1',confirmation_data);
+						$(this).closest('tr').find('td').each(
+		                	    function (i) {
+		                    	    if(i==18){
+    		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
+    		                    	    $(this).html(confirmation_data);
+		                    	    }
+		                	    });
+						$('#all_saved_value').data('11',confirmation_data);
+
+                 });
+                $('.cmt').change(function(){
+                    /* console.log("yesss");
+						var confirmation_data=$(this).val();
+						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
+							if(is_model_alert!=confirmation_data){
+ 							is_model_alert=confirmation_data;
+ 							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
+ 							$('.showComments').modal('show');
+ 							$('.save').click(function(){
+									$('#all_saved_value').data('ctdb',$('.comment').val());
+									$('.showComments').modal('hide');
+     						});
+							}
+						}
+						$this.data('confirmation_status',confirmation_data);
+						$('#all_saved_value').data('9',confirmation_data); */
+             	   		console.log("yesss");
+						var confirmation_data=$(this).find('option:selected').val();
+						$(this).data('cmt',confirmation_data);
+						$(this).closest('tr').find('td').each(
+		                	    function (i) {
+		                    	    if(i==19){
+    		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
+    		                    	    $(this).html(confirmation_data);
+		                    	    }
+		                	    });
+						$('#all_saved_value').data('14',confirmation_data);
+
+                 });
                 function findDetails(obj){
                 	obj.closest('tr').find('td').each(
                     	    function (i) {
@@ -245,6 +315,15 @@
                         	    	$('#all_saved_value').data(i.toString(),$(this).data('cmt'));
                         	    }
                         	   }
+                	    });
+                    }
+                function getCell(obj){
+
+
+                	obj.closest('tr').find('td').each(
+                	    function (i) {
+                    	    console.log(i);
+                	    	$('#all_saved_value').data(i.toString(),$(this).html());
                 	    });
                     }
             </script>
