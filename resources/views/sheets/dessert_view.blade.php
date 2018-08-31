@@ -104,6 +104,7 @@
             var allowed_pop_up=['Not OK','No response'];
             var is_model_alert=false;
             var last_psi='';
+            var last_select='';
 
                 $('body').on('focus change', '[contenteditable]', function(ee) {
                     const $this = $(this);
@@ -111,10 +112,11 @@
 
                     console.log('preparation..');
                     fixCellValue($this);
+
                     is_model_alert=false;
 
-                   $('.confirmation').change(function(){
-                       console.log("yesss");
+                   $('.confirmation').click(function(){
+                       /* console.log("yesss");
 						var confirmation_data=$(this).val();
 						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
 							if(is_model_alert!=confirmation_data){
@@ -123,14 +125,19 @@
     							$('.showComments').modal('show');
     							$('.save').click(function(){
 									$('#all_saved_value').data('ctdb',$('.comment').val());
+									$('.showComments').modal('hide');
         						});
 							}
 						}
 						$this.data('confirmation_status',confirmation_data);
+						$('#all_saved_value').data('9',confirmation_data); */
+                	   console.log("yesss");
+						var confirmation_data=$(this).find('option:selected').val();
+						$this.data('confirmation_status',confirmation_data);
 						$('#all_saved_value').data('9',confirmation_data);
                     });
                    $('.confirmation_1').click(function(){
-                       console.log("yesss");
+                       /* console.log("yesss");
 						var confirmation_data=$(this).val();
 						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
 							if(is_model_alert!=confirmation_data){
@@ -139,9 +146,15 @@
     							$('.showComments').modal('show');
     							$('.save').click(function(){
 									$('#all_saved_value').data('ctha',$('.comment').val());
+									$('.showComments').modal('hide');
         						});
 							}
 						}
+						$this.data('confirmation_status_1',confirmation_data);
+						$('#all_saved_value').data('11',confirmation_data);
+						 */
+                	   console.log("yesss");
+						var confirmation_data=$(this).find('option:selected').val();
 						$this.data('confirmation_status_1',confirmation_data);
 						$('#all_saved_value').data('11',confirmation_data);
                     });
@@ -211,15 +224,27 @@
                     	    });
                 }
                 function fixCellValue(obj){
-                	 $('#all_saved_value').removeData();
+
                 	obj.closest('tr').find('td').each(
                 	    function (i) {
-                    	    if($.inArray(i,allowed_field) != -1){
-                        	    $(this).html($('#all_saved_value').data(i.toString()));
+                    	    if($.inArray(i,[9,11,14]) ==-1){
+                    	    	$('#all_saved_value').removeData('"'+i+'"');
+                	    		$('#all_saved_value').data(i.toString(),$(this).html());
                     	    }
-                    	    if($.inArray(i,[0,1,2]) != -1){
-                        	    $('#all_saved_value').data(i.toString(),$(this).html());
-                    	    }
+                    	    else{
+                        	    if(i==9){
+                            	    console.log($(this).data('confirmation_status'));
+                        	    	$('#all_saved_value').data(i.toString(),$(this).data('confirmation_status'));
+                        	    }
+                        	    else if(i==11){
+                            	    console.log($(this).data('confirmation_status_1'));
+                        	    	$('#all_saved_value').data(i.toString(),$(this).data('confirmation_status_1'));
+                        	    }
+                        	    else if(i==14){
+                            	    console.log($(this).data('cmt'));
+                        	    	$('#all_saved_value').data(i.toString(),$(this).data('cmt'));
+                        	    }
+                        	   }
                 	    });
                     }
             </script>
