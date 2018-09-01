@@ -14,6 +14,11 @@ class Company extends Model
 		return $this->hasMany('App\Models\CompanyTimeTable');
 	}
 
+	public function shift()
+    {
+        return $this->hasMany('App\Models\ShiftMasterData');
+    }
+
 }
 
 

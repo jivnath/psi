@@ -124,9 +124,8 @@
         var button_id = $(this).attr("id");
         var name = $(this).attr("name");
         var psi = $("#psi_num").val();
+
         if(confirm("Are you sure you want to delete this skill?")) {
-
-
             $.ajax({
                 method:"get",
                 url:"{{ route('delete.skill') }}",

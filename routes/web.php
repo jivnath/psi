@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/section', 'PagesController@section')->name('section');
     Route::get('shift/{id}/show', 'PagesController@show')->name('shift.show');
     Route::post('/shift/updateCell', 'PagesController@updateCells');
+    Route::get('/shift/generate', 'PagesController@getShift')->name('generator.shift');
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
@@ -81,6 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('sheet/dessert', 'DessertController@dessert')->name('sheet.dessert');
     Route::get('/dessert', "DessertController@generateDessert")->name('dessert');
     Route::get('/dessert/findDetails', "DessertController@findDetails");
+    Route::post('/dessert', "DessertController@storeDessert")->name('dessert.store');
 
     Route::get('/skill', "EmployeeSkillController@add");
     Route::post('/skill', "EmployeeSkillController@store")->name('skill.store');
