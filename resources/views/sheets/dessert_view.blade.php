@@ -86,6 +86,8 @@
                              <td style='visibility: hidden;'></td>
                              <td style='visibility: hidden;'></td>
                              <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'>{{$dessert_row->id}}</td>
+
                         </tr>
                         @endfor
                         @if($dessert_row->total_require==0)
@@ -166,6 +168,18 @@
                 	getCell($(this));
 					all_record=$('#all_saved_value').data();
 					console.log(all_record);
+					$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type:'POST',
+                        url:"{{ route('dessert.store') }}",
+                        data:{allRecord:all_record},
+                        success:function(data){
+                            console.log(data);
+
+                        }
+                    });
                 });
                 $('.confirmation').change(function(){
                 	is_model_alert='';
@@ -297,6 +311,8 @@
                 	    	$('#all_saved_value').data(i.toString(),$(this).html());
                 	    });
                     }
+
+
 
             $(window).scroll(function(){
                 var stickyOffset = $('thead').offset().top

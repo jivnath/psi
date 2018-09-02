@@ -28,7 +28,7 @@
 
                                     <tr>
                                     	@if($last !==$time->time)
-                                    <td rowspan={{ count($companies)*2}} style="vertical-align:middle;text-align:center;font-weight:bolder;"> {{ $time->time.':00' }} </td>
+                                    <td rowspan={{ count($companies)*2}} style="vertical-align:middle;text-align:center;font-weight:bolder;"> {{ $time->time }} </td>
                                         @endif
                                         @php
 											$last=$time->time
@@ -40,7 +40,7 @@
                                                 @php
                                                     $ctt = App\Http\Controllers\PagesController::getCtt($time->time, $company->id, $date->date);
                                                 @endphp
-                                                @if ($ctt->$type != 0)
+                                                @if ($ctt->$type !=0 && is_null($ctt->$type)==false)
                                                     <td class="contenteditable"
                                                         contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}" data-app_source="shift_update" data-ctt_id="{{$ctt->id}}"> {{ $ctt->$type }} </td>
                                                 @else

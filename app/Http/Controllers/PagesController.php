@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\ShiftMasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
@@ -34,19 +35,26 @@ class PagesController extends Controller
         if ($request->ajax()) {
             $id = $request->get('selected');
 
-            if ($id != null) {
+            if ($id != null)
+            {
                 $sections = DB::table('companies')->where('master_id', $id)->get();
                 $output = '';
-                if ($sections->count() > 0) {
+                if ($sections != null)
+                {
                     $sec = [];
-                    foreach ($sections as $section) {
+                    foreach ($sections as $section)
+                    {
                         $output .= '
-						<input type="checkbox" style ="margin-left:5px;" id="'.$section->name.'" onchange="getShift()" name="section[]" value="' . $section->id . '">' . $section->name;
+						<input type="checkbox" style ="margin-left:5px;" class="sections" id="'.$section->name.'" name="section[]" value="' . $section->id . '">' . $section->name;
                         array_push($sec, $section->name );
                     }
-                } else
-                    $output .= '';
-            } else
+                }
+                else
+                {
+                    $output = 'This company doesn\'t have subcompanies.';
+                }
+            }
+            else
                 $output = '';
         }
 //        $secs = $section->toArray;
@@ -58,16 +66,34 @@ class PagesController extends Controller
         echo json_encode($data);
     }
 
+    public function getShift(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->get('id');
+
+            $sec = ShiftMasterData::where('company_id', $id)->get();
+            $sections = [];
+            foreach($sec as $s){
+                array_push($sections, $s);
+            }
+
+            echo json_encode($sections);
+        }
+
+    }
+
     public function generatorStore(Request $request)
     {
-        $shifts = serialize($request['shift']);
         $section = $request['section'];
         if (sizeof($section) > 0) {
-            foreach ($section as $company) {
+            foreach ($section as $company)
+            {
+                $shifts = ShiftMasterData::where('company_id', $company)->get();
+
                 $timeTable = new CompanyTimeTable();
 
                 $timeTable->company_id = $company;
-                $timeTable->shift = $shifts;
                 $timeTable->save();
 
                 $id = $timeTable->id;
@@ -75,16 +101,14 @@ class PagesController extends Controller
                 $startDate = $request->start_date;
                 $endDate = $request->end_date;
 
-                $s = $request['shift'];
-
-                foreach ($s as $s) {
+                foreach ($shifts as $s) {
                     $startDate = $request->start_date;
                     while (strtotime($startDate) <= strtotime($endDate)) {
                         $schedule = new CompanyTimeSchedule();
 
                         $schedule->companyTT_id = $id;
                         $schedule->date = $startDate;
-                        $schedule->time = $s;
+                        $schedule->time = $s->start_time;
                         $schedule->normal = null;
                         $schedule->help = null;
 
