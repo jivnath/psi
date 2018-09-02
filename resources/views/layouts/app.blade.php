@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'PSI-S') }}</title>
+    <title>{!! Request::segment(count(request()->segments())) !!} | {!! config('app.name', 'PSI-S') !!}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
