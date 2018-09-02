@@ -103,7 +103,7 @@ WHERE
                 master_id";
         return DB::select($sql);
     }
-    public static function getDessertInfo($company_id){
+    public static function getDessertInfo($company_id,$date){
         $sql="SELECT
             cts.id,
             companytt_id,
@@ -128,6 +128,7 @@ WHERE
         WHERE
             cts.companytt_id = ctt.id
             and company_id=$company_id
+            and date='$date'
         ORDER BY
             cts.date,time asc";
         return DB::select($sql);

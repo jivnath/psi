@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Raw;
+use App\Models\CompanyTimeTable;
 
 class DessertController extends Controller
 {
@@ -16,12 +17,33 @@ class DessertController extends Controller
         return view('sheets.dessert')->withCompanies($companies);
     }
 
+    public function generateTimeTable(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->get('selected');
+            if ($id != null) {
+                $schedule_results = \App\Models\Company::find($id)->companyTimeTable();
+                if (count($schedule_results->get()) > 0) {
+                    $schedule_id = $schedule_results->first()->id;
+                    $schedule_data = \App\Models\CompanyTimeTable::find($schedule_id)->companyTimeSchedule()->get();
+
+                    return view('sheets.dessert_schedule_view', compact('schedule_data'));
+                }
+                else{
+                    return 'No generated scheduled found';
+                }
+            }
+        }
+    }
+
     public function generateDessert(Request $request)
     {
         if ($request->ajax()) {
             $id = $request->get('selected');
             if ($id != null) {
-                $dessert = Raw::getDessertInfo($id);
+
+                $date = $request->get('selected_date');
+                $dessert = Raw::getDessertInfo($id, $date);
                 // dd($dessert);
                 return view('sheets.dessert_view', compact('dessert'));
             }
@@ -30,7 +52,7 @@ class DessertController extends Controller
 
     public function findDetails(Request $request)
     {
-        $default_arr= [
+        $default_arr = [
             4 => '',
             5 => '',
             6 => '',

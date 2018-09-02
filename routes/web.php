@@ -77,7 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
 //    Route::get('/leader/{id}', 'LeaderController@update')->name('leader.update');
     Route::get('/leader', 'LeaderController@showName')->name('leader');
 
-
+    Route::get('sheet/time_table', 'DessertController@generateTimeTable')->name('sheet.time_table');
     Route::get('sheet/dessert', 'DessertController@dessert')->name('sheet.dessert');
     Route::get('/dessert', "DessertController@generateDessert")->name('dessert');
     Route::get('/dessert/findDetails', "DessertController@findDetails");

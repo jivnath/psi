@@ -1,12 +1,13 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class CompanyTimeTable extends Model
 {
+
     protected $table = 'company_time_tables';
+
 
     public function comp()
     {
@@ -15,6 +16,6 @@ class CompanyTimeTable extends Model
 
     public function companyTimeSchedule()
     {
-    	return $this->hasMany('App\Models\CompanyTimeSchedule');
+        return $this->hasMany('App\Models\CompanyTimeSchedule','companyTT_id');
     }
 }
