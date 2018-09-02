@@ -1,3 +1,4 @@
+
    <div id="navbar-main">
         <div class="navbar navbar-inverse navbar-fixed-top pull-right" style="">
            <div class="container">
@@ -61,16 +62,25 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto pull-left" style="">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a id="master_data" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <a id="master_data" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-home"></i>  @lang('nav.MasterData') <span class="caret"></span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="master_data">
-                      <a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a>
-                      <a class="dropdown-item" href="{{ route('employees') }}"> @lang('nav.Employee')</a>
-                      <a class="dropdown-item" href="{{ route('company.create') }}"> @lang('nav.Company')</a>
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li> <a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
+                            <li><a class="dropdown-item" href="{{ route('employees') }}"> @lang('nav.Employee')</a></li>
+                            <li><a class="dropdown-item" href="{{ route('company.create') }}"> @lang('nav.Company')</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
+
+                                </ul>
+                            </li>
+                            </ul>
+
                 </li>
 
                 <li class="nav-item dropdown">
@@ -152,4 +162,19 @@
                           e.preventDefault();
                       });
                   });
+                  (function($){
+                		$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+                		  if (!$(this).next().hasClass('show')) {
+                			$(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                		  }
+                		  var $subMenu = $(this).next(".dropdown-menu");
+                		  $subMenu.toggleClass('show');
+
+                		  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                			$('.dropdown-submenu .show').removeClass("show");
+                		  });
+
+                		  return false;
+                		});
+                	})(jQuery)
               </script>

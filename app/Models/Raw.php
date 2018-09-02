@@ -80,6 +80,7 @@ WHERE
         $expired = DB::select("$sql");
         return $expired;
     }
+
     public static function getShiftView()
     {
         $sql = "SELECT
@@ -103,8 +104,10 @@ WHERE
                 master_id";
         return DB::select($sql);
     }
-    public static function getDessertInfo($company_id,$date){
-        $sql="SELECT
+
+    public static function getDessertInfo($company_id, $date)
+    {
+        $sql = "SELECT
             cts.id,
             companytt_id,
             date,
@@ -131,6 +134,23 @@ WHERE
             and date='$date'
         ORDER BY
             cts.date,time asc";
+        return DB::select($sql);
+    }
+
+    public static function getScheduleData($id)
+    {
+        $sql = "SELECT
+                smd.id,
+                smd.company_id,
+                smd.start_time,
+                smd.end_time,
+                cts.date,
+             cts.normal,
+             cts.help
+            FROM shift_master_datas smd,
+            company_time_schedules cts
+            WHERE
+                smd.id = cts.companytt_id and smd.company_id=$id";
         return DB::select($sql);
     }
 }
