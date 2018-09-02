@@ -17,10 +17,20 @@
                                 <label for="psi_num"> <h5> PSI_S No: </h5> </label>
                             </div>
                             <div class="col-md-7" style="text-align: left;">
-                                <input type="text" name="psi_num" placeholder="Enter PSI_s Number">
+                                <input style=" width: 70%" type="text" class="form-control" id="psi_num" name="psi_num" placeholder="Enter PSI_s Number">
                             </div>
                         </div>
 
+                        <div class="row" id="hidden"style="text-align: center; margin-top: 5px; margin-bottom: 20px; display: none;">
+                            <div class="col-md-5">
+                                <label for="name"> <h5> Employee Name: </h5> </label>
+                            </div>
+                            <div class="col-md-7" style="text-align: left;">
+                                <h5 id="name"></h5>
+                            </div>
+                        </div>
+
+                        <br>
 
                         <div style="border-radius: 25px ; border: 1px solid black; padding: 20px;">
 
@@ -74,3 +84,29 @@
     </div>
 </div>
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#psi_num").change(function() {
+            var psi = $('#psi_num').val();
+            $.ajax({
+                type:'GET',
+                url:"{{ route('leader') }}",
+                data:{ 'selected':psi	},
+                success:function(data){
+                    if(data != '')
+                    {
+                        $("#hidden").show("fast");
+                        $("#name").text(data);
+                    }
+                    else
+                    {
+                        $("#hidden").hide(500);
+                    }
+
+                }
+            })
+        });
+    });
+</script>

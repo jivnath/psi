@@ -70,11 +70,4 @@ class EmployeeAvailabilityController extends Controller
 	   	return redirect()->route('availability.index', $id );	
    }
 
-   public static function enhanceTime($time)
-   {
-   		if($time<10)
-   			return '0'.$time;
-   		else
-   			return $time;
-   }
 }

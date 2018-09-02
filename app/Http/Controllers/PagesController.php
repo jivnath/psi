@@ -148,6 +148,12 @@ class PagesController extends Controller
         return $ctt;
     }
 
+    public static function doesTimeExist($time, $id)
+    {
+        $does = ShiftMasterData::where('company_id', $id)->where('start_time', $time)->first();
+        return $does;
+    }
+
     public function show($id)
     {
         $data=[];
@@ -194,11 +200,6 @@ class PagesController extends Controller
 
         $cts->$type = $value;
         $cts->save();
-
-
-
-
-
     }
 
     public static function masterCompany($id)
@@ -206,4 +207,5 @@ class PagesController extends Controller
         $master = Company::find($id);
         return $master->name;
     }
+
 }

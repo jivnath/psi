@@ -10,6 +10,6 @@ class EmployeeAvailability extends Model
 
 	public function employee()
 	{
-		return $this->belongsTo('App\Models\Employee', 'psi_number');
+		return $this->belongsTo('App\Models\Employee', 'psi_number', 'psi_number');
 	}   //
 }

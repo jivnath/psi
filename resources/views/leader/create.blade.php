@@ -50,21 +50,21 @@
 
                                 <div class="row">
                                     <div class="col-md-4"></div>
+                                    <div class="col-md-4"></div>
                                     <div class="col-md-4">
-                                        <div class="col-md-4"><div>
                                         <button style="margin-top: 15px" type="submit" class="btn btn-primary">
                                             Save
                                         </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

@@ -9,12 +9,23 @@
 
                 <div class="card-body " style="padding: 20px;">
                     @if($availability)
-                        <div class="row" style="text-align: left; margin-top: 5px; margin-bottom: 20px;">
-                            <div class="col-md-5">
-                                <label for="company_name"> <h5> PSI-S NO.  </h5> </label>
+                        <div class="row" style="text-align: right; margin-top: 5px; margin-bottom: 20px;">
+                            <div class="col-md-4">
+                                <label for="psi_num"> <h5> PSI_S No: </h5> </label>
                             </div>
-                            <div class="col-md-7">
-                                <label> <h5> {{ $availability->psi_number }} </h5> </label>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-7" style="text-align: left;">
+                                <h5>{{$availability->psi_number}}</h5>
+                            </div>
+                        </div>
+
+                        <div class="row" style="text-align: right; margin-top: 5px; margin-bottom: 20px;">
+                            <div class="col-md-4">
+                                <label for="psi_num"> <h5> Employee Name: </h5> </label>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-7" style="text-align: left;">
+                                <h5>{{$availability->employee->name}}</h5>
                             </div>
                         </div>
 
@@ -34,11 +45,7 @@
                                             <label for="{{$weekday}}"> <h5> {{ucfirst($weekday)}} </h5> </label>
                                         </div>
                                         <div class="col-md-2">
-                                            <fieldset>
-                                                @php
-                                                    echo App\Http\Controllers\EmployeeAvailabilityController::enhanceTime($availability->$weekday);
-                                                @endphp
-                                            </fieldset>
+                                            {{$availability->$weekday}}
                                         </div>
                                         <div class="col-md-1"></div>
                                     @endforeach
