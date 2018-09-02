@@ -89,6 +89,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/skill/addmore', 'EmployeeSkillController@addSkill')->name('skill.addmore');
     Route::get('/skill/all', 'EmployeeSkillController@findSkill')->name('skill.all');
     Route::get('/skill/delete', 'EmployeeSkillController@removeSkill')->name('delete.skill');
+    Route::get('/viber/alert/setting', function() {
+        return view('viber.alert_setting');
+        });
 
 
 });
