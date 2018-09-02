@@ -40,6 +40,29 @@
             @include('layouts.nav')
         </div>
         <main class="py-4">
+        <nav aria-label="breadcrumb">
+
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+             <?php $segments = '';
+             $total=count(Request::segments());
+             ?>
+              @foreach(Request::segments() as $key=> $segment)
+                <?php $segments .= '/'.$segment; ?>
+                <?php
+                if ($key === ($total-1)){?>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $segment }}</li>
+                    <li class="breadcrumb-item pull-right">Last Update: 3:15pm</li>
+                <?php }else{
+                ?>
+                <li class="breadcrumb-item">
+                    <a href="{{ $segments }}">{{$segment}}</a>
+                </li>
+                <?php }?>
+            @endforeach
+              </ol>
+              </div>
+            </nav>
             <div class="container">
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
