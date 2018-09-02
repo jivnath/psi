@@ -1,33 +1,5 @@
 
    <div id="navbar-main">
-        <div class="navbar navbar-inverse navbar-fixed-top pull-right" style="">
-           <div class="container">
-            <div class="">  {!! Form::open(['method' => 'POST', 'route' => 'changelocale', 'class' => 'form-inline navbar-select']) !!}
-                <div class="form-group @if($errors->first('locale')) has-error @endif">
-                    <span aria-hidden="true"></span>
-                    {!! Form::select(
-                        'locale',
-                        ['en' => 'EN', 'ja' => 'JA'],
-                        \App::getLocale(),
-                        [
-                            'id'       => 'locale',
-                            'class'    => 'form-control',
-                            'required' => 'required',
-                            'style'   =>  'font-size:11px;height:35px;border:none',
-                            'onchange' => 'this.form.submit()',
-                        ]
-                    ) !!}
-                    <small class="text-danger">{{ $errors->first('locale') }}</small>
-                </div>
-
-                <div class="btn-group pull-right sr-only">
-                    {!! Form::submit("Change", ['class' => 'btn btn-success']) !!}
-                </div>
-                {!! Form::close() !!}
-            </div>
-        </div>
-
-     </div>
 	   <div class="clearfix"> </div>
 
           @auth
@@ -82,7 +54,6 @@
                             </ul>
 
                 </li>
-
                 <li class="nav-item dropdown">
                     <a id="shift_management" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                      <i class="far fa-clock"></i>
@@ -145,6 +116,33 @@
                     </form>
                 </div>
               </li>
+              <li class="nav-item dropdown dropdown-menu-left">
+                {!! Form::open(['method' => 'POST', 'route' => 'changelocale', 'class' => 'form-inline navbar-select']) !!}
+                <div class="form-group @if($errors->first('locale')) has-error @endif">
+                    <span aria-hidden="true"></span>
+                    {!! Form::select(
+                        'locale',
+                        ['en' => 'EN', 'ja' => 'JA'],
+                        \App::getLocale(),
+                        [
+                            'id'       => 'locale',
+                            'class'    => 'form-control',
+                            'required' => 'required',
+                            'style'   =>  'font-size:11px;height:35px;border:none',
+                            'onchange' => 'this.form.submit()',
+                        ]
+                    ) !!}
+                    <a id="master_data" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ $errors->first('locale') }}
+                    </a>
+                </div>
+
+                <div class="btn-group pull-right sr-only">
+                    {!! Form::submit("Change", ['class' => 'btn btn-success']) !!}
+                </div>
+                {!! Form::close() !!}
+
+                </li>
           @endguest
 
           </ul>
