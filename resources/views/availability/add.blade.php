@@ -39,15 +39,7 @@
                                                 <label for="{{ $weekday }}"> <h5> {{ ucfirst($weekday) }} </h5> </label>
                                             </div>
                                             <div class="col-md-2">
-                                                <select class="form-control" name="{{ $weekday }}">
-                                                    @for ($i = 1; $i <= 24; $i++)
-                                                        @if($i < 10)
-                                                            <option value="{{ '0'.$i }}"> {{ '0'.$i }} </option>
-                                                        @else
-                                                            <option value="{{ $i }}"> {{ $i }} </option>
-                                                        @endif
-                                                    @endfor
-                                                </select>
+                                                <input type="time" class="form-control" name="{{ $weekday }}">
                                             </div>
                                             <div class="col-md-1"></div>
                                             @php
@@ -60,15 +52,7 @@
                                                 <label for="sat"> <h5> Sat </h5> </label>
                                             </div>
                                             <div class="col-md-2">
-                                                <select class="form-control" name="sat">
-                                                    @for ($i = 1; $i <= 24; $i++)
-                                                        @if($i < 10)
-                                                            <option value="{{ '0'.$i }}"> {{ '0'.$i }} </option>
-                                                        @else
-                                                            <option value="{{ $i }}"> {{ $i }} </option>
-                                                        @endif
-                                                    @endfor
-                                                </select>
+                                                <input type="time" class="form-control" name="{{ $weekday }}">
                                             </div>
                                             <div class="col-md-2"></div>
                                             <div class="col-md-2">

@@ -40,7 +40,7 @@
                                                 @php
                                                     $ctt = App\Http\Controllers\PagesController::getCtt($time->time, $company->id, $date->date);
                                                 @endphp
-                                                @if ($ctt->$type !=0 && is_null($ctt->$type)==false)
+                                                @if ($ctt->$type !=0 && $ctt->$type!=null)
                                                     <td class="contenteditable"
                                                         contenteditable="true" data-company_id="{{$company->company_id}}" data-company_tt_id="{{$company->id}}" data-schedule_date="{{ $date->date}}" data-job_type="{{$type}}" data-app_source="shift_update" data-ctt_id="{{$ctt->id}}"> {{ $ctt->$type }} </td>
                                                 @else
