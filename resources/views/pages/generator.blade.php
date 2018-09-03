@@ -13,14 +13,15 @@
                             <div class="col-md-4 form-group" style="text-align: right;">
                                 <label for="company"> Company </label>
                             </div>
-                            <div class="col-md-8 form-group" style="">
+                            <div class="col-md-7 form-group" style="">
                                 <select class="form-control" name="company" id="companies" style="float: left" required>
                                     <option value="">--Select Company--</option>
                                     @foreach ($companies as $company)
-                                        <option value="{{$company->id}}">{{ $company->name }}</option>
+                                        <option name="{{$company->name}}" value="{{$company->id}}">{{ $company->name }}</option>
                                     @endforeach
                                 </select>
                                 <div id="sections" style="margin-top: 7px;"></div>
+                                <div class="col-md-1"></div>
                             </div>
                         </div>
                         <div id="shift">
@@ -31,9 +32,10 @@
                             <div class="col-md-4 form-group" style="text-align: right;">
                                 {{ Form::label('start_date','Start Date')}}
                             </div>
-                            <div class="col-md-8 form-group">
+                            <div class="col-md-7 form-group">
                                 {{ Form::date('start_date', \Carbon\Carbon::now(), array('class' => 'form-control', 'required'=>''))}}
                             </div>
+                            <div class="col-md-1"></div>
                         </div>
                         <br>
 
@@ -41,18 +43,20 @@
                             <div class="col-md-4 form-group" style="text-align: right;">
                                 {{ Form::label('end_date','End Date')}}
                             </div>
-                            <div class="col-md-8 form-group">
+                            <div class="col-md-7 form-group">
                                 {{ Form::date('end_date', \Carbon\Carbon::now(), array('class' => 'form-control', 'required'=>''))}}
                             </div>
+                            <div class="col-md-1"></div>
                         </div>
                         <br>
 
                         <div class="row">
                             <div class="col-md-4"></div>
-                            <div class="col-md-8" style="text-align: right">
+                            <div class="col-md-7" style="text-align: right">
                                 {{ Form::submit('Generate', array('class' => 'btn btn-success btn-md'))}}
                                 <a href="{{ route('generator') }}" class="btn btn-danger" style="margin-left: 5px">Cancel</a>
                             </div>
+                            <div class="col-md-1"></div>
                         </div>
                    {!! Form::close() !!}
                 </div>
@@ -124,7 +128,9 @@
 <script type="text/javascript">
 	$(function() {
 	    $("#companies").change(function() {
+	        $("#shiftAdd").hide();
 	    	var selected = $('#companies').val();
+            var name = $('option:selected', this).attr('name');
 	    	if(selected != '') {
                 $.ajax({
                     type: 'GET',
@@ -134,6 +140,27 @@
                     success: function (data) {
                         $("#sections").html(data.output);
                         $("#shift").html('');
+
+                        if(data.section.length==0)
+                        {
+                            var forSection = '<div id="' + selected + '1' + '"><div class="row" style="text-align:right">' +
+                                '<div class="col-md-4"><label>' + name + '\'s Shift</label></div>' +
+                                '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
+                                '<div id="'+selected+'allShifts"> </div>' +
+                                '</ul> ' +
+                                '<span id="'+selected+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
+                                '</div><br>' +
+                                '</div>';
+                            $("#shift").append(forSection);
+
+                            for (i = 0; i < data.shift.length; i++)
+                            {
+                                var html = '<li>' + data.shift[i].start_time + ' - ' + data.shift[i].end_time + '</li>';
+                                $("#"+selected+"allShifts").append(html);
+                            }
+                        }
+
+
                     }
                 });
             }
@@ -146,6 +173,7 @@
     });
 
     $(document).on('change', '.sections', function(){
+        $("#shiftAdd").hide();
         var sectionId = $(this).attr("value");
         var sectionName = $(this).attr("id");
         if(this.checked) {
@@ -160,11 +188,11 @@
                     if(sections.length >0)
                     {
                         var forSection = '<div id="' + sectionId + '1' + '"><div class="row" style="text-align:right">' +
-                            '<div class="col-md-6"><label>' + sectionName + '\'s Shift</label></div>' +
-                            '<div class="col-md-6" style="text-align: left"><ul style="list-style: none">' +
-                            '<div id="'+sectionName+'allShifts"> </div>' +
+                            '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
+                            '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
+                            '<div id="'+sectionId+'allShifts"> </div>' +
                             '</ul> ' +
-                            '<span class="btn btn-sm btn-info">Add New Shift</span> </div>' +
+                            '<span id="'+sectionId+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
                             '</div><br>' +
                             '</div>';
                         $("#shift").append(forSection);
@@ -173,14 +201,14 @@
                         for (i = 0; i < sections.length; i++)
                         {
                             var html = '<li>' + sections[i].start_time + ' - ' + sections[i].end_time + '</li>';
-                            $("#"+sectionName+"allShifts").append(html);
+                            $("#"+sectionId+"allShifts").append(html);
                         }
                     }
                     else
                     {
-                     var forSec = '<div class="row" style="text-align:right">' +
-                         '<div class="col-md-6"><label>' + sectionName + '\'s Shift</label></div>' +
-                         '<div class="col-md-6" style="text-align: left">' +
+                     var forSec = '<div class="row" style="text-align:center">' +
+                         '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
+                         '<div class="col-md-8" style="text-align: left">' +
                          'No Shift For This Company<br>' +
                          '<span class="btn btn-sm btn-info">Add New Shift</span> </div>' +
                          '</div><br>' +
@@ -199,7 +227,7 @@
     // shift add part starts
     $(document).on('click', '.btn-info', function(){
 
-        $("#shiftAdd").show("fast");
+        $("#shiftAdd").show();
         var postURL = "<?php echo url('addmore'); ?>";
         var i=1;
         $('#add').click(function(){
