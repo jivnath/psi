@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\DessertSheet;
+use App\Models\DessertSheet;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -84,7 +84,6 @@ class DessertController extends Controller
     {
         if($request->ajax())
         {
-            dd($request->all());
             $data = $request->get('allRecord');
 
             $d = new DessertSheet();
@@ -92,7 +91,7 @@ class DessertController extends Controller
             $d->staff_no = $data[3];
             $d->responsible1 = $data[8];
             $d->conformation_day_before = $data[17];
-            $d->respondible2 = $data[10];
+            $d->responsible2 = $data[10];
             $d->conformation_3_hours_ago =$data[18];
             $d->arrival_time_if_late = $data[12];
             $d->reason_for_late = $data[13];
@@ -100,7 +99,7 @@ class DessertController extends Controller
 
             $d->save();
 
-            return redirect()->route('sheet.dessert');
+            return response()->json($d);
 
 
 
