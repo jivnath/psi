@@ -1,10 +1,13 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-fluid">
-        <h3>Company Shift</h3>
-        <div class="row">
+<section class="content">
+    <div class="row">
         	<div class="col-md-12">
-			<div class='container_class' style='overflow: scroll;'>
+        	<div class="box box-info">
+        	<div class="box-header with-border">
+                      <h3 class="box-title">Company Shift</h3>
+                    </div>
+			<div class='box-body container_class'>
         		<table class="table table-striped" id='example'>
         			<thead>
         				<th> Time </th>
@@ -62,8 +65,9 @@
         		</table>
         		</div>
         	</div>
-        </div>
+        	</div>
     </div>
+    </section>
 
 @endsection
 
