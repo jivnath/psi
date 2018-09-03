@@ -41,7 +41,8 @@
             @include('layouts.nav')
         </div>
         <main class="py-4">
-        <nav aria-label="breadcrumb">
+        <section class="content-header">
+
 
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -63,7 +64,7 @@
             @endforeach
               </ol>
               </div>
-            </nav>
+            </section>
             <div class="container">
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
