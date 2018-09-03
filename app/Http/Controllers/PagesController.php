@@ -14,20 +14,11 @@ use Date;
 class PagesController extends Controller
 {
 
-    public function getUser()
-    {
-        return view('pages.users');
-    }
-
-    public function getEmployee()
-    {
-        return view('pages.employee');
-    }
-
     public function generator()
     {
-        $companies = DB::table('companies')->where('master_id', null)->get();
-        return view('pages.generator')->withCompanies($companies);
+        $allCompanies = Company::all();
+        $companies = DB::table('companies')->where('master_id', 0)->get();
+        return view('pages.generator')->withCompanies($companies)->withAllCompanies($allCompanies);
     }
 
     public function section(Request $request)

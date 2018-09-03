@@ -70,4 +70,21 @@ class EmployeeAvailabilityController extends Controller
 	   	return redirect()->route('availability.index', $id );	
    }
 
+   public function ajaxUpdate(Request $request)
+   {
+       if($request->ajax())
+       {
+           $time = $request->get('time');
+           $psi = $request->get('psi');
+           $day = $request->get('day');
+
+           $ava = EmployeeAvailability::where('psi_number', $psi);
+
+           $ava->$day = $time;
+           $ava->save();
+
+
+
+       }
+   }
 }

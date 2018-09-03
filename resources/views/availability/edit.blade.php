@@ -8,7 +8,7 @@
                 <div class="card-header">{{ "Please fill out the form below." }}</div>
 
                 <div class="card-body " style="padding: 20px;">
-                    <form  action="{{ route('availability.update', $availability->id ) }}" method="POST" >
+                    <form class="form-group" action="{{ route('availability.update', $availability->id ) }}" method="POST" >
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -42,17 +42,16 @@
                             </div>
 
                             @foreach($weekdays->chunk(2) as $weekdays)
-                                <div class="row" style="text-align: center; margin-top: 5px;">
+                                <div class="row form-group" style="text-align: center; margin-top: 5px;">
                                     @foreach ($weekdays as $weekday)
                                         @if($k < 6)
                                             <div class="col-md-1"></div>
                                             <div class="col-md-2">
                                                 <label for="{{ $weekday }}"> <h5> {{ ucfirst($weekday) }} </h5> </label>
                                             </div>
-                                            <div class="col-md-2">
-                                                    <input type="time" class="form-control" name="{{ $weekday }}" value="{{$availability->$weekday}}">
+                                            <div class="col-md-3">
+                                                    <input style="width: 75%"type="time" class="form-control days" name="{{ $weekday }}" value="{{$availability->$weekday}}">
                                             </div>
-                                            <div class="col-md-1"></div>
                                             @php
                                                 $k++
                                             @endphp
@@ -62,8 +61,8 @@
                                             <div class="col-md-2">
                                                 <label for="sat"> <h5> Sat </h5> </label>
                                             </div>
-                                            <div class="col-md-2">
-                                                <input type="time" class="form-control" name="{{ $weekday }}" value="{{$availability->sat}}">
+                                            <div class="col-md-3">
+                                                <input type="time" style="width: 75%" class="form-control days" name="{{ $weekday }}" value="{{$availability->sat}}">
 
                                             </div>
                                             <div class="col-md-2"></div>
@@ -73,7 +72,6 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-2"></div>
-                                            <div class="col-md-1"></div>
                                         @endif
                                     @endforeach                                    
                                 </div>
@@ -86,3 +84,29 @@
     </div>
 </div>
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $(document).on('change', '.days', function(){
+        var time = $(this).val();
+        var psi = $('#psi_num').val();
+        var day = $(this).attr("id");
+
+        $.ajax({
+            url:"{{ route('availability.ajaxupdate') }}",
+            type:"POST",
+            data:{time:time, psi:psi, day:day},
+            success:function(data){
+
+                console.log(time);
+            }
+        });
+    });
+</script>
+
+
+

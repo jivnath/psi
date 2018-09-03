@@ -41,17 +41,16 @@
                             </div>
 
                             @foreach($weekdays->chunk(2) as $weekdays)
-                                <div class="row" style="text-align: center; margin-top: 5px;">
+                                <div class="row form-group" style="text-align: center; margin-top: 5px;">
                                     @foreach ($weekdays as $weekday)
                                         @if($k < 6)
                                             <div class="col-md-1"></div>
                                             <div class="col-md-2">
                                                 <label for="{{ $weekday }}"> <h5> {{ ucfirst($weekday) }} </h5> </label>
                                             </div>
-                                            <div class="col-md-2">
-                                                <input type="time" class="form-control" name="{{ $weekday }}">
+                                            <div class="col-md-3">
+                                                <input style="width: 70%" type="time" class="form-control days" id="{{$weekday}}" name="{{ $weekday }}">
                                             </div>
-                                            <div class="col-md-1"></div>
                                             @php
                                                 $k++
                                             @endphp
@@ -61,8 +60,8 @@
                                             <div class="col-md-2">
                                                 <label for="sat"> <h5> Sat </h5> </label>
                                             </div>
-                                            <div class="col-md-2">
-                                                <input type="time" class="form-control" name="{{ $weekday }}">
+                                            <div class="col-md-3">
+                                                <input style="width: 70%" type="time" class="form-control days" id="{{$weekday}}" name="{{ $weekday }}">
                                             </div>
                                             <div class="col-md-2"></div>
                                             <div class="col-md-2">
@@ -71,7 +70,6 @@
                                                 </button>
                                             </div>
                                             <div class="col-md-2"></div>
-                                            <div class="col-md-1"></div>
                                         @endif
                                     @endforeach                                    
                                 </div>
@@ -109,4 +107,6 @@
             })
         });
     });
+
+
 </script>

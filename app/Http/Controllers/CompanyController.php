@@ -16,7 +16,7 @@ class CompanyController extends Controller
 	
 	public function create()
 	{
-		$companies = DB::table('companies')->where('master_id', null)->get();
+		$companies = DB::table('companies')->where('master_id', 0)->get();
 		return view('companies.create')->withCompanies($companies);
 
 	}
