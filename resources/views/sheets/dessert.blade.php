@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-1">
-                <label for="company">Company</label>
-            </div>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+        	<div class="box box-info">
+             <div class="box-header with-border">
+                      <h3 class="box-title">Company Shift</h3>
+                    </div>
+                     <div class="box-body row">
             <div class="col-md-3">
               <select name="company" class="form-control" id="company">
                 <option>--Select Company--</option>
@@ -20,10 +23,14 @@
             <div class="col-md-2">
 				<button type="button" class="btn btn-primary view_dessert">Submit</button>
             </div>
+            </div>
+            </div>
         </div>
-        <div style="margin-top: 20px" id="dessert_response">
+        <div class='col-md-12'>
+        <div id='dessert_response' style="width: 100%;overflow: scroll;position: absolute;"></div>
         </div>
     </div>
+    </section>
 @endsection
 
 @push('scripts')

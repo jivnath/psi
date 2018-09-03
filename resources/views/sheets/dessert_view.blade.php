@@ -21,8 +21,8 @@
 
                     </div>
                   </div>
-                  <table class="table table-borderd" style="text-align: center">
-                <thead>
+                  <table class="table table-borderd">
+                <thead class="thead-dark">
                 <tr>
                 <th>Date</th>
                 <th>Time</th>
