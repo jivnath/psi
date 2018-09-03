@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container" xmlns="http://www.w3.org/1999/html">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header">{{ "Please fill out the form below." }}</div>
 
@@ -23,17 +23,7 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="row" style="text-align: center; margin-top: 5px;">
-                            <div class="col-md-5">
-                                <label for="company_name" id="companyorsub"> Sub-Company Name </label>
-                            </div>
-                            <div class="col-md-7">
-                                <input type="text" name="company_name" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="row" id="dropdown" style="text-align: center; margin-top: 5px;">
+						<div class="row" id="dropdown" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
                                 <label for="company"> Company Name </label>
                             </div>
@@ -46,6 +36,16 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="col-md-5">
+                                <label for="company_name" id="companyorsub"> Sub-Company Name </label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" name="company_name" class="form-control" required>
+                            </div>
+                        </div>
+
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
@@ -76,11 +76,13 @@
                                     Clear
                                 </button>
                             </div>
-                        </div>           
+                        </div>
                     </form>
-<br />
-                    <div>
-                        <table class="table table-striped">
+                </div>
+            </div>
+        </div>
+        <div class='col-md-5'>
+                        <table class="table table-bordered table-hover">
                             <tr>
                                 <th>Company Name</th>
                                 <th>Sections</th>
@@ -99,23 +101,20 @@
                                             {{ $c }}<br />
                                         @endforeach
                                     @else
-                                         --   
+                                         --
                                     @endif
-                                    </td>                                      
+                                    </td>
                                     <td> {{ $company->address }} </td>
                                     <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
                                 </tr>
                             @endforeach
 
                         </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+@push('scripts')
 <script type="text/javascript">
     $(document).ready(function() {
         $("#companytype").change(function () {
@@ -124,15 +123,16 @@
 
             if(master_company_val==0)
             {
-                $("#dropdown").hide(500);
+                $("#dropdown").hide();
                 $("#companyorsub").text('Company Name');
             }
             else
             {
-                $("#dropdown").show("fast");
+                $("#dropdown").show();
                 $("#companyorsub").text('Sub-Company Name');
             }
             $("#master_company").prop('selectedIndex',0);
         });
     });
 </script>
+@endpush
