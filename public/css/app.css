@@ -10570,7 +10570,13 @@ body{
   display: grid;
 }
 body{
-  padding-top:50px;
+  /* padding-top:10px; */
+}
+.table-wrapper-scroll-y {
+  display: block;
+  max-height: 200px;
+  overflow-y: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 table.floatThead-table {
   border-top: none;
