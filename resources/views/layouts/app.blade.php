@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-dropdownhover.css')}}">
     <script src="{{asset('js/bootstrap-dropdownhover.js')}}"></script>
+    <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet">
 
 
 

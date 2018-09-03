@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
+<section class="content">
     <div class="row">
         <div class="col-md-7">
-            <div class="card">
-                <div class="card-header">{{ "Please fill out the form below." }}</div>
-
-                <div class="card-body " style="padding: 10px;">
-                    <form name="companyForm" action="{{ route('company.store') }}" method="POST" >
+ 			<div class="box box-info">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">{{ "Please fill out the form below." }}</h3>
+                    </div>
+                    <form name="companyForm" class='form-horizontal' action="{{ route('company.store') }}" method="POST" >
+                        <div class="box-body">
                         <input type="hidden" name="_method" value="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -77,41 +78,49 @@
                                 </button>
                             </div>
                         </div>
+                        </div>
                     </form>
-                </div>
             </div>
         </div>
-        <div class='col-md-5'>
-                        <table class="table table-bordered table-hover">
-                            <tr>
-                                <th>Company Name</th>
-                                <th>Sections</th>
-                                <th>Address</th>
-                                <th>Action</th>
-                            </tr>
-                            @foreach($companies as $company)
+        	<div class='col-md-5'>
+        	 <div class="box box-info">
+                    <div class="box-header with-border">
+                  		<h3 class="box-title">Company Entry</h3>
+                	</div>
+                	<div class="box-body">
+                            <table class="table table-bordered table-hover">
                                 <tr>
-                                    <td> {{ $company->name }} </td>
-                                    @php
-                                        $c = App\Http\Controllers\CompanyController::sections($company->id);
-                                    @endphp
-                                    <td>
-                                    @if(count($c)>0)
-                                        @foreach($c as $c)
-                                            {{ $c }}<br />
-                                        @endforeach
-                                    @else
-                                         --
-                                    @endif
-                                    </td>
-                                    <td> {{ $company->address }} </td>
-                                    <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
+                                    <th>Company Name</th>
+                                    <th>Sections</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
                                 </tr>
-                            @endforeach
+                                @foreach($companies as $company)
+                                    <tr>
+                                        <td> {{ $company->name }} </td>
+                                        @php
+                                            $c = App\Http\Controllers\CompanyController::sections($company->id);
+                                        @endphp
+                                        <td>
+                                        @if(count($c)>0)
+                                            @foreach($c as $c)
+                                                {{ $c }}<br />
+                                            @endforeach
+                                        @else
+                                             --
+                                        @endif
+                                        </td>
+                                        <td> {{ $company->address }} </td>
+                                        <td><a href="{{ route('company.edit', $company->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
+                                    </tr>
+                                @endforeach
 
-                        </table>
+                            </table>
+                            </div>
+                        </div>
         </div>
     </div>
+    </section>
 
 @endsection
 @push('scripts')

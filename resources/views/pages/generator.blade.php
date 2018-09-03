@@ -1,11 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<section class="content">
             <div class="row">
                 <div class="col-md-6">
-                    <center><h3>Company Shift</h3></center>
-                    {!! Form::open(array('route' => 'generator.store')) !!}
-                        <div class="row">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Company Shift</h3>
+                    </div>
+                    {!! Form::open(array('route' => 'generator.store','class'=>'form-horizontal')) !!}
+                        <div class="box-body row">
                             <div class="col-md-4 form-group" style="text-align: right;">
                                 <label for="company"> Company </label>
                             </div>
@@ -22,7 +26,6 @@
                         <div id="shift">
 
                         </div>
-                    <br>
 
                         <div class="row">
                             <div class="col-md-4 form-group" style="text-align: right;">
@@ -52,12 +55,17 @@
                             </div>
                         </div>
                    {!! Form::close() !!}
-                </div><div class="col-md-1"></div>
+                </div>
+                </div>
+
                 <div class="col-md-5" id="shiftAdd" style="display: none">
-                    <center><h4>Add Shift</h4></center>
-                    <div class="card">
-                        <div class="card-body " style="padding: 10px;">
-                            <form  action="{{ route('shift.store') }}" method="POST" >
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                  		<h3 class="box-title">Add Shift</h3>
+                	</div>
+
+                            <form  class='form-horizontal' action="{{ route('shift.store') }}" method="POST" >
+ 								<div class="box-body">
                                 <input type="hidden" name="_method" value="POST">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -103,11 +111,13 @@
                                         </button>
                                     </div>
                                 </div>
+                                </div>
                             </form>
-                        </div>
-                    </div>
+
                 </div>
             </div>
+            </div>
+            </section>
 
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
