@@ -45,10 +45,63 @@
                 </thead>
                 <tbody>
                 @foreach($dessert as $dessert_row)
-                    @for($i=1;$i<=$dessert_row->total_require;$i++)
+                <?php
+                $i=0;
+                $total_reserved=0;
+                $total_reserved=count($dessert_row['dessert_info']);
+                ?>
+                @foreach($dessert_row['dessert_info'] as $key=> $info)
                         <tr>
-                            <td class='background_global'> {{$dessert_row->date}} </td>
-                            <td class='background_global'> {{$dessert_row->time}} </td>
+                            <td class='background_global'> {{$dessert_row['date']}} </td>
+                            <td class='background_global'> {{$dessert_row['time']}} </td>
+                            <td class='background_global'> {{$key+1}} </td>
+                            <td class="border_field contenteditable" contenteditable="true">{{$info->staff_no}}</td>
+                            <td  class="border_field">{{$info->staff_no}}</td>
+                            <td  class="border_field">{{$info->phoetic_kanji}}</td>
+                            <td  class="border_field">{{$info->name}}</td>
+                            <td  class="border_field">{{$info->cell_no}}</td>
+                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>{{$info->responsible1}}</td>
+                            <td class="background_responsible" data-usage='confirmation'>
+                                <select class='form-control confirmation'>
+                                	<option value=''>--select--</option>
+                                	<option value='OK' {{ ($info->conformation_day_before=='OK') ? 'selected':''}}>OK</option>
+                                	<option value='Not OK' {{ ($info->conformation_day_before=='Not OK') ? 'selected':''}}>Not OK</option>
+                                	<option value='No response' {{ ($info->conformation_day_before=='No response') ? 'selected':''}}>No response</option>
+                                </select>
+                            </td>
+                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>{{$info->responsible2}}</td>
+                            <td class="background_responsible" data-usage='confirmation_1'>
+                             <select class='form-control confirmation_1'>
+                             		<option value=''>--select--</option>
+                                	<option value='OK' {{ ($info->conformation_3_hours_ago=='OK') ? 'selected':''}}>OK</option>
+                                	<option value='Not OK' {{ ($info->conformation_3_hours_ago=='Not OK') ? 'selected':''}}>Not OK</option>
+                                	<option value='No response' {{ ($info->conformation_3_hours_ago=='No response') ? 'selected':''}}>No response</option>
+                                </select>
+                             </td>
+                            <td class="contenteditable" contenteditable="true" data-usage='atlr'>{{$info->arrival_time_if_late}}</td>
+                            <td class="contenteditable" contenteditable="true" data-usage='rlaa'>  </td>
+                            <td  data-usage='cmt'>
+                            <select class='form-control cmt'>
+                            		<option value=''>--select--</option>
+                                	<option value='viber' {{ ($info->call_medium=='viber') ? 'selected':''}}>viber</option>
+                                	<option value='call' {{ ($info->call_medium=='call') ? 'selected':''}}>call</option>
+                                </select>
+                             </td>
+                             <td>0</td>
+                             <td><button type="button" class="btn btn-primary add_now">Add</button></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'></td>
+                             <td style='visibility: hidden;'>{{$dessert_row['id']}}</td>
+
+                        </tr>
+                        @endforeach
+                    @for($i=$total_reserved+1;$i<=($dessert_row['total_require']);$i++)
+                        <tr>
+                            <td class='background_global'> {{$dessert_row['date']}} </td>
+                            <td class='background_global'> {{$dessert_row['time']}} </td>
                             <td class='background_global'> {{$i}} </td>
                             <td class="border_field contenteditable" contenteditable="true">  </td>
                             <td  class="border_field">  </td>
@@ -58,6 +111,7 @@
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
                             <td class="background_responsible" data-usage='confirmation'>
                                 <select class='form-control confirmation'>
+                                	<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
                                 	<option value='No response'>No response</option>
@@ -66,6 +120,7 @@
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>  </td>
                             <td class="background_responsible" data-usage='confirmation_1'>
                              <select class='form-control confirmation_1'>
+                             		<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
                                 	<option value='No response'>No response</option>
@@ -75,6 +130,7 @@
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>  </td>
                             <td  data-usage='cmt'>
                             <select class='form-control cmt'>
+                            		<option value=''>--select--</option>
                                 	<option value='viber'>viber</option>
                                 	<option value='call'>call</option>
                                 </select>
@@ -86,19 +142,20 @@
                              <td style='visibility: hidden;'></td>
                              <td style='visibility: hidden;'></td>
                              <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'>{{$dessert_row->id}}</td>
+                             <td style='visibility: hidden;'>{{$dessert_row['id']}}</td>
 
                         </tr>
                         @endfor
-                        @if($dessert_row->total_require==0)
+                        @if($dessert_row['total_require']==0)
                         <tr>
-                            <td> {{$dessert_row->date}} </td>
-                            <td> {{$dessert_row->time}} </td>
-                        <td colspan='13'>Not available, <a href="{{Route('shift.show',$dessert_row->master_id)}}" target='_blank'>Add here </a></td>
+                            <td> {{$dessert_row['date']}} </td>
+                            <td> {{$dessert_row['time']}} </td>
+                        <td colspan='13'>Not available, <a href="{{Route('shift.show',$dessert_row['master_id'])}}" target='_blank'>Add here </a></td>
                         </tr>
                         @endif
                     @endforeach
                 </tbody>
+
 
             </table>
             <input type='hidden' id='all_saved_value'>

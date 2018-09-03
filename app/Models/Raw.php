@@ -134,7 +134,19 @@ WHERE
             and date='$date'
         ORDER BY
             cts.date,time asc";
-        return DB::select($sql);
+        $re=DB::select($sql);
+        foreach ($re as $row) {
+            $output_results[] = [
+                'id' => $row->id,
+                'companytt_id' => $row->companytt_id,
+                'master_id' => $row->master_id,
+                'total_require' => $row->total_require,
+                'date'=>$row->date,
+                'time'=>$row->time,
+                'dessert_info' => \App\Models\DessertSheet::join('employees','psi_dessert_entry.staff_no', '=','employees.psi_number')->where('cts_id', $row->id)->get()
+            ];
+        }
+        return $output_results;
     }
 
     public static function getScheduleData($id)
