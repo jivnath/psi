@@ -153,7 +153,7 @@
                     let i;
                     if(sections.length >0)
                     {
-                        var forSection = '<div id="' + sectionName + '1' + '"><div class="row" style="text-align:right">' +
+                        var forSection = '<div id="' + sectionId + '1' + '"><div class="row" style="text-align:right">' +
                             '<div class="col-md-6"><label>' + sectionName + '\'s Shift</label></div>' +
                             '<div class="col-md-6" style="text-align: left"><ul style="list-style: none">' +
                             '<div id="'+sectionName+'allShifts"> </div>' +
@@ -186,7 +186,7 @@
         }
         else
         {
-            $("#"+sectionName+'1').remove();
+            $("#"+sectionId+'1').remove();
         }
     });
 
