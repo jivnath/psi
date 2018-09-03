@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" xmlns="http://www.w3.org/1999/html">
+
     <div class="row">
         <div class="col-md-7">
             <div class="card">
@@ -112,7 +112,7 @@
                         </table>
         </div>
     </div>
-</div>
+
 @endsection
 @push('scripts')
 <script type="text/javascript">

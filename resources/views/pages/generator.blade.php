@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div name="generator">
             <div class="row">
                 <div class="col-md-6">
                     <center><h3>Company Shift</h3></center>
@@ -110,8 +108,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
