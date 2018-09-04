@@ -137,4 +137,13 @@ class DessertController extends Controller
         $dessert->save();
         return $dessert->id;
     }
+
+    public function dessert_update(Request $request)
+    {
+
+        $dessert = DessertSheet::find($request->dessert_id);
+        $dessert->{$request->field} = $request->field_value;
+        $dessert->save();
+        return response()->json($dessert);
+    }
 }
