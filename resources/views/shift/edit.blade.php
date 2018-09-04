@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ "Please fill out the form below." }}</div>
+            <div class="box">
+                <div class="box-header">{{ "Please fill out the form below." }}</div>
 
-                <div class="card-body " style="padding: 10px;">
+                <div class="box-body " style="padding: 10px;">
                     <form  action="{{ route('shift.update') }}" method="POST" >
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

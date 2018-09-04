@@ -2,82 +2,58 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ "Please fill out the form below." }}</div>
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+            <div class="box">
+                <div class="box-header"><h3>{{ "Employee Availability" }}</h3></div>
 
-                <div class="card-body " style="padding: 20px;">
+                <div class="box-body " style="padding: 20px;">
                     <form  action="{{ route('availability.store') }}" method="POST" >
                         <input type="hidden" name="_method" value="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                        <div class="row" style="text-align: center; margin-top: 5px; margin-bottom: 20px;">
-                            <div class="col-md-5">
+                        <div class="form-group row" style="text-align: center; margin-top: 5px;">
+                            <div class="col-md-4 col-form-label">
                                 <label for="psi_num"> <h5> PSI_S No: </h5> </label>
                             </div>
-                            <div class="col-md-7" style="text-align: left;">
+                            <div class="col-md-8" style="text-align: center;">
                                 <input style=" width: 70%" type="text" class="form-control" id="psi_num" name="psi_num" placeholder="Enter PSI_s Number">
                             </div>
                         </div>
 
-                        <div class="row" id="hidden"style="text-align: center; margin-top: 5px; margin-bottom: 20px; display: none;">
-                            <div class="col-md-5">
+                        <div class="form-group row" id="hidden"style="text-align: center; margin-top: 5px; display: none;">
+                            <div class="col-md-4 col-form-label">
                                 <label for="name"> <h5> Employee Name: </h5> </label>
                             </div>
-                            <div class="col-md-7" style="text-align: left;">
+                            <div class="col-md-8" style="text-align: left;">
                                 <h5 id="name"></h5>
                             </div>
                         </div>
-
-                        <br>
-
-                        <div style="border-radius: 25px ; border: 1px solid black; padding: 20px;">
-
-                            <div class="row">
-                                <div class="col-md-6 offset-3" style="text-align: center;">
-                                    <label> <h4> Weekdays </h4> </label>
-                                </div>                                
-                            </div>
-
-                            @foreach($weekdays->chunk(2) as $weekdays)
-                                <div class="row form-group" style="text-align: center; margin-top: 5px;">
-                                    @foreach ($weekdays as $weekday)
-                                        @if($k < 6)
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-2">
-                                                <label for="{{ $weekday }}"> <h5> {{ ucfirst($weekday) }} </h5> </label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input style="width: 70%" type="time" class="form-control days" id="{{$weekday}}" name="{{ $weekday }}">
-                                            </div>
-                                            @php
-                                                $k++
-                                            @endphp
-                                            
-                                        @else
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-2">
-                                                <label for="sat"> <h5> Sat </h5> </label>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input style="width: 70%" type="time" class="form-control days" id="{{$weekday}}" name="{{ $weekday }}">
-                                            </div>
-                                            <div class="col-md-2"></div>
-                                            <div class="col-md-2">
-                                                <button style="margin-top: 15px" type="submit" class="btn btn-primary">
-                                                    Save
-                                                </button>
-                                            </div>
-                                            <div class="col-md-2"></div>
+                        @foreach ($weekdays as $weekday)
+                            <div class="form-group row" style="text-align: center;">
+                                @if($k < 7)
+                                    <div class="col-md-4 col-form-label">
+                                        <label for="{{ $weekday }}"> <h5> {{ ucfirst($weekday) }} </h5> </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input style="width: 70%" type="time" class="form-control" id="{{$weekday}}" name="{{ $weekday }}">
+                                        @if($k==6)
+                                            <br>
+                                            <button type="submit" class="btn btn-primary">Add</button>
                                         @endif
-                                    @endforeach                                    
-                                </div>
-                            @endforeach
-                        </div>
+
+                                    </div>
+                                @endif
+                                @php
+                                    $k++;
+                                @endphp
+                            </div>
+                        @endforeach
                     </form>   
                 </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
     </div>
 @endsection
 

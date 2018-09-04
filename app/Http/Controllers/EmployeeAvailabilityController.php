@@ -12,7 +12,7 @@ class EmployeeAvailabilityController extends Controller
 	public function index($id)
 	{
 		$availability = EmployeeAvailability::find($id);
-      $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
+        $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']);
       return view('availability.index')->withAvailability($availability)->withWeekdays($weekdays);
 
 	}
@@ -20,8 +20,8 @@ class EmployeeAvailabilityController extends Controller
    
    public function add()
    {
-         $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ]);
-         $k = 0;
+       $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']);
+       $k = 0;
    		return view('availability.add')->withWeekdays($weekdays)->withK($k);
    }
 
@@ -30,13 +30,13 @@ class EmployeeAvailabilityController extends Controller
    	$availability = new EmployeeAvailability;
 
    	$availability->psi_number = $request->psi_num;
-   	$availability->sun = $request->sun;
-   	$availability->mon = $request->mon;
-   	$availability->tue = $request->tue;
-   	$availability->wed = $request->wed;
-   	$availability->thu = $request->thu;
-   	$availability->fri = $request->fri;
-   	$availability->sat = $request->sat;
+   	$availability->sunday = $request->sunday;
+   	$availability->monday = $request->monday;
+   	$availability->tuesday = $request->tuesday;
+   	$availability->wednesday = $request->wednesday;
+   	$availability->thursday = $request->thursday;
+   	$availability->friday = $request->friday;
+   	$availability->saturday = $request->saturday;
 
    	$availability->save();
    	return redirect()->route('availability.add');
@@ -45,8 +45,8 @@ class EmployeeAvailabilityController extends Controller
 
    public function edit($id)
    {
-         $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ]);
-         $k = 0;
+       $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']);
+       $k = 0;
    		$availability = EmployeeAvailability::find($id);
    		return view('availability.edit')->withAvailability($availability)->withWeekdays($weekdays)->withK($k);
 
