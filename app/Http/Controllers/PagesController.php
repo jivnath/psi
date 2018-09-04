@@ -25,34 +25,33 @@ class PagesController extends Controller
     {
         if ($request->ajax()) {
             $id = $request->get('selected');
-
-            if ($id != null)
+            $output = '';
+            $sections = DB::table('companies')->where('master_id', $id)->get();
+            $shifts = DB::table('shift_master_datas')->where('company_id', $id)->get();
+            $sh = [];
+            $sec = [];
+            if($sections)
             {
-                $sections = DB::table('companies')->where('master_id', $id)->get();
-                $output = '';
-                if ($sections != null)
+                foreach ($sections as $section)
                 {
-                    $sec = [];
-                    foreach ($sections as $section)
-                    {
-                        $output .= '
-						<input type="checkbox" style ="margin-left:5px;" class="sections" id="'.$section->name.'" name="section[]" value="' . $section->id . '">' . $section->name;
-                        array_push($sec, $section->name );
-                    }
-                }
-                else
-                {
-                    $output = 'This company doesn\'t have subcompanies.';
+                    $output .=
+                        '<input type="checkbox" id="'.$section->name.'" style ="margin-left:5px; margin-top:10px;" class="sections" name="section[]" value="' . $section->id . '">' . $section->name;
+                    array_push($sec, $section->name );
                 }
             }
-            else
-                $output = '';
+            if($shifts)
+            {
+                foreach($shifts as $shift)
+                {
+                    array_push($sh, $shift);
+                }
+            }
         }
-//        $secs = $section->toArray;
 
         $data=[
             'output' =>$output,
-            'section'=>$sec
+            'section'=>$sec,
+            'shift'=>$sh
         ];
         echo json_encode($data);
     }
