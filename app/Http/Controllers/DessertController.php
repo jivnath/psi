@@ -29,8 +29,7 @@ class DessertController extends Controller
                     $schedule_data = \App\Models\CompanyTimeTable::find($schedule_id)->companyTimeSchedule()->get();
 
                     return view('sheets.dessert_schedule_view', compact('schedule_data'));
-                }
-                else{
+                } else {
                     return 'No generated scheduled found';
                 }
             }
@@ -45,7 +44,6 @@ class DessertController extends Controller
 
                 $date = $request->get('selected_date');
                 $dessert = Raw::getDessertInfo($id, $date);
-                // dd($dessert);
                 return view('sheets.dessert_view', compact('dessert'));
             }
         }
@@ -53,6 +51,7 @@ class DessertController extends Controller
 
     public function findDetails(Request $request)
     {
+
         $default_arr = [
             4 => '',
             5 => '',
@@ -70,20 +69,35 @@ class DessertController extends Controller
                         6 => $employee->name,
                         7 => $employee->cell_no
                     ];
-                } else {
-                    $data = $default_arr;
+                    if (empty($request->dessert_id)) {
+                        $merge_new = [
+                            23 => $this->auto_store_dessert($request)
+                        ];
+                        array_push($data, $merge_new);
+                    } else {
+                        $request->request->add([
+                            'action_type'=>
+                            'update'
+                        ]);
+
+                        $merge_new = [
+                            23 => $this->auto_store_dessert($request)
+                        ];
+                        array_push($data, $merge_new);
+                    }
                 }
             } else {
                 $data = $default_arr;
             }
-            echo json_encode($data);
+        } else {
+            $data = $default_arr;
         }
+        echo json_encode($data);
     }
 
     public function storeDessert(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $data = $request->get('allRecord');
 
             $d = new DessertSheet();
@@ -92,7 +106,7 @@ class DessertController extends Controller
             $d->responsible1 = $data[8];
             $d->conformation_day_before = $data[17];
             $d->responsible2 = $data[10];
-            $d->conformation_3_hours_ago =$data[18];
+            $d->conformation_3_hours_ago = $data[18];
             $d->arrival_time_if_late = $data[12];
             $d->reason_for_late = $data[13];
             $d->call_medium = $data[19];
@@ -100,10 +114,24 @@ class DessertController extends Controller
             $d->save();
 
             return response()->json($d);
-
-
-
         }
     }
 
+    /**
+     * generate id and populate on dessert info
+     *
+     * @param unknown $data
+     */
+    public function auto_store_dessert(Request $request)
+    {
+        $dessert = new DessertSheet();
+        if ($request->action_type == 'update') {
+            $dessert = $dessert->find($request->dessert_id);
+        }
+        $dessert->cts_id = $request->schedule_id;
+        $dessert->staff_no = $request->psi_num;
+
+        $dessert->save();
+        return $dessert->id;
+    }
 }
