@@ -79,7 +79,7 @@
                                 </select>
                              </td>
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>{{$info->arrival_time_if_late}}</td>
-                            <td class="contenteditable" contenteditable="true" data-usage='rlaa'>  </td>
+                            <td class="contenteditable" contenteditable="true" data-usage='rlaa'>{{$info->reason_for_late}}</td>
                             <td  data-usage='cmt'>
                             <select class='form-control cmt'>
                             		<option value=''>--select--</option>
@@ -187,17 +187,37 @@
                         $this.trigger('change');
                         main_val=$(this).html();
                         var requestor=$this.data('usage');
+                        console.log(requestor);
 						if(typeof requestor !=='undefined' && requestor === 'responsibile'){
 							$('#all_saved_value').data('8',$(this).html());
+							getAllValue($this,8,main_val);
+	                        added_generated_value=$('#all_saved_value').data('23');
+	                        company_schedule_id=$('#all_saved_value').data('22');
+							send_it_to_update(added_generated_value,company_schedule_id,'responsible1',main_val);
 						}
 						else if(typeof requestor !=='undefined' && requestor === 'responsibile_1'){
 							$('#all_saved_value').data('10',$(this).html());
+
+							getAllValue($this,10,main_val);
+							added_generated_value=$('#all_saved_value').data('23');
+	                        company_schedule_id=$('#all_saved_value').data('22');
+							send_it_to_update(added_generated_value,company_schedule_id,'responsible2',main_val);
 						}
 						else if(typeof requestor !=='undefined' && requestor === 'atlr'){
 							$('#all_saved_value').data('12',$(this).html());
+
+							getAllValue($this,12,main_val);
+							added_generated_value=$('#all_saved_value').data('23');
+	                        company_schedule_id=$('#all_saved_value').data('22');
+							send_it_to_update(added_generated_value,company_schedule_id,'arrival_time_if_late',main_val);
 						}
 						else if(typeof requestor !=='undefined' && requestor === 'rlaa'){
 							$('#all_saved_value').data('13',$(this).html());
+
+							getAllValue($this,13,main_val);
+							added_generated_value=$('#all_saved_value').data('23');
+	                        company_schedule_id=$('#all_saved_value').data('22');
+							send_it_to_update(added_generated_value,company_schedule_id,'reason_for_late',main_val);
 						}
 						else{
 
@@ -243,6 +263,11 @@
                 	is_model_alert='';
 						var confirmation_data=$(this).find('option:selected').val();
 						var my_this=$(this);
+
+						getAllValue(my_this,17,confirmation_data);
+                        added_generated_value=$('#all_saved_value').data('23');
+                        company_schedule_id=$('#all_saved_value').data('22');
+						send_it_to_update(added_generated_value,company_schedule_id,'conformation_day_before',confirmation_data);
 						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
 							if(is_model_alert!=confirmation_data){
      							is_model_alert=confirmation_data;
@@ -280,6 +305,12 @@
 						$(this).data('confirmation_status_1',confirmation_data);
 
 						var my_this=$(this);
+
+						getAllValue(my_this,18,confirmation_data);
+                        added_generated_value=$('#all_saved_value').data('23');
+                        company_schedule_id=$('#all_saved_value').data('22');
+						send_it_to_update(added_generated_value,company_schedule_id,'conformation_3_hours_ago',confirmation_data);
+
 						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
 							if(is_model_alert!=confirmation_data){
      							is_model_alert=confirmation_data;
@@ -309,8 +340,27 @@
 						$('#all_saved_value').data('11',confirmation_data);
 
                  });
+                function send_it_to_update(dessert_id,s_id,field,change_value){
+					console.log(dessert_id,s_id,field,change_value);
+					$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type:'POST',
+                        url:"{{ route('dessert.update') }}",
+                        data:{dessert_id:dessert_id,schedule_id:s_id,field:field,field_value:change_value},
+                        success:function(data){
+                            console.log(data);
+                        }
+                    });
+                 }
                 $('.cmt').change(function(){
 						var confirmation_data=$(this).find('option:selected').val();
+						var my_this=$(this);
+						getAllValue(my_this,19,confirmation_data);
+                        added_generated_value=$('#all_saved_value').data('23');
+                        company_schedule_id=$('#all_saved_value').data('22');
+						send_it_to_update(added_generated_value,company_schedule_id,'call_medium',confirmation_data);
 						$(this).data('cmt',confirmation_data);
 						$(this).closest('tr').find('td').each(
 		                	    function (i) {
@@ -333,6 +383,19 @@
                         	    }
                     	    });
                 }
+                function getAllValue(my_this,index,val){
+                	//check
+                    my_this.closest('tr').find('td').each(
+					                	    function (i) {
+					                    	    if(i==index){
+			    		                	    	$('#all_saved_value').data(i.toString(),val);
+					                    	    }
+					                    	    else{
+					                    	    	$('#all_saved_value').data(i.toString(),$(this).html());
+    					                    	    }
+					 });
+                    //end
+                    }
                 function fixCellValue(obj){
                 	$('.comment').val('');
                 	obj.closest('tr').find('td').each(

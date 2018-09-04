@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dessert', "DessertController@generateDessert")->name('dessert');
     Route::get('/dessert/findDetails', "DessertController@findDetails");
     Route::post('/dessert', "DessertController@storeDessert")->name('dessert.store');
+    Route::post('/dessert_update', "DessertController@dessert_update")->name('dessert.update');
 
     Route::get('/skill', "EmployeeSkillController@add");
     Route::post('/skill', "EmployeeSkillController@store")->name('skill.store');
