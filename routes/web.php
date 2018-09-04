@@ -49,12 +49,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/availability/create', 'EmployeeAvailabilityController@store')->name('availability.store');
     Route::get('/availability/edit/{id}', 'EmployeeAvailabilityController@edit')->name('availability.edit');
     Route::put('/availability/{id}', 'EmployeeAvailabilityController@update')->name('availability.update');
-    Route::post('/ajaxupdate', 'EmployeeAvailability@ajaxUpdate')->name('availability.ajaxupdate');
+    Route::post('/ajaxupdate', 'EmployeeAvailabilityController@ajaxUpdate')->name('availability.ajaxupdate');
 
     Route::get('/pages/user', 'PagesController@getUser')->name('pages.users');
     Route::get('/pages/employee', 'PagesController@getEmployee')->name('pages.employee');
-    Route::get('/generator', 'PagesController@generator')->name('generator');
-    Route::post('/generator', 'PagesController@generatorStore')->name('generator.store');
+    Route::get('/shift/generator', 'PagesController@generator')->name('generator');
+    Route::post('/shift/generator', 'PagesController@generatorStore')->name('generator.store');
     Route::get('/shift', 'PagesController@shift')->name('pages.shift');
     Route::get('/section', 'PagesController@section')->name('section');
     Route::get('shift/show/{id}', 'PagesController@show')->name('shift.show');
