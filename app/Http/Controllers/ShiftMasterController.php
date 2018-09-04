@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ShiftMasterData;
 use App\Models\Company;
 use Validator;
+use App\Models\Raw;
 class ShiftMasterController extends Controller
 {
 	public function addMore()

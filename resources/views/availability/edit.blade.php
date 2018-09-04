@@ -4,15 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ "Please fill out the form below." }}</div>
+            <div class="box">
+                <div class="box-header">{{ "Please fill out the form below." }}</div>
 
-                <div class="card-body " style="padding: 20px;">
+                <div class="box-body " style="padding: 20px;">
                     <form class="form-group" action="{{ route('availability.update', $availability->id ) }}" method="POST" >
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                        <div class="row" style="text-align: right; margin-top: 5px; margin-bottom: 20px;">
+                        <div class="form-group row" style="text-align: right; margin-top: 5px; margin-bottom: 20px;">
                             <div class="col-md-4">
                                 <label for="psi_num"> <h5> PSI_S No: </h5> </label>
                             </div>
@@ -22,9 +22,9 @@
                             </div>
                         </div>
 
-                        <div class="row" style="text-align: right; margin-top: 5px; margin-bottom: 20px;">
+                        <div class="form-group row" style="text-align: right; margin-top: 5px; margin-bottom: 20px;">
                             <div class="col-md-4">
-                                <label for="psi_num"> <h5> Employee Name: </h5> </label>
+                                <label for="employee"> <h5> Employee Name: </h5> </label>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-7" style="text-align: left;">

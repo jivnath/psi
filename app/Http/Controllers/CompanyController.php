@@ -46,11 +46,11 @@ class CompanyController extends Controller
 	public function edit($id)
 	{
 		$companies = Raw::companies($id);
-		if ($companies['sub_com'])
-		    $subCompanies = $companies['sub_com'];
+		if (count($companies)===1)
+            $subCompanies = '';
 		else
-		    $subCompanies = '';
-		$master = Raw::master();
+            $subCompanies = $companies['sub_com'];
+        $master = Raw::master();
 		return view('companies.edit')->withCompanies($companies)->withSubCompanies($subCompanies)->withMaster($master);/*, compact($companies, $subCompanies));*/
 
 	}

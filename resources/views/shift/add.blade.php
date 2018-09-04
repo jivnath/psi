@@ -6,9 +6,9 @@
         <h2 class="row justify-content-center" >Company Shift Time Table </h2>
         <div class="row">
             <div class="col-md-7">
-                <div class="card">
-                    <div class="card-header">{{ "Please fill out the form below." }}</div>
-                    <div class="card-body " style="padding: 10px;">
+                <div class="box">
+                    <div class="box-header">{{ "Add Shifts" }}</div>
+                    <div class="box-body " style="padding: 10px;">
                         <form  action="{{ route('shift.store') }}" method="POST" >
                             <input type="hidden" name="_method" value="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -63,9 +63,9 @@
             <br />
             <!--Table List Start -->
             <div class="col-md-5">
-                <div class="card">
-                <div class="card-header">Shifts</div>
-                    <div class="card-body">
+                <div class="box">
+                <div class="box-header">Shifts</div>
+                    <div class="box-body">
                         <table class="table table-striped">
                             <tr>
                                 <th>Company Name</th>

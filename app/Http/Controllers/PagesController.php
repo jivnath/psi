@@ -108,7 +108,36 @@ class PagesController extends Controller
                 }
             }
         } else
-            return redirect()->route('generator');
+            {
+                $company = $request->company;
+                $shifts = ShiftMasterData::where('company_id', $company)->get();
+
+                $timeTable = new CompanyTimeTable();
+
+                $timeTable->company_id = $company;
+                $timeTable->save();
+
+                $id = $timeTable->id;
+
+                $startDate = $request->start_date;
+                $endDate = $request->end_date;
+
+                foreach ($shifts as $s) {
+                    $startDate = $request->start_date;
+                    while (strtotime($startDate) <= strtotime($endDate)) {
+                        $schedule = new CompanyTimeSchedule();
+
+                        $schedule->companyTT_id = $id;
+                        $schedule->date = $startDate;
+                        $schedule->time = $s->start_time;
+                        $schedule->normal = null;
+                        $schedule->help = null;
+
+                        $schedule->save();
+                        $startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
+                    }
+                }
+            }
 
         return redirect()->route('generator');
     }

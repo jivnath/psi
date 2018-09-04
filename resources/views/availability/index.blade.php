@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ 'Employee Availability' }}</div>
+            <div class="box">
+                <div class="box-header">{{ 'Employee Availability' }}</div>
 
-                <div class="card-body " style="padding: 20px;">
+                <div class="box-body " style="padding: 20px;">
                     @if($availability)
                         <div class="row" style="text-align: right; margin-top: 5px; margin-bottom: 20px;">
                             <div class="col-md-4">

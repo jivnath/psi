@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="card">
-            <div class="card-header">{{ "Please fill out the form below." }}</div>
+        <div class="box">
+            <div class="box-header">{{ "Please fill out the form below." }}</div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card-body " style="padding: 10px;">
+                    <div class="box-body " style="padding: 10px;">
                         <form action="{{ route('company.update', $companies['master']['id']) }}" method="POST">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -55,7 +55,7 @@
 
                 <br>
                 <div class="col-md-6">
-                    <div class="card-body" style="padding: 10px">
+                    <div class="box-body" style="padding: 10px">
                         <div id="subDropdown">
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-2"></div>
@@ -150,33 +150,31 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
 
     $(function () {
-
         $("#subComp").change(function(){
         var selected = $(this).val();
         if(selected ==0)
         {
-            $("#subCompany").hide(500);
+            $("#subCompany").hide();
 
         }
         else
         {
-            $("#subCompany").show("fast");
+            $("#subCompany").show();
             $.ajax({
                 type: 'GET',
                 url: "{{ route('company.sub') }}",
                 dataType:'json',
                 data: {'selected': selected},
                 success: function (subCom) {
-                    $('input[name="subname"]').val(subCom.name);
-                    $('input[name="subaddress"]').val(subCom.address);
-                    $('input[name="subcontact"]').val(subCom.contact);
+                    if(subCom)
+                    {
+                        $('input[name="subname"]').val(subCom.name);
+                        $('input[name="subaddress"]').val(subCom.address);
+                        $('input[name="subcontact"]').val(subCom.contact);
+                    }
                 }
 
             });

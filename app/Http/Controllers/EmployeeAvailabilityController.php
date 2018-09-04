@@ -12,7 +12,7 @@ class EmployeeAvailabilityController extends Controller
 	public function index($id)
 	{
 		$availability = EmployeeAvailability::find($id);
-      $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
+        $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thurday', 'friday', 'saturday']);
       return view('availability.index')->withAvailability($availability)->withWeekdays($weekdays);
 
 	}
@@ -20,8 +20,8 @@ class EmployeeAvailabilityController extends Controller
    
    public function add()
    {
-         $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ]);
-         $k = 0;
+       $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thurday', 'friday', 'saturday']);
+       $k = 0;
    		return view('availability.add')->withWeekdays($weekdays)->withK($k);
    }
 
@@ -45,8 +45,8 @@ class EmployeeAvailabilityController extends Controller
 
    public function edit($id)
    {
-         $weekdays = collect(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat' ]);
-         $k = 0;
+       $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thurday', 'friday', 'saturday']);
+       $k = 0;
    		$availability = EmployeeAvailability::find($id);
    		return view('availability.edit')->withAvailability($availability)->withWeekdays($weekdays)->withK($k);
 

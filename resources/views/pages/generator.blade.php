@@ -228,7 +228,6 @@
     $(document).on('click', '.btn-info', function(){
 
         $("#shiftAdd").show();
-        var postURL = "<?php echo url('addmore'); ?>";
         var i=1;
         $('#add').click(function(){
             i++;
