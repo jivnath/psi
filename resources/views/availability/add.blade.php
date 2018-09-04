@@ -37,6 +37,11 @@
                                     </div>
                                     <div class="col-md-8">
                                         <input style="width: 70%" type="time" class="form-control" id="{{$weekday}}" name="{{ $weekday }}">
+                                        @if($k==6)
+                                            <br>
+                                            <button type="submit" class="btn btn-primary">Add</button>
+                                        @endif
+
                                     </div>
                                 @endif
                                 @php
