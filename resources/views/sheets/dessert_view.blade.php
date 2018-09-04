@@ -56,7 +56,7 @@
                             <td class='background_global'> {{$dessert_row['time']}} </td>
                             <td class='background_global'> {{$key+1}} </td>
                             <td class="border_field contenteditable" contenteditable="true">{{$info->staff_no}}</td>
-                            <td  class="border_field">{{$info->staff_no}}</td>
+                            <td  class="border_field">{{$info->country_citizenship}}</td>
                             <td  class="border_field">{{$info->phoetic_kanji}}</td>
                             <td  class="border_field">{{$info->name}}</td>
                             <td  class="border_field">{{$info->cell_no}}</td>
@@ -88,13 +88,14 @@
                                 </select>
                              </td>
                              <td>0</td>
-                             <td><button type="button" class="btn btn-primary add_now">Add</button></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'>{{$dessert_row['id']}}</td>
+                             <td><button type="button" class="btn btn-primary add_now">Delete</button></td>
+                             <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'>{{$dessert_row['id']}}</td>
+                             <td style='visibility: hidden;display: none;'>{{$info->id}}</td>
 
                         </tr>
                         @endforeach
@@ -136,14 +137,14 @@
                                 </select>
                              </td>
                              <td>0</td>
-                             <td><button type="button" class="btn btn-primary add_now">Add</button></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'></td>
-                             <td style='visibility: hidden;'>{{$dessert_row['id']}}</td>
-
+                             <td></td>
+                             <td style='visibility: hidden;display:none'></td>
+                             <td style='visibility: hidden;display:none'></td>
+                             <td style='visibility: hidden;display:none'></td>
+                             <td style='visibility: hidden;display:none'></td>
+                             <td style='visibility: hidden;display:none'></td>
+                             <td style='visibility: hidden;display:none'>{{$dessert_row['id']}}</td>
+                             <td style='visibility: hidden;display: none;'></td>
                         </tr>
                         @endfor
                         @if($dessert_row['total_require']==0)
@@ -178,6 +179,7 @@
                     fixCellValue($this);
 
                     is_model_alert=false;
+                    console.log($('#all_saved_value').data());
                 }).on('blur', '[contenteditable]', function(e) {
                     const $this = $(this);
                     if ($this.data('before') !== $this.html()) {
@@ -186,28 +188,27 @@
                         main_val=$(this).html();
                         var requestor=$this.data('usage');
 						if(typeof requestor !=='undefined' && requestor === 'responsibile'){
-							console.log('here is console');
 							$('#all_saved_value').data('8',$(this).html());
 						}
 						else if(typeof requestor !=='undefined' && requestor === 'responsibile_1'){
-							console.log('here is console for responsibile_1');
 							$('#all_saved_value').data('10',$(this).html());
 						}
 						else if(typeof requestor !=='undefined' && requestor === 'atlr'){
-							console.log('here is console for responsibile_1');
 							$('#all_saved_value').data('12',$(this).html());
 						}
 						else if(typeof requestor !=='undefined' && requestor === 'rlaa'){
-							console.log('here is console for responsibile_1');
 							$('#all_saved_value').data('13',$(this).html());
 						}
 						else{
 
                             $('#all_saved_value').data('3',main_val);
+                            added_generated_value=$('#all_saved_value').data('23');
+                            company_schedule_id=$('#all_saved_value').data('22');
+                            console.log('dessert_id '+added_generated_value);
     						$.ajax({
     	                        type:"GET",
     	                        url:"/dessert/findDetails",
-    	                        data:{'psi_num':main_val},
+    	                        data:{'psi_num':main_val,'dessert_id':added_generated_value,'schedule_id':company_schedule_id},
     	                        dataType:'json',
     	                        success:function(data){
     	                        	main_logical_data=data;
@@ -222,9 +223,9 @@
                     }
                 });
                 $('.add_now').click(function(){
+                    return;
                 	getCell($(this));
 					all_record=$('#all_saved_value').data();
-					console.log(all_record);
 					$.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -240,7 +241,6 @@
                 });
                 $('.confirmation').change(function(){
                 	is_model_alert='';
-             	   		console.log("yesss");
 						var confirmation_data=$(this).find('option:selected').val();
 						var my_this=$(this);
 						if($.inArray(confirmation_data,allowed_pop_up) !=-1){
@@ -276,7 +276,6 @@
                  });
                 $('.confirmation_1').change(function(){
                 		is_model_alert='';
-             	   		console.log("yesss");
 						var confirmation_data=$(this).find('option:selected').val();
 						$(this).data('confirmation_status_1',confirmation_data);
 
@@ -311,7 +310,6 @@
 
                  });
                 $('.cmt').change(function(){
-             	   		console.log("yesss");
 						var confirmation_data=$(this).find('option:selected').val();
 						$(this).data('cmt',confirmation_data);
 						$(this).closest('tr').find('td').each(
@@ -364,7 +362,6 @@
 
                 	obj.closest('tr').find('td').each(
                 	    function (i) {
-                    	    console.log(i);
                 	    	$('#all_saved_value').data(i.toString(),$(this).html());
                 	    });
                     }
