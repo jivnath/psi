@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/availability/create', 'EmployeeAvailabilityController@store')->name('availability.store');
     Route::get('/availability/{id}/edit', 'EmployeeAvailabilityController@edit')->name('availability.edit');
     Route::put('/availability/{id}', 'EmployeeAvailabilityController@update')->name('availability.update');
-    Route::post('/ajaxupdate', 'EmployeeAvailability@ajaxUpdate')->name('availability.ajaxupdate');
+    Route::post('/ajaxupdate', 'EmployeeAvailabilityController@ajaxUpdate')->name('availability.ajaxupdate');
 
     Route::get('/pages/user', 'PagesController@getUser')->name('pages.users');
     Route::get('/pages/employee', 'PagesController@getEmployee')->name('pages.employee');

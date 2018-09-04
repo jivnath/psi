@@ -1,27 +1,83 @@
- <div class="modal showComments" role="dialog">
-                <div class="modal-dialog">
 
-                      <!-- Modal content-->
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title comments_header">Modal Header</h4>
-                        </div>
-                        <div class="modal-body comments_body">
-                          <div class="form-group">
-                          <label for="comment">Comment:</label>
-                          <textarea class="form-control comment" rows="5"></textarea>
-                        </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default save">Save</button>
+<div class="modal showComments" role="dialog">
+	<div class="modal-dialog">
 
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title comments_header">Modal Header</h4>
+			</div>
+			<div class="modal-body comments_body">
+				<div class="form-group">
+					<label for="comment">Comment:</label>
+					<textarea class="form-control comment" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default save">Save</button>
 
-                    </div>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="modal showFlag" role="dialog">
+	<div class="modal-dialog modal-sm">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title showFlag_header">Modal Header</h4>
+			</div>
+			<div class="modal-body">
+                <div class="row">
+
+                <div class="custom-radios center-block">
+                  <div>
+                    <input type="radio" id="color-1" name="color" value="color-1" checked>
+                    <label for="color-1">
+                      <span>
+                      </span>
+                    </label>
                   </div>
-                  <table class="table table-borderd">
+
+                  <div>
+                    <input type="radio" id="color-2" name="color" value="color-2">
+                    <label for="color-2">
+                      <span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <input type="radio" id="color-3" name="color" value="color-3">
+                    <label for="color-3">
+                      <span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <input type="radio" id="color-4" name="color" value="color-4">
+                    <label for="color-4">
+                      <span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                	</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default save_flag">Save</button>
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+<table class="table table-borderd">
                 <thead class="thead-dark">
                 <tr>
                 <th>Date</th>
@@ -243,9 +299,13 @@
                     }
                 });
                 $('.add_now').click(function(){
-                    return;
+
+
                 	getCell($(this));
 					all_record=$('#all_saved_value').data();
+					$('.showFlag_header').html('<strong>Flag for '+$('#all_saved_value').data('6')+' </strong>');
+					$('.showFlag').modal('show');
+                    return;
 					$.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
