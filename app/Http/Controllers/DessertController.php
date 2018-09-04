@@ -51,7 +51,6 @@ class DessertController extends Controller
 
     public function findDetails(Request $request)
     {
-
         $default_arr = [
             4 => '',
             5 => '',
@@ -63,27 +62,31 @@ class DessertController extends Controller
             if ($psi != null) {
                 $employee = Employee::where('psi_number', $psi)->first();
                 if (count($employee) > 0) {
-                    $data = [
-                        4 => $employee->country_citizenship,
-                        5 => $employee->phoetic_kanji,
-                        6 => $employee->name,
-                        7 => $employee->cell_no
-                    ];
-                    if (empty($request->dessert_id)) {
-                        $merge_new = [
-                            23 => $this->auto_store_dessert($request)
-                        ];
-                        array_push($data, $merge_new);
+                    if (DessertSheet::where('staff_no', $psi)->count() > 0) {
+                        $data = [];
                     } else {
-                        $request->request->add([
-                            'action_type'=>
-                            'update'
-                        ]);
 
-                        $merge_new = [
-                            23 => $this->auto_store_dessert($request)
+                        $data = [
+                            4 => $employee->country_citizenship,
+                            5 => $employee->phoetic_kanji,
+                            6 => $employee->name,
+                            7 => $employee->cell_no
                         ];
-                        array_push($data, $merge_new);
+                        if (empty($request->dessert_id)) {
+                            $merge_new = [
+                                23 => $this->auto_store_dessert($request)
+                            ];
+                            array_push($data, $merge_new);
+                        } else {
+                            $request->request->add([
+                                'action_type' => 'update'
+                            ]);
+
+                            $merge_new = [
+                                23 => $this->auto_store_dessert($request)
+                            ];
+                            array_push($data, $merge_new);
+                        }
                     }
                 }
             } else {
