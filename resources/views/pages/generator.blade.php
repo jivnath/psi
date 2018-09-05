@@ -24,7 +24,7 @@
                                 <div class="col-md-1"></div>
                             </div>
                         </div>
-                        <div id="shift">
+                        <div id="shift" style="margin-bottom: 10px">
 
                         </div>
 
@@ -143,12 +143,12 @@
 
                         if(data.section.length==0)
                         {
-                            var forSection = '<div id="' + selected + '1' + '"><div class="row" style="text-align:right">' +
+                            var forSection = '<div id="' + selected + '"><div class="row" style="text-align:right">' +
                                 '<div class="col-md-4"><label>' + name + '\'s Shift</label></div>' +
                                 '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
                                 '<div id="'+selected+'allShifts"> </div>' +
                                 '</ul> ' +
-                                '<span id="'+selected+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
+                                '<span class="btn btn-sm btn-info">Add New Shift</span> </div>' +
                                 '</div><br>' +
                                 '</div>';
                             $("#shift").append(forSection);
@@ -183,35 +183,35 @@
                 data: {id:sectionId},
 				dataType:'json',
 				async:true,
-                success: function (sections) {
+                success: function (shifts) {
                     let i;
-                    if(sections.length >0)
+                    if(shifts.length >0)
                     {
-                        var forSection = '<div id="' + sectionId + '1' + '"><div class="row" style="text-align:right">' +
+                        var forSection = '<div id="'+ sectionId+'sec'  + '"><div class="row" style="text-align:right">' +
                             '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
                             '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
                             '<div id="'+sectionId+'allShifts"> </div>' +
                             '</ul> ' +
-                            '<span id="'+sectionId+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
+                            '<span class="btn btn-sm btn-info">Add New Shift</span> </div>' +
                             '</div><br>' +
                             '</div>';
                         $("#shift").append(forSection);
 
 
-                        for (i = 0; i < sections.length; i++)
+                        for (i = 0; i < shifts.length; i++)
                         {
-                            var html = '<li>' + sections[i].start_time + ' - ' + sections[i].end_time + '</li>';
+                            var html = '<li>' + shifts[i].start_time + ' - ' + shifts[i].end_time + '</li>';
                             $("#"+sectionId+"allShifts").append(html);
                         }
                     }
                     else
                     {
-                     var forSec = '<div class="row" style="text-align:center">' +
+                     var forSec = '<div id="'+sectionId+'sec'+'"<div class="row" style="text-align:center">' +
                          '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
                          '<div class="col-md-8" style="text-align: left">' +
                          'No Shift For This Company<br>' +
-                         '<span class="btn btn-sm btn-info">Add New Shift</span> </div>' +
-                         '</div><br>' +
+                         '<span class="btn btn-sm btn-info">Add New Shift</span></div>' +
+                         '</div>' +
                          '</div>';
                     $("#shift").append(forSec);
                     }
@@ -220,7 +220,8 @@
         }
         else
         {
-            $("#"+sectionId+'1').remove();
+            $("#"+sectionId+"sec").remove();
+
         }
     });
 

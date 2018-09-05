@@ -62,13 +62,13 @@ class PagesController extends Controller
         {
             $id = $request->get('id');
 
-            $sec = ShiftMasterData::where('company_id', $id)->get();
-            $sections = [];
-            foreach($sec as $s){
-                array_push($sections, $s);
+            $shift = ShiftMasterData::where('company_id', $id)->get();
+            $shifts = [];
+            foreach($shift as $s){
+                array_push($shifts, $s);
             }
 
-            echo json_encode($sections);
+            echo json_encode($shifts);
         }
 
     }
