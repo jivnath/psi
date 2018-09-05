@@ -20,4 +20,6 @@ return [
 'cellno'=>'Cell No',
 'expiredate'=>'Expire Date',
 'action'=>'Action',
+'tn'=>'Total Necessary',
+'rda'=>'Recent Desert Activity'
 ];

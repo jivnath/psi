@@ -5150,7 +5150,7 @@ main .card{
 }
 .activity-feed .feed-item {
   position: relative;
-  padding-bottom: 20px;
+  padding-bottom: 5px;
   padding-left: 30px;
   border-left: 2px solid #e4e8eb;
 }
@@ -10585,6 +10585,8 @@ table.floatThead-table {
 }
 .custom-radios div {
   display: inline-block;
+  margin: 0 auto;
+
 }
 .custom-radios input[type="radio"] {
   display: none;

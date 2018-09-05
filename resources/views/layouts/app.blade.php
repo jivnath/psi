@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-dropdownhover.css')}}">
     <script src="{{asset('js/bootstrap-dropdownhover.js')}}"></script>
     <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
 
 
 
@@ -40,10 +41,8 @@
         <div>
             @include('layouts.nav')
         </div>
-        <main class="py-4">
+        <main class="py-4" style='background: #ecf0f5;'>
         <section class="content-header">
-
-
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
              <?php $segments = '';
@@ -65,7 +64,7 @@
               </ol>
               </div>
             </section>
-            <div class="container">
+            <div class="container" style='background: #ecf0f5;'>
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
