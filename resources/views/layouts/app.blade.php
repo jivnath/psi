@@ -33,15 +33,14 @@
     <link href="{{ asset('css/fontawesome-all.css') }}" rel="stylesheet">
 </head>
   @auth
- <body style="background:#fff">
-  @else
-   <body style="background:#21469b">
+ <body style="background:#ecf0f5">
   @endauth
     <div id="app">
         <div>
             @include('layouts.nav')
         </div>
         <main class="py-4" style='background: #ecf0f5;'>
+        @auth
         <section class="content-header">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
@@ -64,6 +63,7 @@
               </ol>
               </div>
             </section>
+            @endauth
             <div class="container" style='background: #ecf0f5;'>
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
