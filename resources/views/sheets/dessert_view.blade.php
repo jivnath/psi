@@ -1,4 +1,26 @@
+<style>
+.element {
+    position: relative;
+}
 
+/*replace the content value with the
+corresponding value from the list below*/
+
+.element:before {
+    content: "\f000";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: #000;
+    font-size: 18px;
+    padding-right: 0.5em;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+</style>
 <div class="modal showComments" role="dialog">
 	<div class="modal-dialog">
 
@@ -111,7 +133,7 @@
                             <td class='background_global'> {{$dessert_row['date']}} </td>
                             <td class='background_global'> {{$dessert_row['time']}} </td>
                             <td class='background_global'> {{$key+1}} </td>
-                            <td class="border_field contenteditable" contenteditable="true">{{$info->staff_no}}</td>
+                            <td class="border_field contenteditable" contenteditable="{{ ($info->conformation_day_before=='OK') ? 'false':'true'}}" style="{{ ($info->conformation_day_before=='OK') ? 'border:1px solid red':'border:none'}}">{{$info->staff_no}}</td>
                             <td  class="border_field">{{$info->country_citizenship}}</td>
                             <td  class="border_field">{{$info->phoetic_kanji}}</td>
                             <td  class="border_field">{{$info->name}}</td>
@@ -143,7 +165,7 @@
                                 	<option value='call' {{ ($info->call_medium=='call') ? 'selected':''}}>call</option>
                                 </select>
                              </td>
-                             <td>0</td>
+                             <td>{{ \App\Models\DessertSheet::find($info->id)->comments->count()}}</td>
                              <td><button type="button" class="btn btn-primary add_now">Delete</button></td>
                              <td style='visibility: hidden;display: none;'></td>
                              <td style='visibility: hidden;display: none;'></td>
@@ -226,6 +248,7 @@
             var is_model_alert=false;
             var last_psi='';
             var last_select='';
+            var no_of_comments=0;
 
                 $('body').on('focus change', '[contenteditable]', function(ee) {
                     const $this = $(this);
@@ -341,6 +364,8 @@
     					                    	    if(i==20){
     			    		                	    	$('#all_saved_value').data(i.toString(),comment_val);
     			    		                    	    $(this).html(comment_val);
+    			    		                    	    send_it_to_update(added_generated_value,company_schedule_id,'comments',confirmation_data+'~~'+comment_val,my_this);
+
     					                    	    }
     					                	    });
     									$('.showComments').modal('hide');
@@ -353,7 +378,16 @@
 		                    	    if(i==17){
     		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
     		                    	    $(this).html(confirmation_data);
+
 		                    	    }
+		                    	    else if(confirmation_data=='OK' && i==3){
+			                    	    	$(this).attr('contenteditable', 'false');
+			                    	    	$(this).css('border', '1px solid red');
+			                    	    }
+		                    	    else if(i==3){
+		                    	    	$(this).css('border', 'none');
+		                    	    	$(this).attr('contenteditable', 'true');
+			                    	    }
 		                	    });
 
 						$('#all_saved_value').data('9',confirmation_data);
@@ -400,7 +434,7 @@
 						$('#all_saved_value').data('11',confirmation_data);
 
                  });
-                function send_it_to_update(dessert_id,s_id,field,change_value){
+                function send_it_to_update(dessert_id,s_id,field,change_value,table_obj){
 					console.log(dessert_id,s_id,field,change_value);
 					$.ajax({
                         headers: {
@@ -410,7 +444,10 @@
                         url:"{{ route('dessert.update') }}",
                         data:{dessert_id:dessert_id,schedule_id:s_id,field:field,field_value:change_value},
                         success:function(data){
-                            console.log(data);
+                            if(field ==='comments'){
+                            	set_now(table_obj,15,data);
+                            }
+                            return data;
                         }
                     });
                  }
@@ -432,6 +469,16 @@
 						$('#all_saved_value').data('14',confirmation_data);
 
                  });
+
+                function set_now(my_this,index,value){
+                	my_this.closest('tr').find('td').each(
+	                	    function (i) {
+	                    	    if(i === parseInt(index)){
+		                    	    $('#all_saved_value').data(i.toString(),parseInt(value));
+		                    	    $(this).html(value);
+	                    	    }
+	               	});
+                    }
                 function findDetails(obj){
                 	obj.closest('tr').find('td').each(
                     	    function (i) {

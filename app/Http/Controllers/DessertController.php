@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Raw;
 use App\Models\CompanyTimeTable;
+use App\Models\PsiSelfSheetComments;
 
 class DessertController extends Controller
 {
@@ -140,10 +141,20 @@ class DessertController extends Controller
 
     public function dessert_update(Request $request)
     {
+        if ($request->field == 'comments') {
+            $psi_self = new PsiSelfSheetComments();
+            $psi_self->self_id = $request->dessert_id;
+            $psi_self->comments = $request->field_value;
+            $psi_self->msg_status = 'sent';
+            $psi_self->msg_medium = 'viber';
+            $psi_self->save();
+            return $psi_self->where('self_id', $request->dessert_id)->count();
+        } else {
 
-        $dessert = DessertSheet::find($request->dessert_id);
-        $dessert->{$request->field} = $request->field_value;
-        $dessert->save();
-        return response()->json($dessert);
+            $dessert = DessertSheet::find($request->dessert_id);
+            $dessert->{$request->field} = $request->field_value;
+            $dessert->save();
+            return response()->json($dessert);
+        }
     }
 }
