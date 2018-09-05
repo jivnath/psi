@@ -42,12 +42,11 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li> <a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
                             <li><a class="dropdown-item" href="{{ route('employees') }}"> @lang('nav.Employee')</a></li>
-                            <li><a class="dropdown-item" href="{{ route('company.create') }}"> @lang('nav.Company')</a></li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown2</a>
+                                <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('company.create') }}">Create Company</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('shift.add') }}"> Company Shift</a></li>
 
                                 </ul>
                             </li>
@@ -63,7 +62,7 @@
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
                       <a class="dropdown-item" href="{{ route('pages.shift') }}"> Company Shift </a>
-                      <a class="dropdown-item" href="{{route('sheet.dessert')}}"> Dessert </a>
+                      <a class="dropdown-item" href="{{route('sheet.dessert')}}"> Self Sheet </a>
                       <a class="dropdown-item" href="#"> Attendance Management </a>
                   </div>
                 </li>

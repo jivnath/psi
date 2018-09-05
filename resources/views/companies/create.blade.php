@@ -26,7 +26,7 @@
                         </div>
 						<div class="row" id="dropdown" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="company"> Company Name </label>
+                                <label for="company">Master Company Name </label>
                             </div>
                             <div class="col-md-7">
                                 <select name="company" class="form-control" id="master_company">
@@ -128,7 +128,6 @@
     $(document).ready(function() {
         $("#companytype").change(function () {
             var master_company_val = $(this).val();
-            console.log(master_company_val);
 
             if(master_company_val==0)
             {
