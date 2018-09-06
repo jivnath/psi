@@ -144,6 +144,7 @@ WHERE
                 'date'=>$row->date,
                 'time'=>$row->time,
                 'dessert_info' => \App\Models\DessertSheet::select('employees.*','psi_dessert_entry.*','psi_dessert_entry.id As psi_id')->join('employees','psi_dessert_entry.staff_no', '=','employees.psi_number')->where('cts_id', $row->id)->get()
+
             ];
         }
         return $output_results;
