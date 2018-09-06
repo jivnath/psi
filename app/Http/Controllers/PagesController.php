@@ -142,6 +142,42 @@ class PagesController extends Controller
         return redirect()->route('generator');
     }
 
+    public function ajaxAddShifts(Request $request)
+    {
+        if($request->ajax()) {
+            $start_shifts = $request->get('start_shifts');
+            $end_shifts = $request->get('end_shifts');
+            $id = $request->get('id');
+
+            $shifts = array_combine($start_shifts, $end_shifts);
+            if (count($shifts) > 0)
+            {
+                $startShift=[];
+                $endShift=[];
+                foreach ($shifts as $key => $value) {
+                    array_push($startShift, $key);
+                    array_push($endShift, $value);
+
+                    $newshift = new ShiftMasterData();
+
+                    $newshift->company_id = $id;
+                    $newshift->start_time = $key;
+                    $newshift->end_time = $value;
+
+                    $newshift->save();
+                }
+
+                $shift = ShiftMasterData::where('company_id', $id)->get();
+                $shi = [];
+                foreach($shift as $s){
+                    array_push($shi, $s);
+                }
+
+                echo json_encode($shifts);
+            }
+        }
+    }
+
     public function shift()
     {
         /*

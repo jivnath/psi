@@ -59,6 +59,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/shifts/add', 'ShiftMasterController@store')->name('shift.store');
         Route::get('/shifts/edit/{id}', 'ShiftMasterController@edit')->name('shift.edit');
         Route::put('/shifts/{id}', 'ShiftMasterController@update')->name('shift.update');
+
+        Route::get('/users/add', 'CompanyUserController@addUser');
+        Route::post('/users/add', 'CompanyUserController@storeUser')->name('company.users.store');
+        Route::get('/user/edit/{id}', 'CompanyUserController@editUser')->name('company.users.edit');
+        Route::put('/user/{id}', 'CompanyUserController@updateUser')->name('company.users.update');
     });
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
@@ -82,6 +87,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('shift/show/{id}', 'PagesController@show')->name('shift.show');
     Route::post('/shift/updateCell', 'PagesController@updateCells');
     Route::get('/shift/generate', 'PagesController@getShift')->name('generator.shift');
+    Route::post('ajax/shift/add', 'PagesController@ajaxAddShifts')->name('ajax.add.shifts');
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');

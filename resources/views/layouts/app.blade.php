@@ -41,6 +41,9 @@
         <div>
             @include('layouts.nav')
         </div>
+        <div>
+            @include('layouts.messeges')
+        </div>
         <main class="py-4" style='background: #ecf0f5;'>
         <section class="content-header">
           <ol class="breadcrumb">

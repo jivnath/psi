@@ -194,8 +194,8 @@ WHERE
                 LEFT JOIN companies AS t3 ON t3.master_id = t2.id
                 LEFT JOIN companies as t4 ON t4.master_id = t3.id) main ) table_data";
 
-        $allcompanies = DB::select($sql);
-        foreach($allcompanies as $company)
+        $allCompanies = DB::select($sql);
+        foreach($allCompanies as $company)
         {
             $companies[]=[
                 "id" => $company->id,
