@@ -8,7 +8,7 @@ use App\Models\Company;
 class Raw extends Model
 {
 
-    public static function totalNecessary()
+    public static function totalNecessary_()
     {
         DB::select("SELECT
     ctt.company_id,
@@ -134,16 +134,18 @@ WHERE
             and date='$date'
         ORDER BY
             cts.date,time asc";
-        $re=DB::select($sql);
+        $re = DB::select($sql);
         foreach ($re as $row) {
             $output_results[] = [
                 'id' => $row->id,
                 'companytt_id' => $row->companytt_id,
                 'master_id' => $row->master_id,
                 'total_require' => $row->total_require,
-                'date'=>$row->date,
-                'time'=>$row->time,
-                'dessert_info' => \App\Models\DessertSheet::select('employees.*','psi_dessert_entry.*','psi_dessert_entry.id As psi_id')->join('employees','psi_dessert_entry.staff_no', '=','employees.psi_number')->where('cts_id', $row->id)->get()
+                'date' => $row->date,
+                'time' => $row->time,
+                'dessert_info' => \App\Models\DessertSheet::select('employees.*', 'psi_dessert_entry.*', 'psi_dessert_entry.id As psi_id')->join('employees', 'psi_dessert_entry.staff_no', '=', 'employees.psi_number')
+                    ->where('cts_id', $row->id)
+                    ->get()
 
             ];
         }
@@ -164,6 +166,29 @@ WHERE
             company_time_schedules cts
             WHERE
                 smd.id = cts.companytt_id and smd.company_id=$id";
+        return DB::select($sql);
+    }
+
+    public static function getTotalNeccessory()
+    {
+        $sql = "SELECT
+                cts.id,
+                companytt_id,
+                DATE,
+                time,
+                ( normal + help ) total_require,
+                ctt.company_id,
+                (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used,
+                c.name
+            FROM
+                company_time_schedules cts
+                INNER JOIN  company_time_tables ctt on cts.companytt_id = ctt.id
+                INNER JOIN companies c ON c.id=ctt.company_id
+            WHERE
+            normal is not NULL
+            ORDER BY
+                cts.DATE,time
+                asc limit 3";
         return DB::select($sql);
     }
 }
