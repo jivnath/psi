@@ -32,11 +32,11 @@ corresponding value from the list below*/
 			<div class="modal-body comments_body">
 				<div class="form-group">
 					<label for="comment">Comment:</label>
-					<textarea class="form-control comment" rows="5"></textarea>
+					<textarea class="form-control comment" id='comment' rows="5"></textarea>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default save">Save</button>
+				<button type="button" class="btn btn-default" id='save'>Save</button>
 
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
@@ -249,6 +249,11 @@ corresponding value from the list below*/
             var last_psi='';
             var last_select='';
             var no_of_comments=0;
+            var my_this='';
+            var confirmation_data='';
+            var type_of_field='';
+            var added_generated_value='';
+            var company_schedule_id='';
 
                 $('body').on('focus change', '[contenteditable]', function(ee) {
                     const $this = $(this);
@@ -343,9 +348,10 @@ corresponding value from the list below*/
                     });
                 });
                 $('.confirmation').change(function(){
+                	$('#comment').val('');
                 	is_model_alert='';
-						var confirmation_data=$(this).find('option:selected').val();
-						var my_this=$(this);
+						confirmation_data=$(this).find('option:selected').val();
+						my_this=$(this);
 
 						getAllValue(my_this,17,confirmation_data);
                         added_generated_value=$('#all_saved_value').data('23');
@@ -356,20 +362,8 @@ corresponding value from the list below*/
      							is_model_alert=confirmation_data;
      							$('.modal-title').html('<strong>Conformation the day before </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
      							$('.showComments').modal('show');
-     							$('.save').click(function(){
+     							type_of_field='conformation_day_before';
 
-    									comment_val=$('.comment').val();
-    									my_this.closest('tr').find('td').each(
-    					                	    function (i) {
-    					                    	    if(i==20){
-    			    		                	    	$('#all_saved_value').data(i.toString(),comment_val);
-    			    		                    	    $(this).html(comment_val);
-    			    		                    	    send_it_to_update(added_generated_value,company_schedule_id,'comments',confirmation_data+'~~'+comment_val,my_this);
-
-    					                    	    }
-    					                	    });
-    									$('.showComments').modal('hide');
-         						});
 							}
 						}
 						$(this).data('confirmation_status',confirmation_data);
@@ -393,12 +387,29 @@ corresponding value from the list below*/
 						$('#all_saved_value').data('9',confirmation_data);
 
                  });
+                	$('#save').click(function(event){
+
+						comment_val=$('#comment').val();
+						console.log(comment_val);
+						my_this.closest('tr').find('td').each(
+		                	    function (i) {
+		                    	    if(i==20){
+			                    	    console.log(i);
+    		                	    	$('#all_saved_value').data(i.toString(),comment_val);
+    		                    	    $(this).html(comment_val);
+    		                    	    send_it_to_update(added_generated_value,company_schedule_id,'comments',type_of_field+'~~'+confirmation_data+'~~'+comment_val,my_this);
+
+		                    	    }
+		                	    });
+						$('.showComments').modal('hide');
+					});
                 $('.confirmation_1').change(function(){
+                	$('#comment').val('');
                 		is_model_alert='';
-						var confirmation_data=$(this).find('option:selected').val();
+						confirmation_data=$(this).find('option:selected').val();
 						$(this).data('confirmation_status_1',confirmation_data);
 
-						var my_this=$(this);
+						my_this=$(this);
 
 						getAllValue(my_this,18,confirmation_data);
                         added_generated_value=$('#all_saved_value').data('23');
@@ -410,18 +421,7 @@ corresponding value from the list below*/
      							is_model_alert=confirmation_data;
      							$('.modal-title').html('<strong>Conform 3 hours ago </strong> for'+$('#all_saved_value').data('0')+','+$('#all_saved_value').data('1')+','+$('#all_saved_value').data('2'));
      							$('.showComments').modal('show');
-     							$('.save').click(function(){
-
-    									comment_val=$('.comment').val();
-    									my_this.closest('tr').find('td').each(
-    					                	    function (i) {
-    					                    	    if(i==21){
-    			    		                	    	$('#all_saved_value').data(i.toString(),comment_val);
-    			    		                    	    $(this).html(comment_val);
-    					                    	    }
-    					                	    });
-    									$('.showComments').modal('hide');
-         						});
+     							type_of_field='Conform 3 hours ago';
 							}
 						}
 						$(this).closest('tr').find('td').each(
