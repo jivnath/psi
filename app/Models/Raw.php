@@ -169,7 +169,7 @@ WHERE
         return DB::select($sql);
     }
 
-<<<<<<< HEAD
+
     public static function getCompaniesForShift()
     {
         $sql ="SELECT
@@ -208,7 +208,8 @@ WHERE
         }
 
         print_r($companies);die;
-=======
+    }
+
     public static function getTotalNeccessory()
     {
         $sql = "SELECT
@@ -230,6 +231,5 @@ WHERE
                 cts.DATE,time
                 asc";
         return DB::select($sql);
->>>>>>> 672ea748475d9cc244b68f87e7b18aedb04faf66
     }
 }
