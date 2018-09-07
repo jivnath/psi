@@ -6,10 +6,10 @@
 <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+            <span class="info-box-icon bg-aqua"><i class="ion ion-checkmark"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Schedule Accuracy</span>
+              <span class="info-box-text">Confirmation</span>
               <span class="info-box-number">90<small>%</small></span>
             </div>
             <!-- /.info-box-content -->
@@ -19,10 +19,10 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="ios-checkmark-circle"></i></span>
+            <span class="info-box-icon bg-red"><i class="ion ion-close-circled"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Confirmation</span>
+              <span class="info-box-text">Not Ok</span>
               <span class="info-box-number">41,410</span>
             </div>
             <!-- /.info-box-content -->
