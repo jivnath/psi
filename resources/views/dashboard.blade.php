@@ -99,19 +99,19 @@
                 <div class="box-body">
                       <table class="table">
                         <tr>
-                            <th>@lang('dashboard.psisno')</th>
-                            <th>@lang('dashboard.name')</th>
-                            <th>@lang('dashboard.cellno')</th>
-                            <th>@lang('dashboard.expiredate')   </th>
-                            <th>@lang('dashboard.action')</th>
+                            <th>Company</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Total</th>
+                            <th>Necessary</th>
                         </tr>
-                        @foreach ($dashboard as $card)
+                        @foreach ($total_ncessary_data as $tn_data)
                         <tr>
-                            <td>{{$card->psi_number}}</td>
-                            <td>{{$card->name}}</td>
-                            <td>{{$card->cell_no}}</td>
-                            <td>{{$card->residence_card_exp_date}}</td>
-                             <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
+                            <td>{{$tn_data->name}}</td>
+                            <td>{{$tn_data->DATE}}</td>
+                            <td>{{$tn_data->time}}</td>
+                            <td>{{$tn_data->total_used}}</td>
+                            <td>{{$tn_data->total_require}}</td>
                         </tr>
                         @endforeach
                      </table>

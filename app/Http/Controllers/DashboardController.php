@@ -1,10 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use App\Models\Raw;
 
 class DashboardController extends Controller
 {
+
     /**
      * Show the application dashboard.
      *
@@ -12,7 +13,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-    	 $expired = Raw::expiredRC();
-    		return view('dashboard',['dashboard'=>$expired]);
+        $data['dashboard'] = Raw::expiredRC();
+        $data['total_ncessary_data'] = Raw::getTotalNeccessory();
+
+        return view('dashboard', $data);
     }
 }
