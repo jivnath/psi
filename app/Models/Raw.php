@@ -188,7 +188,7 @@ WHERE
             normal is not NULL
             ORDER BY
                 cts.DATE,time
-                asc limit 3";
+                asc";
         return DB::select($sql);
     }
 }

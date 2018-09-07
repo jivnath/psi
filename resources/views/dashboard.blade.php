@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <section class="content">
 <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -67,7 +68,8 @@
                       <h3 class="box-title">@lang('dashboard.cardExpire')</h3>
                     </div>
                 <div class="box-body">
-                      <table class="table">
+                      <table class="table" id='expire_info'>
+                      <thead>
                         <tr>
                             <th>@lang('dashboard.psisno')</th>
                             <th>@lang('dashboard.name')</th>
@@ -75,20 +77,20 @@
                             <th>@lang('dashboard.expiredate')   </th>
                             <th>@lang('dashboard.action')</th>
                         </tr>
-                        @foreach ($dashboard as $card)
-                        <tr>
-                            <td>{{$card->psi_number}}</td>
-                            <td>{{$card->name}}</td>
-                            <td>{{$card->cell_no}}</td>
-                            <td>{{$card->residence_card_exp_date}}</td>
-                             <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
-                        </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
+                            @foreach ($dashboard as $card)
+                            <tr>
+                                <td>{{$card->psi_number}}</td>
+                                <td>{{$card->name}}</td>
+                                <td>{{$card->cell_no}}</td>
+                                <td>{{$card->residence_card_exp_date}}</td>
+                                 <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
                      </table>
                 </div>
-                 <div class="box-footer text-center">
-             	 <a href="javascript:void(0)" class="uppercase">View All</a>
-            </div>
             </div>
         </div>
         <div class="col-md-6">
@@ -97,28 +99,29 @@
                       <h3 class="box-title">@lang('dashboard.tn')</h3>
                     </div>
                 <div class="box-body">
-                      <table class="table">
-                        <tr>
-                            <th>Company</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Total</th>
-                            <th>Necessary</th>
-                        </tr>
-                        @foreach ($total_ncessary_data as $tn_data)
-                        <tr>
-                            <td>{{$tn_data->name}}</td>
-                            <td>{{$tn_data->DATE}}</td>
-                            <td>{{$tn_data->time}}</td>
-                            <td>{{$tn_data->total_used}}</td>
-                            <td>{{$tn_data->total_require}}</td>
-                        </tr>
-                        @endforeach
+                      <table class="table table-striped table-bordered" id='tn_table'>
+                      <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Total</th>
+                                <th>Necessary</th>
+                            </tr>
+                        </thead>
+                          <tbody>
+                            @foreach ($total_ncessary_data as $tn_data)
+                            <tr>
+                                <td>{{$tn_data->name}}</td>
+                                <td>{{$tn_data->DATE}}</td>
+                                <td>{{$tn_data->time}}</td>
+                                <td>{{$tn_data->total_used}}</td>
+                                <td>{{$tn_data->total_require}}</td>
+                            </tr>
+                            @endforeach
+                            </tbody>
                      </table>
                 </div>
-                 <div class="box-footer text-center">
-             	 <a href="javascript:void(0)" class="uppercase">View All</a>
-            </div>
             </div>
         </div>
     </div>
@@ -182,3 +185,15 @@
     </div>
     </section>
 @endsection
+@push('scripts')
+<script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
+    <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
+<script>
+
+$(document).ready(function() {
+    $('#tn_table').DataTable({ "pageLength": 3});
+    $('#expire_info').DataTable({ "pageLength": 3});
+});
+</script>
+
+@endpush
