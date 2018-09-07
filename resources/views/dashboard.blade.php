@@ -183,6 +183,14 @@
                         <div class="date">Sep 24</div>
                         <div class="text">Added an interest “Volunteer Activities”</div>
                       </div>
+                       <div class="feed-item">
+                        <div class="date">Sep 24</div>
+                        <div class="text">Added an interest “Volunteer Activities”</div>
+                      </div>
+                       <div class="feed-item">
+                        <div class="date">Sep 24</div>
+                        <div class="text">Added an interest “Volunteer Activities”</div>
+                      </div>
                     </div>
                 </div>
                 <div class="box-footer text-center">
