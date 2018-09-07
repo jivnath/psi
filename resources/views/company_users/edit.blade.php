@@ -7,8 +7,8 @@
                 <div class="box-header"><h3>User Registration</h3></div>
                 <br>
                 <div class="box-body">
-                    <form method="POST" action="{{route('company.users.update')}}" class="form-horizontal" style="text-align:center">
-                        <input type="hidden" name="method" method="PUT">
+                    <form method="POST" action="{{route('company.users.update', $companyUser->id)}}" class="form-horizontal" style="text-align:center">
+                        <input type="hidden" name="_method" value="PUT">
                         @csrf
                         <div class="form-group row">
                             <label for="username" class="col-sm-2 control-label">Username</label>
@@ -29,8 +29,8 @@
 
                             <div class="col-sm-7">
                                 <select name="language" class="form-control">
-                                    <option <?=($companyUser->language==0)?'selected:"selected"':'' ?> value="0">Japanese</option>
-                                    <option <?=($companyUser->language==1)?'selected:"selected"':'' ?> value="1">English</option>
+                                    <option <?= ($companyUser->language==0)? 'selected="selected"':''?> value="0">Japanese</option>
+                                    <option <?= ($companyUser->language==1)? 'selected:"selected"':''?> value="1">English</option>
                                 </select>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="box-footer row">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-7">
-                                <button type="submit" class="btn btn-info pull-right">Register</button>
+                                <button type="submit" class="btn btn-info pull-right">Update</button>
                             </div>
                         </div>
                         <!-- /.box-footer -->
