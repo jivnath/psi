@@ -173,7 +173,7 @@ class PagesController extends Controller
                     array_push($shi, $s);
                 }
 
-                echo json_encode($shifts);
+                echo json_encode($shi);
             }
         }
     }

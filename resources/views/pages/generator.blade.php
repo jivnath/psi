@@ -198,8 +198,9 @@
                     {
                      var forSec = '<div id="'+sectionId+'sec'+'"<div class="row" style="text-align:center">' +
                          '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
-                         '<div class="col-md-8" style="text-align: left">' +
+                         '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
                          '<div id="'+sectionId+'allShifts">No Shift For This Company<br> </div>' +
+                         '</ul> ' +
                          '<span id="'+ sectionId +'" name="'+sectionName+'" class="btn btn-sm btn-info">Add New Shift</span></div>' +
                          '</div>' +
                          '</div>';
@@ -282,11 +283,11 @@
                 success:function(shifts){
                     $("#shiftAdd").html('');
 
-                    $("#"+companyId+"allshifts").html('');
+                    $("#"+companyId+"allShifts").html('');
 
                     for (i = 0; i < shifts.length; i++)
                     {
-                        var html = '<li>' + shifts.start_time[i] + ' - ' + shifts.end_time[i] + '</li>';
+                        var html = '<li>' + shifts[i].start_time + ' - ' + shifts[i].end_time + '</li>';
                         $("#"+companyId+"allShifts").append(html);
                     }
                 }

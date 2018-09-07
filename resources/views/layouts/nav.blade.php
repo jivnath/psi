@@ -12,7 +12,7 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             @auth
-              <img alt="PSI-S" src="/images/logo_small.png">
+              <img alt="PSI-S" id="logo_small" src="/images/logo_small.png">
             @else
               <img alt="PSI-S" src="/images/logo.png">
             @endauth
@@ -174,4 +174,8 @@
                 		  return false;
                 		});
                 	})(jQuery)
+
+                  $("#logo_small").click(function () {
+                      location.href = "{{route('dashboard')}}";
+                  });
               </script>
