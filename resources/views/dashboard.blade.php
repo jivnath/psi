@@ -132,23 +132,31 @@
                       <h3 class="box-title">@lang('dashboard.rda')</h3>
                     </div>
                 <div class="box-body">
-                      <table class="table">
+                      <table class="table" id='rda_table'>
+                      <thead>
                         <tr>
-                            <th>@lang('dashboard.psisno')</th>
-                            <th>@lang('dashboard.name')</th>
-                            <th>@lang('dashboard.cellno')</th>
-                            <th>@lang('dashboard.expiredate')   </th>
-                            <th>@lang('dashboard.action')</th>
+                            <th>User</th>
+                            <th>PsisNo</th>
+                            <th>Activity</th>
+                            <th>Date</th>
+                            <th>Comment</th>
+                            <th>Total comments</th>
+                            <th>Action</th>
                         </tr>
-                        @foreach ($dashboard as $card)
+                        </thead>
+                        <tbody>
+                        @foreach ($recent_dessert_activity as $rda_info)
                         <tr>
-                            <td>{{$card->psi_number}}</td>
-                            <td>{{$card->name}}</td>
-                            <td>{{$card->cell_no}}</td>
-                            <td>{{$card->residence_card_exp_date}}</td>
+                           	<td>{{$rda_info->user}}</td>
+                           	<td>{{$rda_info->staff_no}}</td>
+                            <td>{{$rda_info->activity}}</td>
+                            <td>{{$rda_info->date}}</td>
+                            <td>{{$rda_info->comments}}</td>
+                            <td>{{$rda_info->total_comment}}</td>
                              <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
                         </tr>
                         @endforeach
+                        </tbody>
                      </table>
                 </div>
                  <div class="box-footer text-center">
@@ -193,6 +201,7 @@
 $(document).ready(function() {
     $('#tn_table').DataTable({ "pageLength": 3});
     $('#expire_info').DataTable({ "pageLength": 3});
+    $('#rda_table').DataTable({ "pageLength": 3});
 });
 </script>
 

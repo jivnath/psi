@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $data['dashboard'] = Raw::expiredRC();
         $data['total_ncessary_data'] = Raw::getTotalNeccessory();
-
+        $data['recent_dessert_activity'] = Raw::getDessertActivity();
         return view('dashboard', $data);
     }
 }

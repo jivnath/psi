@@ -169,10 +169,9 @@ WHERE
         return DB::select($sql);
     }
 
-
     public static function getCompaniesForShift()
     {
-        $sql ="SELECT
+        $sql = "SELECT
                     (
                         SELECT
                             name,id
@@ -199,15 +198,15 @@ WHERE
                 LEFT JOIN companies as t4 ON t4.master_id = t3.id) main ) table_data";
 
         $allCompanies = DB::select($sql);
-        foreach($allCompanies as $company)
-        {
-            $companies[]=[
+        foreach ($allCompanies as $company) {
+            $companies[] = [
                 "id" => $company->id,
                 "name" => $company->name
             ];
         }
 
-        print_r($companies);die;
+        print_r($companies);
+        die();
     }
 
     public static function getTotalNeccessory()
@@ -230,6 +229,28 @@ WHERE
             ORDER BY
                 cts.DATE,time
                 asc";
+        return DB::select($sql);
+    }
+
+    public static function getDessertActivity()
+    {
+        $sql = "SELECT
+                    id,
+                    staff_no,
+                    responsible1 user,
+                    conformation_day_before comments,
+                    call_medium activity,
+                    (
+                        SELECT
+                            COUNT(*)
+                        FROM
+                            psi_self_sheet_comments pssc
+                        WHERE
+                            pssc.self_id = pde.id
+                    ) total_comment,
+                    date(created_at) date
+                FROM
+                    `psi_dessert_entry` pde";
         return DB::select($sql);
     }
 }
