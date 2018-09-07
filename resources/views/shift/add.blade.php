@@ -33,10 +33,10 @@
                     <!--Dynamic Field Start -->
                                 <div class="col-md-7">
                                     <div class="table-responsive">
-                                        <table id="dynamic_field">
-                                            <tr>
-                                                <td style="padding-right:10px;"><input type="time" name="start_shift[]" placeholder="Shift Time" class="form-control name_list" /></td>
-                                                <td style="padding-right:10px;"><input type="time" name="end_shift[]" placeholder="Shift Time" class="form-control name_list"/></td>
+                                        <table id="dynamic_field" style="width: 100%">
+                                            <tr class="form-group">
+                                                <td style="padding: 10px"><input type="time" name="start_shift[]" placeholder="Shift Time" class="form-control name_list" /></td>
+                                                <td style="padding: 10px"><input type="time" name="end_shift[]" placeholder="Shift Time" class="form-control name_list"/></td>
                                                 <td><i name="add" id="add" class="fa fa-plus" style=" font-size:28px; color:green;"></i></td>
                                             </tr>
                                         </table>

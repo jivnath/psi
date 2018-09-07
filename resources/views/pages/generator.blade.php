@@ -24,7 +24,7 @@
                                 <div class="col-md-1"></div>
                             </div>
                         </div>
-                        <div id="shift">
+                        <div id="shift" style="margin-bottom: 10px">
 
                         </div>
 
@@ -67,57 +67,48 @@
                     <div class="box-header with-border">
                   		<h3 class="box-title">Add Shift</h3>
                 	</div>
-
-                            <form  class='form-horizontal' action="{{ route('shift.store') }}" method="POST" >
- 								<div class="box-body">
-                                <input type="hidden" name="_method" value="POST">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                                <div class="row" style="text-align: center; margin-top: 5px;">
-                                    <div class="col-md-4">
-                                        <label for="shiftName"> Company Name </label>
-                                    </div>
-                                    <div class="col-md-8 ">
-                                        <select class="form-control" name="company_name" required>
-                                            <option value="">--Select Company--</option>
-                                            @foreach($allCompanies as $acompany )
-                                                <option value="{{ $acompany->id }}"> {{ $acompany->name }} </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div><br />
-                                <div class="row" style="text-align: center">
-                                    <div class="col-md-4">
-                                        Shift Time Table
-                                    </div>
-                                    <!--Dynamic Field Start -->
-                                    <div class="col-md-8">
-                                        <div class="table-responsive">
-                                            <table id="dynamic_field">
-                                                <tr>
-                                                    <td style="padding-right:10px;"><input type="time" name="start_shift[]" placeholder="Shift Time" class="form-control name_list" /></td>
-                                                    <td style="padding-right:10px;"><input type="time" name="end_shift[]" placeholder="Shift Time" class="form-control name_list"/></td>
-                                                    <td><i name="add" id="add" class="fa fa-plus" style=" font-size:28px; color:green;"></i></td>
-                                                </tr>
-                                            </table>
-                                        </div>
+                    <div class='form-horizontal'>
+                        <div class="box-body">
+                            <div class="row" style="text-align: center; margin-top: 5px;">
+                                <div class="col-md-4">
+                                    <label for="company_name"> Company Name </label>
+                                </div>
+                                <div class="col-md-8 ">
+                                    <span style="float:left;" id="company_name"></span>
+                                </div>
+                                <input type="hidden" id="company_id" name="company_name">
+                            </div><br />
+                            <div class="row" style="text-align: center">
+                                <div class="col-md-4">
+                                    Shift Time Table
+                                </div>
+                                <!--Dynamic Field Start -->
+                                <div class="col-md-8">
+                                    <div class="table-responsive">
+                                        <table id="dynamic_field">
+                                            <tr>
+                                                <td style="padding-right:10px;"><input type="time" name="start_shift[]" placeholder="Shift Time" class="form-control name_list" /></td>
+                                                <td style="padding-right:10px;"><input type="time" name="end_shift[]" placeholder="Shift Time" class="form-control name_list"/></td>
+                                                <td><i name="add" id="add" class="fa fa-plus" style=" font-size:28px; color:green;"></i></td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
-                                <!-- Dynamic Field end -->
-                                <div class="row">
-                                    <div class="col-md-7"></div>
-                                    <div class="col-md-5" style="text-align: right">
-                                        <button style="margin-top: 15px" type="submit" class="btn btn-primary">
-                                            Save
-                                        </button>
-                                        <button style="margin-top: 15px" type="reset" class="btn btn-danger">
-                                            Clear
-                                        </button>
-                                    </div>
+                            </div>
+                            <!-- Dynamic Field end -->
+                            <div class="row">
+                                <div class="col-md-7"></div>
+                                <div class="col-md-5" style="text-align: right">
+                                    <button style="margin-top: 15px" id="submitshift" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                    <button style="margin-top: 15px" type="reset" class="btn btn-danger">
+                                        Clear
+                                    </button>
                                 </div>
-                                </div>
-                            </form>
-
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             </div>
@@ -143,14 +134,13 @@
 
                         if(data.section.length==0)
                         {
-                            var forSection = '<div id="' + selected + '1' + '"><div class="row" style="text-align:right">' +
+                            var forSection ='<div class="row" style="text-align:right">' +
                                 '<div class="col-md-4"><label>' + name + '\'s Shift</label></div>' +
                                 '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
                                 '<div id="'+selected+'allShifts"> </div>' +
                                 '</ul> ' +
-                                '<span id="'+selected+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
-                                '</div><br>' +
-                                '</div>';
+                                '<span id="'+selected+'" name="'+name+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
+                                '</div><br>';
                             $("#shift").append(forSection);
 
                             for (i = 0; i < data.shift.length; i++)
@@ -183,35 +173,35 @@
                 data: {id:sectionId},
 				dataType:'json',
 				async:true,
-                success: function (sections) {
+                success: function (shifts) {
                     let i;
-                    if(sections.length >0)
+                    if(shifts.length >0)
                     {
-                        var forSection = '<div id="' + sectionId + '1' + '"><div class="row" style="text-align:right">' +
+                        var forSection = '<div id="'+ sectionId+'sec'  + '"><div class="row" style="text-align:right">' +
                             '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
                             '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
                             '<div id="'+sectionId+'allShifts"> </div>' +
                             '</ul> ' +
-                            '<span id="'+sectionId+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
+                            '<span id="'+ sectionId +'" name="'+sectionName+'" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
                             '</div><br>' +
                             '</div>';
                         $("#shift").append(forSection);
 
 
-                        for (i = 0; i < sections.length; i++)
+                        for (i = 0; i < shifts.length; i++)
                         {
-                            var html = '<li>' + sections[i].start_time + ' - ' + sections[i].end_time + '</li>';
+                            var html = '<li>' + shifts[i].start_time + ' - ' + shifts[i].end_time + '</li>';
                             $("#"+sectionId+"allShifts").append(html);
                         }
                     }
                     else
                     {
-                     var forSec = '<div class="row" style="text-align:center">' +
+                     var forSec = '<div id="'+sectionId+'sec'+'"<div class="row" style="text-align:center">' +
                          '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
                          '<div class="col-md-8" style="text-align: left">' +
-                         'No Shift For This Company<br>' +
-                         '<span class="btn btn-sm btn-info">Add New Shift</span> </div>' +
-                         '</div><br>' +
+                         '<div id="'+sectionId+'allShifts">No Shift For This Company<br> </div>' +
+                         '<span id="'+ sectionId +'" name="'+sectionName+'" class="btn btn-sm btn-info">Add New Shift</span></div>' +
+                         '</div>' +
                          '</div>';
                     $("#shift").append(forSec);
                     }
@@ -220,12 +210,18 @@
         }
         else
         {
-            $("#"+sectionId+'1').remove();
+            $("#"+sectionId+"sec").remove();
+
         }
     });
 
     // shift add part starts
     $(document).on('click', '.btn-info', function(){
+
+        var id = $(this).attr('id');
+        var name = $(this).attr('name');
+        $("#company_name").text(name);
+        $("#company_id").val(id);
 
         $("#shiftAdd").show();
         var i=1;
@@ -233,7 +229,6 @@
             i++;
             $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="time" name="start_shift[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><input type="time" name="end_shift[]" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
         });
-
 
         $(document).on('click', '.btn_remove', function(){
             var button_id = $(this).attr("id");
@@ -266,6 +261,33 @@
                         $(".print-success-msg").css('display','block');
                         $(".print-error-msg").css('display','none');
                         $(".print-success-msg").find("ul").append('<li>Record Inserted Successfully.</li>');
+                    }
+                }
+            });
+        });
+
+        //for ajax save shifts
+        $("#submitshift").click(function(){
+            var start_shifts = $("input[name='start_shift[]']")
+                .map(function(){return $(this).val();}).get();
+            var end_shifts = $("input[name='end_shift[]']")
+                .map(function(){return $(this).val();}).get();
+            var companyId =$("#company_id").val();
+            $.ajax({
+                type:'POST',
+                url:"{{route('ajax.add.shifts')}}",
+                data:{start_shifts:start_shifts, end_shifts:end_shifts, id:companyId, "_token": "{{ csrf_token() }}"},
+                dataType:'json',
+                async:true,
+                success:function(shifts){
+                    $("#shiftAdd").html('');
+
+                    $("#"+companyId+"allshifts").html('');
+
+                    for (i = 0; i < shifts.length; i++)
+                    {
+                        var html = '<li>' + shifts.start_time[i] + ' - ' + shifts.end_time[i] + '</li>';
+                        $("#"+companyId+"allShifts").append(html);
                     }
                 }
             });

@@ -20,16 +20,54 @@ Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationContr
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('ajax',function(){
-   return view('generator');
-});
-    Route::post('/getmsg','AjaxController@index')->name('generator');;
+//    Route::get('ajax',function(){
+//   return view('generator');
+//});
+//    Route::post('/getmsg','AjaxController@index')->name('generator');
+    Route::prefix('employees')->group(function () {
+        Route::get('/', 'EmployeeController@index')->name('employees');
+        Route::get('/show/{companyId}', 'EmployeeController@show')->name('employees.show');
+        Route::get('/upload', 'EmployeeController@uploadForm')->name('employees.uploadForm');
+        Route::post('/upload', 'EmployeeController@upload')->name('employees.upload');
+        Route::post('/updateCell', 'EmployeeController@updateCell')->name('employees.updateCell');
+
+        Route::get('/availability/show/{id}', 'EmployeeAvailabilityController@index')->name('availability.index');
+        Route::get('/availability/add', 'EmployeeAvailabilityController@add')->name('availability.add');
+        Route::post('/availability/create', 'EmployeeAvailabilityController@store')->name('availability.store');
+        Route::get('/availability/edit/{id}', 'EmployeeAvailabilityController@edit')->name('availability.edit');
+        Route::put('/availability/{id}', 'EmployeeAvailabilityController@update')->name('availability.update');
+        Route::post('/ajaxupdate', 'EmployeeAvailabilityController@ajaxUpdate')->name('availability.ajaxupdate');
+
+        Route::get('/skill', "EmployeeSkillController@add");
+        Route::post('/skill', "EmployeeSkillController@store")->name('skill.store');
+        Route::post('/skill/addmore', 'EmployeeSkillController@addSkill')->name('skill.addmore');
+        Route::get('/skill/all', 'EmployeeSkillController@findSkill')->name('skill.all');
+        Route::get('/skill/delete', 'EmployeeSkillController@removeSkill')->name('delete.skill');
+
+
+    });
+
+    Route::prefix('company')->group(function () {
+        Route::get('/create', 'CompanyController@create')->name('company.create');
+        Route::post('/create', 'CompanyController@store')->name('company.store');
+        Route::get('edit/{id}', 'CompanyController@edit')->name('company.edit');
+        Route::put('{id}', 'CompanyController@update')->name('company.update');
+        Route::get('/sub', 'CompanyController@sub')->name('company.sub');
+        Route::post('/subCompanyUpdate', 'CompanyController@subCompanyUpdate')->name('subcompany');
+
+        Route::get('/shifts/add', 'ShiftMasterController@add')->name('shift.add');
+        Route::post('/shifts/add', 'ShiftMasterController@store')->name('shift.store');
+        Route::get('/shifts/edit/{id}', 'ShiftMasterController@edit')->name('shift.edit');
+        Route::put('/shifts/{id}', 'ShiftMasterController@update')->name('shift.update');
+
+        Route::get('/users/add', 'CompanyUserController@addUser');
+        Route::post('/users/add', 'CompanyUserController@storeUser')->name('company.users.store');
+        Route::get('/users/edit/{id}', 'CompanyUserController@editUser')->name('company.users.edit');
+        Route::put('/users/{id}', 'CompanyUserController@updateUser')->name('company.users.update');
+    });
+
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/employees', 'EmployeeController@index')->name('employees');
-    Route::get('/employees/{companyId}/show', 'EmployeeController@show')->name('employees.show');
-    Route::get('/employees/upload', 'EmployeeController@uploadForm')->name('employees.uploadForm');
-    Route::post('/employees/upload', 'EmployeeController@upload')->name('employees.upload');
-    Route::post('/employees/updateCell', 'EmployeeController@updateCell')->name('employees.updateCell');
+
 
     Route::get('/users', 'UserController@index')->name('users.index');
     Route::get('/users/create', 'UserController@createUser')->name('users.create');
@@ -37,19 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/users/edit/{id}', 'UserController@editUser')->name('users.edit');
     Route::put('/users/{id}', 'UserController@updateUser')->name('users.update');
 
-    Route::get('/company/create', 'CompanyController@create')->name('company.create');
-    Route::post('/company/create', 'CompanyController@store')->name('company.store');
-    Route::get('/company/edit/{id}', 'CompanyController@edit')->name('company.edit');
-    Route::put('/company/{id}', 'CompanyController@update')->name('company.update');
-    Route::get('/sub', 'CompanyController@sub')->name('company.sub');
-    Route::post('/subCompanyUpdate', 'CompanyController@subCompanyUpdate')->name('subcompany');
 
-    Route::get('/availability/show/{id}', 'EmployeeAvailabilityController@index')->name('availability.index');
-    Route::get('/availability/add', 'EmployeeAvailabilityController@add')->name('availability.add');
-    Route::post('/availability/create', 'EmployeeAvailabilityController@store')->name('availability.store');
-    Route::get('/availability/edit/{id}', 'EmployeeAvailabilityController@edit')->name('availability.edit');
-    Route::put('/availability/{id}', 'EmployeeAvailabilityController@update')->name('availability.update');
-    Route::post('/ajaxupdate', 'EmployeeAvailabilityController@ajaxUpdate')->name('availability.ajaxupdate');
+
 
     Route::get('/pages/user', 'PagesController@getUser')->name('pages.users');
     Route::get('/pages/employee', 'PagesController@getEmployee')->name('pages.employee');
@@ -60,14 +87,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('shift/show/{id}', 'PagesController@show')->name('shift.show');
     Route::post('/shift/updateCell', 'PagesController@updateCells');
     Route::get('/shift/generate', 'PagesController@getShift')->name('generator.shift');
+    Route::post('ajax/shift/add', 'PagesController@ajaxAddShifts')->name('ajax.add.shifts');
 
     Route::resource('roles', 'RoleController');
     Route::resource('permissions', 'PermissionController');
 
-    Route::get('/shifts/add', 'ShiftMasterController@add')->name('shift.add');
-    Route::post('/shifts/add', 'ShiftMasterController@store')->name('shift.store');
-    Route::get('/shifts/edit/{id}', 'ShiftMasterController@edit')->name('shift.edit');
-    Route::put('/shifts/{id}', 'ShiftMasterController@update')->name('shift.update');
+
     Route::get('/addmore','ShiftMasterController@addMore');
     Route::post('/addmore','ShiftMasterController@addMorePost');
 
@@ -86,11 +111,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/dessert', "DessertController@storeDessert")->name('dessert.store');
     Route::post('/dessert_update', "DessertController@dessert_update")->name('dessert.update');
 
-    Route::get('/skill', "EmployeeSkillController@add");
-    Route::post('/skill', "EmployeeSkillController@store")->name('skill.store');
-    Route::post('/skill/addmore', 'EmployeeSkillController@addSkill')->name('skill.addmore');
-    Route::get('/skill/all', 'EmployeeSkillController@findSkill')->name('skill.all');
-    Route::get('/skill/delete', 'EmployeeSkillController@removeSkill')->name('delete.skill');
+
     Route::get('/viber/alert/setting', function() {
         return view('viber.alert_setting');
         });

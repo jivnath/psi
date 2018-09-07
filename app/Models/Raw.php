@@ -169,6 +169,46 @@ WHERE
         return DB::select($sql);
     }
 
+<<<<<<< HEAD
+    public static function getCompaniesForShift()
+    {
+        $sql ="SELECT
+                    (
+                        SELECT
+                            name,id
+                        FROM
+                            companies
+                        WHERE
+                            id = table_data.name
+                    ) company_name
+                FROM ( SELECT DISTINCT
+                        CASE
+                            WHEN lev2 IS NOT NULL THEN lev2
+                            WHEN lev2 IS NULL THEN lev1
+                        END
+                    name
+                FROM ( SELECT
+                    t1.id AS lev1,
+                    t2.id AS lev2,
+                    t3.id AS lev3,
+                    t4.id AS lev4
+                FROM
+                    companies AS t1
+                LEFT JOIN companies AS t2 ON t2.master_id = t1.id
+                LEFT JOIN companies AS t3 ON t3.master_id = t2.id
+                LEFT JOIN companies as t4 ON t4.master_id = t3.id) main ) table_data";
+
+        $allCompanies = DB::select($sql);
+        foreach($allCompanies as $company)
+        {
+            $companies[]=[
+                "id" => $company->id,
+                "name" => $company->name
+            ];
+        }
+
+        print_r($companies);die;
+=======
     public static function getTotalNeccessory()
     {
         $sql = "SELECT
@@ -190,5 +230,6 @@ WHERE
                 cts.DATE,time
                 asc";
         return DB::select($sql);
+>>>>>>> 672ea748475d9cc244b68f87e7b18aedb04faf66
     }
 }
