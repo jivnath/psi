@@ -10,7 +10,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Confirmation</span>
-              <span class="info-box-number">{{$dessert_report['OK']}}</span>
+              <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -23,7 +23,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Not Ok</span>
-              <span class="info-box-number">{{$dessert_report['Not OK']}}</span>
+              <span class="info-box-number">{{isset($dessert_report['Not OK'])??$dessert_report['Not OK']}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -40,7 +40,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Not Response</span>
-              <span class="info-box-number">{{$dessert_report['No response']}}</span>
+              <span class="info-box-number">{{isset($dessert_report['No response'])??$dessert_report['No response']}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
