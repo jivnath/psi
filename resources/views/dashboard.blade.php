@@ -2,6 +2,44 @@
 
 @section('content')
  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<style>
+.modal-dialog.cascading-modal.modal-avatar .modal-header {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin: -3rem 0 -1rem;
+}
+.img-fluid, .modal-dialog.cascading-modal.modal-avatar .modal-header, .section-blog-fw .view img, .video-fluid {
+    max-width: 100%;
+    /* height: auto; */
+}
+.modal-dialog.cascading-modal .modal-header {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    margin: -2rem 1rem 1rem 1rem;
+    border: none;
+    -webkit-border-radius: .125rem;
+    border-radius: .125rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+.modal-dialog.cascading-modal.modal-avatar .modal-header img {
+    width: 130px;
+    -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-dialog.cascading-modal .modal-header {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    margin: -2rem 1rem 1rem 1rem;
+    border: none;
+    -webkit-border-radius: .125rem;
+    border-radius: .125rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+</style>
 <section class="content">
 <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -85,7 +123,7 @@
                                 <td>{{$card->name}}</td>
                                 <td>{{$card->cell_no}}</td>
                                 <td>{{$card->residence_card_exp_date}}</td>
-                                 <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
+                                <td class='viber_messessing'><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -102,7 +140,8 @@
                       <table class="table table-striped table-bordered" id='tn_table'>
                       <thead>
                             <tr>
-                                <th>Company</th>
+                            	<th>Company</th>
+                                <th>Sub-company</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Total</th>
@@ -112,6 +151,7 @@
                           <tbody>
                             @foreach ($total_ncessary_data as $tn_data)
                             <tr>
+                            	<td>{{$tn_data->master_main_company}}</td>
                                 <td>{{$tn_data->name}}</td>
                                 <td>{{$tn_data->DATE}}</td>
                                 <td>{{$tn_data->time}}</td>
@@ -200,16 +240,32 @@
         </div>
     </div>
     </section>
+    @include('layouts.modal',['modal_id'=>'card_expiry','modal_title'=>'Viber Notification'])
 @endsection
 @push('scripts')
 <script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
     <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
 <script>
-
+var last_click='';
 $(document).ready(function() {
     $('#tn_table').DataTable({ "pageLength": 3});
     $('#expire_info').DataTable({ "pageLength": 3});
     $('#rda_table').DataTable({ "pageLength": 3});
+});
+$('.viber_messessing').on('click',function(e){
+	$('#card_expiry').modal('show');
+	$("#card_expiry").appendTo("body");
+	if(last_click !=='')
+		{
+		last_click.removeClass('text-danger');
+		last_click=$(this).closest('tr');
+		last_click.addClass('text-danger');
+		}
+	else{
+		last_click=$(this).closest('tr');
+		last_click.addClass('text-danger');
+	}
+	$('.profile-username').html(last_click.find("td:eq(1)").text());
 });
 </script>
 

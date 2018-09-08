@@ -219,7 +219,13 @@ WHERE
                 ( normal + help ) total_require,
                 ctt.company_id,
                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used,
-                c.name
+                c.name,
+                (CASE
+                when c.master_id is NULL THEN c.name
+                when c.master_id is not Null THEN (select cc.name from companies cc where cc.id=c.master_id)
+                ELSE
+                  c.name
+                end) master_main_company
             FROM
                 company_time_schedules cts
                 INNER JOIN  company_time_tables ctt on cts.companytt_id = ctt.id
