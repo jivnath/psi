@@ -3,42 +3,7 @@
 @section('content')
  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <style>
-.modal-dialog.cascading-modal.modal-avatar .modal-header {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    margin: -3rem 0 -1rem;
-}
-.img-fluid, .modal-dialog.cascading-modal.modal-avatar .modal-header, .section-blog-fw .view img, .video-fluid {
-    max-width: 100%;
-    /* height: auto; */
-}
-.modal-dialog.cascading-modal .modal-header {
-    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-    margin: -2rem 1rem 1rem 1rem;
-    border: none;
-    -webkit-border-radius: .125rem;
-    border-radius: .125rem;
-    padding: 1.5rem;
-    text-align: center;
-}
-.modal-dialog.cascading-modal.modal-avatar .modal-header img {
-    width: 130px;
-    -webkit-box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-    box-shadow: 0 8px 17px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
-    margin-left: auto;
-    margin-right: auto;
-}
-.modal-dialog.cascading-modal .modal-header {
-    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-    margin: -2rem 1rem 1rem 1rem;
-    border: none;
-    -webkit-border-radius: .125rem;
-    border-radius: .125rem;
-    padding: 1.5rem;
-    text-align: center;
-}
+
 </style>
 <section class="content">
 <div class="row">
