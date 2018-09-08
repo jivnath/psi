@@ -10,7 +10,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Confirmation</span>
-              <span class="info-box-number">90<small>%</small></span>
+              <span class="info-box-number">{{$dessert_report['OK']}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -23,7 +23,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Not Ok</span>
-              <span class="info-box-number">41,410</span>
+              <span class="info-box-number">{{$dessert_report['Not OK']}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -40,7 +40,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Not Response</span>
-              <span class="info-box-number">760</span>
+              <span class="info-box-number">{{$dessert_report['No response']}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -53,7 +53,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">New Members</span>
-              <span class="info-box-number">2,000</span>
+              <span class="info-box-number">{{$total_emp}}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
