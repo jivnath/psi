@@ -2,9 +2,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class DessertSheet extends Model
+
+class DessertSheet extends Model implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
+
 
     protected $table = 'psi_dessert_entry';
 
