@@ -84,12 +84,8 @@ You can publish [the migration](https://github.com/spatie/laravel-permission/blo
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 ```
 
-If you're using UUIDs or GUIDs for your `User` models you can update the `create_permission_tables.php` migration and replace `$table->morphs('model')` with:
-
-```php
-$table->uuid('model_id');
-$table->string('model_type');
-```
+If you're using UUIDs or GUIDs for your `User` models you can update the `create_permission_tables.php` migration and replace `$table->unsignedBigInteger($columnNames['model_morph_key'])` with `$table->uuid($columnNames['model_morph_key'])`.
+For consistency, you can also update the package configuration file to use the `model_uuid` column name instead of the default `model_id` column.
 
 After the migration has been published you can create the role- and permission-tables by running the migrations:
 
@@ -175,6 +171,18 @@ return [
          */
 
         'role_has_permissions' => 'role_has_permissions',
+    ],
+
+    'column_names' => [
+
+        /*
+         * Change this if you want to name the related model primary key other than 
+         * `model_id`.
+         *
+         * For example, this would be nice if your primary keys are all UUIDs. In 
+         * that case, name this `model_uuid`.
+         */
+        'model_morph_key' => 'model_id',
     ],
 
     /*
@@ -316,7 +324,7 @@ $permissions = $user->getDirectPermissions();
 $permissions = $user->getPermissionsViaRoles();
 $permissions = $user->getAllPermissions();
 
-// get a collection of all defined roles
+// get the names of the user's roles
 $roles = $user->getRoleNames(); // Returns a collection
 ```
 
@@ -697,7 +705,7 @@ php artisan permission:create-role writer
 php artisan permission:create-permission "edit articles"
 ```
 
-When creating permissions and roles for specific guards you can specify the guard names as a second argument:
+When creating permissions/roles for specific guards you can specify the guard names as a second argument:
 
 ```bash
 php artisan permission:create-role writer web
@@ -706,6 +714,13 @@ php artisan permission:create-role writer web
 ```bash
 php artisan permission:create-permission "edit articles" web
 ```
+
+When creating roles you can also create and link permissions at the same time:
+
+```bash
+php artisan permission:create-role writer web "create articles|edit articles"
+```
+
 
 ## Unit Testing
 
@@ -818,7 +833,14 @@ from accidentally using/changing your cached data.
 
 ## Need a UI?
 
-The package doesn't come with any screens out of the box, you should build that yourself. To get started check out [this extensive tutorial](https://scotch.io/tutorials/user-authorization-in-laravel-54-with-spatie-laravel-permission) by [Caleb Oki](http://www.caleboki.com/).
+The package doesn't come with any screens out of the box, you should build that yourself. Here are some options to get you started:
+
+- [Laravel Nova package by @vyuldashev for managing Roles and Permissions](https://github.com/vyuldashev/nova-permission)
+
+- [Extensive tutorial for building permissions UI](https://scotch.io/tutorials/user-authorization-in-laravel-54-with-spatie-laravel-permission) by [Caleb Oki](http://www.caleboki.com/).
+
+- [How to create a UI for managing the permissions and roles](http://www.qcode.in/easy-roles-and-permissions-in-laravel-5-4/)
+
 
 ### Testing
 
@@ -856,10 +878,6 @@ on [permissions and roles](https://laracasts.com/series/whats-new-in-laravel-5-1
 can be found [in this repo on GitHub](https://github.com/laracasts/laravel-5-roles-and-permissions-demo).
 
 Special thanks to [Alex Vanderbist](https://github.com/AlexVanderbist) who greatly helped with `v2`, and to [Chris Brown](https://github.com/drbyte) for his longtime support  helping us maintain the package.
-
-## Resources
-
-- [How to create a UI for managing the permissions and roles](http://www.qcode.in/easy-roles-and-permissions-in-laravel-5-4/)
 
 ## Alternatives
 
