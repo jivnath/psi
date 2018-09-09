@@ -6282,11 +6282,11 @@ button.close {
 
 .modal-backdrop {
   position: fixed;
-  top: 0;
+ /*  top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
-  z-index: 1040;
+  left: 0; */
+  z-index: -1040;
   background-color: #000;
 }
 
@@ -10634,4 +10634,31 @@ table.floatThead-table {
   height: 40px;
   display: inline-block;
 
+}
+.fixed_header{
+    width: 400px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed_header tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 500px;
+}
+
+.fixed_header thead tr {
+   display: block;
+}
+
+.fixed_header thead {
+  background: black;
+  color:#fff;
+}
+
+.fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: left;
+  width: 200px;
 }
