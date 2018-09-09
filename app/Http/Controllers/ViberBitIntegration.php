@@ -11,7 +11,7 @@ class ViberBitIntegration extends Controller
 
     public function handleViberRequest()
     {
-        $access_token = \Config::get('constant.VIBER_ACCESS_TOKEN');
+        $access_token = env('VIBER_ACCESS_TOKEN', false);
         $request = file_get_contents("php://input");
         $input = json_decode($request, true);
 

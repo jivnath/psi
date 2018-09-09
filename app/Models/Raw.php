@@ -259,4 +259,42 @@ WHERE
                     `psi_dessert_entry` pde";
         return DB::select($sql);
     }
+
+    public static function getConfirmedEmployees()
+    {
+        $sql = "SELECT
+                COUNT(pde.conformation_day_before) total_count,
+                    'to' days
+                FROM
+                    psi_dessert_entry pde,
+                    company_time_schedules cts
+                WHERE
+                    pde.cts_id = cts.id
+                AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day) and pde.conformation_day_before='OK'
+                union
+                SELECT
+
+                    COUNT(pde.conformation_day_before) total_count,
+                    'to_week'
+                FROM
+                    psi_dessert_entry pde,
+                    company_time_schedules cts
+                WHERE
+                    pde.cts_id = cts.id
+                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week) and pde.conformation_day_before='OK'
+                union
+                SELECT
+
+
+                    COUNT(pde.conformation_day_before) total_count,
+                    'to_month'
+                FROM
+                    psi_dessert_entry pde,
+                    company_time_schedules cts
+                WHERE
+                    pde.cts_id = cts.id
+                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(),interval 1 month)
+                AND pde.conformation_day_before = 'OK'";
+        return DB::select($sql);
+    }
 }

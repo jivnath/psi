@@ -54,9 +54,34 @@
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">New Members</span>
-              <span class="info-box-number">{{$total_emp}}</span>
+                <div class="info-box-content">
+                <span class="info-box-text">Confirmed Employee</span>
+                  <div class="row">
+                    <div class="col-sm-4 border-right">
+                      <div class="description-block" style='margin: 8px -10px!important'>
+                        <h5 class="description-header">{{$employee_summery[0]->total_count}}</h5>
+                        <span class="description-text" style='text-transform: none;'>Tomorrow</span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4 border-right">
+                      <div class="description-block" style="margin: 8px -10px!important;">
+                        <h5 class="description-header">{{$employee_summery[1]->total_count}}</h5>
+                        <span class="description-text" style='text-transform: none;'>To2Week</span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-sm-4">
+                      <div class="description-block" style="margin: 8px -10px!important;">
+                        <h5 class="description-header">{{$employee_summery[2]->total_count}}</h5>
+                        <span class="description-text" style='text-transform: none;'>To2Month</span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
             </div>
             <!-- /.info-box-content -->
           </div>
