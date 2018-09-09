@@ -20,17 +20,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($user_group as $index => $group)
-                                    <tr>
-                                        {{--<td>{{ $index + 1 }}</td>--}}
-                                        <td id="{{$group->id}}td">{{ $group->group_name }}</td>
-                                        <td> 2 </td>
-                                        <td>
-                                            <span id="{{$group->id}}" name="{{$group->group_name}}" class="btn btn-small btn-link rename"><small>Rename</small></span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <span id="moreGroup"></span>
+                                    @foreach($user_group as $index => $group)
+                                        <tr>
+                                            {{--<td>{{ $index + 1 }}</td>--}}
+                                            <td id="{{$group->id}}td">{{ $group->group_name }}</td>
+                                            <td> 2 </td>
+                                            <td>
+                                                <span id="{{$group->id}}" name="{{$group->group_name}}" class="btn btn-small btn-link rename"><small>Rename</small></span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    <tr id="moreGroup"></tr>
                                 </tbody>
                             </table>
                         @endif
@@ -57,6 +57,48 @@
         // $(document).ready(function() {
         //     $('#group_table').DataTable();
         // });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).on("click", ".update", function(){
+            var name = $("#group_name").val();
+            var id = $(this).attr('name');
+
+            $.ajax({
+                type:"POST",
+                url:"{{route('group.rename')}}",
+                data:{id:id, name:name},
+                async:true,
+                success:function(data){
+                    $("#"+id+"td").text(name);
+                    $("#add_form").hide();
+                }
+            });
+        });
+
+        $(document).on("click", ".add", function(){
+            var name = $("#group_name").val();
+
+            $.ajax({
+                type:"POST",
+                url:"{{route('group.add')}}",
+                data:{name:name},
+                dataType:'json',
+                async:true,
+                success:function(data){
+                    var newrow = '<td id="'+data+'td'+'">'+name+'</td>' +
+                        '<td>2</td>' +
+                        '<td>' +
+                        '<span id="'+data+'" name="'+name+'" class="btn btn-small btn-link rename"><small>Rename</small></span>' +
+                        '</td>';
+                    $("#group_table").append(newrow);
+                    $("#add_form").hide();
+                }
+            });
+        });
 
         $(function () {
             $("#add_group").click(function () {
@@ -68,6 +110,7 @@
                 $("#submit").removeAttr('name');
                 $("#group_name").attr("placeholder", "Enter Group Name");
                 $("#group_name").removeAttr("value");
+                $("#group_name").val('');
             });
             $(".rename").click(function () {
                 var id = $(this).attr("id");
@@ -78,43 +121,10 @@
                 $("#submit").addClass('update');
                 $("#submit").text('Rename');
                 $("#submit").attr("name", id);
-                $("#group_name").attr("value", name);
+                // $("#group_name").attr("value", name);
+                $("#group_name").val(name);
                 $("#group_name").removeAttr("placeholder");
             });
-
-            $(".update").click(function(){
-                var name = $("#group_name").val();
-                var id = $(this).attr('name');
-                alert(name);
-                alert(id);
-
-               $.ajax({
-                   type:"POST",
-                   url:"{{route('group.rename')}}",
-                   data:{id:id, name:name},
-                   async:true,
-                   success:function(data){
-                       $("#"+id+"td").text(name);
-                   }
-               });
-            });
-
-            $(".add").click(function(){
-               var name = $("#group_name").val();
-
-               $.ajax({
-                  type:"POST",
-                   url:"{{route('group.add')}}",
-                   data:{name:name},
-                   async:true,
-                   success:function(data){
-                       alert('success');
-                   }
-               });
-            });
-
         });
     </script>
-
-re
 @endpush

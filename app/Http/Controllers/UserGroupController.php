@@ -19,20 +19,32 @@ class UserGroupController extends Controller
     {
         if($request->ajax())
         {
+            $this->validate($request, [
+                'name' => 'required|max:191'
+            ]);
+
             $name = $request->get('name');
 
             $group = new UserGroup();
             $group->group_name = $name;
             $group->save();
 
+            $data = $group->id;
+
             Session::flash('success', 'The group is successfully added!');
         }
+
+        echo json_encode($data);
     }
 
     public function renameGroup(Request $request)
     {
         if($request->ajax())
         {
+            $this->validate($request, [
+                'name' => 'required|max:191'
+            ]);
+
             $id = $request->get('id');
             $name = $request->get('name');
 
