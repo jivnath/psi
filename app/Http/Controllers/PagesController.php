@@ -139,7 +139,7 @@ class PagesController extends Controller
                 }
             }
 
-        return redirect()->route('generator');
+        return redirect()->route('pages.shift');
     }
 
     public function ajaxAddShifts(Request $request)

@@ -19,6 +19,11 @@ class Company extends Model
         return $this->hasMany('App\Models\ShiftMasterData');
     }
 
+    public function companyUser()
+    {
+        return $this->hasMany('App\Models\CompanyUser');
+    }
+
 }
 
 

@@ -10,4 +10,14 @@ class CompanyUser extends Model
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function company()
+    {
+        return $this->belongsToMany('App\Models\Company');
+    }
+
+    public function userGroup()
+    {
+        return $this->belongsTo('App\Models\UserGroup');
+    }
 }

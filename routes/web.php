@@ -64,6 +64,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/users/add', 'CompanyUserController@storeUser')->name('company.users.store');
         Route::get('/users/edit/{id}', 'CompanyUserController@editUser')->name('company.users.edit');
         Route::put('/users/{id}', 'CompanyUserController@updateUser')->name('company.users.update');
+
+        Route::get('/group', 'UserGroupController@index')->name('user_group');
+        Route::post('group/add', 'UserGroupController@addGroup')->name('group.add');
+        Route::post('group/rename', 'UserGroupController@renameGroup')->name('group.rename');
     });
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
