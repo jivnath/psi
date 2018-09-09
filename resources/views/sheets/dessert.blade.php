@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -27,7 +28,7 @@
             </div>
         </div>
         <div class='col-md-12'>
-        <div id='dessert_response' style="width: 100%;overflow: scroll;position: absolute;"></div>
+        <div id='dessert_response' class='fixed_header' style="width: 100%;overflow: scroll;position: absolute;"></div>
         </div>
     </div>
     </section>
@@ -52,6 +53,8 @@
             	   $('#dessert_response').html('');
                    	if(status=='success'){
                     	$('#dessert_response').html(data);
+                    	window.location.href="<?= url()->full(); ?>"+'#dessert_response';
+
                    	}
                }
            });
