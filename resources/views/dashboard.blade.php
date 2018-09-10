@@ -257,6 +257,13 @@ $('.viber_messessing').on('click',function(e){
 	}
 	$('.profile-username').html(last_click.find("td:eq(1)").text());
 });
+$('.send_it_now').on('click',function(){
+	var comments=$('#comment').val();
+	var psis_no=last_click.find("td:eq(0)").text();
+	console.log(psis_no);
+	console.log(comments);
+	$('#comment').val('');
+});
 </script>
 
 @endpush

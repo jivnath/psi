@@ -119,7 +119,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/viber/alert/setting', function() {
         return view('viber.alert_setting');
         });
-
+    Route::prefix('viber')->group(function () {
+        Route::post('/viber_it', 'ViberMessageController@store_message')->name('viber.send');
+    });
 
 });
 Route::any('viber_bot','ViberBitIntegration@handleViberRequest')->name('viber_bot');

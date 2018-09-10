@@ -39,7 +39,7 @@
 									<label for="comment">Comment:</label>
 									<textarea class="form-control" rows="5" id="comment"></textarea>
 								</div>
-								<button type="submit" class="btn btn-primary">
+								<button type="submit" class="btn btn-primary send_it_now">
 									Viber It Now! <i class="fa fa-send"></i>
 								</button>
 								<button type="submit" class="btn btn-warning">
