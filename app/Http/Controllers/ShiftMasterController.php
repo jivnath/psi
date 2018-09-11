@@ -58,6 +58,8 @@ class ShiftMasterController extends Controller
 	    $shifts = array_combine($start_shifts, $end_shifts);
 	    foreach ($shifts as $key=>$value)
         {
+            $this->validate($request, $this->rules());
+
             $newshift = new ShiftMasterData();
 
             $newshift->company_id = $request->company_name;
@@ -83,7 +85,6 @@ class ShiftMasterController extends Controller
 	{
 		$shift = ShiftMasterData::find($id);
 
-		$shift->shift_name = $request->input('shiftName');
 		$shift->start_time = $request->input('startTime');
 		$shift->end_time = $request->input('endTime');
 
@@ -96,5 +97,14 @@ class ShiftMasterController extends Controller
     {
         $company = Company::find($id);
         return $company->name;
+    }
+
+    protected function rules()
+    {
+        return [
+            'company_id' => 'bail|required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ];
     }
 }

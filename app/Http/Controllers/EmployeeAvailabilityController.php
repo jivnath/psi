@@ -27,7 +27,9 @@ class EmployeeAvailabilityController extends Controller
 
    public function store(Request $request)
    {
-   	$availability = new EmployeeAvailability;
+       $this->validate($request, $this->rules());
+
+       $availability = new EmployeeAvailability;
 
    	$availability->psi_number = $request->psi_num;
    	$availability->sunday = $request->sunday;
@@ -55,7 +57,9 @@ class EmployeeAvailabilityController extends Controller
 
    public function update(Request $request, $id)
    {
-   		$availability = EmployeeAvailability::find($id);
+       $this->validate($request, $this->rules());
+
+       $availability = EmployeeAvailability::find($id);
 
 	   	// $availability->company_id = $request->input('company');
 	   	$availability->sun = $request->input('sun');
@@ -83,8 +87,19 @@ class EmployeeAvailabilityController extends Controller
            $ava->$day = $time;
            $ava->save();
 
-
-
        }
+   }
+
+   protected function rules()
+   {
+       return [
+           'sunday' => 'required|time',
+           'monday' => 'required|time',
+           'tuesday' => 'required|time',
+           'wednesday' => 'required|time',
+           'thursday' => 'required|time',
+           'friday' => 'required|time',
+           'saturday' => 'required|time'
+       ];
    }
 }

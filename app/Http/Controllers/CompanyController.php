@@ -30,7 +30,9 @@ class CompanyController extends Controller
 
 	public function store(Request $request)
 	{
-		$company = new Company;
+        $this->validate($request, $this->rules());
+
+        $company = new Company;
 
 		$company->name = $request->company_name;
 		$company->address= $request->address;
@@ -121,6 +123,14 @@ class CompanyController extends Controller
             $sub->save();
             return redirect()->route('company.create');
         }
+    }
+
+    protected function rules()
+    {
+        return [
+            'name' => 'bail|required|max:191',
+            'contact_num' => 'required',
+        ];
     }
 
 }

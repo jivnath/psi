@@ -19,6 +19,8 @@ class LeaderController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, $this->rules());
+
         $leader = new Leader;
 
         $leader->company_id = $request->company_name;
@@ -64,6 +66,8 @@ class LeaderController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->validate($request, $this->rules());
+
         $leader = Leader::find($id);
 
         $leader->company_id = $request->input('company_id');
@@ -71,5 +75,14 @@ class LeaderController extends Controller
         $leader->contact_num = $request->input('contact_num');
 
         $leader->save();
+    }
+
+    protected function rules()
+    {
+        return [
+            'company_id' => 'required',
+            'psi_num' => 'bail|required',
+            'contact_num'=>'nullable'
+        ];
     }
 }
