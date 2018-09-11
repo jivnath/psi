@@ -11,7 +11,7 @@ class EmployeeAvailabilityController extends Controller
 {
 	public function index($id)
 	{
-		$availability = EmployeeAvailability::find($id);
+		$availability = EmployeeAvailability::where('psi_number', $id)->first();
         $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']);
       return view('availability.index')->withAvailability($availability)->withWeekdays($weekdays);
 

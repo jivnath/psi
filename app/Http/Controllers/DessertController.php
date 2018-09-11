@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DessertSheet;
 use App\Models\Employee;
+use App\Models\ShiftMasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
@@ -15,7 +16,13 @@ class DessertController extends Controller
 
     public function dessert()
     {
-        $companies = Company::all();
+        $allcompanies = CompanyTimeTable::all('company_id');
+        $companies=[];
+            foreach($allcompanies as $comp)
+            {
+                $company = Company::find($comp->company_id);
+                array_push($companies, $company);
+            }
         return view('sheets.dessert')->withCompanies($companies);
     }
 
