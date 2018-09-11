@@ -38,6 +38,7 @@
 
 <script>
     var main_logical_data='';
+
     $(function(){
        $(".view_dessert").click(function(){
            var selected = $('#company option:selected').val();
