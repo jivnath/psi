@@ -55,9 +55,9 @@ corresponding value from the list below*/
 			<div class="modal-body">
                 <div class="row">
 
-                <div class="custom-radios center-block">
+                <div class="custom-radios" style='margin: 0 auto;'>
                   <div>
-                    <input type="radio" id="color-1" name="color" value="color-1" checked>
+                    <input type="radio" id="color-1" name="color" value="green">
                     <label for="color-1">
                       <span>
                       </span>
@@ -65,7 +65,7 @@ corresponding value from the list below*/
                   </div>
 
                   <div>
-                    <input type="radio" id="color-2" name="color" value="color-2">
+                    <input type="radio" id="color-2" name="color" value="blue">
                     <label for="color-2">
                       <span>
                       </span>
@@ -73,7 +73,7 @@ corresponding value from the list below*/
                   </div>
 
                   <div>
-                    <input type="radio" id="color-3" name="color" value="color-3">
+                    <input type="radio" id="color-3" name="color" value="yellow">
                     <label for="color-3">
                       <span>
                       </span>
@@ -121,7 +121,7 @@ corresponding value from the list below*/
                 $total_reserved=count($dessert_row['dessert_info']);
                 ?>
                 @foreach($dessert_row['dessert_info'] as $key=> $info)
-                        <tr>
+                        <tr class="{{isset($info->flag)? 'text-'.$info->flag:''}}">
                             <td class='background_global'> {{$dessert_row['date']}} </td>
                             <td class='background_global'> {{$dessert_row['time']}} </td>
                             <td class='background_global'> {{$key+1}} </td>
@@ -166,6 +166,7 @@ corresponding value from the list below*/
                              <td style='visibility: hidden;display: none;'></td>
                              <td style='visibility: hidden;display: none;'>{{$dessert_row['id']}}</td>
                              <td style='visibility: hidden;display: none;'>{{$info->id}}</td>
+                             <td style='visibility: hidden;display: none;'>{{$info->flag}}</td>
 
                         </tr>
                         @endforeach
@@ -215,6 +216,7 @@ corresponding value from the list below*/
                              <td style='visibility: hidden;display:none'></td>
                              <td style='visibility: hidden;display:none'>{{$dessert_row['id']}}</td>
                              <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
                         </tr>
                         @endfor
                         @if($dessert_row['total_require']==0)
@@ -248,6 +250,9 @@ corresponding value from the list below*/
             var type_of_field='';
             var added_generated_value='';
             var company_schedule_id='';
+            var click_flag_obj='';
+            var last_click_flag_obj='';
+            var last_click_value_flag=''
 
                 $('body').on('focus change', '[contenteditable]', function(ee) {
                     const $this = $(this);
@@ -322,11 +327,12 @@ corresponding value from the list below*/
                 });
                 $('.add_now').click(function(){
 
-
+					click_flag_obj=$(this);
                 	getCell($(this));
 					all_record=$('#all_saved_value').data();
 					$('.showFlag_header').html('<strong>Flag for '+$('#all_saved_value').data('6')+' </strong>');
 					$('.showFlag').modal('show');
+
                     return;
 					$.ajax({
                         headers: {
@@ -340,6 +346,32 @@ corresponding value from the list below*/
 
                         }
                     });
+                });
+                $('.save_flag').click(function(){
+
+                	getCell(click_flag_obj);
+					all_record=$('#all_saved_value').data();
+					click_value_flag=$('input[name="color"]:checked').val();
+					getAllValue(click_flag_obj,24,click_value_flag);
+
+					if(last_click_value_flag==''){
+						last_click_value_flag=click_value_flag;
+					}
+
+					if(last_click_flag_obj !==click_value_flag)
+					{
+						last_click_flag_obj=click_flag_obj.closest('tr');
+						last_click_flag_obj.removeClass('text-'+last_click_value_flag);
+					}
+    				else{
+    					last_click_flag_obj=click_flag_obj.closest('tr');
+    				}
+					last_click_flag_obj.addClass('text-'+click_value_flag);
+					last_click_value_flag=click_value_flag;
+					added_generated_value=$('#all_saved_value').data('23');
+                    company_schedule_id=$('#all_saved_value').data('22');
+					send_it_to_update(added_generated_value,company_schedule_id,'flag',click_value_flag);
+					$('.showFlag').modal('hide');
                 });
                 $('.confirmation').change(function(){
                 	$('#comment').val('');
