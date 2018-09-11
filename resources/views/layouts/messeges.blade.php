@@ -14,3 +14,13 @@
         </ul>
     </div>
 @endif
+
+@push('scripts')
+    <script>
+        $(function(){
+            setTimeout(function() {
+                $(".alert").hide(500);
+            }, 4000);
+        });
+    </script>
+@endpush

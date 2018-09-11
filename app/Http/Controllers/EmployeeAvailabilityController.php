@@ -17,7 +17,7 @@ class EmployeeAvailabilityController extends Controller
 
 	}
 
-   
+
    public function add()
    {
        $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']);
@@ -71,7 +71,7 @@ class EmployeeAvailabilityController extends Controller
 	   	$availability->sat = $request->input('sat');
 
 	   	$availability->save();
-	   	return redirect()->route('availability.index', $id );	
+	   	return redirect()->route('availability.index', $id );
    }
 
    public function ajaxUpdate(Request $request)
@@ -93,13 +93,13 @@ class EmployeeAvailabilityController extends Controller
    protected function rules()
    {
        return [
-           'sunday' => 'required|time',
-           'monday' => 'required|time',
-           'tuesday' => 'required|time',
-           'wednesday' => 'required|time',
-           'thursday' => 'required|time',
-           'friday' => 'required|time',
-           'saturday' => 'required|time'
+           'sunday' => 'time',
+           'monday' => 'time',
+           'tuesday' => 'time',
+           'wednesday' => 'time',
+           'thursday' => 'time',
+           'friday' => 'time',
+           'saturday' => 'time'
        ];
    }
 }

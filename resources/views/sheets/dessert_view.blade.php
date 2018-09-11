@@ -94,23 +94,23 @@ corresponding value from the list below*/
 <table class="table table-borderd">
                 <thead class="thead-dark">
                 <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>No</th>
-                <th class="border_field">Staff No.</th>
-                <th class="border_field">Country</th>
-                <th class="border_field">Name（フリガナ）</th>
-                <th class="border_field">Name（氏名）</th>
-                <th class="border_field">Tel No</th>
-                <th class="background_responsible">Responsible</th>
-                <th class="background_responsible">Conformation the day before</th>
-                <th class="background_responsible">Responsible</th>
-                <th class="background_responsible">Conform 3 hours ago</th>
-                <th>Arrival time in case of late arrival</th>
-                <th>Reason for late arrival and absence</th>
-                <th>Call Medium/Through</th>
-                <th>Comments</th>
-                <th>Action</th>
+                <th class="sticky-top">Date</th>
+                <th class="sticky-top">Time</th>
+                <th class="sticky-top">No</th>
+                <th class="border_field sticky-top">Staff No.</th>
+                <th class="border_field sticky-top">Country</th>
+                <th class="border_field sticky-top">Name（フリガナ）</th>
+                <th class="border_field sticky-top">Name（氏名）</th>
+                <th class="border_field sticky-top">Tel No</th>
+                <th class="background_responsible sticky-top">Responsible</th>
+                <th class="background_responsible sticky-top">Conformation the day before</th>
+                <th class="background_responsible sticky-top">Responsible</th>
+                <th class="background_responsible sticky-top">Conform 3 hours ago</th>
+                <th class="sticky-top">Arrival time in case of late arrival</th>
+                <th class="sticky-top">Reason for late arrival and absence</th>
+                <th class="sticky-top">Call Medium/Through</th>
+                <th class="sticky-top">Comments</th>
+                <th class="sticky-top">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -237,7 +237,7 @@ corresponding value from the list below*/
 
             <script>
             var down_to_top=window.innerHeight;
-            $('.fixed_header tbody').css('height',down_to_top/2);
+            $('#dessert_response').css('height',down_to_top/2);
             var allowed_field=[4,5,6,7];
             var main_val;
             var allowed_pop_up=['Not OK','No response'];
@@ -569,8 +569,8 @@ corresponding value from the list below*/
                 var sticky = $("thead th "),
                     scroll = $(window).scrollTop();
 
-                if (scroll > stickyOffset) sticky.addClass('sticky-top');
-                else sticky.removeClass('sticky-top');
+                // if (scroll > stickyOffset) sticky.addClass('sticky-top');
+                // else sticky.removeClass('sticky-top');
             });
 
             </script>

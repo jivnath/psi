@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class='col-md-12'>
-        <div id='dessert_response' class='fixed_header' style="width: 100%;overflow: scroll;position: absolute;"></div>
+        <div id='dessert_response' class='' style="width: 100%;overflow: scroll;position: absolute;"></div>
         </div>
     </div>
     </section>
