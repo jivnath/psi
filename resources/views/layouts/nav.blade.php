@@ -41,11 +41,20 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li> <a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
-                            <li><a class="dropdown-item" href="{{ route('employees') }}"> @lang('nav.Employee')</a></li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company</a>
+                                <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employees</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('company.create') }}">Create Company</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('employees') }}">@lang('nav.Employee')</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('employee.skill') }}"> Employee Skills</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('availability.add') }}"> Employee Availability</a></li>
+
+                                </ul>
+                            </li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Companies</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('company.create') }}">@lang('nav.Company')</a></li>
                                     <li><a class="dropdown-item" href="{{ route('shift.add') }}"> Company Shift</a></li>
 
                                 </ul>
