@@ -16,10 +16,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $dessert_obj = new DessertSheet();
         $data['dashboard'] = Raw::expiredRC();
         $data['total_ncessary_data'] = Raw::getTotalNeccessory();
         $data['recent_dessert_activity'] = Raw::getDessertActivity();
-        $dessert_report = DessertSheet::select('conformation_day_before', DB::raw('count(*) as total_count'))->groupBy('conformation_day_before')->get();
+        $dessert_report = $dessert_obj->select('conformation_day_before', DB::raw('count(*) as total_count'))
+            ->groupBy('conformation_day_before')
+            ->get();
+        $data['audits'] = $dessert_obj->find(4)->audits;
+
         $data['dessert_report'] = $this->simplify_dessert_report($dessert_report->toArray());
         $data['employee_summery'] = Raw::getConfirmedEmployees();
         $data['total_emp'] = Employee::count();

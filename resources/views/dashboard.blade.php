@@ -194,39 +194,30 @@
             </div>
             </div>
         </div>
-        {{--<div class="col-md-6">--}}
-            {{--<div class="box box-info">--}}
-                {{--<div class="box-header with-border">--}}
-                      {{--<h3 class="box-title">@lang('Activity Feed')</h3>--}}
-                    {{--</div>--}}
-                {{--<div class="box-body">--}}
-                {{--<div class="activity-feed">--}}
-                      {{--<div class="feed-item">--}}
-                        {{--<div class="date">Sep 25</div>--}}
-                        {{--<div class="text">Responded to need <a href="single-need.php">“Volunteer opportunity”</a></div>--}}
-                      {{--</div>--}}
-                      {{--<div class="feed-item">--}}
-                        {{--<div class="date">Sep 24</div>--}}
-                        {{--<div class="text">Added an interest “Volunteer Activities”</div>--}}
-                      {{--</div>--}}
-                       {{--<div class="feed-item">--}}
-                        {{--<div class="date">Sep 24</div>--}}
-                        {{--<div class="text">Added an interest “Volunteer Activities”</div>--}}
-                      {{--</div>--}}
-                       {{--<div class="feed-item">--}}
-                        {{--<div class="date">Sep 24</div>--}}
-                        {{--<div class="text">Added an interest “Volunteer Activities”</div>--}}
-                      {{--</div>--}}
-                       {{--<div class="feed-item">--}}
-                        {{--<div class="date">Sep 24</div>--}}
-                        {{--<div class="text">Added an interest “Volunteer Activities”</div>--}}
-                      {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="box-footer text-center">--}}
-             	 {{--<a href="javascript:void(0)" class="uppercase">View All</a>--}}
-            {{--</div>--}}
-            {{--</div>--}}
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                      <h3 class="box-title">@lang('Activity Feed')</h3>
+                    </div>
+                <div class="box-body">
+                <div class="activity-feed">
+					@forelse ($audits as $audit)
+                      <div class="feed-item">
+                       @lang('article.updated.metadata', $audit->getMetadata())
+                        @foreach ($audit->getModified() as $attribute => $modified)
+                        <div class="text">@lang('article.'.$audit->event.'.modified.'.$attribute, $modified)</div>
+                         @endforeach
+                      </div>
+                       @empty
+                       <p>@lang('article.unavailable_audits')</p>
+                       @endforelse
+
+                    </div>
+                </div>
+                <div class="box-footer text-center">
+             	 <a href="javascript:void(0)" class="uppercase">View All</a>
+            </div>
+            </div>
         </div>
     </div>
     </section>
