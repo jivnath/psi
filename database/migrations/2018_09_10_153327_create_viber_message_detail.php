@@ -21,7 +21,7 @@ class CreateViberMessageDetail extends Migration
             $table->string('message_state')->comment('send,draft');
             $table->string('sender_id');
             $table->string('operator');
-            $table->json('response');
+            $table->json('response')->nullable();
             $table->timestamps();
         });
     }

@@ -21,5 +21,5 @@ return [
 'expiredate'=>'Expire Date',
 'action'=>'Action',
 'tn'=>'Total Necessary',
-'rda'=>'Recent Desert Activity'
+'rssa'=>'Recent Self Sheet Activity'
 ];
