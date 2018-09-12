@@ -1,30 +1,26 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use http\Env\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
+     * |--------------------------------------------------------------------------
+     * | Login Controller
+     * |--------------------------------------------------------------------------
+     * |
+     * | This controller handles authenticating users for the application and
+     * | redirecting them to your home screen. The controller uses a trait
+     * | to conveniently provide its functionality to your applications.
+     * |
+     */
 
-    use AuthenticatesUsers
-    {
-        authenticated as protected afterAuthentication;
-        loggedOut as protected afterLogout;
-    }
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -43,16 +39,20 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function authenticated(Request $request, $user)
+    public function authenticated(Request $request)
     {
-        $request->session()->put('username', $user->name);
-//        dd(Session:all());
-        return $this->afterAuthentication();
+        if (Auth::check()) {
+            $request->session()->put('username', Auth::user()->name);
+        }
+        return redirect()->intended($this->redirectPath());
+
     }
 
-    public function loggedOut(Request $request)
+    public function logout()
     {
-        $request->session()->flush();
-        return $this->afterLogout();
+        $user = Auth::user();
+        Auth::logout();
+        Session::flush();
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 }
