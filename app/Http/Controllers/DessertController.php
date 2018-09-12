@@ -67,10 +67,11 @@ class DessertController extends Controller
         ];
         if ($request->ajax()) {
             $psi = $request->get('psi_num');
+            $dessert_id = $request->get('schedule_id');
             if ($psi != null) {
                 $employee = Employee::where('psi_number', $psi)->first();
                 if (count($employee) > 0) {
-                    if (DessertSheet::where('staff_no', $psi)->count() > 0) {
+                    if (DessertSheet::where([['staff_no', $psi],['cts_id', $dessert_id]])->count() > 0) {
                         $data = [];
                     } else {
 
