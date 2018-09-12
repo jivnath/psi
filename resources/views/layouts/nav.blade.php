@@ -40,7 +40,14 @@
                     <i class="fas fa-home"></i>  @lang('nav.MasterData') <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li> <a class="dropdown-item" href="{{ route('users.index') }}"> @lang('nav.Users')</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('nav.Users')</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{{ route('users.index') }}">User List</a></li>
+                                <li><a class="dropdown-item" href="{{ route('users.create') }}"> Create User</a></li>
+
+                            </ul>
+                        </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employees</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
