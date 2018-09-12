@@ -128,8 +128,9 @@ class CompanyController extends Controller
     protected function rules()
     {
         return [
-            'name' => 'bail|required|max:191',
+            'name' => 'bail|unique:companies|required|max:191',
             'contact_num' => 'required',
+            'address' => 'required'
         ];
     }
 
