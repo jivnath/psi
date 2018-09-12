@@ -50,7 +50,6 @@ class LoginController extends Controller
 
     public function logout()
     {
-        $user = Auth::user();
         Auth::logout();
         Session::flush();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
