@@ -9,6 +9,8 @@ use App\Models\User;
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\Company;
+use App\Models\CompanyToUser_rel;
 
 
 class UserController extends Controller
@@ -28,7 +30,8 @@ class UserController extends Controller
 	{
     //Get all roles and pass it to the view
         $roles = Role::get();
-        return view('users.create', ['roles'=>$roles]);
+        $companies = Company::where('master_id', null)->get();
+        return view('users.create', ['roles'=>$roles], ['companies'=>$companies]);
     }
 
     public function store(Request $request) {
@@ -39,18 +42,30 @@ class UserController extends Controller
             'password'=>'required|min:6|confirmed'
         ]);
 
-        $user = User::create($request->only('email', 'name', 'password')); //Retrieving only the email and password data
-
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->language = $request->language;
+        $user->save();
         $role = $request->role; //Retrieving the roles field
-    //Checking if a role was selected
-        // if (isset($roles)) {
+        $user->assignRole($role); //Assigning role to user
 
-        //     foreach ($roles as $role) {
-        //     $role_r = Role::where('id', '=', $role)->firstOrFail();            
-            $user->assignRole($role); //Assigning role to user
-        //     }
-        // }        
-    //Redirect to the users.index view and display message
+        $companies = $request['companies'];
+        if(isset($companies))
+        {
+            foreach($companies as $company)
+            {
+                $companyToUser = new CompanyToUser_rel();
+
+                $companyToUser->user_id = $user->id;
+                $companyToUser->company_id = $company;
+                $companyToUser->save();
+            }
+        }
+
+
+        //Redirect to the users.index view and display message
         return redirect()->route('users.index');
     }
 

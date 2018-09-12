@@ -78,6 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/users/create', 'UserController@store')->name('users.store');
     Route::get('/users/edit/{id}', 'UserController@editUser')->name('users.edit');
     Route::put('/users/{id}', 'UserController@updateUser')->name('users.update');
+    Route::get('/users/profile', 'UserController@userProfile')->name('users.profile');
 
 
 
