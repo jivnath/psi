@@ -90,7 +90,6 @@
                   $language = \Session::get('user_language');
                   $user_id = \Session::get('user_id');
               @endphp
-		{!! Form::open(['method' => 'POST', 'route' => 'changecompany', 'class' => 'form-inline navbar-select']) !!}
                  <li class="nav-item dropdown">
                     <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                      <i class="fas fa-sign-in-alt"></i>
@@ -100,12 +99,11 @@
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
                   @foreach($companies as $company)
                   @if($primaryCompany->name !==$company->name)
-                      <a class="dropdown-item" href="{{ route('pages.shift') }}"> {{$company->name}} </a>
+                      <a class="dropdown-item" href="#" > {{$company->name}} </a>
                   @endif
                     @endforeach
                   </div>
                 </li>
-                 {!! Form::close() !!}
 
             </ul>
     @endauth
