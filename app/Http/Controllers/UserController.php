@@ -113,4 +113,13 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+
+    public function profileUpdate(Request $request, $id)
+    {
+        $user = find($id);
+        $user->email = $request->input('email');
+        $user->language = $request->input('language');
+        $user->primary_company = $request->input('primary_company');
+        $user->save();
+    }
 }

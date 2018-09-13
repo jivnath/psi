@@ -29,6 +29,15 @@
 <div style="background: #21469b">
 	<div class="container" >
     @auth
+
+        @php
+            $username = \Session::get('username');
+            $companies = \Session::get('user_companies');
+            $primaryCompany = \Session::get('primary_company');
+            $language = \Session::get('user_language');
+            $user_id = \Session::get('user_id');
+        @endphp
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -84,16 +93,16 @@
                 </li>
                 <!-- company login as -->
                  <li class="nav-item dropdown">
-                    <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                     <i class="fas fa-sign-in-alt"></i>
- 					Logged As ABC company <span class="caret"></span>
-                    </a>
+                     <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <i class="fas fa-sign-in-alt"></i>
+                        Logged As <span id="company_name">ABC company</span> <span class="caret"></span>
+                     </a>
 
-                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
-                      <a class="dropdown-item" href="{{ route('pages.shift') }}"> Session 1 </a>
-                      <a class="dropdown-item" href="{{route('sheet.dessert')}}"> Session 2 </a>
-                      <a class="dropdown-item" href="#"> Session 3 </a>
-                  </div>
+                     <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
+                         @foreach($companies as $company)
+                             <a class="dropdown-item" href="#"> {{$company->name}} </a>
+                         @endforeach
+                     </div>
                 </li>
 
             </ul>
@@ -113,15 +122,6 @@
                 <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
             </li> -->--}}
 
-
-
-              @php
-                  $username = \Session::get('username');
-                  $companies = \Session::get('user_companies');
-                  $primaryCompany = \Session::get('primary_company');
-                  $language = \Session::get('user_language');
-                  $user_id = \Session::get('user_id');
-              @endphp
               {{--{{dd($language)}}--}}
 
                   <li class="nav-item dropdown ">
