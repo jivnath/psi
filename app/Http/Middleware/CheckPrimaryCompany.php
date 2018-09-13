@@ -16,7 +16,7 @@ class checkPrimaryCompany
      */
     public function handle($request, Closure $next)
     {
-        if (\Session::get('primary_company')->name != null)
+        if (\Session::get('primary_company')->first()->name != null)
 
             return $next($request);
         else
