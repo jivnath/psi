@@ -16,7 +16,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
-Route::post('changecompany', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
+Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
 
 
 Auth::routes();

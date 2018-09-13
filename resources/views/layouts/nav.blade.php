@@ -86,6 +86,7 @@
                 @php
                   $username = \Session::get('username');
                   $companies = \Session::get('user_companies');
+
                   $primaryCompany = \Session::get('primary_company');
                   $language = \Session::get('user_language');
                   $user_id = \Session::get('user_id');
@@ -93,13 +94,13 @@
                  <li class="nav-item dropdown">
                     <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                      <i class="fas fa-sign-in-alt"></i>
- 					Logged As {{$primaryCompany->name}} <span class="caret"></span>
+ 					Logged As {{isset($primaryCompany->name)?$primaryCompany->name:'primary not set'}} <span class="caret"></span>
                     </a>
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
                   @foreach($companies as $company)
-                  @if($primaryCompany->name !==$company->name)
-                      <a class="dropdown-item" href="{{route('changecompany',['change_to'=>$company->id])}}" > {{$company->name}} </a>
+                  @if(isset($primaryCompany->name) && $primaryCompany->name !==$company->name)
+                      <a class="dropdown-item" href="{{route('changecompany',['change_to'=>$company->id,'name'=>$company->name])}}" > {{$company->name}} </a>
                   @endif
                     @endforeach
                   </div>

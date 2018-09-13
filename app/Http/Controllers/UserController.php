@@ -84,7 +84,7 @@ class UserController extends Controller
 		// $user->assignRole($request->input('role'));
 		// $user->save();
 		// return redirect()->route('users.index');
-	
+
         $user = User::findOrFail($id); //Get role specified by id
 
         // $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
@@ -93,9 +93,9 @@ class UserController extends Controller
         $user->roles()->detach();
         $user->assignRole($role);
 
-        // if (isset($roles)) {        
-        //     $user->roles()->sync($roles);  //If one or more role is selected associate user to roles          
-        // }        
+        // if (isset($roles)) {
+        //     $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
+        // }
         // else {
         //     $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
         // }
@@ -107,9 +107,9 @@ class UserController extends Controller
         return view('users.profile');
     }
 
-    public function changeCompany(Request $request)
+    public function changeCompany($id,$name)
     {
-        \Session::put('primary_company', $request->companies);
+        \Session::put('primary_company',Company::find($id));
 
         return redirect()->back();
     }

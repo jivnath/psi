@@ -17,7 +17,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
         $dessert_obj = new DessertSheet();
         $data['dashboard'] = Raw::expiredRC();
         $data['total_ncessary_data'] = Raw::getTotalNeccessory();
