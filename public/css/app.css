@@ -10662,3 +10662,9 @@ table.floatThead-table {
   text-align: left;
   width: 200px;
 }
+.company_default_select{
+    color: #f29c26;
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #f29c26;
+}

@@ -82,6 +82,19 @@
                       <a class="dropdown-item" href="#"> Attendance Management </a>
                   </div>
                 </li>
+                <!-- company login as -->
+                 <li class="nav-item dropdown">
+                    <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                     <i class="fas fa-sign-in-alt"></i>
+ 					Logged As ABC company <span class="caret"></span>
+                    </a>
+
+                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
+                      <a class="dropdown-item" href="{{ route('pages.shift') }}"> Session 1 </a>
+                      <a class="dropdown-item" href="{{route('sheet.dessert')}}"> Session 2 </a>
+                      <a class="dropdown-item" href="#"> Session 3 </a>
+                  </div>
+                </li>
 
             </ul>
     @endauth

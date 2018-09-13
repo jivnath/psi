@@ -200,19 +200,23 @@
                       <h3 class="box-title">@lang('Activity Feed')</h3>
                     </div>
                 <div class="box-body">
-                <div class="activity-feed">
-					@forelse ($audits as $audit)
-                      <div class="feed-item">
-                       @lang('article.updated.metadata', $audit->getMetadata())
-                        @foreach ($audit->getModified() as $attribute => $modified)
-                        <div class="text">@lang('article.'.$audit->event.'.modified.'.$attribute, $modified)</div>
-                         @endforeach
-                      </div>
-                       @empty
-                       <p>@lang('article.unavailable_audits')</p>
-                       @endforelse
+                <ul>
+                @forelse ($audits as $audit)
+                <li>
+                    @lang('article.updated.metadata', $audit->getMetadata())
 
-                    </div>
+                    @foreach ($audit->getModified() as $attribute => $modified)
+                    <ul>
+                        <li>@lang($attribute, $modified)
+                        @lang('article.'.$audit->event.'.modified.content',$modified)</li>
+                    </ul>
+                    @endforeach
+                </li>
+                @empty
+                <p>@lang('article.unavailable_audits')</p>
+                @endforelse
+            </ul>
+                <div class="activity-feed" />
                 </div>
                 <div class="box-footer text-center">
              	 <a href="javascript:void(0)" class="uppercase">View All</a>
