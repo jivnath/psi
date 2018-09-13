@@ -57,6 +57,7 @@ class LoginController extends Controller
             }
             $request->session()->put('user_companies', $companies);
             $request->session()->put('primary_company', $companies->first());
+            $request->session()->put('user_email', Auth::user()->email);
 
         }
         return redirect()->intended($this->redirectPath());
