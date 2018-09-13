@@ -16,6 +16,8 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
+Route::post('changecompany', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
+
 
 Auth::routes();
 
@@ -78,7 +80,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/users/create', 'UserController@store')->name('users.store');
     Route::get('/users/edit/{id}', 'UserController@editUser')->name('users.edit');
     Route::put('/users/{id}', 'UserController@updateUser')->name('users.update');
-    Route::get('/users/profile', 'UserController@userProfile')->name('users.profile');
+    Route::get('/users/profile', 'UserController@profile')->name('profile');
 
 
 

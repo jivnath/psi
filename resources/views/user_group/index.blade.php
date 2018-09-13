@@ -112,7 +112,7 @@
                 $("#group_name").removeAttr("value");
                 $("#group_name").val('');
             });
-            $(".rename").click(function () {
+            $(document).on("click", ".rename", function() {
                 var id = $(this).attr("id");
                 var name = $(this).attr("name");
                 $("#add_form").show();

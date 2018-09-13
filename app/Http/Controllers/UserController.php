@@ -101,5 +101,16 @@ class UserController extends Controller
         // }
         return redirect()->route('users.index');
 	}
-    //
+
+    public function profile()
+    {
+        return view('users.profile');
+    }
+
+    public function changeCompany(Request $request)
+    {
+        \Session::put('primary_company', $request->companies);
+
+        return redirect()->back();
+    }
 }

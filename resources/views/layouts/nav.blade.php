@@ -100,29 +100,61 @@
                 <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
             </li> -->--}}
 
-                <li class="nav-item dropdown">
-                    <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                     <i class="fas fa-cog"></i> @lang('nav.Setting') <span class="caret"></span>
-                    </a>
 
-                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="setting">
-                      <a class="dropdown-item" href="#">
-                        Alert Management
+
+              @php
+                  $username = \Session::get('username');
+                  $companies = \Session::get('user_companies');
+                  $primaryCompany = \Session::get('primary_company');
+                  $language = \Session::get('user_language');
+                  $user_id = \Session::get('user_id');
+              @endphp
+              {{--{{dd($language)}}--}}
+
+                  <li class="nav-item dropdown ">
+                      {!! Form::open(['method' => 'POST', 'route' => 'changecompany', 'class' => 'form-inline navbar-select']) !!}
+                      <div class="form-group @if($errors->first('companies')) has-error @endif">
+                          <span aria-hidden="true"></span>
+                          <select name="companies" id="companies" class="form-control" onchange="this.form.submit()">
+                              @foreach($companies as $company)
+                                  <option value="{{$company->id}}" <?=($primaryCompany==$company->id)?'selected="selected"':''?>>{{$company->name}}</option>
+                              @endforeach
+                          </select>
+
+                          <a id="change_companies" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              {{ $errors->first('companies') }}
+                          </a>
+                      </div>
+
+                      <div class="btn-group pull-right sr-only">
+                          {!! Form::submit("Change", ['class' => 'btn btn-success']) !!}
+                      </div>
+                      {!! Form::close() !!}
+                  </li>
+
+                  <li class="nav-item dropdown">
+                      <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                          <i class="fas fa-cog"></i> @lang('nav.Setting') <span class="caret"></span>
                       </a>
-                  </div>
-                </li>
+
+                      <div class="dropdown-menu dropdown-menu-left" aria-labelledby="setting">
+                          <a class="dropdown-item" href="#">
+                              Alert Management
+                          </a>
+                      </div>
+                  </li>
 
             <li class="nav-item dropdown">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     <i class="fas fa-user"></i>
-                    @php
-                        $username = \Session::get('username');
-                    @endphp
 
-                    {{ Auth::user()->name }} <span class="caret"></span>
+
+                    {{( $username )}} <span class="caret"></span>
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{route('profile', $user_id)}}">Profile</a>
+
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
@@ -132,8 +164,6 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-
-                    <a class="dropdown-item" href="{{route('users.profile')}}">Profile</a>
                 </div>
               </li>
               <li class="nav-item dropdown dropdown-menu-left">

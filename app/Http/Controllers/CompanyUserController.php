@@ -67,7 +67,7 @@ class CompanyUserController extends Controller
             'name' => 'required|max:191',
             'email' => 'required|email|max:191',
             'language' => 'required'
-            ]);
+        ]);
 
         $companyUser = CompanyUser::find($id);
 

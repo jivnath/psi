@@ -2,10 +2,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Models\CompanyToUser_rel;
 
 class LoginController extends Controller
 {
@@ -43,6 +45,19 @@ class LoginController extends Controller
     {
         if (Auth::check()) {
             $request->session()->put('username', Auth::user()->name);
+            $request->session()->put('user_id', Auth::user()->id);
+            $request->session()->put('user_language', Auth::user()->language);
+
+            $companiesOfUsers = CompanyToUser_rel::where('user_id', Auth::user()->id)->get();
+            $companies = [];
+            foreach($companiesOfUsers as $userCompany)
+            {
+                $company = Company::find($userCompany->company_id);
+                array_push($companies, $company);
+            }
+            $request->session()->put('user_companies', $companies);
+            $request->session()->put('primary_company', $companies->first());
+
         }
         return redirect()->intended($this->redirectPath());
 
