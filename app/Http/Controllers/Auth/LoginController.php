@@ -57,7 +57,8 @@ class LoginController extends Controller
             }
 
             $request->session()->put('user_companies', $companies);
-            $request->session()->put('primary_company',collect($companies)->first());
+            $primaryCompany = Company::find(Auth::user()->primary_company);
+            $request->session()->put('primary_company', $primaryCompany);
             $request->session()->put('user_email', Auth::user()->email);
 
         }

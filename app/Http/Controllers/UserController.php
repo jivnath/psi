@@ -114,12 +114,22 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    public function profileUpdate(Request $request, $id)
+    public function updateProfile(Request $request, $id)
     {
-        $user = find($id);
+
+        $user = User::find($id);
+        $this->validate($request, [
+            'email'=>'required|email|unique:users'
+        ]);
+
         $user->email = $request->input('email');
+        \Session::put('user_email',$request->input('email'));
         $user->language = $request->input('language');
+        \Session::put('user_language',$request->input('language'));
         $user->primary_company = $request->input('primary_company');
+
         $user->save();
+
+        return redirect()->route('profile');
     }
 }

@@ -94,7 +94,7 @@
                                         <li class="nav-item dropdown">
                                             <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                                 <i class="fas fa-sign-in-alt"></i>
-                                                Logged As {{isset($primaryCompany->name)?$primaryCompany->name:'primary not set'}} <span class="caret"></span>
+                                                {{isset($primaryCompany->name)?'Logged As '.$primaryCompany->name:'Primary Company not set'}} <span class="caret"></span>
                                             </a>
 
                                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
@@ -104,6 +104,7 @@
                                                     @endif
                                                 @endforeach
                                             </div>
+                                            {{--{{dd($primaryCompany)}}--}}
                                         </li>
 
                                     </ul>

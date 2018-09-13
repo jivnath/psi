@@ -11,8 +11,6 @@
         $language = \Session::get('user_language');
         $user_id = \Session::get('user_id');
         $userEmail = \Session::get('user_email');
-    echo Auth::user()->email;
-    echo $userEmail;
     @endphp
 
     <div class="row">
@@ -21,8 +19,6 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
-
                     <h3 class="profile-username text-center">{{$username}}</h3>
 
                     <p class="text-muted text-center">{{ Auth::user()->roles()->pluck('name')->implode('')}}</p>
@@ -50,24 +46,6 @@
                     <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
                     <p class="text-muted">Malibu, California</p>
-
-                    <hr>
-
-                    <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-                    <p>
-                        <span class="label label-danger">UI Design</span>
-                        <span class="label label-success">Coding</span>
-                        <span class="label label-info">Javascript</span>
-                        <span class="label label-warning">PHP</span>
-                        <span class="label label-primary">Node.js</span>
-                    </p>
-
-                    <hr>
-
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -86,13 +64,15 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="settings">
-                        <form class="form-horizontal">
+                        <form action="{{route('updateProfile', $user_id)}}" method="POST" class="form-horizontal">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" value="{{$userEmail}}">
+                                    <input type="email" name="email" class="form-control" id="inputEmail" value="{{$userEmail}}">
                                 </div>
                             </div>
 
@@ -101,8 +81,9 @@
 
                                 <div class="col-sm-10">
                                     <select name="primary_company" class="form-control">
-                                        {{--@foreach($companies as $company)--}}
-                                        {{--@endforeach--}}
+                                        @foreach($companies as $company)
+                                            <option value="{{$company->id}}"<?=(Auth::user()->primary_company==$company->id)?'selected="selected"':''?>>{{$company->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
