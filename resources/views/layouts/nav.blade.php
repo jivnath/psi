@@ -92,7 +92,16 @@
                   </div>
                 </li>
                 <!-- company login as -->
+                @php
+                  $username = \Session::get('username');
+                  $companies = \Session::get('user_companies');
+
+                  $primaryCompany = \Session::get('primary_company');
+                  $language = \Session::get('user_language');
+                  $user_id = \Session::get('user_id');
+              @endphp
                  <li class="nav-item dropdown">
+<<<<<<< HEAD
                      <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                         <i class="fas fa-sign-in-alt"></i>
                         Logged As <span id="company_name">ABC company</span> <span class="caret"></span>
@@ -103,6 +112,20 @@
                              <a class="dropdown-item" href="#"> {{$company->name}} </a>
                          @endforeach
                      </div>
+=======
+                    <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                     <i class="fas fa-sign-in-alt"></i>
+ 					Logged As {{isset($primaryCompany->name)?$primaryCompany->name:'primary not set'}} <span class="caret"></span>
+                    </a>
+
+                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
+                  @foreach($companies as $company)
+                  @if(isset($primaryCompany->name) && $primaryCompany->name !==$company->name)
+                      <a class="dropdown-item" href="{{route('changecompany',['change_to'=>$company->id,'name'=>$company->name])}}" > {{$company->name}} </a>
+                  @endif
+                    @endforeach
+                  </div>
+>>>>>>> bf5fc9f42d6258b049aafda013d856f1d432802c
                 </li>
 
             </ul>
@@ -122,6 +145,7 @@
                 <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
             </li> -->--}}
 
+<<<<<<< HEAD
               {{--{{dd($language)}}--}}
 
                   <li class="nav-item dropdown ">
@@ -144,6 +168,8 @@
                       </div>
                       {!! Form::close() !!}
                   </li>
+=======
+>>>>>>> bf5fc9f42d6258b049aafda013d856f1d432802c
 
                   <li class="nav-item dropdown">
                       <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
