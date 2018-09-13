@@ -193,7 +193,6 @@
     </div>
 	</div>
 </nav>
-
               <script type="text/javascript">
                   $(document).ready(function(){
                       $('.dropdown-menu a.test').on("click", function(e){
