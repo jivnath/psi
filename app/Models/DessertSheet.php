@@ -12,6 +12,10 @@ class DessertSheet extends Model implements Auditable
 
     protected $table = 'psi_dessert_entry';
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
     public function cts()
     {
         $this->belongsTo('App\Models\CompanyTimeSchedule', 'cts_id');

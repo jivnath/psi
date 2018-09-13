@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use OwenIt\Auditing\Contracts\Auditable;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements Auditable
 {
+    use \OwenIt\Auditing\Auditable;
     use Notifiable;
     use HasRoles;
 
@@ -28,10 +30,10 @@ class User extends Authenticatable
 
     //encrypting all password field
     public function setPasswordAttribute($password)
-        {   
+        {
             $this->attributes['password'] = bcrypt($password);
         }
-    
+
 
     /**
      * The attributes that should be hidden for arrays.
