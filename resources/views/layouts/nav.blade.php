@@ -83,18 +83,29 @@
                   </div>
                 </li>
                 <!-- company login as -->
+                @php
+                  $username = \Session::get('username');
+                  $companies = \Session::get('user_companies');
+                  $primaryCompany = \Session::get('primary_company');
+                  $language = \Session::get('user_language');
+                  $user_id = \Session::get('user_id');
+              @endphp
+		{!! Form::open(['method' => 'POST', 'route' => 'changecompany', 'class' => 'form-inline navbar-select']) !!}
                  <li class="nav-item dropdown">
                     <a id="shift_management" class="nav-link dropdown-toggle company_default_select" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                      <i class="fas fa-sign-in-alt"></i>
- 					Logged As ABC company <span class="caret"></span>
+ 					Logged As {{$primaryCompany->name}} <span class="caret"></span>
                     </a>
 
                   <div class="dropdown-menu dropdown-menu-left" aria-labelledby="shift_management">
-                      <a class="dropdown-item" href="{{ route('pages.shift') }}"> Session 1 </a>
-                      <a class="dropdown-item" href="{{route('sheet.dessert')}}"> Session 2 </a>
-                      <a class="dropdown-item" href="#"> Session 3 </a>
+                  @foreach($companies as $company)
+                  @if($primaryCompany->name !==$company->name)
+                      <a class="dropdown-item" href="{{ route('pages.shift') }}"> {{$company->name}} </a>
+                  @endif
+                    @endforeach
                   </div>
                 </li>
+                 {!! Form::close() !!}
 
             </ul>
     @endauth
@@ -113,37 +124,6 @@
                 <a class="nav-link" href="{{ route('employees') }}">{{ __('Employees') }}</a>
             </li> -->--}}
 
-
-
-              @php
-                  $username = \Session::get('username');
-                  $companies = \Session::get('user_companies');
-                  $primaryCompany = \Session::get('primary_company');
-                  $language = \Session::get('user_language');
-                  $user_id = \Session::get('user_id');
-              @endphp
-              {{--{{dd($language)}}--}}
-
-                  <li class="nav-item dropdown ">
-                      {!! Form::open(['method' => 'POST', 'route' => 'changecompany', 'class' => 'form-inline navbar-select']) !!}
-                      <div class="form-group @if($errors->first('companies')) has-error @endif">
-                          <span aria-hidden="true"></span>
-                          <select name="companies" id="companies" class="form-control" onchange="this.form.submit()">
-                              @foreach($companies as $company)
-                                  <option value="{{$company->id}}" <?=($primaryCompany==$company->id)?'selected="selected"':''?>>{{$company->name}}</option>
-                              @endforeach
-                          </select>
-
-                          <a id="change_companies" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              {{ $errors->first('companies') }}
-                          </a>
-                      </div>
-
-                      <div class="btn-group pull-right sr-only">
-                          {!! Form::submit("Change", ['class' => 'btn btn-success']) !!}
-                      </div>
-                      {!! Form::close() !!}
-                  </li>
 
                   <li class="nav-item dropdown">
                       <a id="setting" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
