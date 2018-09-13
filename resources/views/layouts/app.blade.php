@@ -55,7 +55,7 @@
                 <?php
                 if ($key === ($total-1)){?>
                     <li class="breadcrumb-item active" aria-current="page">{{ $segment }}</li>
-                    <li class="breadcrumb-item pull-right">Last Update: 3:15pm</li>
+                    <li class="breadcrumb-item pull-right text-bold">({{\Session::get('primary_company')->name}})</li>
                 <?php }else{
                 ?>
                 <li class="breadcrumb-item">
