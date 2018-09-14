@@ -79,7 +79,7 @@ class UserController extends Controller
 		foreach($userCompanies as $company)
         {
             $comp = Company::find($company->company_id);
-            
+
         }
 		return view('users.edit')->withUser($user)->withRoles($roles);
 	}

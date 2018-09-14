@@ -17,10 +17,10 @@ class checkPrimaryCompany
      */
     public function handle($request, Closure $next)
     {
-//        if (\Session::get('primary_company') != null)
+        if (\Session::get('primary_company') != null)
 
             return $next($request);
-//        else
-//            return view('pages.no_primary');
+        else
+            return view('pages.no_primary');
     }
 }
