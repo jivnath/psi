@@ -73,6 +73,14 @@ class UserController extends Controller
 	{
 		$user = User::find($id);
 		$roles = Role::get();
+
+		$userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
+		$companies=[];
+		foreach($userCompanies as $company)
+        {
+            $comp = Company::find($company->company_id);
+            
+        }
 		return view('users.edit')->withUser($user)->withRoles($roles);
 	}
 

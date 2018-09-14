@@ -17,6 +17,8 @@ Route::get('/', function () {
 });
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
 Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
+Route::get('/primary', ['as'=>'selectPrimary', function() {
+    return view('pages.no_primary');}]);
 
 
 Auth::routes();
@@ -70,7 +72,6 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-        Route::get('/primary', ['as'=>'selectPrimary', 'uses'=>'UserController@selectPrimary']);
 
 
 

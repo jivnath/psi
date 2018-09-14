@@ -2,6 +2,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Closure;
 
 class checkPrimaryCompany
@@ -16,10 +17,10 @@ class checkPrimaryCompany
      */
     public function handle($request, Closure $next)
     {
-        if (\Session::get('primary_company') != null)
+//        if (\Session::get('primary_company') != null)
 
             return $next($request);
-        else
-            return view('pages.no_primary');
+//        else
+//            return view('pages.no_primary');
     }
 }
