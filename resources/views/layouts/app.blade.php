@@ -55,7 +55,9 @@
                 <?php
                 if ($key === ($total-1)){?>
                     <li class="breadcrumb-item active" aria-current="page">{{ $segment }}</li>
-                    @php$primaryCompany=\Session::get('primary_company');@endphp
+                    @php
+                    $primaryCompany=\Session::get('primary_company');
+                    @endphp
                     <li class="breadcrumb-item pull-right text-bold">({{$primaryCompany->name}})</li>
                 <?php }else{
                 ?>
