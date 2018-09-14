@@ -101,9 +101,8 @@
 
                                 <div class="col-sm-10">
                                     <select name="primary_company" class="form-control">
-                                        @foreach($companies as $company)
-                                            <option value="{{$company->id}}"<?=($primaryCompany==$company->id)?'selected="selected"':''?>>{{$company->name}}</option>
-                                        @endforeach
+                                        {{--@foreach($companies as $company)--}}
+                                        {{--@endforeach--}}
                                     </select>
                                 </div>
                             </div>
