@@ -79,9 +79,11 @@ class UserController extends Controller
 		foreach($userCompanies as $company)
         {
             $comp = Company::find($company->company_id);
-
+            array_push($companies, $comp);
         }
-		return view('users.edit')->withUser($user)->withRoles($roles);
+
+        $allCompanies = Company::where('master_id', null)->get();
+		return view('users.edit')->withUser($user)->withRoles($roles)->withCompanies($companies)->withAllCompanies($allCompanies);
 	}
 
 	public function updateUser(Request $request, $id)
