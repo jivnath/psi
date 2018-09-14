@@ -119,7 +119,7 @@ class UserController extends Controller
 
         $user = User::find($id);
         $this->validate($request, [
-            'email'=>'required|email|unique:users'
+            'email'=>'required|email'
         ]);
 
         $user->email = $request->input('email');
@@ -131,5 +131,15 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('profile');
+    }
+
+    public function selectPrimary($id)
+    {
+        $user_id = \Session::get('user_id');
+        $user = User::find($user_id);
+        $user->primary_company = $id;
+        $user->save();
+
+        return redirect()->route('dashboard');
     }
 }

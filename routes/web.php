@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('/primary', ['as'=>'selectPrimary', 'uses'=>'UserController@selectPrimary']);
 
 
 

@@ -59,6 +59,7 @@
                     $primaryCompany=\Session::get('primary_company');
                     @endphp
                     <li class="breadcrumb-item pull-right text-bold">({{$primaryCompany->name}})</li>
+
                 <?php }else{
                 ?>
                 <li class="breadcrumb-item">

@@ -20,6 +20,6 @@ class checkPrimaryCompany
 
             return $next($request);
         else
-            return redirect('/home');
+            return view('pages.no_primary');
     }
 }
