@@ -17,6 +17,9 @@ class checkPrimaryCompany
      */
     public function handle($request, Closure $next)
     {
+        if (! Auth::check()) {
+            return $next($request);
+        }
         if (\Session::get('primary_company') != null)
 
             return $next($request);
