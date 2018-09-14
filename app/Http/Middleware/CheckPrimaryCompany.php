@@ -16,13 +16,14 @@ class checkPrimaryCompany
      */
     public function handle($request, Closure $next)
     {
-        if (! Auth::check()) {
+        if(!Auth::check()){
             return $next($request);
         }
         if (\Session::get('primary_company') != null)
 
             return $next($request);
         else
-            return view('pages.no_primary');
+            return response(view('pages.no_primary'));
+
     }
 }
