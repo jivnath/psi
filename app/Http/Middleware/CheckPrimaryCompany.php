@@ -17,6 +17,8 @@ class checkPrimaryCompany
      */
     public function handle($request, Closure $next)
     {
+
+//        dd(\Session::all());
         if(!Auth::check()){
             return $next($request);
         }

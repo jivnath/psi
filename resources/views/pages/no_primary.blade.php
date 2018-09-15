@@ -56,7 +56,7 @@
                                         <td> {{ $company->name }} </td>
                                         <td> No </td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary" href="{{route('selectPrimary', $company->id)}}">Manage</button>
+                                            <a class="btn btn-sm btn-primary" href="{{route('selectPrimary', $company->id)}}">Manage</a>
                                         </td>
                                     </tr>
                                 @endforeach

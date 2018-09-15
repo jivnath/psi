@@ -27,11 +27,20 @@
                 <option value="{{$role['name']}}" <?=($user->roles()->pluck('name')->first()==$role['name'])? 'selected="selected"':''?>> {{$role['name']}} </option>
             @endforeach
         </select>
-        @foreach ($allCompanies as $comp)
-            {{ Form::checkbox('companies[]',  $role->id, $user->roles ) }}
-            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+        <div class="form-group">
+            <label for="companies">Companies</label><br>{{dd($comp_id)}}
 
-        @endforeach<br>
+            @foreach($allCompanies->chunk(3) as $chunk)
+                <div class="row">
+                    @foreach($chunk as $comp)
+                        <div class="col-md-4">
+                            <input type="checkbox" name="comapnies[]" value="{{$comp->id}}"<?=(in_array($comp->id, $comp_id))?'checked':''?>>
+                            {{Form::label($comp->name, $comp->name)}}
+                        </div>
+                    @endforeach
+                </div>
+            @endforeach
+        </div>
     </div>
 
     {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}

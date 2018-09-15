@@ -76,39 +76,42 @@ class UserController extends Controller
 
 		$userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
 		$companies=[];
+		$comp_id=[];
 		foreach($userCompanies as $company)
         {
             $comp = Company::find($company->company_id);
             array_push($companies, $comp);
+            array_push($comp_id, $comp->id);
         }
 
         $allCompanies = Company::where('master_id', null)->get();
-		return view('users.edit')->withUser($user)->withRoles($roles)->withCompanies($companies)->withAllCompanies($allCompanies);
+
+		return view('users.edit')->withUser($user)->withRoles($roles)->withCompanies($companies)->withAllCompanies($allCompanies)->withComp_id($comp_id);
 	}
 
 	public function updateUser(Request $request, $id)
 	{
-		// $user = User::find($id);
 
-		// $user->usertype_id = $request->input('role');
-		// $user->assignRole($request->input('role'));
-		// $user->save();
-		// return redirect()->route('users.index');
+        $user = User::findOrFail($id);
 
-        $user = User::findOrFail($id); //Get role specified by id
-
-        // $input = $request->only(['name', 'email', 'password']); //Retreive the name, email and password fields
         $role = $request->input('role'); //Retreive all roles
-        // $user->fill($input)->save();
         $user->roles()->detach();
         $user->assignRole($role);
 
-        // if (isset($roles)) {
-        //     $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
-        // }
-        // else {
-        //     $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
-        // }
+        $userCompanies = CompanyToUser_rel::where('user_id', $id);
+        foreach ($userCompanies as $userCompany)
+            $userCompany->delete();
+
+        $companies = $request->input('companies');
+        foreach ($companies as $company)
+        {
+            $user_company_rel = new CompanyToUser_rel();
+            $user_company_rel->user_id = $id;
+            $user_company_rel->company_id = $company;
+            $user_company_rel->save();
+        }
+
+
         return redirect()->route('users.index');
 	}
 
@@ -143,12 +146,15 @@ class UserController extends Controller
         return redirect()->route('profile');
     }
 
-    public function selectPrimary($id)
+    public function selectPrimary(Request $request, $id)
     {
         $user_id = \Session::get('user_id');
+
         $user = User::find($user_id);
         $user->primary_company = $id;
         $user->save();
+        $primaryCompany = Company::find($id);
+        $request->session()->put('primary_company', $primaryCompany);
 
         return redirect()->route('dashboard');
     }
