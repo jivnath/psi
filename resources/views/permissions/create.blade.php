@@ -2,31 +2,36 @@
 
 @section('content')
 
-<div class='col-lg-4 col-lg-offset-4'>
+    <div class='col-md-8 offset-2'>
+        <div class="box">
+            <div class="box-header">
+                <h3> Add Permission</h3>
+                <br>
+            </div>
+            <div class="box-body">
 
-    <h1><i class='fa fa-key'></i> Add Permission</h1>
-    <br>
+                {{ Form::open(array('url' => 'permissions')) }}
 
-    {{ Form::open(array('url' => 'permissions')) }}
+                <div class="form-group">
+                    <b>{{ Form::label('name', 'Name') }}</b>
+                    {{ Form::text('name', '', array('class' => 'form-control', 'style' => 'width:80%')) }}
+                </div><br>
+                @if(!$roles->isEmpty())
+                    <b>Assign Permission to Roles</b><br>
 
-    <div class="form-group">
-        {{ Form::label('name', 'Name') }}
-        {{ Form::text('name', '', array('class' => 'form-control')) }}
-    </div><br>
-    @if(!$roles->isEmpty())
-        <h4>Assign Permission to Roles</h4>
+                    @foreach ($roles as $role)
+                        {{ Form::checkbox('roles[]',  $role->id ) }}
+                        {{ Form::label($role->name, ucfirst($role->name)) }}<br>
 
-        @foreach ($roles as $role) 
-            {{ Form::checkbox('roles[]',  $role->id ) }}
-            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+                    @endforeach
+                @endif
+                <br>
+                {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
 
-        @endforeach
-    @endif
-    <br>
-    {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
+                {{ Form::close() }}
 
-    {{ Form::close() }}
-
-</div>
+            </div>
+        </div>
+    </div>
 
 @endsection
