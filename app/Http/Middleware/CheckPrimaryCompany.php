@@ -25,8 +25,9 @@ class checkPrimaryCompany
         if (\Session::get('primary_company') != null)
 
             return $next($request);
-        else
-            return response(view('pages.no_primary'));
-
+        else {
+//            return response(view('pages.no_primary'));
+            return redirect()->route('primary');
+        }
     }
 }

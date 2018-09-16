@@ -70,24 +70,28 @@ class UserController extends Controller
     }
 
 	public function editUser($id)
-	{
-		$user = User::find($id);
-		$roles = Role::get();
+    {
+        $user = User::find($id);
+        $roles = Role::get();
 
-		$userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
-		$companies=[];
-		$comp_id=[];
-		foreach($userCompanies as $company)
-        {
+        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
+        $companies = [];
+        $compid = [];
+        foreach ($userCompanies as $company) {
             $comp = Company::find($company->company_id);
             array_push($companies, $comp);
-            array_push($comp_id, $comp->id);
+            array_push($compid, $comp->id);
         }
+
 
         $allCompanies = Company::where('master_id', null)->get();
 
-		return view('users.edit')->withUser($user)->withRoles($roles)->withCompanies($companies)->withAllCompanies($allCompanies)->withComp_id($comp_id);
-	}
+        return view('users.edit')->withUser($user)
+            ->withRoles($roles)
+            ->withCompanies($companies)
+            ->withAllCompanies($allCompanies)
+            ->withCompid($compid);
+    }
 
 	public function updateUser(Request $request, $id)
 	{
@@ -98,11 +102,16 @@ class UserController extends Controller
         $user->roles()->detach();
         $user->assignRole($role);
 
-        $userCompanies = CompanyToUser_rel::where('user_id', $id);
+        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
         foreach ($userCompanies as $userCompany)
+        {
             $userCompany->delete();
 
+
+        }
+
         $companies = $request->input('companies');
+
         foreach ($companies as $company)
         {
             $user_company_rel = new CompanyToUser_rel();
@@ -157,5 +166,10 @@ class UserController extends Controller
         $request->session()->put('primary_company', $primaryCompany);
 
         return redirect()->route('dashboard');
+    }
+
+    public function primary()
+    {
+        return view('pages.no_primary');
     }
 }

@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
 Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
 Route::get('/primary/{id}', ['as'=>'selectPrimary', 'uses'=>'UserController@selectPrimary']);
+Route::get('/select/primary', 'UserController@primary')->name('primary');
 
 
 Auth::routes();

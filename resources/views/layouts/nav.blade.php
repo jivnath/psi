@@ -147,6 +147,7 @@
 
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item" href="{{route('profile', $user_id)}}">Profile</a>
+                                                    <a class="dropdown-item" href="#" id="logout">Logout</a>
 
                                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                                        onclick="event.preventDefault();
@@ -221,5 +222,21 @@
 
                     $("#logo_small").click(function () {
                         location.href = "{{route('dashboard')}}";
+                    });
+
+
+                    $("#logout").click(function(){
+                        swal({
+                                title: "Are you sure?",
+                                text: "Your will not be able to recover this imaginary file!",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonClass: "btn-warning",
+                                confirmButtonText: "Yes, delete it!",
+                                closeOnConfirm: false
+                            },
+                            function(){
+                                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                            });
                     });
                 </script>
