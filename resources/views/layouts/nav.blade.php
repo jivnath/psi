@@ -148,16 +148,6 @@
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item" href="{{route('profile', $user_id)}}">Profile</a>
                                                     <a class="dropdown-item" href="#" id="logout">Logout</a>
-
-                                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                                       onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                                        {{ __('Logout') }}
-                                                    </a>
-
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                    </form>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown dropdown-menu-left">
@@ -227,8 +217,8 @@
 
                     $("#logout").click(function(){
                         swal({
-                            title: "Are you sure?",
-                            text: "Your will not be able to recover this imaginary file!",
+                            title: "Logout?",
+                            text: "Are you sure to logout?",
                             type: "warning",
                             buttons:true,
                             showCancelButton: true,
@@ -238,10 +228,17 @@
                         })
                             .then((willDelete) => {
                                 if (willDelete) {
-                                    window.location = "{{route('logout')}}";
+                                    $.ajax({
+                                        type:'POST',
+                                        data:{"_token": "{{ csrf_token() }}"},
+                                        url:"{{route('logout')}}",
+                                        success:function(data){
+                                            window.location.replace("{{route('login')}}");
+                                        }
+                                    });
                                     }
                                 else {
-                                    swal("Your imaginary file is safe!");
+
                                 }
                             });
                     });
