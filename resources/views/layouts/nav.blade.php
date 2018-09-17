@@ -227,16 +227,22 @@
 
                     $("#logout").click(function(){
                         swal({
-                                title: "Are you sure?",
-                                text: "Your will not be able to recover this imaginary file!",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonClass: "btn-warning",
-                                confirmButtonText: "Yes, delete it!",
-                                closeOnConfirm: false
-                            },
-                            function(){
-                                swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                            title: "Are you sure?",
+                            text: "Your will not be able to recover this imaginary file!",
+                            type: "warning",
+                            buttons:true,
+                            showCancelButton: true,
+                            confirmButtonClass: "btn-warning",
+                            confirmButtonText: "Yes, delete it!",
+                            closeOnConfirm: false
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    window.location = "{{route('logout')}}";
+                                    }
+                                else {
+                                    swal("Your imaginary file is safe!");
+                                }
                             });
                     });
                 </script>

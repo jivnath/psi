@@ -1,4 +1,4 @@
-@extends('layouts.app)
+@extends('layouts.app')
 @section('content')
     @php
         $companies = \Session::get('user_companies');
