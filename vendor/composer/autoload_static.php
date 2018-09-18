@@ -405,6 +405,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
     );
 
     public static $classMap = array (
+        'App\\CompanyToEmployee_rel' => __DIR__ . '/../..' . '/app/CompanyToEmployee_rel.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/AjaxController.php',

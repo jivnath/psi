@@ -71,17 +71,13 @@
     });
 
     var stickyOffset = $('.sticky').offset().top;
-    // var stickyLeftOffset = $('.sticky').offset().left;
 
     $(window).scroll(function(){
         var sticky = $('.sticky'),
             scroll = $(window).scrollTop();
-            // scrollLeft = $(window).scrollLeft();
 
         if (scroll > stickyOffset) sticky.addClass('sticky-top');
         else sticky.removeClass('sticky-top');
-    //     if (scrollLeft >= stickyLeftOffset) sticky.addClass('sticky-left');
-    //     else sticky.removeClass('stickey-left');
     });
     </script>
 @endpush

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use \PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 use App\Models\Employee;
+use App\Models\CompanyToEmployee_rel;
 
 class ExcelReader extends FormRequest
 {
@@ -80,6 +81,10 @@ class ExcelReader extends FormRequest
                     }
                     $this->setColumnData($columns, $value, $row - 1, $col - 1, $highestColumnIndex);
                 }
+                $companyToEmployee = new CompanyToEmployee_rel();
+                $companyToEmployee->company_id = $this->company_id;
+                $companyToEmployee->psi_number = $worksheet->getCellByColumnAndRow(1, $row);
+                $companyToEmployee->save();
             }
         }
 
@@ -92,9 +97,14 @@ class ExcelReader extends FormRequest
      */
     public function store()
     {
-        //dd($this->data);
+        dd($this->data);
         try {
+            $employee = Employee::firstOrNew([
+                'psi_number' => $this->data[i]['psi_number']
+            ]);
+
             Employee::inserts($this->data);
+
         } catch (\Exception $e) {
             // print_r($e->getMessage());
            // die;
