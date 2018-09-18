@@ -33,7 +33,7 @@ class EmployeeController extends Controller
     {
         $excelReader->uploadSheet()
                     ->iterateSheet()
-                    ->store();
+                    ->checkDuplicate();
 
         return redirect()->route('employees', ['companyId' => $excelReader->company_id]);
     }

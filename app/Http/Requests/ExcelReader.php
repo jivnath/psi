@@ -81,14 +81,64 @@ class ExcelReader extends FormRequest
                     }
                     $this->setColumnData($columns, $value, $row - 1, $col - 1, $highestColumnIndex);
                 }
-                $companyToEmployee = new CompanyToEmployee_rel();
-                $companyToEmployee->company_id = $this->company_id;
-                $companyToEmployee->psi_number = $worksheet->getCellByColumnAndRow(1, $row);
-                $companyToEmployee->save();
+//                $companyToEmployee = new CompanyToEmployee_rel();
+//                $companyToEmployee->company_id = $this->company_id;
+//                $companyToEmployee->psi_number = $worksheet->getCellByColumnAndRow(1, $row);
+//                $companyToEmployee->save();
             }
         }
 
         return $this;
+    }
+
+    /**
+     * Check if the  Employee data already exists
+     *
+     * @returns array
+     */
+    public function checkDuplicate()
+    {
+        $checkDuplicates = [];
+        $yes = [];
+        $no = [];
+//        dd($this->data);
+        for($i = 1; $i <= count($this->data); $i++)
+        {
+            $employee = Employee::firstOrNew([
+                'psi_number' => $this->data[$i]['psi_number']
+            ]);
+            if ($employee->exists) {
+
+            } else {
+                array_push($no, $this->data[$i]);
+            }
+
+            $companyToEmployee = CompanyToEmployee_rel::firstOrNew([
+                'psi_number' => $this->data[$i]['psi_number'],
+                'company_id' => $this->company_id
+            ]);
+            if ($companyToEmployee->exists)
+            {
+                break;
+            }
+            else
+            {
+                $companyToEmployee_rel = ['psi_number' => $this->data[$i]['psi_number'], 'company_id' => $this->company_id];
+
+                array_push($yes, $companyToEmployee_rel);
+            }
+        }
+        $checkDuplicates['yes'] = $yes;
+        $checkDuplicates['no'] = $no;
+//        dd($checkDuplicates['yes']);
+        try {
+            Employee::inserts($checkDuplicates['no']);
+            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
+
+        } catch (\Exception $e) {
+            // print_r($e->getMessage());
+           // die;
+        }
     }
 
     /**
@@ -97,18 +147,14 @@ class ExcelReader extends FormRequest
      */
     public function store()
     {
-        dd($this->data);
-        try {
-            $employee = Employee::firstOrNew([
-                'psi_number' => $this->data[i]['psi_number']
-            ]);
-
-            Employee::inserts($this->data);
-
-        } catch (\Exception $e) {
-            // print_r($e->getMessage());
-           // die;
-        }
+        dd($checkDuplicates['no']);
+//        try {
+//            Employee::inserts($this->data['no']);
+//
+//        } catch (\Exception $e) {
+//            // print_r($e->getMessage());
+//           // die;
+//        }
     }
 
     /**
