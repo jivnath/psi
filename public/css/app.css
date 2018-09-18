@@ -10668,3 +10668,21 @@ table.floatThead-table {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #f29c26;
 }
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
