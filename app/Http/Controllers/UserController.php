@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompanyToEmployee_rel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserType;
@@ -157,13 +158,28 @@ class UserController extends Controller
 
     public function selectPrimary(Request $request, $id)
     {
+
         $user_id = \Session::get('user_id');
 
         $user = User::find($user_id);
-        $user->primary_company = $id;
-        $user->save();
-        $primaryCompany = Company::find($id);
-        $request->session()->put('primary_company', $primaryCompany);
+        $company = CompanyToUser_rel::where('user_id', $user_id)->get();
+        $companies = [];
+        foreach($company as $comp)
+        {
+            array_push($companies, $comp->company_id);
+        }
+
+//        dd($companies);
+        if(in_array($id, $companies))
+        {
+            $user->primary_company = $id;
+            $user->save();
+            $primaryCompany = Company::find($id);
+            $request->session()->put('primary_company', $primaryCompany);
+        }
+        else{
+            return redirect()->back();
+        }
 
         return redirect()->route('dashboard');
     }

@@ -17,6 +17,7 @@
                 </tr>
             </thead>
             <tbody>
+{{--            {{dd($employees)}}--}}
                 @if(count($employees) > 0)
                     @foreach($employees as $index => $employee)
                         <tr>

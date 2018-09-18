@@ -6,7 +6,7 @@
     <div id="validation" class="alert alert-danger" style="display:none"></div>
     <div class="container">
         <div style="background-color: rgb(255,255,255);">
-            <h1>{{ $cells->first()->company->name }}</h1>
+            <h1>{{ $companyToEmployee->first()->company->name }}</h1>
         </div>
         <table class="table table-striped table-fixed" style="text-align: center" >
              <thead>
@@ -71,17 +71,13 @@
     });
 
     var stickyOffset = $('.sticky').offset().top;
-    // var stickyLeftOffset = $('.sticky').offset().left;
 
     $(window).scroll(function(){
         var sticky = $('.sticky'),
             scroll = $(window).scrollTop();
-            // scrollLeft = $(window).scrollLeft();
 
         if (scroll > stickyOffset) sticky.addClass('sticky-top');
         else sticky.removeClass('sticky-top');
-    //     if (scrollLeft >= stickyLeftOffset) sticky.addClass('sticky-left');
-    //     else sticky.removeClass('stickey-left');
     });
     </script>
 @endpush
