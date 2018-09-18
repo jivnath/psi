@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExcelReader;
+use App\Models\CompanyToEmployee_rel;
 use App\Models\Employee;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -17,9 +18,10 @@ class EmployeeController extends Controller
     
     public function index()
     {
-        $employees = Employee::groupByCompany();
+        $employees = CompanyToEmployee_rel::groupByCompany();
+        $total = count($employees);
 
-        return view('employees.index', compact('employees'));
+        return view('employees.index', compact('employees'))->withTotal($total);
     }
 
     public function uploadForm()
@@ -33,23 +35,33 @@ class EmployeeController extends Controller
     {
         $excelReader->uploadSheet()
                     ->iterateSheet()
-                    ->checkDuplicate();
+                    ->checkDuplicateAndStore();
 
         return redirect()->route('employees', ['companyId' => $excelReader->company_id]);
     }
 
-    public function show(Request $request, $companyId)
+    public function show($companyId)
     {
-        $cells = Employee::byCompany($companyId);
+        $companyToEmployee = CompanyToEmployee_rel::where('company_id', $companyId)->get();
+        $cells = [];
+        foreach ($companyToEmployee as $comToEmp)
+        {
+            $cell = Employee::where('psi_number', $comToEmp->psi_number)->first();
+            array_push($cells, $cell);
+        }
 
-        if ($cells->count() == 0) {
+
+//        $cells = Employee::byCompany($companyId);
+//        dd($cells);
+
+        if (count($cells) == 0) {
             return redirect()->route('employees');
         }
 
         $columns = Employee::columns(['id', 'company_id', 'created_at']);
         $sex = Gender::all();
 
-        return view('employees.show', compact('cells', 'columns', 'companyId'))->withSex($sex);
+        return view('employees.show', compact('cells', 'columns', 'companyId'))->withSex($sex)->withCompanyToEmployee($companyToEmployee);
     }
 
     public function updateCell(Request $request)

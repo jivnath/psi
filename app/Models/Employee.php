@@ -16,6 +16,11 @@ class Employee extends Model
         return $this->belongsTo(Company::class);
     }
 
+    public function companyToEmployee()
+    {
+        return $this->hasMany('App\Models\CompanyToEmployee_rel');
+    }
+
     public function employeeAvailability()
     {
         //relation to employee availability
@@ -45,7 +50,6 @@ class Employee extends Model
     public static function byCompany($companyId)
     {
         return static::with('company')
-                    ->where('company_id', $companyId)
                     ->orderBy('updated_at', 'DESC')
                     ->get();
     }

@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
 	protected $table = 'companies';	
-    //
+
+	public function companyToEmployee()
+    {
+        return $this->hasMany('App\Models\CompanyToEmployee_rel');
+    }
 
 	public function companyTimeTable()
 	{

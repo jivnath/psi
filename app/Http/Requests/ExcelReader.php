@@ -81,10 +81,6 @@ class ExcelReader extends FormRequest
                     }
                     $this->setColumnData($columns, $value, $row - 1, $col - 1, $highestColumnIndex);
                 }
-//                $companyToEmployee = new CompanyToEmployee_rel();
-//                $companyToEmployee->company_id = $this->company_id;
-//                $companyToEmployee->psi_number = $worksheet->getCellByColumnAndRow(1, $row);
-//                $companyToEmployee->save();
             }
         }
 
@@ -94,9 +90,10 @@ class ExcelReader extends FormRequest
     /**
      * Check if the  Employee data already exists
      *
+     * Store the data accordingly
      * @returns array
      */
-    public function checkDuplicate()
+    public function checkDuplicateAndStore()
     {
         $checkDuplicates = [];
         $yes = [];
@@ -139,22 +136,6 @@ class ExcelReader extends FormRequest
             // print_r($e->getMessage());
            // die;
         }
-    }
-
-    /**
-     * Store Employee data to database
-     *
-     */
-    public function store()
-    {
-        dd($checkDuplicates['no']);
-//        try {
-//            Employee::inserts($this->data['no']);
-//
-//        } catch (\Exception $e) {
-//            // print_r($e->getMessage());
-//           // die;
-//        }
     }
 
     /**
