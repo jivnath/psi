@@ -84,7 +84,7 @@
                                         </li>
                                           <li class="nav-item dropdown">
                                             <a id="shift_management" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                                <i class="far fa-clock"></i>
+                                                <i class="fa fa-line-chart"></i>
 
                                                 @lang('nav.Rpts') <span class="caret"></span>
                                             </a>
