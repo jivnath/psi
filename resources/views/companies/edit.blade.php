@@ -191,7 +191,7 @@
             var master = $('input[name="submaster"]').val();
                 $.ajax({
                     type:'POST',
-                    url: '{{ route('subcompany') }}',
+                    url: "{{ route('subcompany') }}",
                     data:{'name':name, 'address':address, 'contact':contact, 'master':master, 'id':id, "_token": "{{ csrf_token() }}"},
                     async: true,
                     success: function(data){
