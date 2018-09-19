@@ -127,7 +127,10 @@ class CompanyController extends Controller
 
     public function manageCompanies()
     {
-        return view('companies.company');
+
+        $masterCompany = Company::where('master_id', null)->get();
+        $allCompanies = Company::all();
+        return view('companies.company', compact('masterCompany', 'allCompanies'));
     }
 
     protected function rules()
@@ -137,6 +140,38 @@ class CompanyController extends Controller
             'contact_num' => 'required',
             'address' => 'required'
         ];
+    }
+
+    public function saveCompany(Request $request)
+    {
+        $company = new Company();
+        $company->name = $request->company_name;
+        $company->address = $request->company_address;
+        $company->contact_num = $request->company_contact;
+        $company->save();
+        $id = $company->id;
+
+        $section = new Company();
+        $section->name = $request->section_name;
+        $section->address = $request->section_address;
+        $section->contact_num = $request->section_contact;
+        $section->master_id = $id;
+        $section->save();
+        $sectionId = $section->id;
+
+        $subSection = new Company();
+        $subSection->name = $request->subSection_name;
+        $subSection->master_id = $request->$sectionId;
+        $subSection->address = $request->section_address;
+        $subSection->contact_num = $request->section_contact;
+        $subSection->save();
+
+        return redirect()->back();
+    }
+
+    public function editCompany()
+    {
+
     }
 
 }
