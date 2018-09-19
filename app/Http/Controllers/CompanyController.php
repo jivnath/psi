@@ -130,7 +130,7 @@ class CompanyController extends Controller
 
         $masterCompany = Company::where('master_id', null)->get();
         $allCompanies = Company::all();
-        return view('companies.company', compact('masterCompany', 'allCompanies'));
+        return view('companies.manage', compact('masterCompany', 'allCompanies'));
     }
 
     protected function rules()
@@ -174,6 +174,18 @@ class CompanyController extends Controller
     public function editCompany()
     {
 
+    }
+
+    public function getSection(Request $request)
+    {
+        if($request->ajax)
+        {
+            $companyId = $request->get('selectedCompany');
+            dd($companyId);
+            $sections = Company::where('master_id', $companyId)->get();
+
+            echo json_encode($sections);
+        }
     }
 
 }

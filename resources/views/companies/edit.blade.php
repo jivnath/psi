@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="box">
-            <div class="box-header">{{ "Please fill out the form below." }}</div>
+            <div class="box-header"><h4>{{ "Company Edit." }}</h4></div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="box-body " style="padding: 10px;">
@@ -60,7 +60,7 @@
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-4">
-                                    <label for="address"> Edit Section </label>
+                                    <label for="address"> Section </label>
                                 </div>
 
                                 <div class="col-md-4">
