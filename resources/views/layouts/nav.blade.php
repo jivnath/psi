@@ -90,7 +90,7 @@
                                             </a>
 
                                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="report">
-                                                <a class="dropdown-item" href="{{ route('employee.detail.report') }}"> Employee Details </a>
+                                                <a class="dropdown-item" href="{{ route('employee.detail.report') }}"><i class="fa fa-users" aria-hidden="true"></i> Employee Details </a>
                                             </div>
                                         </li>
                                         <!-- company login as -->
