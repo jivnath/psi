@@ -82,6 +82,17 @@
                                                 <a class="dropdown-item" href="#"> Attendance Management </a>
                                             </div>
                                         </li>
+                                          <li class="nav-item dropdown">
+                                            <a id="shift_management" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                <i class="far fa-clock"></i>
+
+                                                @lang('nav.Rpts') <span class="caret"></span>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="report">
+                                                <a class="dropdown-item" href="{{ route('employee.detail.report') }}"> Employee Details </a>
+                                            </div>
+                                        </li>
                                         <!-- company login as -->
                                         @php
                                             $username = \Session::get('username');

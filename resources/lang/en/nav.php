@@ -20,4 +20,5 @@ return [
 'RecentUpdate' =>'RecentUpdate',
 'ShiftManagement' =>'Shift Management',
 'Setting'=>'Setting',
+'Rpts'=>'Reports'
 ];

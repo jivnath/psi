@@ -47,6 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         });
+        Route::prefix('report')->group(function(){
+            Route::get('/employee_report','EmployeeController@FetchEmployeeDetails')->name('employee.detail.report');
+        });
 
         Route::prefix('company')->group(function () {
             Route::get('/create', 'CompanyController@create')->name('company.create');

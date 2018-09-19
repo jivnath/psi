@@ -11,21 +11,20 @@ class Employee extends Model
      *
      * @return Company
      */
-//    public function company()
-//    {
-//        return $this->belongsTo(Company::class);
-//    }
-
-    public function companyToEmployee()
+    public function company()
     {
-        return $this->hasMany('App\Models\CompanyToEmployee_rel');
+        return $this->belongsTo(Company::class);
     }
 
     public function employeeAvailability()
     {
         //relation to employee availability
         return $this->hasOne('App\Models\EmployeeAvailability');
-    } 
+    }
+    public function employeeSkill()
+    {
+        return $this->hasMany(EmployeeSkill::class, 'psi_num', 'psi_number');
+    }
 
 
     /**
@@ -33,26 +32,27 @@ class Employee extends Model
      *
      * @return Collection
      */
-//    public static function groupByCompany()
-//    {
-//        return static::with('company')
-//                    ->selectRaw('*, count(id) as total')
-//                    ->groupBy('company_id')
-//                    ->orderBy('updated_at', 'DESC')
-//                    ->paginate(50);
-//    }
+    public static function groupByCompany()
+    {
+        return static::with('company')
+                    ->selectRaw('*, count(id) as total')
+                    ->groupBy('company_id')
+                    ->orderBy('updated_at', 'DESC')
+                    ->paginate(50);
+    }
 
     /**
      * Fetch employee by company
      *
      * @return Collection
      */
-//    public static function byCompany($companyId)
-//    {
-//        return static::with('company')
-//                    ->orderBy('updated_at', 'DESC')
-//                    ->get();
-//    }
+    public static function byCompany($companyId)
+    {
+        return static::with('company')
+                    ->where('company_id', $companyId)
+                    ->orderBy('updated_at', 'DESC')
+                    ->get();
+    }
 
     /**
      * Check is record exist by psiNum and companyId
