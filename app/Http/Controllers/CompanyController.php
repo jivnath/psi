@@ -125,6 +125,11 @@ class CompanyController extends Controller
         }
     }
 
+    public function manageCompanies()
+    {
+        return view('companies.company');
+    }
+
     protected function rules()
     {
         return [
