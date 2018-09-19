@@ -60,7 +60,7 @@
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-4">
-                                    <label for="address"> Edit Sub Company </label>
+                                    <label for="address"> Edit Section </label>
                                 </div>
 
                                 <div class="col-md-4">
@@ -82,7 +82,7 @@
                             <div class="row">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-3">
-                                    <label for="subname" class="small-text"> Name </label>
+                                    <label for="subname" class="small-text"> Section </label>
                                 </div>
                                 <div class="col-md-3">
                                         <input type="text" class="form-control input-sm" value="" name="subname">
@@ -94,7 +94,7 @@
                                 <hr>
                                 <div class="col-md-3"></div>
                                 <div class="col-md-3">
-                                    <label for="sub_master" class="small-text"> Master Company </label>
+                                    <label for="sub_master" class="small-text"> Company </label>
                                 </div>
                                 <div class="col-md-3">
                                         <select id="sub_master" name="submaster" class="form-control select-sm">
