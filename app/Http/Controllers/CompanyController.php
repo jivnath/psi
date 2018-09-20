@@ -144,6 +144,7 @@ class CompanyController extends Controller
 
     public function saveCompany(Request $request)
     {
+//        dd($request->all());
         $company = new Company();
         $company->name = $request->company_name;
         $company->address = $request->company_address;
@@ -160,13 +161,14 @@ class CompanyController extends Controller
         $sectionId = $section->id;
 
         $subSection = new Company();
-        $subSection->name = $request->subSection_name;
-        $subSection->master_id = $request->$sectionId;
+        $subSection->name = $request->subsection_name;
+        $subSection->master_id = $sectionId;
         $subSection->address = $request->section_address;
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
+        return $subSection;
 
-        return redirect()->back();
+//        return redirect()->back()->with('success');
     }
 
     public function editCompany()

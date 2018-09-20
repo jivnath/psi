@@ -23,8 +23,10 @@
 						<div class="col-md-12" id="forNew" style="display: none">
 							<div class="box box-info">
 
-									<div class="box-body">
-										 <form class="form-group">
+                                <div class="box-body">
+                                     <form action="{{route('company.saveCompany')}}" method="POST" class="form-group">
+                                         @csrf
+                                         @method('post')
                             <label for="company"><h4><b>Company</b></h4></label>
                             <div class="input-group">
                                 <div class="input-group-addon">
@@ -88,7 +90,6 @@
                             <input type="submit" value="Submit" class="btn btn-success">
                         </form>
 									</div>
-								</form>
 							</div>
 						</div>
 						<div class="col-md-12" id="forExisting" style="display: none">
@@ -172,9 +173,9 @@
                             </div><br>
                             <input type="submit" value="Submit" class="btn btn-success">
 
-
+                                     </form>
 								</div>
-								 </form>
+
 							</div>
 						</div>
 					</div>

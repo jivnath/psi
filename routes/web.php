@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{id}', 'CompanyController@edit')->name('company.edit');
             Route::put('{id}', 'CompanyController@update')->name('company.update');
             Route::get('/sub', 'CompanyController@sub')->name('company.sub');
+            Route::post('/', 'CompanyController@saveCompany')->name('company.saveCompany');
             Route::post('/subCompanyUpdate', 'CompanyController@subCompanyUpdate')->name('subcompany');
 
             Route::get('/shifts/add', 'ShiftMasterController@add')->name('shift.add');
