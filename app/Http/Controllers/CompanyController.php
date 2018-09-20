@@ -121,7 +121,7 @@ class CompanyController extends Controller
     {
         $masterCompany = Company::where('master_id', null)->get();
         $allCompanies = Company::all();
-        return view('companies.company', compact('masterCompany', 'allCompanies'));
+        return view('companies.manage', compact('masterCompany', 'allCompanies'));
     }
 
     protected function rules()
@@ -135,6 +135,7 @@ class CompanyController extends Controller
 
     public function saveCompany(Request $request)
     {
+//        dd($request->all());
         $company = new Company();
         $company->name = $request->company_name;
         $company->address = $request->company_address;
@@ -151,13 +152,14 @@ class CompanyController extends Controller
         $sectionId = $section->id;
 
         $subSection = new Company();
-        $subSection->name = $request->subSection_name;
-        $subSection->master_id = $request->$sectionId;
+        $subSection->name = $request->subsection_name;
+        $subSection->master_id = $sectionId;
         $subSection->address = $request->section_address;
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
+        return $subSection;
 
-        return redirect()->back();
+//        return redirect()->back()->with('success');
     }
 
     public function editCompany()
@@ -169,4 +171,17 @@ class CompanyController extends Controller
         $data['companies'] = Raw::AllCompanyData();
         return view('companies.companyview', $data);
     }
+
+    public function getSection(Request $request)
+    {
+        if($request->ajax)
+        {
+            $companyId = $request->get('selectedCompany');
+            dd($companyId);
+            $sections = Company::where('master_id', $companyId)->get();
+
+            echo json_encode($sections);
+        }
+    }
+
 }

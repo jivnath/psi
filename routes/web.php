@@ -52,7 +52,8 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::prefix('company')->group(function () {
-            Route::get('/', 'CompanyController@manageCompanies');
+            Route::get('/manage', 'CompanyController@manageCompanies');
+            Route::post('/manage', 'CompanyController@saveCompany')->name('company.saveCompany');
             Route::get('/create', 'CompanyController@create')->name('company.create');
             Route::get('/view', 'CompanyController@viewDetail')->name('company.details');
             Route::post('/create', 'CompanyController@store')->name('company.store');
@@ -60,6 +61,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('{id}', 'CompanyController@update')->name('company.update');
             Route::get('/sub', 'CompanyController@sub')->name('company.sub');
             Route::post('/subCompanyUpdate', 'CompanyController@subCompanyUpdate')->name('subcompany');
+            Route::get('/getSelected', 'CompanyController@getSelected')->name('getSelected');
 
             Route::get('/shifts/add', 'ShiftMasterController@add')->name('shift.add');
             Route::post('/shifts/add', 'ShiftMasterController@store')->name('shift.store');
