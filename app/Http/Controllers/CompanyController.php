@@ -117,7 +117,7 @@ class CompanyController extends Controller
         }
     }
 
-    public function manageCompanies()
+    public function manageCompanies(Request $request)
     {
         $masterCompany = Company::where('master_id', null)->get();
         $allCompanies = Company::all();
@@ -176,6 +176,8 @@ class CompanyController extends Controller
             $sectionLeader = $request->get('sectionLeader');
             $subId = $request->get('subId');
             $subName = $request->get('subName');
+            $data = [$companyId, $companyName, $companyContact, $companyAddress, $sectionId, $sectionAddress, $subName];
+
 
             if($companyId != 0)
             {
@@ -202,6 +204,7 @@ class CompanyController extends Controller
                 }
             }
         }
+        echo json_encode($data);
     }
 
     public function viewDetail()
@@ -235,6 +238,51 @@ class CompanyController extends Controller
             $subId = $request->get('selectedCompany');
             $sub = Company::find($subId);
             echo json_encode($sub);
+        }
+    }
+
+    public function addmoreSection(Request $request)
+    {
+        if($request->ajax())
+        {
+            $master_id = $request->get('selectedCompany');
+            $name = $request->get('sectionName');
+            $contact = $request->get('sectionContact');
+            $address = $request->get('sectionAddress');
+            $sub = $request->get('subName');
+
+            $section = new Company();
+            $section->name = $name;
+            $section->master_id = $master_id;
+            $section->address = $address;
+            $section->contact_num = $contact;
+            $section->save();
+
+            $subSection = new Company();
+            $subSection->name = $sub;
+            $subSection->address = $address;
+            $subSection->master_id = $section->id;
+            $subSection->contact_num = $contact;
+            $subSection->save();
+        }
+    }
+
+    public  function addmoreSubsection(Request $request)
+    {
+        if($request->ajax())
+        {
+            $master = $request->get('selectedCompany');
+            $name = $request->get('subName');
+
+            $company = Company::find($master);
+
+            $sub = new Company();
+            $sub->name = $name;
+            $sub->master_id = $master;
+            $sub->contact_num = $company->contact_num;
+            $sub->address = $company->address;
+
+            $sub->save();
         }
     }
 
