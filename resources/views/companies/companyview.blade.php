@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <?php
 $last_p='';
 ?>
@@ -12,13 +13,16 @@ $last_p='';
                   		<h3 class="box-title">Company Details</h3>
                 	</div>
                 	<div class="box-body">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id='table'>
+                            <thead>
                                 <tr>
                                  	<th>SN</th>
                                     <th>Company Name</th>
                                     <th>Sections Hierachy</th>
 
                                 </tr>
+                                </thead>
+                                <tbody>
 								@php
 									$i=0
 
@@ -43,12 +47,12 @@ $last_p='';
 
         											@foreach($section as $index2=>$subsection)
         											<div class="table-responsive">
-        											<table class='table table-sm table-bordered'>
-        											<thead>
-            											<tr><th class="table_th_fix">Name</th><td>{{$index}}</td>
-            											<td class="table_th_fix">{{$index1}}</td>
+        											<table class='table table-bordered'>
+        											<thead class="thead-light">
+            											<tr><th class="table_th_fix">Name</th><td><a href='#'>{{$index}}</a></td>
+            											<td class="table_th_fix"><a href='#'>{{$index1}}</a></td>
             											@if($index2)
-            											<td class="table_th_fix">{{$index2}}</td>
+            											<td class="table_th_fix"><a href='#'>{{$index2}}</a></td>
             											@endif
             											</tr>
             											@foreach($subsection as $index3)
@@ -81,7 +85,7 @@ $last_p='';
                                         </tr>
 
                                 @endforeach
-
+</tbody>
                             </table>
                             </div>
                         </div>
@@ -91,7 +95,11 @@ $last_p='';
 
 @endsection
 @push('scripts')
+<script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
 <script type="text/javascript">
-
+$(document).ready(function() {
+    $('#table').DataTable();
+});
 </script>
 @endpush

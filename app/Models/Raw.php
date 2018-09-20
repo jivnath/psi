@@ -51,12 +51,12 @@ where     p.master_id IS NULL
 
         foreach ($companies as $row) {
             $fetch_detail[$row->parent_name][$row->child_name_1][$row->child_name_2][][] = [
-                'contact_p' => ($row->contact_num)?$row->contact_num:'N/A',
-                'contact_c1' => ($row->contact_c1)?$row->contact_c1:'N/A',
-                'contact_c2' => ($row->contact_c2)?$row->contact_c2:'N/A',
-                'address_p' => ($row->address_p)?$row->address_p:'N/A',
-                'address_c1' => ($row->address_c1)?$row->address_c1:'N/A',
-                'address_c2' => ($row->address_c2)?$row->address_c2:'N/A'
+                'contact_p' => ($row->contact_num)?$row->contact_num:'...',
+                'contact_c1' => ($row->contact_c1)?$row->contact_c1:'...',
+                'contact_c2' => ($row->contact_c2)?$row->contact_c2:'...',
+                'address_p' => ($row->address_p)?$row->address_p:'...',
+                'address_c1' => ($row->address_c1)?$row->address_c1:'...',
+                'address_c2' => ($row->address_c2)?$row->address_c2:'...'
             ];
         }
         return $fetch_detail;
