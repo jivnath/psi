@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::prefix('company')->group(function () {
             Route::get('/', 'CompanyController@manageCompanies');
             Route::get('/create', 'CompanyController@create')->name('company.create');
+            Route::get('/view', 'CompanyController@viewDetail')->name('company.details');
             Route::post('/create', 'CompanyController@store')->name('company.store');
             Route::get('edit/{id}', 'CompanyController@edit')->name('company.edit');
             Route::put('{id}', 'CompanyController@update')->name('company.update');

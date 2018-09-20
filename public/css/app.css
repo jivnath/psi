@@ -10725,3 +10725,6 @@ table.floatThead-table {
     vertical-align: baseline;
     border-radius: .25em;
 }
+.table_th_fix{
+	width:190px;
+}
