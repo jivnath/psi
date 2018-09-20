@@ -99,7 +99,9 @@ $last_p='';
 <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#table').DataTable();
+    $('#table').DataTable({dom: "<'row'<'col-sm-3'l><'col-sm-3'f><'col-sm-6'p>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-5'i><'col-sm-7'p>>",});
 });
 </script>
 @endpush
