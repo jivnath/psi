@@ -162,8 +162,47 @@ class CompanyController extends Controller
 //        return redirect()->back()->with('success');
     }
 
-    public function editCompany()
-    {}
+    public function updateCompanies(Request $request)
+    {
+        if($request->ajax()) {
+            $companyId = $request->get('companyId');
+            $companyName = $request->get('companyName');
+            $companyContact = $request->get('companyContact');
+            $companyAddress = $request->get('companyAddress');
+            $sectionId = $request->get('sectionId');
+            $sectionName = $request->get('sectionName');
+            $sectionContact = $request->get('sectionContact');
+            $sectionAddress = $request->get('sectionAddress');
+            $sectionLeader = $request->get('sectionLeader');
+            $subId = $request->get('subId');
+            $subName = $request->get('subName');
+
+            if($companyId != 0)
+            {
+                $company = Company::find($companyId);
+                $company->name = $companyName;
+                $company->address = $companyAddress;
+                $company->contact_num = $companyContact;
+                $company->save();
+                if($sectionId !=0)
+                {
+                    $section = Company::find($sectionId);
+                    $section->name = $sectionName;
+                    $section->address = $sectionAddress;
+                    $section->contact_num = $sectionContact;
+                    $section->save();
+                    if($subId != 0)
+                    {
+                        $sub = Company::find($subId);
+                        $sub->name = $subName;
+                        $sub->contact_num = $sectionContact;
+                        $sub->address = $sectionAddress;
+                        $sub->save();
+                    }
+                }
+            }
+        }
+    }
 
     public function viewDetail()
     {
@@ -174,13 +213,28 @@ class CompanyController extends Controller
 
     public function getSection(Request $request)
     {
-        if($request->ajax)
+        if($request->ajax())
         {
             $companyId = $request->get('selectedCompany');
-            dd($companyId);
+            $company = Company::find($companyId);
             $sections = Company::where('master_id', $companyId)->get();
 
-            echo json_encode($sections);
+            $data = [
+                'company' => $company,
+                'sections' => $sections
+            ];
+
+            echo json_encode($data);
+        }
+    }
+
+    public function subSection(Request $request)
+    {
+        if($request->ajax())
+        {
+            $subId = $request->get('selectedCompany');
+            $sub = Company::find($subId);
+            echo json_encode($sub);
         }
     }
 

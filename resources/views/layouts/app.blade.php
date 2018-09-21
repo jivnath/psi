@@ -25,7 +25,7 @@
     <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
     {{--<script src="https://jsdelivr.com/package/npm/sweetalert2"></script>--}}
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{asset('js/sweetalert.min.js')}}"></script>
 
 
 @yield('styles')

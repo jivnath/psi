@@ -61,7 +61,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('{id}', 'CompanyController@update')->name('company.update');
             Route::get('/sub', 'CompanyController@sub')->name('company.sub');
             Route::post('/subCompanyUpdate', 'CompanyController@subCompanyUpdate')->name('subcompany');
-            Route::get('/getSelected', 'CompanyController@getSelected')->name('getSelected');
+            Route::get('/getSection', 'CompanyController@getSection')->name('getSection');
+            Route::get('/subSection', 'CompanyController@subSection')->name('subSection');
+            Route::post('/update', 'CompanyController@updateCompanies')->name('updateCompanies');
+            Route::post('/addmoreSection', 'CompanyController@addmoreSection')->name('addmoreSection');
+            Route::post('/addmoreSubsection', 'CompanyController@addmoreSubsection')->name('addmoreSubsection');
 
             Route::get('/shifts/add', 'ShiftMasterController@add')->name('shift.add');
             Route::post('/shifts/add', 'ShiftMasterController@store')->name('shift.store');
