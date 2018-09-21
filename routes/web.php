@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
 //    Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', 'EmployeeController@index')->name('employees');
-            Route::get('/show/{companyId}', 'EmployeeController@show')->name('employees.show');
+            Route::get('/show', 'EmployeeController@show')->name('employees.show');
             Route::get('/upload', 'EmployeeController@uploadForm')->name('employees.uploadForm');
             Route::post('/upload', 'EmployeeController@upload')->name('employees.upload');
             Route::post('/updateCell', 'EmployeeController@updateCell')->name('employees.updateCell');

@@ -269,6 +269,7 @@
 
         //for ajax save shifts
         $("#submitshift").click(function(){
+            $(this).closest('form').find("input[type=time]").val("");
             var start_shifts = $("input[name='start_shift[]']")
                 .map(function(){return $(this).val();}).get();
             var end_shifts = $("input[name='end_shift[]']")
@@ -281,8 +282,8 @@
                 dataType:'json',
                 async:true,
                 success:function(shifts){
+                    
                     $("#shiftAdd").html('');
-
                     $("#"+companyId+"allShifts").html('');
 
                     for (i = 0; i < shifts.length; i++)

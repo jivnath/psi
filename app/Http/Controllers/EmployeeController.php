@@ -57,14 +57,14 @@ class EmployeeController extends Controller
         ]);
     }
 
-    public function show($companyId)
+    public function show()
     {
-        $companyToEmployee = CompanyToEmployee_rel::where('company_id', $companyId)->get();
-        $cells = [];
-        foreach ($companyToEmployee as $comToEmp) {
-            $cell = Employee::where('psi_number', $comToEmp->psi_number)->first();
-            array_push($cells, $cell);
-        }
+        // $companyToEmployee = CompanyToEmployee_rel::where('company_id', $companyId)->get();
+        // $cells = [];
+        // foreach ($companyToEmployee as $comToEmp) {
+            $cells = Employee::all();//where('psi_number', $comToEmp->psi_number)->first();
+            // array_push($cells, $cell);
+        // }
 
         // $cells = Employee::byCompany($companyId);
         // dd($cells);
@@ -80,7 +80,7 @@ class EmployeeController extends Controller
         ]);
         $sex = Gender::all();
 
-        return view('employees.show', compact('cells', 'columns', 'companyId'))->withSex($sex)->withCompanyToEmployee($companyToEmployee);
+        return view('employees.show', compact('cells', 'columns', 'companyId'))->withSex($sex)/*->withCompanyToEmployee($companyToEmployee)*/;
     }
 
     public function updateCell(Request $request)
