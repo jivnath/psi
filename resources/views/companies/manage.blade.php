@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
     <section class="content">
+        <div id="alert" style="display: none">
+            <div class="alert alert-success" role="alert">
+                <strong>Success:</strong><span id="message"></span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="box">
@@ -321,12 +326,14 @@
         $('#sectionDropdown').change(function () {
             var selectedSection = $('#sectionDropdown').val();
             var option = '<option value="0">--Select Sub-Section--</option>';
+            $('#subsectionDropdown').show();
             $('#subsectionDropdown').html(option);
             $('#existing_section_name').val('');
             $('#existing_section_contact').val('');
             $('#existing_section_address').val('');
             $('#existing_subsection_name').val('');
             $('#subNameDiv').hide();
+            console.log(selectedSection);
 
 
             if (selectedSection != 0) {
@@ -342,6 +349,7 @@
                             var options = '<option value=' + data.sections[i].id + '>' + data.sections[i].name + '</option>';
                             $('#subsectionDropdown').append(options);
                         }
+                        console.log(selectedSection);
                         $('#existing_section_name').val(data.company.name);
                         $('#existing_section_contact').val(data.company.contact_num);
                         $('#existing_section_address').val(data.company.address);
@@ -409,8 +417,7 @@
                         'sectionAddress': sectionAddress,
                         // 'sectionLeader':sectionLeader,
                         'subId': subId,
-                        'subName': subName,
-                        "_token": "{{ csrf_token() }}"
+                        'subName': subName
                     },
                     success: function (data) {
                     }
@@ -419,6 +426,8 @@
         });
 
         $('#addSection').click(function () {
+            var companyId = $('#companyDropdown').val();
+            $('#dynamicButton').attr('title', companyId);
             $('#sectionDropdown').hide();
             $('#subsectionDropdown').hide();
             $(this).hide();
@@ -435,12 +444,16 @@
             $('#existing_section_address').val('');
             $('#existing_subsection_name').val('');
             $("#companyDiv *").prop('disabled', true);
+            $("#sectionDiv *").prop('disabled', true);
+            $("#cancelSection").show();
         });
 
         $('#addSubsection').click(function () {
             $(this).hide();
             $('#cancelSubsection').show();
 
+            var sectionId = $('#sectionDropdown').val();
+            $('#dynamicButton').attr('title', sectionId);
             $('#existing_subsection_name').val('');
             $('#subsectionDropdown').hide();
             $('#dynamicButton').show();
@@ -457,19 +470,36 @@
         $('#cancelSubsection').click(function(){
             $(this).hide();
             $('#subNameDiv').hide();
-            $('#addSection').show();
             $('#submit').show();
             $('#addSubsection').show();
             $("#sectionDiv *").prop('disabled', false);
             $("#companyDiv *").prop('disabled', false);
             $("#subsectionDiv *").prop('disabled', false);
+            $('#addSection').show();
             $('#dynamicButton').hide();
             $('#subsectionDropdown').show();
             $('#subsectionDropdown').prop('selectedIndex', 0);
         });
 
+        $('#cancelSection').click(function () {
+           $(this).hide();
+            $('#addSubsection').show();
+            $('#addSection').show();
+            $('#sectionDropdown').show();
+            $('#sectionDropdown').prop('selectedIndex', 0);
+            $('#dynamicButton').hide();
+            $("#sectionDiv *").prop('disabled', false);
+            $("#companyDiv *").prop('disabled', false);
+            $("#subsectionDiv *").prop('disabled', false);
+            $("#subsectionDiv").hide();
+            $('#subNameDiv').hide();
+
+
+
+        });
+
         $(document).on('click', '.addSection', function () {
-            var selectedCompany = $('#sectionDropdown').val();
+            var selectedCompany = $('#dynamicButton').attr('title');
             var sectionName = $('#existing_section_name').val();
             var sectionContact = $('#existing_section_contact').val();
             var sectionAddress = $('#existing_section_address').val();
@@ -486,15 +516,27 @@
                 url: "{{route('addmoreSection')}}",
                 async: true,
                 success: function () {
+                    $(this).hide();
+                    $('#addSubsection').show();
+                    $('#addSection').show();
+                    $('#sectionDropdown').show();
+                    $('#sectionDropdown').prop('selectedIndex', 0);
+                    $('#dynamicButton').hide();
+                    $("#sectionDiv *").prop('disabled', false);
+                    $("#companyDiv *").prop('disabled', false);
+                    $("#subsectionDiv *").prop('disabled', false);
+                    $("#subsectionDiv").hide();
+                    $('#subNameDiv').hide();
 
+                    var newSection = '<option value="'+data.id+'">'+data.name +'</option>'
+                    $('#sectionDropdown').append(newSection);
                 }
             });
         });
 
         $(document).on('click', '.addSubsection', function () {
-            var selectedCompany = $('#sectionDropdown').val();
+            var selectedCompany = $('#dynamicButton').attr('title');
             var subName = $('#existing_subsection_name').val();
-
             $.ajax({
                 type: 'POST',
                 data: {
@@ -503,8 +545,31 @@
                 },
                 url: "{{route('addmoreSubsection')}}",
                 async: true,
-                success: function () {
+                success: function (data) {
+                    $(this).hide();
+                    $('#subNameDiv').hide();
+                    $('#submit').show();
+                    $('#addSubsection').show();
+                    $("#sectionDiv *").prop('disabled', false);
+                    $("#companyDiv *").prop('disabled', false);
+                    $("#subsectionDiv *").prop('disabled', false);
+                    $('#addSection').show();
+                    $('#dynamicButton').hide();
+                    $('#subsectionDropdown').show();
+                    $('#subsectionDropdown').prop('selectedIndex', 0);
+                    $('#cancelSubsection').hide();
 
+                    var newSub = '<option value="'+data.id +'">'+ data.name +'</option>';
+                    $('#subsectionDropdown').append(newSub);
+                    console.log(data);
+
+                    $("#alert").show()
+                    $("#message").text('Subsection Added!');
+                    $(function(){
+                        setTimeout(function() {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
                 }
             });
         });

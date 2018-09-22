@@ -96,6 +96,15 @@ WHERE
     AND companytt_id = 12;");
     }
 
+    public static function getSecondLevelCompanies()
+    {
+        $sql = "select id,name from companies where master_id in (SELECT id FROM `companies` WHERE `master_id` is null)";
+
+        $secondCompanies = DB::select("$sql");
+
+        return $secondCompanies;
+    }
+
     public static function companies($id)
     {
         $sql = "select * from companies where (id=$id or master_id=$id)";
