@@ -405,6 +405,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '{{route("updateCompanies")}}',
+                    dataType:'json',
                     async: true,
                     data: {
                         'companyId': companyId,
@@ -514,6 +515,7 @@
                     'subName': subName
                 },
                 url: "{{route('addmoreSection')}}",
+                dataType:'json',
                 async: true,
                 success: function () {
                     $(this).hide();
@@ -544,6 +546,7 @@
                     'subName': subName
                 },
                 url: "{{route('addmoreSubsection')}}",
+                dataType:'json',
                 async: true,
                 success: function (data) {
                     $(this).hide();
