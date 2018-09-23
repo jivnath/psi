@@ -8,6 +8,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Gender;
 use App\Models\EmployeeSkill;
+use App\Models\PsiViewCustimizeModel;
 
 class EmployeeController extends Controller
 {
@@ -36,6 +37,8 @@ class EmployeeController extends Controller
             'created_at',
             'updated_at'
         ]);
+        $data['all_col']=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
+        $data['customize_columns']=PsiViewCustimizeModel::where('type','employee')->get();
         return view('reports.employee_details', $data);
     }
 
@@ -79,8 +82,10 @@ class EmployeeController extends Controller
             'created_at'
         ]);
         $sex = Gender::all();
+        $all_col=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
+        $customize_columns=PsiViewCustimizeModel::where('type','employee')->get();
 
-        return view('employees.show', compact('cells', 'columns', 'companyId'))->withSex($sex)/*->withCompanyToEmployee($companyToEmployee)*/;
+        return view('employees.show', compact('cells', 'columns', 'companyId','customize_columns','all_col'))->withSex($sex)/*->withCompanyToEmployee($companyToEmployee)*/;
     }
 
     public function updateCell(Request $request)
