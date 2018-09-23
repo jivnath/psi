@@ -20,14 +20,17 @@ Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'Use
 Route::get('/primary/{id}', ['as'=>'selectPrimary', 'uses'=>'UserController@selectPrimary']);
 Route::get('/select/primary', 'UserController@primary')->name('primary');
 
+Route::get('employee/login', 'Employee\EmployeeController@getLogin');
+Route::post('employee/login', 'Employee\EmployeeController@postLogin');
+Route::get('employee/logout', 'Employee\EmployeeController@getLogout');
 
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::group(['middleware' => ['check.primary.company']], function(){
+//    Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', 'EmployeeController@index')->name('employees');
-            Route::get('/show/{companyId}', 'EmployeeController@show')->name('employees.show');
+            Route::get('/show', 'EmployeeController@show')->name('employees.show');
             Route::get('/upload', 'EmployeeController@uploadForm')->name('employees.uploadForm');
             Route::post('/upload', 'EmployeeController@upload')->name('employees.upload');
             Route::post('/updateCell', 'EmployeeController@updateCell')->name('employees.updateCell');
@@ -52,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::prefix('company')->group(function () {
-            Route::get('/manage', 'CompanyController@manageCompanies');
+            Route::get('/manage', 'CompanyController@manageCompanies')->name('manageCompanies');
             Route::post('/manage', 'CompanyController@saveCompany')->name('company.saveCompany');
             Route::get('/create', 'CompanyController@create')->name('company.create');
             Route::get('/view', 'CompanyController@viewDetail')->name('company.details');
@@ -83,6 +86,9 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('/skills', 'SkillMasterController@manage')->name('manageSkills');
+        Route::post('/skills/add', 'SkillMasterController@addSkills')->name('skills.master.add');
+        Route::post('/skills/remove', 'SkillMasterController@removeSkills')->name('skills.master.remove');
 
 
 
@@ -137,6 +143,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::prefix('viber')->group(function () {
             Route::post('/viber_it', 'ViberMessageController@store_message')->name('viber.send');
         });
-    });
+//    });
 });
 Route::any('viber_bot','ViberBitIntegration@handleViberRequest')->name('viber_bot');

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use DB;
 use App\Models\Raw;
+use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
@@ -157,9 +158,8 @@ class CompanyController extends Controller
         $subSection->address = $request->section_address;
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
-        return $subSection;
 
-//        return redirect()->back()->with('success');
+        Session::flash('success', 'Companies successfully added!');
     }
 
     public function updateCompanies(Request $request)
@@ -203,6 +203,7 @@ class CompanyController extends Controller
                     }
                 }
             }
+            Session::flash('success', 'Companies successfully updated!');
         }
         echo json_encode($data);
     }
@@ -264,6 +265,9 @@ class CompanyController extends Controller
             $subSection->master_id = $section->id;
             $subSection->contact_num = $contact;
             $subSection->save();
+            echo json_encode($section);
+
+//            Session::flash('success', 'Section successfully saved!');
         }
     }
 
@@ -283,7 +287,14 @@ class CompanyController extends Controller
             $sub->address = $company->address;
 
             $sub->save();
+
+            $data = [
+              'name' => $sub->name,
+              'id' => $sub->id
+            ];
         }
+        echo json_encode($data);
+//        Session::flash('success', 'Sub-section successfully saved!');
     }
 
 }

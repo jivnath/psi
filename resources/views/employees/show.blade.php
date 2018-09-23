@@ -6,7 +6,7 @@
     <div id="validation" class="alert alert-danger" style="display:none"></div>
     <div class="container">
         <div style="background-color: rgb(255,255,255);">
-            <h1>{{ $companyToEmployee->first()->company->name }}</h1>
+         {{--   <h1>{{ $companyToEmployee->first()->company->name }}</h1>--}}<h1>Employees</h1>
         </div>
         <table class="table table-striped table-fixed" style="text-align: center" >
              <thead>
@@ -51,7 +51,7 @@
             </tbody>
         </table>
     </div>
-    <input type="hidden" id="companyId" value ="{{ $companyId }}"/>
+    {{--<input type="hidden" id="companyId" value ="{{ $companyId }}"/>--}}
 @endsection
 
 
