@@ -86,6 +86,9 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('/skills', 'SkillMasterController@manage')->name('manageSkills');
+        Route::post('/skills/add', 'SkillMasterController@addSkills')->name('skills.master.add');
+        Route::post('/skills/remove', 'SkillMasterController@removeSkills')->name('skills.master.remove');
 
 
 
