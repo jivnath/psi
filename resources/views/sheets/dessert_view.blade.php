@@ -237,7 +237,7 @@ corresponding value from the list below*/
 
             <script>
             var down_to_top=window.innerHeight;
-            $('#dessert_response').css('height',down_to_top/2);
+            $('#dessert_response').css('height',down_to_top/1.3);
             var allowed_field=[4,5,6,7];
             var main_val;
             var allowed_pop_up=['Not OK','No response'];
