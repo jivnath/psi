@@ -1,52 +1,37 @@
 @extends('layouts.app') 
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div class="row">
+        <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <center> Choose Employee</center>
+                    <h3>Employee Skills</h3>
                 </div>
 
-                <div class="box-body" style="align:center">
-                    <form action="{{ route('skill.store') }}" method="POST">
+                <div class="box-body">
+                    <form action="{{ route('skill.store') }}" class="form-group" method="POST">
                         @csrf
-                        <div class="row" style="text-align: right">
-                            <div class="col-md-4">
-                                <label>PSI Number</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" name="psi_num" id="psi_num" placeholder="PSIS_No" class="form-control" required>
-                            </div>
-                            <div class="col-md-2"></div>
+                                <label><b>PSI Number</b></label>
+                                <input type="text" name="psi_num" id="psi_num" placeholder="PSIS_No" class="form-control input-shorter" required>
+
+                        <div style="display: none" id="nameDiv">
+                            <p id="name_label"><b>Name</b></p>
+                            <p id="employee_name" style="text-align: left"></p>
                         </div>
 
-                        <div class="row" style="text-align: right; display: none" id="nameDiv">
-                            <div class="col-md-4" id="name_label">Name</div>
-                            <div class="col-md-6" id="employee_name" style="text-align: left"></div>
-                            <div class="col-md-2"></div>
-                        </div>
-                        </br>
-
-                        <div class="row" style="text-align: right">
-                            <div class="col-md-4">
-                                <label> Add Skill</label>
-                            </div>
-                            <div class="col-md-5">
-                                <input type="text" id="skills" name="skill" placeholder="Enter skill" class="form-control" required>
-                            </div>
-                            <div class="col-md-1" style="margin: auto; text-align: left"><i  id="addmore" class="fa fa-plus" style="color: #1d643b;font-size:24px"></i> </div>
-                            <div class="col-md-2"></div>
-                        </div>
-                        <br>
-
-                        <div class="row" id="showSkills" style="text-align: right;display: none">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-6" style="">
-                                <div class="form-control" id="allSkills" style="text-align: left;height: 180px;overflow: auto" >
+                                <label><b> All Skills </b></label>
+                                <div id="allSkills">
                                 </div>
-                            </div>
-                            <div class="col-md-2"></div>
-                        </div>
+                                <input type="submit" class="btn btn-primary" value="Save Changes" style="margin-top: 20px">
+                        {{--<br>--}}
+
+                        {{--<div class="row" id="showSkills" style="text-align: right;display: none">--}}
+                            {{--<div class="col-md-4"></div>--}}
+                            {{--<div class="col-md-6" style="">--}}
+                                {{--<div class="form-control" id="allSkills" style="text-align: left;height: 180px;overflow: auto" >--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-2"></div>--}}
+                        {{--</div>--}}
                     </form>
                 </div>
             </div>
@@ -58,32 +43,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript">
-    $(function(){
-        $("#addmore").click(function(){
-
-            event.preventDefault();
-            var skill = $("#skills").val();
-            var psi_num = $("#psi_num").val();
-            $('#allSkills').append('<span id="row' + skill + '" style="margin: 3px; background-color: #e9e9e9">' + skill + '<i id="'+skill+'" name="'+skill+'" class="fa fa-times-circle remove" style="color:#ff5d4d; margin-left: 2px"></i></span>');
-
-            $.ajax({
-                type:"POST",
-                url:'{{ route('skill.addmore') }}',
-                data:{'skill':skill, 'psi_num':psi_num, "_token": "{{ csrf_token() }}"},
-                async:true,
-                success:function(){
-                    $("#skills").val('');
-                }
-
-            });
-        });
-    });
-
     $(function() {
         $("#psi_num").change(function() {
             var selected = $('#psi_num').val();
             if(selected != '') {
-                $('#allSkills').text('');
                 $.ajax({
                     type: 'GET',
                     url: "{{ route('leader') }}",
@@ -99,39 +62,34 @@
                                 dataType: 'json',
                                 success: function (data) {
                                     let i;
-                                    for (i = 0; i < data.length; i++) {
-                                        $('#allSkills').append('<span id="row' + i + '" style="margin: 3px; background-color: #e9e9e9">' + data[i] + '<i id="'+i+'" name="'+data[i]+'" class="fa fa-times-circle remove" style="color:#ff5d4d; margin-left: 2px"></i></span>');
-                                        $('#showSkills').show('fast');
+                                    for(i =0; i < data.masterSkills.length; i++ )
+                                    {
+                                        var check = $.inArray(data.masterSkills[i].id, data.employeeSkills);
+                                        if(check > 0)
+                                        {
+                                            console.log(data.masterSkills[i]);
+                                            var html = '<input type="checkbox" name="employeeSkills[]" value="'+data.masterSkills[i].id+'" checked>'+data.masterSkills[i].skill_name+'<br>';
+                                            $("#allSkills").append(html);
+                                        }
+                                            else
+                                        {
+                                            var html = '<input type="checkbox" name="employeeSkills[]" value="'+data.masterSkills[i].id+'">'+data.masterSkills[i].skill_name+'<br>';
+                                            $("#allSkills").append(html);
+                                        }
+
                                     }
                                 }
                             });
 
                         }
                         else {
-                            $("#employee_name").text("No Person Found");
+                            $("#employee_name").text("No employee Found");
                             $("#name_label").text('');
                             $("#showSkills").hide();
-                            $("#allSkills").text('');
                         }
                     }
                 });
             }
         });
-    });
-    $(document).on('click', '.remove', function(){
-        var button_id = $(this).attr("id");
-        var name = $(this).attr("name");
-        var psi = $("#psi_num").val();
-
-        if(confirm("Are you sure you want to delete this skill?")) {
-            $.ajax({
-                method:"get",
-                url:"{{ route('delete.skill') }}",
-                data:{skill:name, psi:psi},
-                success:function(){
-                    $('#row' + button_id + '').remove();
-                }
-            });
-        }
     });
 </script>

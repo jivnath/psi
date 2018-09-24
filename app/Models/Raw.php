@@ -105,6 +105,14 @@ WHERE
         return $secondCompanies;
     }
 
+    public static function getThirdLevelCompanies()
+    {
+        $sql = "select * from companies where master_id in (select id from companies where master_id in (SELECT id FROM `companies` WHERE master_id is null))";
+        $thirdCompanies = DB::select("$sql");
+
+        return $thirdCompanies;
+    }
+
     public static function companies($id)
     {
         $sql = "select * from companies where (id=$id or master_id=$id)";

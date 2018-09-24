@@ -64,9 +64,12 @@
                                                         <li><a class="dropdown-item" href="{{ route('company.details') }}">Company Details</a></li>
                                                          <li><a class="dropdown-item" href="{{ route('manageCompanies') }}">@lang('nav.Company')</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('shift.add') }}"> Company Shift</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('leader.create') }}"> Team Leader </a></li>
 
                                                     </ul>
                                                 </li>
+                                                <a class="dropdown-item" href="{{ route('manageSkills') }}"> Skills </a>
+
                                             </ul>
 
                                         </li>

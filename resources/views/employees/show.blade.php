@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app')
+@section('content')
 
 <section class="content">
 	<div class="row">
@@ -6,7 +7,7 @@
 		<div class="col-md-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Employees List</h3>
+					<h3 class="box-title">Employees List<a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>@lang('employee.UploadNew')</small></a></h3>
 					<div class="box-tools pull-right">
 						<div class="btn-group">
 							<button type="button" class="btn btn-box-tool dropdown-toggle"

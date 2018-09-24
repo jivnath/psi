@@ -4,14 +4,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="box">
-                    <div class="box-header">{{ "Please fill out the form below." }}</div>
+                    <div class="box-header"><h3>Team Leader</h3></div>
 
                     <div class="box-body " style="padding: 10px;">
                         <form  action="{{ route('leader.store') }}" method="POST" >
                             <input type="hidden" name="_method" value="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                            <div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-4">
                                     <label for="company_name"> Company Name </label>
                                 </div>
@@ -26,9 +26,9 @@
                                 <div class="col-md-4"></div>
                             </div>
 
-                            <div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-4">
-                                    <label for="psi_num"> PSIS_NO </label>
+                                    <label for="psi_num"> PSIS No </label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" id="psi_num" name="psi_num" class="form-control">
@@ -38,9 +38,9 @@
                                 </div>
                             </div>
 
-                            <div class="row" style="text-align: center; margin-top: 5px;">
+                            <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-4">
-                                    <label for="contact_num"> Contact NO. </label>
+                                    <label for="contact_num"> Contact No. </label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="contact_num" class="form-control">

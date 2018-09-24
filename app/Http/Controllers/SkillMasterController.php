@@ -20,10 +20,21 @@ class SkillMasterController extends Controller
         {
             $newSkill = $request->get('skill');
 
-            $skill = new SkillMaster();
-            $skill->skill_name = $newSkill;
-            $skill->status = 'enabled';
-            $skill->save();
+            $skill = SkillMaster::firstOrNew(['skill_name' => $newSkill]);
+
+//            $skill = new SkillMaster();
+            if($skill->exists)
+            {
+                $skill->status = 'enabled';
+                $skill->save();
+            }
+            else
+            {
+                $skill = new SkillMaster();
+                $skill->skill_name = $newSkill;
+                $skill->status = 'enabled';
+                $skill->save();
+            }
 
             echo json_encode($skill);
         }
