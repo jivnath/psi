@@ -1,25 +1,45 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExcelReader;
+use App\Models\CompanyToEmployee_rel;
 use App\Models\Employee;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Models\Gender;
+use App\Models\EmployeeSkill;
+use App\Models\PsiViewCustimizeModel;
 
 class EmployeeController extends Controller
 {
+
     // public function __construct()
     // {
-    //     $this->middleware(['auth', 'clearance']);
+    // $this->middleware(['auth', 'clearance']);
     // }
-    
     public function index()
     {
-        $employees = Employee::groupByCompany();
+        $employees = CompanyToEmployee_rel::groupByCompany();
+        $total = count($employees);
 
-        return view('employees.index', compact('employees'));
+        return view('employees.index', compact('employees'))->withTotal($total);
+    }
+
+    public function FetchEmployeeDetails()
+    {
+        $employee_data = Employee::with([
+            'employeeSkill'
+        ]);
+        $data['employee_data'] = $employee_data->get();
+        $data['columns'] = $employee_data->first()->columns([
+            'id',
+            'company_id',
+            'created_at',
+            'updated_at'
+        ]);
+        $data['all_col']=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
+        $data['customize_columns']=PsiViewCustimizeModel::where('type','employee')->get();
+        return view('reports.employee_details', $data);
     }
 
     public function uploadForm()
@@ -32,24 +52,40 @@ class EmployeeController extends Controller
     public function upload(ExcelReader $excelReader)
     {
         $excelReader->uploadSheet()
-                    ->iterateSheet()
-                    ->store();
+            ->iterateSheet()
+            ->checkDuplicateAndStore();
 
-        return redirect()->route('employees', ['companyId' => $excelReader->company_id]);
+        return redirect()->route('employees', [
+            'companyId' => $excelReader->company_id
+        ]);
     }
 
-    public function show(Request $request, $companyId)
+    public function show()
     {
-        $cells = Employee::byCompany($companyId);
+        // $companyToEmployee = CompanyToEmployee_rel::where('company_id', $companyId)->get();
+        // $cells = [];
+        // foreach ($companyToEmployee as $comToEmp) {
+            $cells = Employee::all();//where('psi_number', $comToEmp->psi_number)->first();
+            // array_push($cells, $cell);
+        // }
 
-        if ($cells->count() == 0) {
+        // $cells = Employee::byCompany($companyId);
+        // dd($cells);
+
+        if (count($cells) == 0) {
             return redirect()->route('employees');
         }
 
-        $columns = Employee::columns(['id', 'company_id', 'created_at']);
+        $columns = Employee::columns([
+            'id',
+            'company_id',
+            'created_at'
+        ]);
         $sex = Gender::all();
+        $all_col=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
+        $customize_columns=PsiViewCustimizeModel::where('type','employee')->get();
 
-        return view('employees.show', compact('cells', 'columns', 'companyId'))->withSex($sex);
+        return view('employees.show', compact('cells', 'columns', 'companyId','customize_columns','all_col'))->withSex($sex)/*->withCompanyToEmployee($companyToEmployee)*/;
     }
 
     public function updateCell(Request $request)
@@ -58,7 +94,9 @@ class EmployeeController extends Controller
 
         Employee::updateCell($request->all());
 
-        return response()->json(['message' => 'Cell Updated'], 200);
+        return response()->json([
+            'message' => 'Cell Updated'
+        ], 200);
     }
 
     /**

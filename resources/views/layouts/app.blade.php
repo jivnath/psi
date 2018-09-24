@@ -24,7 +24,8 @@
     <script src="{{asset('js/bootstrap-dropdownhover.js')}}"></script>
     <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
-
+    {{--<script src="https://jsdelivr.com/package/npm/sweetalert2"></script>--}}
+    <script src="{{asset('js/sweetalert.min.js')}}"></script>
 
 
 @yield('styles')
@@ -40,7 +41,7 @@
             @include('layouts.nav')
         </div>
         <div>
-            @include('layouts.messeges')
+            @include('layouts.messages')
         </div>
         <main class="py-4" style='background: #ecf0f5;'>
         @auth

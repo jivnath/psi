@@ -20,7 +20,11 @@ class Employee extends Model
     {
         //relation to employee availability
         return $this->hasOne('App\Models\EmployeeAvailability');
-    } 
+    }
+    public function employeeSkill()
+    {
+        return $this->hasMany(EmployeeSkill::class, 'psi_num', 'psi_number');
+    }
 
 
     /**

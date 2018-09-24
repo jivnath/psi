@@ -17,7 +17,8 @@ class PagesController extends Controller
     public function generator()
     {
         $allCompanies = Company::all();
-        $companies = DB::table('companies')->where('master_id', null)->get();
+        $companies = Raw::getSecondLevelCompanies();
+//        dd($companies);
         return view('pages.generator')->withCompanies($companies)->withAllCompanies($allCompanies);
     }
 

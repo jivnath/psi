@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use \PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 use App\Models\Employee;
+use App\Models\CompanyToEmployee_rel;
 
 class ExcelReader extends FormRequest
 {
@@ -87,14 +88,50 @@ class ExcelReader extends FormRequest
     }
 
     /**
-     * Store Employee data to database
+     * Check if the  Employee data already exists
      *
+     * Store the data accordingly
+     * @returns array
      */
-    public function store()
+    public function checkDuplicateAndStore()
     {
-        //dd($this->data);
+        $checkDuplicates = [];
+        $yes = [];
+        $no = [];
+//        dd($this->data);
+        for($i = 1; $i <= count($this->data); $i++)
+        {
+            $employee = Employee::firstOrNew([
+                'psi_number' => $this->data[$i]['psi_number']
+            ]);
+            if ($employee->exists) {
+
+            } else {
+                array_push($no, $this->data[$i]);
+            }
+
+            $companyToEmployee = CompanyToEmployee_rel::firstOrNew([
+                'psi_number' => $this->data[$i]['psi_number'],
+                'company_id' => $this->company_id
+            ]);
+            if ($companyToEmployee->exists)
+            {
+                break;
+            }
+            else
+            {
+                $companyToEmployee_rel = ['psi_number' => $this->data[$i]['psi_number'], 'company_id' => $this->company_id];
+
+                array_push($yes, $companyToEmployee_rel);
+            }
+        }
+        $checkDuplicates['yes'] = $yes;
+        $checkDuplicates['no'] = $no;
+//        dd($checkDuplicates['yes']);
         try {
-            Employee::inserts($this->data);
+            Employee::inserts($checkDuplicates['no']);
+            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
+
         } catch (\Exception $e) {
             // print_r($e->getMessage());
            // die;

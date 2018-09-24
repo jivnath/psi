@@ -51,7 +51,7 @@
                                                 <li class="dropdown">
                                                     <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Employees</a>
                                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <li><a class="dropdown-item" href="{{ route('employees') }}">@lang('nav.Employee')</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('employees.show') }}">@lang('nav.Employee')</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('employee.skill') }}"> Employee Skills</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('availability.add') }}"> Employee Availability</a></li>
 
@@ -61,11 +61,15 @@
                                                 <li class="dropdown">
                                                     <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Companies</a>
                                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <li><a class="dropdown-item" href="{{ route('company.create') }}">@lang('nav.Company')</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('company.details') }}">Company Details</a></li>
+                                                         <li><a class="dropdown-item" href="{{ route('manageCompanies') }}">@lang('nav.Company')</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('shift.add') }}"> Company Shift</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('leader.create') }}"> Team Leader </a></li>
 
                                                     </ul>
                                                 </li>
+                                                <a class="dropdown-item" href="{{ route('manageSkills') }}"> Skills </a>
+
                                             </ul>
 
                                         </li>
@@ -80,6 +84,17 @@
                                                 <a class="dropdown-item" href="{{ route('pages.shift') }}"> Company Shift </a>
                                                 <a class="dropdown-item" href="{{route('sheet.dessert')}}"> Self Sheet </a>
                                                 <a class="dropdown-item" href="#"> Attendance Management </a>
+                                            </div>
+                                        </li>
+                                          <li class="nav-item dropdown">
+                                            <a id="shift_management" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                <i class="fa fa-line-chart"></i>
+
+                                                @lang('nav.Rpts') <span class="caret"></span>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="report">
+                                                <a class="dropdown-item" href="{{ route('employee.detail.report') }}"><i class="fa fa-users" aria-hidden="true"></i> Employee Details </a>
                                             </div>
                                         </li>
                                         <!-- company login as -->
@@ -147,16 +162,7 @@
 
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item" href="{{route('profile', $user_id)}}">Profile</a>
-
-                                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                                       onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                                        {{ __('Logout') }}
-                                                    </a>
-
-                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                    </form>
+                                                    <a class="dropdown-item" href="#" id="logout">Logout</a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown dropdown-menu-left">
@@ -221,5 +227,34 @@
 
                     $("#logo_small").click(function () {
                         location.href = "{{route('dashboard')}}";
+                    });
+
+
+                    $("#logout").click(function(){
+                        swal({
+                            title: "Logout?",
+                            text: "Are you sure to logout?",
+                            type: "warning",
+                            buttons:true,
+                            showCancelButton: true,
+                            confirmButtonClass: "btn-warning",
+                            confirmButtonText: "Yes, delete it!",
+                            closeOnConfirm: false
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    $.ajax({
+                                        type:'POST',
+                                        data:{"_token": "{{ csrf_token() }}"},
+                                        url:"{{route('logout')}}",
+                                        success:function(data){
+                                            window.location.replace("{{route('login')}}");
+                                        }
+                                    });
+                                    }
+                                else {
+
+                                }
+                            });
                     });
                 </script>

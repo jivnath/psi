@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="box">
-            <div class="box-header">{{ "Please fill out the form below." }}</div>
+            <div class="box-header"><h4>{{ "Company Edit." }}</h4></div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="box-body " style="padding: 10px;">
@@ -60,7 +60,7 @@
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-4">
-                                    <label for="address"> Edit Sub Company </label>
+                                    <label for="address"> Section </label>
                                 </div>
 
                                 <div class="col-md-4">
@@ -82,7 +82,7 @@
                             <div class="row">
                                 <div class="col-md-3"></div>
                                 <div class="col-md-3">
-                                    <label for="subname" class="small-text"> Name </label>
+                                    <label for="subname" class="small-text"> Section </label>
                                 </div>
                                 <div class="col-md-3">
                                         <input type="text" class="form-control input-sm" value="" name="subname">
@@ -94,7 +94,7 @@
                                 <hr>
                                 <div class="col-md-3"></div>
                                 <div class="col-md-3">
-                                    <label for="sub_master" class="small-text"> Master Company </label>
+                                    <label for="sub_master" class="small-text"> Company </label>
                                 </div>
                                 <div class="col-md-3">
                                         <select id="sub_master" name="submaster" class="form-control select-sm">
@@ -191,7 +191,7 @@
             var master = $('input[name="submaster"]').val();
                 $.ajax({
                     type:'POST',
-                    url: '{{ route('subcompany') }}',
+                    url: "{{ route('subcompany') }}",
                     data:{'name':name, 'address':address, 'contact':contact, 'master':master, 'id':id, "_token": "{{ csrf_token() }}"},
                     async: true,
                     success: function(data){

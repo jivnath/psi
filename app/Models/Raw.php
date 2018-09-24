@@ -8,6 +8,60 @@ use App\Models\Company;
 class Raw extends Model
 {
 
+    public static function AllCompanyData()
+    {
+        $sql = "SELECT
+            p.id AS parent_id,
+            p.name AS parent_name,
+            c1.id AS child_id_1,
+            c1.name AS child_name_1,
+            c2.id AS child_id_2,
+            c2.name AS child_name_2,
+            c3.id AS child_id_3,
+            c3.name AS child_name_3,
+            p.contact_num,
+            c1.contact_num contact_c1,
+            c2.contact_num contact_c2,
+            p.address address_p,
+            c1.address address_c1,
+            c2.address address_c2,
+            CASE
+                    WHEN c1.id IS NULL
+                         AND c2.id IS NULL
+                         AND c3.id IS NULL THEN 0
+                    WHEN c1.id IS NOT NULL
+                         AND c2.id IS NULL
+                         AND c3.id IS NULL THEN 1
+                    WHEN c1.id IS NOT NULL
+                         AND c2.id IS NOT NULL
+                         AND c3.id IS NULL THEN 2
+
+                    ELSE -1
+                END
+            level
+        FROM
+            companies p
+            LEFT JOIN companies c1 ON c1.master_id = p.id
+            LEFT JOIN companies c2 ON c2.master_id = c1.id
+            LEFT JOIN companies c3 ON c3.master_id = c2.id
+where     p.master_id IS NULL
+        ORDER BY
+            p.id,c1.id,c2.id,c3.id ASC";
+        $companies = DB::select($sql);
+
+        foreach ($companies as $row) {
+            $fetch_detail[$row->parent_name][$row->child_name_1][$row->child_name_2][][] = [
+                'contact_p' => ($row->contact_num)?$row->contact_num:'...',
+                'contact_c1' => ($row->contact_c1)?$row->contact_c1:'...',
+                'contact_c2' => ($row->contact_c2)?$row->contact_c2:'...',
+                'address_p' => ($row->address_p)?$row->address_p:'...',
+                'address_c1' => ($row->address_c1)?$row->address_c1:'...',
+                'address_c2' => ($row->address_c2)?$row->address_c2:'...'
+            ];
+        }
+        return $fetch_detail;
+    }
+
     public static function totalNecessary_()
     {
         DB::select("SELECT
@@ -40,6 +94,23 @@ FROM
 WHERE
     cts.companytt_id = ctt.id
     AND companytt_id = 12;");
+    }
+
+    public static function getSecondLevelCompanies()
+    {
+        $sql = "select id,name from companies where master_id in (SELECT id FROM `companies` WHERE `master_id` is null)";
+
+        $secondCompanies = DB::select("$sql");
+
+        return $secondCompanies;
+    }
+
+    public static function getThirdLevelCompanies()
+    {
+        $sql = "select * from companies where master_id in (select id from companies where master_id in (SELECT id FROM `companies` WHERE master_id is null))";
+        $thirdCompanies = DB::select("$sql");
+
+        return $thirdCompanies;
     }
 
     public static function companies($id)

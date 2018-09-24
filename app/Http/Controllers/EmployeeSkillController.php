@@ -3,68 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Models\EmployeeSkill;
+use App\Models\SkillMaster;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-//use App\Models\EmployeeSkill;
 
 class EmployeeSkillController extends Controller
 {
     public function add()
     {
-        return view('employees.skill');
+        $masterSkills = SkillMaster::where('status', 'enabled')->get();
+        return view('employees.skill')->withMasterSkills($masterSkills);
     }
 
     public function store(Request $request)
     {
-        $emp_skill = new EmployeeSkill();
-
-        $emp_skill->psi_num = $request->psi_num;
-        $emp_skill->skill = $request->skill;
-
-        $emp_skill->save();
-    }
-
-    public function addSkill(Request $request)
-    {
-        if ($request->ajax()) {
-            $psi_num = $request->get('psi_num');
-            $skill = $request->get('skill');
-            if ($psi_num && $skill != null) {
-                $emp_skill = new EmployeeSkill();
-
-                $emp_skill->skill = $skill;
-                $emp_skill->psi_num = $psi_num;
-
-                $emp_skill->save();
-
-            }
+        $update_data=[];
+        $employeeSkills= $request->employeeSkills;
+        $psi_num = $request->psi_num;
+        $emp_skills = EmployeeSkill::where('psi_num', $psi_num)->get();
+        foreach ($emp_skills as $emp)
+        {
+            $emp->delete();
         }
+//        dd($employeeSkills);
+        if(isset($employeeSkills))
+        {
+            foreach ($employeeSkills as $skill){
+                $update_data[]=['psi_num'=>$psi_num,'skill_id'=>$skill];
+            }
+            EmployeeSkill::insert($update_data);
+        }
+        return redirect()->route('employee.skill');
     }
-    public function findSkill (Request $request)
+
+    public function findSkill(Request $request)
     {
 
-            $psi_num = $request->get('selected');
+        $psi_num = $request->get('selected');
 
-            $sk = EmployeeSkill::where('psi_num', $psi_num)->get();
-            if($sk) {
-                $ski = [];
-                foreach ($sk as $s)
-                    array_push($ski, $s->skill);
-            }
-
-            else
-                $ski = '';
-
-
-        echo json_encode($ski);
+        $skill = EmployeeSkill::where('psi_num', $psi_num)->get();
+        $masterSkills = SkillMaster::where('status', 'enabled')->get();
+        $skills = [];
+        if ($skill) {
+            foreach ($skill as $s)
+                array_push($skills, $s->skill_id);
+        }
+        $data=[
+            'employeeSkills' => $skills,
+            'masterSkills' => $masterSkills
+        ];
+            echo json_encode($data);
     }
 
     public function removeSkill(Request $request)
     {
-        if ($request->ajax())
-        {
+        if ($request->ajax()) {
             $psi = $request->get('psi');
-            $skill= $request->get('skill');
+            $skill = $request->get('skill');
 
             $sk = EmployeeSkill::where('psi_num', $psi)->where('skill', $skill)->first();
             if ($sk)
