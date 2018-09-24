@@ -2,12 +2,12 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <center> Please Fill up the Form</center>
+            <div class="box">
+                <div class="box-header">
+                    <center> Choose Employee</center>
                 </div>
 
-                <div class="card-body" style="align:center">
+                <div class="box-body" style="align:center">
                     <form action="{{ route('skill.store') }}" method="POST">
                         @csrf
                         <div class="row" style="text-align: right">
@@ -47,8 +47,6 @@
                             </div>
                             <div class="col-md-2"></div>
                         </div>
-
-
                     </form>
                 </div>
             </div>

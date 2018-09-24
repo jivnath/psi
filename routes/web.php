@@ -20,12 +20,14 @@ Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'Use
 Route::get('/primary/{id}', ['as'=>'selectPrimary', 'uses'=>'UserController@selectPrimary']);
 Route::get('/select/primary', 'UserController@primary')->name('primary');
 
-Route::get('employee/login', 'Employee\EmployeeController@getLogin');
-Route::post('employee/login', 'Employee\EmployeeController@postLogin');
-Route::get('employee/logout', 'Employee\EmployeeController@getLogout');
+Route::get('employee/login', 'Employee\LoginController@getLogin');
+Route::post('employee/login', 'Employee\LoginController@login')->name('employee.login');
+Route::get('employee/logout', 'Employee\EmployeeController@logout');
 
 Auth::routes();
+Route::group(['middleware'=> ['employee']], function(){
 
+});
 Route::group(['middleware' => ['auth']], function () {
 //    Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {

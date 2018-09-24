@@ -1,24 +1,26 @@
 <?php
 namespace App\Http\Controllers\Employee;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 class LoginController extends Controller
 {
-    /*
-     * |--------------------------------------------------------------------------
-     * | Login Controller
-     * |--------------------------------------------------------------------------
-     * |
-     * | This controller handles authenticating users for the application and
-     * | redirecting them to your home screen. The controller uses a trait
-     * | to conveniently provide its functionality to your applications.
-     * |
-     */
-
     use AuthenticatesUsers;
+    /**
+     * Show the application’s login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogin()
+    {
+        return view('employee_login.login');
+    }
+
+    protected function guard(){
+        return Auth::guard('employee');
+    }
 
     /**
      * Where to redirect users after login.
@@ -27,43 +29,27 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/dashboard';
 
+    protected $psi_number = 'psi_number';
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function showLoginForm()
+    public function __construct()
     {
-        return view('employee.login');
+        $this->middleware('guest:employee')->except('logout');
     }
 
     public function username()
     {
-        return 'psi_number';
+        $login = request()->input('psi_number');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'psi_number';
+        request()->merge([$field => $login]);
+        return $field;
     }
 
-    protected function validateLogin(Request $request)
-    {
-        $this->validate($request, [
-            $this->username() => 'required|integer',
-            'password' => 'required|string',
-        ]);
-    }
-
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
-    public function authenticated(Request $request)
-    {
-
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/employee/login');
-    }
-
+//    public function postLogin()
+//    {
+//
+//    }
 }

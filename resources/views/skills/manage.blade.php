@@ -56,13 +56,20 @@
         });
         $(document).on('click', '#remove', function () {
             var id = $(this).attr('name');
+            console.log(id);
             $.ajax({
                 type: "POST",
                 url: "{{route('skills.master.remove')}}",
                 data: {'id': id},
-                dataType: "json",
-                success: function (data) {
-                    $('#skill'+id+'').remove();
+                beforeSend:function(){
+                  console.log('deleting....');
+                },
+                success: function (data,status) {
+                    console.log('deleted');
+                    $('#skill'+id).remove();
+                },
+                error: function (request, status, error) {
+                    console.log(error);
                 }
             });
         });

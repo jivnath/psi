@@ -39,6 +39,7 @@ class SkillMasterController extends Controller
             $skill->status = 'disabled';
 
             $skill->save();
+            return response()->json($skill);
         }
     }
 }
