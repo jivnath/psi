@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::prefix('column')->group(function(){
                 Route::post('/customize','CustomerTableView@saveCustomizedField')->name('customize.field');
+                Route::get('/update_field/{type}','CustomerTableView@update_table_view')->name('field_update');
          });
 
         Route::prefix('company')->group(function () {
