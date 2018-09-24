@@ -118,6 +118,8 @@ WHERE
         $sql = "SELECT skill_id, (select skill_name from psi_skill_master p where p.id =skill_id) name, COUNT(*) as count FROM `employee_skills` group by skill_id";
         $skills = DB::select("$sql");
 
+//        dd($skills);
+
         return $skills;
     }
 

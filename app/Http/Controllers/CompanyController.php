@@ -284,8 +284,7 @@ class CompanyController extends Controller
             $sub->name = $name;
             $sub->master_id = $master;
             $sub->contact_num = $company->contact_num;
-            $sub->address = $company->address;
-
+            $sub->address = $company->addre
             $sub->save();
 
             $data = [

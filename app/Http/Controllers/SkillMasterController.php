@@ -60,4 +60,20 @@ class SkillMasterController extends Controller
             return response()->json($skill);
         }
     }
+
+    public function rename(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->get('id');
+            $name = $request->get('skill');
+
+            $skill = SkillMaster::findOrFail($id);
+            $skill->skill_name = $name;
+
+            $skill->save();
+
+            return response()->json($skill);
+        }
+    }
 }
