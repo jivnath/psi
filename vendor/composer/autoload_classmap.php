@@ -2688,6 +2688,8 @@ return array(
     'PhpParser\\Builder\\Namespace_' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Namespace_.php',
     'PhpParser\\Builder\\Param' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Param.php',
     'PhpParser\\Builder\\Property' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Property.php',
+    'PhpParser\\Builder\\TraitUse' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/TraitUse.php',
+    'PhpParser\\Builder\\TraitUseAdaptation' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/TraitUseAdaptation.php',
     'PhpParser\\Builder\\Trait_' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Trait_.php',
     'PhpParser\\Builder\\Use_' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Use_.php',
     'PhpParser\\Comment' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Comment.php',
