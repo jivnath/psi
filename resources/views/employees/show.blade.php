@@ -34,21 +34,27 @@
 							</tr>
 						</thead>
 						<tbody>
-							@if(count($cells) > 0) @foreach($cells as $index => $cell)
+							@if(count($cells) > 0)
+							@foreach($cells as $index => $cell)
 							<tr>
-								@foreach($all_col as $column) @if($column->field_name != 'updated_at' &&
-								$column->field_name != 'psi_number')
-								<td class="contenteditable" data-column="{{ $column->field_name }}"
-									data-old="" contenteditable="true">@if ($column->field_name == 'sex') <select
-									name="sex"> @foreach($sex as $s)
-										<option
-										<?= ($cell->$column->field_name==$s->name)? 'selected="selected"':''?>
-											value="$s->id">{{ $s->name }}</option> @endforeach
-								</select> @else {{ $cell->{$column->field_name} }} @endif
-								</td> @else
-								<td>{{ $cell->{$column->field_name} }}</td> @endif @endforeach
+								@foreach($all_col as $column)
+    								@if($column->field_name != 'updated_at' && $column->field_name != 'psi_number')
+        								<td class="contenteditable" data-column="{{ $column->field_name }}"
+        									data-old="" contenteditable="true">
+        									@if ($column->field_name == 'sex')
+        									<select name="sex">
+        										@foreach($sex as $s)
+        										<option <?= ($cell->{$column->field_name}==$s->name)? 'selected="selected"':''?> value="{{$s->id}}">{{ $s->name }}</option>
+        										@endforeach
+        								</select> @else {{ $cell->{$column->field_name} }} @endif
+        								</td>
+    								@else
+    								<td>{{ $cell->{$column->field_name} }}</td>
+    								@endif
+								@endforeach
 							</tr>
-							@endforeach @else
+							@endforeach
+							@else
 							<tr>
 								<td colspan="6">No sheets are uploaded</td>
 							</tr>
