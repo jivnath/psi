@@ -10616,7 +10616,7 @@ table.floatThead-table {
   transition: all .3s ease;
 }
 .custom-radios input[type="radio"]#color-1 + label span {
-  background-color: #2ecc71;
+  background-color: #ff0000;
 }
 .custom-radios input[type="radio"]#color-2 + label span {
   background-color: #3498db;

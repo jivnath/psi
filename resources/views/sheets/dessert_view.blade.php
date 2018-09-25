@@ -57,16 +57,8 @@ corresponding value from the list below*/
 
                 <div class="custom-radios" style='margin: 0 auto;'>
                   <div>
-                    <input type="radio" id="color-1" name="color" value="green">
+                    <input type="radio" id="color-1" name="color" value="red">
                     <label for="color-1">
-                      <span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <input type="radio" id="color-2" name="color" value="blue">
-                    <label for="color-2">
                       <span>
                       </span>
                     </label>
