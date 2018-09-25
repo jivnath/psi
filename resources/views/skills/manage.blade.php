@@ -5,9 +5,9 @@
             <div class="box">
                 <div class="box-header"><h3>Skills Master</h3></div>
                 <div class="box-body">
-                    <div class="form-group">
+                    <div class="form-group" id="box">
                         <label for="skill"><h5><b>Skills</b></h5></label>
-                        <input type="text" class="form-control input-shorter" placeholder="Add New Skill" id="skill"
+                        <input type="text" class="form-control input-shorter" placeholder="Enter Skill" id="skill"
                                required>
                         <span id="add" style="margin-top: 10px" class="btn btn-success">Add</span>
                     </div>
@@ -26,16 +26,19 @@
                                 <tr>
                                     <th> Skills</th>
                                     <th> No. of Employee</th>
-                                    <th> Action</th>
+                                    <th> Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($skills as $skill)
-                                    <tr id="skill{{$skill->id}}">
-                                        <td>{{$skill->skill_name}}</td>
-                                        <td>5</td>
+                                    <tr id="skill{{$skill->skill_id}}">
+                                        <td id="skillname{{$skill->skill_id}}">{{$skill->name}}</td>
+                                        <td>{{$skill->count}}</td>
                                         <td><span id="remove" class="btn btn-link"
-                                                  name="{{$skill->id}}">Delete</span></td>
+                                                  name="{{$skill->skill_id}}">Delete</span>
+                                            <span id="rename" data-name="{{$skill->name}}" class="btn btn-link"
+                                                  name="{{$skill->skill_id}}">Rename</span>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -65,7 +68,7 @@
             }
         });
 
-        $("#add").click(function () {
+        $(document).on('click', '.add', function() {
             var skill = $("#skill").val();
             $.ajax({
                 type: "POST",
@@ -73,18 +76,18 @@
                 data: {'skill': skill},
                 dataType: "json",
                 success: function (data) {
-                    if(data==0)
-                    {
-                        alert('Skill '+skill+' already exists!!!');
+                    if (data == 0) {
+                        alert('Skill ' + skill + ' already exists!!!');
                     }
-                    else
-                    {
+                    else {
                         $("#noSkills").hide();
                         // var html = '<span id="skill' + data.id + '">' + data.skill_name + ' &nbsp;<i class="fa fa-trash" style="font-size:16px;color:red" id="remove" name="' + data.id + '"></i><br></span>'
                         let newRow = '<tr id="skill' + data.id + '">' +
-                            '<td>' + data.skill_name + '</td>' +
+                            '<td id="skillname'+data.id+'">' + data.skill_name + '</td>' +
                             '<td>5</td>' +
-                            '<td><span id="remove" class="btn btn-link" name="' + data.id + '">Delete</span></td></tr>';
+                            '<td><span id="remove" class="btn btn-link" name="' + data.id + '">Delete</span>' +
+                            '<span id="rename" data-name="'+skill+' class="btn btn-link" name="' + data.id + '">Delete</span>' +
+                            '</td></tr>';
                         $("table tbody").append(newRow);
                         $("#skill").val('');
                     }
@@ -103,7 +106,13 @@
                     // $('#skill'+id).hide();
                     $('#skill' + id).remove();
                     var text = $("#allSkills").html();
-                    console.log(text);
+                    $(this).hide();
+                    $("#add").addClass('add');
+                    $("#add").removeClass('rename');
+                    $("#add").text('Add');
+                    $("#skill").val('');
+
+                    // console.log(text);
                     // if(text=='')
                     // {
                     //     $("#skillDiv").hide();
@@ -112,6 +121,44 @@
                 },
                 error: function (request, status, error) {
 
+                }
+            });
+        });
+        $(document).on('click', '#rename', function () {
+            var id = $(this).attr('name');
+            var skill = $(this).attr('data-name');
+            $("#add").removeClass('add');
+            $("#add").addClass('rename');
+            $("#add").text('Rename');
+            $("#add").attr('data-id', id);
+            $("#skill").val(skill);
+            var button = '<span id="cancel" style="margin-top:10px" class="btn btn-danger">Cancel</span>';
+            $("#box").append(button);
+        });
+
+        $(document).on('click', '#cancel', function(){
+            $(this).hide();
+            $("#add").addClass('add');
+            $("#add").removeClass('rename');
+            $("#add").text('Add');
+            $("#skill").val('');
+        });
+
+        $(document).on('click', '.rename', function() {
+            var id = $(this).attr('data-id');
+            var skill = $('#skill').val();
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{{route('skills.master.rename')}}",
+                data: {'id': id, 'skill':skill},
+                success: function (data, status) {
+                    $('#skillname'+id).text(skill);
+                    $("#add").removeClass('rename');
+                    $("#add").addClass('add');
+                    $("#add").text('Add');
+                    $('#skill').val('');
+                    alert(skill);
                 }
             });
         });

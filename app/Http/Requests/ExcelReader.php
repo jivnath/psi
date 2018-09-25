@@ -35,7 +35,7 @@ class ExcelReader extends FormRequest
     public function rules()
     {
         return [
-            'company_id' => 'bail|required:exists,companies',
+//            'company_id' => 'bail|required:exists,companies',
             'excelFile' => 'required|mimes:xls,xlsx'
         ];
     }
@@ -76,14 +76,13 @@ class ExcelReader extends FormRequest
                 for ($col = 1; $col <= $highestColumnIndex; ++$col) {
                     $value = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
                     //echo $value . ' - ';
-                    if ($col == 1 && Employee::isRecordExist((int)$value, $this->company_id)) {
-                        break;
-                    }
+//                    if ($col == 1 && Employee::isRecordExist((int)$value, $this->company_id)) {
+//                        break;
+//                    }
                     $this->setColumnData($columns, $value, $row - 1, $col - 1, $highestColumnIndex);
                 }
             }
         }
-
         return $this;
     }
 
@@ -96,7 +95,7 @@ class ExcelReader extends FormRequest
     public function checkDuplicateAndStore()
     {
         $checkDuplicates = [];
-        $yes = [];
+//        $yes = [];
         $no = [];
 //        dd($this->data);
         for($i = 1; $i <= count($this->data); $i++)
@@ -105,36 +104,39 @@ class ExcelReader extends FormRequest
                 'psi_number' => $this->data[$i]['psi_number']
             ]);
             if ($employee->exists) {
-
-            } else {
+                break;
+            }
+            else {
                 array_push($no, $this->data[$i]);
             }
 
-            $companyToEmployee = CompanyToEmployee_rel::firstOrNew([
-                'psi_number' => $this->data[$i]['psi_number'],
-                'company_id' => $this->company_id
-            ]);
-            if ($companyToEmployee->exists)
-            {
-                break;
-            }
-            else
-            {
-                $companyToEmployee_rel = ['psi_number' => $this->data[$i]['psi_number'], 'company_id' => $this->company_id];
 
-                array_push($yes, $companyToEmployee_rel);
-            }
+//            $companyToEmployee = CompanyToEmployee_rel::firstOrNew([
+//                'psi_number' => $this->data[$i]['psi_number'],
+//                'company_id' => $this->company_id
+//            ]);
+//            if ($companyToEmployee->exists)
+//            {
+//                break;
+//            }
+//            else
+//            {
+//                $companyToEmployee_rel = ['psi_number' => $this->data[$i]['psi_number'], 'company_id' => $this->company_id];
+//
+//                array_push($yes, $companyToEmployee_rel);
+//            }
         }
-        $checkDuplicates['yes'] = $yes;
+//        dd($no);
+//        $checkDuplicates['yes'] = $yes;
         $checkDuplicates['no'] = $no;
 //        dd($checkDuplicates['yes']);
         try {
             Employee::inserts($checkDuplicates['no']);
-            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
+//            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
 
         } catch (\Exception $e) {
-            // print_r($e->getMessage());
-           // die;
+             print_r($e->getMessage());
+            die;
         }
     }
 

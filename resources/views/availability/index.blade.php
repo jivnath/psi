@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="box">
-                <div class="box-header"><h3>{{ 'Employee Availability' }}</h3></div>
+                <div class="box-header"><h4>{{ 'Employee Availability' }}</h4></div>
 
                 <div class="box-body">
                     <div class="row">

@@ -8546,7 +8546,7 @@ button.bg-dark:focus {
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 1030;
+  z-index: 1;
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -8554,7 +8554,7 @@ button.bg-dark:focus {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1020;
+    z-index: 1;
   }
   .sticky-left {
     position: -webkit-sticky;

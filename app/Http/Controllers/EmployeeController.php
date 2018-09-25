@@ -44,9 +44,9 @@ class EmployeeController extends Controller
 
     public function uploadForm()
     {
-        $companies = Company::pluck('name', 'id');
+//        $companies = Company::pluck('name', 'id');
 
-        return view('employees.upload', compact('companies'));
+        return view('employees.upload');
     }
 
     public function upload(ExcelReader $excelReader)
@@ -55,9 +55,7 @@ class EmployeeController extends Controller
             ->iterateSheet()
             ->checkDuplicateAndStore();
 
-        return redirect()->route('employees', [
-            'companyId' => $excelReader->company_id
-        ]);
+        return redirect()->route('employees.show');
     }
 
     public function show()
@@ -72,20 +70,19 @@ class EmployeeController extends Controller
         // $cells = Employee::byCompany($companyId);
         // dd($cells);
 
-        if (count($cells) == 0) {
-            return redirect()->route('employees');
-        }
+//        if (count($cells) == 0) {
+//            return redirect()->route('employees');
+//        }
 
         $columns = Employee::columns([
             'id',
-            'company_id',
             'created_at'
         ]);
         $sex = Gender::all();
         $all_col=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
         $customize_columns=PsiViewCustimizeModel::where('type','employee')->get();
 
-        return view('employees.show', compact('cells', 'columns', 'companyId','customize_columns','all_col'))->withSex($sex)/*->withCompanyToEmployee($companyToEmployee)*/;
+        return view('employees.show', compact('cells', 'columns', 'customize_columns','all_col'))->withSex($sex)/*->withCompanyToEmployee($companyToEmployee)*/;
     }
 
     public function updateCell(Request $request)
@@ -105,7 +102,6 @@ class EmployeeController extends Controller
     protected function cellRules()
     {
         return [
-            'company_id' => 'bail|required',
             'psi_num' => 'bail|required',
             'column' => 'bail|required',
             'value' => 'bail|required'

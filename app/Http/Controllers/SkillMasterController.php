@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\SkillMaster;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Raw;
 
 class SkillMasterController extends Controller
 {
     public function manage()
     {
-        $skills = SkillMaster::where('status', 'enabled')->get();
+        $skills = Raw::getSkillsDetails();
         return view('skills.manage')->withSkills($skills);
     }
 
@@ -56,6 +57,22 @@ class SkillMasterController extends Controller
             $skill->status = 'disabled';
 
             $skill->save();
+            return response()->json($skill);
+        }
+    }
+
+    public function rename(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->get('id');
+            $name = $request->get('skill');
+
+            $skill = SkillMaster::findOrFail($id);
+            $skill->skill_name = $name;
+
+            $skill->save();
+
             return response()->json($skill);
         }
     }
