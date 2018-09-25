@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\SkillMaster;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Raw;
 
 class SkillMasterController extends Controller
 {
     public function manage()
     {
-        $skills = SkillMaster::where('status', 'enabled')->get();
+        $skills = Raw::getSkillsDetails();
         return view('skills.manage')->withSkills($skills);
     }
 

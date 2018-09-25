@@ -32,8 +32,8 @@
                                 <tbody>
                                 @foreach($skills as $skill)
                                     <tr id="skill{{$skill->id}}">
-                                        <td>{{$skill->skill_name}}</td>
-                                        <td>5</td>
+                                        <td>{{$skill->name}}</td>
+                                        <td>{{$skill->count}}</td>
                                         <td><span id="remove" class="btn btn-link"
                                                   name="{{$skill->id}}">Delete</span></td>
                                     </tr>
