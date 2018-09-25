@@ -19,23 +19,29 @@ class SkillMasterController extends Controller
         if($request->ajax())
         {
             $newSkill = $request->get('skill');
-
-            $skill = SkillMaster::firstOrNew(['skill_name' => $newSkill]);
-
-//            $skill = new SkillMaster();
-            if($skill->exists)
+//dd(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->get());
+            if(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->get())
             {
-                $skill->status = 'enabled';
-                $skill->save();
+                $skill = 0;
             }
             else
             {
-                $skill = new SkillMaster();
-                $skill->skill_name = $newSkill;
-                $skill->status = 'enabled';
-                $skill->save();
-            }
+                $skill = SkillMaster::firstOrNew(['skill_name' => $newSkill]);
 
+//            $skill = new SkillMaster();
+                if($skill->exists)
+                {
+                    $skill->status = 'enabled';
+                    $skill->save();
+                }
+                else
+                {
+                    $skill = new SkillMaster();
+                    $skill->skill_name = $newSkill;
+                    $skill->status = 'enabled';
+                    $skill->save();
+                }
+            }
             echo json_encode($skill);
         }
     }

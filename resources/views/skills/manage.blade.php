@@ -14,49 +14,47 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            @if(count($skills)>0)
-                <div>
-                    <h5><b>All Skills</b></h5>
-                    <div id="allSkills">
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th> Skills</th>
-                                <th> No. of Employee</th>
-                                <th> Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($skills as $skill)
-                                <tr id="skill{{$skill->id}}">
-                                    <td>{{$skill->skill_name}}</td>
-                                    <td>5</td>
-                                    <td><span id="remove" class="btn btn-link" name="{{$skill->id}}">Delete</span></td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {{--@foreach($skills as $skill)--}}
-                        {{--<span id="skill{{$skill->id}}">{{$skill->skill_name}} <i class="fa fa-trash"--}}
-                        {{--id="remove"--}}
-                        {{--style="font-size:16px;color:red"--}}
-                        {{--name="{{$skill->id}}"></i><br></span>--}}
-                        {{--@endforeach--}}
-                    </div>
-                </div>
-                <p style="display:none;" id="noSkills">No Skills Available</p>
 
-            @else
-                <div id="skillDiv" style="margin-top:25px;display: none">
-                    <h5><b>All Skills</b></h5>
-                    <div id="allSkills">
-                    </div>
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header"><h5><b>All Skills</b></h5></div>
+                <div class="box-body">
+                    @if(count($skills)>0)
+                        <div id="allSkills">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th> Skills</th>
+                                    <th> No. of Employee</th>
+                                    <th> Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($skills as $skill)
+                                    <tr id="skill{{$skill->id}}">
+                                        <td>{{$skill->skill_name}}</td>
+                                        <td>5</td>
+                                        <td><span id="remove" class="btn btn-link"
+                                                  name="{{$skill->id}}">Delete</span></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <p style="display:none;" id="noSkills">No Skills Available</p>
+                    @else
+                        <div id="skillDiv" style="margin-top:25px;display: none">
+                            <h5><b>All Skills</b></h5>
+                            <div id="allSkills">
+                            </div>
+                        </div>
+                        <p id="noSkills">No Skills Available</p>
+                    @endif
                 </div>
-                <p id="noSkills">No Skills Available</p>
-            @endif
+            </div>
         </div>
     </div>
+
 @endsection
 
 @push('scripts')
@@ -75,14 +73,21 @@
                 data: {'skill': skill},
                 dataType: "json",
                 success: function (data) {
-                    $("#noSkills").hide();
-                    // var html = '<span id="skill' + data.id + '">' + data.skill_name + ' &nbsp;<i class="fa fa-trash" style="font-size:16px;color:red" id="remove" name="' + data.id + '"></i><br></span>'
-                    let newRow = '<tr id="skill' + data.id + '">' +
-                        '<td>' + data.skill_name + '</td>' +
-                        '<td>5</td>' +
-                        '<td><span id="remove" class="btn btn-link" name="' + data.id + '">Delete</span></td></tr>';
-                    $("table tbody").append(newRow);
-                    $("#skill").val('');
+                    if(data==0)
+                    {
+                        alert('Skill '+skill+' already exists!!!');
+                    }
+                    else
+                    {
+                        $("#noSkills").hide();
+                        // var html = '<span id="skill' + data.id + '">' + data.skill_name + ' &nbsp;<i class="fa fa-trash" style="font-size:16px;color:red" id="remove" name="' + data.id + '"></i><br></span>'
+                        let newRow = '<tr id="skill' + data.id + '">' +
+                            '<td>' + data.skill_name + '</td>' +
+                            '<td>5</td>' +
+                            '<td><span id="remove" class="btn btn-link" name="' + data.id + '">Delete</span></td></tr>';
+                        $("table tbody").append(newRow);
+                        $("#skill").val('');
+                    }
                 }
             });
         });

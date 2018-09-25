@@ -17,21 +17,21 @@ class EmployeeSkillController extends Controller
 
     public function store(Request $request)
     {
-        $employeeSkills[] = $request['employeeSkills'];
+        $update_data=[];
+        $employeeSkills= $request->employeeSkills;
         $psi_num = $request->psi_num;
+        $emp_skills = EmployeeSkill::where('psi_num', $psi_num)->get();
+        foreach ($emp_skills as $emp)
+        {
+            $emp->delete();
+        }
 //        dd($employeeSkills);
         if(isset($employeeSkills))
         {
-//            foreach($employeeSkills as $skill)
-            for($i=0; $i<(count($employeeSkills)); $i++)
-            {
-//                dd($employeeSkills[$i]);
-                $emp_skill = new EmployeeSkill();
-
-                $emp_skill->psi_num = $psi_num;
-                $emp_skill->skill_id = $employeeSkills[$i];
-                $emp_skill->save();
+            foreach ($employeeSkills as $skill){
+                $update_data[]=['psi_num'=>$psi_num,'skill_id'=>$skill];
             }
+            EmployeeSkill::insert($update_data);
         }
         return redirect()->route('employee.skill');
     }
