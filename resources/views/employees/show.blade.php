@@ -27,7 +27,7 @@
 						<thead>
 							<tr>
 								@foreach($all_col as $column)
-								<th class="sticky" style="word-wrap: break-word">{{__('employee.'.
+								<th class="sticky-top" style="word-wrap: break-word">{{__('employee.'.
 									ucwords(str_replace('_','',ucwords($column->field_name,'_'))))}}</th>
 								@endforeach
 
@@ -123,15 +123,15 @@
         })
     });
 
-    var stickyOffset = $('.sticky').offset().top;
-
-    $(window).scroll(function(){
-        var sticky = $('.sticky'),
-            scroll = $(window).scrollTop();
-
-        if (scroll > stickyOffset) sticky.addClass('sticky-top');
-        else sticky.removeClass('sticky-top');
-    });
+    // var stickyOffset = $('.sticky').offset().top;
+	//
+    // $(window).scroll(function(){
+        // var sticky = $('.sticky'),
+        //     scroll = $(window).scrollTop();
+		//
+        // if (scroll > stickyOffset) sticky.addClass('fixed-top');
+        // else sticky.removeClass('fixed-top');
+    // });
     $('#view_columns').click(function(){
     	$('#exampleModalLong').modal('show');
      });

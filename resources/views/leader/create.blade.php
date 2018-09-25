@@ -2,7 +2,7 @@
 
 @section('content')
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header"><h3>Team Leader</h3></div>
 
@@ -12,10 +12,11 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label for="company_name"> Company Name </label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
+                                    {{--{{dd($companies)}}--}}
                                     <select name="company_name" class="form-control">
                                         @foreach($companies as $company)
                                             <option value="{{$company->id}}" class="form-control"> {{ $company->name  }} </option>
@@ -27,10 +28,10 @@
                             </div>
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label for="psi_num"> PSIS No </label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <input type="text" id="psi_num" name="psi_num" class="form-control">
                                 </div>
                                 <div class="col-md-4">
@@ -39,23 +40,23 @@
                             </div>
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <label for="contact_num"> Contact No. </label>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <input type="text" name="contact_num" class="form-control">
                                 </div>
                                 <div class="col-md-4"></div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-4">
-                                        <button style="margin-top: 15px" type="submit" class="btn btn-primary">
-                                            Save
-                                        </button>
-                                    </div>
+                            <div class="row" style="margin-top: 15px; text-align:right">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
+                                    </button>
                                 </div>
+                                <div class="col-md-4"></div>
                             </div>
                         </form>
                     </div>

@@ -32,7 +32,7 @@
                                 <tbody>
                                 @foreach($skills as $skill)
                                     <tr id="skill{{$skill->skill_id}}">
-                                        <td id="skill{{$skill->skill_id}}">{{$skill->name}}</td>
+                                        <td id="skillname{{$skill->skill_id}}">{{$skill->name}}</td>
                                         <td>{{$skill->count}}</td>
                                         <td><span id="remove" class="btn btn-link"
                                                   name="{{$skill->skill_id}}">Delete</span>
@@ -83,7 +83,7 @@
                         $("#noSkills").hide();
                         // var html = '<span id="skill' + data.id + '">' + data.skill_name + ' &nbsp;<i class="fa fa-trash" style="font-size:16px;color:red" id="remove" name="' + data.id + '"></i><br></span>'
                         let newRow = '<tr id="skill' + data.id + '">' +
-                            '<td id="skill'+data.id+'">' + data.skill_name + '</td>' +
+                            '<td id="skillname'+data.id+'">' + data.skill_name + '</td>' +
                             '<td>5</td>' +
                             '<td><span id="remove" class="btn btn-link" name="' + data.id + '">Delete</span>' +
                             '<span id="rename" data-name="'+skill+' class="btn btn-link" name="' + data.id + '">Delete</span>' +
@@ -121,7 +121,6 @@
         $(document).on('click', '#rename', function () {
             var id = $(this).attr('name');
             var skill = $(this).attr('data-name');
-            console.log(id);
             $("#add").removeClass('add');
             $("#add").addClass('rename');
             $("#add").text('Rename');
@@ -139,7 +138,7 @@
                 url: "{{route('skills.master.rename')}}",
                 data: {'id': id, 'skill':skill},
                 success: function (data, status) {
-                    $('#skill'+id).text(skill);
+                    $('#skillname'+id).text(skill);
                     $("#add").removeClass('rename');
                     $("#add").addClass('add');
                     $("#add").text('Add');

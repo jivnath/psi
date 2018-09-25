@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Leader;
+use App\Models\Raw;
+use Session;
 use DB;
 
 class LeaderController extends Controller
 {
     public function create()
     {
-        $companies = Company::all();
+        $companies = Raw::getSecondLevelCompanies();
         return view('leader.create', compact('companies'));
 
     }
@@ -22,13 +24,13 @@ class LeaderController extends Controller
         $this->validate($request, $this->rules());
 
         $leader = new Leader;
-
         $leader->company_id = $request->company_name;
         $leader->psi_num = $request->psi_num;
         $leader->contact_num = $request->contact_num;
 
         $leader->save();
 
+        Session::flash('success', 'Leader successfully added!');
         return redirect()->route('leader.create');
     }
 
@@ -55,32 +57,32 @@ class LeaderController extends Controller
 
     }
 
-    public function edit($id)
-    {
-        $companies = Company::all();
-        $leader = Leader::find($id);
+//    public function edit($id)
+//    {
+//        $companies = Company::all();
+//        $leader = Leader::find($id);
+//
+//        return view('leader.create', compact('companies'))->withLeader($leader);
+//
+//    }
 
-        return view('leader.create', compact('companies'))->withLeader($leader);
-
-    }
-
-    public function update(Request $request, $id)
-    {
-        $this->validate($request, $this->rules());
-
-        $leader = Leader::find($id);
-
-        $leader->company_id = $request->input('company_id');
-        $leader->psi_num = $request->input('psi_num');
-        $leader->contact_num = $request->input('contact_num');
-
-        $leader->save();
-    }
+//    public function update(Request $request, $id)
+//    {
+//        $this->validate($request, $this->rules());
+//
+//        $leader = Leader::find($id);
+//
+//        $leader->company_id = $request->input('company_id');
+//        $leader->psi_num = $request->input('psi_num');
+//        $leader->contact_num = $request->input('contact_num');
+//
+//        $leader->save();
+//    }
 
     protected function rules()
     {
         return [
-            'company_id' => 'required',
+            'company_name' => 'required',
             'psi_num' => 'bail|required',
             'contact_num'=>'nullable'
         ];

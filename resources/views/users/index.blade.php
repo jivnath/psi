@@ -5,7 +5,7 @@
         <div class="box">
             <div class="box-header">
                 <h3> User Administration <a href="{{ route('roles.index') }}" class="btn btn-link pull-right">Roles</a>
-                    <a href="{{ route('permissions.index') }}" class="btn btn-link pull-right">Permissions</a></h3>
+                    {{--<a href="{{ route('permissions.index') }}" class="btn btn-link pull-right">Permissions</a></h3>--}}
                 <hr>
             </div>
             <div class="box-body">
