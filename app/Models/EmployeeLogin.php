@@ -6,9 +6,9 @@ use Illuminate\Notifications\Notifiable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class EmployeeLogin extends Authenticatable
+class EmployeeLogin extends Authenticatable implements Auditable
 {
-
+    use \OwenIt\Auditing\Auditable;
     use Notifiable;
 // The authentication guard for admin
     protected $guard = 'employee';

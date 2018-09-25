@@ -15,12 +15,8 @@ class Employee
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,$guard = null)
     {
-        if(Auth::employee())
-//            dd(Auth::employee());
-            return $next($request);
-        else
-            return redirect()->route('dashboard');
+        return $next($request);
     }
 }

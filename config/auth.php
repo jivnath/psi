@@ -41,9 +41,8 @@ return [
         ],
         'employee' => [
             'driver' => 'session',
-            'provider' => 'employee'
+            'provider' => 'employees'
             ],
-
 
         'api' => [
             'driver' => 'token',
@@ -74,7 +73,7 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'employee' => [
+        'employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\EmployeeLogin::class,
         ]
@@ -106,8 +105,8 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
-        'employee' => [
-            'providers' => 'employee',
+        'employees' => [
+            'providers' => 'employees',
             'table' => 'password_resets',
             'expire' => 60,
 
