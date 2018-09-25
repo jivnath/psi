@@ -55,9 +55,7 @@ class EmployeeController extends Controller
             ->iterateSheet()
             ->checkDuplicateAndStore();
 
-        return redirect()->route('employees', [
-            'companyId' => $excelReader->company_id
-        ]);
+        return redirect()->route('employees.show');
     }
 
     public function show()
