@@ -5,7 +5,7 @@
             <div class="box">
                 <div class="box-header"><h3>Skills Master</h3></div>
                 <div class="box-body">
-                    <div class="form-group">
+                    <div class="form-group" id="box">
                         <label for="skill"><h5><b>Skills</b></h5></label>
                         <input type="text" class="form-control input-shorter" placeholder="Enter Skill" id="skill"
                                required>
@@ -106,7 +106,13 @@
                     // $('#skill'+id).hide();
                     $('#skill' + id).remove();
                     var text = $("#allSkills").html();
-                    console.log(text);
+                    $(this).hide();
+                    $("#add").addClass('add');
+                    $("#add").removeClass('rename');
+                    $("#add").text('Add');
+                    $("#skill").val('');
+
+                    // console.log(text);
                     // if(text=='')
                     // {
                     //     $("#skillDiv").hide();
@@ -126,9 +132,18 @@
             $("#add").text('Rename');
             $("#add").attr('data-id', id);
             $("#skill").val(skill);
-
-
+            var button = '<span id="cancel" style="margin-top:10px" class="btn btn-danger">Cancel</span>';
+            $("#box").append(button);
         });
+
+        $(document).on('click', '#cancel', function(){
+            $(this).hide();
+            $("#add").addClass('add');
+            $("#add").removeClass('rename');
+            $("#add").text('Add');
+            $("#skill").val('');
+        });
+
         $(document).on('click', '.rename', function() {
             var id = $(this).attr('data-id');
             var skill = $('#skill').val();

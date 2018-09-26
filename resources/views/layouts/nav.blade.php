@@ -61,8 +61,8 @@
                                                 <li class="dropdown">
                                                     <a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Companies</a>
                                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                        <li><a class="dropdown-item" href="{{ route('company.details') }}">Company Details</a></li>
-                                                         <li><a class="dropdown-item" href="{{ route('manageCompanies') }}">@lang('nav.Company')</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('company.details') }}">@lang('nav.Company')</a></li>
+                                                         <li><a class="dropdown-item" href="{{ route('manageCompanies') }}">Company Manage</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('shift.add') }}"> Company Shift</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('leader.create') }}"> Team Leader </a></li>
 

@@ -5,7 +5,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-7">
             <div class="box">
-                <div class="box-header"><h3>{{ "Employee Availability" }}</h3></div>
+                <div class="box-header"><h4>{{ "Employee Availability | Add" }}</h4></div>
 
                 <div class="box-body " style="padding: 20px;">
                     <form  action="{{ route('availability.store') }}" method="POST" >
