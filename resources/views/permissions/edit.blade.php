@@ -5,7 +5,7 @@
 <div class='col-md-8 offset-2'>
     <div class="box">
         <div class="box-header">
-            <h3> Edit {{$permission->name}}</h3>
+            <h4> Edit Permission: '{{$permission->name}}'</h4>
             <br>
         </div>
         <div class="box-body">
@@ -14,7 +14,7 @@
 
             <div class="form-group">
                 {{ Form::label('name', 'Permission Name') }}
-                {{ Form::text('name', null, array('class' => 'form-control', 'style'=>'width:80%')) }}
+                {{ Form::text('name', null, array('class' => 'form-control', 'style'=>'width:50%')) }}
             </div>
             <br>
             {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}

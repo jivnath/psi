@@ -19,7 +19,7 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <h3 class="profile-username text-center">{{$username}}</h3>
+                    <h4 class="profile-username text-center">{{$username}}</h4>
 
                     <p class="text-muted text-center">{{ Auth::user()->roles()->pluck('name')->implode('')}}</p>
                     <p class="text-muted text-center">{{ $userEmail}}</p>

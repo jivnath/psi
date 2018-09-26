@@ -7,7 +7,7 @@
     <div class='col-md-8 offset-2'>
         <div class="box">
             <div class="box-header">
-                <h3> Add User</h3>
+                <h4> Add User</h4>
                 <hr>
             </div>
             <div class="box-body">
@@ -42,20 +42,6 @@
                             <option value="{{$role->id}}"> {{$role->name}} </option>
                         @endforeach
                     </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="companies">Companies</label><br>
-                    @foreach($companies->chunk(3) as $chunk)
-                        <div class="row">
-                            @foreach($chunk as $company)
-                                <div class="col-md-4">
-                                {{Form::checkbox('companies[]', $company->id)}}
-                                {{Form::label($company->name, $company->name)}}
-                                </div>
-                            @endforeach
-                        </div>
-                    @endforeach
                 </div>
 
                 <div class="form-group">

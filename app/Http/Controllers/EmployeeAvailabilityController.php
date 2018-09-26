@@ -11,12 +11,10 @@ use DB;
 
 class EmployeeAvailabilityController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        $availability = EmployeeAvailability::where('psi_number', $id)->first();
         $weekdays = collect(['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']);
-        return view('availability.index')->withAvailability($availability)->withWeekdays($weekdays);
-
+        return view('availability.index')->withWeekdays($weekdays);
     }
 
 
@@ -29,7 +27,7 @@ class EmployeeAvailabilityController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, $this->rules());
+//        $this->validate($request, $this->rules());
 
         $availability = new EmployeeAvailability;
 
@@ -59,7 +57,7 @@ class EmployeeAvailabilityController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, $this->rules());
+//        $this->validate($request, $this->rules());
 
         $availability = EmployeeAvailability::find(1);
 
@@ -95,7 +93,7 @@ class EmployeeAvailabilityController extends Controller
     {
         if ($request->ajax()) {
             $psi = $request->get('psi');
-            $employee = Employee::where('psi_number', $psi)->get();
+            $employee = Employee::where('psi_number', $psi)->first();
 
             if($employee){
                 $availability = EmployeeAvailability::where('psi_number', $psi)->first();
@@ -119,8 +117,6 @@ class EmployeeAvailabilityController extends Controller
             {
                 $data = 0;
             }
-
-
         }
         echo json_encode($data);
     }
@@ -138,6 +134,7 @@ class EmployeeAvailabilityController extends Controller
             $fri = $request->get('fri');
             $sat = $request->get('sat');
             $availability = EmployeeAvailability::where('psi_number', $psi)->first();
+//            dd($psi);
             if($availability)
             {
                 $availability->sunday = $sun;
@@ -153,6 +150,39 @@ class EmployeeAvailabilityController extends Controller
             }
             else
                 $data=0;
+        }
+        echo json_encode($data);
+    }
+
+    public function showAvailability(Request $request)
+    {
+        if($request->ajax())
+        {
+            $psi = $request->get('psi');
+            $employee = Employee::where('psi_number', $psi)->first();
+            if($employee)
+            {
+                $availability = EmployeeAvailability::where('psi_number', $psi)->first();
+                if($availability)
+                {
+                    $data = [
+                        'name' => $availability->employee->name,
+                        'sun' => $availability->sunday,
+                        'mon' => $availability->monday,
+                        'tue' => $availability->tuesday,
+                        'wed' => $availability->wednesday,
+                        'thu' => $availability->thursday,
+                        'fri' => $availability->friday,
+                        'sat' => $availability->saturday,
+                    ];
+                }
+                else{
+                    $data = 1;
+                }
+            }
+            else{
+                $data = 0;
+            }
         }
         echo json_encode($data);
     }

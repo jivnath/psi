@@ -7,10 +7,7 @@
                 <div class="box-header"><h4>{{ "Employee Availability | Edit" }}</h4></div>
 
                 <div class="box-body " style="padding: 20px;">
-                    <form class="form-group" action="{{ route('availability.update') }}" method="POST">
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                    <form class="form-group">
                         <div class="form-group row" style="text-align: center; margin-top: 5px; margin-bottom: 25px;">
                             <div class="col-md-3" style="text-align: right">
                                 <label for="psi_num"><h5> PSI_S No: </h5></label>
@@ -49,8 +46,7 @@
                                                    id="{{$weekday}}" name="{{ $weekday }}">
                                             @if($k==6)
                                                 <br>
-                                                <button id="" update type="submit" class="btn btn-primary">Update
-                                                </button>
+                                                <span id="update" class="btn btn-primary">Update</span>
                                             @endif
                                         </div>
 
@@ -103,13 +99,13 @@
                     data: {'psi': psi},
                     success: function (data) {
                         if (data == 0) {
-                            alert('PSI number invalid!!!');
                             $("#hiddenDiv").hide();
+                            alert('PSI number invalid!!!');
 
                         }
                         else if (data == 1) {
-                            alert('No Availability available');
                             $("#hiddenDiv").hide();
+                            alert('No Availability available');
                         }
 
                         else {
@@ -161,7 +157,7 @@
                 },
                 url: "{{route('updateAvailability')}}",
                 success: function (data) {
-                    window.location.replace("{{route('availability.add')}}");
+                    window.location.replace("{{route('availability.index')}}");
                 }
             });
         });

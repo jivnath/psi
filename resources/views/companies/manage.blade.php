@@ -10,7 +10,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3>Manage Company</h3>
+                        <h4>Manage Company</h4>
                     </div>
                     <div class="box-body">
                         <div class="row">
@@ -89,15 +89,6 @@
                                                 </div>
                                                 <input type="text" placeholder="Address" class="form-control"
                                                        name="section_address"><br>
-                                            </div>
-                                            <br>
-
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user-circle"></i>
-                                                </div>
-                                                <input type="text" placeholder="Team Leader" class="form-control"
-                                                       name="section_leader"><br>
                                             </div>
                                             <br>
 
@@ -206,14 +197,7 @@
                                                            id="existing_section_address"><br>
                                                 </div>
                                                 <br>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-user-circle"></i>
-                                                    </div>
-                                                    <input type="text" placeholder="Team Leader"
-                                                           class="form-control" name="existing_section_leader"
-                                                           id="existing_section_leader"><br>
-                                                </div>
+
                                                 <div style="margin-top: 20px;">
                                                     <label for="subsection"><h4><b>Sub-Section</b><span
                                                                     id="addSubsection"

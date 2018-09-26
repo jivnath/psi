@@ -6,7 +6,7 @@
         <div class='col-md-8 offset-2'>
             <div class="box">
                 <div class="box-header">
-                    <h3>Add Role</h3>
+                    <h4>Add Role</h4>
                     <hr>
                 </div>
                 <div class="box-body" style="margin-left: 15px">
@@ -15,10 +15,9 @@
 
                     <div class="form-group">
                         {{ Form::label('name', 'Name') }}
-                        {{ Form::text('name', null, array('class' => 'form-control', 'style' => 'width:80%')) }}
+                        {{ Form::text('name', null, array('class' => 'form-control input-shorter', 'style' => 'width:50%')) }}
                     </div>
-
-                    <h5><b>Assign Permissions</b></h5>
+                    <b>Permissions</b>
 
                     <div class='form-group'>
                         @foreach ($permissions as $permission)
