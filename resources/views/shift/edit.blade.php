@@ -17,7 +17,7 @@
                                 <label for="shiftName"> Company </label>
                             </div>
                             <div class="col-md-7">
-                                <span> {{ dd($shiftData->company()) }} </span>
+                                <span> {{ dd($shiftData->company->name) }} </span>
                             </div>
                         </div>
 
