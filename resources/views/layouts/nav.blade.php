@@ -129,7 +129,7 @@
                                                                    href="{{ route('employee.skill') }}"><i class="fas fa-user-graduate"></i> Employee
                                                                     Skills</a></li>
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('availability.add') }}"><i class="fas fa-user-clock"></i> Employee
+                                                                   href="{{ route('availability.index') }}"><i class="fas fa-user-clock"></i> Employee
                                                                     Availability</a></li>
 
                                                         </ul>

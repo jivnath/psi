@@ -50,7 +50,7 @@ class LeaderController extends Controller
 
             }
             else
-                $leaderName = '';
+                $leaderName = 0;
         }
         echo $leaderName;
 
