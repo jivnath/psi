@@ -25,6 +25,14 @@ class Raw extends Model
             p.address address_p,
             c1.address address_c1,
             c2.address address_c2,
+            (
+                SELECT
+                    psi_num
+                FROM
+                    leaders l
+                WHERE
+                    l.company_id = c1.id
+            ) team_leader,
             CASE
                     WHEN c1.id IS NULL
                          AND c2.id IS NULL
@@ -56,7 +64,8 @@ where     p.master_id IS NULL
                 'contact_c2' => ($row->contact_c2)?$row->contact_c2:'...',
                 'address_p' => ($row->address_p)?$row->address_p:'...',
                 'address_c1' => ($row->address_c1)?$row->address_c1:'...',
-                'address_c2' => ($row->address_c2)?$row->address_c2:'...'
+                'address_c2' => ($row->address_c2)?$row->address_c2:'...',
+                'team_leader'=>($row->team_leader)??$row->team_leader
             ];
         }
         return $fetch_detail;

@@ -75,7 +75,7 @@ $last_p='';
 													<td class="table_th_fix" rowspan='{{count($section)+2}}'><i class="fas fa-mobile-alt"> {{$index4['contact_c1']}} | <i class="fas fa-location-arrow"></i> {{$index4['address_c1']}}</td>
         										@endif
 
-													<td class="table_th_fix"><i class="fas fa-mobile-alt"></i> {{$index4['contact_c2']}} | <i class="fas fa-location-arrow"></i> {{$index4['address_c2']}}</td>
+													<td class="table_th_fix"><i class="fas fa-mobile-alt"></i> {{$index4['contact_c2']}} | <i class="fas fa-location-arrow"></i> {{$index4['address_c2']}} | <i class="fas fa-user"></i> {{$index4['team_leader']}}</td>
 												</tr>
 												@endforeach
 												@endforeach
@@ -109,9 +109,9 @@ $last_p='';
 												@foreach($subsection as $index3)
 												@foreach($index3 as $index4)
 												<tr>
-													<td class="table_th_fix"><i class="fas fa-mobile-alt"></i> {{$index4['contact_c1']}} | <i class="fas fa-location-arrow"></i> {{$index4['address_c1']}}</td>
+													<td class="table_th_fix"><i class="fas fa-mobile-alt"></i> {{$index4['contact_c1']}} | <i class="fas fa-location-arrow"></i> {{$index4['address_c1']}} | <i class="fas fa-user"></i> {{$index4['team_leader']}}</td>
 
-													<td class="table_th_fix"><i class="fas fa-mobile-alt"></i> {{$index4['contact_c2']}} | <i class="fas fa-location-arrow"></i> {{$index4['address_c2']}}</td>
+													<td class="table_th_fix"><i class="fas fa-mobile-alt"></i> {{$index4['contact_c2']}} | <i class="fas fa-location-arrow"></i> {{$index4['address_c2']}} | <i class="fas fa-user"></i> {{$index4['team_leader']}}</td>
 												</tr>
 
 												@endforeach
