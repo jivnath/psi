@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-{{dd($shiftData)}}
 <div class="container">
     <div class="row justify-content-center">
+        @php
+            $c = App\Http\Controllers\ShiftMasterController::findCompany($shiftData->company_id);
+        @endphp
         <div class="col-md-8">
             <div class="box box-info">
                 <div class="box-header"><h4>Shift | Edit</h4></div>
@@ -16,8 +18,7 @@
                             <div class="col-md-5">
                                 <label for="shiftName"> Company </label>
                             </div>
-                            <div class="col-md-7">
-                            </div>
+                            <div class="col-md-7" style="text-align: left">{{$c}}  </div>
                         </div>
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
