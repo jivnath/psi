@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-7">
                 <div class="box">
-                    <div class="box-header">{{ "Add Shifts" }}</div>
+                    <div class="box-header"><h4>{{ "Add Shifts" }}</h4></div>
                     <div class="box-body " style="padding: 10px;">
                         <form  action="{{ route('shift.store') }}" method="POST" >
                             <input type="hidden" name="_method" value="POST">
@@ -64,7 +64,7 @@
             <!--Table List Start -->
             <div class="col-md-5">
                 <div class="box">
-                <div class="box-header">Shifts</div>
+                <div class="box-header"><h4>Shifts</h4></div>
                     <div class="box-body">
                         <table class="table table-striped">
                             <tr>

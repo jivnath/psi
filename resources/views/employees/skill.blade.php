@@ -12,7 +12,7 @@
                         @csrf
                         <label><b>PSI Number</b></label>
                         <input type="text" name="psi_num" id="psi_num" placeholder="PSIS_No"
-                               class="form-control input-shorter" required><span class="loading"></span>
+                               class="form-control" style="width: 50%;" required><span class="loading"></span>
 
                         <div style="display: none" id="nameDiv">
                             <p id="name_label"><b>Name</b></p>
@@ -22,7 +22,7 @@
                             <label><b> All Skills </b></label>
                             <div id="allSkills">
                             </div>
-                            <input type="submit" class="btn btn-primary" value="Save Changes" style="margin-top: 20px">
+                            <input type="submit" class="btn btn-primary" value="Save" style="margin-top: 20px">
                         </div>
                     </form>
                 </div>

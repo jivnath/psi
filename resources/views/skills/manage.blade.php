@@ -132,6 +132,7 @@
             $("#add").text('Rename');
             $("#add").attr('data-id', id);
             $("#skill").val(skill);
+            $("#cancel").remove();
             var button = '<span id="cancel" style="margin-top:10px" class="btn btn-danger">Cancel</span>';
             $("#box").append(button);
         });

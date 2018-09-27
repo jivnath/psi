@@ -478,6 +478,7 @@
             $("#subsectionDiv *").prop('disabled', false);
             $("#subsectionDiv").hide();
             $('#subNameDiv').hide();
+            $('#submit').show();
 
 
 
