@@ -186,6 +186,7 @@
 @endsection
 
 @push('scripts')
+<!--script  -->
     <script>
         $.ajaxSetup({
             headers: {
