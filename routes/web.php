@@ -149,11 +149,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/dessert_update', "DessertController@dessert_update")->name('dessert.update');
 
 
-        Route::get('/viber/alert/setting', function() {
-            return view('viber.alert_setting');
-            });
+
         Route::prefix('viber')->group(function () {
             Route::post('/viber_it', 'ViberMessageController@store_message')->name('viber.send');
+
+            Route::get('/alert/setting', 'ViberAlertController@setting')->name('viberAlert');
+            Route::post('/alert/setting', 'ViberAlertController@storeSetting')->name('storeSetting');
         });
 //    });
 });

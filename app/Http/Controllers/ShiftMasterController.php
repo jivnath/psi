@@ -75,10 +75,8 @@ class ShiftMasterController extends Controller
 
 	public function edit($id)
 	{
-		$shifts = ShiftMasterData::all();
 		$shiftData = ShiftMasterData::find($id);
-
-		return view('shift.edit')->withShifts($shifts)->withShiftData($shiftData);
+		return view('shift.edit')->withShiftData($shiftData);
 	}
 
 	public function update(Request $request, $id)

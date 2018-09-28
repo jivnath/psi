@@ -158,7 +158,7 @@
                                             <td><i>
                                                     <small>interval</small>
                                                 </i></td>
-                                            <td id="arrivalType" class="contenteditable" data-old=""
+                                            <td id="arrivalCount" class="contenteditable" data-old=""
                                                 contenteditable="true"
                                                 style="border: 1px solid black">5
                                             </td>
@@ -177,8 +177,6 @@
                                 <span style="margin-bottom:30px " id="submit" class="btn btn-primary">Save</span>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -189,18 +187,46 @@
 
 @push('scripts')
     <script>
-        $('#submit').click(function(){
-           var expiryInt = $('#residanceInt').val();
-           var expiryType = $('#residanceType').val();
-           var beforeOneInt = $('#beforeOneDayInt').val();
-           var beforeOneType = $('#beforeOneDayType').val();
-           var beforeOneCount = $('#beforeOneDayCount').val();
-           var beforeThreeInt = $('#beforeThreeInt').val();
-           var beforeThreeType = $('#beforeThreeType').val();
-           var beforeThreeCount = $('#beforeOneDayCount').val();
-           var arrivalInt = $('#arrivalInt').val();
-           var arrivalType = $('#arrivalType').val();
-           var arrivalCount = $('#arrivalCount').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('#submit').click(function () {
+            var expiryInt = $('#residanceInt').text();
+            var expiryType = $('#residanceType').val();
+            var beforeOneInt = $('#beforeOneDayInt').text();
+            var beforeOneType = $('#beforeOneDayType').val();
+            var beforeOneCount = $('#beforeOneDayCount').text();
+            var beforeThreeInt = $('#beforeThreeInt').text();
+            var beforeThreeType = $('#beforeThreeType').val();
+            var beforeThreeCount = $('#beforeOneDayCount').text();
+            var arrivalInt = $('#arrivalInt').text();
+            var arrivalType = $('#arrivalType').val();
+            var arrivalCount = $('#arrivalCount').text();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{route("storeSetting")}}',
+                async: true,
+                data: {
+                    'expiryInt': expiryInt,
+                    'expiryType': expiryType,
+                    'beforeOneInt': beforeOneInt,
+                    'beforeOneType': beforeOneType,
+                    'beforeOneCount': beforeOneCount,
+                    'beforeThreeInt': beforeThreeInt,
+                    'beforeThreeType': beforeThreeType,
+                    'beforeThreeCount': beforeThreeCount,
+                    'arrivalInt': arrivalInt,
+                    'arrivalType': arrivalType,
+                    'arrivalCount': arrivalCount,
+                },
+                success: function (data) {
+                    window.location.replace('{{route("viberAlert")}}')
+                }
+            });
         });
     </script>
 @endpush
