@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers\Employee;
 
+use App\Models\ShiftMasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Raw;
 
 class Dashboard extends Controller
 {
@@ -14,6 +16,27 @@ class Dashboard extends Controller
 
     public function index()
     {
-        return view('employees_dashboard.dashboard');
+        $companies = Raw::getCompaniesHavingShift();
+//        dd($companies);
+        return view('employees_dashboard.dashboard', compact('companies'));
+    }
+
+    public function getDataForCalendar(Request $request)
+    {
+        if($request->ajax())
+        {
+            $company = $request->get('company');
+            $data = Raw::totalNecessary($company);
+            $events = [];
+            foreach ($data as $datum)
+            {
+                if($datum->occupied < $datum->necessary)
+                {
+                    array_push($events, $datum);
+                }
+            }
+//            dd($events);
+            echo json_encode($events);
+        }
     }
 }

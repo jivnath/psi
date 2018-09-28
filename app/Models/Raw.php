@@ -93,7 +93,7 @@ where     p.master_id IS NULL
         SELECT
             COUNT(*) occupied_shift
         FROM
-            company_to_employees_rel cte
+            company_to_employees_rels cte
         WHERE
             cte.cts_id = cts.id
     ) total_occupied_shift
@@ -387,4 +387,59 @@ WHERE
                 AND pde.conformation_day_before = 'OK'";
         return DB::select($sql);
     }
+
+    public static function totalNecessary($id)
+    {
+        $sql = "SELECT
+            ctt.company_id,
+            (
+                SELECT
+                    name
+                FROM
+                    companies c
+                WHERE
+                    c.id = ctt.company_id
+            ) company_name,
+            companytt_id time_table_id,
+            cts.id AS rel_id,
+        
+            date,
+            time start_time,
+            (
+            	SELECT
+                	end_time
+                FROM
+                	shift_master_datas
+                WHERE
+                	start_time = cts.time
+                	AND company_id = ctt.company_id
+                
+            ) end_time,
+            
+            (help+normal) necessary,
+            (
+                SELECT 
+                    COUNT(*) 
+                FROM
+                    psi_dessert_entry pde
+                WHERE
+                    pde.cts_id = cts.id
+            ) occupied
+            
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt
+        WHERE
+            cts.companytt_id = ctt.id
+            AND ctt.company_id = $id";
+        $data = DB::select($sql);
+        return $data;
+    }
+
+    public static function getCompaniesHavingShift(){
+        $sql ="SELECT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id";
+        $data = DB::select($sql);
+        return $data;
+    }
+
 }
