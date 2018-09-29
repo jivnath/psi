@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="row" id="hidden" style="display: none">
+        <div class="row" id="calendarDiv" style="display: none">
             <div class="col-md-3">
                 <div class="box box-solid">
                     <div class="box-header with-border">
@@ -178,7 +178,7 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'month,agendaWeek,agendaDay'
+                    right: 'month'
                 },
                 buttonText: {
                     today: 'today',
@@ -253,7 +253,7 @@
                data:{'company':company},
                success:function(data){
 
-                   $("#hidden").show();
+                   $("#calendarDiv").show();
                    let i;
                    $('#calendar').fullCalendar('removeEvents',function() {
                        return true;
@@ -274,7 +274,7 @@
             });
             }
             else{
-                $("#hidden").hide();
+                $("#calendarDiv").hide();
             }
         });
     </script>
