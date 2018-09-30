@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @php
-        $intervalType=['year', 'month', 'day', 'hrs', 'min', 'sec'];
+        $intervalType=['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
     @endphp
     <div class="container-fluid">
         <div class="box box-info">
