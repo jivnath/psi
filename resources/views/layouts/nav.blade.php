@@ -258,7 +258,7 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting">
-                                                    <a class="dropdown-item" href="#"><i class="fa fa-bell" aria-hidden="true"></i> Alert Management </a>
+                                                    <a class="dropdown-item" href="{{route('viberAlert')}}"><i class="fa fa-bell" aria-hidden="true"></i> Alert Management </a>
                                                 </div>
                                             </li>
 

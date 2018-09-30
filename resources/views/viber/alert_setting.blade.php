@@ -27,7 +27,7 @@
                                                 @endif
 
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
 
                                                 <select name="expiryType" class="form-control">
                                                     @foreach($intervalType as $type)
@@ -66,7 +66,7 @@
                                                     <input type="text" name="beforeOneInt" class="form-control">
                                                 @endif
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <select name="beforeOneType" class="form-control">
                                                     @foreach($intervalType as $type)
                                                         @if($one)
@@ -112,7 +112,7 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <select name="beforeThreeType" class="form-control">
                                                     @foreach($intervalType as $type)
                                                         @if($three)
@@ -157,7 +157,7 @@
                                                     <input type="text" name="arrivalInt" class="form-control">
                                                 @endif
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-3">
                                                 <select name="arrivalType" class="form-control">
                                                     @foreach($intervalType as $type)
                                                         @if($arrival)
