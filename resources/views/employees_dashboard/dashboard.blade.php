@@ -254,21 +254,21 @@
                success:function(data){
 
                    $("#calendarDiv").show();
-                   let i;
-                   $('#calendar').fullCalendar('removeEvents',function() {
-                       return true;
-                   });
-                   for(i = 0; i < data.length; i++)
-                   {
-
-                       $('#calendar').fullCalendar('renderEvent', {
-                           title: data[i].start_time+' - '+data[i].end_time,
-                           start: data[i].date,
-                           allDay: true,
-                           backgroundColor: '#f56954', //red
-                               borderColor: '#f56954' //red
-                       }, 'stick');
-                   }
+                   // let i;
+                   // $('#calendar').fullCalendar('removeEvents',function() {
+                   //     return true;
+                   // });
+                   // for(i = 0; i < data.length; i++)
+                   // {
+                   //
+                   //     $('#calendar').fullCalendar('renderEvent', {
+                   //         title: data[i].start_time+' - '+data[i].end_time,
+                   //         start: data[i].date,
+                   //         allDay: true,
+                   //         backgroundColor: '#f56954', //red
+                   //             borderColor: '#f56954' //red
+                   //     }, 'stick');
+                   // }
 
                }
             });
