@@ -59,7 +59,7 @@
     <div class="modal" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form class="form-horizontal" method="POST" action="{{route('')}}">
+                <form class="form-horizontal" method="POST" action="{{route('storeEmployeeApplication')}}">
                     @csrf
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel"></h4>
@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label for="color" class="col-sm-2 control-label">Shift</label>
                             <div class="col-sm-12">
-                                <select name="color" class="form-control" id="shifts">
+                                <select name="shifts" class="form-control" id="shifts">
 
                                 </select>
                             </div>
@@ -187,6 +187,7 @@
                 },
                 dayClick: function (date, allDay) {
                     $('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
+                    $('#shifts').html('');
                     var select = '<option value="0">--Choose Shift--</option>';
                     $('#shifts').append(select);
                     $('#calendar').fullCalendar('clientEvents', function (event) {
@@ -195,7 +196,6 @@
                             // do your stuff here
                             $('#shifts').append('<option value="' + event.id + '">' + event.title + '</option>')
                             console.log(event.id);
-                            console.log(event);
 
 
                         }
@@ -273,6 +273,7 @@
                 $("#calendarDiv").hide();
             }
         });
+
     </script>
 
 @endpush

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Employee;
 
+use App\Models\DessertSheet;
 use App\Models\ShiftMasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,5 +39,13 @@ class Dashboard extends Controller
 //            dd($events);
             echo json_encode($events);
         }
+    }
+
+    public function storeEmployeeApplication(Request $request)
+    {
+        $shift = $request->shifts;
+        $user = \Session::get('username');
+
+        $employee = DessertSheet::firstOrNew()
     }
 }

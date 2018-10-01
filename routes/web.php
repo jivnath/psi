@@ -29,6 +29,7 @@ Route::group(['middleware'=> ['employee']], function(){
     Route::prefix('employee')->group(function () {
         Route::get('/dashboard', 'Employee\Dashboard@index')->name('employee.dashboard');
         Route::get('/getDataForCalendar', 'Employee\Dashboard@getDataForCalendar')->name('getDataForCalendar');
+        Route::post('/storeEmployeeApplication', 'Employee\Dashboard@storeEmployeeApplication')->name('storeEmployeeApplication');
     });
 });
 Route::group(['middleware' => ['auth']], function () {
