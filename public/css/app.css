@@ -10767,3 +10767,4 @@ button, input, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
+.i-am-centered { margin: auto; max-width: 80%;}
