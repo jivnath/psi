@@ -12,6 +12,8 @@ class DessertSheet extends Model implements Auditable
 
     protected $table = 'psi_dessert_entry';
 
+    protected $fillable = ['staff_no', 'cts_id'];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
