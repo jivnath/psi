@@ -273,7 +273,11 @@
                 $("#calendarDiv").hide();
             }
         });
-
+        $(document).on('change', '#shifts', function(){
+            alert('hey');
+           var selected = $('#shifts').val();
+           console.log(selected);
+        });
     </script>
 
 @endpush

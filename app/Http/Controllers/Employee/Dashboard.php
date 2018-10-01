@@ -6,6 +6,7 @@ use App\Models\ShiftMasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Raw;
+use Session;
 
 class Dashboard extends Controller
 {
@@ -45,7 +46,26 @@ class Dashboard extends Controller
     {
         $shift = $request->shifts;
         $user = \Session::get('username');
+//        dd($shift);
 
-        $employee = DessertSheet::firstOrNew()
+        $employee = DessertSheet::firstOrNew([
+            'staff_no' => $user,
+            'cts_id' => $shift
+        ]);
+        if($employee->exists)
+        {
+            Session::flash('error', 'You are already on the list');
+            return redirect()->route('employee.dashboard');
+        }
+        else
+        {
+            $employee->staff_no = $user;
+            $employee->cts_id = $shift;
+            $employee->save();
+
+            Session::flash('success', 'You are selected for the task');
+            return redirect()->route('employee.dashboard');
+
+        }
     }
 }
