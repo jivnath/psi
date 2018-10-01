@@ -130,6 +130,10 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
             'League\\Flysystem\\' => 17,
             'Laravel\\Tinker\\' => 15,
         ),
+        'J' => 
+        array (
+            'JakubOnderka\\PhpConsoleColor\\' => 29,
+        ),
         'I' => 
         array (
             'Illuminate\\' => 11,
@@ -305,6 +309,10 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
+        'JakubOnderka\\PhpConsoleColor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
+        ),
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
@@ -400,10 +408,6 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
             array (
                 0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
             ),
-            'JakubOnderka\\PhpConsoleColor' => 
-            array (
-                0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
-            ),
         ),
         'D' => 
         array (
@@ -422,6 +426,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AjaxController' => __DIR__ . '/../..' . '/app/Http/Controllers/AjaxController.php',
+        'App\\Http\\Controllers\\Auth\\EmployeeLoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/EmployeeLoginController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -429,11 +434,13 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Http\\Controllers\\CompanyController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompanyController.php',
         'App\\Http\\Controllers\\CompanyUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompanyUserController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\CustomerTableView' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomerTableView.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\DessertController' => __DIR__ . '/../..' . '/app/Http/Controllers/DessertController.php',
         'App\\Http\\Controllers\\EmployeeAvailabilityController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeeAvailabilityController.php',
         'App\\Http\\Controllers\\EmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeeController.php',
         'App\\Http\\Controllers\\EmployeeSkillController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployeeSkillController.php',
+        'App\\Http\\Controllers\\Employee\\Dashboard' => __DIR__ . '/../..' . '/app/Http/Controllers/Employee/Dashboard.php',
         'App\\Http\\Controllers\\Employee\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Employee/LoginController.php',
         'App\\Http\\Controllers\\GenderController' => __DIR__ . '/../..' . '/app/Http/Controllers/GenderController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
@@ -447,12 +454,14 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Http\\Controllers\\TranslationController' => __DIR__ . '/../..' . '/app/Http/Controllers/TranslationController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\UserGroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserGroupController.php',
+        'App\\Http\\Controllers\\ViberAlertController' => __DIR__ . '/../..' . '/app/Http/Controllers/ViberAlertController.php',
         'App\\Http\\Controllers\\ViberBitIntegration' => __DIR__ . '/../..' . '/app/Http/Controllers/ViberBitIntegration.php',
         'App\\Http\\Controllers\\ViberMessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ViberMessageController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
         'App\\Http\\Middleware\\ClearanceMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/ClearanceMiddleware.php',
+        'App\\Http\\Middleware\\Employee' => __DIR__ . '/../..' . '/app/Http/Middleware/Employee.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\SetLocale' => __DIR__ . '/../..' . '/app/Http/Middleware/SetLocale.php',
@@ -462,6 +471,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Http\\Middleware\\checkPrimaryCompany' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckPrimaryCompany.php',
         'App\\Http\\Requests\\ExcelReader' => __DIR__ . '/../..' . '/app/Http/Requests/ExcelReader.php',
         'App\\Model\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
+        'App\\Models\\AlertSetting' => __DIR__ . '/../..' . '/app/Models/AlertSetting.php',
         'App\\Models\\Audit' => __DIR__ . '/../..' . '/app/Models/Audit.php',
         'App\\Models\\Company' => __DIR__ . '/../..' . '/app/Models/Company.php',
         'App\\Models\\CompanyTimeSchedule' => __DIR__ . '/../..' . '/app/Models/CompanyTimeSchedule.php',
@@ -479,6 +489,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Models\\Leader' => __DIR__ . '/../..' . '/app/Models/Leader.php',
         'App\\Models\\Model' => __DIR__ . '/../..' . '/app/Models/Model.php',
         'App\\Models\\PsiSelfSheetComments' => __DIR__ . '/../..' . '/app/Models/PsiSelfSheetComments.php',
+        'App\\Models\\PsiViewCustimizeModel' => __DIR__ . '/../..' . '/app/Models/PsiViewCustimizeModel.php',
         'App\\Models\\Raw' => __DIR__ . '/../..' . '/app/Models/Raw.php',
         'App\\Models\\ShiftMasterData' => __DIR__ . '/../..' . '/app/Models/ShiftMasterData.php',
         'App\\Models\\SkillMaster' => __DIR__ . '/../..' . '/app/Models/SkillMaster.php',
@@ -2283,8 +2294,8 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
-        'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
-        'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
+        'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
+        'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
@@ -4164,6 +4175,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'Symfony\\Component\\HttpKernel\\HttpCache\\Ssi' => __DIR__ . '/..' . '/symfony/http-kernel/HttpCache/Ssi.php',
         'Symfony\\Component\\HttpKernel\\HttpCache\\Store' => __DIR__ . '/..' . '/symfony/http-kernel/HttpCache/Store.php',
         'Symfony\\Component\\HttpKernel\\HttpCache\\StoreInterface' => __DIR__ . '/..' . '/symfony/http-kernel/HttpCache/StoreInterface.php',
+        'Symfony\\Component\\HttpKernel\\HttpCache\\SubRequestHandler' => __DIR__ . '/..' . '/symfony/http-kernel/HttpCache/SubRequestHandler.php',
         'Symfony\\Component\\HttpKernel\\HttpCache\\SurrogateInterface' => __DIR__ . '/..' . '/symfony/http-kernel/HttpCache/SurrogateInterface.php',
         'Symfony\\Component\\HttpKernel\\HttpKernel' => __DIR__ . '/..' . '/symfony/http-kernel/HttpKernel.php',
         'Symfony\\Component\\HttpKernel\\HttpKernelInterface' => __DIR__ . '/..' . '/symfony/http-kernel/HttpKernelInterface.php',
