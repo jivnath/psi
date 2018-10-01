@@ -195,7 +195,7 @@
                         if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD')) {
                             // do your stuff here
                             $('#shifts').append('<option value="' + event.id + '">' + event.title + '</option>')
-                            console.log(event.id);
+                            // console.log(event.id);
 
 
                         }
@@ -252,19 +252,31 @@
                         $('#calendar').fullCalendar('removeEvents', function () {
                             return true;
                         });
-                        for (i = 0; i < data.length; i++) {
+                        for (i = 0; i < data['red'].length; i++) {
 
 
                             $('#calendar').fullCalendar('renderEvent', {
-                                title: data[i].start_time + ' - ' + data[i].end_time,
-                                id: data[i].rel_id,
-                                start: data[i].date,
+                                title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
+                                id: data['red'][i].rel_id,
+                                start: data['red'][i].date,
                                 allDay: true,
-                                company: data[i].company_name,
+                                company: data['red'][i].company_name,
                                 backgroundColor: '#f56954', //red
                                 borderColor: '#f56954' //red
                             }, 'stick');
-                            console.log(data);
+                        }
+                        for (i = 0; i < data.green.length; i++) {
+
+
+                            $('#calendar').fullCalendar('renderEvent', {
+                                title: data['green'][i].start_time + ' - ' + data['green'][i].end_time,
+                                id: data['green'][i].rel_id,
+                                start: data['green'][i].date,
+                                allDay: true,
+                                company: data['green'][i].company_name,
+                                backgroundColor: '#2ac633', //green
+                                borderColor: '#2ac633' //green
+                            }, 'stick');
                         }
                     }
                 });
@@ -272,11 +284,6 @@
             else {
                 $("#calendarDiv").hide();
             }
-        });
-        $(document).on('change', '#shifts', function(){
-            alert('hey');
-           var selected = $('#shifts').val();
-           console.log(selected);
         });
     </script>
 

@@ -27,16 +27,30 @@ class Dashboard extends Controller
     {
         if($request->ajax())
         {
+            $user = \Session::get('username');
             $company = $request->get('company');
             $data = Raw::totalNecessary($company);
             $events = [];
+            $red = [];
+            $green = [];
             foreach ($data as $datum)
             {
                 if($datum->occupied < $datum->necessary)
                 {
-                    array_push($events, $datum);
+                    $dessert = DessertSheet::where([['staff_no', '=', $user],['cts_id', '=', $datum->rel_id]])->first();
+                    if($dessert)
+                    {
+                        array_push($green, $datum);
+                    }
+                    else
+                    {
+                        array_push($red, $datum);
+                    }
+//                    array_push($events, $datum);
                 }
             }
+            $events['red'] = $red;
+            $events['green'] = $green;
 //            dd($events);
             echo json_encode($events);
         }
