@@ -193,7 +193,7 @@
                     $('#calendar').fullCalendar('clientEvents', function (event) {
 
                         if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD')) {
-                            if(event.selected == 'yes')
+                            if(event.selected == 'no')
                             {
                                 $('#shifts').append('<option value="' + event.id + '">' + event.title + '</option>')
                             }
