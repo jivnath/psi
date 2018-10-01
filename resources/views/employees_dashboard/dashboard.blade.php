@@ -254,6 +254,7 @@
                         });
                         for (i = 0; i < data.length; i++) {
 
+
                             $('#calendar').fullCalendar('renderEvent', {
                                 title: data[i].start_time + ' - ' + data[i].end_time,
                                 id: data[i].rel_id,
