@@ -193,10 +193,10 @@
                     $('#calendar').fullCalendar('clientEvents', function (event) {
 
                         if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD')) {
-                            // do your stuff here
-                            $('#shifts').append('<option value="' + event.id + '">' + event.title + '</option>')
-                            // console.log(event.id);
-
+                            if(event.selected == 'yes')
+                            {
+                                $('#shifts').append('<option value="' + event.id + '">' + event.title + '</option>')
+                            }
 
                         }
                     });
@@ -260,6 +260,7 @@
                                 id: data['red'][i].rel_id,
                                 start: data['red'][i].date,
                                 allDay: true,
+                                selected:'no',
                                 company: data['red'][i].company_name,
                                 backgroundColor: '#f56954', //red
                                 borderColor: '#f56954' //red
@@ -273,6 +274,7 @@
                                 id: data['green'][i].rel_id,
                                 start: data['green'][i].date,
                                 allDay: true,
+                                selected:'yes',
                                 company: data['green'][i].company_name,
                                 backgroundColor: '#2ac633', //green
                                 borderColor: '#2ac633' //green
