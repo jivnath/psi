@@ -363,8 +363,23 @@ corresponding value from the list below*/
 					added_generated_value=$('#all_saved_value').data('23');
                     company_schedule_id=$('#all_saved_value').data('22');
 					send_it_to_update(added_generated_value,company_schedule_id,'flag',click_value_flag);
+					console.log(click_value_flag);
+					if(click_value_flag=='red'){
+						remove_content(click_flag_obj);
+						send_it_to_update(added_generated_value,company_schedule_id,'deleted',click_value_flag);
+					}
 					$('.showFlag').modal('hide');
                 });
+                function remove_content(click_flag_obj){
+                    prevent_remove=[0,1,2,9,11,14,16];
+                	click_flag_obj.closest('tr').find('td').each(
+	                	    function (i) {
+	                	    	if($.inArray(i,prevent_remove) ==-1){
+		                	    	$('#all_saved_value').data(i.toString(),'');
+		                    	    $(this).html('');
+	                	    	}
+	                	    });
+                    }
                 $('.confirmation').change(function(){
                 	$('#comment').val('');
                 	is_model_alert='';

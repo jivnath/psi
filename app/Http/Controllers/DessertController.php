@@ -151,6 +151,7 @@ class DessertController extends Controller
 
     public function dessert_update(Request $request)
     {
+
         if ($request->field == 'comments') {
             $psi_self = new PsiSelfSheetComments();
             $psi_self->self_id = $request->dessert_id;
@@ -159,7 +160,12 @@ class DessertController extends Controller
             $psi_self->msg_medium = 'viber';
             $psi_self->save();
             return $psi_self->where('self_id', $request->dessert_id)->count();
-        } else {
+        }
+        elseif($request->field=='deleted'){
+            $dessert = DessertSheet::find($request->dessert_id);
+            $dessert->delete();
+            return response()->json($dessert);
+        }else {
 
             $dessert = DessertSheet::find($request->dessert_id);
             $dessert->{$request->field} = $request->field_value;
