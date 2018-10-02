@@ -228,7 +228,6 @@
         var name = $(this).attr('name');
         $("#company_name").text(name);
         $("#company_id").val(id);
-        alert('vayo');
         $("#shiftAdd").show();
         var i = 1;
         $('#add').click(function () {

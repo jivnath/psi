@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Raw;
 use Session;
+use App\Models\Company;
+
 
 class Dashboard extends Controller
 {
@@ -58,7 +60,7 @@ class Dashboard extends Controller
 
     public function storeEmployeeApplication(Request $request)
     {
-        $shift = $request->shifts;
+        $shift = $request->get('shift');
         $user = \Session::get('username');
 //        dd($shift);
 
@@ -68,8 +70,8 @@ class Dashboard extends Controller
         ]);
         if($employee->exists)
         {
-            Session::flash('error', 'You are already on the list');
-            return redirect()->route('employee.dashboard');
+//            Session::flash('error', 'You are already on the list');
+//            return redirect()->route('employee.dashboard');
         }
         else
         {
@@ -77,10 +79,11 @@ class Dashboard extends Controller
             $employee->cts_id = $shift;
             $employee->save();
 
-            Session::flash('success', 'You are selected for the task');
-            return redirect()->route('employee.dashboard');
+//            Session::flash('success', 'You are selected for the task');
+//            return redirect()->route('employee.dashboard');
 
         }
+        echo json_encode($employee);
     }
 
     public function getCompanyName(Request $request)
@@ -90,4 +93,6 @@ class Dashboard extends Controller
 
         echo json_encode($company->name);
     }
+
+
 }

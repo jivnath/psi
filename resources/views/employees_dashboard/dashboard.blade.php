@@ -59,8 +59,8 @@
     <div class="modal" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form class="form-horizontal" method="POST" action="{{route('storeEmployeeApplication')}}">
-                    @csrf
+                <form class="form-horizontal">
+                    {{--@csrf--}}
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel"></h4>
                     </div>
@@ -76,8 +76,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <span id="submit" class="btn btn-primary"> Apply </span>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary"> Apply </button>
                     </div>
                 </form>
             </div>
@@ -142,6 +142,11 @@
     <script src="{{asset('bower_components/moment/moment.js')}}"></script>
     <script src="{{asset('bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         var last_click = '';
         $(document).ready(function () {
             /* initialize the calendar
@@ -179,6 +184,7 @@
                         $('#ModalEdit #color').val(event.color);
                         $('#ModalEdit').modal('show');
                     });
+
                 },
                 eventDrop: function (event, delta, revertFunc) { // si changement de position
 
@@ -187,16 +193,16 @@
                 },
                 dayClick: function (date, allDay) {
                     var company = $("#companies").val();
-                    // alert('hey');
+                    $('#ModalAdd').show();
                     $.ajax({
-                        type:'GET',
-                        url:'{{route('getCompanyName')}}',
-                        data:{'company':company},
-                        async:true,
+                        type: 'GET',
+                        url: '{{route('getCompanyName')}}',
+                        data: {'company': company},
+                        async: true,
                         dataType: 'json',
-                        success:function(data){
+                        success: function (data) {
                             // alert(data);
-                            $('#myModalLabel').text(data['company']+'('+moment(date).format('YYYY-MM-DD')+')');
+                            $('#myModalLabel').html(data + '<h6>(' + moment(date).format('YYYY-MM-DD') + ')</h6>');
                         }
                     });
                     $('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
@@ -206,8 +212,7 @@
                     $('#calendar').fullCalendar('clientEvents', function (event) {
 
                         if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD')) {
-                            if(event.selected == 'no')
-                            {
+                            if (event.selected == 'no') {
                                 $('#shifts').append('<option value="' + event.id + '">' + event.title + '</option>')
                             }
 
@@ -221,32 +226,6 @@
 
                 },
                 editable: true,
-                // droppable: true, // this allows things to be dropped onto the calendar !!!
-                // drop: function (date, allDay) { // this function is called when something is dropped
-                //
-                //     // retrieve the dropped element's stored Event Object
-                //     var originalEventObject = $(this).data('eventObject')
-                //
-                //     // we need to copy it, so that multiple events don't have a reference to the same object
-                //     var copiedEventObject = $.extend({}, originalEventObject)
-                //
-                //     // assign it the date that was reported
-                //     copiedEventObject.start = date
-                //     copiedEventObject.allDay = allDay
-                //     copiedEventObject.backgroundColor = $(this).css('background-color')
-                //     copiedEventObject.borderColor = $(this).css('border-color')
-                //
-                //     // render the event on the calendar
-                //     // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-                //     $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
-                //
-                //     // is the "remove after drop" checkbox checked?
-                //     if ($('#drop-remove').is(':checked')) {
-                //         // if so, remove the element from the "Draggable Events" list
-                //         $(this).remove()
-                //     }
-                //
-                // }
             });
         });
         $("#companies").change(function () {
@@ -273,7 +252,7 @@
                                 id: data['red'][i].rel_id,
                                 start: data['red'][i].date,
                                 allDay: true,
-                                selected:'no',
+                                selected: 'no',
                                 company: data['red'][i].company_name,
                                 backgroundColor: '#f56954', //red
                                 borderColor: '#f56954' //red
@@ -287,7 +266,7 @@
                                 id: data['green'][i].rel_id,
                                 start: data['green'][i].date,
                                 allDay: true,
-                                selected:'yes',
+                                selected: 'yes',
                                 company: data['green'][i].company_name,
                                 backgroundColor: '#2ac633', //green
                                 borderColor: '#2ac633' //green
@@ -299,6 +278,30 @@
             else {
                 $("#calendarDiv").hide();
             }
+        });
+
+        $('#submit').click(function () {
+            var selectedShift = $('#shifts').val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: "{{route('storeEmployeeApplication')}}",
+                data: {'shift': selectedShift},
+                async: true,
+                success: function (data) {
+                    $("#calendar").fullCalendar('clientEvents', function (event) {
+                        if (event.id == selectedShift) {
+                            event.backgroundColor = '#2ac633',
+                            event.borderColor = '#2ac633',
+                            event.selected = 'yes'
+                            $('#calendar').fullCalendar('updateEvent',event);
+                            $('#shifts').html('');
+                            $('#ModalAdd').hide();
+                        }
+
+                    });
+                }
+            });
         });
     </script>
 

@@ -3,7 +3,7 @@
 <section class="content">
     <div class="row">
         	<div class="col-md-12">
-        	<div class="box box-info">
+        	<div class="box box-info" style="overflow: auto">
         	<div class="box-header with-border">
                       <h3 class="box-title">Company Shift</h3>
                     </div>
