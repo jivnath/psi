@@ -82,4 +82,12 @@ class Dashboard extends Controller
 
         }
     }
+
+    public function getCompanyName(Request $request)
+    {
+        $id = $request->get('company');
+        $company = Company::find($id);
+
+        echo json_encode($company->name);
+    }
 }

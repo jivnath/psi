@@ -30,6 +30,7 @@ Route::group(['middleware'=> ['employee']], function(){
         Route::get('/dashboard', ['as' => 'employee.dashboard', 'uses' => 'Employee\Dashboard@index']);
         Route::get('/getDataForCalendar', ['as' => 'getDataForCalendar', 'uses' => 'Employee\Dashboard@getDataForCalendar']);
         Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
+        Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
     });
 });
 Route::group(['middleware' => ['auth']], function () {
