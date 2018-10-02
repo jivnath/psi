@@ -70,10 +70,12 @@ class DessertController extends Controller
             $dessert_id = $request->get('schedule_id');
             if ($psi != null) {
                 $employee = Employee::where('psi_number', $psi)->first();
-                if (count($employee) > 0) {
+                if ($employee) {
                     if (DessertSheet::where([['staff_no', $psi],['cts_id', $dessert_id]])->count() > 0) {
                         $data = [];
                     } else {
+
+//                        dd($employee);
 
                         $data = [
                             4 => $employee->country_citizenship,
