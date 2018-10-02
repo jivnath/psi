@@ -197,10 +197,10 @@
         <div class="col-md-6">
             <div class="box box-info">
                 <div class="box-header with-border">
-                      <h3 class="box-title">@lang('Activity Feed')</h3>
+                      <h3 class="box-title">Viber Alert Summery</h3>
                     </div>
                 <div class="box-body">
-                <ul>
+                <!-- <ul>
                 @forelse ($audits as $audit)
                 <li>
                     @lang('article.updated.metadata', $audit->getMetadata())
@@ -215,12 +215,39 @@
                 @empty
                 <p>@lang('article.unavailable_audits')</p>
                 @endforelse
-            </ul>
-                <div class="activity-feed" />
-                </div>
-                <div class="box-footer text-center">
-             	 <a href="javascript:void(0)" class="uppercase">View All</a>
-            </div>
+            </ul> -->
+             <table class="table" id='alert_viber'>
+                      <thead>
+                        <tr>
+                            <th>Message Type</th>
+                            <th>Sent</th>
+                            <th>Response Count</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                           	<td>Residence card expiry</td>
+                           	<td><i class="fas fa-check-double"></i></td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                           	<td>One day before</td>
+                            <td><i class="fas fa-check-double"></i></td>
+                             <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>3 hour before</td>
+                            <td><i class="fas fa-check"></i></td>
+                             <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>Arrival confirmation</td>
+                            <td><i class="fas fa-check-double"></i></td>
+                             <td>5</td>
+                        </tr>
+                        </tbody>
+                     </table>
+
             </div>
         </div>
     </div>
@@ -236,6 +263,7 @@ $(document).ready(function() {
     $('#tn_table').DataTable({ "pageLength": 3});
     $('#expire_info').DataTable({ "pageLength": 3});
     $('#rda_table').DataTable({ "pageLength": 3});
+    $('#alert_viber').DataTable({ "pageLength": 4});
 });
 $('.viber_messessing').on('click',function(e){
 	$('#card_expiry').modal('show');
