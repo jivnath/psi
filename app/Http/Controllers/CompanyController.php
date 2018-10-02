@@ -159,7 +159,7 @@ class CompanyController extends Controller
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
 
-        Session::flash('success', 'Companies successfully added!');
+        // Session::flash('success', 'Companies successfully added!');
     }
 
     public function updateCompanies(Request $request)
@@ -203,7 +203,7 @@ class CompanyController extends Controller
                     }
                 }
             }
-            Session::flash('success', 'Companies successfully updated!');
+            // Session::flash('success', 'Companies successfully updated!');
         }
         echo json_encode($data);
     }
