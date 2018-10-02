@@ -14,6 +14,7 @@ class PsiPermissionController extends Controller
         foreach ($permissions as $row) {
             $permission_relation[$row->prefix][] = $row;
         }
+        //roles for roleid
 
         return view('pages/roleUpdateForm', compact('permission_relation'));
     }

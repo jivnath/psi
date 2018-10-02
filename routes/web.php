@@ -139,9 +139,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-        Route::prefix('roles')->group(function(){
             Route::resource('roles', 'RoleController');
-        });
         Route::prefix('permissions')->group(function(){
             Route::resource('permissions', 'PermissionController');
         });

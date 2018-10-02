@@ -18,9 +18,9 @@ margin-left: 17px;
 						<div class="col-md-12">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
-										id="customCheck231" name="customized[]" value="231~~y"
-										checked=""> <label class="custom-control-label"
-										for="customCheck231">{{$k}}</label>
+										id="customCheck-{{str_replace('/','',$k)}}" name="customized[]" value="{{$k}}~~y"
+										checked="" onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')"> <label class="custom-control-label"
+										for="customCheck-{{str_replace('/','',$k)}}">{{$k}}</label>
 								</div>
 							</div>
 
@@ -32,9 +32,9 @@ margin-left: 17px;
 							<div class="col-md-3 mb-3">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
-										id="customCheck231" name="customized[]" value="231~~y"
-										checked=""> <label class="custom-control-label"
-										for="customCheck231">{{$item['perm_name']?$item['perm_name']:$item['perm_desc']}}</label>
+										id="customCheck{{$item['id']}}" name="customized[]" value="{{$item['id']}}~~y"
+										checked="" data-child="{{str_replace('/','',$k)}}"> <label class="custom-control-label"
+										for="customCheck{{$item['id']}}">{{$item['perm_name']?$item['perm_name']:$item['perm_desc']}}</label>
 								</div>
 							</div>
 
@@ -66,5 +66,12 @@ margin-left: 17px;
         });
     });
 
+</script>
+<script type="text/javascript">
+	function toggleSectionCheck(item){
+		var check =  $("#customCheck-"+item).is(':checked');
+        var checkboxes = $(document).find('input[data-child='+item+']');
+        checkboxes.prop('checked', check);
+	}
 </script>
 @endpush
