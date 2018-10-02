@@ -98,64 +98,84 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('group/add', ['as' => 'group.add', 'uses' => 'UserGroupController@addGroup']);
             Route::post('group/rename', ['as '=>'group.rename', 'uses' => 'UserGroupController@renameGroup']);
         });
+        Route::prefix('permission_module')->group(function(){
+            Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
+        });
 
         Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
-        Route::get('/skills', ['as' => 'manageSkills', 'uses' => 'SkillMasterController@manage' ]);
-        Route::post('/skills/add', ['as' => 'skills.master.add','uses' => 'SkillMasterController@addSkills']);
-        Route::post('/skills/remove', ['as' => 'skills.master.remove', 'uses' => 'SkillMasterController@removeSkills']);
-        Route::post('/skills/rename', ['as' => 'skills.master.rename', 'uses' => 'SkillMasterController@rename']);
+        Route::prefix('skills')->group(function(){
+            Route::get('/', ['as' => 'manageSkills', 'uses' => 'SkillMasterController@manage' ]);
+            Route::post('/add', ['as' => 'skills.master.add','uses' => 'SkillMasterController@addSkills']);
+            Route::post('/remove', ['as' => 'skills.master.remove', 'uses' => 'SkillMasterController@removeSkills']);
+            Route::post('/rename', ['as' => 'skills.master.rename', 'uses' => 'SkillMasterController@rename']);
+
+        });
+
+
+        Route::prefix('users')->group(function(){
+            Route::get('/', ['as' => 'users.index', 'uses' => 'UserController@index']);
+            Route::get('/create', ['as' => 'users.create', 'uses' => 'UserController@createUser']);
+            Route::post('/create', ['as' => 'users.store', 'uses' => 'UserController@store']);
+            Route::get('/edit/{id}', ['as' => 'users.edit', 'uses' => 'UserController@editUser' ]);
+            Route::put('/{id}', ['as' => 'users.update', 'uses' => 'UserController@updateUser']);
+            Route::get('/profile', ['as' => 'profile', 'uses' =>'UserController@profile']);
+            Route::put('/profile/{id}', ['as' => 'updateProfile', 'uses' => 'UserController@updateProfile']);
+        });
+
+        Route::prefix('pages')->group(function(){
+            Route::get('/user', ['as' => 'pages.users', 'uses' => 'PagesController@getUser']);
+            Route::get('/employee', ['as' => 'pages.employee', 'uses' => 'PagesController@getEmployee']);
+            Route::get('/total', ['as' => 'total.necessary', 'uses' => 'TotalNecessaryController@totalNecessary']);
+            Route::get('/shift/generator', ['as' => 'generator', 'uses' => 'PagesController@generator']);
+            Route::post('/shift/generator', ['as' => 'generator.store', 'uses' => 'PagesController@generatorStore']);
+            Route::get('/shift', ['as' => 'pages.shift', 'uses' => 'PagesController@shift']);
+            Route::get('/section', ['as' => 'section', 'uses' => 'PagesController@section']);
+            Route::get('shift/show/{id}', ['as' => 'shift.show', 'uses' => 'PagesController@show']);
+            Route::post('/shift/updateCell', 'PagesController@updateCells');
+            Route::get('/shift/generate', ['as' => 'generator.shift', 'uses' => 'PagesController@getShift']);
+            Route::post('ajax/shift/add', ['as' => 'ajax.add.shifts', 'uses' => 'PagesController@ajaxAddShifts']);
+        });
 
 
 
-        Route::get('/users', ['as' => 'users.index', 'uses' => 'UserController@index']);
-        Route::get('/users/create', ['as' => 'users.create', 'uses' => 'UserController@createUser']);
-        Route::post('/users/create', ['as' => 'users.store', 'uses' => 'UserController@store']);
-        Route::get('/users/edit/{id}', ['as' => 'users.edit', 'uses' => 'UserController@editUser' ]);
-        Route::put('/users/{id}', ['as' => 'users.update', 'uses' => 'UserController@updateUser']);
-        Route::get('/users/profile', ['as' => 'profile', 'uses' =>'UserController@profile']);
-        Route::put('/users/profile/{id}', ['as' => 'updateProfile', 'uses' => 'UserController@updateProfile']);
 
+        Route::prefix('roles')->group(function(){
+            Route::resource('roles', 'RoleController');
+        });
+        Route::prefix('permissions')->group(function(){
+            Route::resource('permissions', 'PermissionController');
+        });
 
-
-
-        Route::get('/pages/user', ['as' => 'pages.users', 'uses' => 'PagesController@getUser']);
-        Route::get('/pages/employee', ['as' => 'pages.employee', 'uses' => 'PagesController@getEmployee']);
-        Route::get('/shift/generator', ['as' => 'generator', 'uses' => 'PagesController@generator']);
-        Route::post('/shift/generator', ['as' => 'generator.store', 'uses' => 'PagesController@generatorStore']);
-        Route::get('/shift', ['as' => 'pages.shift', 'uses' => 'PagesController@shift']);
-        Route::get('/section', ['as' => 'section', 'uses' => 'PagesController@section']);
-        Route::get('shift/show/{id}', ['as' => 'shift.show', 'uses' => 'PagesController@show']);
-        Route::post('/shift/updateCell', 'PagesController@updateCells');
-        Route::get('/shift/generate', ['as' => 'generator.shift', 'uses' => 'PagesController@getShift']);
-        Route::post('ajax/shift/add', ['as' => 'ajax.add.shifts', 'uses' => 'PagesController@ajaxAddShifts']);
-
-        Route::resource('roles', 'RoleController');
-        Route::resource('permissions', 'PermissionController');
 
 
         Route::get('/addmore','ShiftMasterController@addMore');
         Route::post('/addmore','ShiftMasterController@addMorePost');
 
-        Route::get('/pages/total', ['as' => 'total.necessary', 'uses' => 'TotalNecessaryController@totalNecessary']);
 
-        Route::get('/leader/create', ['as' => 'leader.create', 'uses' => 'LeaderController@create']);
-        Route::post('/leader/create', ['as' => 'leader.store', 'uses' => 'LeaderController@store']);
-    //    Route::get('/leader/edit/{id}', 'LeaderController@edit')->name('leader.edit');
-    //    Route::get('/leader/{id}', 'LeaderController@update')->name('leader.update');
-        Route::get('/leader', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
+        Route::prefix('leader')->group(function(){
+            Route::get('/create', ['as' => 'leader.create', 'uses' => 'LeaderController@create']);
+            Route::post('/create', ['as' => 'leader.store', 'uses' => 'LeaderController@store']);
+            //    Route::get('/leader/edit/{id}', 'LeaderController@edit')->name('leader.edit');
+            //    Route::get('/leader/{id}', 'LeaderController@update')->name('leader.update');
+            Route::get('/', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
+        });
 
-        Route::get('sheet/time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
-        Route::get('sheet/self', ['as' => 'sheet.dessert', 'uses' => 'DessertController@dessert']);
-        Route::get('/dessert', ['as' => 'dessert', 'uses' => "DessertController@generateDessert"]);
-        Route::get('/dessert/findDetails', "DessertController@findDetails");
-        Route::post('/dessert', ['as' => 'dessert.store', 'uses' => "DessertController@storeDessert"]);
-        Route::post('/dessert_update', ['as' => 'dessert.update', 'uses' => "DessertController@dessert_update"]);
+        Route::prefix('sheet')->group(function(){
+            Route::get('time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
+            Route::get('self', ['as' => 'sheet.dessert', 'uses' => 'DessertController@dessert']);
+        });
+
+        Route::prefix('dessert')->group(function(){
+            Route::get('/', ['as' => 'dessert', 'uses' => "DessertController@generateDessert"]);
+            Route::get('/findDetails', "DessertController@findDetails");
+            Route::post('/', ['as' => 'dessert.store', 'uses' => "DessertController@storeDessert"]);
+            Route::post('/dessert_update', ['as' => 'dessert.update', 'uses' => "DessertController@dessert_update"]);
+        });
 
 
 
         Route::prefix('viber')->group(function () {
             Route::post('/viber_it', ['as' => 'viber.send', 'uses' => 'ViberMessageController@store_message']);
-
             Route::get('/alert/setting', ['as' => 'viberAlert', 'uses' => 'ViberAlertController@setting']);
             Route::post('/alert/setting', ['as' => 'storeSetting', 'uses' => 'ViberAlertController@storeSetting']);
         });

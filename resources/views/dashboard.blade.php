@@ -259,6 +259,18 @@ $('.send_it_now').on('click',function(){
 	console.log(comments);
 	$('#comment').val('');
 });
+$(document).on('click','#messags_view',function(){
+	char_class=$('#message_send_view').attr('class');
+	char_class=$('#chat_view').attr('class');
+	$('#message_send_view').removeClass();
+	$('#message_send_view').addClass('col-sm-4');
+	$('#chat_view').show('100');
+});
+$('#card_expiry').on('hidden.bs.modal', function () {
+	$('#chat_view').hide();
+	$('#message_send_view').removeClass();
+	$('#message_send_view').addClass('col-sm-9');
+});
 </script>
 
 @endpush
