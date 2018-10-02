@@ -13,8 +13,8 @@
 						<thead>
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">Master Company</th>
-								<th scope="col">No of Sub-Companies</th>
+								<th scope="col">Section</th>
+								<th scope="col">No of Sub-Sections</th>
 								<th scope="col">Created At</th>
 								<th scope="col">Action</th>
 							</tr>

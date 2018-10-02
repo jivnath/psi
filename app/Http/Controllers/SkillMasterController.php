@@ -12,6 +12,7 @@ class SkillMasterController extends Controller
     public function manage()
     {
         $skills = Raw::getSkillsDetails();
+//        dd($skills);
         return view('skills.manage')->withSkills($skills);
     }
 
@@ -20,8 +21,8 @@ class SkillMasterController extends Controller
         if($request->ajax())
         {
             $newSkill = $request->get('skill');
-//dd(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->get());
-            if(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->get())
+//dd(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->first());
+            if(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->first() != null)
             {
                 $skill = 0;
             }
@@ -42,6 +43,7 @@ class SkillMasterController extends Controller
                     $skill->status = 'enabled';
                     $skill->save();
                 }
+//                dd($skill);
             }
             echo json_encode($skill);
         }

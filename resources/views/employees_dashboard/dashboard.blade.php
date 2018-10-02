@@ -16,7 +16,7 @@
                 <select class="form-control input-shorter" id="companies">
                     <option value="0">--Select sub section--</option>
                     @foreach($companies as $company)
-                        <option value="{{$company->id}}">{{$company->name}}</option>
+                        <option name="{{$company->name}}" value="{{$company->id}}">{{$company->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -186,6 +186,19 @@
 
                 },
                 dayClick: function (date, allDay) {
+                    var company = $("#companies").val();
+                    // alert('hey');
+                    $.ajax({
+                        type:'GET',
+                        url:'{{route('getCompanyName')}}',
+                        data:{'company':company},
+                        async:true,
+                        dataType: 'json',
+                        success:function(data){
+                            // alert(data);
+                            $('#myModalLabel').text(data['company']+'('+moment(date).format('YYYY-MM-DD')+')');
+                        }
+                    });
                     $('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
                     $('#shifts').html('');
                     var select = '<option value="0">--Choose Shift--</option>';

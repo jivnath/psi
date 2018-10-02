@@ -65,7 +65,7 @@ class ExcelReader extends FormRequest
      */
     public function iterateSheet()
     {
-        $columns = Employee::columns(['id', 'company_id', 'created_at', 'updated_at']);
+        $columns = Employee::columns(['id', 'created_at', 'updated_at']);
 
         foreach ($this->currentSpreadsheet->getAllSheets() as $worksheet) {
             $highestRow = $worksheet->getHighestRow(); // e.g. 10
@@ -104,7 +104,7 @@ class ExcelReader extends FormRequest
                 'psi_number' => $this->data[$i]['psi_number']
             ]);
             if ($employee->exists) {
-                break;
+                continue;
             }
             else {
                 array_push($no, $this->data[$i]);
@@ -129,7 +129,7 @@ class ExcelReader extends FormRequest
 //        dd($no);
 //        $checkDuplicates['yes'] = $yes;
         $checkDuplicates['no'] = $no;
-//        dd($checkDuplicates['yes']);
+//        dd($checkDuplicates['no']);
         try {
             Employee::inserts($checkDuplicates['no']);
 //            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
@@ -157,7 +157,7 @@ class ExcelReader extends FormRequest
             $dateTime = date('Y-m-d H:i:s');
             $this->data[$rowIndex]['created_at'] = $dateTime;
             $this->data[$rowIndex]['updated_at'] = $dateTime;
-            $this->data[$rowIndex]['company_id'] = $this->company_id; //from request
+//            $this->data[$rowIndex]['company_id'] = $this->company_id; //from request
         }
     }
 

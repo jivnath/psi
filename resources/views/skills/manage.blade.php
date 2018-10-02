@@ -9,7 +9,7 @@
                         <label for="skill"><h5><b>Skills</b></h5></label>
                         <input type="text" class="form-control input-shorter" placeholder="Enter Skill" id="skill"
                                required>
-                        <span id="add" style="margin-top: 10px" class="btn btn-success">Add</span>
+                        <span id="add" style="margin-top: 10px" class="btn btn-success add">Add</span>
                     </div>
                 </div>
             </div>
@@ -70,6 +70,7 @@
 
         $(document).on('click', '.add', function() {
             var skill = $("#skill").val();
+            console.log(skill);
             $.ajax({
                 type: "POST",
                 url: "{{route('skills.master.add')}}",
@@ -86,8 +87,8 @@
                             '<td id="skillname'+data.id+'">' + data.skill_name + '</td>' +
                             '<td>5</td>' +
                             '<td><span id="remove" class="btn btn-link" name="' + data.id + '">Delete</span>' +
-                            '<span id="rename" data-name="'+skill+' class="btn btn-link" name="' + data.id + '">Delete</span>' +
-                            '</td></tr>';
+                            '<span id="rename" data-name="'+skill+'" class="btn btn-link" name="' + data.id + '">Rename</span></td>' +
+                            '</tr>';
                         $("table tbody").append(newRow);
                         $("#skill").val('');
                     }

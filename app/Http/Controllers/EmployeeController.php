@@ -33,7 +33,7 @@ class EmployeeController extends Controller
         $data['employee_data'] = $employee_data->get();
         $data['columns'] = $employee_data->first()->columns([
             'id',
-            'company_id',
+//            'company_id',
             'created_at',
             'updated_at'
         ]);

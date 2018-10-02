@@ -100,9 +100,9 @@ class ShiftMasterController extends Controller
     protected function rules()
     {
         return [
-            'company_id' => 'bail|required',
-            'start_time' => 'required',
-            'end_time' => 'required',
+            'company_name' => 'bail|required',
+            'start_shift' => 'required',
+            'end_shift' => 'required',
         ];
     }
 }

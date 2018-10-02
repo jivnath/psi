@@ -59,11 +59,11 @@ class Employee extends Model
      *
      * @return boolean
      */
-    public static function isRecordExist($psiNum, $companyId)
-    {
-        $count = static::where('psi_number', $psiNum)->where('company_id', $companyId)->count();
-        return ($count > 0) ? true : false;
-    }
+//    public static function isRecordExist($psiNum, $companyId)
+//    {
+//        $count = static::where('psi_number', $psiNum)->where('company_id', $companyId)->count();
+//        return ($count > 0) ? true : false;
+//    }
 
     /**
      * Fetch employee columns and remove id, company_id
