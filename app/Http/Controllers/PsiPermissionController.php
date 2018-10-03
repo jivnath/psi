@@ -5,6 +5,7 @@ use App\Model\Role;
 use App\Models\RolesToPermission_rel;
 use Illuminate\Http\Request;
 use App\Models\PermissionModel;
+use App\Models\User;
 
 class PsiPermissionController extends Controller
 {
@@ -49,4 +50,18 @@ class PsiPermissionController extends Controller
         }
 
     }
+
+    public function updateUser(Request $request, $roleid)
+    {
+        $permission_relation = [];
+        $permissions = PermissionModel::orderBy('prefix', 'perm_name')->get();
+        foreach ($permissions as $row) {
+            $permission_relation[$row->prefix][] = $row;
+        }
+        
+        $user=User::All();
+        return view('pages/userUpdateForm', compact('permission_relation','user'));
+    }
+
+    
 }

@@ -100,8 +100,10 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::prefix('permission_module')->group(function(){
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
-//            Route::post('/role/update-{role_id}', ['as'=>'PermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
+
             Route::post('/role/update-{role_id}', ['as'=>'storePermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
+            Route::match(['get', 'post'],'/user/update-{role_id}', ['as' => 'update.user', 'uses' => 'PsiPermissionController@updateUser']);
+
         });
 
         Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
@@ -138,15 +140,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('ajax/shift/add', ['as' => 'ajax.add.shifts', 'uses' => 'PagesController@ajaxAddShifts']);
         });
 
-
-
-
-            Route::resource('roles', 'RoleController');
+        Route::resource('roles', 'RoleController');
         Route::prefix('permissions')->group(function(){
-            Route::resource('permissions', 'PermissionController');
+        Route::resource('permissions', 'PermissionController');
         });
-
-
 
         Route::get('/addmore','ShiftMasterController@addMore');
         Route::post('/addmore','ShiftMasterController@addMorePost');
@@ -182,3 +179,4 @@ Route::group(['middleware' => ['auth']], function () {
 //    });
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+
