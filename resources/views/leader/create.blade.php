@@ -13,7 +13,7 @@
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-2">
-                                    <label for="company_name"> Company Name </label>
+                                    <label for="company_name"> Section Name </label>
                                 </div>
                                 <div class="col-md-6">
                                     {{--{{dd($companies)}}--}}

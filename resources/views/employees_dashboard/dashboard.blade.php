@@ -23,26 +23,26 @@
         </div>
 
         <div class="row" id="calendarDiv" style="display: none">
-            <div class="col-md-3">
-                <div class="box box-solid">
-                    <div class="box-header with-border">
-                        <h4 class="box-title">Last Updates</h4>
-                    </div>
-                    <div class="box-body">
-                        <!-- the events -->
-                        <div id="external-events">
-                            <div class="external-event bg-green">Cancel Last Day</div>
-                            <div class="external-event bg-yellow">Scheduled On Sept</div>
+            {{--<div class="col-md-3">--}}
+                {{--<div class="box box-solid">--}}
+                    {{--<div class="box-header with-border">--}}
+                        {{--<h4 class="box-title">Last Updates</h4>--}}
+                    {{--</div>--}}
+                    {{--<div class="box-body">--}}
+                        {{--<!-- the events -->--}}
+                        {{--<div id="external-events">--}}
+                            {{--<div class="external-event bg-green">Cancel Last Day</div>--}}
+                            {{--<div class="external-event bg-yellow">Scheduled On Sept</div>--}}
 
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /. box -->
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<!-- /.box-body -->--}}
+                {{--</div>--}}
+                {{--<!-- /. box -->--}}
 
-            </div>
+            {{--</div>--}}
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body no-padding">
                         <!-- THE CALENDAR -->
@@ -177,15 +177,15 @@
                     $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
                     $('#ModalAdd').modal('show');
                 },
-                eventRender: function (event, element) {
-                    element.bind('dblclick', function () {
-                        $('#ModalEdit #id').val(event.id);
-                        $('#ModalEdit #title').val(event.title);
-                        $('#ModalEdit #color').val(event.color);
-                        $('#ModalEdit').modal('show');
-                    });
-
-                },
+                // eventRender: function (event, element) {
+                //     element.bind('dblclick', function () {
+                //         $('#ModalEdit #id').val(event.id);
+                //         $('#ModalEdit #title').val(event.title);
+                //         $('#ModalEdit #color').val(event.color);
+                //         $('#ModalEdit').modal('show');
+                //     });
+                //
+                // },
                 eventDrop: function (event, delta, revertFunc) { // si changement de position
 
                     edit(event);
