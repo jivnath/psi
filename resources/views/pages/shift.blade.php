@@ -14,7 +14,6 @@
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Section</th>
-								<th scope="col">No of Sub-Sections</th>
 								<th scope="col">Created At</th>
 								<th scope="col">Action</th>
 							</tr>
@@ -28,7 +27,6 @@
                         <tr>
 								<th scope="row">{{$index + 1}}</th>
 								<td>{{ $shift->master_company_name }}</td>
-								<td>{{ $shift->total_subcompany }}</td>
 								<td>{{ Carbon\Carbon::parse( $shift->created_at)->format('d-m-Y
 									i:s A') }}</td>
 								<td><a

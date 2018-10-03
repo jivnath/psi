@@ -11,7 +11,7 @@
         		<table class="table table-striped" id='example'>
         			<thead>
         				<th> Time </th>
-        				<th> Company </th>
+        				<th> Subsection </th>
         				<th> Type </th>
         				@foreach($dates as $date)
         					<th>{{ date('m-d', strtotime( $date->date )) }}</th>

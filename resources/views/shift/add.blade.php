@@ -15,11 +15,11 @@
 
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-5">
-                                    <label for="shiftName"> Company Name </label>
+                                    <label for="shiftName"> Subsection Name </label>
                                 </div>
                                 <div class="col-md-7 ">
                                 <select class="form-control" name="company_name" required>
-                                    <option value="">--Select Company--</option>
+                                    <option value="">--Select Subsection--</option>
                                     @foreach($data['companies'] as $company )
                                         <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                     @endforeach
@@ -68,7 +68,7 @@
                     <div class="box-body">
                         <table class="table table-striped">
                             <tr>
-                                <th>Company Name</th>
+                                <th>Subsection Name</th>
                                 <th>Start-End Time</th>
                                 <th>Action</th>
                             </tr>

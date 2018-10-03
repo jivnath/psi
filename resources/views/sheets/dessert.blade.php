@@ -12,7 +12,7 @@
                      <div class="box-body row">
             <div class="col-md-3">
               <select name="company" class="form-control" id="company">
-                <option>--Select Company--</option>
+                <option>--Select Subsection--</option>
                     @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                     @endforeach

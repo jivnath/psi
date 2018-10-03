@@ -16,7 +16,7 @@
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="shiftName"> Company </label>
+                                <label for="shiftName"> Subsection </label>
                             </div>
                             <div class="col-md-7" style="text-align: left">{{$c}}  </div>
                         </div>
