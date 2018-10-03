@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::prefix('permission_module')->group(function(){
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
+            Route::match(['get', 'post'],'/user/update-{role_id}', ['as' => 'update.user', 'uses' => 'PsiPermissionController@updateUser']);
         });
 
         Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
@@ -180,3 +181,4 @@ Route::group(['middleware' => ['auth']], function () {
 //    });
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+
