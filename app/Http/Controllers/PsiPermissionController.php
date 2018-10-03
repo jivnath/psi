@@ -31,6 +31,10 @@ class PsiPermissionController extends Controller
 
     public function storeUpdate(Request $request, $roleid)
     {
+        $old = RolesToPermission_rel::where('role_id', $roleid)->get();
+        foreach ($old as $o)
+            $o->delete();
+
         $permissions = $request->customized;
 //        dd($permissions);
         foreach($permissions as $permission)
@@ -40,6 +44,7 @@ class PsiPermissionController extends Controller
             $roleToPermission->permission_id = $permission;
             $roleToPermission->save();
 
+            Session::flash('success', 'Permission successfully assigned!');
             return redirect()->route('update.role', $roleid);
         }
 

@@ -10,7 +10,7 @@ margin-left: 17px;
 			{{--{{dd($permissionsOfRole)}}--}}
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Update Role</h3>
+					<h3 class="box-title">Update Role{{' : '.$role->name}}</h3>
 				</div>
 				<div class='box-body'>
 					<form name="customize_form" class="form-horizontal" action="{{route('storePermissionToRole', $role->id)}}" method="POST">
@@ -22,7 +22,7 @@ margin-left: 17px;
 									<input type="checkbox" class="custom-control-input"
 										id="customCheck-{{str_replace('/','',$k)}}" name="customized[]" value="{{$k}}~~y"
 										 onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')"> <label class="custom-control-label"
-										for="customCheck-{{str_replace('/','',$k)}}"<?=(in_array($k.'~~y', $permissionsOfRole))?'checked':''?>>{{$k}}</label>
+										for="customCheck-{{str_replace('/','',$k)}}"<?=(in_array($k."~~y", $permissionsOfRole))?'checked':''?>>{{$k}}</label>
 								</div>
 							</div>
 
