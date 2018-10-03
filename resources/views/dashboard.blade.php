@@ -132,8 +132,8 @@
                         <table class="table table-striped table-bordered" id='tn_table'>
                             <thead>
                             <tr>
-                                <th>Company</th>
-                                <th>Sub-company</th>
+                                <th>Section</th>
+                                <th>Sub-section</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Total</th>

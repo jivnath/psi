@@ -151,7 +151,7 @@
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('shift.add') }}"><i
                                                                             class="fa fa-clock" aria-hidden="true"></i>
-                                                                    Company Shift</a></li>
+                                                                    Sub-section Shift</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('leader.create') }}"><i
                                                                             class="fa fa-user-circle" aria-hidden="true"></i>
@@ -174,7 +174,7 @@
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="shift_management">
                                                     <a class="dropdown-item" href="{{ route('pages.shift') }}"><i class="fas fa-table"></i>
-                                                        Company Shift </a>
+                                                        Section Shift </a>
                                                     <a class="dropdown-item"
                                                        href="{{route('sheet.dessert')}}">
                                                         <i class="far fa-calendar-alt" aria-hidden="true"></i> Self
