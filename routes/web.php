@@ -100,6 +100,8 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::prefix('permission_module')->group(function(){
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
+//            Route::post('/role/update-{role_id}', ['as'=>'PermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
+            Route::post('/role/update-{role_id}', ['as'=>'storePermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
         });
 
         Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);

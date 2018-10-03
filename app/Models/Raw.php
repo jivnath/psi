@@ -174,24 +174,64 @@ WHERE
     public static function getShiftView()
     {
         $sql = "SELECT
-                (
-                    SELECT
-                        name
-                    FROM
-                        companies
-                    WHERE
-                        companies.id = c.master_id
-                ) master_company_name,
-                master_id,
-                COUNT(master_id) total_subcompany,
-                ctt.created_at
-            FROM
-                companies c,
-                company_time_tables ctt
-            WHERE
-                c.id = ctt.company_id
-            GROUP BY
-                master_id";
+    t1.*,
+    t2.*,
+    (
+        SELECT
+            name
+        FROM
+            companies
+        WHERE
+            companies.id = master_main_id
+    ) section_name
+FROM
+    (
+        SELECT
+            ctt.id,
+            ctt.company_id,
+            c.name,
+            ctt.created_at,
+            c.master_id,
+            (
+                SELECT
+                    cc.master_id
+                FROM
+                    companies cc
+                WHERE
+                    cc.id = ctt.company_id
+            ) master_main_id,
+            (
+                SELECT
+                    p.id AS parent_id
+                FROM
+                    companies p
+                    LEFT JOIN companies c1 ON c1.master_id = p.id
+                    LEFT JOIN companies c2 ON c2.master_id = c1.id
+                    LEFT JOIN companies c3 ON c3.master_id = c2.id
+                WHERE
+                    p.master_id IS NULL
+                    AND ( c2.id = ctt.company_id )
+            ) master_main_id1
+        FROM
+            companies c,
+            company_time_tables ctt
+        WHERE
+            c.id = ctt.company_id
+    ) t1,
+    (
+        SELECT
+            companytt_id,
+            MIN(DATE) schedule_from,
+            MAX(DATE) schedule_to
+        FROM
+            company_time_schedules
+        GROUP BY
+            companytt_id
+    ) t2
+WHERE
+    t1.id = t2.companytt_id
+    AND t1.master_main_id1 IS NOT NULL
+    ORDER BY companytt_id DESC ";
         return DB::select($sql);
     }
 

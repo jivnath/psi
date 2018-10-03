@@ -7,20 +7,22 @@ margin-left: 17px;
 <section class="content">
 	<div class="row">
 		<div class='col-md-12'>
+			{{--{{dd($permissionsOfRole)}}--}}
 			<div class="box box-info">
 				<div class="box-header with-border">
 					<h3 class="box-title">Update Role</h3>
 				</div>
 				<div class='box-body'>
-					<form name="customize_form" class="form-horizontal" method="POST">
+					<form name="customize_form" class="form-horizontal" action="{{route('storePermissionToRole', $role->id)}}" method="POST">
+						@csrf
 						@foreach($permission_relation as $k=>$i)
 						<div class="form-row">
 						<div class="col-md-12">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
 										id="customCheck-{{str_replace('/','',$k)}}" name="customized[]" value="{{$k}}~~y"
-										checked="" onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')"> <label class="custom-control-label"
-										for="customCheck-{{str_replace('/','',$k)}}">{{$k}}</label>
+										 onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')"> <label class="custom-control-label"
+										for="customCheck-{{str_replace('/','',$k)}}"<?=(in_array($k.'~~y', $permissionsOfRole))?'checked':''?>>{{$k}}</label>
 								</div>
 							</div>
 
@@ -28,12 +30,13 @@ margin-left: 17px;
 						<br>
 						<div class="form-row child-row">
 							@foreach($i as $item)
+								{{--{{dd($item['id'])}}--}}
 
 							<div class="col-md-3 mb-3">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
 										id="customCheck{{$item['id']}}" name="customized[]" value="{{$item['id']}}~~y"
-										checked="" data-child="{{str_replace('/','',$k)}}"> <label class="custom-control-label"
+									    data-child="{{str_replace('/','',$k)}}"<?=(in_array($item['id'].'~~y', $permissionsOfRole))?'checked':''?>> <label class="custom-control-label"
 										for="customCheck{{$item['id']}}">{{$item['perm_name']?$item['perm_name']:$item['perm_desc']}}</label>
 								</div>
 							</div>
@@ -44,6 +47,12 @@ margin-left: 17px;
 							@endforeach
 						</div>
 						@endforeach
+						<div class="row">
+							<div class="col-md-10"></div>
+							<div class="col-md-2" style="text-align: left">
+								<input type="submit" class="btn btn-primary" value="Save">
+							</div>
+						</div>
 					</form>
 
 
