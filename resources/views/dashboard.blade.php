@@ -13,7 +13,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Confirmation</span>
-              <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}}</span>
+              <span class="info-box-number">80%</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -26,7 +26,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Not Ok</span>
-              <span class="info-box-number">{{isset($dessert_report['Not OK'])??$dessert_report['Not OK']}}</span>
+              <span class="info-box-number">20%</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -42,7 +42,7 @@
             <span class="info-box-icon bg-green"><i class="ion ion-volume-mute"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Not Response</span>
+              <span class="info-box-text">Viber Alert</span>
               <span class="info-box-number">{{isset($dessert_report['No response'])??$dessert_report['No response']}}</span>
             </div>
             <!-- /.info-box-content -->
@@ -130,8 +130,8 @@
                       <table class="table table-striped table-bordered" id='tn_table'>
                       <thead>
                             <tr>
-                            	<th>Company</th>
-                                <th>Sub-company</th>
+                            	<th>Section</th>
+                                <th>Sub-Section</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Total</th>
@@ -197,7 +197,7 @@
         <div class="col-md-6">
             <div class="box box-info">
                 <div class="box-header with-border">
-                      <h3 class="box-title">@lang('Activity Feed')</h3>
+                      <h3 class="box-title">Viber Alert Summary</h3>
                     </div>
                 <div class="box-body">
                 <ul>
