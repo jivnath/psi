@@ -25,7 +25,7 @@
                     <span class="info-box-icon bg-red"><i class="ion ion-close-circled"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Not Ok</span>
+                        <span class="info-box-text">Not OK</span>
                         <span class="info-box-number">{{isset($dessert_report['Not OK'])??$dessert_report['Not OK']}}</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -42,7 +42,7 @@
                     <span class="info-box-icon bg-green"><i class="ion ion-volume-mute"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Not Response</span>
+                        <span class="info-box-text">Not Responded</span>
                         <span class="info-box-number">{{isset($dessert_report['No response'])??$dessert_report['No response']}}</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -168,7 +168,7 @@
                             <thead>
                             <tr>
                                 <th>User</th>
-                                <th>PsisNo</th>
+                                <th>Psi-No</th>
                                 <th>Activity</th>
                                 <th>Date</th>
                                 <th>Comment</th>

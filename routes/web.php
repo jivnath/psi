@@ -180,3 +180,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
 
+Route::get('/eprofile',function(){
+    return view('employees_dashboard.employeeProfile');
+});
