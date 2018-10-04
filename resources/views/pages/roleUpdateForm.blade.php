@@ -18,11 +18,12 @@ margin-left: 17px;
 						@foreach($permission_relation as $k=>$i)
 						<div class="form-row">
 						<div class="col-md-12">
+
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
-										id="customCheck-{{str_replace('/','',$k)}}" name="customized[]" value="{{$k}}~~y"
-										 onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')"> <label class="custom-control-label"
-										for="customCheck-{{str_replace('/','',$k)}}"<?=(in_array($k."~~y", $permissionsOfRole))?'checked':''?>>{{$k}}</label>
+										id="customCheck-{{str_replace('/','',$k)}}"name="customized[]" value="{{str_replace('/','',$k)}}"
+										 onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')" {{ (in_array(str_replace('/','',$k), $permissionsOfRole))?'checked':''}} > <label class="custom-control-label"
+										for="customCheck-{{str_replace('/','',$k)}}">{{$k}}</label>
 								</div>
 							</div>
 
@@ -35,8 +36,8 @@ margin-left: 17px;
 							<div class="col-md-3 mb-3">
 								<div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input"
-										id="customCheck{{$item['id']}}" name="customized[]" value="{{$item['id']}}~~y"
-									    data-child="{{str_replace('/','',$k)}}"<?=(in_array($item['id'].'~~y', $permissionsOfRole))?'checked':''?>> <label class="custom-control-label"
+										id="customCheck{{$item['id']}}" name="customized[]" value="{{$item['id']}}"
+									    data-child="{{str_replace('/','',$k)}}" <?=(in_array($item['id'], $permissionsOfRole))?'checked':''?> > <label class="custom-control-label"
 										for="customCheck{{$item['id']}}">{{$item['perm_name']?$item['perm_name']:$item['perm_desc']}}</label>
 								</div>
 							</div>

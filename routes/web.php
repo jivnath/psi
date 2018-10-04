@@ -102,7 +102,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
 
             Route::post('/role/update-{role_id}', ['as'=>'storePermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
-            Route::match(['get', 'post'],'/user/update-{role_id}', ['as' => 'update.user', 'uses' => 'PsiPermissionController@updateUser']);
+            Route::match(['get', 'post'],'/user/update', ['as' => 'update.user', 'uses' => 'PsiPermissionController@updateUser']);
+            Route::get('/user/permission', ['as'=>'getUserPermission', 'uses'=>'PsiPermissionController@getUserPermission']);
+            Route::post('/user/permission', ['as'=>'storePermissionToUser', 'uses'=>'PsiPermissionController@storePermissionToUser']);
 
         });
 
