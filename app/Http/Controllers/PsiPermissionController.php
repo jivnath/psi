@@ -44,10 +44,10 @@ class PsiPermissionController extends Controller
 //        dd($permissions);
         foreach($permissions as $permission)
         {
-            $roleToPermission = new RolesToPermission_rel();
-            $roleToPermission->role_id = $roleid;
-            $roleToPermission->permission_id = $permission;
-            $roleToPermission->save();
+            $userToPermission = new RolesToPermission_rel();
+            $userToPermission->role_id = $roleid;
+            $userToPermission->permission_id = $permission;
+            $userToPermission->save();
         }
 
         Session::flash('success', 'Permission successfully assigned!');
@@ -108,5 +108,26 @@ class PsiPermissionController extends Controller
         echo json_encode($allPermissions);
     }
 
-    
+    public function storePermissionToUser(Request $request)
+    {
+        $user_id = $request->userUpdate;
+        $old = UserToPermission_rel::where('user_id', $user_id)->get();
+        foreach ($old as $o)
+        {
+            $o->delete();
+        }
+        $permissions = $request->customized;
+//        dd($permissions);
+        foreach($permissions as $permission)
+        {
+            $userToPermission = new RolesToPermission_rel();
+            $userToPermission->user_id = $user_id;
+            $userToPermission->permission_id = $permission;
+            $userToPermission->save();
+        }
+
+        Session::flash('success', 'Permission successfully assigned!');
+        return redirect()->route('getUserPermission');
+    }
+
 }

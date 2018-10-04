@@ -13,7 +13,8 @@
                         <h3 class="box-title">Update User</h3>
                     </div>
 
-                    <form id="form" name="customize_form" class="form-horizontal" method="POST">
+                    <form id="form" name="customize_form" action="{{route('storePermissionToUser')}}" class="form-horizontal" method="POST">
+                        @csrf
                         <div class='box-body'>
                             <div class="row">
                                 <div class="col-md-1">
@@ -36,7 +37,7 @@
                                     <div class="col-md-12">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input"
-                                                   id="customCheck-{{str_replace('/','',$k)}}" name="customized[]"
+                                                   id="customCheck{{str_replace('/','',$k)}}" name="customized[]"
                                                    value="{{str_replace('/','',$k)}}"
                                                    onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')">
                                             <label class="custom-control-label"
@@ -79,18 +80,18 @@
 @endsection
 @push('scripts')
     <script>
-        $(document).ready(function () {
-            var tds = document.querySelectorAll("td.contenteditable");
-            tds.forEach(function (el, index) {
-                employee.inlineEditable(el, function (response) {
-                });
-            });
-        });
+        // $(document).ready(function () {
+        //     var tds = document.querySelectorAll("td.contenteditable");
+        //     tds.forEach(function (el, index) {
+        //         employee.inlineEditable(el, function (response) {
+        //         });
+        //     });
+        // });
 
     </script>
     <script type="text/javascript">
         function toggleSectionCheck(item) {
-            var check = $("#customCheck-" + item).is(':checked');
+            var check = $("#customCheck" + item).is(':checked');
             var checkboxes = $(document).find('input[data-child=' + item + ']');
             checkboxes.prop('checked', check);
         }
