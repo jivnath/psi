@@ -82,6 +82,7 @@
                             </div>
                             <!-- /.col -->
                         </div>
+
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -254,6 +255,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     @include('layouts.modal',['modal_id'=>'card_expiry','modal_title'=>'Viber Notification'])
 @endsection
