@@ -45,6 +45,7 @@ class SyncLanguageController extends Controller
                 $row => $translated_lang[$key]
             ];
         }
+        \Storage::disk('local')->put('test.log', json_encode($data_transalted));
         return $data_transalted;
     }
 
@@ -56,11 +57,6 @@ class SyncLanguageController extends Controller
 
     private function get_all_language()
     {
-        return [
-            'test',
-            'test',
-            'best',
-            'my'
-        ];
+        return Config('localLanguage');
     }
 }
