@@ -55,6 +55,7 @@ class EmployeeLoginController extends Controller
         if (Auth::guard('employee')->attempt(['psi_number' => $request->psi_number, 'password' => $request->password])) {
             $request->session()->put('username', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
+            $request->session()->put('employee_cell_no', Auth::guard('employee')->cell_no);
 
         }
         return redirect()->intended($this->redirectPath());

@@ -94,5 +94,10 @@ class Dashboard extends Controller
         echo json_encode($company->name);
     }
 
+    public function employeeProfile()
+    {
+        return view('employees_dashboard.employeeProfile');
+    }
+
 
 }

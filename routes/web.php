@@ -31,6 +31,7 @@ Route::group(['middleware'=> ['employee']], function(){
         Route::get('/getDataForCalendar', ['as' => 'getDataForCalendar', 'uses' => 'Employee\Dashboard@getDataForCalendar']);
         Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
         Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
+        Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
     });
 });
 Route::group(['middleware' => ['auth']], function () {
@@ -181,7 +182,3 @@ Route::group(['middleware' => ['auth']], function () {
 //    });
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
-
-Route::get('/eprofile',function(){
-    return view('employees_dashboard.employeeProfile');
-});

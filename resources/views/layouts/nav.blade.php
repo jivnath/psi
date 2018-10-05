@@ -1,6 +1,10 @@
 <div id="navbar-main">
     <div class="clearfix"></div>
     @if(Auth::guard('employee')->check())
+        @php
+            $employee_name = \Session::get('employee_cell_no');
+		    $employee_psi_number = \Session::get('user_psi_number');
+        @endphp
 
         <nav class="navbar navbar-expand-md navbar-light"
              style="background: #fff">
@@ -42,8 +46,8 @@
                                                             data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">Test</a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <li><a class="dropdown-item"
-                                                    href="{{ url('/eprofile') }}">Profile</a></li>
+                                            <li><a class="dropdown-item"
+                                                   href="{{ url('/employee/profile') }}">Profile</a></li>
                                             <li><a class="dropdown-item"
                                                    href="{{ route('employee.logout') }}">Logout</a></li>
 
@@ -107,31 +111,40 @@
                                                     <li class="dropdown"><a class="dropdown-toggle dropdown-item"
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false"><i class="fa fa-user"></i> @lang('nav.Users')</a>
+                                                                            aria-expanded="false"><i
+                                                                    class="fa fa-user"></i>@lang('nav.Users')</a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('users.index') }}"><i class="	fa fa-address-book"></i>User List</a></li>
+                                                                   href="{{ route('users.index') }}"><i
+                                                                            class="	fa fa-address-book"></i> User
+                                                                    List</a></li>
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('roles.index') }}"><i class="fas fa-pen-alt"></i> Roles</a></li>
+                                                                   href="{{ route('roles.index') }}"><i
+                                                                            class="fas fa-pen-alt"></i> Roles</a></li>
 
                                                         </ul>
                                                     </li>
                                                     <li class="dropdown"><a class="dropdown-toggle dropdown-item"
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false"><i class="fa fa-users"></i>Employees</a>
+                                                                            aria-expanded="false"><i
+                                                                    class="fa fa-users"></i>Employees</a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('employees.show') }}"><i class="fa fa-user"></i>@lang('nav.Employee')</a>
+                                                                   href="{{ route('employees.show') }}"><i
+                                                                            class="fa fa-user"></i>@lang('nav.Employee')
+                                                                </a>
                                                             </li>
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('manageSkills') }}"><i class="fa fa-bullseye"></i>
-                                                                    Skills </a></li>
+                                                                   href="{{ route('manageSkills') }}"><i
+                                                                            class="fa fa-bullseye"></i> Skills </a></li>
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('employee.skill') }}"><i class="fas fa-user-graduate"></i> Employee
+                                                                   href="{{ route('employee.skill') }}"><i
+                                                                            class="fas fa-user-graduate"></i> Employee
                                                                     Skills</a></li>
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('availability.index') }}"><i class="fas fa-user-clock"></i> Employee
+                                                                   href="{{ route('availability.index') }}"><i
+                                                                            class="fas fa-user-clock"></i> Employee
                                                                     Availability</a></li>
 
                                                         </ul>
@@ -140,15 +153,17 @@
                                                     <li class="dropdown"><a class="dropdown-toggle dropdown-item"
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
-                                                                            aria-expanded="false"><i class="fas fa-city"></i> Companies</a>
+                                                                            aria-expanded="false"><i
+                                                                    class="fas fa-city"></i> Companies</a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('company.details') }}"><i
+                                                                   href="{{ route('company.details') }}"> <i
                                                                             class="fa fa-building"
                                                                             aria-hidden="true"></i>@lang('nav.Company')
                                                                 </a></li>
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('manageCompanies') }}"><i class="fas fa-briefcase"></i>Company
+                                                                   href="{{ route('manageCompanies') }}"><i
+                                                                            class="fas fa-briefcase"></i> Company
                                                                     Manage</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('shift.add') }}"><i
@@ -156,8 +171,9 @@
                                                                     Sub-section Shift</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('leader.create') }}"><i
-                                                                            class="fa fa-user-circle" aria-hidden="true"></i>
-                                                                    Team Leader </a></li>
+                                                                            class="fa fa-user-circle"
+                                                                            aria-hidden="true"></i>
+                                                                    Section Manager </a></li>
 
                                                         </ul>
                                                     </li>
@@ -175,7 +191,8 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="shift_management">
-                                                    <a class="dropdown-item" href="{{ route('pages.shift') }}"><i class="fas fa-table"></i>
+                                                    <a class="dropdown-item" href="{{ route('pages.shift') }}"><i
+                                                                class="fas fa-table"></i>
                                                         Section Shift </a>
                                                     <a class="dropdown-item"
                                                        href="{{route('sheet.dessert')}}">
@@ -226,7 +243,7 @@
                                                     @foreach($companies as $company)
                                                         @if(isset($primaryCompany->name) && $primaryCompany->name
                                                         !==$company->name) <a class="dropdown-item"
-                                                          href="{{route('changecompany',['change_to'=>$company->id,'name'=>$company->name])}}">
+                                                                              href="{{route('changecompany',['change_to'=>$company->id,'name'=>$company->name])}}">
                                                             {{$company->name}} </a> @endif @endforeach
                                                 </div> {{--{{dd($primaryCompany)}}--}}</li>
 
@@ -260,7 +277,9 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting">
-                                                    <a class="dropdown-item" href="{{route('viberAlert')}}"><i class="fa fa-bell" aria-hidden="true"></i> Alert Management </a>
+                                                    <a class="dropdown-item" href="{{route('viberAlert')}}"><i
+                                                                class="fa fa-bell" aria-hidden="true"></i> Alert
+                                                        Management </a>
                                                 </div>
                                             </li>
 
@@ -275,8 +294,10 @@
 
                                                 <div class="dropdown-menu dropdown-menu-right"
                                                      aria-labelledby="navbarDropdown">
-                                                    <a class="dropdown-item" href="{{route('profile', $user_id)}}"><i class="fa fa-address-book"></i>Profile</a>
-                                                    <a class="dropdown-item" href="#" id="logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                                                    <a class="dropdown-item" href="{{route('profile', $user_id)}}"><i
+                                                                class="fa fa-address-book"></i> Profile</a>
+                                                    <a class="dropdown-item" href="#" id="logout"><i
+                                                                class="fas fa-sign-out-alt"></i> Logout</a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown dropdown-menu-left">{!!
@@ -311,60 +332,60 @@
             </nav>
         @endif
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.dropdown-menu a.test').on("click", function (e) {
-            $(this).next('ul').toggle();
-            e.stopPropagation();
-            e.preventDefault();
-        });
-    });
-    (function ($) {
-        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
-            if (!$(this).next().hasClass('show')) {
-                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
-            }
-            var $subMenu = $(this).next(".dropdown-menu");
-            $subMenu.toggleClass('show');
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.dropdown-menu a.test').on("click", function (e) {
+                    $(this).next('ul').toggle();
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+            });
+            (function ($) {
+                $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+                    if (!$(this).next().hasClass('show')) {
+                        $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                    }
+                    var $subMenu = $(this).next(".dropdown-menu");
+                    $subMenu.toggleClass('show');
 
-            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
-                $('.dropdown-submenu .show').removeClass("show");
+                    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                        $('.dropdown-submenu .show').removeClass("show");
+                    });
+
+                    return false;
+                });
+            })(jQuery)
+
+            $("#logo_small").click(function () {
+                location.href = "{{route('dashboard')}}";
             });
 
-            return false;
-        });
-    })(jQuery)
 
-    $("#logo_small").click(function () {
-        location.href = "{{route('dashboard')}}";
-    });
+            $("#logout").click(function () {
+                swal({
+                    title: "Logout?",
+                    text: "Are you sure to logout?",
+                    type: "warning",
+                    buttons: true,
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-warning",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: false
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                type: 'POST',
+                                data: {"_token": "{{ csrf_token() }}"},
+                                url: "{{route('logout')}}",
+                                success: function (data) {
+                                    window.location.replace("{{route('login')}}");
+                                }
+                            });
+                        }
+                        else {
 
-
-    $("#logout").click(function () {
-        swal({
-            title: "Logout?",
-            text: "Are you sure to logout?",
-            type: "warning",
-            buttons: true,
-            showCancelButton: true,
-            confirmButtonClass: "btn-warning",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    $.ajax({
-                        type: 'POST',
-                        data: {"_token": "{{ csrf_token() }}"},
-                        url: "{{route('logout')}}",
-                        success: function (data) {
-                            window.location.replace("{{route('login')}}");
                         }
                     });
-                }
-                else {
-
-                }
             });
-    });
-</script>
+        </script>
