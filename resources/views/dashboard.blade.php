@@ -169,7 +169,7 @@
                             <thead>
                             <tr>
                                 <th>User</th>
-                                <th>Psi-No</th>
+                                <th>PSI-S_No</th>
                                 <th>Activity</th>
                                 <th>Date</th>
                                 <th>Comment</th>

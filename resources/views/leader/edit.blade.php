@@ -29,7 +29,7 @@
 
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-4">
-                                    <label for="psi_num"> PSI_NO </label>
+                                    <label for="psi_num"> PSI-S_NO </label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" id="psi_num" name="psi_num" class="form-control" value="{{$leader->psi_num}}">
