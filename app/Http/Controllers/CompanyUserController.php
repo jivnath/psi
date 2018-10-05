@@ -19,7 +19,7 @@ class CompanyUserController extends Controller
     public function storeUser(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:191',
+            'username' => 'required|max:191',
             'password' => 'required|min:6',
             'email' => 'required|email|max:191',
             'language' => 'required'
@@ -64,7 +64,7 @@ class CompanyUserController extends Controller
     public function updateUser(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required|max:191',
+            'username' => 'required|max:191',
             'email' => 'required|email|max:191',
             'language' => 'required'
         ]);

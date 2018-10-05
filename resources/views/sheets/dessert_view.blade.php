@@ -95,9 +95,9 @@ corresponding value from the list below*/
                 <th class="border_field sticky-top">Name（氏名）</th>
                 <th class="border_field sticky-top">Tel No</th>
                 <th class="background_responsible sticky-top">Responsible</th>
-                <th class="background_responsible sticky-top">Conformation the day before</th>
+                <th class="background_responsible sticky-top">Confirmation the day before</th>
                 <th class="background_responsible sticky-top">Responsible</th>
-                <th class="background_responsible sticky-top">Conform 3 hours ago</th>
+                <th class="background_responsible sticky-top">Confirm 3 hours ago</th>
                 <th class="sticky-top">Arrival time in case of late arrival</th>
                 <th class="sticky-top">Reason for late arrival and absence</th>
                 <th class="sticky-top">Call Medium/Through</th>
