@@ -13,44 +13,15 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Confirmation</span>
-              <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}}</span>
+              <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}} %</span>
             </div>
             <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="ion ion-close-circled"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Not Ok</span>
-              <span class="info-box-number">{{isset($dessert_report['Not OK'])??$dessert_report['Not OK']}}</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
         <!-- /.col -->
-
-        <!-- fix for small devices only -->
-        <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-volume-mute"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Not Response</span>
-              <span class="info-box-number">{{isset($dessert_report['No response'])??$dessert_report['No response']}}</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-9 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
@@ -68,7 +39,7 @@
                     <div class="col-sm-4 border-right">
                       <div class="description-block" style="margin: 8px -10px!important;">
                         <h5 class="description-header">{{$employee_summery[1]->total_count}}</h5>
-                        <span class="description-text" style='text-transform: none;'>To2Week</span>
+                        <span class="description-text" style='text-transform: none;'>Tomorrow To Week</span>
                       </div>
                       <!-- /.description-block -->
                     </div>
@@ -76,7 +47,7 @@
                     <div class="col-sm-4">
                       <div class="description-block" style="margin: 8px -10px!important;">
                         <h5 class="description-header">{{$employee_summery[2]->total_count}}</h5>
-                        <span class="description-text" style='text-transform: none;'>To2Month</span>
+                        <span class="description-text" style='text-transform: none;'>Tomorrow To Month</span>
                       </div>
                       <!-- /.description-block -->
                     </div>
