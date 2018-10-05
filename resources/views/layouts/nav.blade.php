@@ -42,8 +42,10 @@
                                                             data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">Test</a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item"
+                                                    href="{{ url('/eprofile') }}">Profile</a></li>
                                             <li><a class="dropdown-item"
-                                                   href="{{ route('employee.logout') }}">logout</a></li>
+                                                   href="{{ route('employee.logout') }}">Logout</a></li>
 
                                         </ul>
                                     </li>

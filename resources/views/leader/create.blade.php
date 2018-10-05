@@ -29,7 +29,7 @@
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-2">
-                                    <label for="psi_num"> PSIS No </label>
+                                    <label for="psi_num"> PSI No </label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" id="psi_num" name="psi_num" class="form-control">

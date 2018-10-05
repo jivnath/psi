@@ -11,7 +11,7 @@
                     <form action="{{ route('skill.store') }}" class="form-group" method="POST">
                         @csrf
                         <label><b>PSI Number</b></label>
-                        <input type="text" name="psi_num" id="psi_num" placeholder="PSIS_No"
+                        <input type="text" name="psi_num" id="psi_num" placeholder="PSI_No"
                                class="form-control" style="width: 50%;" required><span class="loading"></span>
 
                         <div style="display: none" id="nameDiv">
