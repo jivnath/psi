@@ -51,10 +51,11 @@ class EmployeeController extends Controller
 
     public function upload(ExcelReader $excelReader)
     {
-        $excelReader->uploadSheet()
+        $data = $excelReader->uploadSheet()
             ->iterateSheet()
             ->checkDuplicateAndStore();
 
+        
         return redirect()->route('employees.show');
     }
 
