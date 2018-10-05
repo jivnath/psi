@@ -2,8 +2,8 @@
 @section('content')
 
 <section class="content">
+	@include('layouts.duplicate_employees')
 	<div class="row">
-		<div id="validation" class="alert alert-danger" style="display: none"></div>
 		<div class="col-md-12">
 			<div class="box box-info">
 				<div class="box-header with-border">

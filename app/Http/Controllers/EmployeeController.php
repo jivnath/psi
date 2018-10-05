@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Gender;
 use App\Models\EmployeeSkill;
 use App\Models\PsiViewCustimizeModel;
+use Session;
 
 class EmployeeController extends Controller
 {
@@ -54,8 +55,9 @@ class EmployeeController extends Controller
         $data = $excelReader->uploadSheet()
             ->iterateSheet()
             ->checkDuplicateAndStore();
+//        dd($data);
 
-        
+        Session::flash('duplicate', $data);
         return redirect()->route('employees.show');
     }
 
