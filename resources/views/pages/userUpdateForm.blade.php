@@ -41,7 +41,7 @@
                                                    value="{{str_replace('/','',$k)}}"
                                                    onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')">
                                             <label class="custom-control-label"
-                                                   for="customCheck-{{str_replace('/','',$k)}}">{{$k}}</label>
+                                                   for="customCheck{{str_replace('/','',$k)}}">{{$k}}</label>
                                         </div>
                                         {{--{{dd(str_replace('/','',$k))}}--}}
                                     </div>
@@ -128,9 +128,4 @@
             }
         });
     </script>
-
-
-
-
-
 @endpush
