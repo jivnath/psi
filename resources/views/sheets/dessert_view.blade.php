@@ -124,7 +124,7 @@ corresponding value from the list below*/
                             <td  class="border_field">{{$info->cell_no}}</td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>{{$info->responsible1}}</td>
                             <td class="background_responsible" data-usage='confirmation'>
-                                <select class='form-control confirmation'>
+                                <select class='confirmation'>
                                 	<option value=''>--select--</option>
                                 	<option value='OK' {{ ($info->conformation_day_before=='OK') ? 'selected':''}}>OK</option>
                                 	<option value='Not OK' {{ ($info->conformation_day_before=='Not OK') ? 'selected':''}}>Not OK</option>
@@ -133,7 +133,7 @@ corresponding value from the list below*/
                             </td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>{{$info->responsible2}}</td>
                             <td class="background_responsible" data-usage='confirmation_1'>
-                             <select class='form-control confirmation_1'>
+                             <select class='confirmation_1'>
                              		<option value=''>--select--</option>
                                 	<option value='OK' {{ ($info->conformation_3_hours_ago=='OK') ? 'selected':''}}>OK</option>
                                 	<option value='Not OK' {{ ($info->conformation_3_hours_ago=='Not OK') ? 'selected':''}}>Not OK</option>
@@ -143,7 +143,7 @@ corresponding value from the list below*/
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>{{$info->arrival_time_if_late}}</td>
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>{{$info->reason_for_late}}</td>
                             <td  data-usage='cmt'>
-                            <select class='form-control cmt'>
+                            <select class='cmt'>
                             		<option value=''>--select--</option>
                                 	<option value='viber' {{ ($info->call_medium=='viber') ? 'selected':''}}>viber</option>
                                 	<option value='call' {{ ($info->call_medium=='call') ? 'selected':''}}>call</option>
@@ -174,7 +174,7 @@ corresponding value from the list below*/
                             <td  class="border_field">  </td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
                             <td class="background_responsible" data-usage='confirmation'>
-                                <select class='form-control confirmation'>
+                                <select class='confirmation'>
                                 	<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -183,7 +183,7 @@ corresponding value from the list below*/
                             </td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>  </td>
                             <td class="background_responsible" data-usage='confirmation_1'>
-                             <select class='form-control confirmation_1'>
+                             <select class='confirmation_1'>
                              		<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -193,7 +193,7 @@ corresponding value from the list below*/
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>  </td>
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>  </td>
                             <td  data-usage='cmt'>
-                            <select class='form-control cmt'>
+                            <select class='cmt'>
                             		<option value=''>--select--</option>
                                 	<option value='viber'>viber</option>
                                 	<option value='call'>call</option>
