@@ -171,22 +171,6 @@
                       <h3 class="box-title">Viber Alert Summery</h3>
                     </div>
                 <div class="box-body">
-                <!-- <ul>
-                @forelse ($audits as $audit)
-                <li>
-                    @lang('article.updated.metadata', $audit->getMetadata())
-
-                    @foreach ($audit->getModified() as $attribute => $modified)
-                    <ul>
-                        <li>@lang($attribute, $modified)
-                        @lang('article.'.$audit->event.'.modified.content',$modified)</li>
-                    </ul>
-                    @endforeach
-                </li>
-                @empty
-                <p>@lang('article.unavailable_audits')</p>
-                @endforelse
-            </ul> -->
              <table class="table" id='alert_viber'>
                       <thead>
                         <tr>

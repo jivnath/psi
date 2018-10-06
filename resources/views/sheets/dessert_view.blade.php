@@ -317,7 +317,7 @@ corresponding value from the list below*/
     	                        		alert('Not available');
         	                        	return false;
         	                        }
-        	                        if(typeof data.total_worked !=='undefined' && data.total_worked>12){
+        	                        if(typeof data.total_worked !=='undefined' && data.total_worked>{{\Config('app.job_limit')}}){
 										alert('reached limit '+data.total_worked);
 										return false;
             	                     }

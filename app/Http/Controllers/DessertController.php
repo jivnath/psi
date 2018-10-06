@@ -78,7 +78,7 @@ class DessertController extends Controller
 
                             //check time limit
                         $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
-                        if($total_worked['total_worked'] > 12) {
+                        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
                             $default_arr = [
                                 'total_worked' => $total_worked['total_worked']
                             ];
