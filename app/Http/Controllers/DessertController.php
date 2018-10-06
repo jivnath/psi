@@ -10,6 +10,9 @@ use App\Models\Company;
 use App\Models\Raw;
 use App\Models\CompanyTimeTable;
 use App\Models\PsiSelfSheetComments;
+use App\Models\CompanyTimeSchedule;
+use DB;
+
 
 class DessertController extends Controller
 {
@@ -78,11 +81,20 @@ class DessertController extends Controller
 
                             //check time limit
                         $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
+                        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
+                        $total_used=DessertSheet::where(['cts_id'=>$dessert_id])->whereNull('deleted_at')->count();
                         if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
-                            $default_arr = [
+                            $data = [
                                 'total_worked' => $total_worked['total_worked']
                             ];
-                        } else {
+                        } elseif($total_needed <=$total_used){
+                            $data = [
+                                'total_worked' => $total_worked['total_worked'],
+                                'total_needed'=>$total_needed,
+                                'total_used'=>$total_used
+                            ];
+                        }
+                        else {
                             $data = [
                                 4 => $employee->country_citizenship,
                                 5 => $employee->phoetic_kanji,
