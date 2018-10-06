@@ -302,11 +302,25 @@ corresponding value from the list below*/
                             console.log('dessert_id '+added_generated_value);
     						$.ajax({
     	                        type:"GET",
-    	                        url:"/dessert/findDetails",
+    	                        url:"{{route('dessert.findDetails')}}",
     	                        data:{'psi_num':main_val,'dessert_id':added_generated_value,'schedule_id':company_schedule_id},
     	                        dataType:'json',
     	                        success:function(data){
     	                        	main_logical_data=data;
+    	                        	console.log(checkProperties(data));
+
+    	                        	if(data.length == 0){
+        	                        	alert('already in use');
+        	                        	return false;
+    	                        	}
+    	                        	if(checkProperties(data)){
+    	                        		alert('Not available');
+        	                        	return false;
+        	                        }
+        	                        if(typeof data.total_worked !=='undefined' && data.total_worked>12){
+										alert('reached limit '+data.total_worked);
+										return false;
+            	                     }
     	                        	$.each(data,function(i,v){
     	                        		$('#all_saved_value').data(i,v);
     		                        });
@@ -317,6 +331,13 @@ corresponding value from the list below*/
 						}
                     }
                 });
+                function checkProperties(obj) {
+                    for (var key in obj) {
+                        if (obj[key] !== null && obj[key] != "")
+                            return false;
+                    }
+                    return true;
+                }
                 $('.add_now').click(function(){
 
 					click_flag_obj=$(this);

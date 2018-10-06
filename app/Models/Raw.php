@@ -59,13 +59,13 @@ where     p.master_id IS NULL
 
         foreach ($companies as $row) {
             $fetch_detail[$row->parent_name][$row->child_name_1][$row->child_name_2][][] = [
-                'contact_p' => ($row->contact_num)?$row->contact_num:'...',
-                'contact_c1' => ($row->contact_c1)?$row->contact_c1:'...',
-                'contact_c2' => ($row->contact_c2)?$row->contact_c2:'...',
-                'address_p' => ($row->address_p)?$row->address_p:'...',
-                'address_c1' => ($row->address_c1)?$row->address_c1:'...',
-                'address_c2' => ($row->address_c2)?$row->address_c2:'...',
-                'team_leader'=>($row->team_leader)??$row->team_leader
+                'contact_p' => ($row->contact_num) ? $row->contact_num : '...',
+                'contact_c1' => ($row->contact_c1) ? $row->contact_c1 : '...',
+                'contact_c2' => ($row->contact_c2) ? $row->contact_c2 : '...',
+                'address_p' => ($row->address_p) ? $row->address_p : '...',
+                'address_c1' => ($row->address_c1) ? $row->address_c1 : '...',
+                'address_c2' => ($row->address_c2) ? $row->address_c2 : '...',
+                'team_leader' => ($row->team_leader) ?? $row->team_leader
             ];
         }
         return $fetch_detail;
@@ -127,7 +127,7 @@ WHERE
         $sql = "SELECT skill_id, (select skill_name from psi_skill_master p where p.id =skill_id) name, COUNT(*) as count FROM `employee_skills` group by skill_id";
         $skills = DB::select("$sql");
 
-//        dd($skills);
+        // dd($skills);
 
         return $skills;
     }
@@ -402,7 +402,7 @@ WHERE
             ) company_name,
             companytt_id time_table_id,
             cts.id AS rel_id,
-        
+
             date,
             time start_time,
             (
@@ -413,19 +413,19 @@ WHERE
                 WHERE
                 	start_time = cts.time
                 	AND company_id = ctt.company_id
-                
+
             ) end_time,
-            
+
             (help+normal) necessary,
             (
-                SELECT 
-                    COUNT(*) 
+                SELECT
+                    COUNT(*)
                 FROM
                     psi_dessert_entry pde
                 WHERE
                     pde.cts_id = cts.id
             ) occupied
-            
+
         FROM
             company_time_schedules cts,
             company_time_tables ctt
@@ -436,10 +436,54 @@ WHERE
         return $data;
     }
 
-    public static function getCompaniesHavingShift(){
-        $sql ="SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id";
+    public static function getCompaniesHavingShift()
+    {
+        $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id";
         $data = DB::select($sql);
         return $data;
     }
 
+    public static function dessert_calculation_method($schedule_id, $staff_id)
+    {
+        $sql = "SELECT
+            ##main_table.*,
+            sum(time_to_sec(main_table.shift_time_diff)) total_sec
+        FROM
+            ( SELECT
+            cts.*,
+            ctt.company_id,
+            (
+                SELECT
+                    timediff(smd.end_time,smd.start_time)
+                FROM
+                    shift_master_datas smd
+                WHERE
+                    smd.company_id = ctt.company_id
+                    AND smd.start_time = cts.time
+            ) shift_time_diff
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt
+        WHERE
+            cts.companytt_id = ctt.id
+            AND cts.id IN (
+                SELECT
+                    cts_id
+                FROM
+                    `psi_dessert_entry`
+                WHERE
+                    staff_no = $staff_id
+            )
+            AND cts.id >= $schedule_id
+        AND DATE( cts.DATE) between (select date from company_time_schedules WHERE
+            id = $schedule_id) and DATE_ADD((select date from company_time_schedules WHERE
+            id = $schedule_id),interval 7 day)
+                ORDER BY
+                    DATE ASC
+            ) main_table";
+        $data = collect(DB::select(DB::raw($sql)))->first();
+        return $calculated_arr = [
+            'total_worked' => $data->total_sec / 3600
+        ];
+    }
 }
