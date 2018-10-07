@@ -3,6 +3,24 @@
 @section('title', '| Profile')
 
 @section('content')
+    @php
+        $employee_name = \Session::get('employee_name');
+        $employee_psi_number = \Session::get('user_psi_number');
+        $employee_retirement_date = \Session::get('employee_retirement_date');
+        $employee_birth_date = \Session::get('employee_birth_date');
+        $employee_cell_no = \Session::get('employee_cell_no');
+        $employee_address = \Session::get('employee_address');
+        $employee_residence_card_no = \Session::get('employee_residence_card_no');
+        $employee_residence_card_exp_date = \Session::get('employee_residence_card_exp_date');
+        $employee_work_location = \Session::get('employee_work_location');
+        $employee_country_citizenship = \Session::get('employee_country_citizenship');
+        $employee_reg_officer = \Session::get('employee_reg_officer');
+        $employee_hire_date = \Session::get('employee_hire_date');
+        $employee_address_ip = \Session::get('employee_address_ip');
+        $employee_phoetic_kanji = \Session::get('employee_phoetic_kanji');
+        $employee_hourly_wage = \Session::get('employee_hourly_wage');
+        $employee_status_residence = \Session::get('employee_status_residence');
+    @endphp
 
     <div class="row">
         <div class="col-md-3">
@@ -12,8 +30,8 @@
                 <div class="box-body box-profile">
                     <h4 class="profile-username text-center"><i class="fas fa-user  fa-2x" style="width:40px"></i></h4>
 
-                    <p class="text-muted text-center">John Abhrahm</p>
-                    <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> 9812345678</p>
+                    <p class="text-muted text-center">{{$employee_name}}</p>
+                    <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
                     
                 </div>
                 <!-- /.box-body -->
@@ -30,22 +48,22 @@
 
                     <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-                    <p class="text-muted">Malibu, California</p>
+                    <p class="text-muted">{{$employee_address_ip}}</p>
                     <hr>
 
                     <strong><i class="fas fa-map-marker-alt"></i> Work Location</strong>
 
-                    <p class="text-muted">Malibu, California</p>
+                    <p class="text-muted">{{$employee_work_location}}</p>
                     <hr>
 
                     <strong><i class="far fa-address-card"></i> Resident Card No</strong>
 
-                    <p class="text-muted">422000</p>
+                    <p class="text-muted">{{$employee_residence_card_no}}</p>
                     <hr>
 
                     <strong><i class="far fa-calendar-alt"></i> Retirement Date</strong>
 
-                    <p class="text-muted">2052/11/01</p>
+                    <p class="text-muted">{{$employee_retirement_date}}</p>
                 </div>
                 <!-- /.box-body -->
             </div>

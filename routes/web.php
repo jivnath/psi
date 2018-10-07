@@ -32,6 +32,8 @@ Route::group(['middleware'=> ['employee']], function(){
         Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
         Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
         Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
+        Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
+
     });
 });
 Route::group(['middleware' => ['auth']], function () {

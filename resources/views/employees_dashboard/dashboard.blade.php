@@ -177,15 +177,28 @@
                     $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
                     $('#ModalAdd').modal('show');
                 },
-                // eventRender: function (event, element) {
-                //     element.bind('dblclick', function () {
-                //         $('#ModalEdit #id').val(event.id);
-                //         $('#ModalEdit #title').val(event.title);
-                //         $('#ModalEdit #color').val(event.color);
-                //         $('#ModalEdit').modal('show');
-                //     });
-                //
-                // },
+                eventRender: function (event, element) {
+                    element.bind('click', function () {
+                        alert(event.old);
+                        alert(event.start);
+                        alert(event.companyId);
+                        if(event.old==1)
+                        {
+                            $.ajax({
+                               type:"GET",
+                               dataType:'json',
+                               url:'getWorkedShift',
+                               data:{'date': event.start, 'company':event.companyId},
+                                success:function(data){
+
+                                }
+                            });
+                        }
+                        // $('#ModalEdit #title').val(event.title);
+                        // $('#ModalEdit #color').val(event.color);
+                        // $('#ModalEdit').modal('show');
+                    });
+                },
                 eventDrop: function (event, delta, revertFunc) { // si changement de position
 
                     edit(event);
@@ -244,9 +257,18 @@
                         $('#calendar').fullCalendar('removeEvents', function () {
                             return true;
                         });
+                        for (i = 0; i < data['date'].length; i++) {
+                            $('#calendar').fullCalendar('renderEvent', {
+                                title: 'Worked on this day',
+                                start: data['date'][i].date,
+                                allDay: true,
+                                old:1,
+                                companyId:data['date'][i].company_id,
+                                backgroundColor: '#2a7ce9', //blue
+                                borderColor: '#2a7ce9' //blue
+                            }, 'stick');
+                        }
                         for (i = 0; i < data['red'].length; i++) {
-
-
                             $('#calendar').fullCalendar('renderEvent', {
                                 title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
                                 id: data['red'][i].rel_id,

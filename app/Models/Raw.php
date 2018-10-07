@@ -428,6 +428,26 @@ WHERE
         return DB::select($sql);
     }
 
+    public static function workedDate($staff, $company)
+    {
+        $sql = "SELECT
+            DISTINCT date,
+            ctt.company_id
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt,
+            psi_dessert_entry pde
+        WHERE
+        	pde.cts_id = cts.id 
+        	AND	pde.staff_no = $staff 
+        	AND cts.companytt_id = ctt.id
+            AND ctt.company_id = $company";
+
+        $data = DB::select($sql);
+        return $data;
+
+    }
+
     public static function totalNecessary($id)
     {
         $sql = "SELECT

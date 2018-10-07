@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Employee;
 
+use App\Models\CompanyTimeSchedule;
 use App\Models\DessertSheet;
 use App\Models\ShiftMasterData;
 use Illuminate\Http\Request;
@@ -32,17 +33,27 @@ class Dashboard extends Controller
             $user = \Session::get('username');
             $company = $request->get('company');
             $data = Raw::totalNecessary($company);
+//            dd($data);
             $events = [];
             $red = [];
             $green = [];
+            $date=[];
+            $yesterday = date(strtotime("-1 days"));
+            $oldDate = Raw::workedDate($user, $company);
+            foreach ($oldDate as $old)
+            {
+                if(date(strtotime($old->date)) <= $yesterday)
+                    array_push($date, $old);
+            }
+//            dd($data);
             foreach ($data as $datum)
             {
-                if($datum->occupied < $datum->necessary)
+                if($datum->occupied < $datum->necessary && date(strtotime($datum->date)) > $yesterday)
                 {
                     $dessert = DessertSheet::where([['staff_no', '=', $user],['cts_id', '=', $datum->rel_id]])->first();
                     if($dessert)
                     {
-                        array_push($green, $datum);
+                            array_push($green, $datum);
                     }
                     else
                     {
@@ -53,6 +64,7 @@ class Dashboard extends Controller
             }
             $events['red'] = $red;
             $events['green'] = $green;
+            $events['date'] = $date;
 //            dd($events);
             echo json_encode($events);
         }
@@ -97,6 +109,15 @@ class Dashboard extends Controller
     public function employeeProfile()
     {
         return view('employees_dashboard.employeeProfile');
+    }
+
+    public function getWorkedShift(Request $request)
+    {
+        if($request->ajax())
+            $user = \Session::get('username');
+            $companyId = $request->get('companyId');
+            $date = $request->get('date');
+
     }
 
 

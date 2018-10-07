@@ -5,6 +5,7 @@
             $employee_name = \Session::get('employee_cell_no');
 		    $employee_psi_number = \Session::get('user_psi_number');
         @endphp
+    {{--{{dd(session()->all())}}--}}
 
         <nav class="navbar navbar-expand-md navbar-light"
              style="background: #fff">
