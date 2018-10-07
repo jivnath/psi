@@ -24,8 +24,9 @@ class DashboardController extends Controller
         $dessert_report = $dessert_obj->select('conformation_day_before', DB::raw('count(*) as total_count'))
             ->groupBy('conformation_day_before')
             ->get();
-//        $data['audits'] = $dessert_obj->find(1)->audits;
-        
+
+        $data['audits'] = '';//$dessert_obj->find(1)->audits;
+
         $data['dessert_report'] = $this->simplify_dessert_report($dessert_report->toArray());
         $data['employee_summery'] = Raw::getConfirmedEmployees();
         $data['total_emp'] = Employee::count();

@@ -204,22 +204,6 @@
                         <h3 class="box-title">Viber Alert Summery</h3>
                     </div>
                     <div class="box-body">
-                        {{--<ul>--}}
-                            {{--@forelse ($audits as $audit)--}}
-                                {{--<li>--}}
-                                    {{--@lang('article.updated.metadata', $audit->getMetadata())--}}
-
-                                    {{--@foreach ($audit->getModified() as $attribute => $modified)--}}
-                                        {{--<ul>--}}
-                                            {{--<li>@lang($attribute, $modified)--}}
-                                                {{--@lang('article.'.$audit->event.'.modified.content',$modified)</li>--}}
-                                        {{--</ul>--}}
-                                    {{--@endforeach--}}
-                                {{--</li>--}}
-                            {{--@empty--}}
-                                {{--<p>@lang('article.unavailable_audits')</p>--}}
-                            {{--@endforelse--}}
-                        {{--</ul>--}}
                         <table class="table" id='alert_viber'>
                             <thead>
                             <tr>
@@ -231,27 +215,26 @@
                             <tbody>
                             <tr>
                                 <td>Residence card expiry</td>
-                                <td><i class="fas fa-check-double"></i></td>
+                                <td>2</td>
                                 <td>3</td>
                             </tr>
                             <tr>
                                 <td>One day before</td>
-                                <td><i class="fas fa-check-double"></i></td>
+                                <td>1</td>
                                 <td>2</td>
                             </tr>
                             <tr>
                                 <td>3 hour before</td>
-                                <td><i class="fas fa-check"></i></td>
+                                <td>3</td>
                                 <td>5</td>
                             </tr>
                             <tr>
                                 <td>Arrival confirmation</td>
-                                <td><i class="fas fa-check-double"></i></td>
+                                <td>1</td>
                                 <td>5</td>
                             </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>

@@ -10,6 +10,9 @@ use App\Models\Company;
 use App\Models\Raw;
 use App\Models\CompanyTimeTable;
 use App\Models\PsiSelfSheetComments;
+use App\Models\CompanyTimeSchedule;
+use DB;
+
 
 class DessertController extends Controller
 {
@@ -70,35 +73,55 @@ class DessertController extends Controller
             $dessert_id = $request->get('schedule_id');
             if ($psi != null) {
                 $employee = Employee::where('psi_number', $psi)->first();
+
                 if ($employee) {
                     if (DessertSheet::where([['staff_no', $psi],['cts_id', $dessert_id]])->count() > 0) {
                         $data = [];
                     } else {
 
-//                        dd($employee);
-
-                        $data = [
-                            4 => $employee->country_citizenship,
-                            5 => $employee->phoetic_kanji,
-                            6 => $employee->name,
-                            7 => $employee->cell_no
-                        ];
-                        if (empty($request->dessert_id)) {
-                            $merge_new = [
-                                23 => $this->auto_store_dessert($request)
+                            //check time limit
+                        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
+                        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
+                        $total_used=DessertSheet::where(['cts_id'=>$dessert_id])->whereNull('deleted_at')->count();
+                        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+                            $data = [
+                                'total_worked' => $total_worked['total_worked']
                             ];
-                            array_push($data, $merge_new);
-                        } else {
-                            $request->request->add([
-                                'action_type' => 'update'
-                            ]);
+                        } elseif($total_needed <=$total_used){
+                            $data = [
+                                'total_worked' => $total_worked['total_worked'],
+                                'total_needed'=>$total_needed,
+                                'total_used'=>$total_used
+                            ];
+                        }
+                        else {
+                            $data = [
+                                4 => $employee->country_citizenship,
+                                5 => $employee->phoetic_kanji,
+                                6 => $employee->name,
+                                7 => $employee->cell_no,
+                                'total_worked' => $total_worked['total_worked']
+                            ];
+                            if (empty($request->dessert_id)) {
+                                $merge_new = [
+                                    23 => $this->auto_store_dessert($request)
+                                ];
+                                array_push($data, $merge_new);
+                            } else {
+                                $request->request->add([
+                                    'action_type' => 'update'
+                                ]);
 
                             $merge_new = [
                                 23 => $this->auto_store_dessert($request)
                             ];
                             array_push($data, $merge_new);
                         }
+                        }
                     }
+                }
+                else{
+                    $data = $default_arr;
                 }
             } else {
                 $data = $default_arr;

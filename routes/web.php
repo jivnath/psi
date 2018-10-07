@@ -169,7 +169,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::prefix('dessert')->group(function(){
             Route::get('/', ['as' => 'dessert', 'uses' => "DessertController@generateDessert"]);
-            Route::get('/findDetails', "DessertController@findDetails");
+            Route::get('/findDetails', [
+                'as' => 'dessert.findDetails',
+                'uses' => "DessertController@findDetails"
+            ]);
             Route::post('/', ['as' => 'dessert.store', 'uses' => "DessertController@storeDessert"]);
             Route::post('/dessert_update', ['as' => 'dessert.update', 'uses' => "DessertController@dessert_update"]);
         });

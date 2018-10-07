@@ -70,7 +70,7 @@
             <!-- /.box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-7">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
@@ -88,9 +88,9 @@
 
 
                             <div class="form-group">
-                                <label for="language" class="col-sm-2 control-label">Preferred Language</label>
+                                <label for="language" class="col-sm-3 control-label">Preferred Language</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-12">
                                     <select name="language" class="form-control">
                                         <option value="0">English</option>
                                         <option value="1">Japanese</option>
@@ -110,6 +110,9 @@
                 <!-- /.tab-content -->
             </div>
             <!-- /.nav-tabs-custom -->
+        </div>
+        <div class="col-md-2 box box-info">
+
         </div>
         <!-- /.col -->
     </div>
