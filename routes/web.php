@@ -110,6 +110,10 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+        Route::get('/exp_date', ['as' => 'exp_date', 'uses' => 'DashboardController@viewExp']);
+        Route::get('/total_necessary', ['as' => 'total_necessary', 'uses' => 'DashboardController@viewTotal']);
+        Route::get('/recent_sheet', ['as' => 'recent_sheet', 'uses' => 'DashboardController@viewSheet']);
+        Route::get('/alert_summary', ['as' => 'alert_summary', 'uses' => 'DashboardController@viewSummary']);
         Route::prefix('skills')->group(function(){
             Route::get('/', ['as' => 'manageSkills', 'uses' => 'SkillMasterController@manage' ]);
             Route::post('/add', ['as' => 'skills.master.add','uses' => 'SkillMasterController@addSkills']);
