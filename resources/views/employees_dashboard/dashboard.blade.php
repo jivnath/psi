@@ -83,55 +83,18 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal" id="ModalShift" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form class="form-horizontal" method="POST" action="#">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Edit Schedule</h4>
+                        <h4 class="modal-title" id="myModalLabel">Worked Shifts</h4>
                     </div>
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="title" class="col-sm-2 control-label">Title</label>
-                            <div class="col-sm-12">
-                                <input type="text" name="title" class="form-control" id="title" placeholder="Title">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="color" class="col-sm-2 control-label">Color</label>
-                            <div class="col-sm-12">
-                                <select name="color" class="form-control" id="color">
-                                    <option value="">Choose</option>
-                                    <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
-                                    <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-                                    <option style="color:#008000;" value="#008000">&#9724; Green</option>
-                                    <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
-                                    <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-                                    <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
-                                    <option style="color:#000;" value="#000">&#9724; Black</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label class="text-danger"><input type="checkbox" name="delete"> Delete
-                                        event</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <input type="hidden" name="id" class="form-control" id="id">
-
+                    <div id="allShifts" class="modal-body">
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
-                </form>
             </div>
         </div>
     </div>
@@ -181,6 +144,7 @@
                     element.bind('click', function () {
                         if(event.old == 1)
                         {
+                            $('#allShifts').html('');
                             var start = moment(event.start).format('Y-MM-DD');
                             $.ajax({
                                 type:"GET",
@@ -190,12 +154,19 @@
                                 data:{'date': start, 'company':event.companyId},
                                 success:function(data){
                                     console.log(data);
+                                    let i;
+                                    for(i = 0; i < data.length; i++)
+                                    {
+                                        var shift ='<b>'+ (i+1) +'.  </b>'+ data[i].start_time+' - '+data[i].end_time+'<br>';
+                                        $("#allShifts").append(shift);
+                                    }
+                                    $('#ModalShift').modal('show');
                                 }
                             });
                         }
-                        // $('#ModalEdit #title').val(event.title);
-                        // $('#ModalEdit #color').val(event.color);
-                        // $('#ModalEdit').modal('show');
+                        // $('#ModalShift #title').val(event.title);
+                        // $('#ModalShift #color').val(event.color);
+
                     });
                 },
                 eventDrop: function (event, delta, revertFunc) { // si changement de position
