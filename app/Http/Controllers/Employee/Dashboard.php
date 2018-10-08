@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Raw;
 use Session;
 use App\Models\Company;
+use DB;
 
 
 class Dashboard extends Controller
@@ -72,30 +73,54 @@ class Dashboard extends Controller
 
     public function storeEmployeeApplication(Request $request)
     {
-        $shift = $request->get('shift');
+
+
+        $cts_id = $request->get('shift');
         $user = \Session::get('username');
 //        dd($shift);
 
-        $employee = DessertSheet::firstOrNew([
-            'staff_no' => $user,
-            'cts_id' => $shift
-        ]);
-        if($employee->exists)
-        {
+        $total_worked=Raw::dessert_calculation_method($cts_id,$user);
+//        dd($total_worked);
+        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($cts_id)->total_needed;
+        $total_used=DessertSheet::where(['cts_id'=>$cts_id])->whereNull('deleted_at')->count();
+        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+            $data = [
+                'total_worked' => $total_worked['total_worked']
+            ];
+        }
+        elseif($total_needed <=$total_used){
+            $data = [
+                'total_worked' => $total_worked['total_worked'],
+                'total_needed'=>$total_needed,
+                'total_used'=>$total_used
+            ];
+        }
+        else{
+            $employee = DessertSheet::firstOrNew([
+                'staff_no' => $user,
+                'cts_id' => $cts_id
+            ]);
+            if($employee->exists)
+            {
 //            Session::flash('error', 'You are already on the list');
 //            return redirect()->route('employee.dashboard');
-        }
-        else
-        {
-            $employee->staff_no = $user;
-            $employee->cts_id = $shift;
-            $employee->save();
+            }
+            else
+            {
+                $employee->staff_no = $user;
+                $employee->cts_id = $cts_id;
+                $employee->save();
 
+                $data['staff_no'] = $user;
+                $data['cts_id'] = $cts_id;
 //            Session::flash('success', 'You are selected for the task');
 //            return redirect()->route('employee.dashboard');
 
+            }
+            echo json_encode($employee);
         }
-        echo json_encode($employee);
+
+
     }
 
     public function getCompanyName(Request $request)
@@ -123,5 +148,28 @@ class Dashboard extends Controller
 
 //            dd($date);
             echo json_encode($data);
+    }
+
+    public static function getWorkedHours()
+    {
+        $psi = \Session::get('username');
+        $dessert_id = 808;
+        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
+        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
+        $total_used=DessertSheet::where(['cts_id'=>$dessert_id])->whereNull('deleted_at')->count();
+        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+            $data = [
+                'total_worked' => $total_worked['total_worked']
+            ];
+        } elseif($total_needed <=$total_used){
+            $data = [
+                'total_worked' => $total_worked['total_worked'],
+                'total_needed'=>$total_needed,
+                'total_used'=>$total_used
+            ];
+        }
+        else{
+//            your awesome code should be here
+        }
     }
 }

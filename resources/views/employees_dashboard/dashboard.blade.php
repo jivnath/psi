@@ -23,25 +23,25 @@
         </div>
 
         <div class="row" id="calendarDiv" style="display: none">
-            {{--<div class="col-md-3">--}}
-                {{--<div class="box box-solid">--}}
-                    {{--<div class="box-header with-border">--}}
-                        {{--<h4 class="box-title">Last Updates</h4>--}}
-                    {{--</div>--}}
-                    {{--<div class="box-body">--}}
-                        {{--<!-- the events -->--}}
-                        {{--<div id="external-events">--}}
-                            {{--<div class="external-event bg-green">Cancel Last Day</div>--}}
-                            {{--<div class="external-event bg-yellow">Scheduled On Sept</div>--}}
+        {{--<div class="col-md-3">--}}
+        {{--<div class="box box-solid">--}}
+        {{--<div class="box-header with-border">--}}
+        {{--<h4 class="box-title">Last Updates</h4>--}}
+        {{--</div>--}}
+        {{--<div class="box-body">--}}
+        {{--<!-- the events -->--}}
+        {{--<div id="external-events">--}}
+        {{--<div class="external-event bg-green">Cancel Last Day</div>--}}
+        {{--<div class="external-event bg-yellow">Scheduled On Sept</div>--}}
 
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- /.box-body -->--}}
-                {{--</div>--}}
-                {{--<!-- /. box -->--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<!-- /.box-body -->--}}
+        {{--</div>--}}
+        {{--<!-- /. box -->--}}
 
-            {{--</div>--}}
-            <!-- /.col -->
+        {{--</div>--}}
+        <!-- /.col -->
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body no-padding">
@@ -86,15 +86,15 @@
     <div class="modal" id="ModalShift" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Worked Shifts</h4>
-                    </div>
-                    <div id="allShifts" class="modal-body">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Worked Shifts</h4>
+                </div>
+                <div id="allShifts" class="modal-body">
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -142,31 +142,25 @@
                 },
                 eventRender: function (event, element) {
                     element.bind('click', function () {
-                        if(event.old == 1)
-                        {
+                        if (event.old == 1) {
                             $('#allShifts').html('');
                             var start = moment(event.start).format('Y-MM-DD');
                             $.ajax({
-                                type:"GET",
-                                dataType:'json',
-                                async:true,
-                                url:'{{route("getWorkedShift")}}',
-                                data:{'date': start, 'company':event.companyId},
-                                success:function(data){
-                                    console.log(data);
+                                type: "GET",
+                                dataType: 'json',
+                                async: true,
+                                url: '{{route("getWorkedShift")}}',
+                                data: {'date': start, 'company': event.companyId},
+                                success: function (data) {
                                     let i;
-                                    for(i = 0; i < data.length; i++)
-                                    {
-                                        var shift ='<b>'+ (i+1) +'.  </b>'+ data[i].start_time+' - '+data[i].end_time+'<br>';
+                                    for (i = 0; i < data.length; i++) {
+                                        var shift = '<b>' + (i + 1) + '.  </b>' + data[i].start_time + ' - ' + data[i].end_time + '<br>';
                                         $("#allShifts").append(shift);
                                     }
                                     $('#ModalShift').modal('show');
                                 }
                             });
                         }
-                        // $('#ModalShift #title').val(event.title);
-                        // $('#ModalShift #color').val(event.color);
-
                     });
                 },
                 eventDrop: function (event, delta, revertFunc) { // si changement de position
@@ -232,8 +226,8 @@
                                 title: 'Worked on this day',
                                 start: data['date'][i].date,
                                 allDay: true,
-                                old:1,
-                                companyId:data['date'][i].company_id,
+                                old: 1,
+                                companyId: data['date'][i].company_id,
                                 backgroundColor: '#2a7ce9', //blue
                                 borderColor: '#2a7ce9' //blue
                             }, 'stick');
@@ -274,6 +268,7 @@
 
         $('#submit').click(function () {
             var selectedShift = $('#shifts').val();
+            alert(selectedShift);
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -284,9 +279,9 @@
                     $("#calendar").fullCalendar('clientEvents', function (event) {
                         if (event.id == selectedShift) {
                             event.backgroundColor = '#2ac633',
-                            event.borderColor = '#2ac633',
-                            event.selected = 'yes'
-                            $('#calendar').fullCalendar('updateEvent',event);
+                                event.borderColor = '#2ac633',
+                                event.selected = 'yes'
+                            $('#calendar').fullCalendar('updateEvent', event);
                             $('#shifts').html('');
                             $('#ModalAdd').hide();
                         }
