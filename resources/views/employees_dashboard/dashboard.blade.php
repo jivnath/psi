@@ -179,18 +179,17 @@
                 },
                 eventRender: function (event, element) {
                     element.bind('click', function () {
-                        alert(event.old);
-                        alert(event.start);
-                        alert(event.companyId);
-                        if(event.old==1)
+                        if(event.old == 1)
                         {
+                            var start = moment(event.start).format('Y-MM-DD');
                             $.ajax({
-                               type:"GET",
-                               dataType:'json',
-                               url:'getWorkedShift',
-                               data:{'date': event.start, 'company':event.companyId},
+                                type:"GET",
+                                dataType:'json',
+                                async:true,
+                                url:'{{route("getWorkedShift")}}',
+                                data:{'date': start, 'company':event.companyId},
                                 success:function(data){
-
+                                    console.log(data);
                                 }
                             });
                         }

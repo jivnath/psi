@@ -89,6 +89,7 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
+            $('.container_class').css('width',window.innerWidth-30);
             var tds = document.querySelectorAll("td.contenteditable");
             tds.forEach(function (el, index) {
                 employee.inlineEditable(el, function (response) {

@@ -428,6 +428,28 @@ WHERE
         return DB::select($sql);
     }
 
+    public static function getWorkedShift($staff, $date, $company)
+    {
+        $sql = "SELECT
+                    pd.staff_no, 
+                    cts.date, 
+                    cts.time as start_time, 
+                    sm.end_time 
+                FROM 
+                    psi_dessert_entry pd, 
+                    shift_master_datas sm, 
+                    company_time_schedules cts
+                WHERE 
+                    cts.companyTT_id in (SELECT ctt.id from company_time_tables ctt WHERE ctt.company_id =72) 
+                    AND cts.date = $date
+                    AND pd.staff_no = $staff 
+                    AND pd.cts_id = cts.id 
+                    AND sm.company_id = $company 
+                    AND sm.start_time = cts.time";
+        $data = DB::select($sql);
+        return $data;
+    }
+
     public static function workedDate($staff, $company)
     {
         $sql = "SELECT
@@ -440,7 +462,7 @@ WHERE
         WHERE
         	pde.cts_id = cts.id 
         	AND	pde.staff_no = $staff 
-        	AND cts.companytt_id = ctt.id
+        	AND cts.companyTT_id = ctt.id
             AND ctt.company_id = $company";
 
         $data = DB::select($sql);

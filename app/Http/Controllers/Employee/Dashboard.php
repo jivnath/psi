@@ -115,10 +115,13 @@ class Dashboard extends Controller
     {
         if($request->ajax())
             $user = \Session::get('username');
-            $companyId = $request->get('companyId');
-            $date = $request->get('date');
+            $companyId = $request->get('company');
+            $date = str_replace('-', '', $request->get('date'));
 
+
+            $data = Raw::getWorkedShift($user, $date, $companyId);
+
+//            dd($date);
+            echo json_encode($data);
     }
-
-
 }
