@@ -231,7 +231,7 @@ FROM
 WHERE
     t1.id = t2.companytt_id
     AND t1.master_main_id1 IS NOT NULL
-    ORDER BY companytt_id DESC ";
+    ORDER BY companytt_id DESC";
         return DB::select($sql);
     }
 

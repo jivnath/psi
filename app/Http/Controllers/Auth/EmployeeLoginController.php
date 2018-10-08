@@ -63,14 +63,13 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_retirement_date', $employee->retirement_date);
             $request->session()->put('employee_birth_date', $employee->birthdate);
             $request->session()->put('employee_cell_no', $employee->cell_no);
-            $request->session()->put('employee_address', $employee->address);
             $request->session()->put('employee_residence_card_no', $employee->residence_card_no);
             $request->session()->put('employee_residence_card_exp_date', $employee->residence_card_exp_date);
             $request->session()->put('employee_work_location', $employee->work_location);
             $request->session()->put('employee_country_citizenship', $employee->country_citizenship);
             $request->session()->put('employee_reg_officer', $employee->reg_officer);
             $request->session()->put('employee_hire_date', $employee->hire_date);
-            $request->session()->put('employee_address_ip', $employee->address_ip);
+            $request->session()->put('employee_address_ip', $employee->address_jp);
             $request->session()->put('employee_phoetic_kanji', $employee->phoetic_kanji);
             $request->session()->put('employee_hourly_wage', $employee->hourly_wage);
             $request->session()->put('employee_status_residence', $employee->status_residence);

@@ -13,7 +13,7 @@
 
             <div class="container" style="padding: 5px 20px 20px">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#"> <img alt="PSI-S"
+                    <a class="navbar-brand" href="{{route('employee.dashboard')}}"> <img alt="PSI-S"
                                                            src="/images/logo_small.png">
 
                     </a>
@@ -31,7 +31,7 @@
                             aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown"><a id="master_data"

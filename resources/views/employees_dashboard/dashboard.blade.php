@@ -122,9 +122,9 @@
                 y = date.getFullYear()
             $('#calendar').fullCalendar({
                 header: {
-                    left: 'prev,next today',
+                    left: 'prev, today',
                     center: 'title',
-                    right: 'month'
+                    right: 'next, today'
                 },
                 buttonText: {
                     today: 'today',

@@ -5,11 +5,10 @@
 @section('content')
     @php
         $employee_name = \Session::get('employee_name');
-        $employee_psi_number = \Session::get('user_psi_number');
+        $employee_psi_number = \Session::get('employee_psi_number');
         $employee_retirement_date = \Session::get('employee_retirement_date');
         $employee_birth_date = \Session::get('employee_birth_date');
         $employee_cell_no = \Session::get('employee_cell_no');
-        $employee_address = \Session::get('employee_address');
         $employee_residence_card_no = \Session::get('employee_residence_card_no');
         $employee_residence_card_exp_date = \Session::get('employee_residence_card_exp_date');
         $employee_work_location = \Session::get('employee_work_location');
@@ -70,10 +69,11 @@
             <!-- /.box -->
         </div>
         <!-- /.col -->
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
+                    <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
+                    <li><a href="#activity" data-toggle="tab">Activity</a></li>
                     <li><a href="#settings" data-toggle="tab">Settings</a></li>
                 </ul>
                 <div class="tab-content">
@@ -105,14 +105,65 @@
                             </div>
                         </form>
                     </div>
+                    <div class="active tab-pane" id="about_me">
+                        <div class="post clearfix">
+                            <table class="table table-striped">
+                                <tr>
+                                    <td>Name</td>
+                                    <td>{{$employee_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>PSI-S No.</td>
+                                    <td>{{$employee_psi_number}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phoetic Kanji</td>
+                                    <td>{{$employee_phoetic_kanji}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Contact No.</td>
+                                    <td>{{$employee_cell_no}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>{{$employee_address_ip}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Work Location</td>
+                                    <td>{{$employee_work_location}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Retirement Date</td>
+                                    <td>{{$employee_retirement_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Birthday</td>
+                                    <td>{{$employee_birth_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Residence Card No.</td>
+                                    <td>{{$employee_residence_card_no}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Register Officer</td>
+                                    <td>{{$employee_reg_officer}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                     <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->
             </div>
             <!-- /.nav-tabs-custom -->
         </div>
-        <div class="col-md-2 box box-info">
-
+        <div class="col-md-3 box box-info">
+            <label for="request">Requests</label><br>
+            <a href="#" >Request for contact no. change</a><br>
+            <a href="#" >Request for address change</a><br>
+            <a href="#" >Request for birthday change</a><br>
+            <a href="#" >Request for work location change</a><br>
+            <a href="#" >Request for residence card no. change</a><br>
         </div>
         <!-- /.col -->
     </div>

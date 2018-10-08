@@ -26,7 +26,7 @@ class DessertController extends Controller
                 $company = Company::find($comp->company_id);
                 array_push($companies, $company);
             }
-        return view('sheets.dessert')->withCompanies($companies);
+        return view('sheets.dessert')->withCompanies(array_unique($companies));
     }
 
     public function generateTimeTable(Request $request)

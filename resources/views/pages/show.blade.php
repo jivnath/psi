@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Company Shift</h3>
+                        <h3 class="box-title">Section Shift</h3>
                     </div>
                     <div class='box-body container_class' style="overflow-x: scroll">
                         <table class="table table-striped" id='example'>
