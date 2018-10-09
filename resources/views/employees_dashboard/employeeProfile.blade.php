@@ -73,8 +73,8 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
-                    <li><a href="#activity" data-toggle="tab">Activity</a></li>
-                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                    {{--<li><a href="#activity" data-toggle="tab">Activity</a></li>--}}
+                    <li><a href="#settings" data-toggle="tab">Requests</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
@@ -88,13 +88,19 @@
 
 
                             <div class="form-group">
-                                <label for="language" class="col-sm-3 control-label">Preferred Language</label>
+                                <label for="language" class="col-sm-3 control-label">Request Type</label>
 
                                 <div class="col-sm-12">
                                     <select name="language" class="form-control">
-                                        <option value="0">English</option>
-                                        <option value="1">Japanese</option>
+                                        <option value="0">Profile Change</option>
+                                        <option value="1">Others</option>
                                     </select>
+                                </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <label for="language" class="col-sm-3 control-label">Request Type</label>
+                                        <div class="col-sm-12">
+                                        <textarea cols="70" rows="10"></textarea>
                                 </div>
                             </div>
 
@@ -102,6 +108,7 @@
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="submit" class="btn btn-danger">Submit</button>
                                 </div>
+                            </div>
                             </div>
                         </form>
                     </div>
@@ -157,14 +164,14 @@
             </div>
             <!-- /.nav-tabs-custom -->
         </div>
-        <div class="col-md-3 box box-info">
-            <label for="request">Requests</label><br>
-            <a href="#" >Request for contact no. change</a><br>
-            <a href="#" >Request for address change</a><br>
-            <a href="#" >Request for birthday change</a><br>
-            <a href="#" >Request for work location change</a><br>
-            <a href="#" >Request for residence card no. change</a><br>
-        </div>
+        {{--<div class="col-md-3 box box-info">--}}
+            {{--<label for="request">Requests</label><br>--}}
+            {{--<a href="#" >Request for contact no. change</a><br>--}}
+            {{--<a href="#" >Request for address change</a><br>--}}
+            {{--<a href="#" >Request for birthday change</a><br>--}}
+            {{--<a href="#" >Request for work location change</a><br>--}}
+            {{--<a href="#" >Request for residence card no. change</a><br>--}}
+        {{--</div>--}}
         <!-- /.col -->
     </div>
     <!-- /.row -->
