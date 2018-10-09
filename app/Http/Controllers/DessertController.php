@@ -37,7 +37,10 @@ class DessertController extends Controller
                 $schedule_results = \App\Models\Company::find($id)->companyTimeTable();
                 if (count($schedule_results->get()) > 0) {
                     $schedule_id = $schedule_results->first()->id;
-                    $schedule_data = \App\Models\CompanyTimeTable::find($schedule_id)->companyTimeSchedule()->get();
+                    $schedule_data = $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+                        $query->where('id', $id);
+                    })->groupBy('date')->get();
+//                    dd($schedule_data);
 
                     return view('sheets.dessert_schedule_view', compact('schedule_data'));
                 } else {

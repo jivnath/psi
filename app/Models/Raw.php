@@ -191,6 +191,7 @@ FROM
             ctt.company_id,
             c.name,
             ctt.created_at,
+        	ctt.schedule_session_id,
             c.master_id,
             (
                 SELECT
@@ -231,7 +232,8 @@ FROM
 WHERE
     t1.id = t2.companytt_id
     AND t1.master_main_id1 IS NOT NULL
-    ORDER BY companytt_id DESC";
+    GROUP BY t1.schedule_session_id
+    ORDER BY t2.companytt_id DESC";
         return DB::select($sql);
     }
 
@@ -337,6 +339,24 @@ WHERE
 
         print_r($companies);
         die();
+    }
+
+    public static function getCompaniesForShiftShow($id)
+    {
+        $sql = "SELECT c.name, c.id, ctt.id as companyTT_id FROM companies c,company_time_tables ctt WHERE c.id=ctt.company_id and ctt.schedule_session_id = $id";
+        return DB::select($sql);
+    }
+
+    public static function getDatesForShiftShow($id)
+    {
+        $sql = "SELECT DISTINCT cts.date FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = $id AND cts.companyTT_id = ctt.id";
+        return DB::select($sql);
+    }
+
+    public static function getTimesForShiftShow($id)
+    {
+        $sql = "SELECT DISTINCT cts.time FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = $id AND cts.companyTT_id = ctt.id";
+        return DB::select($sql);
     }
 
     public static function getTotalNeccessory()

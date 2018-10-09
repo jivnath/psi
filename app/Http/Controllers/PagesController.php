@@ -213,22 +213,26 @@ class PagesController extends Controller
     public function show($id)
     {
         $data=[];
-        $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
-            $query->where('master_id', $id);
-        })->groupBy('date')->get();
+//        $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+//            $query->where('master_id', $id);
+//        })->groupBy('date')->get();
 
-        $times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
-            $query->where('master_id', $id);
-        })->groupBy('time')->get();
-        $companies = CompanyTimeTable::whereHas('comp', function ($query) use ($id) {
-            $query->where('master_id', $id);
-        })->groupBy('company_id')->get();
+//        $times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+//            $query->where('master_id', $id);
+//        })->groupBy('time')->get();
+
+//        $companies = CompanyTimeTable::whereHas('comp', function ($query) use ($id) {
+//            $query->where('master_id', $id);
+//        })->groupBy('company_id')->get();
+//
+
+        $companies = Raw::getCompaniesForShiftShow($id);
         $types = collect([
             'normal',
             'help'
         ]);
-//        $dates = CompanyTimeSchedule::where('companyTT_id', $ctt_id)->groupBy('date')->get();
-//        $times = CompanyTimeSchedule::where('companyTT_id', $ctt_id)->groupBy('time')->get();
+        $dates = Raw::getDatesForShiftShow($id);
+        $times = Raw::getTimesForShiftShow($id);
         /*please utilize this
         foreach ($times as $time) {
             foreach ($companies as $company) {
