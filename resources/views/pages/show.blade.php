@@ -34,10 +34,10 @@
                                             @endif
                                             @php
                                                 $last=$time->time;
-                                                $doesTimeExist = App\Http\Controllers\PagesController::doesTimeExist($time->time, $company->company_id);
+                                                $doesTimeExist = App\Http\Controllers\PagesController::doesTimeExist($time->time, $company->id);
                                             @endphp
                                             @if($doesTimeExist)
-                                                <td> {{ $company->comp->name }} </td>
+                                                <td> {{ $company->name }} </td>
                                                 <td>
                                                     @if($type=='normal')
                                                         Necessary
@@ -48,22 +48,22 @@
 
                                                 @foreach($dates as $date)
                                                     @php
-                                                        $ctt = App\Http\Controllers\PagesController::getCtt($time->time, $company->id, $date->date);
+                                                        $ctt = App\Http\Controllers\PagesController::getCtt($time->time, $company->companyTT_id, $date->date);
                                                     @endphp
                                                     @if($ctt)
                                                         @if ($ctt->$type !=0 && $ctt->$type!=null)
                                                             <td class="contenteditable"
                                                                 contenteditable="true"
-                                                                data-company_id="{{$company->company_id}}"
-                                                                data-company_tt_id="{{$company->id}}"
+                                                                data-company_id="{{$company->id}}"
+                                                                data-company_tt_id="{{$company->companyTT_id}}"
                                                                 data-schedule_date="{{ $date->date}}"
                                                                 data-job_type="{{$type}}" data-app_source="shift_update"
                                                                 data-ctt_id="{{$ctt->id}}"> {{ $ctt->$type }} </td>
                                                         @else
                                                             <td class="contenteditable"
                                                                 contenteditable="true"
-                                                                data-company_id="{{$company->company_id}}"
-                                                                data-company_tt_id="{{$company->id}}"
+                                                                data-company_id="{{$company->id}}"
+                                                                data-company_tt_id="{{$company->companyTT_id}}"
                                                                 data-schedule_date="{{ $date->date}}"
                                                                 data-job_type="{{$type}}" data-app_source="shift_update"
                                                                 data-ctt_id="{{$ctt->id}}"> {{ '' }} </td>

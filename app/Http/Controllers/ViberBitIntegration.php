@@ -3,6 +3,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\PsiViberCommand;
+use App\Models\PsiViberStory;
+use App\Models\Employee;
 
 class ViberBitIntegration extends Controller
 {
@@ -11,6 +14,7 @@ class ViberBitIntegration extends Controller
 
     public function handleViberRequest()
     {
+        $message_to_reply = 'wrong command';
         $access_token = env('VIBER_ACCESS_TOKEN', false);
         $request = file_get_contents("php://input");
         $input = json_decode($request, true);
@@ -28,6 +32,42 @@ class ViberBitIntegration extends Controller
             $sender_id = $input['sender']['id'];
             $sender_name = $input['sender']['name'];
 
+            // $this->store_story();
+            $lastest_call = $this->get_latest_story();
+
+            if ($lastest_call == null || $lastest_call->ask == $text_received) {
+                $commands = PsiViberCommand::where('command', $text_received)->first();
+                if ($commands) {
+                    $this->store_story([
+                        'sender_id' => $sender_id,
+                        'text_received' => $text_received
+                    ]);
+                    $message_to_reply = $commands->execute_en;
+                }
+            } elseif (is_int($text_received) && strlen($text_received) == 10 && $lastest_call->ask == 'register') {
+
+                // check number to db
+                $employee_data = $this->get_employee_verify($text_received, 'cell_no');
+                if ($employee_data->count() > 0) {
+                    $commands = PsiViberCommand::where('command', 'mobile_number')->first();
+                    $this->store_story([
+                        'sender_id' => $sender_id,
+                        'text_received' => 'mobile_number'
+                    ]);
+                    $message_to_reply = $commands->execute_en;
+                }
+            } elseif (is_int($text_received) && strlen($text_received) == 8 && $lastest_call->ask == 'mobile_number') {
+                $employee_data = $this->get_employee_verify($text_received, 'birthdate');
+                if ($employee_data->count() > 0) {
+                    $commands = PsiViberCommand::where('command', 'registration_complete')->first();
+                    $this->store_story([
+                        'sender_id' => $sender_id,
+                        'text_received' => 'registration_complete'
+                    ]);
+                    $message_to_reply = $commands->execute_en;
+                    $message_to_reply .= ' username=pramod and password=2323';
+                }
+            }
             if ($text_received == 'hi') {
                 $message_to_reply = 'hello ' . $sender_name;
             } elseif ($text_received == 'menu') {
@@ -75,5 +115,23 @@ class ViberBitIntegration extends Controller
         ]);
         echo '<pre>' . var_export($response->getStatusCode(), true) . '</pre>';
         echo '<pre>' . var_export($response->getBody()->getContents(), true) . '</pre>';
+    }
+
+    private function store_story($data)
+    {
+        $story_obj = new PsiViberStory();
+        $story_obj->sender_id = $data['sender_id'];
+        $story_obj->ask = $data['text_received'];
+        $story_obj->save();
+    }
+
+    private function get_latest_story($sender_id)
+    {
+        return PsiViberStory::where('sender_id', $sender_id)->latest()->first();
+    }
+
+    private function get_employee_verify($mobile, $field)
+    {
+        return Employee::where($field, $mobile);
     }
 }

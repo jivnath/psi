@@ -28,11 +28,11 @@
                     @foreach($results as $index => $shift)
                         <tr>
 							<th scope="row">{{$index + 1}}</th>
-							<td>{{ $shift->name }}</td>
+							<td>{{ $shift->section_name }}</td>
 							<td>{{ Carbon\Carbon::parse( $shift->schedule_from)->format('d-m-Y') }}</td>
 							<td>{{ Carbon\Carbon::parse( $shift->schedule_to)->format('d-m-Y') }}</td>
 							<td>{{ Carbon\Carbon::parse( $shift->created_at)->format('d-m-Y i:s A') }}</td>
-							<td> <a href="{{ route('shift.show',['id' => $shift->master_id]) }}">View</a></td>
+							<td> <a href="{{ route('shift.show',['id' => $shift->schedule_session_id]) }}">View</a></td>
 							</tr>
 							@endforeach @else
 							<tr>
