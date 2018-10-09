@@ -6,6 +6,8 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Models\Employee;
+use DB;
 
 class EmployeeLoginController extends Controller
 {
@@ -28,7 +30,8 @@ class EmployeeLoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/employee/dashboard';
-    protected $redirectAfterLogout='/employee/login';
+
+    protected $redirectAfterLogout = '/employee/login';
 
     /**
      * Create a new controller instance.
@@ -49,17 +52,24 @@ class EmployeeLoginController extends Controller
     {
         return view('employee_login.login');
     }
+
     public function login(Request $request)
     {
-
-        if (Auth::guard('employee')->attempt(['psi_number' => $request->psi_number, 'password' => $request->password])) {
-            $request->session()->put('username', Auth::guard('employee')->user()->psi_number);
+        if (Auth::guard('employee')->attempt([
+            'psi_number' => $request->psi_number,
+            'password' => $request->password
+        ])) {
+            $request->session()->put('username', $this->get_psi_number(Auth::guard('employee')->user()->psi_number));
+            $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
-
         }
         return redirect()->intended($this->redirectPath());
+    }
 
+    private function get_psi_number($cell_number)
+    {
 
+        return Employee::where(DB::raw("replace(cell_no,'-','')"), '=', $cell_number)->first()->psi_number;
     }
 
     public function username()

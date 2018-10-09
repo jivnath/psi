@@ -20,6 +20,7 @@ class Dashboard extends Controller
 
     public function index()
     {
+//         dd(\Session::all());
         $companies = Raw::getCompaniesHavingShift();
 //        dd($companies);
         return view('employees_dashboard.dashboard', compact('companies'));
