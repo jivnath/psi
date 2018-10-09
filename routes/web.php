@@ -31,6 +31,9 @@ Route::group(['middleware'=> ['employee']], function(){
         Route::get('/getDataForCalendar', ['as' => 'getDataForCalendar', 'uses' => 'Employee\Dashboard@getDataForCalendar']);
         Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
         Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
+        Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
+        Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
+
     });
 });
 Route::group(['middleware' => ['auth']], function () {
@@ -100,9 +103,19 @@ Route::group(['middleware' => ['auth']], function () {
         });
         Route::prefix('permission_module')->group(function(){
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
+
+            Route::post('/role/update-{role_id}', ['as'=>'storePermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
+            Route::match(['get', 'post'],'/user/update', ['as' => 'update.user', 'uses' => 'PsiPermissionController@updateUser']);
+            Route::get('/user/permission', ['as'=>'getUserPermission', 'uses'=>'PsiPermissionController@getUserPermission']);
+            Route::post('/user/permission', ['as'=>'storePermissionToUser', 'uses'=>'PsiPermissionController@storePermissionToUser']);
+
         });
 
         Route::get('/dashboard', ['as' => 'dashboard', 'uses' => 'DashboardController@index']);
+        Route::get('/exp_date', ['as' => 'exp_date', 'uses' => 'DashboardController@viewExp']);
+        Route::get('/total_necessary', ['as' => 'total_necessary', 'uses' => 'DashboardController@viewTotal']);
+        Route::get('/recent_sheet', ['as' => 'recent_sheet', 'uses' => 'DashboardController@viewSheet']);
+        Route::get('/alert_summary', ['as' => 'alert_summary', 'uses' => 'DashboardController@viewSummary']);
         Route::prefix('skills')->group(function(){
             Route::get('/', ['as' => 'manageSkills', 'uses' => 'SkillMasterController@manage' ]);
             Route::post('/add', ['as' => 'skills.master.add','uses' => 'SkillMasterController@addSkills']);
@@ -136,15 +149,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('ajax/shift/add', ['as' => 'ajax.add.shifts', 'uses' => 'PagesController@ajaxAddShifts']);
         });
 
-
-
-
-            Route::resource('roles', 'RoleController');
+        Route::resource('roles', 'RoleController');
         Route::prefix('permissions')->group(function(){
-            Route::resource('permissions', 'PermissionController');
+        Route::resource('permissions', 'PermissionController');
         });
-
-
 
         Route::get('/addmore','ShiftMasterController@addMore');
         Route::post('/addmore','ShiftMasterController@addMorePost');
@@ -165,7 +173,10 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::prefix('dessert')->group(function(){
             Route::get('/', ['as' => 'dessert', 'uses' => "DessertController@generateDessert"]);
-            Route::get('/findDetails', "DessertController@findDetails");
+            Route::get('/findDetails', [
+                'as' => 'dessert.findDetails',
+                'uses' => "DessertController@findDetails"
+            ]);
             Route::post('/', ['as' => 'dessert.store', 'uses' => "DessertController@storeDessert"]);
             Route::post('/dessert_update', ['as' => 'dessert.update', 'uses' => "DessertController@dessert_update"]);
         });

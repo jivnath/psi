@@ -10,7 +10,7 @@
                     <form class="form-group">
                         <div class="form-group row" style="text-align: center; margin-top: 5px; margin-bottom: 25px;">
                             <div class="col-md-3" style="text-align: right">
-                                <label for="psi_num"><h5> PSI_S No: </h5></label>
+                                <label for="psi_num"><h5> PSI-S No: </h5></label>
                             </div>
                             <div class="col-md-9" style="text-align: left;">
                                 <input type="text" id="psi_number" style="width:65%" class="form-control"

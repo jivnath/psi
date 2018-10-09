@@ -215,4 +215,5 @@ return [
         'load_permission'=>App\Helpers\PermissionHelper::class
 
     ],
+    'job_limit'=>28
 ];

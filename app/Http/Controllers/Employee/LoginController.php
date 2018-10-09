@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Employee;
 
 class LoginController extends Controller
 {
@@ -52,6 +53,13 @@ class LoginController extends Controller
             $field => $login
         ]);
         return $field;
+    }
+
+    public function logout()
+    {
+        Auth::guard('employee')->logout();
+        Session::flush();
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/employee/login');
     }
 
     // public function postLogin()

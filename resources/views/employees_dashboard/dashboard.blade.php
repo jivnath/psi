@@ -23,25 +23,25 @@
         </div>
 
         <div class="row" id="calendarDiv" style="display: none">
-            {{--<div class="col-md-3">--}}
-                {{--<div class="box box-solid">--}}
-                    {{--<div class="box-header with-border">--}}
-                        {{--<h4 class="box-title">Last Updates</h4>--}}
-                    {{--</div>--}}
-                    {{--<div class="box-body">--}}
-                        {{--<!-- the events -->--}}
-                        {{--<div id="external-events">--}}
-                            {{--<div class="external-event bg-green">Cancel Last Day</div>--}}
-                            {{--<div class="external-event bg-yellow">Scheduled On Sept</div>--}}
+        {{--<div class="col-md-3">--}}
+        {{--<div class="box box-solid">--}}
+        {{--<div class="box-header with-border">--}}
+        {{--<h4 class="box-title">Last Updates</h4>--}}
+        {{--</div>--}}
+        {{--<div class="box-body">--}}
+        {{--<!-- the events -->--}}
+        {{--<div id="external-events">--}}
+        {{--<div class="external-event bg-green">Cancel Last Day</div>--}}
+        {{--<div class="external-event bg-yellow">Scheduled On Sept</div>--}}
 
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<!-- /.box-body -->--}}
-                {{--</div>--}}
-                {{--<!-- /. box -->--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--<!-- /.box-body -->--}}
+        {{--</div>--}}
+        {{--<!-- /. box -->--}}
 
-            {{--</div>--}}
-            <!-- /.col -->
+        {{--</div>--}}
+        <!-- /.col -->
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body no-padding">
@@ -83,55 +83,18 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal" id="ModalShift" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form class="form-horizontal" method="POST" action="#">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Edit Schedule</h4>
-                    </div>
-                    <div class="modal-body">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Worked Shifts</h4>
+                </div>
+                <div id="allShifts" class="modal-body">
 
-                        <div class="form-group">
-                            <label for="title" class="col-sm-2 control-label">Title</label>
-                            <div class="col-sm-12">
-                                <input type="text" name="title" class="form-control" id="title" placeholder="Title">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="color" class="col-sm-2 control-label">Color</label>
-                            <div class="col-sm-12">
-                                <select name="color" class="form-control" id="color">
-                                    <option value="">Choose</option>
-                                    <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
-                                    <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-                                    <option style="color:#008000;" value="#008000">&#9724; Green</option>
-                                    <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
-                                    <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-                                    <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
-                                    <option style="color:#000;" value="#000">&#9724; Black</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="checkbox">
-                                    <label class="text-danger"><input type="checkbox" name="delete"> Delete
-                                        event</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <input type="hidden" name="id" class="form-control" id="id">
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
@@ -159,9 +122,9 @@
                 y = date.getFullYear()
             $('#calendar').fullCalendar({
                 header: {
-                    left: 'prev,next today',
+                    left: 'prev, today',
                     center: 'title',
-                    right: 'month'
+                    right: 'next, today'
                 },
                 buttonText: {
                     today: 'today',
@@ -177,15 +140,29 @@
                     $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
                     $('#ModalAdd').modal('show');
                 },
-                // eventRender: function (event, element) {
-                //     element.bind('dblclick', function () {
-                //         $('#ModalEdit #id').val(event.id);
-                //         $('#ModalEdit #title').val(event.title);
-                //         $('#ModalEdit #color').val(event.color);
-                //         $('#ModalEdit').modal('show');
-                //     });
-                //
-                // },
+                eventRender: function (event, element) {
+                    element.bind('click', function () {
+                        if (event.old == 1) {
+                            $('#allShifts').html('');
+                            var start = moment(event.start).format('Y-MM-DD');
+                            $.ajax({
+                                type: "GET",
+                                dataType: 'json',
+                                async: true,
+                                url: '{{route("getWorkedShift")}}',
+                                data: {'date': start, 'company': event.companyId},
+                                success: function (data) {
+                                    let i;
+                                    for (i = 0; i < data.length; i++) {
+                                        var shift = '<b>' + (i + 1) + '.  </b>' + data[i].start_time + ' - ' + data[i].end_time + '<br>';
+                                        $("#allShifts").append(shift);
+                                    }
+                                    $('#ModalShift').modal('show');
+                                }
+                            });
+                        }
+                    });
+                },
                 eventDrop: function (event, delta, revertFunc) { // si changement de position
 
                     edit(event);
@@ -244,9 +221,18 @@
                         $('#calendar').fullCalendar('removeEvents', function () {
                             return true;
                         });
+                        for (i = 0; i < data['date'].length; i++) {
+                            $('#calendar').fullCalendar('renderEvent', {
+                                title: 'Worked on this day',
+                                start: data['date'][i].date,
+                                allDay: true,
+                                old: 1,
+                                companyId: data['date'][i].company_id,
+                                backgroundColor: '#2a7ce9', //blue
+                                borderColor: '#2a7ce9' //blue
+                            }, 'stick');
+                        }
                         for (i = 0; i < data['red'].length; i++) {
-
-
                             $('#calendar').fullCalendar('renderEvent', {
                                 title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
                                 id: data['red'][i].rel_id,
@@ -282,6 +268,7 @@
 
         $('#submit').click(function () {
             var selectedShift = $('#shifts').val();
+            alert(selectedShift);
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -292,9 +279,9 @@
                     $("#calendar").fullCalendar('clientEvents', function (event) {
                         if (event.id == selectedShift) {
                             event.backgroundColor = '#2ac633',
-                            event.borderColor = '#2ac633',
-                            event.selected = 'yes'
-                            $('#calendar').fullCalendar('updateEvent',event);
+                                event.borderColor = '#2ac633',
+                                event.selected = 'yes'
+                            $('#calendar').fullCalendar('updateEvent', event);
                             $('#shifts').html('');
                             $('#ModalAdd').hide();
                         }

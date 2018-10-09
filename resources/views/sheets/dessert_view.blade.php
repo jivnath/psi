@@ -95,9 +95,9 @@ corresponding value from the list below*/
                 <th class="border_field sticky-top">Name（氏名）</th>
                 <th class="border_field sticky-top">Tel No</th>
                 <th class="background_responsible sticky-top">Responsible</th>
-                <th class="background_responsible sticky-top">Conformation the day before</th>
+                <th class="background_responsible sticky-top">Confirmation the day before</th>
                 <th class="background_responsible sticky-top">Responsible</th>
-                <th class="background_responsible sticky-top">Conform 3 hours ago</th>
+                <th class="background_responsible sticky-top">Confirm 3 hours ago</th>
                 <th class="sticky-top">Arrival time in case of late arrival</th>
                 <th class="sticky-top">Reason for late arrival and absence</th>
                 <th class="sticky-top">Call Medium/Through</th>
@@ -124,7 +124,7 @@ corresponding value from the list below*/
                             <td  class="border_field">{{$info->cell_no}}</td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>{{$info->responsible1}}</td>
                             <td class="background_responsible" data-usage='confirmation'>
-                                <select class='form-control confirmation'>
+                                <select class='confirmation'>
                                 	<option value=''>--select--</option>
                                 	<option value='OK' {{ ($info->conformation_day_before=='OK') ? 'selected':''}}>OK</option>
                                 	<option value='Not OK' {{ ($info->conformation_day_before=='Not OK') ? 'selected':''}}>Not OK</option>
@@ -133,7 +133,7 @@ corresponding value from the list below*/
                             </td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>{{$info->responsible2}}</td>
                             <td class="background_responsible" data-usage='confirmation_1'>
-                             <select class='form-control confirmation_1'>
+                             <select class='confirmation_1'>
                              		<option value=''>--select--</option>
                                 	<option value='OK' {{ ($info->conformation_3_hours_ago=='OK') ? 'selected':''}}>OK</option>
                                 	<option value='Not OK' {{ ($info->conformation_3_hours_ago=='Not OK') ? 'selected':''}}>Not OK</option>
@@ -143,7 +143,7 @@ corresponding value from the list below*/
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>{{$info->arrival_time_if_late}}</td>
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>{{$info->reason_for_late}}</td>
                             <td  data-usage='cmt'>
-                            <select class='form-control cmt'>
+                            <select class='cmt'>
                             		<option value=''>--select--</option>
                                 	<option value='viber' {{ ($info->call_medium=='viber') ? 'selected':''}}>viber</option>
                                 	<option value='call' {{ ($info->call_medium=='call') ? 'selected':''}}>call</option>
@@ -174,7 +174,7 @@ corresponding value from the list below*/
                             <td  class="border_field">  </td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
                             <td class="background_responsible" data-usage='confirmation'>
-                                <select class='form-control confirmation'>
+                                <select class='confirmation'>
                                 	<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -183,7 +183,7 @@ corresponding value from the list below*/
                             </td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>  </td>
                             <td class="background_responsible" data-usage='confirmation_1'>
-                             <select class='form-control confirmation_1'>
+                             <select class='confirmation_1'>
                              		<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -193,7 +193,7 @@ corresponding value from the list below*/
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>  </td>
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>  </td>
                             <td  data-usage='cmt'>
-                            <select class='form-control cmt'>
+                            <select class='cmt'>
                             		<option value=''>--select--</option>
                                 	<option value='viber'>viber</option>
                                 	<option value='call'>call</option>
@@ -302,11 +302,25 @@ corresponding value from the list below*/
                             console.log('dessert_id '+added_generated_value);
     						$.ajax({
     	                        type:"GET",
-    	                        url:"/dessert/findDetails",
+    	                        url:"{{route('dessert.findDetails')}}",
     	                        data:{'psi_num':main_val,'dessert_id':added_generated_value,'schedule_id':company_schedule_id},
     	                        dataType:'json',
     	                        success:function(data){
     	                        	main_logical_data=data;
+    	                        	console.log(checkProperties(data));
+
+    	                        	if(data.length == 0){
+        	                        	alert('already in use');
+        	                        	return false;
+    	                        	}
+    	                        	if(checkProperties(data)){
+    	                        		alert('Not available');
+        	                        	return false;
+        	                        }
+        	                        if(typeof data.total_worked !=='undefined' && data.total_worked>{{\Config('app.job_limit')}}){
+										alert('reached limit '+data.total_worked);
+										return false;
+            	                     }
     	                        	$.each(data,function(i,v){
     	                        		$('#all_saved_value').data(i,v);
     		                        });
@@ -317,6 +331,13 @@ corresponding value from the list below*/
 						}
                     }
                 });
+                function checkProperties(obj) {
+                    for (var key in obj) {
+                        if (obj[key] !== null && obj[key] != "")
+                            return false;
+                    }
+                    return true;
+                }
                 $('.add_now').click(function(){
 
 					click_flag_obj=$(this);
@@ -363,8 +384,23 @@ corresponding value from the list below*/
 					added_generated_value=$('#all_saved_value').data('23');
                     company_schedule_id=$('#all_saved_value').data('22');
 					send_it_to_update(added_generated_value,company_schedule_id,'flag',click_value_flag);
+					console.log(click_value_flag);
+					if(click_value_flag=='red'){
+						remove_content(click_flag_obj);
+						send_it_to_update(added_generated_value,company_schedule_id,'deleted',click_value_flag);
+					}
 					$('.showFlag').modal('hide');
                 });
+                function remove_content(click_flag_obj){
+                    prevent_remove=[0,1,2,9,11,14,16];
+                	click_flag_obj.closest('tr').find('td').each(
+	                	    function (i) {
+	                	    	if($.inArray(i,prevent_remove) ==-1){
+		                	    	$('#all_saved_value').data(i.toString(),'');
+		                    	    $(this).html('');
+	                	    	}
+	                	    });
+                    }
                 $('.confirmation').change(function(){
                 	$('#comment').val('');
                 	is_model_alert='';

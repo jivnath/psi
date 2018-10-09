@@ -227,6 +227,8 @@ class PagesController extends Controller
             'normal',
             'help'
         ]);
+//        $dates = CompanyTimeSchedule::where('companyTT_id', $ctt_id)->groupBy('date')->get();
+//        $times = CompanyTimeSchedule::where('companyTT_id', $ctt_id)->groupBy('time')->get();
         /*please utilize this
         foreach ($times as $time) {
             foreach ($companies as $company) {

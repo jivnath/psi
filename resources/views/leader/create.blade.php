@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="box">
-                    <div class="box-header"><h3>Team Leader</h3></div>
+                    <div class="box-header"><h3>Section Manager</h3></div>
 
                     <div class="box-body " style="padding: 10px;">
                         <form  action="{{ route('leader.store') }}" method="POST" >
@@ -29,7 +29,7 @@
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-2">
-                                    <label for="psi_num"> PSIS No </label>
+                                    <label for="psi_num"> PSI-S No </label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" id="psi_num" name="psi_num" class="form-control">
