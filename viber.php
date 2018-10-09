@@ -20,9 +20,32 @@ if ($input['event'] == 'webhooks') {
     } elseif($text_received=='smile'){
         $message_to_reply = 'hehehe ' . $sender_name;
     }
-    elseif($text_receiveed=='help'){
-        $message_to_reply = 'Need help?' . $sender_name;
+    elseif($text_received=='back'){
+        $message_to_reply = $sender_name .' welcome to main menu';
+        $data['keyboard'] = getMainMenu();
     }
+    elseif($text_received=='Help'){
+        $message_to_reply = 'Need help?' . $sender_name;
+        $data['keyboard'] = getHelpMenu();
+    }
+    elseif($text_received=='registration'){
+        $message_to_reply = 'Provide your mobile No ' . $sender_name;
+        $data['keyboard'] = getBackMenu('->main_menu');
+
+    }
+    elseif($text_received=='11'){
+        $message_to_reply = 'Provide your PSIS No ' . $sender_name;
+        $data['keyboard'] = getBackMenu('->main_menu->registration');
+
+
+    }
+    elseif($text_received=='71203'){
+        $message_to_reply = 'Congratulation '.$sender_name." your username and password has been created.\nusername:71203 \npassword:xxxxx";
+        $data['keyboard'] = getBackMenu('back');
+
+
+    }
+
     elseif ($text_received == 'menu') {
         $message_to_reply = 'select one of the options below';
         $data['keyboard'] = getMainMenu();
@@ -49,6 +72,65 @@ elseif($input['event']=='conversation_started'){
 
     $return=sendMessage($data);
 }
+function getBackMenu($text){
+
+
+    $data['BgColor']="#ffffff";
+
+    $keyboard_array['Type']='keyboard';
+    $keyboard_array['DefaultHeight']=false;
+    $keyboard_array['BgColor']="#FFFFFF";
+    $keyboard['keyboard']=$keyboard_array;
+
+    $news['Columns']=6;
+    $news['Rows']=1;
+    $news["Text"]= "<font color=\"#494E67\">$text</font><br><br>";
+    $news["TextSize"]= "medium";
+    $news["TextHAlign"]= "center";
+    $news["TextVAlign"]= "bottom";
+    $news["ActionType"]= "reply";
+    $news["BgColor"]= "#f7bb3f";
+    $news['ActionBody']="back";
+    $keyboard['keyboard']['Buttons'][]=$news;
+    return $keyboard['keyboard'];
+}
+function getHelpMenu(){
+
+
+    $data['BgColor']="#ffffff";
+    $data['text']="Please select one of the options below:";
+
+    $keyboard_array['Type']='keyboard';
+    $keyboard_array['DefaultHeight']=false;
+    $keyboard_array['BgColor']="#FFFFFF";
+    $keyboard['keyboard']=$keyboard_array;
+
+    $news['Columns']=6;
+    $news['Rows']=1;
+    $news["Text"]= "<font color=\"#494E67\">Back ..</font><br><br>";
+    $news["TextSize"]= "medium";
+    $news["TextHAlign"]= "center";
+    $news["TextVAlign"]= "bottom";
+    $news["ActionType"]= "reply";
+    $news["BgColor"]= "#f7bb3f";
+    $news['ActionBody']="back";
+    $keyboard['keyboard']['Buttons'][]=$news;
+
+    $articles['Columns']=6;
+    $articles['Rows']=1;
+    $articles['TextVAlign']="bottom";
+    $articles['TextHAlign']="center";
+    $articles['TextOpacity']="100";
+    $articles["Text"]= "<font color=\"#494E67\">Voli garaula :P </font><br><br>";
+    $articles['TextSize']="regular";
+    $articles['ActionType']="reply";
+    $articles['ActionBody']="done";
+    $articles["BgColor"]= "#f6f7f9";
+
+    //   $articles['Image']="http://www.kebuena.com.mx/wp-content/uploads/2017/06/calor-.jpg";
+    $keyboard['keyboard']['Buttons'][]=$articles;
+    return $keyboard['keyboard'];
+}
 function getMainMenu(){
 
 
@@ -60,29 +142,51 @@ function getMainMenu(){
     $keyboard_array['BgColor']="#FFFFFF";
     $keyboard['keyboard']=$keyboard_array;
 
-    $news['Columns']=3;
-    $news['Rows']=2;
+    $news['Columns']=6;
+    $news['Rows']=1;
     $news["Text"]= "<font color=\"#494E67\">Registration</font><br><br>";
     $news["TextSize"]= "medium";
     $news["TextHAlign"]= "center";
     $news["TextVAlign"]= "bottom";
     $news["ActionType"]= "reply";
     $news["BgColor"]= "#f7bb3f";
-    $news['ActionBody']="Smiling";
+    $news['ActionBody']="registration";
     //   $news['Image']="http://www.qygjxz.com/data/out/208/4243957-smile-image.png";
     $keyboard['keyboard']['Buttons'][]=$news;
 
 
-    $articles['Columns']=3;
-    $articles['Rows']=2;
+
+
+    $login['Columns']=6;
+    $login['Rows']=1;
+    $login['TextVAlign']="bottom";
+    $login['TextHAlign']="center";
+    $login['TextOpacity']="100";
+    $login["Text"]= "<font color=\"#494E67\">Login Portal</font><br><br>";
+    $login['TextSize']="regular";
+    $login["ActionType"]="open-url";
+    $login["OpenURLType"]="internal";
+    $login["InternalBrowser"]=[
+        "Mode"=>"fullscreen",
+        "CustomTitle"=>"Hello World - Custom Title"
+    ];
+    $login["ActionBody"]= "http://127.0.0.1:8000/employee/login";
+    $login["BgColor"]= "#2db9b9";
+
+    //   $articles['Image']="http://www.kebuena.com.mx/wp-content/uploads/2017/06/calor-.jpg";
+    $keyboard['keyboard']['Buttons'][]=$login;
+
+    $articles['Columns']=6;
+    $articles['Rows']=1;
     $articles['TextVAlign']="bottom";
     $articles['TextHAlign']="center";
     $articles['TextOpacity']="100";
     $articles["Text"]= "<font color=\"#494E67\">Help</font><br><br>";
     $articles['TextSize']="regular";
     $articles['ActionType']="reply";
-    $articles['ActionBody']="Crying";
+    $articles['ActionBody']="Help";
     $articles["BgColor"]= "#f6f7f9";
+
     //   $articles['Image']="http://www.kebuena.com.mx/wp-content/uploads/2017/06/calor-.jpg";
     $keyboard['keyboard']['Buttons'][]=$articles;
     return $keyboard['keyboard'];
