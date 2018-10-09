@@ -20,6 +20,7 @@ class SyncLanguageController extends Controller
         $data_transalted = [];
         $client = new Client();
         $string_to_transalte = $this->sum_string();
+
         $results = $client->request('GET', 'https://translate.googleapis.com/translate_a/single', [
             'headers' => [
                 'Cache-Control' => 'no-cache',
@@ -38,13 +39,26 @@ class SyncLanguageController extends Controller
 
         ]);
         $response = json_decode($results->getBody(), true);
-        $translated_lang = explode(self::EXPLODE_VALUE, str_replace('* ::: *', '*:::*', $response[0][0][0]));
-        $translation = explode(self::EXPLODE_VALUE, $response[0][0][1]);
-        foreach ($translation as $key => $row) {
-            $data_transalted[] = [
-                $row => $translated_lang[$key]
-            ];
+        foreach ($response[0] as $row_main) {
+            $translated_lang = explode(self::EXPLODE_VALUE, str_replace([
+                '* ::: *',
+                '* :: '
+            ], [
+                '*:::*',
+                ''
+            ], $row_main[0]));
+            $translation = explode(self::EXPLODE_VALUE, $row_main[1]);
+
+            foreach ($translation as $key => $row) {
+
+                $data_transalted[] = [
+
+                    str_replace('*::', '', $row) => isset($translated_lang[$key])?$translated_lang[$key]:''
+                ];
+
+            }
         }
+
         \Storage::disk('local')->put('test.log', json_encode($data_transalted));
         return $data_transalted;
     }
