@@ -62,13 +62,19 @@ class EmployeeLoginController extends Controller
             $request->session()->put('username', $this->get_psi_number(Auth::guard('employee')->user()->psi_number));
             $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
+            return redirect()->intended($this->redirectPath());
         }
-        return redirect()->intended($this->redirectPath());
+        else {
+            return redirect('/employee/login')
+            ->withInput($request->only($request->psi_number, 'remember'))
+            ->withErrors([
+                $request->psi_number => 'error',
+            ]);
+        }
     }
 
     private function get_psi_number($cell_number)
     {
-
         return Employee::where(DB::raw("replace(cell_no,'-','')"), '=', $cell_number)->first()->psi_number;
     }
 
