@@ -64,6 +64,7 @@ class EmployeeLoginController extends Controller
             $request->session()->put('username', $psi_number);
             $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
+
             $request->session()->put('employee_name', $employee->name);
             $request->session()->put('employee_psi_number', $employee->psi_number);
             // $request->session()->put('employee_language', $employee->language);
@@ -80,8 +81,13 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_phoetic_kanji', $employee->phoetic_kanji);
             $request->session()->put('employee_hourly_wage', $employee->hourly_wage);
             $request->session()->put('employee_status_residence', $employee->status_residence);
+            return redirect()->intended($this->redirectPath());
+        } else {
+            return redirect('/employee/login')->withInput($request->only($request->psi_number, 'remember'))
+                ->withErrors([
+                $request->psi_number => 'error'
+            ]);
         }
-        return redirect()->intended($this->redirectPath());
     }
 
     private function get_psi_number($cell_number)
