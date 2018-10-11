@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+
 use DB;
 
 class EmployeeLoginController extends Controller
@@ -65,6 +66,7 @@ class EmployeeLoginController extends Controller
             $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
 
+            $employee = Employee::where('psi_number', $request->psi_number)->first();
             $request->session()->put('employee_name', $employee->name);
             $request->session()->put('employee_psi_number', $employee->psi_number);
             // $request->session()->put('employee_language', $employee->language);
@@ -81,7 +83,6 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_phoetic_kanji', $employee->phoetic_kanji);
             $request->session()->put('employee_hourly_wage', $employee->hourly_wage);
             $request->session()->put('employee_status_residence', $employee->status_residence);
-
 
             return redirect()->intended($this->redirectPath());
         } else {
