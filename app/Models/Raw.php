@@ -122,6 +122,27 @@ WHERE
         return $thirdCompanies;
     }
 
+    public static function getWorkedHours($user, $start, $end )
+    {
+        $sql ="SELECT
+                  SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000 AS totalWorked
+              FROM
+                  psi_dessert_entry pde, 
+                  company_time_schedules cts, 
+                  company_time_tables ctt, 
+                  shift_master_datas smd
+              WHERE
+                  pde.staff_no = $user 
+                  AND cts.id = pde.cts_id 
+                  AND cts.companyTT_id = ctt.id
+                  AND smd.company_id = ctt.company_id 
+                  AND cts.time = smd.start_time 
+                  AND cts.date BETWEEN $start AND $end";
+
+        $hour = DB::select("$sql");
+        return $hour;
+    }
+
     public static function getSkillsDetails()
     {
         $sql = "SELECT skill_id, (select skill_name from psi_skill_master p where p.id =skill_id) name, COUNT(*) as count FROM `employee_skills` group by skill_id";
@@ -341,21 +362,21 @@ WHERE
         die();
     }
 
-    public static function getCompaniesForShiftShow($id)
+    public static function getCompaniesForShiftShow($session)
     {
-        $sql = "SELECT c.name, c.id, ctt.id as companyTT_id FROM companies c,company_time_tables ctt WHERE c.id=ctt.company_id and ctt.schedule_session_id = $id";
+        $sql = "SELECT c.name, c.id, ctt.id as companyTT_id FROM companies c,company_time_tables ctt WHERE ctt.schedule_session_id = '$session' AND c.id=ctt.company_id";
         return DB::select($sql);
     }
 
     public static function getDatesForShiftShow($id)
     {
-        $sql = "SELECT DISTINCT cts.date FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = $id AND cts.companyTT_id = ctt.id";
+        $sql = "SELECT DISTINCT cts.date FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = '$id' AND cts.companyTT_id = ctt.id";
         return DB::select($sql);
     }
 
     public static function getTimesForShiftShow($id)
     {
-        $sql = "SELECT DISTINCT cts.time FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = $id AND cts.companyTT_id = ctt.id";
+        $sql = "SELECT DISTINCT cts.time FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = '$id' AND cts.companyTT_id = ctt.id";
         return DB::select($sql);
     }
 

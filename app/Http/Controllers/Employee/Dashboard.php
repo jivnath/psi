@@ -173,4 +173,23 @@ class Dashboard extends Controller
 //            your awesome code should be here
         }
     }
+
+    public static function getWeekRange()
+    {
+        $psi_number = \Session::get('employee_psi_number');
+        $start_date = \Session::get('employee_hire_date');
+        $day = date('l', strtotime($start_date));
+//        dd($day);
+
+        $selected_date = strtotime("2018-10-07");
+
+        $first_date = str_replace('-', '', date('Y-m-d', strtotime('previous '.$day, $selected_date)));
+//        dd($first_date);
+
+        $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date. ' + 6 days')));
+
+        $totalHours = Raw::getWorkedHours($psi_number, $first_date, $last_date);
+
+        return $totalHours;
+    }
 }
