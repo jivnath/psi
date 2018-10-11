@@ -61,7 +61,7 @@ class PsiPermissionController extends Controller
         $permissions = PermissionModel::orderBy('prefix', 'perm_name')->get();
         foreach ($permissions as $row) {
             $permission_relation[$row->prefix][] = $row;
-//            dd($permission_relation);
+        //    dd($permission_relation);
         }
         
         $user = User::all();

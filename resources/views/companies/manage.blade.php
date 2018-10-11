@@ -549,7 +549,7 @@
 
                     var newSub = '<option value="'+data.id +'">'+ data.name +'</option>';
                     $('#subsectionDropdown').append(newSub);
-                    console.log(data);
+                    
 
                     $("#alert").show()
                     $("#message").text('Subsection Added!');
