@@ -19,6 +19,43 @@
         $employee_phoetic_kanji = \Session::get('employee_phoetic_kanji');
         $employee_hourly_wage = \Session::get('employee_hourly_wage');
         $employee_status_residence = \Session::get('employee_status_residence');
+
+        $employee_base = \Session::get('employee_base');
+        $employee_for_work = \Session::get('employee_for_work');
+        $employee_opt_management = \Session::get('employee_opt_management');
+        $employee_contract_collection = \Session::get('employee_contract_collection');
+        $employee_res_confirmation = \Session::get('employee_res_confirmation');
+        $employee_sex = \Session::get('employee_sex');
+        $employee_postal_code = \Session::get('employee_postal_code');
+        $employee_business_content = \Session::get('employee_business_content');
+        $employee_dispatch_destination = \Session::get('employee_dispatch_destination');
+        $employee_name_of_facility= \Session::get('employee_name_of_facility');
+        $employee_path = \Session::get('employee_path');
+        $employee_one_way_rate= \Session::get('employee_one_way_rate');
+        $employee_pass_price = \Session::get('employee_pass_price');
+        $employee_hourly_employee = \Session::get('employee_hourly_employee');
+        $employee_dependent_exemption = \Session::get('employee_dependent_exemption');
+        $employee_notes = \Session::get('employee_notes');
+
+        $employee_account = \Session::get('employee_account');
+        $employee_input = \Session::get('employee_input');
+        $employee_operating_status= \Session::get('employee_operating_status');
+        $employee_office = \Session::get('employee_office');
+        $employee_old_double_registration = \Session::get('employee_old_double_registration');
+        $employee_lane_employee_no = \Session::get('employee_lane_employee_no');
+        $employee_phonetic = \Session::get('employee_phonetic');
+        $employee_viber_install = \Session::get('employee_viber_install');
+        $employee_email = \Session::get('employee_email');
+        $employee_school_information = \Session::get('employee_school_information');
+        $employee_place = \Session::get('employee_place');
+        $employee_financial_institution = \Session::get('employee_financial_institution');
+        $employee_branch_name = \Session::get('employee_branch_name');
+        $employee_account_number = \Session::get('employee_account_number');
+        $employee_expiration_date = \Session::get('employee_expiration_date');
+        $employee_account_registration = \Session::get('employee_account_registration');
+
+
+
     @endphp
 
     <div class="row">
@@ -155,6 +192,93 @@
                                     <td>Register Officer</td>
                                     <td>{{$employee_reg_officer}}</td>
                                 </tr>
+                                <tr>
+                                    <td>Hire Date</td>
+                                    <td>{{$employee_hire_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Country Citizenship</td>
+                                    <td>{{$employee_country_citizenship}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Residence Card Expiry Date</td>
+                                    <td>{{$employee_residence_card_exp_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hourly Wage</td>
+                                    <td>{{$employee_hourly_wage}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Residence Status</td>
+                                    <td>{{ $employee_status_residence}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Base</td>
+                                    <td>{{ $employee_base}}</td>
+                                </tr>
+                                <tr>
+                                    <td>For Work</td>
+                                    <td>{{  $employee_for_work}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Optional Management</td>
+                                    <td>{{  $employee_opt_management}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Contract Collection</td>
+                                    <td>{{ $employee_contract_collection}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Residence Confirmation</td>
+                                    <td>{{ $employee_res_confirmation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sex</td>
+                                    <td>{{ $employee_sex}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Postal Code</td>
+                                    <td>{{ $employee_postal_code}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Business Content</td>
+                                    <td>{{ $employee_business_content}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Dispatch Destination</td>
+                                    <td>{{ $employee_dispatch_destination}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Name of facility</td>
+                                    <td>{{ $employee_name_of_facility}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Path</td>
+                                    <td>{{ $employee_path}}</td>
+                                </tr>
+                                <tr>
+                                    <td>One Way Rate</td>
+                                    <td>{{ $employee_one_way_rate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pass Price</td>
+                                    <td>{{ $employee_pass_price}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hourly Employee</td>
+                                    <td>{{ $employee_hourly_employee}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dependent Exemption</td>
+                                    <td>{{ $employee_dependent_exemption}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Notes</td>
+                                    <td>{{ $employee_notes}}</td>
+                                </tr>
+
                             </table>
                         </div>
                     </div>
@@ -162,7 +286,8 @@
                 </div>
                 <!-- /.tab-content -->
             </div>
-            <!-- /.nav-tabs-custom -->
+            <!-- /.nav-tabs-cust
+            om -->
         </div>
         {{--<div class="col-md-3 box box-info">--}}
             {{--<label for="request">Requests</label><br>--}}
