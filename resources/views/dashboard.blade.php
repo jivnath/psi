@@ -11,41 +11,6 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua"><i class="ion ion-checkmark"></i></span>
 
-<<<<<<< HEAD
-            <div class="info-box-content">
-              <span class="info-box-text">Confirmation</span>
-              <span class="info-box-number">80%</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="ion ion-close-circled"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Not Ok</span>
-              <span class="info-box-number">20%</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-        <!-- fix for small devices only -->
-        <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="ion ion-volume-mute"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Viber Alert</span>
-              <span class="info-box-number">{{isset($dessert_report['No response'])??$dessert_report['No response']}}</span>
-=======
                     <div class="info-box-content">
                         <span class="info-box-text">Confirmation</span>
                         <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}} %</span>
@@ -53,7 +18,6 @@
                     <!-- /.info-box-content -->
                 </div>
                 <!-- /.info-box -->
->>>>>>> 7dc775df63cf4a739b6d800348b971768f47d953
             </div>
             <!-- /.col -->
             <!-- /.col -->

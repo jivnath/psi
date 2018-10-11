@@ -81,6 +81,8 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_phoetic_kanji', $employee->phoetic_kanji);
             $request->session()->put('employee_hourly_wage', $employee->hourly_wage);
             $request->session()->put('employee_status_residence', $employee->status_residence);
+
+
             return redirect()->intended($this->redirectPath());
         } else {
             return redirect('/employee/login')->withInput($request->only($request->psi_number, 'remember'))
