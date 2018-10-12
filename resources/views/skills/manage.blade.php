@@ -127,6 +127,17 @@
                     $("#add").removeClass('rename');
                     $("#add").text('Add');
                     $("#skill").val('');
+                    
+                    $("#alert").show()
+                        $("#message").text('Skill Deleted Successfully');
+                        $(function(){
+                        $('html, body').animate({
+                        scrollTop: $("#alert").offset().top
+                        }, 500);
+                        setTimeout(function() {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
                    
 
                     // console.log(text);
@@ -177,6 +188,16 @@
                     $("#add").text('Add');
                     $('#skill').val('');
                     alert(skill);
+                    $("#alert").show()
+                    $("#message").text('Renamed Successfully');
+                    $(function(){
+                        $('html, body').animate({
+                     scrollTop: $("#alert").offset().top
+                    }, 500);
+                        setTimeout(function() {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
                     
                 }
             });
