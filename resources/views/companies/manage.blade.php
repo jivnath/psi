@@ -3,7 +3,7 @@
     <section class="content">
         <div id="alert" style="display: none">
             <div class="alert alert-success" role="alert">
-                <strong>Success:</strong><span id="message"></span>
+                <strong>Success: </strong><span id="message"></span>
             </div>
         </div>
         <div class="row">
@@ -102,7 +102,7 @@
                                             </div>
                                             <br>
 
-                                            <input type="submit" value="Submit" class="btn btn-success">
+                                            <input type="submit" id="toSubmit" value="Submit" class="btn btn-success">
                                         </form>
                                     </div>
                                 </div>
@@ -405,6 +405,16 @@
                         'subName': subName
                     },
                     success: function (data) {
+                        $("#alert").show()
+                    $("#message").text('Updated!');
+                    $(function(){
+                        $('html, body').animate({
+                     scrollTop: $("#alert").offset().top
+                    }, 500);
+                        setTimeout(function() {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
                     }
                 });
             }
@@ -502,7 +512,7 @@
                 url: "{{route('addmoreSection')}}",
                 dataType:'json',
                 async: true,
-                success: function () {
+                success: function (data) {
                     $(this).hide();
                     $('#addSubsection').show();
                     $('#addSection').show();
@@ -517,6 +527,17 @@
 
                     var newSection = '<option value="'+data.id+'">'+data.name +'</option>'
                     $('#sectionDropdown').append(newSection);
+
+                    $("#alert").show()
+                    $("#message").text('Section Added!');
+                    $(function(){
+                        $('html, body').animate({
+                     scrollTop: $("#alert").offset().top
+                    }, 500);
+                        setTimeout(function() {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
                 }
             });
         });
@@ -548,12 +569,14 @@
                     $('#cancelSubsection').hide();
 
                     var newSub = '<option value="'+data.id +'">'+ data.name +'</option>';
-                    $('#subsectionDropdown').append(newSub);
-                    
+                    $('#subsectionDropdown').append(newSub);                  
 
                     $("#alert").show()
                     $("#message").text('Subsection Added!');
                     $(function(){
+                        $('html, body').animate({
+                     scrollTop: $("#alert").offset().top
+                    }, 500);
                         setTimeout(function() {
                             $("#alert").hide(500);
                         }, 4000);
@@ -561,6 +584,7 @@
                 }
             });
         });
+        
 
     </script>
 @endpush

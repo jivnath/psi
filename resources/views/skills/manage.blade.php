@@ -1,68 +1,72 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('content')
-    <div class="row">
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header"><h3>Skills Master</h3></div>
-                <div class="box-body">
-                    <div class="form-group" id="box">
-                        <label for="skill"><h5><b>Skills</b></h5></label>
-                        <input type="text" class="form-control input-shorter" placeholder="Enter Skill" id="skill"
-                               required>
-                        <span id="add" style="margin-top: 10px" class="btn btn-success add">Add</span>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-md-6">
+        <div id="alert" style="display: none">
+            <div class="alert alert-success" role="alert">
+                <strong>Success:</strong><span id="message"></span>
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="box box-info">
-                <div class="box-header"><h5><b>All Skills</b></h5></div>
-                <div class="box-body">
-                    @if(count($skills)>0)
-                        <div id="allSkills">
-                            <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th> Skills</th>
-                                    <th> No. of Employee</th>
-                                    <th> Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($skills as $skill)
-                                    <tr id="skill{{$skill->skill_id}}">
-                                        <td id="skillname{{$skill->skill_id}}">{{$skill->name}}</td>
-                                        <td>{{$skill->count}}</td>
-                                        <td><span id="remove" class="btn btn-link"
-                                                  name="{{$skill->skill_id}}">Delete</span>
-                                            <span id="rename" data-name="{{$skill->name}}" class="btn btn-link"
-                                                  name="{{$skill->skill_id}}">Rename</span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <p style="display:none;" id="noSkills">No Skills Available</p>
-                    @else
-                        <div id="skillDiv" style="margin-top:25px;display: none">
-                            <h5><b>All Skills</b></h5>
-                            <div id="allSkills">
-                            </div>
-                        </div>
-                        <p id="noSkills">No Skills Available</p>
-                    @endif
+        <div class="box">
+            <div class="box-header">
+                <h3>Skills Master</h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group" id="box">
+                    <label for="skill"><h5><b>Skills</b></h5></label>
+                    <input type="text" class="form-control input-shorter" placeholder="Enter Skill" id="skill" required>
+                    <span id="add" style="margin-top: 10px" class="btn btn-success add">Add</span>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="col-md-6">
+        <div class="box box-info">
+            <div class="box-header">
+                <h5><b>All Skills</b></h5>
+            </div>
+            <div class="box-body">
+                @if(count($skills)>0)
+                <div id="allSkills">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th> Skills</th>
+                                <th> No. of Employee</th>
+                                <th> Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($skills as $skill)
+                            <tr id="skill{{$skill->skill_id}}">
+                                <td id="skillname{{$skill->skill_id}}">{{$skill->name}}</td>
+                                <td>{{$skill->count}}</td>
+                                <td><span id="remove" class="btn btn-link" name="{{$skill->skill_id}}">Delete</span>
+                                    <span id="rename" data-name="{{$skill->name}}" class="btn btn-link" name="{{$skill->skill_id}}">Rename</span>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <p style="display:none;" id="noSkills">No Skills Available</p>
+                @else
+                <div id="skillDiv" style="margin-top:25px;display: none">
+                    <h5><b>All Skills</b></h5>
+                    <div id="allSkills">
+                    </div>
+                </div>
+                <p id="noSkills">No Skills Available</p>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
-
-@push('scripts')
-    <script>
-        $.ajaxSetup({
+ @push('scripts')
+<script>
+    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
@@ -78,7 +82,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data == 0) {
-                        alert('Skill ' + skill + ' already exists!!!');
+                        alert('Skill ' + skill + ' already exists!!!');                      
                     }
                     else {
                         $("#noSkills").hide();
@@ -91,6 +95,17 @@
                             '</tr>';
                         $("table tbody").append(newRow);
                         $("#skill").val('');
+
+                         $("#alert").show()
+                        $("#message").text('Skill Added!');
+                        $(function(){
+                        $('html, body').animate({
+                        scrollTop: $("#alert").offset().top
+                        }, 500);
+                        setTimeout(function() {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
                     }
                 }
             });
@@ -112,6 +127,7 @@
                     $("#add").removeClass('rename');
                     $("#add").text('Add');
                     $("#skill").val('');
+                   
 
                     // console.log(text);
                     // if(text=='')
@@ -161,8 +177,10 @@
                     $("#add").text('Add');
                     $('#skill').val('');
                     alert(skill);
+                    
                 }
             });
         });
-    </script>
+</script>
+
 @endpush
