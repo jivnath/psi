@@ -191,3 +191,7 @@ Route::group(['middleware' => ['auth']], function () {
 //    });
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+
+Route::get('/hierrchy', function(){
+    return view('hierrchy');
+});

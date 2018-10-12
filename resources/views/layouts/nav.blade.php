@@ -353,7 +353,7 @@
                         $('.dropdown-submenu .show').removeClass("show");
                     });
 
-                    return false;
+                   return false;
                 });
             })(jQuery)
 
