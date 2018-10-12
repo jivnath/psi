@@ -23,9 +23,6 @@
 
     <div class="row">
         <div class="col-md-3">
-            @php
-                $date = App\Http\Controllers\Employee\Dashboard::getWeekRange();
-            @endphp
 
             <!-- Profile Image -->
             <div class="box box-primary">

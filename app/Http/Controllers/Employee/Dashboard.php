@@ -74,7 +74,6 @@ class Dashboard extends Controller
 
         $cts_id = $request->get('shift');
         $user = \Session::get('username');
-//        dd($shift);
 
         $total_worked = Raw::dessert_calculation_method($cts_id, $user);
 //        dd($total_worked);
@@ -96,8 +95,6 @@ class Dashboard extends Controller
                 'cts_id' => $cts_id
             ]);
             if ($employee->exists) {
-//            Session::flash('error', 'You are already on the list');
-//            return redirect()->route('employee.dashboard');
             } else {
                 $employee->staff_no = $user;
                 $employee->cts_id = $cts_id;
@@ -105,9 +102,6 @@ class Dashboard extends Controller
 
                 $data['staff_no'] = $user;
                 $data['cts_id'] = $cts_id;
-//            Session::flash('success', 'You are selected for the task');
-//            return redirect()->route('employee.dashboard');
-
             }
             echo json_encode($employee);
         }
@@ -119,7 +113,6 @@ class Dashboard extends Controller
     {
         $id = $request->get('company');
         $selected_date = $request->get('date');
-//        dd($selected_date);
 
         $company = Company::find($id);
 
@@ -131,16 +124,10 @@ class Dashboard extends Controller
         else
             $first_date = str_replace('-', '', date('Y-m-d', strtotime('previous ' . $day, strtotime($selected_date))));
 
-//        dd($day);
-//        dd($first_date);
         $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
         $totalHours = Raw::getWorkedHours($psi_number, $first_date, $last_date);
-//        $hour = preg_split('.', $totalHours[0]->totalWorked);
-//        dd($hour);
-//        dd($totalHours[0]->totalWorked);
         $data['name'] = $company->name;
         $data['hours'] = 28 - $totalHours[0]->totalWorked;
-//        dd($data['hours']);
         echo json_encode($data);
     }
 
@@ -163,30 +150,25 @@ class Dashboard extends Controller
         echo json_encode($data);
     }
 
-    public static function getWorkedHours()
-    {
-        $psi = \Session::get('username');
-        $dessert_id = 808;
-        $total_worked = Raw::dessert_calculation_method($dessert_id, $psi);
-        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
-        $total_used = DessertSheet::where(['cts_id' => $dessert_id])->whereNull('deleted_at')->count();
-        if ($total_worked['total_worked'] > \Config::get('app.job_limit')) {
-            $data = [
-                'total_worked' => $total_worked['total_worked']
-            ];
-        } elseif ($total_needed <= $total_used) {
-            $data = [
-                'total_worked' => $total_worked['total_worked'],
-                'total_needed' => $total_needed,
-                'total_used' => $total_used
-            ];
-        } else {
-//            your awesome code should be here
-        }
-    }
-
-    public static function getWeekRange()
-    {
-
-    }
+//    public static function getWorkedHours()
+//    {
+//        $psi = \Session::get('username');
+//        $dessert_id = 808;
+//        $total_worked = Raw::dessert_calculation_method($dessert_id, $psi);
+//        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
+//        $total_used = DessertSheet::where(['cts_id' => $dessert_id])->whereNull('deleted_at')->count();
+//        if ($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+//            $data = [
+//                'total_worked' => $total_worked['total_worked']
+//            ];
+//        } elseif ($total_needed <= $total_used) {
+//            $data = [
+//                'total_worked' => $total_worked['total_worked'],
+//                'total_needed' => $total_needed,
+//                'total_used' => $total_used
+//            ];
+//        } else {
+////            your awesome code should be here
+//        }
+//    }
 }
