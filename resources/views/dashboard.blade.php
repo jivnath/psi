@@ -101,8 +101,8 @@
                         <table class="table table-striped table-bordered" id='tn_table'>
                             <thead>
                             <tr>
-                                <th>Company</th>
-                                <th>Sub-company</th>
+                            	<th>Section</th>
+                                <th>Sub-Section</th>
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th>Total</th>
@@ -165,10 +165,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Viber Alert Summery</h3>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                      <h3 class="box-title">Viber Alert Summary</h3>
                     </div>
                     <div class="box-body">
                         <table class="table" id='alert_viber'>

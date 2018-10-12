@@ -5,7 +5,7 @@
             $employee_name = \Session::get('employee_cell_no');
 		    $employee_psi_number = \Session::get('user_psi_number');
         @endphp
-    {{--{{dd(session()->all())}}--}}
+        {{--{{dd(session()->all())}}--}}
 
         <nav class="navbar navbar-expand-md navbar-light"
              style="background: #fff">
@@ -14,7 +14,7 @@
             <div class="container" style="padding: 5px 20px 20px">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{route('employee.dashboard')}}"> <img alt="PSI-S"
-                                                           src="/images/logo_small.png">
+                                                                                         src="/images/logo_small.png">
 
                     </a>
                 </div>
@@ -40,23 +40,16 @@
                                                              aria-expanded="false"> <i class="fas fa-home"></i>
                                     Settings <span class="caret"></span>
                                 </a>
+
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                    <li class="dropdown"><a class="dropdown-toggle dropdown-item"
-                                                            href="#" id="navbarDropdown" role="button"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">Test</a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <li><a class="dropdown-item"
-                                                   href="{{ url('/employee/profile') }}">Profile</a></li>
-                                            <li><a class="dropdown-item"
-                                                   href="{{ route('employee.logout') }}">Logout</a></li>
-
-                                        </ul>
-                                    </li>
-
+                                    <li><a class="dropdown-item"
+                                           href="{{ url('/employee/profile') }}">Profile</a></li>
+                                    <li><a class="dropdown-item"
+                                           href="{{ route('employee.logout') }}">Logout</a></li>
 
                                 </ul>
+                            </li>
+
                             </li>
 
                         </ul>
@@ -353,7 +346,7 @@
                         $('.dropdown-submenu .show').removeClass("show");
                     });
 
-                    return false;
+                   return false;
                 });
             })(jQuery)
 
