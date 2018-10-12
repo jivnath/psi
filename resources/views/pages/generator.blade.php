@@ -8,6 +8,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Company Shift</h3>
                     </div>
+                   
                     {!! Form::open(array('route' => 'generator.store','class'=>'form-horizontal')) !!}
                     <div class="box-body row">
                         <div class="col-md-4 form-group" style="text-align: right;">
@@ -303,6 +304,7 @@
                         var html = '<li>' + shifts[i].start_time + ' - ' + shifts[i].end_time + '</li>';
                         $("#" + companyId + "allShifts").append(html);
                     }
+                  
                 }
             });
         });
