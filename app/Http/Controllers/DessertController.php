@@ -19,9 +19,9 @@ class DessertController extends Controller
 
     public function dessert()
     {
-        $allcompanies = CompanyTimeTable::all('company_id');
+        $allCompanies = CompanyTimeTable::all('company_id');
         $companies=[];
-            foreach($allcompanies as $comp)
+            foreach($allCompanies as $comp)
             {
                 $company = Company::find($comp->company_id);
                 array_push($companies, $company);

@@ -62,8 +62,8 @@ class EmployeeLoginController extends Controller
         ])) {
             $employee = $this->get_psi_number(Auth::guard('employee')->user()->psi_number);
 //            $psi_number = $employee->psi_number;
-            $request->session()->put('username', $employee);
-            $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
+            $request->session()->put('username', $request->psi_number);
+//            $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
 
             $employee = Employee::where('psi_number', $request->psi_number)->first();

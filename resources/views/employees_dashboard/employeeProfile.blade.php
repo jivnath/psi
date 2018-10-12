@@ -60,6 +60,9 @@
 
     <div class="row">
         <div class="col-md-3">
+            @php
+                $date = App\Http\Controllers\Employee\Dashboard::getWeekRange();
+            @endphp
 
             <!-- Profile Image -->
             <div class="box box-primary">
@@ -111,16 +114,16 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
                     {{--<li><a href="#activity" data-toggle="tab">Activity</a></li>--}}
-                    <li><a href="#settings" data-toggle="tab">Requests</a></li>
+                    <li><a href="#requests" data-toggle="tab">Requests</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
                         <div class="post clearfix">
                         </div>
                     </div>
-                    <div class="tab-pane" id="settings">
+                    <div class="tab-pane" id="requests">
                         <form action="{{url('')}}" method="POST" class="form-horizontal">
-                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="_method" value="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
@@ -289,14 +292,8 @@
             <!-- /.nav-tabs-cust
             om -->
         </div>
-        {{--<div class="col-md-3 box box-info">--}}
-            {{--<label for="request">Requests</label><br>--}}
-            {{--<a href="#" >Request for contact no. change</a><br>--}}
-            {{--<a href="#" >Request for address change</a><br>--}}
-            {{--<a href="#" >Request for birthday change</a><br>--}}
-            {{--<a href="#" >Request for work location change</a><br>--}}
-            {{--<a href="#" >Request for residence card no. change</a><br>--}}
-        {{--</div>--}}
+        <div class="col-md-3 box box-info">
+            <label for="request">Activity</label>
         <!-- /.col -->
     </div>
     <!-- /.row -->
