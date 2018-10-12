@@ -129,7 +129,7 @@ class CompanyController extends Controller
     {
         return [
             'name' => 'bail|unique:companies|required|max:191',
-            'contact_num' => 'required',
+            'contact_num' => 'required|numeric',
             'address' => 'required'
         ];
     }

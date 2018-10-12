@@ -37,6 +37,7 @@ Route::group(['middleware'=> ['employee']], function(){
     });
 });
 Route::group(['middleware' => ['auth']], function () {
+ //   Route::group(['middleware'=>['check.user']], function(){
 //    Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', ['as' => 'employees', 'uses' => 'EmployeeController@index']);
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         });
+    
         Route::prefix('report')->group(function(){
             Route::get('/employee_report', ['as' => 'employee.detail.report', 'uses' => 'EmployeeController@FetchEmployeeDetails']);
         });
@@ -105,8 +107,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
 
             Route::post('/role/update-{role_id}', ['as'=>'storePermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
-            Route::match(['get', 'post'],'/user/update', ['as' => 'update.user', 'uses' => 'PsiPermissionController@updateUser']);
-            Route::get('/user/permission', ['as'=>'getUserPermission', 'uses'=>'PsiPermissionController@getUserPermission']);
+            Route::get('/user/update', ['as' => 'update.user', 'uses' => 'PsiPermissionController@updateUser']);
+            Route::get('/getUserPermission', ['as'=>'getUserPermission', 'uses'=>'PsiPermissionController@getUserPermission']);
             Route::post('/user/permission', ['as'=>'storePermissionToUser', 'uses'=>'PsiPermissionController@storePermissionToUser']);
 
         });
@@ -189,9 +191,13 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/alert/setting', ['as' => 'storeSetting', 'uses' => 'ViberAlertController@storeSetting']);
         });
 //    });
+    //});
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+
 
 Route::get('/hierrchy', function(){
     return view('hierrchy');
 });
+Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@display']);
+

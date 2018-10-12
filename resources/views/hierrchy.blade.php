@@ -1,71 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE HTML>
+<html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MenuSetting</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--jquery-->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <!-- bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-    <!-- google font -->
-    <link href="https://fonts.googleapis.com/css?family=Concert+One|Lato:300,400,700" rel="stylesheet">
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
-          crossorigin="anonymous">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Interface</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dropdown-menu a.test').on("click", function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            });
+        });
+        (function ($) {
+            $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+                if (!$(this).next().hasClass('show')) {
+                    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                }
+                var $subMenu = $(this).next(".dropdown-menu");
+                $subMenu.toggleClass('show');
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+                $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                    $('.dropdown-submenu .show').removeClass("show");
+                });
 
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+                return false;
+            });
+        })(jQuery)
 
+    </script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="{{asset('css/animate.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-dropdownhover.css')}}">
+    <script src="{{asset('js/bootstrap-dropdownhover.js')}}"></script>
+    <link href="{{ asset('css/AdminLTE.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
+    {{--<script src="https://jsdelivr.com/package/npm/sweetalert2"></script>--}}
+    <script src="{{asset('js/sweetalert.min.js')}}"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-
 <body>
-<div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                        aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
+<nav class="navbar navbar-expand-md navbar-light" style="background: #fff">
+    <div style="background: #21469b">
+    <div class="container">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <nav class="navbar navbar-expand-md navbar-light" >
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a style="font-size:16px;" id="master_data" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu Setting</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                            <li class="dropdown"><a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Information</a>
+                                <ul class="dropdown-menu"  aria-labelledby="navbarDropdown" >
+                                    <li><a class="dropdown-item" href="">Login</a></li>
+                                </ul>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            </li>
+                        </ul>
 
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="dropdown"> <a href=""><b style="color:white;font-size:16px;">Menu Setting</b></a></li>
-                    <ul class="dropdown-menu">
-                        <li> <a href="">User Information</a></li>
-                    </ul>
-
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
                     </li>
                 </ul>
-
-            </div>
-            <!-- /.navbar-collapse -->
+            </nav>
         </div>
-        <!-- /.container -->
-    </nav>
+    </div>
+    </div>
+</nav>>
 
-
-</div>
-
+<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-<html>
+</html>
