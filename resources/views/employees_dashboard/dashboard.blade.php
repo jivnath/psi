@@ -21,7 +21,7 @@
                 </select>
             </div>
         </div>
-
+        <div id="loadingDiv" style="display: none"><h5><b>Loading, Please wait...</b></h5></div>
         <div class="row" id="calendarDiv" style="display: none">
         {{--<div class="col-md-3">--}}
         {{--<div class="box box-solid">--}}
@@ -63,20 +63,22 @@
                     {{--@csrf--}}
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel"></h4>
+                        <p id="remaining" style="display: none" class="pull-right"></p>
                     </div>
                     <div class="modal-body">
 
                         <div class="form-group">
                             <label for="color" class="col-sm-2 control-label">Shift</label>
+                            <label id="message" style="display:none;" for="message" class="pull-right"></label>
                             <div class="col-sm-12">
-                                <select name="shifts" class="form-control" id="shifts">
+                                <select name="shifts" class="form-control" id="shifts" required>
 
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <span id="submit" class="btn btn-primary"> Apply </span>
+                        <button id="submit" class="btn btn-primary" disabled> Apply </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -141,7 +143,7 @@
                     $('#ModalAdd').modal('show');
                 },
                 eventRender: function (event, element) {
-                    element.bind('click', function () {
+                    element.bind('dblclick', function () {
                         if (event.old == 1) {
                             $('#allShifts').html('');
                             var start = moment(event.start).format('Y-MM-DD');
@@ -169,19 +171,25 @@
 
                 },
                 dayClick: function (date, allDay) {
+                    $("#submit").prop('disabled', true);
+                    $("#message").hide();
                     var company = $("#companies").val();
                     $('#ModalAdd').show();
                     $.ajax({
                         type: 'GET',
                         url: '{{route('getCompanyName')}}',
-                        data: {'company': company},
+                        data: {'company': company, 'date': moment(date).format('YYYY-MM-DD')},
                         async: true,
                         dataType: 'json',
                         success: function (data) {
                             // alert(data);
-                            $('#myModalLabel').html(data + '<h6>(' + moment(date).format('YYYY-MM-DD') + ')</h6>');
+                            $('#remaining').html('<b id="remainingHours" name="'+data["hours"]+'">Remaining Hours: ' + data["hours"] + '</b>');
+                            $('#remaining').show();
+                            $('#myModalLabel').html(data['name'] + '<h6>(' + moment(date).format('YYYY-MM-DD') + ')</h6>');
+
                         }
                     });
+
                     $('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
                     $('#shifts').html('');
                     var select = '<option value="0">--Choose Shift--</option>';
@@ -190,7 +198,7 @@
 
                         if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD')) {
                             if (event.selected == 'no') {
-                                $('#shifts').append('<option value="' + event.id + '">' + event.title + '</option>')
+                                $('#shifts').append('<option data-Hours="' + event.hours + '" value="' + event.id + '">' + event.title + '</option>')
                             }
 
                         }
@@ -214,9 +222,12 @@
                     url: "{{route('getDataForCalendar')}}",
                     dataType: "json",
                     data: {'company': company},
-                    success: function (data) {
-
+                    beforeSend: function () {
                         $("#calendarDiv").show();
+                        $("#loadingDiv").show();
+                    },
+                    success: function (data) {
+                        $("#loadingDiv").hide();
                         let i;
                         $('#calendar').fullCalendar('removeEvents', function () {
                             return true;
@@ -233,10 +244,12 @@
                             }, 'stick');
                         }
                         for (i = 0; i < data['red'].length; i++) {
+                            console.log(data['red'][i].hours);
                             $('#calendar').fullCalendar('renderEvent', {
                                 title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
                                 id: data['red'][i].rel_id,
                                 start: data['red'][i].date,
+                                hours: data['red'][i].hours,
                                 allDay: true,
                                 selected: 'no',
                                 company: data['red'][i].company_name,
@@ -251,6 +264,7 @@
                                 title: data['green'][i].start_time + ' - ' + data['green'][i].end_time,
                                 id: data['green'][i].rel_id,
                                 start: data['green'][i].date,
+                                hours: data['green'][i].hours,
                                 allDay: true,
                                 selected: 'yes',
                                 company: data['green'][i].company_name,
@@ -268,7 +282,6 @@
 
         $('#submit').click(function () {
             var selectedShift = $('#shifts').val();
-            alert(selectedShift);
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -289,6 +302,29 @@
                     });
                 }
             });
+            return false;
+        });
+
+        $(document).on('change', '#shifts', function () {
+            var selected = $('#shifts').val();
+            var remaining = $("#remainingHours").attr('name');
+            if (selected != 0) {
+                var hours = remaining - $(this).find(':selected').attr('data-Hours');
+                if (hours >= 0) {
+                    $('#message').html('<b style="color:darkgreen">Remaining hours will be ' + hours + ' hrs.</b>');
+                    $("#submit").attr("disabled", false);
+                }
+                else {
+                    $('#message').html('<b style="color:red">Working time exceeded!</b>')
+                    $("#submit").attr("disabled", true);
+                }
+                $("#message").show();
+            }
+            else
+            {
+                $("#message").hide();
+                $("#submit").attr("disabled", true);
+            }
         });
     </script>
 

@@ -525,19 +525,29 @@ WHERE
             ) company_name,
             companytt_id time_table_id,
             cts.id AS rel_id,
-
+            
             date,
             time start_time,
             (
             	SELECT
-                	end_time
+                	smd.end_time
                 FROM
-                	shift_master_datas
+                	shift_master_datas smd
                 WHERE
                 	start_time = cts.time
                 	AND company_id = ctt.company_id
 
             ) end_time,
+            (
+            	SELECT
+                TIMEDIFF(smd.end_time, smd.start_time)
+                FROM
+                	shift_master_datas smd
+                WHERE
+                	start_time = cts.time
+                	AND company_id = ctt.company_id
+
+            ) hours,
 
             (help+normal) necessary,
             (

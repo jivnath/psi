@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Employee;
 
 use App\Models\CompanyTimeSchedule;
@@ -30,8 +31,7 @@ class Dashboard extends Controller
 
     public function getDataForCalendar(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $user = \Session::get('username');
             $company = $request->get('company');
             $data = Raw::totalNecessary($company);
@@ -39,26 +39,22 @@ class Dashboard extends Controller
             $events = [];
             $red = [];
             $green = [];
-            $date=[];
+            $date = [];
             $yesterday = date(strtotime("-1 days"));
             $oldDate = Raw::workedDate($user, $company);
-            foreach ($oldDate as $old)
-            {
-                if(date(strtotime($old->date)) <= $yesterday)
+            foreach ($oldDate as $old) {
+                if (date(strtotime($old->date)) <= $yesterday)
                     array_push($date, $old);
             }
 //            dd($data);
-            foreach ($data as $datum)
-            {
-                if($datum->occupied < $datum->necessary && date(strtotime($datum->date)) > $yesterday)
+            foreach ($data as $datum) {
+                if ($datum->occupied < $datum->necessary && date(strtotime($datum->date)) > $yesterday) //                dd($datum);
                 {
-                    $dessert = DessertSheet::where([['staff_no', '=', $user],['cts_id', '=', $datum->rel_id]])->first();
-                    if($dessert)
-                    {
-                            array_push($green, $datum);
-                    }
-                    else
-                    {
+                    $datum->hours = date('H', strtotime($datum->hours));
+                    $dessert = DessertSheet::where([['staff_no', '=', $user], ['cts_id', '=', $datum->rel_id]])->first();
+                    if ($dessert) {
+                        array_push($green, $datum);
+                    } else {
                         array_push($red, $datum);
                     }
 //                    array_push($events, $datum);
@@ -67,7 +63,7 @@ class Dashboard extends Controller
             $events['red'] = $red;
             $events['green'] = $green;
             $events['date'] = $date;
-//            dd($events);
+//            dd($events['red']);
             echo json_encode($events);
         }
     }
@@ -80,34 +76,29 @@ class Dashboard extends Controller
         $user = \Session::get('username');
 //        dd($shift);
 
-        $total_worked=Raw::dessert_calculation_method($cts_id,$user);
+        $total_worked = Raw::dessert_calculation_method($cts_id, $user);
 //        dd($total_worked);
         $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($cts_id)->total_needed;
-        $total_used=DessertSheet::where(['cts_id'=>$cts_id])->whereNull('deleted_at')->count();
-        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+        $total_used = DessertSheet::where(['cts_id' => $cts_id])->whereNull('deleted_at')->count();
+        if ($total_worked['total_worked'] > \Config::get('app.job_limit')) {
             $data = [
                 'total_worked' => $total_worked['total_worked']
             ];
-        }
-        elseif($total_needed <=$total_used){
+        } elseif ($total_needed <= $total_used) {
             $data = [
                 'total_worked' => $total_worked['total_worked'],
-                'total_needed'=>$total_needed,
-                'total_used'=>$total_used
+                'total_needed' => $total_needed,
+                'total_used' => $total_used
             ];
-        }
-        else{
+        } else {
             $employee = DessertSheet::firstOrNew([
                 'staff_no' => $user,
                 'cts_id' => $cts_id
             ]);
-            if($employee->exists)
-            {
+            if ($employee->exists) {
 //            Session::flash('error', 'You are already on the list');
 //            return redirect()->route('employee.dashboard');
-            }
-            else
-            {
+            } else {
                 $employee->staff_no = $user;
                 $employee->cts_id = $cts_id;
                 $employee->save();
@@ -127,9 +118,30 @@ class Dashboard extends Controller
     public function getCompanyName(Request $request)
     {
         $id = $request->get('company');
+        $selected_date = $request->get('date');
+//        dd($selected_date);
+
         $company = Company::find($id);
 
-        echo json_encode($company->name);
+        $psi_number = \Session::get('employee_psi_number');
+        $start_date = \Session::get('employee_hire_date');
+        $day = date('l', strtotime($start_date));
+        if ((date('l', strtotime($selected_date))) == $day)
+            $first_date = str_replace('-', '', date('Y-m-d', strtotime($selected_date)));
+        else
+            $first_date = str_replace('-', '', date('Y-m-d', strtotime('previous ' . $day, strtotime($selected_date))));
+
+//        dd($day);
+//        dd($first_date);
+        $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
+        $totalHours = Raw::getWorkedHours($psi_number, $first_date, $last_date);
+//        $hour = preg_split('.', $totalHours[0]->totalWorked);
+//        dd($hour);
+//        dd($totalHours[0]->totalWorked);
+        $data['name'] = $company->name;
+        $data['hours'] = 28 - $totalHours[0]->totalWorked;
+//        dd($data['hours']);
+        echo json_encode($data);
     }
 
     public function employeeProfile()
@@ -139,57 +151,42 @@ class Dashboard extends Controller
 
     public function getWorkedShift(Request $request)
     {
-        if($request->ajax())
+        if ($request->ajax())
             $user = \Session::get('username');
-            $companyId = $request->get('company');
-            $date = str_replace('-', '', $request->get('date'));
+        $companyId = $request->get('company');
+        $date = str_replace('-', '', $request->get('date'));
 
 
-            $data = Raw::getWorkedShift($user, $date, $companyId);
+        $data = Raw::getWorkedShift($user, $date, $companyId);
 
 //            dd($date);
-            echo json_encode($data);
+        echo json_encode($data);
     }
 
     public static function getWorkedHours()
     {
         $psi = \Session::get('username');
         $dessert_id = 808;
-        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
+        $total_worked = Raw::dessert_calculation_method($dessert_id, $psi);
         $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
-        $total_used=DessertSheet::where(['cts_id'=>$dessert_id])->whereNull('deleted_at')->count();
-        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+        $total_used = DessertSheet::where(['cts_id' => $dessert_id])->whereNull('deleted_at')->count();
+        if ($total_worked['total_worked'] > \Config::get('app.job_limit')) {
             $data = [
                 'total_worked' => $total_worked['total_worked']
             ];
-        } elseif($total_needed <=$total_used){
+        } elseif ($total_needed <= $total_used) {
             $data = [
                 'total_worked' => $total_worked['total_worked'],
-                'total_needed'=>$total_needed,
-                'total_used'=>$total_used
+                'total_needed' => $total_needed,
+                'total_used' => $total_used
             ];
-        }
-        else{
+        } else {
 //            your awesome code should be here
         }
     }
 
     public static function getWeekRange()
     {
-        $psi_number = \Session::get('employee_psi_number');
-        $start_date = \Session::get('employee_hire_date');
-        $day = date('l', strtotime($start_date));
-//        dd($day);
 
-        $selected_date = strtotime("2018-10-07");
-
-        $first_date = str_replace('-', '', date('Y-m-d', strtotime('previous '.$day, $selected_date)));
-//        dd($first_date);
-
-        $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date. ' + 6 days')));
-
-        $totalHours = Raw::getWorkedHours($psi_number, $first_date, $last_date);
-
-        return $totalHours;
     }
 }
