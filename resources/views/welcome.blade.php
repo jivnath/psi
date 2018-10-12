@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    PSI
+                    PSI-S
                 </div>
             </div>
         </div>

@@ -13,10 +13,10 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <span>PSIS No:</span>
+                            <span>PSI-S No:</span>
                         </div>
                         <div class="col-md-10" style="text-align: left">
-                            <input type="text" class="form-control" placeholder="Enter PSI number" id="psi_number" style="width:50%;">
+                            <input type="text" class="form-control" placeholder="Enter PSI-S number" id="psi_number" style="width:50%;">
                         </div>
                     </div>
                     <div id="errorId" class="row" style="margin-top:10px; margin-bottom: 10px;display: none">

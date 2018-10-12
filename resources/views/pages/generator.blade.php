@@ -8,14 +8,15 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Company Shift</h3>
                     </div>
+                   
                     {!! Form::open(array('route' => 'generator.store','class'=>'form-horizontal')) !!}
                     <div class="box-body row">
                         <div class="col-md-4 form-group" style="text-align: right;">
-                            <label for="company"> Company </label>
+                            <label for="company"> Section </label>
                         </div>
                         <div class="col-md-7 form-group" style="">
                             <select class="form-control" name="company" id="companies" style="float: left" required>
-                                <option value="">--Select Company--</option>
+                                <option value="">--Select Section--</option>
                                 @foreach ($companies as $company)
                                     <option name="{{$company->name}}"
                                             value="{{$company->id}}">{{ $company->name }}</option>
@@ -303,6 +304,7 @@
                         var html = '<li>' + shifts[i].start_time + ' - ' + shifts[i].end_time + '</li>';
                         $("#" + companyId + "allShifts").append(html);
                     }
+                  
                 }
             });
         });

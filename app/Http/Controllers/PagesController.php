@@ -77,13 +77,14 @@ class PagesController extends Controller
     public function generatorStore(Request $request)
     {
         $section = $request['section'];
+        $shift_schedule_id = uniqid();
         if (sizeof($section) > 0) {
             foreach ($section as $company)
             {
                 $shifts = ShiftMasterData::where('company_id', $company)->get();
 
                 $timeTable = new CompanyTimeTable();
-
+                $timeTable->schedule_session_id = $shift_schedule_id;
                 $timeTable->company_id = $company;
                 $timeTable->save();
 
@@ -120,7 +121,7 @@ class PagesController extends Controller
 
                 $id = $timeTable->id;
 
-                $startDate = $request->start_date;
+//                $startDate = $request->start_date;
                 $endDate = $request->end_date;
 
                 foreach ($shifts as $s) {
@@ -213,20 +214,26 @@ class PagesController extends Controller
     public function show($id)
     {
         $data=[];
-        $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
-            $query->where('master_id', $id);
-        })->groupBy('date')->get();
+//        $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+//            $query->where('master_id', $id);
+//        })->groupBy('date')->get();
 
-        $times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
-            $query->where('master_id', $id);
-        })->groupBy('time')->get();
-        $companies = CompanyTimeTable::whereHas('comp', function ($query) use ($id) {
-            $query->where('master_id', $id);
-        })->groupBy('company_id')->get();
+//        $times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+//            $query->where('master_id', $id);
+//        })->groupBy('time')->get();
+
+//        $companies = CompanyTimeTable::whereHas('comp', function ($query) use ($id) {
+//            $query->where('master_id', $id);
+//        })->groupBy('company_id')->get();
+//
+
+        $companies = Raw::getCompaniesForShiftShow($id);
         $types = collect([
             'normal',
             'help'
         ]);
+        $dates = Raw::getDatesForShiftShow($id);
+        $times = Raw::getTimesForShiftShow($id);
         /*please utilize this
         foreach ($times as $time) {
             foreach ($companies as $company) {

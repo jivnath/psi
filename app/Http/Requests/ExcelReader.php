@@ -86,6 +86,8 @@ class ExcelReader extends FormRequest
         return $this;
     }
 
+    protected $checkDuplicates = [];
+
     /**
      * Check if the  Employee data already exists
      *
@@ -95,7 +97,7 @@ class ExcelReader extends FormRequest
     public function checkDuplicateAndStore()
     {
         $checkDuplicates = [];
-//        $yes = [];
+        $yes = [];
         $no = [];
 //        dd($this->data);
         for($i = 1; $i <= count($this->data); $i++)
@@ -104,7 +106,7 @@ class ExcelReader extends FormRequest
                 'psi_number' => $this->data[$i]['psi_number']
             ]);
             if ($employee->exists) {
-                continue;
+                array_push($yes, $this->data[$i]);
             }
             else {
                 array_push($no, $this->data[$i]);
@@ -127,7 +129,7 @@ class ExcelReader extends FormRequest
 //            }
         }
 //        dd($no);
-//        $checkDuplicates['yes'] = $yes;
+        $checkDuplicates['yes'] = $yes;
         $checkDuplicates['no'] = $no;
 //        dd($checkDuplicates['no']);
         try {
@@ -138,6 +140,8 @@ class ExcelReader extends FormRequest
              print_r($e->getMessage());
             die;
         }
+        $this->checkDuplicates = $checkDuplicates;
+        return $this->checkDuplicates;
     }
 
     /**

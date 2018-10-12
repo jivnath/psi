@@ -17,6 +17,7 @@ class EmployeeSkillController extends Controller
 
     public function store(Request $request)
     {
+
         $update_data=[];
         $employeeSkills= $request->employeeSkills;
         $psi_num = $request->psi_num;
@@ -65,6 +66,15 @@ class EmployeeSkillController extends Controller
             if ($sk)
                 $sk->delete();
         }
+    }
+
+    protected function rules()
+    {
+        return [
+            'name' => 'bail|unique:companies|required|max:191',
+            'contact_num' => 'required',
+            'address' => 'required'
+        ];
     }
 
 

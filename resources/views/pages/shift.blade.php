@@ -4,7 +4,7 @@
 		<div class="col-md-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Company Shift <a href="{{ route('generator') }}"
+					<h3 class="box-title">Section Shift <a href="{{ route('generator') }}"
 						class="btn btn-link" style="margin-left: 10px"><small>Generate New</small></a></h3>
 				</div>
 				<div class="table-responsive">
@@ -13,7 +13,9 @@
 						<thead>
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">Section</th>
+								<th scope="col">Sub-section</th>
+								<th scope="col">From</th>
+								<th scope="col">To</th>
 								<th scope="col">Created At</th>
 								<th scope="col">Action</th>
 							</tr>
@@ -25,12 +27,12 @@
                 @if(count($results) > 0)
                     @foreach($results as $index => $shift)
                         <tr>
-								<th scope="row">{{$index + 1}}</th>
-								<td>{{ $shift->master_company_name }}</td>
-								<td>{{ Carbon\Carbon::parse( $shift->created_at)->format('d-m-Y
-									i:s A') }}</td>
-								<td><a
-									href="{{ route('shift.show',['id' => $shift->master_id]) }}">View</a></td>
+							<th scope="row">{{$index + 1}}</th>
+							<td>{{ $shift->section_name }}</td>
+							<td>{{ Carbon\Carbon::parse( $shift->schedule_from)->format('d-m-Y') }}</td>
+							<td>{{ Carbon\Carbon::parse( $shift->schedule_to)->format('d-m-Y') }}</td>
+							<td>{{ Carbon\Carbon::parse( $shift->created_at)->format('d-m-Y i:s A') }}</td>
+							<td> <a href="{{ route('shift.show',['id' => $shift->schedule_session_id]) }}">View</a></td>
 							</tr>
 							@endforeach @else
 							<tr>

@@ -122,6 +122,27 @@ WHERE
         return $thirdCompanies;
     }
 
+    public static function getWorkedHours($user, $start, $end )
+    {
+        $sql ="SELECT
+                  SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000 AS totalWorked
+              FROM
+                  psi_dessert_entry pde, 
+                  company_time_schedules cts, 
+                  company_time_tables ctt, 
+                  shift_master_datas smd
+              WHERE
+                  pde.staff_no = $user 
+                  AND cts.id = pde.cts_id 
+                  AND cts.companyTT_id = ctt.id
+                  AND smd.company_id = ctt.company_id 
+                  AND cts.time = smd.start_time 
+                  AND cts.date BETWEEN $start AND $end";
+
+        $hour = DB::select("$sql");
+        return $hour;
+    }
+
     public static function getSkillsDetails()
     {
         $sql = "SELECT skill_id, (select skill_name from psi_skill_master p where p.id =skill_id) name, COUNT(*) as count FROM `employee_skills` group by skill_id";
@@ -174,24 +195,66 @@ WHERE
     public static function getShiftView()
     {
         $sql = "SELECT
-                (
-                    SELECT
-                        name
-                    FROM
-                        companies
-                    WHERE
-                        companies.id = c.master_id
-                ) master_company_name,
-                master_id,
-                COUNT(master_id) total_subcompany,
-                ctt.created_at
-            FROM
-                companies c,
-                company_time_tables ctt
-            WHERE
-                c.id = ctt.company_id
-            GROUP BY
-                master_id";
+    t1.*,
+    t2.*,
+    (
+        SELECT
+            name
+        FROM
+            companies
+        WHERE
+            companies.id = master_main_id
+    ) section_name
+FROM
+    (
+        SELECT
+            ctt.id,
+            ctt.company_id,
+            c.name,
+            ctt.created_at,
+        	ctt.schedule_session_id,
+            c.master_id,
+            (
+                SELECT
+                    cc.master_id
+                FROM
+                    companies cc
+                WHERE
+                    cc.id = ctt.company_id
+            ) master_main_id,
+            (
+                SELECT
+                    p.id AS parent_id
+                FROM
+                    companies p
+                    LEFT JOIN companies c1 ON c1.master_id = p.id
+                    LEFT JOIN companies c2 ON c2.master_id = c1.id
+                    LEFT JOIN companies c3 ON c3.master_id = c2.id
+                WHERE
+                    p.master_id IS NULL
+                    AND ( c2.id = ctt.company_id )
+            ) master_main_id1
+        FROM
+            companies c,
+            company_time_tables ctt
+        WHERE
+            c.id = ctt.company_id
+    ) t1,
+    (
+        SELECT
+            companytt_id,
+            MIN(DATE) schedule_from,
+            MAX(DATE) schedule_to
+        FROM
+            company_time_schedules
+        GROUP BY
+            companytt_id
+    ) t2
+WHERE
+    t1.id = t2.companytt_id
+    AND t1.master_main_id1 IS NOT NULL
+    GROUP BY t1.schedule_session_id
+    ORDER BY t2.companytt_id DESC";
         return DB::select($sql);
     }
 
@@ -299,6 +362,24 @@ WHERE
         die();
     }
 
+    public static function getCompaniesForShiftShow($session)
+    {
+        $sql = "SELECT c.name, c.id, ctt.id as companyTT_id FROM companies c,company_time_tables ctt WHERE ctt.schedule_session_id = '$session' AND c.id=ctt.company_id";
+        return DB::select($sql);
+    }
+
+    public static function getDatesForShiftShow($id)
+    {
+        $sql = "SELECT DISTINCT cts.date FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = '$id' AND cts.companyTT_id = ctt.id";
+        return DB::select($sql);
+    }
+
+    public static function getTimesForShiftShow($id)
+    {
+        $sql = "SELECT DISTINCT cts.time FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = '$id' AND cts.companyTT_id = ctt.id";
+        return DB::select($sql);
+    }
+
     public static function getTotalNeccessory()
     {
         $sql = "SELECT
@@ -388,6 +469,48 @@ WHERE
         return DB::select($sql);
     }
 
+    public static function getWorkedShift($staff, $date, $company)
+    {
+        $sql = "SELECT
+                    pd.staff_no, 
+                    cts.date, 
+                    cts.time as start_time, 
+                    sm.end_time 
+                FROM 
+                    psi_dessert_entry pd, 
+                    shift_master_datas sm, 
+                    company_time_schedules cts
+                WHERE 
+                    cts.companyTT_id in (SELECT ctt.id from company_time_tables ctt WHERE ctt.company_id =72) 
+                    AND cts.date = $date
+                    AND pd.staff_no = $staff 
+                    AND pd.cts_id = cts.id 
+                    AND sm.company_id = $company 
+                    AND sm.start_time = cts.time";
+        $data = DB::select($sql);
+        return $data;
+    }
+
+    public static function workedDate($staff, $company)
+    {
+        $sql = "SELECT
+            DISTINCT date,
+            ctt.company_id
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt,
+            psi_dessert_entry pde
+        WHERE
+        	pde.cts_id = cts.id 
+        	AND	pde.staff_no = $staff 
+        	AND cts.companyTT_id = ctt.id
+            AND ctt.company_id = $company";
+
+        $data = DB::select($sql);
+        return $data;
+
+    }
+
     public static function totalNecessary($id)
     {
         $sql = "SELECT
@@ -402,19 +525,29 @@ WHERE
             ) company_name,
             companytt_id time_table_id,
             cts.id AS rel_id,
-
+            
             date,
             time start_time,
             (
             	SELECT
-                	end_time
+                	smd.end_time
                 FROM
-                	shift_master_datas
+                	shift_master_datas smd
                 WHERE
                 	start_time = cts.time
                 	AND company_id = ctt.company_id
 
             ) end_time,
+            (
+            	SELECT
+                TIMEDIFF(smd.end_time, smd.start_time)
+                FROM
+                	shift_master_datas smd
+                WHERE
+                	start_time = cts.time
+                	AND company_id = ctt.company_id
+
+            ) hours,
 
             (help+normal) necessary,
             (
