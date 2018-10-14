@@ -619,4 +619,14 @@ WHERE
             'total_worked' => $data->total_sec / 3600
         ];
     }
+        }
+    public static function get_user_info($sender_id){
+        
+        try{
+        $sql="SELECT e.* FROM employee_logins el,employees e where concat(0,el.psi_number)=replace(cell_no,'-','') and  viber_id='$sender_id'";
+        return collect(DB::select(DB::raw($sql)))->first();
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }
