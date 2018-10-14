@@ -157,7 +157,7 @@
                         setTimeout(function() {
                             $("#alert").hide(500);
                         }, 4000);
-                    });
+                        });
                     }
                 }  
            });  

@@ -70,7 +70,7 @@
             $.ajax({
                 type:"POST",
                 url:"{{route('group.rename')}}",
-                data:{id:id, name:name},
+                data:{'id':id, 'name':name},
                 async:true,
                 success:function(data){
                     $("#"+id+"td").text(name);
@@ -85,7 +85,7 @@
             $.ajax({
                 type:"POST",
                 url:"{{route('group.add')}}",
-                data:{name:name},
+                data:{'name':name},
                 dataType:'json',
                 async:true,
                 success:function(data){
