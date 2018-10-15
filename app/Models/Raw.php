@@ -145,7 +145,7 @@ WHERE
 
     public static function getSkillsDetails()
     {
-        $sql = "SELECT skill_id, (select skill_name from psi_skill_master p where p.id =skill_id) name, COUNT(*) as count FROM `employee_skills` group by skill_id";
+        $sql = "SELECT sk.id, sk.skill_name name, (SELECT COUNT(*) FROM employee_skills WHERE skill_id = sk.id) as count FROM psi_skill_master sk";
         $skills = DB::select("$sql");
 
         // dd($skills);
@@ -619,7 +619,7 @@ WHERE
             'total_worked' => $data->total_sec / 3600
         ];
     }
-        }
+
     public static function get_user_info($sender_id){
         
         try{

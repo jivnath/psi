@@ -68,7 +68,7 @@
 
                     <p class="text-muted text-center">{{$employee_name}}</p>
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
-                    
+
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -77,7 +77,7 @@
             <!-- About Me Box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                   <center> <h3 class="box-title">About Me</h3></center>
+                    <center><h3 class="box-title">About Me</h3></center>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -110,8 +110,8 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
-                    {{--<li><a href="#activity" data-toggle="tab">Activity</a></li>--}}
                     <li><a href="#requests" data-toggle="tab">Requests</a></li>
+                    <li><a href="#status" data-toggle="tab">Status</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
@@ -133,19 +133,19 @@
                                         <option value="1">Others</option>
                                     </select>
                                 </div>
-                                    <br />
-                                    <div class="form-group">
-                                        <label for="language" class="col-sm-3 control-label">Request Type</label>
-                                        <div class="col-sm-12">
+                                <br/>
+                                <div class="form-group">
+                                    <label for="language" class="col-sm-3 control-label">Request Type</label>
+                                    <div class="col-sm-12">
                                         <textarea cols="70" rows="10"></textarea>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </form>
                     </div>
@@ -283,6 +283,15 @@
                         </div>
                     </div>
                     <!-- /.tab-pane -->
+                    <div class="active tab-pane" id="status">
+                        <div class="post clearfix">
+                            <p>
+                                <label for="title">
+                                    <h5>Unavailable</h5>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.tab-content -->
             </div>
@@ -291,6 +300,7 @@
         </div>
         <div class="col-md-3 box box-info">
             <label for="request">Activity</label>
+        </div>
         <!-- /.col -->
     </div>
     <!-- /.row -->

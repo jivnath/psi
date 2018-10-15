@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
 Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
-Route::get('/primary/{id}', ['as' =>' selectPrimary', 'uses' => 'UserController@selectPrimary']);
+Route::get('/primary/{id}', ['as' => 'selectPrimary', 'uses' => 'UserController@selectPrimary']);
 Route::get('/select/primary', ['as' => 'primary', 'uses' => 'UserController@primary']);
 
 Route::get('employee/login', 'Auth\EmployeeLoginController@getLogin');
@@ -38,7 +38,7 @@ Route::group(['middleware'=> ['employee']], function(){
 });
 Route::group(['middleware' => ['auth']], function () {
  //   Route::group(['middleware'=>['check.user']], function(){
-//    Route::group(['middleware' => ['check.primary.company']], function(){
+    Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', ['as' => 'employees', 'uses' => 'EmployeeController@index']);
             Route::get('/show', ['as' => 'employees.show', 'uses' => 'EmployeeController@show']);
@@ -191,7 +191,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/alert/setting', ['as' => 'viberAlert', 'uses' => 'ViberAlertController@setting']);
             Route::post('/alert/setting', ['as' => 'storeSetting', 'uses' => 'ViberAlertController@storeSetting']);
         });
-//    });
+    });
     //});
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);

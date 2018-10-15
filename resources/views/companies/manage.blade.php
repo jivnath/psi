@@ -524,6 +524,7 @@
                     $("#subsectionDiv *").prop('disabled', false);
                     $("#subsectionDiv").hide();
                     $('#subNameDiv').hide();
+                    $('#cancelSection').hide();
 
                     var newSection = '<option value="'+data.id+'">'+data.name +'</option>'
                     $('#sectionDropdown').append(newSection);
