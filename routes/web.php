@@ -101,9 +101,10 @@ Route::group(['middleware' => ['auth']], function () {
 
             Route::get('/group', ['as' => 'user_group', 'uses' => 'UserGroupController@index']);
             Route::post('group/add', ['as' => 'group.add', 'uses' => 'UserGroupController@addGroup']);
-            Route::post('group/rename', ['as '=>'group.rename', 'uses' => 'UserGroupController@renameGroup']);
-        });
-        Route::prefix('permission_module')->group(function(){
+            Route::post('group/rename', ['as'=>'group.rename', 'uses' => 'UserGroupController@renameGroup']);
+            });
+            
+            Route::prefix('permission_module')->group(function(){
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
 
             Route::post('/role/update-{role_id}', ['as'=>'storePermissionToRole', 'uses'=>'PsiPermissionController@storeUpdate']);
