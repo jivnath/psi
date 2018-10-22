@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use DB;
 use App\Models\Raw;
-use Illuminate\Support\Facades\Session;
-
+//use Illuminate\Support\Facades\Session;
+use Session;
 class CompanyController extends Controller
 {
 
@@ -159,7 +159,8 @@ class CompanyController extends Controller
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
 
-        // Session::flash('success', 'Companies successfully added!');
+//        Session::flash('success', 'Companies successfully added!');
+        return redirect()->route('manageCompanies');
     }
 
     public function updateCompanies(Request $request)

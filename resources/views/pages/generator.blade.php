@@ -4,6 +4,11 @@
     <section class="content">
         <div class="row">
             <div class="col-md-6">
+                    <div id="alert" style="display: none">
+                            <div class="alert alert-success" role="alert">
+                                <strong>Success:</strong><span id="message"></span>
+                            </div>
+                        </div>
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Company Shift</h3>
@@ -266,6 +271,7 @@
                         $(".print-success-msg").css('display', 'block');
                         $(".print-error-msg").css('display', 'none');
                         $(".print-success-msg").find("ul").append('<li>Record Inserted Successfully.</li>');
+                        
                     }
                 }
             });
@@ -304,7 +310,17 @@
                         var html = '<li>' + shifts[i].start_time + ' - ' + shifts[i].end_time + '</li>';
                         $("#" + companyId + "allShifts").append(html);
                     }
-                  
+                    
+                    $("#alert").show()
+                        $("#message").text('New Shift Added');
+                        $(function(){
+                        $('html, body').animate({
+                        scrollTop: $("#alert").offset().top
+                        }, 500);
+                        setTimeout(function() {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
                 }
             });
         });

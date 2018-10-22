@@ -5,8 +5,7 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h4> Roles
-                    <a href="{{ route('permissions.index') }}" class="btn btn-link pull-right">Permissions</a></h4>
+                <h4> Roles</h4>
                 <hr>
             </div>
             <div class="box-body">

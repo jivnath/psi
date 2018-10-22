@@ -39,11 +39,11 @@
                         </thead>
                         <tbody>
                             @foreach($skills as $skill)
-                            <tr id="skill{{$skill->skill_id}}">
-                                <td id="skillname{{$skill->skill_id}}">{{$skill->name}}</td>
+                            <tr id="skill{{$skill->id}}">
+                                <td id="skillname{{$skill->id}}">{{$skill->name}}</td>
                                 <td>{{$skill->count}}</td>
-                                <td><span id="remove" class="btn btn-link" name="{{$skill->skill_id}}">Delete</span>
-                                    <span id="rename" data-name="{{$skill->name}}" class="btn btn-link" name="{{$skill->skill_id}}">Rename</span>
+                                <td><span id="remove" class="btn btn-link" name="{{$skill->id}}">Delete</span>
+                                    <span id="rename" data-name="{{$skill->name}}" class="btn btn-link" name="{{$skill->id}}">Rename</span>
                                 </td>
                             </tr>
                             @endforeach
