@@ -122,21 +122,21 @@ WHERE
         return $thirdCompanies;
     }
 
-    public static function getWorkedHours($user, $start, $end )
+    public static function getWorkedHours($user, $start, $end)
     {
-        $sql ="SELECT
+        $sql = "SELECT
                   SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000 AS totalWorked
               FROM
-                  psi_dessert_entry pde, 
-                  company_time_schedules cts, 
-                  company_time_tables ctt, 
+                  psi_dessert_entry pde,
+                  company_time_schedules cts,
+                  company_time_tables ctt,
                   shift_master_datas smd
               WHERE
-                  pde.staff_no = $user 
-                  AND cts.id = pde.cts_id 
+                  pde.staff_no = $user
+                  AND cts.id = pde.cts_id
                   AND cts.companyTT_id = ctt.id
-                  AND smd.company_id = ctt.company_id 
-                  AND cts.time = smd.start_time 
+                  AND smd.company_id = ctt.company_id
+                  AND cts.time = smd.start_time
                   AND cts.date BETWEEN $start AND $end";
 
         $hour = DB::select("$sql");
@@ -472,20 +472,20 @@ WHERE
     public static function getWorkedShift($staff, $date, $company)
     {
         $sql = "SELECT
-                    pd.staff_no, 
-                    cts.date, 
-                    cts.time as start_time, 
-                    sm.end_time 
-                FROM 
-                    psi_dessert_entry pd, 
-                    shift_master_datas sm, 
+                    pd.staff_no,
+                    cts.date,
+                    cts.time as start_time,
+                    sm.end_time
+                FROM
+                    psi_dessert_entry pd,
+                    shift_master_datas sm,
                     company_time_schedules cts
-                WHERE 
-                    cts.companyTT_id in (SELECT ctt.id from company_time_tables ctt WHERE ctt.company_id =72) 
+                WHERE
+                    cts.companyTT_id in (SELECT ctt.id from company_time_tables ctt WHERE ctt.company_id =$company)
                     AND cts.date = $date
-                    AND pd.staff_no = $staff 
-                    AND pd.cts_id = cts.id 
-                    AND sm.company_id = $company 
+                    AND pd.staff_no = $staff
+                    AND pd.cts_id = cts.id
+                    AND sm.company_id = $company
                     AND sm.start_time = cts.time";
         $data = DB::select($sql);
         return $data;
@@ -501,14 +501,13 @@ WHERE
             company_time_tables ctt,
             psi_dessert_entry pde
         WHERE
-        	pde.cts_id = cts.id 
-        	AND	pde.staff_no = $staff 
+        	pde.cts_id = cts.id
+        	AND	pde.staff_no = $staff
         	AND cts.companyTT_id = ctt.id
             AND ctt.company_id = $company";
 
         $data = DB::select($sql);
         return $data;
-
     }
 
     public static function totalNecessary($id)
@@ -525,7 +524,7 @@ WHERE
             ) company_name,
             companytt_id time_table_id,
             cts.id AS rel_id,
-            
+
             date,
             time start_time,
             (
@@ -620,13 +619,19 @@ WHERE
         ];
     }
 
-    public static function get_user_info($sender_id){
-        
-        try{
-        $sql="SELECT e.* FROM employee_logins el,employees e where concat(0,el.psi_number)=replace(cell_no,'-','') and  viber_id='$sender_id'";
-        return collect(DB::select(DB::raw($sql)))->first();
-        }catch(\Exception $e){
+    public static function get_user_info($sender_id)
+    {
+        try {
+            $sql = "SELECT e.* FROM employee_logins el,employees e where concat(0,el.psi_number)=replace(cell_no,'-','') and  viber_id='$sender_id'";
+            return collect(DB::select(DB::raw($sql)))->first();
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public static function getEmpDetail($mobile)
+    {
+        $sql = "select * from (select  e.*,replace(e.cell_no,'-','') replaced_num from employees e)em where em.replaced_num='$mobile'";
+        return collect(DB::select(DB::raw($sql)))->first();
     }
 }
