@@ -631,6 +631,7 @@ WHERE
 
     public static function getEmpDetail($mobile)
     {
+        $mobile=(isset($mobile[0]) && $mobile[0]!=0)? '0'.$mobile:$mobile;
         $sql = "select * from (select  e.*,replace(e.cell_no,'-','') replaced_num from employees e)em where em.replaced_num='$mobile'";
         return collect(DB::select(DB::raw($sql)))->first();
     }
