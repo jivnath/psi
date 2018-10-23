@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<<style>
+<style>
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
     display: block;
     max-width: 100%;
@@ -36,6 +36,7 @@
         $employee_contract_collection = \Session::get('employee_contract_collection');
         $employee_res_confirmation = \Session::get('employee_res_confirmation');
         $employee_sex = \Session::get('employee_sex');
+        $employee_sex=($employee_sex)?$employee_sex:'Not';
         $employee_postal_code = \Session::get('employee_postal_code');
         $employee_business_content = \Session::get('employee_business_content');
         $employee_dispatch_destination = \Session::get('employee_dispatch_destination');
@@ -75,8 +76,9 @@
             <div class="box box-primary">
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle" src="https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg" alt="User profile picture">
-                    <h3 class="profile-username text-center">{{$employee_name}}</h3>
+                    <h3 class="profile-username text-center"><?= $employee_name.'(<small>'.$employee_sex.'</small>)'?></h3>
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
+                   <p class="text-center"><i class="fa fa-circle text-success"></i> Online</p>
 
                 </div>
                 <!-- /.box-body -->
@@ -101,11 +103,18 @@
                     <p class="text-muted">{{$employee_work_location}}</p>
                     <hr>
 
+					<strong><i class="fas fa-mobile-alt"></i> Contact Number</strong>
+
+                    <p class="text-muted">{{$employee_cell_no}}</p>
+                    <hr>
                     <strong><i class="far fa-address-card"></i> Resident Card No</strong>
 
                     <p class="text-muted">{{$employee_residence_card_no}}</p>
                     <hr>
+                    <strong><i class="far fa-clock"></i> Residence Card Expiry Date</strong>
 
+                    <p class="text-muted">{{$employee_residence_card_exp_date}}</p>
+                    <hr>
                     <strong><i class="far fa-calendar-alt"></i> Retirement Date</strong>
 
                     <p class="text-muted">{{$employee_retirement_date}}</p>
@@ -120,7 +129,6 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
                     <li><a href="#requests" data-toggle="tab">Requests</a></li>
-                    <li><a href="#status" data-toggle="tab">Status</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
@@ -143,12 +151,19 @@
                                     </select>
                                 </div>
                                 <br/>
+                                 <div class="form-group">
+                                  <label for="exampleInputFile" class="col-sm-3 control-label">Browse File</label>
+                                   <div class="col-sm-12">
+                                  <input type="file" id="exampleInputFile">
+                                  </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="language" class="col-sm-3 control-label">Request Type</label>
                                     <div class="col-sm-12">
                                         <textarea cols="70" rows="10"></textarea>
                                     </div>
                                 </div>
+
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
@@ -174,28 +189,12 @@
                                     <td>{{$employee_phoetic_kanji}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Contact No.</td>
-                                    <td>{{$employee_cell_no}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td>{{$employee_address_ip}}</td>
-                                </tr>
-                                <tr>
                                     <td>Work Location</td>
                                     <td>{{$employee_work_location}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Retirement Date</td>
-                                    <td>{{$employee_retirement_date}}</td>
-                                </tr>
-                                <tr>
                                     <td>Birthday</td>
                                     <td>{{$employee_birth_date}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Residence Card No.</td>
-                                    <td>{{$employee_residence_card_no}}</td>
                                 </tr>
                                 <tr>
                                     <td>Register Officer</td>
@@ -209,10 +208,7 @@
                                     <td>Country Citizenship</td>
                                     <td>{{$employee_country_citizenship}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Residence Card Expiry Date</td>
-                                    <td>{{$employee_residence_card_exp_date}}</td>
-                                </tr>
+
                                 <tr>
                                     <td>Hourly Wage</td>
                                     <td>{{$employee_hourly_wage}}</td>
@@ -241,10 +237,6 @@
                                 <tr>
                                     <td>Residence Confirmation</td>
                                     <td>{{ $employee_res_confirmation}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Sex</td>
-                                    <td>{{ $employee_sex}}</td>
                                 </tr>
                                 <tr>
                                     <td>Postal Code</td>
@@ -291,16 +283,7 @@
                             </table>
                         </div>
                     </div>
-                    <!-- /.tab-pane -->
-                    <div class="active tab-pane" id="status">
-                        <div class="post clearfix">
-                            <p>
-                                <label for="title">
-                                    <h5>Unavailable</h5>
-                                </label>
-                            </p>
-                        </div>
-                    </div>
+
                 </div>
                 <!-- /.tab-content -->
             </div>
