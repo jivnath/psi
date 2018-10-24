@@ -78,7 +78,9 @@
                     <img class="profile-user-img img-responsive img-circle" src="https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg" alt="User profile picture">
                     <h3 class="profile-username text-center"><?= $employee_name.'(<small>'.$employee_sex.'</small>)'?></h3>
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
+
                    <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
+
 
                 </div>
                 <!-- /.box-body -->
@@ -301,6 +303,7 @@
                 <p class="message">
                   <a href="#" class="name">
                     <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
+
                     <?= $employee_name?>
                   </a>
                  I am going to nepal for 2 months so i am not avialable till 01 Jan 2019<br/> 
@@ -322,7 +325,6 @@
               
               <!-- /.item -->
 
- 
             </div>
         </div>
         <!-- /.col -->

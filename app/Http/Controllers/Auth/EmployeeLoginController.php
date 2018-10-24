@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 
 use DB;
+use App\Models\Raw;
 
 class EmployeeLoginController extends Controller
 {
@@ -65,8 +66,9 @@ class EmployeeLoginController extends Controller
             $employee = Employee::where('psi_number', $request->psi_number)->first();
             if(!$employee)
             {
-                $employee = Employee::where('cell_no', $request->psi_number)->first();
+            $employee = Raw::getEmpDetail($request->psi_number);
             }
+//             dd($employee);
 
 //            $psi_number = $employee->psi_number;
             $request->session()->put('username', $request->psi_number);
