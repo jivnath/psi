@@ -1,4 +1,14 @@
 @extends('layouts.app')
+<style>
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.img-circle {
+    border-radius: 50%;
+}
+</style>
 
 @section('title', '| Profile')
 
@@ -26,6 +36,7 @@
         $employee_contract_collection = \Session::get('employee_contract_collection');
         $employee_res_confirmation = \Session::get('employee_res_confirmation');
         $employee_sex = \Session::get('employee_sex');
+        $employee_sex=($employee_sex)?$employee_sex:'Not';
         $employee_postal_code = \Session::get('employee_postal_code');
         $employee_business_content = \Session::get('employee_business_content');
         $employee_dispatch_destination = \Session::get('employee_dispatch_destination');
@@ -64,10 +75,10 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <h4 class="profile-username text-center"><i class="fas fa-user  fa-2x" style="width:40px"></i></h4>
-
-                    <p class="text-muted text-center">{{$employee_name}}</p>
+                    <img class="profile-user-img img-responsive img-circle" src="https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg" alt="User profile picture">
+                    <h3 class="profile-username text-center"><?= $employee_name.'(<small>'.$employee_sex.'</small>)'?></h3>
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
+                   <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
 
                 </div>
                 <!-- /.box-body -->
@@ -82,21 +93,27 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+               <!--     <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong> -->
 
                     <p class="text-muted">{{$employee_address_ip}}</p>
-                    <hr>
 
                     <strong><i class="fas fa-map-marker-alt"></i> Work Location</strong>
 
                     <p class="text-muted">{{$employee_work_location}}</p>
                     <hr>
 
+					<strong><i class="fas fa-mobile-alt"></i> Contact Number</strong>
+
+                    <p class="text-muted">{{$employee_cell_no}}</p>
+                    <hr>
                     <strong><i class="far fa-address-card"></i> Resident Card No</strong>
 
                     <p class="text-muted">{{$employee_residence_card_no}}</p>
                     <hr>
+                    <strong><i class="far fa-clock"></i> Residence Card Expiry Date</strong>
 
+                    <p class="text-muted">{{$employee_residence_card_exp_date}}</p>
+                    <hr>
                     <strong><i class="far fa-calendar-alt"></i> Retirement Date</strong>
 
                     <p class="text-muted">{{$employee_retirement_date}}</p>
@@ -111,7 +128,6 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
                     <li><a href="#requests" data-toggle="tab">Requests</a></li>
-                    <li><a href="#status" data-toggle="tab">Status</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
@@ -134,16 +150,23 @@
                                     </select>
                                 </div>
                                 <br/>
+                                 <div class="form-group">
+                                  <label for="exampleInputFile" class="col-sm-3 control-label">Browse File</label>
+                                   <div class="col-sm-12">
+                                  <input type="file" id="exampleInputFile">
+                                  </div>
+                                </div>
                                 <div class="form-group">
-                                    <label for="language" class="col-sm-3 control-label">Request Type</label>
+                                    <label for="language" class="col-sm-3 control-label">Message</label>
                                     <div class="col-sm-12">
                                         <textarea cols="70" rows="10"></textarea>
                                     </div>
                                 </div>
 
+
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                        <button type="submit" class="btn btn-danger">Send</button>
                                     </div>
                                 </div>
                             </div>
@@ -165,28 +188,12 @@
                                     <td>{{$employee_phoetic_kanji}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Contact No.</td>
-                                    <td>{{$employee_cell_no}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td>{{$employee_address_ip}}</td>
-                                </tr>
-                                <tr>
                                     <td>Work Location</td>
                                     <td>{{$employee_work_location}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Retirement Date</td>
-                                    <td>{{$employee_retirement_date}}</td>
-                                </tr>
-                                <tr>
                                     <td>Birthday</td>
                                     <td>{{$employee_birth_date}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Residence Card No.</td>
-                                    <td>{{$employee_residence_card_no}}</td>
                                 </tr>
                                 <tr>
                                     <td>Register Officer</td>
@@ -200,10 +207,7 @@
                                     <td>Country Citizenship</td>
                                     <td>{{$employee_country_citizenship}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Residence Card Expiry Date</td>
-                                    <td>{{$employee_residence_card_exp_date}}</td>
-                                </tr>
+
                                 <tr>
                                     <td>Hourly Wage</td>
                                     <td>{{$employee_hourly_wage}}</td>
@@ -232,10 +236,6 @@
                                 <tr>
                                     <td>Residence Confirmation</td>
                                     <td>{{ $employee_res_confirmation}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Sex</td>
-                                    <td>{{ $employee_sex}}</td>
                                 </tr>
                                 <tr>
                                     <td>Postal Code</td>
@@ -282,16 +282,7 @@
                             </table>
                         </div>
                     </div>
-                    <!-- /.tab-pane -->
-                    <div class="active tab-pane" id="status">
-                        <div class="post clearfix">
-                            <p>
-                                <label for="title">
-                                    <h5>Unavailable</h5>
-                                </label>
-                            </p>
-                        </div>
-                    </div>
+
                 </div>
                 <!-- /.tab-content -->
             </div>
@@ -299,7 +290,40 @@
             om -->
         </div>
         <div class="col-md-3 box box-info">
-            <label for="request">Activity</label>
+            <div class="box-header with-border">
+              <h3 class="box-title">Activity</h3>
+            </div>
+            <div class="box-body chat" id="chat-box">
+              <!-- chat item -->
+              <div class="item">
+                <img src="{{asset('images/dist/user4-128x128.jpg')}}" alt="user image" class="online">
+
+                <p class="message">
+                  <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
+                    <?= $employee_name?>
+                  </a>
+                 I am going to nepal for 2 months so i am not avialable till 01 Jan 2019<br/> 
+                 私は2ヶ月間ネパールに行くので、2019年1月1日までは利用できません
+                </p>
+                </div>
+                <div class="item">
+                <img src="{{asset('images/dist/user1-128x128.jpg')}}" alt="user image" class="online">
+                  <p class="message">
+                <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 12:15</small>
+                    Admin</a>
+                    Thank you for the information.Please let us know after you returned.<br/>
+                  情報ありがとうございました。返品後にお知らせください
+                  </p>
+                </div>
+                </div>
+                <!-- /.attachment -->
+              
+              <!-- /.item -->
+
+ 
+            </div>
         </div>
         <!-- /.col -->
     </div>
