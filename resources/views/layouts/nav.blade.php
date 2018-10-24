@@ -115,6 +115,9 @@
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('roles.index') }}"><i
                                                                             class="fas fa-pen-alt"></i> Roles</a></li>
+                                                            <li><a class="dropdown-item"
+                                                                   href="{{ route('update.user') }}"><i
+                                                                            class="fas fa-key"></i> Permssion</a></li>
 
                                                         </ul>
                                                     </li>

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\Raw;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -48,13 +49,13 @@ class LoginController extends Controller
             $request->session()->put('user_id', Auth::user()->id);
             $request->session()->put('user_language', Auth::user()->language);
 
-            $companiesOfUsers = CompanyToUser_rel::where('user_id', Auth::user()->id)->get();
-            $companies = [];
-            foreach($companiesOfUsers as $userCompany)
-            {
-                $company = Company::find($userCompany->company_id);
-                array_push($companies, $company);
-            }
+            $companies = Raw::getSecondLevelCompanies();
+//            $companies = [];
+//            foreach($companiesOfUsers as $userCompany)
+//            {
+//                $company = Company::find($userCompany->company_id);
+//                array_push($companies, $company);
+//            }
 
             $request->session()->put('user_companies', $companies);
             $primaryCompany = Company::find(Auth::user()->primary_company);

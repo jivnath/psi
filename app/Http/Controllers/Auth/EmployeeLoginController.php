@@ -60,13 +60,19 @@ class EmployeeLoginController extends Controller
             'psi_number' => $request->psi_number,
             'password' => $request->password
         ])) {
-            $employee = $this->get_psi_number(Auth::guard('employee')->user()->psi_number);
+//            $employee = $this->get_psi_number(Auth::guard('employee')->user()->psi_number);
+
+            $employee = Employee::where('psi_number', $request->psi_number)->first();
+            if(!$employee)
+            {
+                $employee = Employee::where('cell_no', $request->psi_number)->first();
+            }
+
 //            $psi_number = $employee->psi_number;
             $request->session()->put('username', $request->psi_number);
 //            $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
 
-            $employee = Employee::where('psi_number', $request->psi_number)->first();
             $request->session()->put('employee_name', $employee->name);
             $request->session()->put('employee_psi_number', $employee->psi_number);
             // $request->session()->put('employee_language', $employee->language);

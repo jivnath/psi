@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserType;
 use App\Models\User;
+use App\Models\Raw;
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -162,11 +163,11 @@ class UserController extends Controller
         $user_id = \Session::get('user_id');
 
         $user = User::find($user_id);
-        $company = CompanyToUser_rel::where('user_id', $user_id)->get();
+        $company = Raw::getSecondLevelCompanies();
         $companies = [];
         foreach($company as $comp)
         {
-            array_push($companies, $comp->company_id);
+            array_push($companies, $comp->id);
         }
 
 //        dd($companies);

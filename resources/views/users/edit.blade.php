@@ -32,12 +32,10 @@
                     </select>
                 </div>
 
-                {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}
+                {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
 
                 {{ Form::close() }}
             </div>
         </div>
     </div>
-
-
 @endsection

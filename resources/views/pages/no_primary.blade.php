@@ -13,8 +13,8 @@
                             <thead>
                             <tr>
                                 <th> Role </th>
-                                <th> Company </th>
-                                <th> Team Leader </th>
+                                <th> Section </th>
+                                <th> Team Manager </th>
                                 <th> Action </th>
                             </tr>
                             </thead>
