@@ -34,6 +34,7 @@ Route::group(['middleware'=> ['employee']], function(){
         Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
         Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
 
+        Route::post('/storeMessage', ['as' => 'inbox.store', 'uses' => 'PsiInboxController@store']);
     });
 });
 Route::group(['middleware' => ['auth']], function () {
@@ -200,3 +201,5 @@ Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@displ
 Route::get('/hierrchy', function(){
     return view('hierrchy');
 });
+
+
