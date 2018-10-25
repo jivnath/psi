@@ -144,7 +144,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -213,7 +212,6 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'load_permission'=>App\Helpers\PermissionHelper::class,
-        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
     'job_limit'=>28
