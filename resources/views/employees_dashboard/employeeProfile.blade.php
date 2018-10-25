@@ -80,7 +80,6 @@
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
                     <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
 
-                   <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
 
 
                 </div>
