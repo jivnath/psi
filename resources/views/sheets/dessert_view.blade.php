@@ -122,7 +122,14 @@ corresponding value from the list below*/
                             <td  class="border_field">{{$info->phoetic_kanji}}</td>
                             <td  class="border_field">{{$info->name}}</td>
                             <td  class="border_field">{{$info->cell_no}}</td>
-                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>{{$info->responsible1}}</td>
+                            <td class="background_responsible" data-usage='responsibile'>
+                             <select class='responsibile'>
+                             		<option value=''>--select--</option>
+                             		@foreach($userlist as $row_user)
+                                		<option value='{{$row_user->id}}' {{ ($info->responsible1==$row_user->id) ? 'selected':''}}>{{$row_user->name}}</option>
+                                	@endforeach
+                             </select>
+                            </td>
                             <td class="background_responsible" data-usage='confirmation'>
                                 <select class='confirmation'>
                                 	<option value=''>--select--</option>
@@ -131,7 +138,14 @@ corresponding value from the list below*/
                                 	<option value='No response' {{ ($info->conformation_day_before=='No response') ? 'selected':''}}>No response</option>
                                 </select>
                             </td>
-                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>{{$info->responsible2}}</td>
+                             <td class="background_responsible" data-usage='responsibile_1'>
+                             <select class='responsibile_1'>
+                             		<option value=''>--select--</option>
+                             		@foreach($userlist as $row_user)
+                                		<option value='{{$row_user->id}}' {{ ($info->responsible2==$row_user->id) ? 'selected':''}}>{{$row_user->name}}</option>
+                                	@endforeach
+                             </select>
+                            </td>
                             <td class="background_responsible" data-usage='confirmation_1'>
                              <select class='confirmation_1'>
                              		<option value=''>--select--</option>
@@ -159,6 +173,8 @@ corresponding value from the list below*/
                              <td style='visibility: hidden;display: none;'>{{$dessert_row['id']}}</td>
                              <td style='visibility: hidden;display: none;'>{{$info->id}}</td>
                              <td style='visibility: hidden;display: none;'>{{$info->flag}}</td>
+                             <td style='visibility: hidden;display: none;'>{{$info->responsible1}}</td>
+                             <td style='visibility: hidden;display: none;'>{{$info->responsible2}}</td>
 
                         </tr>
                         @endforeach
@@ -172,7 +188,14 @@ corresponding value from the list below*/
                             <td  class="border_field">  </td>
                             <td  class="border_field">  </td>
                             <td  class="border_field">  </td>
-                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
+                            <td class="background_responsible" data-usage='responsibile'>
+                             <select class='responsibile'>
+                             		<option value=''>--select--</option>
+                             		@foreach($userlist as $row_user)
+                                		<option value='{{$row_user->id}}'>{{$row_user->name}}</option>
+                                	@endforeach
+                             </select>
+                            </td>
                             <td class="background_responsible" data-usage='confirmation'>
                                 <select class='confirmation'>
                                 	<option value=''>--select--</option>
@@ -209,6 +232,8 @@ corresponding value from the list below*/
                              <td style='visibility: hidden;display:none'>{{$dessert_row['id']}}</td>
                              <td style='visibility: hidden;display: none;'></td>
                              <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
                         </tr>
                         @endfor
                         @if($dessert_row['total_require']==0)
@@ -239,6 +264,7 @@ corresponding value from the list below*/
             var no_of_comments=0;
             var my_this='';
             var confirmation_data='';
+            var responsibile_data='';
             var type_of_field='';
             var added_generated_value='';
             var company_schedule_id='';
@@ -317,7 +343,7 @@ corresponding value from the list below*/
     	                        		alert('Not available');
         	                        	return false;
         	                        }
-        	                        if(typeof data.total_worked !=='undefined' && data.total_worked>{{\Config('app.job_limit')}}){
+        	                        if(typeof data.total_worked !=='undefined' && data.total_worked > {{\Config('app.job_limit')}}){
 										alert('reached limit '+data.total_worked);
 										return false;
             	                     }
@@ -523,6 +549,42 @@ corresponding value from the list below*/
 						$('#all_saved_value').data('14',confirmation_data);
 
                  });
+                $('.responsibile').change(function(){
+					var confirmation_data=$(this).find('option:selected').val();
+					var my_this=$(this);
+					getAllValue(my_this,25,confirmation_data);
+                    added_generated_value=$('#all_saved_value').data('23');
+                    company_schedule_id=$('#all_saved_value').data('22');
+					send_it_to_update(added_generated_value,company_schedule_id,'responsible1',confirmation_data);
+					$(this).data('responsibile',confirmation_data);
+					$(this).closest('tr').find('td').each(
+	                	    function (i) {
+	                    	    if(i==25){
+		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
+		                    	    $(this).html(confirmation_data);
+	                    	    }
+	                	    });
+					$('#all_saved_value').data('8',confirmation_data);
+
+             });
+                $('.responsibile_1').change(function(){
+					var confirmation_data=$(this).find('option:selected').val();
+					var my_this=$(this);
+					getAllValue(my_this,26,confirmation_data);
+                    added_generated_value=$('#all_saved_value').data('23');
+                    company_schedule_id=$('#all_saved_value').data('22');
+					send_it_to_update(added_generated_value,company_schedule_id,'responsible2',confirmation_data);
+					$(this).data('responsibile_1',confirmation_data);
+					$(this).closest('tr').find('td').each(
+	                	    function (i) {
+	                    	    if(i==26){
+		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
+		                    	    $(this).html(confirmation_data);
+	                    	    }
+	                	    });
+					$('#all_saved_value').data('10',confirmation_data);
+
+             });
 
                 function set_now(my_this,index,value){
                 	my_this.closest('tr').find('td').each(
