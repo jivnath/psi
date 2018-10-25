@@ -34,8 +34,10 @@ Route::group(['middleware'=> ['employee']], function(){
             Route::get('/getDataForCalendar', ['as' => 'getDataForCalendar', 'uses' => 'Employee\Dashboard@getDataForCalendar']);
             Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
             Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
-            Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
+            Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);            
             Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
+            Route::post('/storeMessage', ['as' => 'inbox.store', 'uses' => 'PsiInboxController@store']);
+
         });
     });
 });
@@ -204,3 +206,5 @@ Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@displ
 Route::get('/hierrchy', function(){
     return view('hierrchy');
 });
+
+

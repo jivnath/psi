@@ -39,7 +39,7 @@ class CompanyController extends Controller
         $company->master_id = $request->company;
         $company->contact_num = $request->contact_num;
         $company->save();
-
+        Session::flash('success', 'Companies successfully added!');
         return redirect()->route('company.create');
     }
 
@@ -65,7 +65,7 @@ class CompanyController extends Controller
         $company->contact_num = $request->input('contact');
 
         $company->save();
-
+        Session::flash('success', 'Companies successfully updated!');
         return redirect()->route('company.edit', $id);
     }
 
@@ -114,6 +114,7 @@ class CompanyController extends Controller
             $sub->master_id = $master;
 
             $sub->save();
+            Session::flash('success', 'Sub companies successfully added!');
             return redirect()->route('company.create');
         }
     }
@@ -159,7 +160,7 @@ class CompanyController extends Controller
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
 
-//        Session::flash('success', 'Companies successfully added!');
+        Session::flash('success', 'Companies successfully added!');
         return redirect()->route('manageCompanies');
     }
 

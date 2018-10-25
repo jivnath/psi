@@ -138,8 +138,8 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="requests">
-                        <form action="{{url('')}}" method="POST" class="form-horizontal">
-                            <input type="hidden" name="_method" value="POST">
+                        <form action="{{route('inbox.store')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                            {{-- <input type="hidden" name="_method" value="POST"> --}}
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
@@ -147,7 +147,7 @@
                                 <label for="language" class="col-sm-3 control-label">Request Type</label>
 
                                 <div class="col-sm-12">
-                                    <select name="language" class="form-control">
+                                    <select name="type" class="form-control">
                                         <option value="0">Profile Change</option>
                                         <option value="1">Others</option>
                                     </select>
@@ -163,7 +163,7 @@
 
                                     <label for="language" class="col-sm-3 control-label">Message</label>
                                     <div class="col-sm-12">
-                                        <textarea cols="70" rows="10"></textarea>
+                                        <input type="file" class="form-control" name="cfile">
                                     </div>
                                 </div>
 
@@ -402,7 +402,6 @@
                                             <td>{{ $employee_operating_status }}</td>
                                         </tr>
                                     @endif
-
                             </table>
                         </div>
                     </div>
