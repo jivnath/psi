@@ -182,15 +182,6 @@ class PagesController extends Controller
 
     public function shift()
     {
-        /*
-         * $shifts = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
-         * $query->groupBy('master_id');
-         * })->get();
-         *
-         * $s = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) {
-         * $query->distinct('master_id');
-         * })->get();
-         */
         $data['results'] = Raw::getShiftView();
 
         return view('pages.shift', $data);
@@ -214,18 +205,6 @@ class PagesController extends Controller
     public function show($id)
     {
         $data=[];
-//        $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
-//            $query->where('master_id', $id);
-//        })->groupBy('date')->get();
-
-//        $times = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
-//            $query->where('master_id', $id);
-//        })->groupBy('time')->get();
-
-//        $companies = CompanyTimeTable::whereHas('comp', function ($query) use ($id) {
-//            $query->where('master_id', $id);
-//        })->groupBy('company_id')->get();
-//
 
         $companies = Raw::getCompaniesForShiftShow($id);
         $types = collect([
@@ -234,18 +213,6 @@ class PagesController extends Controller
         ]);
         $dates = Raw::getDatesForShiftShow($id);
         $times = Raw::getTimesForShiftShow($id);
-        /*please utilize this
-        foreach ($times as $time) {
-            foreach ($companies as $company) {
-                foreach ($types as $type) {
-                    $data[$time->time][] = [
-                        'name' => $company->comp->name,
-                        'id' => $company->comp->id,
-                        'type' => $type
-                    ];
-                }
-            }
-        }*/
 
         return view('pages.show')->withDates($dates)
             ->withTimes($times)

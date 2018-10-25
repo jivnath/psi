@@ -122,16 +122,6 @@
             });
         })
     });
-
-    // var stickyOffset = $('.sticky').offset().top;
-	//
-    // $(window).scroll(function(){
-        // var sticky = $('.sticky'),
-        //     scroll = $(window).scrollTop();
-		//
-        // if (scroll > stickyOffset) sticky.addClass('fixed-top');
-        // else sticky.removeClass('fixed-top');
-    // });
     $('#view_columns').click(function(){
     	$('#exampleModalLong').modal('show');
      });

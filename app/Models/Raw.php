@@ -265,7 +265,7 @@ WHERE
             companytt_id,
             date,
             time,
-            ( normal + help ) total_require,
+            ( normal ) total_require,
             ctt.company_id,
             (
                 SELECT
@@ -387,7 +387,7 @@ WHERE
                 companytt_id,
                 DATE,
                 time,
-                ( normal + help ) total_require,
+                ( help ) total_require,
                 ctt.company_id,
                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used,
                 c.name,
@@ -548,7 +548,7 @@ WHERE
 
             ) hours,
 
-            (help+normal) necessary,
+            (normal) necessary,
             (
                 SELECT
                     COUNT(*)
