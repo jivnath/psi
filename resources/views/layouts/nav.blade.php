@@ -1,3 +1,11 @@
+<style>
+.footer_message{
+ background: #21469b2e;
+    margin-bottom: -8px;
+}
+
+}
+</style>
 <div id="navbar-main">
     <div class="clearfix"></div>
     @if(Auth::guard('employee')->check())
@@ -262,6 +270,25 @@
                                              </li> -->
 							--}}
 
+
+                                            <li class="nav-item dropdown"><a id="setting"
+                                                                             class="nav-link dropdown-toggle" href="#"
+                                                                             role="button"
+                                                                             data-toggle="dropdown" aria-haspopup="true"
+                                                                             aria-expanded="false" v-pre> <i
+                                                            class="fas fa-envelope"></i>
+                                                   <span class="label label-success" style="position: absolute;top: 8px;right: 7px;text-align: center;font-size: 9px;padding: 2px 3px;line-height: .9;">4</span>
+                                                </a>
+
+                                                <div class="dropdown-menu dropdown-menu-left"
+                                                     aria-labelledby="setting" style="margin-left: -50%;">
+                                                    <div style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
+                                                    <a class="dropdown-item text-center" href="{{route('viberAlert')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
+                                                    <a class="dropdown-item text-center" href="{{route('viberAlert')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
+                                                    </div>
+                                                    <a class="footer_message dropdown-item text-center">See All Messages</a>
+                                                </div>
+                                            </li>
 
                                             <li class="nav-item dropdown"><a id="setting"
                                                                              class="nav-link dropdown-toggle" href="#"
