@@ -200,6 +200,7 @@ Route::group(['middleware' => ['auth']], function () {
     //});
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+
 Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@display']);
 
 Route::get('/hierrchy', function(){

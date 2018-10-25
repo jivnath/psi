@@ -42,11 +42,38 @@
         								<td class="contenteditable" data-column="{{ $column->field_name }}"
         									data-old="" contenteditable="true">
         									@if ($column->field_name == 'sex')
-        									<select name="sex">
+												<select name="sex">
         										@foreach($sex as $s)
         										<option <?= ($cell->{$column->field_name}==$s->name)? 'selected="selected"':''?> value="{{$s->id}}">{{ $s->name }}</option>
         										@endforeach
-        								</select> @else {{ $cell->{$column->field_name} }} @endif
+        										</select>
+
+											@elseif ($column->field_name == 'status_residence')
+												<select name = "status_residence">
+												<option>none</option>
+												<option <?= ($cell->{$column->field_name}=='就労')? 'selected="selected"':''?> value="就労"> 就労 </option>
+												<option <?= ($cell->{$column->field_name}=='家族滞在')? 'selected="selected"':''?>  value="家族滞在"> 家族滞在 </option>
+												<option <?= ($cell->{$column->field_name}=='留学')? 'selected="selected"':''?> value="留学"> 留学 </option>
+												</select>
+
+											@elseif ($column->field_name == 'hourly_wage')
+												<select name = "hourly_wage">
+													<option>none</option>
+													<option <?= ($cell->{$column->field_name}=='通常の雇用主')? 'selected="selected"':''?> value="通常の雇用主"> 通常の雇用主 </option>
+													<option <?= ($cell->{$column->field_name}=='セミ雇用者')? 'selected="selected"':''?> value="セミ雇用者"> セミ雇用者 </option>
+													<option <?= ($cell->{$column->field_name}=='アルバイト')? 'selected="selected"':''?>value="アルバイト"> アルバイト </option>
+												</select>
+
+												@elseif($column->field_name == 'operating_status')
+													<select name = "operating_status">
+														<option>none</option>
+														<option <?= ($cell->{$column->field_name}=='働くこと')? 'selected="selected"':''?> value="働くこと"> 働くこと </option>
+														<option <?= ($cell->{$column->field_name}=='低頻度の仕事')? 'selected="selected"':''?> value="低頻度の仕事"> 低頻度の仕事 </option>
+														<option <?= ($cell->{$column->field_name}=='やめて ')? 'selected="selected"':''?> value="やめて"> やめて </option>
+													</select>
+											@else
+												{{ $cell->{$column->field_name} }}
+											@endif
         								</td>
     								@else
     								<td>{{ $cell->{$column->field_name} }}</td>
