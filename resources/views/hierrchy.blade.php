@@ -69,10 +69,8 @@
                                 <ul class="dropdown-menu"  aria-labelledby="navbarDropdown" >
                                     <li><a class="dropdown-item" href="">Login</a></li>
                                 </ul>
-
                             </li>
                         </ul>
-
                     </li>
                 </ul>
             </nav>
@@ -86,3 +84,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+

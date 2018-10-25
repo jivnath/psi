@@ -1,4 +1,14 @@
 @extends('layouts.app')
+<style>
+    .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    .img-circle {
+        border-radius: 50%;
+    }
+</style>
 
 @section('title', '| Profile')
 
@@ -26,6 +36,7 @@
         $employee_contract_collection = \Session::get('employee_contract_collection');
         $employee_res_confirmation = \Session::get('employee_res_confirmation');
         $employee_sex = \Session::get('employee_sex');
+        $employee_sex=($employee_sex)?$employee_sex:'Not';
         $employee_postal_code = \Session::get('employee_postal_code');
         $employee_business_content = \Session::get('employee_business_content');
         $employee_dispatch_destination = \Session::get('employee_dispatch_destination');
@@ -64,10 +75,10 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <h4 class="profile-username text-center"><i class="fas fa-user  fa-2x" style="width:40px"></i></h4>
-
-                    <p class="text-muted text-center">{{$employee_name}}</p>
+                    <img class="profile-user-img img-responsive img-circle" src="https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg" alt="User profile picture">
+                    <h3 class="profile-username text-center"><?= $employee_name.'(<small>'.$employee_sex.'</small>)'?></h3>
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
+                    <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
 
                 </div>
                 <!-- /.box-body -->
@@ -82,21 +93,27 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                    <!--     <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong> -->
 
                     <p class="text-muted">{{$employee_address_ip}}</p>
-                    <hr>
 
                     <strong><i class="fas fa-map-marker-alt"></i> Work Location</strong>
 
                     <p class="text-muted">{{$employee_work_location}}</p>
                     <hr>
 
+                    <strong><i class="fas fa-mobile-alt"></i> Contact Number</strong>
+
+                    <p class="text-muted">{{$employee_cell_no}}</p>
+                    <hr>
                     <strong><i class="far fa-address-card"></i> Resident Card No</strong>
 
                     <p class="text-muted">{{$employee_residence_card_no}}</p>
                     <hr>
+                    <strong><i class="far fa-clock"></i> Residence Card Expiry Date</strong>
 
+                    <p class="text-muted">{{$employee_residence_card_exp_date}}</p>
+                    <hr>
                     <strong><i class="far fa-calendar-alt"></i> Retirement Date</strong>
 
                     <p class="text-muted">{{$employee_retirement_date}}</p>
@@ -111,7 +128,6 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
                     <li><a href="#requests" data-toggle="tab">Requests</a></li>
-                    <li><a href="#status" data-toggle="tab">Status</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
@@ -135,15 +151,22 @@
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <label for="language" class="col-sm-3 control-label">Request Type</label>
+                                    <label for="exampleInputFile" class="col-sm-3 control-label">Browse File</label>
+                                    <div class="col-sm-12">
+                                        <input type="file" id="exampleInputFile">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="language" class="col-sm-3 control-label">Message</label>
                                     <div class="col-sm-12">
                                         <textarea cols="70" rows="10"></textarea>
                                     </div>
                                 </div>
 
+
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                        <button type="submit" class="btn btn-danger">Send</button>
                                     </div>
                                 </div>
                             </div>
@@ -152,146 +175,233 @@
                     <div class="active tab-pane" id="about_me">
                         <div class="post clearfix">
                             <table class="table table-striped">
-                                <tr>
-                                    <td>Name</td>
-                                    <td>{{$employee_name}}</td>
-                                </tr>
-                                <tr>
-                                    <td>PSI-S No.</td>
-                                    <td>{{$employee_psi_number}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Phoetic Kanji</td>
-                                    <td>{{$employee_phoetic_kanji}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Contact No.</td>
-                                    <td>{{$employee_cell_no}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td>{{$employee_address_ip}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Work Location</td>
-                                    <td>{{$employee_work_location}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Retirement Date</td>
-                                    <td>{{$employee_retirement_date}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Birthday</td>
-                                    <td>{{$employee_birth_date}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Residence Card No.</td>
-                                    <td>{{$employee_residence_card_no}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Register Officer</td>
-                                    <td>{{$employee_reg_officer}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Hire Date</td>
-                                    <td>{{$employee_hire_date}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Country Citizenship</td>
-                                    <td>{{$employee_country_citizenship}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Residence Card Expiry Date</td>
-                                    <td>{{$employee_residence_card_exp_date}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Hourly Wage</td>
-                                    <td>{{$employee_hourly_wage}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Residence Status</td>
-                                    <td>{{ $employee_status_residence}}</td>
-                                </tr>
+                                @if($employee_name!=null)
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>{{$employee_name}}</td>
+                                    </tr>
+                                @endif
 
-                                <tr>
-                                    <td>Base</td>
-                                    <td>{{ $employee_base}}</td>
-                                </tr>
-                                <tr>
-                                    <td>For Work</td>
-                                    <td>{{  $employee_for_work}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Optional Management</td>
-                                    <td>{{  $employee_opt_management}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Contract Collection</td>
-                                    <td>{{ $employee_contract_collection}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Residence Confirmation</td>
-                                    <td>{{ $employee_res_confirmation}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Sex</td>
-                                    <td>{{ $employee_sex}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Postal Code</td>
-                                    <td>{{ $employee_postal_code}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Business Content</td>
-                                    <td>{{ $employee_business_content}}</td>
-                                </tr>
+                                @if($employee_psi_number!=null)
+                                    <tr>
+                                        <td>PSI-S No.</td>
+                                        <td>{{$employee_psi_number}}</td>
+                                    </tr>
+                                @endif
 
-                                <tr>
-                                    <td>Dispatch Destination</td>
-                                    <td>{{ $employee_dispatch_destination}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Name of facility</td>
-                                    <td>{{ $employee_name_of_facility}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Path</td>
-                                    <td>{{ $employee_path}}</td>
-                                </tr>
-                                <tr>
-                                    <td>One Way Rate</td>
-                                    <td>{{ $employee_one_way_rate}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Pass Price</td>
-                                    <td>{{ $employee_pass_price}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Hourly Employee</td>
-                                    <td>{{ $employee_hourly_employee}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Dependent Exemption</td>
-                                    <td>{{ $employee_dependent_exemption}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Notes</td>
-                                    <td>{{ $employee_notes}}</td>
-                                </tr>
+                                @if($employee_phoetic_kanji!=null)
+                                    <tr>
+                                        <td>Phoetic Kanji</td>
+                                        <td>{{$employee_phoetic_kanji}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_cell_no!=null)
+                                    <tr>
+                                        <td>Contact No.</td>
+                                        <td>{{$employee_cell_no}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_address_ip!=null)
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>{{$employee_address_ip}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_work_location!=null)
+                                    <tr>
+                                        <td>Work Location</td>
+                                        <td>{{$employee_work_location}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_retirement_date!=null)
+                                    <tr>
+                                        <td>Retirement Date</td>
+                                        <td>{{$employee_retirement_date}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_birth_date!=null)
+                                    <tr>
+                                        <td>Birthday</td>
+                                        <td>{{$employee_birth_date}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_residence_card_no!=null)
+                                    <tr>
+                                        <td>Residence Card No.</td>
+                                        <td>{{$employee_residence_card_no}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_reg_officer!=null)
+                                    <tr>
+                                        <td>Register Officer</td>
+                                        <td>{{$employee_reg_officer}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_hire_date!=null)
+                                    <tr>
+                                        <td>Hire Date</td>
+                                        <td>{{$employee_hire_date}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_country_citizenship!=null)
+                                    <tr>
+                                        <td>Country Citizenship</td>
+                                        <td>{{$employee_country_citizenship}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_residence_card_exp_date!=null)
+                                    <tr>
+                                        <td>Residence Card Expiry Date</td>
+                                        <td>{{$employee_residence_card_exp_date}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_hourly_wage!=null)
+                                    <tr>
+                                        <td>Hourly Wage</td>
+                                        <td>{{$employee_hourly_wage}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_status_residence!=null)
+                                    <tr>
+                                        <td>Residence Status</td>
+                                        <td>{{ $employee_status_residence}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_base!=null)
+                                    <tr>
+                                        <td>Base</td>
+                                        <td>{{ $employee_base}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_for_work!=null)
+                                    <tr>
+                                        <td>For Work</td>
+                                        <td>{{  $employee_for_work}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_opt_management!=null)
+                                    <tr>
+                                        <td>Optional Management</td>
+                                        <td>{{  $employee_opt_management}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_contract_collection!=null)
+                                    <tr>
+                                        <td>Contract Collection</td>
+                                        <td>{{ $employee_contract_collection}}</td>
+                                    </tr>
+                                @endif
+
+                                @if( $employee_res_confirmation!=null)
+                                    <tr>
+                                        <td>Residence Confirmation</td>
+                                        <td>{{ $employee_res_confirmation}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_sex!=null)
+                                    <tr>
+                                        <td>Sex</td>
+                                        <td>{{ $employee_sex}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_postal_code!=null)
+                                    <tr>
+                                        <td>Postal Code</td>
+                                        <td>{{ $employee_postal_code}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_business_content!=null)
+                                    <tr>
+                                        <td>Business Content</td>
+                                        <td>{{ $employee_business_content}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_dispatch_destination!=null)
+                                    <tr>
+                                        <td>Dispatch Destination</td>
+                                        <td>{{ $employee_dispatch_destination}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_name_of_facility!=null)
+                                    <tr>
+                                        <td>Name of facility</td>
+                                        <td>{{ $employee_name_of_facility}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_path!=null)
+                                    <tr>
+                                        <td>Path</td>
+                                        <td>{{ $employee_path}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_one_way_rate!=null)
+                                    <tr>
+                                        <td>One Way Rate</td>
+                                        <td>{{ $employee_one_way_rate}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_pass_price!=null)
+                                    <tr>
+                                        <td>Pass Price</td>
+                                        <td>{{ $employee_pass_price}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_hourly_employee!=null)
+                                    <tr>
+                                        <td>Hourly Employee</td>
+                                        <td>{{ $employee_hourly_employee}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_dependent_exemption!=null)
+                                    <tr>
+                                        <td>Dependent Exemption</td>
+                                        <td>{{ $employee_dependent_exemption}}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_notes!=null)
+                                    <tr>
+                                        <td>Notes</td>
+                                        <td>{{ $employee_notes }}</td>
+                                    </tr>
+                                @endif
+                                    @if($employee_operating_status!=null)
+                                        <tr>
+                                            <td>Operating Status</td>
+                                            <td>{{ $employee_operating_status }}</td>
+                                        </tr>
+                                    @endif
 
                             </table>
                         </div>
                     </div>
-                    <!-- /.tab-pane -->
-                    <div class="active tab-pane" id="status">
-                        <div class="post clearfix">
-                            <p>
-                                <label for="title">
-                                    <h5>Unavailable</h5>
-                                </label>
-                            </p>
-                        </div>
-                    </div>
+
                 </div>
                 <!-- /.tab-content -->
             </div>
@@ -299,9 +409,42 @@
             om -->
         </div>
         <div class="col-md-3 box box-info">
-            <label for="request">Activity</label>
+            <div class="box-header with-border">
+                <h3 class="box-title">Activity</h3>
+            </div>
+            <div class="box-body chat" id="chat-box">
+                <!-- chat item -->
+                <div class="item">
+                    <img src="{{asset('images/dist/user4-128x128.jpg')}}" alt="user image" class="online">
+
+                    <p class="message">
+                        <a href="#" class="name">
+                            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
+                            <?= $employee_name?>
+                        </a>
+                        I am going to nepal for 2 months so i am not avialable till 01 Jan 2019<br/>
+                        ç§ã¯2ãƒ¶æœˆé–“ãƒãƒ‘ãƒ¼ãƒ«ã«è¡Œãã®ã§ã€2019å¹´1æœˆ1æ—¥ã¾ã§ã¯åˆ©ç”¨ã§ãã¾ã›ã‚“
+                    </p>
+                </div>
+                <div class="item">
+                    <img src="{{asset('images/dist/user1-128x128.jpg')}}" alt="user image" class="online">
+                    <p class="message">
+                        <a href="#" class="name">
+                            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 12:15</small>
+                            Admin</a>
+                        Thank you for the information.Please let us know after you returned.<br/>
+                        æƒ…å ±ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã—ãŸã€‚è¿”å“å¾Œã«ãŠçŸ¥ã‚‰ã›ãã ã•ã„
+                    </p>
+                </div>
+            </div>
+            <!-- /.attachment -->
+
+            <!-- /.item -->
+
+
         </div>
-        <!-- /.col -->
+    </div>
+    <!-- /.col -->
     </div>
     <!-- /.row -->
 @endsection
