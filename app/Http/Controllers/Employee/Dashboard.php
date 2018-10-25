@@ -11,6 +11,7 @@ use App\Models\Raw;
 use Session;
 use App\Models\Company;
 use DB;
+use App\Models\EmployeeLogin;
 
 
 class Dashboard extends Controller
@@ -60,9 +61,11 @@ class Dashboard extends Controller
 //                    array_push($events, $datum);
                 }
             }
+            $companyName = Company::find($company);
             $events['red'] = $red;
             $events['green'] = $green;
             $events['date'] = $date;
+            $events['company'] = $companyName->name;
 //            dd($events['red']);
             echo json_encode($events);
         }
@@ -171,4 +174,21 @@ class Dashboard extends Controller
 ////            your awesome code should be here
 //        }
 //    }
+
+    public function primary()
+    {
+        return view('employees_dashboard.choose_primary');
+    }
+
+    public function  selectPrimary(Request $request , $id)
+    {
+        $emp = \Session::get('username');
+        $employee = EmployeeLogin::where('psi_number', $emp)->first();
+        $employee->primary_company = $id;
+        $employee->save();
+
+        $request->session()->put('employee_primary_company', $id);
+        return redirect()->route('employee.dashboard');
+
+    }
 }

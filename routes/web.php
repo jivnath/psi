@@ -19,6 +19,8 @@ Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationContr
 Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
 Route::get('/primary/{id}', ['as' => 'selectPrimary', 'uses' => 'UserController@selectPrimary']);
 Route::get('/select/primary', ['as' => 'primary', 'uses' => 'UserController@primary']);
+Route::get('/primarySub/{id}', ['as' => 'selectPrimarySub', 'uses' => 'Employee\Dashboard@selectPrimary']);
+Route::get('select/primarySub', ['as' => 'primarySub', 'uses' => 'Employee\Dashboard@primary']);
 
 Route::get('employee/login', 'Auth\EmployeeLoginController@getLogin');
 Route::post('employee/login', ['as' => 'employee.login', 'uses' => 'Auth\EmployeeLoginController@login']);
@@ -26,14 +28,15 @@ Route::get('employee/logout', ['as' => 'employee.logout', 'uses' => 'Auth\Employ
 
 Auth::routes();
 Route::group(['middleware'=> ['employee']], function(){
-    Route::prefix('employee')->group(function () {
-        Route::get('/dashboard', ['as' => 'employee.dashboard', 'uses' => 'Employee\Dashboard@index']);
-        Route::get('/getDataForCalendar', ['as' => 'getDataForCalendar', 'uses' => 'Employee\Dashboard@getDataForCalendar']);
-        Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
-        Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
-        Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
-        Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
-
+    Route::group(['middleware'=>['check.employee.primary']], function(){
+        Route::prefix('employee')->group(function () {
+            Route::get('/dashboard', ['as' => 'employee.dashboard', 'uses' => 'Employee\Dashboard@index']);
+            Route::get('/getDataForCalendar', ['as' => 'getDataForCalendar', 'uses' => 'Employee\Dashboard@getDataForCalendar']);
+            Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
+            Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
+            Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
+            Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
+        });
     });
 });
 Route::group(['middleware' => ['auth']], function () {

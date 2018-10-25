@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmployeeLogin;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -125,6 +126,11 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_account_number', $employee->account_number);
             $request->session()->put('employee_expiration_date', $employee->expiration_date);
             $request->session()->put('employee_account_registration', $employee->account_registration);
+
+            $primary = EmployeeLogin::where('psi_number', $request->psi_number)->first();
+            $request->session()->put('employee_primary_company', $primary->primary_company);
+            $companies = Raw::getCompaniesHavingShift();
+            $request->session()->put('companies', $companies);
 
             return redirect()->intended($this->redirectPath());
         } else {
