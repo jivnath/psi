@@ -1959,6 +1959,7 @@ return array(
     'Illuminate\\View\\ViewFinderInterface' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
     'Illuminate\\View\\ViewName' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewName.php',
     'Illuminate\\View\\ViewServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+<<<<<<< HEAD
     'Intervention\\Image\\AbstractColor' => $vendorDir . '/intervention/image/src/Intervention/Image/AbstractColor.php',
     'Intervention\\Image\\AbstractDecoder' => $vendorDir . '/intervention/image/src/Intervention/Image/AbstractDecoder.php',
     'Intervention\\Image\\AbstractDriver' => $vendorDir . '/intervention/image/src/Intervention/Image/AbstractDriver.php',
@@ -2087,6 +2088,8 @@ return array(
     'Intervention\\Image\\Size' => $vendorDir . '/intervention/image/src/Intervention/Image/Size.php',
     'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => $vendorDir . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
     'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => $vendorDir . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
+=======
+>>>>>>> cdd31aa5d90d04037cfe35977f78262e44b96bfb
     'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => $vendorDir . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
     'Laravel\\Tinker\\ClassAliasAutoloader' => $vendorDir . '/laravel/tinker/src/ClassAliasAutoloader.php',
     'Laravel\\Tinker\\Console\\TinkerCommand' => $vendorDir . '/laravel/tinker/src/Console/TinkerCommand.php',
@@ -3005,6 +3008,8 @@ return array(
     'PhpParser\\Builder\\Namespace_' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Namespace_.php',
     'PhpParser\\Builder\\Param' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Param.php',
     'PhpParser\\Builder\\Property' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Property.php',
+    'PhpParser\\Builder\\TraitUse' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/TraitUse.php',
+    'PhpParser\\Builder\\TraitUseAdaptation' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/TraitUseAdaptation.php',
     'PhpParser\\Builder\\Trait_' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Trait_.php',
     'PhpParser\\Builder\\Use_' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Builder/Use_.php',
     'PhpParser\\Comment' => $vendorDir . '/nikic/php-parser/lib/PhpParser/Comment.php',

@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'check.primary.company' => \App\Http\Middleware\CheckPrimaryCompany::class,
         'employee' => \App\Http\Middleware\Employee::class,
         'check.user' => \App\Http\Middleware\CheckUser::class,
+        'check.employee.primary' => \App\Http\Middleware\CheckEmployeePrimary::class,
     ];
 }

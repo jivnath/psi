@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Models\DessertSheet;
 use App\Models\Employee;
+use App\Models\EmployeeLogin;
 use App\Models\Raw;
 use DB;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -77,4 +79,5 @@ class DashboardController extends Controller
         }
         return $desser_report;
     }
+    
 }
