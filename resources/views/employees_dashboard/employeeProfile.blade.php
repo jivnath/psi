@@ -1,13 +1,13 @@
 @extends('layouts.app')
 <style>
-    .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-        display: block;
-        max-width: 100%;
-        height: auto;
-    }
-    .img-circle {
-        border-radius: 50%;
-    }
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.img-circle {
+    border-radius: 50%;
+}
 </style>
 
 @section('title', '| Profile')
@@ -80,6 +80,9 @@
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
                     <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
 
+                   <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
+
+
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -93,7 +96,11 @@
                 <!-- /.box-header -->
                 <div class="box-body">
 
+<<<<<<< HEAD
                     <!--     <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong> -->
+=======
+               <!--     <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong> -->
+>>>>>>> cdd31aa5d90d04037cfe35977f78262e44b96bfb
 
                     <p class="text-muted">{{$employee_address_ip}}</p>
 
@@ -102,7 +109,11 @@
                     <p class="text-muted">{{$employee_work_location}}</p>
                     <hr>
 
+<<<<<<< HEAD
                     <strong><i class="fas fa-mobile-alt"></i> Contact Number</strong>
+=======
+					<strong><i class="fas fa-mobile-alt"></i> Contact Number</strong>
+>>>>>>> cdd31aa5d90d04037cfe35977f78262e44b96bfb
 
                     <p class="text-muted">{{$employee_cell_no}}</p>
                     <hr>
@@ -150,13 +161,22 @@
                                     </select>
                                 </div>
                                 <br/>
+                                 <div class="form-group">
+                                  <label for="exampleInputFile" class="col-sm-3 control-label">Browse File</label>
+                                   <div class="col-sm-12">
+                                  <input type="file" id="exampleInputFile">
+                                  </div>
+                                </div>
                                 <div class="form-group">
+<<<<<<< HEAD
                                     <label for="exampleInputFile" class="col-sm-3 control-label">Browse File</label>
                                     <div class="col-sm-12">
                                         <input type="file" id="exampleInputFile">
                                     </div>
                                 </div>
                                 <div class="form-group">
+=======
+>>>>>>> cdd31aa5d90d04037cfe35977f78262e44b96bfb
                                     <label for="language" class="col-sm-3 control-label">Message</label>
                                     <div class="col-sm-12">
                                         <textarea cols="70" rows="10"></textarea>
@@ -175,6 +195,7 @@
                     <div class="active tab-pane" id="about_me">
                         <div class="post clearfix">
                             <table class="table table-striped">
+<<<<<<< HEAD
                                 @if($employee_name!=null)
                                     <tr>
                                         <td>Name</td>
@@ -397,6 +418,111 @@
                                             <td>{{ $employee_operating_status }}</td>
                                         </tr>
                                     @endif
+=======
+                                <tr>
+                                    <td>Name</td>
+                                    <td>{{$employee_name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>PSI-S No.</td>
+                                    <td>{{$employee_psi_number}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phoetic Kanji</td>
+                                    <td>{{$employee_phoetic_kanji}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Work Location</td>
+                                    <td>{{$employee_work_location}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Birthday</td>
+                                    <td>{{$employee_birth_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Register Officer</td>
+                                    <td>{{$employee_reg_officer}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hire Date</td>
+                                    <td>{{$employee_hire_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Country Citizenship</td>
+                                    <td>{{$employee_country_citizenship}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Hourly Wage</td>
+                                    <td>{{$employee_hourly_wage}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Residence Status</td>
+                                    <td>{{ $employee_status_residence}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Base</td>
+                                    <td>{{ $employee_base}}</td>
+                                </tr>
+                                <tr>
+                                    <td>For Work</td>
+                                    <td>{{  $employee_for_work}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Optional Management</td>
+                                    <td>{{  $employee_opt_management}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Contract Collection</td>
+                                    <td>{{ $employee_contract_collection}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Residence Confirmation</td>
+                                    <td>{{ $employee_res_confirmation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Postal Code</td>
+                                    <td>{{ $employee_postal_code}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Business Content</td>
+                                    <td>{{ $employee_business_content}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Dispatch Destination</td>
+                                    <td>{{ $employee_dispatch_destination}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Name of facility</td>
+                                    <td>{{ $employee_name_of_facility}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Path</td>
+                                    <td>{{ $employee_path}}</td>
+                                </tr>
+                                <tr>
+                                    <td>One Way Rate</td>
+                                    <td>{{ $employee_one_way_rate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pass Price</td>
+                                    <td>{{ $employee_pass_price}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hourly Employee</td>
+                                    <td>{{ $employee_hourly_employee}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Dependent Exemption</td>
+                                    <td>{{ $employee_dependent_exemption}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Notes</td>
+                                    <td>{{ $employee_notes}}</td>
+                                </tr>
+>>>>>>> cdd31aa5d90d04037cfe35977f78262e44b96bfb
 
                             </table>
                         </div>
@@ -410,6 +536,7 @@
         </div>
         <div class="col-md-3 box box-info">
             <div class="box-header with-border">
+<<<<<<< HEAD
                 <h3 class="box-title">Activity</h3>
             </div>
             <div class="box-body chat" id="chat-box">
@@ -442,6 +569,41 @@
             <!-- /.item -->
 
 
+=======
+              <h3 class="box-title">Activity</h3>
+            </div>
+            <div class="box-body chat" id="chat-box">
+              <!-- chat item -->
+              <div class="item">
+                <img src="{{asset('images/dist/user4-128x128.jpg')}}" alt="user image" class="online">
+
+                <p class="message">
+                  <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
+
+                    <?= $employee_name?>
+                  </a>
+                 I am going to nepal for 2 months so i am not avialable till 01 Jan 2019<br/> 
+                 私は2ヶ月間ネパールに行くので、2019年1月1日までは利用できません
+                </p>
+                </div>
+                <div class="item">
+                <img src="{{asset('images/dist/user1-128x128.jpg')}}" alt="user image" class="online">
+                  <p class="message">
+                <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 12:15</small>
+                    Admin</a>
+                    Thank you for the information.Please let us know after you returned.<br/>
+                  情報ありがとうございました。返品後にお知らせください
+                  </p>
+                </div>
+                </div>
+                <!-- /.attachment -->
+              
+              <!-- /.item -->
+
+            </div>
+>>>>>>> cdd31aa5d90d04037cfe35977f78262e44b96bfb
         </div>
     </div>
     <!-- /.col -->

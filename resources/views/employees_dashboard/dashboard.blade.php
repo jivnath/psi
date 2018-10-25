@@ -8,40 +8,27 @@
             overflow-x: visible !Important;
         }
     </style>
+    @php $primary = \Session::get('employee_primary_company'); @endphp
 
     <section class="content box box-success">
-        <div class="col-md-6 offset-3">
-            <div class="form-group" style="margin-top: 15px;">
-                <label for="subsection"><h5>Sub-Section</h5></label>
-                <select class="form-control input-shorter" id="companies">
-                    <option value="0">--Select sub section--</option>
-                    @foreach($companies as $company)
-                        <option name="{{$company->name}}" value="{{$company->id}}">{{$company->name}}</option>
-                    @endforeach
-                </select>
+        <div class="row">
+            <div class="col-md-4" id="sub_section_name"></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="subsection"><h5>Sub-Section</h5></label>
+                    <select class="form-control input-shorter" id="companies">
+                        @foreach($companies as $company)
+                            <option
+                                <?=($company->id == $primary) ? 'selected="selected"' : ''?> name="{{$company->name}}"
+                                value="{{$company->id}}">{{$company->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
         </div>
         <div id="loadingDiv" style="display: none"><h5><b>Loading, Please wait...</b></h5></div>
-        <div class="row" id="calendarDiv" style="display: none">
-        {{--<div class="col-md-3">--}}
-        {{--<div class="box box-solid">--}}
-        {{--<div class="box-header with-border">--}}
-        {{--<h4 class="box-title">Last Updates</h4>--}}
-        {{--</div>--}}
-        {{--<div class="box-body">--}}
-        {{--<!-- the events -->--}}
-        {{--<div id="external-events">--}}
-        {{--<div class="external-event bg-green">Cancel Last Day</div>--}}
-        {{--<div class="external-event bg-yellow">Scheduled On Sept</div>--}}
-
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--<!-- /.box-body -->--}}
-        {{--</div>--}}
-        {{--<!-- /. box -->--}}
-
-        {{--</div>--}}
-        <!-- /.col -->
+        <div class="row" id="calendarDiv">
             <div class="col-md-12">
                 <div class="box box-primary">
                     <div class="box-body no-padding">
@@ -78,7 +65,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="submit" class="btn btn-primary" disabled> Apply </button>
+                        <button id="submit" class="btn btn-primary" disabled> Apply</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </form>
@@ -183,7 +170,7 @@
                         dataType: 'json',
                         success: function (data) {
                             // alert(data);
-                            $('#remaining').html('<b id="remainingHours" name="'+data["hours"]+'">Remaining Hours: ' + data["hours"] + '</b>');
+                            $('#remaining').html('<b id="remainingHours" name="' + data["hours"] + '">Remaining Hours: ' + data["hours"] + '</b>');
                             $('#remaining').show();
                             $('#myModalLabel').html(data['name'] + '<h6>(' + moment(date).format('YYYY-MM-DD') + ')</h6>');
 
@@ -213,71 +200,69 @@
                 editable: true,
             });
         });
-        $("#companies").change(function () {
+
+        function getData() {
             var company = $("#companies").val();
-            if (company != 0) {
-
-                $.ajax({
-                    type: "GET",
-                    url: "{{route('getDataForCalendar')}}",
-                    dataType: "json",
-                    data: {'company': company},
-                    beforeSend: function () {
-                        $("#calendarDiv").show();
-                        $("#loadingDiv").show();
-                    },
-                    success: function (data) {
-                        $("#loadingDiv").hide();
-                        let i;
-                        $('#calendar').fullCalendar('removeEvents', function () {
-                            return true;
-                        });
-                        for (i = 0; i < data['date'].length; i++) {
-                            $('#calendar').fullCalendar('renderEvent', {
-                                title: 'Worked on this day',
-                                start: data['date'][i].date,
-                                allDay: true,
-                                old: 1,
-                                companyId: data['date'][i].company_id,
-                                backgroundColor: '#2a7ce9', //blue
-                                borderColor: '#2a7ce9' //blue
-                            }, 'stick');
-                        }
-                        for (i = 0; i < data['red'].length; i++) {
-                            console.log(data['red'][i].hours);
-                            $('#calendar').fullCalendar('renderEvent', {
-                                title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
-                                id: data['red'][i].rel_id,
-                                start: data['red'][i].date,
-                                hours: data['red'][i].hours,
-                                allDay: true,
-                                selected: 'no',
-                                company: data['red'][i].company_name,
-                                backgroundColor: '#f56954', //red
-                                borderColor: '#f56954' //red
-                            }, 'stick');
-                        }
-                        for (i = 0; i < data.green.length; i++) {
-
-
-                            $('#calendar').fullCalendar('renderEvent', {
-                                title: data['green'][i].start_time + ' - ' + data['green'][i].end_time,
-                                id: data['green'][i].rel_id,
-                                start: data['green'][i].date,
-                                hours: data['green'][i].hours,
-                                allDay: true,
-                                selected: 'yes',
-                                company: data['green'][i].company_name,
-                                backgroundColor: '#2ac633', //green
-                                borderColor: '#2ac633' //green
-                            }, 'stick');
-                        }
+            $.ajax({
+                type: "GET",
+                url: "{{route('getDataForCalendar')}}",
+                dataType: "json",
+                data: {'company': company},
+                beforeSend: function () {
+                    // $("#calendarDiv").show();
+                    $("#loadingDiv").show();
+                },
+                success: function (data) {
+                    $("#loadingDiv").hide();
+                    $("#sub_section_name").html('<h2><b>'+data['company']+'</b></h2>');
+                    let i;
+                    $('#calendar').fullCalendar('removeEvents', function () {
+                        return true;
+                    });
+                    for (i = 0; i < data['date'].length; i++) {
+                        $('#calendar').fullCalendar('renderEvent', {
+                            title: 'Worked on this day',
+                            start: data['date'][i].date,
+                            allDay: true,
+                            old: 1,
+                            companyId: data['date'][i].company_id,
+                            backgroundColor: '#2a7ce9', //blue
+                            borderColor: '#2a7ce9' //blue
+                        }, 'stick');
                     }
-                });
-            }
-            else {
-                $("#calendarDiv").hide();
-            }
+                    for (i = 0; i < data['red'].length; i++) {
+                        console.log(data['red'][i].hours);
+                        $('#calendar').fullCalendar('renderEvent', {
+                            title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
+                            id: data['red'][i].rel_id,
+                            start: data['red'][i].date,
+                            hours: data['red'][i].hours,
+                            allDay: true,
+                            selected: 'no',
+                            company: data['red'][i].company_name,
+                            backgroundColor: '#f56954', //red
+                            borderColor: '#f56954' //red
+                        }, 'stick');
+                    }
+                    for (i = 0; i < data.green.length; i++) {
+                        $('#calendar').fullCalendar('renderEvent', {
+                            title: data['green'][i].start_time + ' - ' + data['green'][i].end_time,
+                            id: data['green'][i].rel_id,
+                            start: data['green'][i].date,
+                            hours: data['green'][i].hours,
+                            allDay: true,
+                            selected: 'yes',
+                            company: data['green'][i].company_name,
+                            backgroundColor: '#2ac633', //green
+                            borderColor: '#2ac633' //green
+                        }, 'stick');
+                    }
+                }
+            });
+        }
+
+        $(function () {
+            $('#companies').on('change', getData).trigger('change');
         });
 
         $('#submit').click(function () {
@@ -320,8 +305,7 @@
                 }
                 $("#message").show();
             }
-            else
-            {
+            else {
                 $("#message").hide();
                 $("#submit").attr("disabled", true);
             }
