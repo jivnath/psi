@@ -266,6 +266,7 @@ WHERE
             date,
             time,
             ( normal ) total_require,
+            ctt.schedule_session_id,
             ctt.company_id,
             (
                 SELECT
@@ -296,6 +297,7 @@ WHERE
                 'total_require' => $row->total_require,
                 'date' => $row->date,
                 'time' => $row->time,
+                'schedule_session_id' => $row->schedule_session_id,
                 'dessert_info' => \App\Models\DessertSheet::select('employees.*', 'psi_dessert_entry.*', 'psi_dessert_entry.id As psi_id')->join('employees', 'psi_dessert_entry.staff_no', '=', 'employees.psi_number')
                     ->where('cts_id', $row->id)
                     ->get()

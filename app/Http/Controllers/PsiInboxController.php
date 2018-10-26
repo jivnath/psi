@@ -43,7 +43,7 @@ class PsiInboxController extends Controller
         $inbox->status = 1;
         $inbox->save();
 
-//        Session::flash('success', 'Message sent!');
-        return redirect()->back()->with('success', 'Message sent!');
+        Session::flash('success', 'Message sent!');
+        return redirect()->route('employee.profile');
     }
 }
