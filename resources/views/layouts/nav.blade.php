@@ -283,10 +283,10 @@
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting" style="margin-left: -50%;">
                                                     <div style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
-                                                    <a class="dropdown-item text-center" href="{{route('viberAlert')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
-                                                    <a class="dropdown-item text-center" href="{{route('viberAlert')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
+                                                    <a class="dropdown-item text-center" href="{{url('/smessage')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
+                                                    <a class="dropdown-item text-center" href="{{url('/smessage')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
                                                     </div>
-                                                    <a class="footer_message dropdown-item text-center">See All Messages</a>
+                                                <a class="footer_message dropdown-item text-center" href="{{url('/messages')}}">See All Messages</a>
                                                 </div>
                                             </li>
 
