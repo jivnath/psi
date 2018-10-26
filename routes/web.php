@@ -34,7 +34,7 @@ Route::group(['middleware'=> ['employee']], function(){
             Route::get('/getDataForCalendar', ['as' => 'getDataForCalendar', 'uses' => 'Employee\Dashboard@getDataForCalendar']);
             Route::post('/storeEmployeeApplication', ['as' => 'storeEmployeeApplication', 'uses' => 'Employee\Dashboard@storeEmployeeApplication']);
             Route::get('/getCompanyName', ['as'=>'getCompanyName', 'uses'=>'Employee\Dashboard@getCompanyName']);
-            Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);            
+            Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
             Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
             Route::post('/storeMessage', ['as' => 'inbox.store', 'uses' => 'PsiInboxController@store']);
 
@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
         });
-    
+
         Route::prefix('report')->group(function(){
             Route::get('/employee_report', ['as' => 'employee.detail.report', 'uses' => 'EmployeeController@FetchEmployeeDetails']);
         });
@@ -108,7 +108,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('group/add', ['as' => 'group.add', 'uses' => 'UserGroupController@addGroup']);
             Route::post('group/rename', ['as'=>'group.rename', 'uses' => 'UserGroupController@renameGroup']);
             });
-            
+
             Route::prefix('permission_module')->group(function(){
             Route::match(['get', 'post'],'/roles/update-{role_id}', ['as' => 'update.role', 'uses' => 'PsiPermissionController@updateRole']);
 
@@ -196,6 +196,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/alert/setting', ['as' => 'viberAlert', 'uses' => 'ViberAlertController@setting']);
             Route::post('/alert/setting', ['as' => 'storeSetting', 'uses' => 'ViberAlertController@storeSetting']);
         });
+            Route::prefix('notification')->group(function () {
+                Route::get('/inbox_data', ['as' => 'notificatin.inbox', 'uses' => 'NotificationHandler@get_current_message']);
+            });
     });
     //});
 });

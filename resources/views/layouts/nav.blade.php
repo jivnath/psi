@@ -277,17 +277,23 @@
                                                                              data-toggle="dropdown" aria-haspopup="true"
                                                                              aria-expanded="false" v-pre> <i
                                                             class="fas fa-envelope"></i>
-                                                   <span class="label label-success" style="position: absolute;top: 8px;right: 7px;text-align: center;font-size: 9px;padding: 2px 3px;line-height: .9;">4</span>
+                                                   <span class="label label-success total_inbox_messages" style="position: absolute;top: 8px;right: 7px;text-align: center;font-size: 9px;padding: 2px 3px;line-height: .9;">{{ $total=\App\Models\PsiInbox::count()}}</span>
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting" style="margin-left: -50%;">
-                                                    <div style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
-                                                    <a class="dropdown-item text-center" href="{{route('viberAlert')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
-                                                    <a class="dropdown-item text-center" href="{{route('viberAlert')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
-                                                    </div>
-                                                    <a class="footer_message dropdown-item text-center">See All Messages</a>
+                                                     @if($total>0)
+                                                        <div class='messages_space' style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
+
+                                                        </div>
+                                                        <a class="footer_message dropdown-item text-center">See All Messages</a>
+                                                     @endif
+                                                     @empty($total)
+                                                     <a class="footer_message dropdown-item text-center">Messages not available</a>
+                                                     @endempty
+
                                                 </div>
+
                                             </li>
 
                                             <li class="nav-item dropdown"><a id="setting"
@@ -358,6 +364,7 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
+            	update();
                 $('.dropdown-menu a.test').on("click", function (e) {
                     $(this).next('ul').toggle();
                     e.stopPropagation();
@@ -412,4 +419,19 @@
                         }
                     });
             });
+            function update() {
+                to_fill='';
+                $.get("{{route('notificatin.inbox')}}", function(data, status){
+                    var obj=data;
+                    $('.total_inbox_messages').html(obj.count);
+                    if(obj.status!='fail'){
+                        $.each(obj.data, function(k, v) {
+                        to_fill +='<a class="dropdown-item text-center" href="" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
+                        });
+                        $('.messages_space').html(to_fill);
+                    }
+
+                });
+            }
+            setInterval(update, 10000); //every 50 secs
         </script>
