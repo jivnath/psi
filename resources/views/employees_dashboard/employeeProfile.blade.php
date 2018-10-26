@@ -163,7 +163,8 @@
 
                                     <label for="language" class="col-sm-3 control-label">Message</label>
                                     <div class="col-sm-12">
-                                        <input type="textarea" class="form-control" name="message" required>
+                                        <textarea name="message" cols="82%" rows="10" required></textarea>
+                                        {{--<input type="text" style="height: 200px" class="form-control" name="message" required>--}}
                                     </div>
                                 </div>
 
