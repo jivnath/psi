@@ -156,14 +156,14 @@
                                  <div class="form-group">
                                   <label for="exampleInputFile" class="col-sm-3 control-label">Browse File</label>
                                    <div class="col-sm-12">
-                                  <input type="file" id="exampleInputFile">
-                                  </div>
+                                       <input type="file" class="form-control" name="cfile">
+                                   </div>
                                 </div>
                                 <div class="form-group">
 
                                     <label for="language" class="col-sm-3 control-label">Message</label>
                                     <div class="col-sm-12">
-                                        <input type="file" class="form-control" name="cfile">
+                                        <input type="textarea" class="form-control" name="message" required>
                                     </div>
                                 </div>
 
