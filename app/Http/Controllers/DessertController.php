@@ -12,6 +12,7 @@ use App\Models\CompanyTimeTable;
 use App\Models\PsiSelfSheetComments;
 use App\Models\CompanyTimeSchedule;
 use DB;
+use App\Models\User;
 
 
 class DessertController extends Controller
@@ -58,7 +59,9 @@ class DessertController extends Controller
 
                 $date = $request->get('selected_date');
                 $dessert = Raw::getDessertInfo($id, $date);
-                return view('sheets.dessert_view', compact('dessert'));
+                $userlist=User::all();
+
+                return view('sheets.dessert_view', compact('dessert','userlist'));
             }
         }
     }
