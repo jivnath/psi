@@ -12,10 +12,10 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -141,6 +141,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         ),
         'I' => 
         array (
+            'Intervention\\Image\\' => 19,
             'Illuminate\\' => 11,
         ),
         'G' => 
@@ -332,6 +333,10 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
         ),
+        'Intervention\\Image\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
+        ),
         'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
@@ -481,6 +486,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Http\\Controllers\\LeaderController' => __DIR__ . '/../..' . '/app/Http/Controllers/LeaderController.php',
         'App\\Http\\Controllers\\PagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/PagesController.php',
         'App\\Http\\Controllers\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermissionController.php',
+        'App\\Http\\Controllers\\PsiInboxController' => __DIR__ . '/../..' . '/app/Http/Controllers/PsiInboxController.php',
         'App\\Http\\Controllers\\PsiPermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PsiPermissionController.php',
         'App\\Http\\Controllers\\PsiViberStoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/PsiViberStoryController.php',
         'App\\Http\\Controllers\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleController.php',
@@ -507,7 +513,6 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Middleware\\checkPrimaryCompany' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckPrimaryCompany.php',
         'App\\Http\\Requests\\ExcelReader' => __DIR__ . '/../..' . '/app/Http/Requests/ExcelReader.php',
-        'App\\Model\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\AlertSetting' => __DIR__ . '/../..' . '/app/Models/AlertSetting.php',
         'App\\Models\\Audit' => __DIR__ . '/../..' . '/app/Models/Audit.php',
         'App\\Models\\Company' => __DIR__ . '/../..' . '/app/Models/Company.php',
@@ -526,11 +531,13 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'App\\Models\\Leader' => __DIR__ . '/../..' . '/app/Models/Leader.php',
         'App\\Models\\Model' => __DIR__ . '/../..' . '/app/Models/Model.php',
         'App\\Models\\PermissionModel' => __DIR__ . '/../..' . '/app/Models/PermissionModel.php',
+        'App\\Models\\PsiInbox' => __DIR__ . '/../..' . '/app/Models/PsiInbox.php',
         'App\\Models\\PsiSelfSheetComments' => __DIR__ . '/../..' . '/app/Models/PsiSelfSheetComments.php',
         'App\\Models\\PsiViberCommand' => __DIR__ . '/../..' . '/app/Models/PsiViberCommand.php',
         'App\\Models\\PsiViberStory' => __DIR__ . '/../..' . '/app/Models/PsiViberStory.php',
         'App\\Models\\PsiViewCustimizeModel' => __DIR__ . '/../..' . '/app/Models/PsiViewCustimizeModel.php',
         'App\\Models\\Raw' => __DIR__ . '/../..' . '/app/Models/Raw.php',
+        'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\RolesToPermission_rel' => __DIR__ . '/../..' . '/app/Models/RolesToPermission_rel.php',
         'App\\Models\\ShiftMasterData' => __DIR__ . '/../..' . '/app/Models/ShiftMasterData.php',
         'App\\Models\\SkillMaster' => __DIR__ . '/../..' . '/app/Models/SkillMaster.php',
@@ -2405,6 +2412,7 @@ class ComposerStaticInit7a58b3dae15c51e6bf6d0f1f9e4eea75
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
