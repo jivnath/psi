@@ -39,10 +39,10 @@ class ViberBitIntegration extends Controller
             $sender_img = $input['sender']['avatar'];
 
             // $this->store_story();
-            
+
             $lastest_call = $this->get_latest_story($sender_id);
-            
-            
+
+
             if ($lastest_call == null || (isset($lastest_call->ask) && $lastest_call->ask == $text_received)) {
                 $commands = PsiViberCommand::where('command', $text_received)->first();
                 if ($commands->count()>0) {
@@ -57,7 +57,7 @@ class ViberBitIntegration extends Controller
 
                 // check number to db
                 $employee_data = $this->get_employee_verify($text_received, 'cell_no');
-                
+
                 if ($employee_data->count() > 0) {
                     $commands = PsiViberCommand::where('command', 'mobile_number')->first();
                     $this->store_story([
@@ -72,11 +72,11 @@ class ViberBitIntegration extends Controller
                 }
             } elseif (strlen($text_received) == 8 && $lastest_call->ask == 'mobile_number') {
                 $last_sender_details=$this->get_latest_story($sender_id);
-                
+
                 $next_ans=($last_sender_details->ans)??$last_sender_details->ans;
                 $employee_data = $this->get_employee_verify($text_received, 'birthdate',$next_ans);
-                
-               
+
+
                 if ($employee_data->count() > 0) {
                     $employee_data_ref=$employee_data->first();
                     $commands = PsiViberCommand::where('command', 'registration_complete')->first();
@@ -88,7 +88,7 @@ class ViberBitIntegration extends Controller
                     $message_to_reply = $commands->execute_en.'('.$commands->execute_ja.')';
                     list($normal_password,$hash_pass)=explode('~~',$this->generatePassword());
                     $store_log=$this->store_logins($next_ans,$hash_pass,$sender_id);
-                    
+
                     if(!$store_log)
                         $message_to_reply ='Username and password has already been sent(ユーザー名とパスワードは既に送信されています)';
                     else
@@ -103,10 +103,10 @@ class ViberBitIntegration extends Controller
             }
             elseif($lastest_call->ask=='mobile_number' && $text_received=='register'){
                 $commands = PsiViberStory::where('ask', 'register')->latest()->count();
-                
+
                 if($commands>0){
                      $commands = PsiViberCommand::where('command', 'mobile_number')->first();
-                     
+
                     $this->store_story([
                         'sender_id' => $sender_id,
                         'text_received' => 'mobile_number',
@@ -114,8 +114,8 @@ class ViberBitIntegration extends Controller
                     ]);
                     $message_to_reply = $commands->execute_en;
                 }
-                
-                
+
+
             }
             if ($text_received == 'hi') {
                 $message_to_reply = 'hello ' . $sender_name;
@@ -134,7 +134,7 @@ class ViberBitIntegration extends Controller
             $data['receiver'] = $sender_id;
             $data['type'] = "text";
             $data['text'] = $message_to_reply;
-           
+
             $this->postToViberServer($data);
         }
     }
@@ -176,7 +176,7 @@ class ViberBitIntegration extends Controller
 
     private function store_story($data)
     {
-        
+
         $story_obj = new PsiViberStory();
         $story_obj->sender_id = $data['sender_id'];
         $story_obj->ask = $data['text_received'];
@@ -203,8 +203,8 @@ class ViberBitIntegration extends Controller
                $response .= $key.'='.$row.PHP_EOL;
         }
         return $response;
-        
-        
+
+
     }
     private function generatePassword(){
         $password=str_random(8);
@@ -217,7 +217,7 @@ class ViberBitIntegration extends Controller
         try{
         $obj_add = EmployeeLogin::updateOrCreate(
                     [
-                        'psi_number' => $username, 
+                        'psi_number' => $username,
                         'password' => $password,
                         'viber_id'=>$sender_id
                     ]
@@ -226,6 +226,6 @@ class ViberBitIntegration extends Controller
         }catch(\Exception $e){
             return false;//$e->getMessage();
         }
-        
+
     }
 }
