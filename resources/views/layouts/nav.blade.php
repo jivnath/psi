@@ -286,12 +286,12 @@
                                                     <a class="dropdown-item text-center" href="{{url('/smessage')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
                                                     <a class="dropdown-item text-center" href="{{url('/smessage')}}" style='white-space:normal;border-bottom: 1px solid;width: 235px'>Pramod requested to change residence card at <i class="fa fa-clock-o" aria-hidden="true"></i> 2:00 PM</a>
                                                     </div>
-                                                <a class="footer_message dropdown-item text-center" href="{{url('/messages')}}">See All Messages</a>
                                                      @if($total>0)
                                                         <div class='messages_space' style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
 
                                                         </div>
-                                                        <a class="footer_message dropdown-item text-center">See All Messages</a>
+                                                        <a class="footer_message dropdown-item text-center" href="{{url('/messages')}}">See All Messages</a>
+
                                                      @endif
                                                      @empty($total)
                                                      <a class="footer_message dropdown-item text-center">Messages not available</a>
