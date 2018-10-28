@@ -14,7 +14,6 @@
                 <table class="table" id='rda_table'>
                     <thead>
                         <tr>
-                            <th>User</th>
                             <th>PSI-S_No</th>
                             <th>Activity</th>
                             <th>Date</th>
@@ -26,7 +25,6 @@
                     <tbody>
                         @foreach ($recent_dessert_activity as $rda_info)
                         <tr>
-                            <td>{{$rda_info->user}}</td>
                             <td>{{$rda_info->staff_no}}</td>
                             <td>{{$rda_info->activity}}</td>
                             <td>{{$rda_info->date}}</td>

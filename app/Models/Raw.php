@@ -4,6 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\Models\Company;
+use Session;
 
 class Raw extends Model
 {
@@ -33,6 +34,14 @@ class Raw extends Model
                 WHERE
                     l.company_id = c1.id
             ) team_leader,
+            (
+                SELECT
+                	emp.name 
+                FROM
+                	employees emp
+                WHERE
+                	emp.psi_number = team_leader
+            ) employee,
             CASE
                     WHEN c1.id IS NULL
                          AND c2.id IS NULL
@@ -58,6 +67,7 @@ where     p.master_id IS NULL
         $companies = DB::select($sql);
 
         foreach ($companies as $row) {
+            $manager = Employee::where('psi_number', $row->team_leader)->first();
             $fetch_detail[$row->parent_name][$row->child_name_1][$row->child_name_2][][] = [
                 'contact_p' => ($row->contact_num) ? $row->contact_num : '...',
                 'contact_c1' => ($row->contact_c1) ? $row->contact_c1 : '...',
@@ -65,7 +75,8 @@ where     p.master_id IS NULL
                 'address_p' => ($row->address_p) ? $row->address_p : '...',
                 'address_c1' => ($row->address_c1) ? $row->address_c1 : '...',
                 'address_c2' => ($row->address_c2) ? $row->address_c2 : '...',
-                'team_leader' => ($row->team_leader) ?? $row->team_leader
+                'team_leader' => ($row->team_leader) ?? $row->team_leader,
+                'manager' => ($row->employee) ?? $row->employee
             ];
         }
         return $fetch_detail;
@@ -96,7 +107,7 @@ where     p.master_id IS NULL
             company_to_employees_rels cte
         WHERE
             cte.cts_id = cts.id
-    ) total_occupied_shift
+     ) total_occupied_shift
 FROM
     company_time_schedules cts,
     company_time_tables ctt
@@ -413,10 +424,10 @@ WHERE
 
     public static function getDessertActivity()
     {
+        $user = Session::get('user_id');
         $sql = "SELECT
                     id,
                     staff_no,
-                    responsible1 user,
                     conformation_day_before comments,
                     call_medium activity,
                     (
@@ -429,7 +440,8 @@ WHERE
                     ) total_comment,
                     date(created_at) date
                 FROM
-                    `psi_dessert_entry` pde";
+                    `psi_dessert_entry` pde
+                WHERE pde.responsible1 = $user";
         return DB::select($sql);
     }
 
