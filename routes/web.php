@@ -174,6 +174,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
         });
 
+        Route::get('/messages', function(){
+            return view('messages');
+        });
+        
+        Route::get('/smessage', function(){
+            return view('single_message');
+        });
+
         Route::prefix('sheet')->group(function(){
             Route::get('time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
             Route::get('self', ['as' => 'sheet.dessert', 'uses' => 'DessertController@dessert']);
@@ -201,6 +209,7 @@ Route::group(['middleware' => ['auth']], function () {
             });
     });
     //});
+    
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
 
@@ -209,5 +218,7 @@ Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@displ
 Route::get('/hierrchy', function(){
     return view('hierrchy');
 });
+
+
 
 
