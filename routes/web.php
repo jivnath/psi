@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::prefix('report')->group(function(){
             Route::get('/employee_report', ['as' => 'employee.detail.report', 'uses' => 'EmployeeController@FetchEmployeeDetails']);
+            Route::get('/employee_worksheet', ['as' => 'employee.worksheet.report', 'uses' => 'EmployeeController@employeeWorksheet']);
         });
         Route::prefix('column')->group(function(){
                 Route::post('/customize', ['as' => 'customize.field', 'uses' => 'CustomerTableView@saveCustomizedField']);
