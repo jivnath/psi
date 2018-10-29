@@ -177,7 +177,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/messages', function(){
             return view('messages');
         });
-        
+
         Route::get('/smessage', function(){
             return view('single_message');
         });
@@ -209,9 +209,10 @@ Route::group(['middleware' => ['auth']], function () {
             });
     });
     //});
-    
+
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+Route::any('send_viber',['as' => 'viber_send', 'uses' => 'ViberBitIntegration@send_viber']);
 
 Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@display']);
 
