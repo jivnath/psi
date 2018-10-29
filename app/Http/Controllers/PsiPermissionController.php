@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Model\Role;
+use App\Models\Role;
 use App\Models\RolesToPermission_rel;
 use App\Models\UserToPermission_rel;
 use Illuminate\Http\Request;

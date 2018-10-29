@@ -424,12 +424,19 @@ WHERE
 
     public static function getDessertActivity()
     {
+        $cond='';
         $user = Session::get('user_id');
+        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
+            $cond=" AND pde.responsible1 = $user";
+        }
+
         $sql = "SELECT
                     id,
                     staff_no,
                     conformation_day_before comments,
                     call_medium activity,
+                    responsible1,
+                    (select name from users where id=responsible1) operator,
                     (
                         SELECT
                             COUNT(*)
@@ -441,7 +448,7 @@ WHERE
                     date(created_at) date
                 FROM
                     `psi_dessert_entry` pde
-                WHERE pde.responsible1 = $user";
+                WHERE 1=1 $cond";
         return DB::select($sql);
     }
 

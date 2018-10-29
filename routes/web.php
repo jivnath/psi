@@ -205,7 +205,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/alert/setting', ['as' => 'storeSetting', 'uses' => 'ViberAlertController@storeSetting']);
         });
             Route::prefix('notification')->group(function () {
-                Route::get('/inbox_data', ['as' => 'notificatin.inbox', 'uses' => 'NotificationHandler@get_current_message']);
+                Route::get('/inbox_data', ['as' => 'notification.inbox', 'uses' => 'NotificationHandler@get_current_message']);
             });
     });
     //});
