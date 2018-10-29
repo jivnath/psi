@@ -127,7 +127,7 @@
                 select: function (start, end) {
                     $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
                     $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
-                    $('#ModalAdd').modal('show');
+                    // $('#ModalAdd').modal('show');
                 },
                 eventRender: function (event, element) {
                     element.bind('dblclick', function () {
@@ -158,38 +158,52 @@
 
                 },
                 dayClick: function (date, allDay) {
-                    $("#submit").prop('disabled', true);
-                    $("#message").hide();
-                    var company = $("#companies").val();
-                    $('#ModalAdd').show();
-                    $.ajax({
-                        type: 'GET',
-                        url: '{{route('getCompanyName')}}',
-                        data: {'company': company, 'date': moment(date).format('YYYY-MM-DD')},
-                        async: true,
-                        dataType: 'json',
-                        success: function (data) {
-                            // alert(data);
-                            $('#remaining').html('<b id="remainingHours" name="' + data["hours"] + '">Remaining Hours: ' + data["hours"] + '</b>');
-                            $('#remaining').show();
-                            $('#myModalLabel').html(data['name'] + '<h6>(' + moment(date).format('YYYY-MM-DD') + ')</h6>');
-
-                        }
-                    });
-
-                    $('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
-                    $('#shifts').html('');
-                    var select = '<option value="0">--Choose Shift--</option>';
-                    $('#shifts').append(select);
+                    var today = $('#calendar').fullCalendar('getDate');
+                    var newdate = moment(today).format('YYYY-MM-DD');
+                    // alert(newdate);
+                    let i = 0;
                     $('#calendar').fullCalendar('clientEvents', function (event) {
 
-                        if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD')) {
-                            if (event.selected == 'no') {
-                                $('#shifts').append('<option data-Hours="' + event.hours + '" value="' + event.id + '">' + event.title + '</option>')
-                            }
-
+                        if (moment(date).format('YYYY-MM-DD') ==  moment(event.start).format('YYYY-MM-DD') && moment(date).format('YYYY-MM-DD') >= newdate ) {
+                            i = 1;
                         }
                     });
+                    // alert(i);
+                    if(i === 1)
+                    {
+                        // alert(i);
+                        $("#submit").prop('disabled', true);
+                        $("#message").hide();
+                        var company = $("#companies").val();
+                        $('#ModalAdd').show();
+                        $.ajax({
+                            type: 'GET',
+                            url: '{{route('getCompanyName')}}',
+                            data: {'company': company, 'date': moment(date).format('YYYY-MM-DD')},
+                            async: true,
+                            dataType: 'json',
+                            success: function (data) {
+                                // alert(data);
+                                $('#remaining').html('<b id="remainingHours" name="' + data["hours"] + '">Remaining Hours: ' + data["hours"] + '</b>');
+                                $('#remaining').show();
+                                $('#myModalLabel').html(data['name'] + '<h6>(' + moment(date).format('YYYY-MM-DD') + ')</h6>');
+
+                            }
+                        });
+
+                        $('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
+                        $('#shifts').html('');
+                        var select = '<option value="0">--Choose Shift--</option>';
+                        $('#shifts').append(select);
+                        $('#calendar').fullCalendar('clientEvents', function (event) {
+
+                            if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD')) {
+                                if (event.selected == 'no') {
+                                    $('#shifts').append('<option data-Hours="' + event.hours + '" value="' + event.id + '">' + event.title + '</option>')
+                                }
+                            }
+                        });
+                    }
                 },
 
                 eventResize: function (event, dayDelta, minuteDelta, revertFunc) { // si changement de longueur

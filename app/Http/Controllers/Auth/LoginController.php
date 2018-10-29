@@ -48,6 +48,10 @@ class LoginController extends Controller
             $request->session()->put('username', Auth::user()->name);
             $request->session()->put('user_id', Auth::user()->id);
             $request->session()->put('user_language', Auth::user()->language);
+            $user_role = Auth::user()->roles()->pluck('id')->first();
+//            dd($user_role);
+            $request->session()->put('user_role_id', $user_role);
+
 
             $companies = Raw::getSecondLevelCompanies();
 //            $companies = [];
