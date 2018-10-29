@@ -42,7 +42,7 @@ Route::group(['middleware'=> ['employee']], function(){
     });
 });
 Route::group(['middleware' => ['auth']], function () {
- //   Route::group(['middleware'=>['check.user']], function(){
+   Route::group(['middleware'=>['check.user']], function(){
     Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', ['as' => 'employees', 'uses' => 'EmployeeController@index']);
@@ -208,7 +208,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/inbox_data', ['as' => 'notificatin.inbox', 'uses' => 'NotificationHandler@get_current_message']);
             });
     });
-    //});
+    });
 
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);

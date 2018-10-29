@@ -79,5 +79,5 @@ class DashboardController extends Controller
         }
         return $desser_report;
     }
-    
+
 }
