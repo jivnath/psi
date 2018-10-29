@@ -288,7 +288,7 @@
                                                         <div class='messages_space' style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
 
                                                         </div>
-                                                        <a class="footer_message dropdown-item text-center" href="{{url('/messages')}}">See All Messages</a>
+                                                        <a class="footer_message dropdown-item text-center" href="{{route('inbox.messages')}}">See All Requests</a>
 
                                                      @endif
                                                      @empty($total)
@@ -429,7 +429,7 @@
                     $('.total_inbox_messages').html(obj.count);
                     if(obj.status!='fail'){
                         $.each(obj.data, function(k, v) {
-                        to_fill +='<a class="dropdown-item text-center" href="" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
+                        to_fill +='<a class="dropdown-item text-center" href="smessage/'+ k +'" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
                         });
                         $('.messages_space').html(to_fill);
                     }

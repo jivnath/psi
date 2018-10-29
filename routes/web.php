@@ -37,6 +37,10 @@ Route::group(['middleware'=> ['employee']], function(){
             Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
             Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
             Route::post('/storeMessage', ['as' => 'inbox.store', 'uses' => 'PsiInboxController@store']);
+         
+          
+          
+         
 
         });
     });
@@ -174,13 +178,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
         });
 
-        Route::get('/messages', function(){
-            return view('messages');
-        });
-        
-        Route::get('/smessage', function(){
-            return view('single_message');
-        });
+      
+        Route::get('/messages', ['as' => 'inbox.messages', 'uses' => 'PsiInboxController@messages']);
+        Route::get('smessage/{id}', ['as' => 'inbox.smessage', 'uses' => 'PsiInboxController@singleMessage']);
+        Route::put('smessage/{id}', ['as' => 'inbox.update', 'uses' => 'PsiInboxController@update']);
+       
 
         Route::prefix('sheet')->group(function(){
             Route::get('time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
