@@ -21,7 +21,11 @@
                     {{$edit->request_message}}
                 </div>
                 <i class="fas fa-clock" style="color:#004d99;margin-left:80%" ;>{{$edit->message_date}}</i></li>
+                @if($edit->file_upload_path!=null)
+                <a href="{{route('inbox.download',$edit->id)}}" class="btn btn-primary">download</a>
+                {{$edit->file_upload_path}}
                 <hr> 
+                @endif
             {{--<a href="{{url('storage}}',$edit->file_upload_path)}}">Download File</a>--}}
                     <form action="{{route('inbox.update', $edit->id)}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                          @csrf @method('PUT')

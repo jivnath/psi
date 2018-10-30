@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 
+
 //use DB;
 //use Session;
 use Session;
@@ -59,6 +60,9 @@ class PsiInboxController extends Controller
     {
         $edit = PsiInbox::find($id);
         $psi_no = $edit->employeeid; 
+       // $pathToFile = "storage/app/$edit->file_upload_path";
+        //return response()->download($pathToFile);
+        
         $name = Employee::where('psi_number', $psi_no)->first();
         return View::make('single_message')->with(array('edit' => $edit, 'name' => $name));
     }
@@ -76,6 +80,11 @@ class PsiInboxController extends Controller
         $update->save();
 
         return redirect()->route('inbox.messages');
+    }
+    public function download($id)
+    {
+     $d = PsiInbox::find($id);
+     return Storage::download($d->file_upload_path);   
     }
 
 }

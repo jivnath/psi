@@ -182,6 +182,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/messages', ['as' => 'inbox.messages', 'uses' => 'PsiInboxController@messages']);
         Route::get('smessage/{id}', ['as' => 'inbox.smessage', 'uses' => 'PsiInboxController@singleMessage']);
         Route::put('smessage/{id}', ['as' => 'inbox.update', 'uses' => 'PsiInboxController@update']);
+        Route::get('file/{id}',['as' => 'inbox.download' , 'uses' => 'PsiInboxController@download']);
        
 
         Route::prefix('sheet')->group(function(){
