@@ -1,5 +1,10 @@
 @extends('layouts.app') 
 @section('content')
+<style>
+    .a {
+        display: block;
+    }
+</style>
 <div class="row">
 
     <div class="col-md-3">
@@ -22,22 +27,19 @@
             </div>
             <div class="box-body">
                 <ul style="list-style-type:none">
+                    @foreach($msg as $m)
                     <li>
-                        <div style="color:#004d99;font-weight:bold">Bina Maharjan</div>
-                        I wont be able to perform my tasks as i will be busy on my personal works. &nbsp <i class="fas fa-clock"
-                            style="color:#004d99">10:44am</i></li>
-                    <hr>
-                    <li>
-                        <div style="color:#004d99;font-weight:bold">Bina Maharjan</div>
-                        I wont be able to perform my tasks as i will be busy on my personal works. &nbsp <i class="fas fa-clock"
-                            style="color:#004d99">10:44am</i></li>
-                    <hr>
-                    <li>
-                        <div style="color:#004d99;font-weight:bold">Bina Maharjan</div>
-                        I wont be able to perform my tasks as i will be busy on my personal works. &nbsp <i class="fas fa-clock"
-                            style="color:#004d99">10:44am</i></li>
-                    <hr>
+                        <div>
+                            @foreach($employee as $e) @if($e->psi_number==$m->employeeid)
+                            <div style="color:#004d99;font-weight:bold">{{$e->name}}</div>
+                            @endif @endforeach {{$m->request_message}}
+                            <br>
+                            <i class="fas fa-clock" style="color:#004d99;margin-left:80%">{{$m->message_date}}</i>
+                            <a class="btn btn-primary" href="{{route('inbox.smessage', $m->id)}}">Response </a>
 
+                        </div>
+                    </li>
+                    <hr> @endforeach
                 </ul>
             </div>
 
