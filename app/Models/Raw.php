@@ -680,4 +680,33 @@ WHERE
         $sql = "select * from (select  e.*,replace(e.cell_no,'-','') replaced_num from employees e)em where em.replaced_num='$mobile'";
         return collect(DB::select(DB::raw($sql)))->first();
     }
+
+    public static function employeeWorksheetData($start, $end)
+    {
+//        dd($start);
+        $sql = "SELECT
+        pde.staff_no, 
+        e.name, 
+        COUNT(DISTINCT cts.date) totalWorkdays, 
+        FLOOR(SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000) AS totalWorked
+    FROM
+        psi_dessert_entry pde,
+        company_time_schedules cts,
+        company_time_tables ctt,
+        shift_master_datas smd,
+        employees e
+    WHERE
+       cts.id = pde.cts_id
+        AND pde.staff_no = e.psi_number
+        AND cts.companyTT_id = ctt.id
+        AND smd.company_id = ctt.company_id
+        AND cts.time = smd.start_time
+        AND cts.date BETWEEN '$start' AND '$end'
+        group by pde.staff_no, 
+        e.name";
+        $data = DB::select($sql);
+//        print_r($data);die;
+        return $data;
+    }
+
 }
