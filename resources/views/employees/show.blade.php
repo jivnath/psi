@@ -44,7 +44,7 @@
         									@if ($column->field_name == 'sex')
 												<select name="sex">
         										@foreach($sex as $s)
-        										<option <?= ($cell->{$column->field_name}==$s->name)? 'selected="selected"':''?> value="{{$s->id}}">{{ $s->name }}</option>
+	        										<option <?= ($cell->{$column->field_name}==$s->name)? 'selected="selected"':''?> value="{{$s->id}}">{{ $s->name }}</option>
         										@endforeach
         										</select>
 

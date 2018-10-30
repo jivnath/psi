@@ -8,7 +8,6 @@
         <div class="box box-info">
             <div class="box-header with-border">
                 <h3 class="box-title">@lang('dashboard.rssa')</h3>
-                <button type="button" class="btn btn-outline-info btn-sm" style="margin-left:330px"><a href="{{route('total_necessary')}}">View</a></button>
             </div>
             <div class="box-body">
                 <table class="table" id='rda_table'>
@@ -36,9 +35,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="box-footer text-center">
-                <a href="javascript:void(0)" class="uppercase">View All</a>
-            </div>
         </div>
     </div>
     @push('scripts')
@@ -47,10 +43,7 @@
     <script>
         var last_click = '';
         $(document).ready(function () {
-            $('#tn_table').DataTable({"pageLength": 3});
-            $('#expire_info').DataTable({"pageLength": 3});
-            $('#rda_table').DataTable({"pageLength": 3});
-            $('#alert_viber').DataTable({"pageLength": 4});
+            $('#rda_table').DataTable({"pageLength": 20});
         });
         $('.viber_messessing').on('click', function (e) {
             $('#card_expiry').modal('show');

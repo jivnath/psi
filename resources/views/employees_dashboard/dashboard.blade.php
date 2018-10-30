@@ -12,7 +12,31 @@
 
     <section class="content box box-success">
         <div class="row">
-            <div class="col-md-4" id="sub_section_name"></div>
+            <div class="col-md-4">
+                <div id="sub_section_name"></div>
+                <div id="ledgend">
+                    <ul style="list-style: none;">
+                        <li>
+                            <div class="input-color">
+                                <div class="color-box" style="background-color:#f56954;width:10px;height:10px;display:inline-block;"></div>
+                                <label for="red">Shifts which are not full.</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-color">
+                                <div class="color-box" style="background-color: #2ac633;width:10px;height:10px;display:inline-block;"></div>
+                                <label for="red">Shifts you choose to work.</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-color">
+                                <div class="color-box" style="background-color: #2a7ce9;width:10px;height:10px;display:inline-block;"></div>
+                                <label for="red">Shifts you worked in the past.</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="form-group" style="margin-top: 15px;">
@@ -66,7 +90,7 @@
                     </div>
                     <div class="modal-footer">
                         <button id="submit" class="btn btn-primary" disabled> Apply</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" data-number="close_hamro_afanai">Close</button>
                     </div>
                 </form>
             </div>
@@ -157,6 +181,23 @@
                     edit(event);
 
                 },
+                // dayRender: function (date, cell){
+                //     var today = $('#calendar').fullCalendar('getDate');
+                //     var newdate = moment(today).format('YYYY-MM-DD');
+                //     let i = 0;
+                //     $('#calendar').fullCalendar('clientEvents', function (event) {
+                //
+                //         if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD') && moment(date).format('YYYY-MM-DD') >= newdate) {
+                //             i = 1;
+                //             alert('hey');
+                //             // cell.css("background-color", '#2a7ce9');
+                //         }
+                //     });
+                //     if (i === 1) {
+                //         // alert(i);
+                //         cell.css("background-color", '#2a7ce9');
+                //     }
+                // },
                 dayClick: function (date, allDay) {
                     var today = $('#calendar').fullCalendar('getDate');
                     var newdate = moment(today).format('YYYY-MM-DD');
@@ -164,13 +205,13 @@
                     let i = 0;
                     $('#calendar').fullCalendar('clientEvents', function (event) {
 
-                        if (moment(date).format('YYYY-MM-DD') ==  moment(event.start).format('YYYY-MM-DD') && moment(date).format('YYYY-MM-DD') >= newdate ) {
+                        if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD') && moment(date).format('YYYY-MM-DD') >= newdate) {
                             i = 1;
                         }
                     });
                     // alert(i);
-                    if(i === 1)
-                    {
+                    if (i === 1) {
+                        // cell.css("background-color", "red");
                         // alert(i);
                         $("#submit").prop('disabled', true);
                         $("#message").hide();
@@ -228,7 +269,7 @@
                 },
                 success: function (data) {
                     $("#loadingDiv").hide();
-                    $("#sub_section_name").html('<h2><b>'+data['company']+'</b></h2>');
+                    $("#sub_section_name").html('<h2><b>' + data['company'] + '</b></h2>');
                     let i;
                     $('#calendar').fullCalendar('removeEvents', function () {
                         return true;
@@ -323,6 +364,10 @@
                 $("#message").hide();
                 $("#submit").attr("disabled", true);
             }
+        });
+
+        $("button[data-number=close_hamro_afanai]").click(function () {
+            $('#ModalAdd').hide();
         });
     </script>
 

@@ -146,6 +146,7 @@
                             <thead>
                             <tr>
                                 <th>PsisNo</th>
+                                <th>Responsible</th>
                                 <th>Activity</th>
                                 <th>Date</th>
                                 <th>Comment</th>
@@ -157,6 +158,7 @@
                             @foreach ($recent_dessert_activity as $rda_info)
                                 <tr>
                                     <td>{{$rda_info->staff_no}}</td>
+                                    <td>{{$rda_info->operator}}</td>
                                     <td>{{$rda_info->activity}}</td>
                                     <td>{{$rda_info->date}}</td>
                                     <td>{{$rda_info->comments}}</td>
