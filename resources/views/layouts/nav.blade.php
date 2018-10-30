@@ -203,8 +203,6 @@
                                                        href="{{route('sheet.dessert')}}">
                                                         <i class="far fa-calendar-alt" aria-hidden="true"></i> Self
                                                         Sheet </a>
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-book"></i>
-                                                        Attendance Management </a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown"><a id="shift_management"
@@ -227,6 +225,8 @@
                                                        href="{{ route('employee.worksheet.report') }}"><i
                                                                 class="fa fa-clock" aria-hidden="true"></i> Employee
                                                         Worksheet </a>
+                                                    <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i class="fas fa-book"></i>
+                                                        Attendance Management </a>
                                                 </div>
                                             </li>
                                             <!-- company login as -->

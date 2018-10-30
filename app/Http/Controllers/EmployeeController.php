@@ -115,6 +115,12 @@ class EmployeeController extends Controller
         }
     }
 
+    public function attendanceManagement()
+    {
+        $data = Raw::getAttendanceMgmtData();
+        return view('reports.attendance_management', compact('data'));
+    }
+
     /**
      * Define cell update rules
      */
