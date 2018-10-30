@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Model\Role;
+use App\Models\Role;
 use App\Models\RolesToPermission_rel;
 use App\Models\UserToPermission_rel;
 use Illuminate\Http\Request;
@@ -63,7 +63,7 @@ class PsiPermissionController extends Controller
             $permission_relation[$row->prefix][] = $row;
         //    dd($permission_relation);
         }
-        
+
         $user = User::all();
         return view('pages/userUpdateForm', compact('permission_relation','user'));
     }

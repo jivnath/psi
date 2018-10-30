@@ -63,19 +63,7 @@ class EmployeeController extends Controller
 
     public function show()
     {
-        // $companyToEmployee = CompanyToEmployee_rel::where('company_id', $companyId)->get();
-        // $cells = [];
-        // foreach ($companyToEmployee as $comToEmp) {
-            $cells = Employee::all();//where('psi_number', $comToEmp->psi_number)->first();
-            // array_push($cells, $cell);
-        // }
-
-        // $cells = Employee::byCompany($companyId);
-        // dd($cells);
-
-//        if (count($cells) == 0) {
-//            return redirect()->route('employees');
-//        }
+        $cells = Employee::all();
 
         $columns = Employee::columns([
             'id',
@@ -85,7 +73,7 @@ class EmployeeController extends Controller
         $all_col=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
         $customize_columns=PsiViewCustimizeModel::where('type','employee')->get();
 
-        return view('employees.show', compact('cells', 'columns', 'customize_columns','all_col'))->withSex($sex)/*->withCompanyToEmployee($companyToEmployee)*/;
+        return view('employees.show', compact('cells', 'columns', 'customize_columns','all_col'))->withSex($sex);
     }
 
     public function updateCell(Request $request)
@@ -97,6 +85,11 @@ class EmployeeController extends Controller
         return response()->json([
             'message' => 'Cell Updated'
         ], 200);
+    }
+
+    public function employeeWorksheet()
+    {
+        return view('reports.employee_worksheet');
     }
 
     /**

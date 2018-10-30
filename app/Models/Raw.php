@@ -424,12 +424,20 @@ WHERE
 
     public static function getDessertActivity()
     {
+        $today = date("Ymd");
+        $cond='';
         $user = Session::get('user_id');
+        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
+            $cond=" AND pde.responsible1 = $user";
+        }
+
         $sql = "SELECT
-                    id,
+                    pde.id,
                     staff_no,
                     conformation_day_before comments,
                     call_medium activity,
+                    responsible1,
+                    (select name from users where id=responsible1) operator,
                     (
                         SELECT
                             COUNT(*)
@@ -438,10 +446,33 @@ WHERE
                         WHERE
                             pssc.self_id = pde.id
                     ) total_comment,
-                    date(created_at) date
+                    date(cts.date) date
                 FROM
+                	company_time_schedules cts,
                     `psi_dessert_entry` pde
-                WHERE pde.responsible1 = $user";
+                WHERE cts.date >= $today
+                	AND pde.cts_id = cts.id $cond
+                GROUP BY
+                	cts.date ASC";
+//        $sql = "SELECT
+//                    id,
+//                    staff_no,
+//                    conformation_day_before comments,
+//                    call_medium activity,
+//                    responsible1,
+//                    (select name from users where id=responsible1) operator,
+//                    (
+//                        SELECT
+//                            COUNT(*)
+//                        FROM
+//                            psi_self_sheet_comments pssc
+//                        WHERE
+//                            pssc.self_id = pde.id
+//                    ) total_comment,
+//                    date(created_at) date
+//                FROM
+//                    `psi_dessert_entry` pde
+//                WHERE 1=1 $cond";
         return DB::select($sql);
     }
 

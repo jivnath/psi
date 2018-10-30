@@ -37,16 +37,16 @@ Route::group(['middleware'=> ['employee']], function(){
             Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
             Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
             Route::post('/storeMessage', ['as' => 'inbox.store', 'uses' => 'PsiInboxController@store']);
-         
-          
-          
-         
+
+
+
+
 
         });
     });
 });
 Route::group(['middleware' => ['auth']], function () {
- //   Route::group(['middleware'=>['check.user']], function(){
+   Route::group(['middleware'=>['check.user']], function(){
     Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', ['as' => 'employees', 'uses' => 'EmployeeController@index']);
@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::prefix('report')->group(function(){
             Route::get('/employee_report', ['as' => 'employee.detail.report', 'uses' => 'EmployeeController@FetchEmployeeDetails']);
+            Route::get('/employee_worksheet', ['as' => 'employee.worksheet.report', 'uses' => 'EmployeeController@employeeWorksheet']);
         });
         Route::prefix('column')->group(function(){
                 Route::post('/customize', ['as' => 'customize.field', 'uses' => 'CustomerTableView@saveCustomizedField']);
@@ -178,12 +179,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
         });
 
-      
         Route::get('/messages', ['as' => 'inbox.messages', 'uses' => 'PsiInboxController@messages']);
-        Route::get('smessage/{id}', ['as' => 'inbox.smessage', 'uses' => 'PsiInboxController@singleMessage']);
+        Route::get('smessage/{id?}', ['as' => 'inbox.smessage', 'uses' => 'PsiInboxController@singleMessage']);
         Route::put('smessage/{id}', ['as' => 'inbox.update', 'uses' => 'PsiInboxController@update']);
+
         Route::get('file/{id}',['as' => 'inbox.download' , 'uses' => 'PsiInboxController@download']);
-       
+
 
         Route::prefix('sheet')->group(function(){
             Route::get('time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
@@ -208,13 +209,14 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/alert/setting', ['as' => 'storeSetting', 'uses' => 'ViberAlertController@storeSetting']);
         });
             Route::prefix('notification')->group(function () {
-                Route::get('/inbox_data', ['as' => 'notificatin.inbox', 'uses' => 'NotificationHandler@get_current_message']);
+                Route::get('/inbox_data', ['as' => 'notification.inbox', 'uses' => 'NotificationHandler@get_current_message']);
             });
     });
-    //});
-    
+    });
+
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+Route::any('send_viber',['as' => 'viber_send', 'uses' => 'ViberBitIntegration@send_viber']);
 
 Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@display']);
 

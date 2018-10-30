@@ -199,7 +199,13 @@ class DessertController extends Controller
             $dessert = DessertSheet::find($request->dessert_id);
             $dessert->{$request->field} = $request->field_value;
             $dessert->save();
-            return response()->json($dessert);
+            $response=response()->json($dessert);
+            if($request->field=='flag'){
+                Employee::where('psi_number', $dessert->staff_no)->update([
+                    'flag' => $request->field_value
+                ]);
+            }
+            return $response;
         }
     }
 }

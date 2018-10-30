@@ -423,18 +423,20 @@
                     });
             });
             function update() {
+                // return false;
                 to_fill='';
-                $.get("{{route('notificatin.inbox')}}", function(data, status){
+                $.get("{{route('notification.inbox')}}", function(data, status){
                     var obj=data;
                     $('.total_inbox_messages').html(obj.count);
                     if(obj.status!='fail'){
                         $.each(obj.data, function(k, v) {
-                        to_fill +='<a class="dropdown-item text-center" href="smessage/'+ k +'" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
+						url="{{route('inbox.smessage') }}"+"/"+k;
+                        to_fill +='<a class="dropdown-item text-center" href="'+url+'" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
                         });
                         $('.messages_space').html(to_fill);
                     }
 
                 });
             }
-            setInterval(update, 10000); //every 50 secs
+            setInterval(update, 10000); //every 10 secs
         </script>

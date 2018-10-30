@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
+use App\Models\Employee;
+use App\Models\PsiViewCustimizeModel;
 
 class SyncLanguageController extends Controller
 {
@@ -53,14 +55,38 @@ class SyncLanguageController extends Controller
 
                 $data_transalted[] = [
 
-                    str_replace('*::', '', $row) => isset($translated_lang[$key])?$translated_lang[$key]:''
+                    str_replace('*::', '', $row) => isset($translated_lang[$key]) ? $translated_lang[$key] : ''
                 ];
-
             }
         }
 
         \Storage::disk('local')->put('test.log', json_encode($data_transalted));
         return $data_transalted;
+    }
+
+    public function sync_col()
+    {
+        PsiViewCustimizeModel::where([
+            'type' => 'employee'
+        ])->delete();
+        $columns = Employee::all()->first()->columns([
+            'id',
+            // 'company_id',
+            'created_at',
+            'updated_at'
+        ]);
+        $insert_data = [];
+        foreach ($columns as $row) {
+            $insert_data[] = [
+                'type' => 'employee',
+                'field_name' => $row,
+                'status' => 'y',
+                'created_by' => 4
+
+            ];
+        }
+        PsiViewCustimizeModel::insert($insert_data);
+        return 'Done';
     }
 
     private function sum_string()
