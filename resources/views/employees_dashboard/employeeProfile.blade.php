@@ -148,8 +148,8 @@
 
                                 <div class="col-sm-12">
                                     <select name="type" class="form-control">
-                                        <option value="0">Profile Change</option>
-                                        <option value="1">Others</option>
+                                        <option value="profile change">Profile Change</option>
+                                        <option value="other">Others</option>
                                     </select>
                                 </div>
                                 <br/>

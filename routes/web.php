@@ -183,6 +183,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/messages', ['as' => 'inbox.messages', 'uses' => 'PsiInboxController@messages']);
         Route::get('smessage/{id?}', ['as' => 'inbox.smessage', 'uses' => 'PsiInboxController@singleMessage']);
         Route::put('smessage/{id}', ['as' => 'inbox.update', 'uses' => 'PsiInboxController@update']);
+        Route::get('view/{id}', ['as' => 'inbox.view', 'uses' => 'PsiInboxController@view']);
+        Route::get('file/{id}',['as' => 'inbox.download' , 'uses' => 'PsiInboxController@download']);
+
 
         Route::prefix('sheet')->group(function(){
             Route::get('time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
@@ -221,6 +224,8 @@ Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@displ
 Route::get('/hierrchy', function(){
     return view('hierrchy');
 });
+
+
 
 
 
