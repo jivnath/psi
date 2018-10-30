@@ -718,9 +718,9 @@ WHERE
         pde.conformation_3_hours_ago,
         e.name,
         e.cell_no,
-        e.flag,
+        e.phoetic_kanji,
+        e.country_citizenship,
         c.name subsection,
-        pde.call_medium,
         smd.start_time,
         smd.end_time
     FROM

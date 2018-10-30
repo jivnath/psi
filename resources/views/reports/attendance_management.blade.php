@@ -9,38 +9,50 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Attendance Management</h3>
                     </div>
-                </div>
-                <div class="box-body">
-                    <table id="attendance" class="table table-striped">
-                        <thead>
-                            <th>#</th>
-                            <th>PSI-S No.</th>
-                            <th>Name</th>
-                            <th>Shift</th>
-                            <th>Subsection</th>
-                            <th>Confirmation Day Before</th>
-                            <th>Confirmation 3 Hours Before</th>
-                            <th>Contact No.</th>
-                            <th>Flag</th>
-                            <th>Call Medium</th>
-                        </thead>
-                        <tbody>
+                    <div class="box-body">
+                        <table id="attendance" class="table table-striped">
+                            <thead>
+                                <th>#</th>
+                                <th>PSI-S No.</th>
+                                <th>Name</th>
+                                <th>Phonetic</th>
+                                <th>Country</th>
+                                <th>Shift</th>
+                                <th>Subsection</th>
+                                <th>Confirmation Day Before</th>
+                                <th>Confirmation 3 Hours Before</th>
+                                <th>Contact No.</th>
+                                <th>出勤ｼｭｯｷﾝ</th>
+                                <th>カード</th>
+                                <th>出勤時刻</th>
+                                <th>退勤時刻</th>
+                                <th>Break Time</th>
+                                <th>移動</th>
+                            </thead>
+                            <tbody>
                             @foreach($data as $index => $datum)
                                 <tr>
                                     <td scope="row">{{$index + 1}}</td>
                                     <td>{{$datum->staff_no}}</td>
                                     <td>{{$datum->name}}</td>
+                                    <td>{{$datum->phoetic_kanji}}</td>
+                                    <td>{{$datum->country_citizenship}}</td>
                                     <td>{{substr($datum->start_time, 0, -3)}} - {{substr($datum->end_time, 0, -3)}}</td>
                                     <td>{{$datum->subsection}}</td>
                                     <td>{{$datum->conformation_day_before}}</td>
                                     <td>{{$datum->conformation_3_hours_ago}}</td>
                                     <td>{{$datum->cell_no}}</td>
-                                    <td>{{$datum->flag}}</td>
-                                    <td>{{$datum->call_medium}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
