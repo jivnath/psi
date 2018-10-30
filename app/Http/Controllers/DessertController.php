@@ -58,6 +58,7 @@ class DessertController extends Controller
             if ($id != null) {
 
                 $date = $request->get('selected_date');
+                dd($date);
                 $dessert = Raw::getDessertInfo($id, $date);
                 $userlist=User::all();
 
