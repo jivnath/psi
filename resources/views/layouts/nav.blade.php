@@ -223,6 +223,10 @@
                                                        href="{{ route('employee.detail.report') }}"><i
                                                                 class="fa fa-users" aria-hidden="true"></i> Employee
                                                         Details </a>
+                                                    <a class="dropdown-item"
+                                                       href="{{ route('employee.worksheet.report') }}"><i
+                                                                class="fa fa-clock" aria-hidden="true"></i> Employee
+                                                        Worksheet </a>
                                                 </div>
                                             </li>
                                             <!-- company login as -->
