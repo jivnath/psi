@@ -10,7 +10,7 @@
 
         </div>
         <div class="box-body">
-            <table class="table table-striped table-bordered" id='tn_table'>
+            <table class="table table-bordered" id='tn_table'>
                 <thead>
                     <tr>
                         <th>Section</th>
@@ -23,14 +23,25 @@
                 </thead>
                 <tbody>
                     @foreach ($total_ncessary_data as $tn_data)
-                    <tr>
-                        <td>{{$tn_data->master_main_company}}</td>
-                        <td>{{$tn_data->name}}</td>
-                        <td>{{$tn_data->DATE}}</td>
-                        <td>{{$tn_data->time}}</td>
-                        <td>{{$tn_data->total_used}}</td>
-                        <td>{{$tn_data->total_require}}</td>
-                    </tr>
+                        @if($tn_data->total_used < $tn_data->total_require)
+                            <tr bgcolor="#e9a294">
+                                <td>{{$tn_data->master_main_company}}</td>
+                                <td>{{$tn_data->name}}</td>
+                                <td>{{$tn_data->DATE}}</td>
+                                <td>{{$tn_data->time}}</td>
+                                <td>{{$tn_data->total_used}}</td>
+                                <td>{{$tn_data->total_require}}</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td>{{$tn_data->master_main_company}}</td>
+                                <td>{{$tn_data->name}}</td>
+                                <td>{{$tn_data->DATE}}</td>
+                                <td>{{$tn_data->time}}</td>
+                                <td>{{$tn_data->total_used}}</td>
+                                <td>{{$tn_data->total_require}}</td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
@@ -44,10 +55,7 @@
 <script>
     var last_click = '';
         $(document).ready(function () {
-            $('#tn_table').DataTable({"pageLength": 3});
-            $('#expire_info').DataTable({"pageLength": 3});
-            $('#rda_table').DataTable({"pageLength": 3});
-            $('#alert_viber').DataTable({"pageLength": 4});
+            $('#tn_table').DataTable({"pageLength": 25});
         });
         $('.viber_messessing').on('click', function (e) {
             $('#card_expiry').modal('show');

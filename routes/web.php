@@ -178,7 +178,7 @@ Route::group(['middleware' => ['auth']], function () {
             //    Route::get('/leader/{id}', 'LeaderController@update')->name('leader.update');
             Route::get('/', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
         });
-              
+
         Route::get('/messages', ['as' => 'inbox.messages', 'uses' => 'PsiInboxController@messages']);
         Route::get('smessage/{id}', ['as' => 'inbox.smessage', 'uses' => 'PsiInboxController@singleMessage']);
         Route::put('smessage/{id}', ['as' => 'inbox.update', 'uses' => 'PsiInboxController@update']);
