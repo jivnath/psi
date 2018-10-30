@@ -430,8 +430,8 @@
                     $('.total_inbox_messages').html(obj.count);
                     if(obj.status!='fail'){
                         $.each(obj.data, function(k, v) {
-
-                        to_fill +='<a class="dropdown-item text-center" href="smessage/'+ k +'" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
+						url="{{route('inbox.smessage') }}"+"/"+k;
+                        to_fill +='<a class="dropdown-item text-center" href="'+url+'" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
                         });
                         $('.messages_space').html(to_fill);
                     }
