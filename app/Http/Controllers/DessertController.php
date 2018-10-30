@@ -41,7 +41,7 @@ class DessertController extends Controller
                     $schedule_data = $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
                         $query->where('id', $id);
                     })->groupBy('date')->get();
-//                    dd($schedule_data);
+		
 
                     return view('sheets.dessert_schedule_view', compact('schedule_data'));
                 } else {
@@ -58,7 +58,7 @@ class DessertController extends Controller
             if ($id != null) {
 
                 $date = $request->get('selected_date');
-                dd($date);
+              
                 $dessert = Raw::getDessertInfo($id, $date);
                 $userlist=User::all();
 
