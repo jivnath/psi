@@ -44,10 +44,7 @@
     <script>
         var last_click = '';
         $(document).ready(function () {
-            $('#tn_table').DataTable({"pageLength": 3});
-            $('#expire_info').DataTable({"pageLength": 3});
-            $('#rda_table').DataTable({"pageLength": 3});
-            $('#alert_viber').DataTable({"pageLength": 4});
+            $('#expire_info').DataTable({"pageLength": 20});
         });
         $('.viber_messessing').on('click', function (e) {
             $('#card_expiry').modal('show');

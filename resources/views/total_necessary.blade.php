@@ -55,7 +55,7 @@
 <script>
     var last_click = '';
         $(document).ready(function () {
-            $('#tn_table').DataTable({"pageLength": 25});
+            $('#tn_table').DataTable({"pageLength": 20});
         });
         $('.viber_messessing').on('click', function (e) {
             $('#card_expiry').modal('show');
