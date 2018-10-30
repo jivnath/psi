@@ -178,12 +178,10 @@ Route::group(['middleware' => ['auth']], function () {
             //    Route::get('/leader/{id}', 'LeaderController@update')->name('leader.update');
             Route::get('/', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
         });
-
-      
+              
         Route::get('/messages', ['as' => 'inbox.messages', 'uses' => 'PsiInboxController@messages']);
         Route::get('smessage/{id}', ['as' => 'inbox.smessage', 'uses' => 'PsiInboxController@singleMessage']);
         Route::put('smessage/{id}', ['as' => 'inbox.update', 'uses' => 'PsiInboxController@update']);
-       
 
         Route::prefix('sheet')->group(function(){
             Route::get('time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
@@ -212,9 +210,10 @@ Route::group(['middleware' => ['auth']], function () {
             });
     });
     //});
-    
+
 });
 Route::any('viber_bot',['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+Route::any('send_viber',['as' => 'viber_send', 'uses' => 'ViberBitIntegration@send_viber']);
 
 Route::get('/denied',['as' => 'access.denied', 'uses' =>'DisplayController@display']);
 
