@@ -16,13 +16,13 @@
                 {{ Form::text('name', null, array('class' => 'form-control', 'style' => 'width:50%')) }}
             </div>
 
-            <b>Permissions</b><br>
-            @foreach ($permissions as $permission)
+            {{--<b>Permissions</b><br>--}}
+            {{--@foreach ($permissions as $permission)--}}
 
-                {{Form::checkbox('permissions[]',  $permission->id, $role->permissions ) }}
-                {{Form::label($permission->name, ucfirst($permission->name)) }}<br>
+                {{--{{Form::checkbox('permissions[]',  $permission->id, $role->permissions ) }}--}}
+                {{--{{Form::label($permission->name, ucfirst($permission->name)) }}<br>--}}
 
-            @endforeach
+            {{--@endforeach--}}
             <br>
             {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}
 

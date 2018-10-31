@@ -22,11 +22,11 @@ class PsiInboxController extends Controller
     public function messages()
     {
         $requests = Raw::getAllRequests();
-        $umsg = PsiInbox::where('status',1)->get();
-        $rmsg = PsiInbox::where('status',0)->get();
-        $employee = Employee::all();
+//        $umsg = PsiInbox::where('status',1)->get();
+//        $rmsg = PsiInbox::where('status',0)->get();
+//        $employee = Employee::all();
 
-        return view('messages')->with(array('umsg' => $umsg,'rmsg' => $rmsg, 'employee' => $employee, 'requests'=>$requests));
+        return view('messages', compact('requests'));
     }
 
     public function store(Request $request)

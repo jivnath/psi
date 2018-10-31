@@ -17,15 +17,15 @@
                         {{ Form::label('name', 'Name') }}
                         {{ Form::text('name', null, array('class' => 'form-control input-shorter', 'style' => 'width:50%')) }}
                     </div>
-                    <b>Permissions</b>
+                    {{--<b>Permissions</b>--}}
 
-                    <div class='form-group'>
-                        @foreach ($permissions as $permission)
-                            {{ Form::checkbox('permissions[]',  $permission->id ) }}
-                            {{ Form::label($permission->name, ucfirst($permission->name)) }}<br>
+                    {{--<div class='form-group'>--}}
+                        {{--@foreach ($permissions as $permission)--}}
+                            {{--{{ Form::checkbox('permissions[]',  $permission->id ) }}--}}
+                            {{--{{ Form::label($permission->name, ucfirst($permission->name)) }}<br>--}}
 
-                        @endforeach
-                    </div>
+                        {{--@endforeach--}}
+                    {{--</div>--}}
 
                     {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
 
