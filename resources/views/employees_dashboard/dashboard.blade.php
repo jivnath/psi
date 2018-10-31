@@ -19,19 +19,19 @@
                         <li>
                             <div class="input-color">
                                 <div class="color-box" style="background-color:#f56954;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Shifts which are not full.</label>
+                                <label for="red">Not full.</label>
                             </div>
                         </li>
                         <li>
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #2ac633;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Shifts you choose to work.</label>
+                                <label for="red">Applied shifts.</label>
                             </div>
                         </li>
                         <li>
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #2a7ce9;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Shifts you worked in the past.</label>
+                                <label for="red">Worked in the past.</label>
                             </div>
                         </li>
                     </ul>

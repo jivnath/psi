@@ -99,16 +99,15 @@ class EmployeeController extends Controller
         {
             $fr = $request->get('from');
             $t = $request->get('to');
-//            $to =
             $today = date('Y-m-d');
 //            dd($today);
 
             $from = date("Y-m-d", strtotime($fr));
             $to = date("Y-m-d", strtotime($t));
-//            dd($from);
+//            dd($to);
 
 
-            $data = Raw::employeeWorksheetData($from, $today);
+            $data = Raw::employeeWorksheetData($from, $to);
 //            dd($data);
 
             echo json_encode($data);
