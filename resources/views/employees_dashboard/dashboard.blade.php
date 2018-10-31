@@ -15,20 +15,20 @@
             <div class="col-md-4">
                 <div id="sub_section_name"></div>
                 <div id="ledgend">
-                    <ul style="list-style: none;">
-                        <li>
+                    <ul class="list-inline" style="margin-top:10%">
+                        <li class="list-inline-item">
                             <div class="input-color">
                                 <div class="color-box" style="background-color:#f56954;width:10px;height:10px;display:inline-block;"></div>
                                 <label for="red">Not full.</label>
                             </div>
                         </li>
-                        <li>
+                        <li class="list-inline-item"  style="margin-left:8%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #2ac633;width:10px;height:10px;display:inline-block;"></div>
                                 <label for="red">Applied shifts.</label>
                             </div>
                         </li>
-                        <li>
+                        <li class="list-inline-item"  style="margin-left:8%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #2a7ce9;width:10px;height:10px;display:inline-block;"></div>
                                 <label for="red">Worked in the past.</label>

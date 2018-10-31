@@ -280,7 +280,7 @@
                                                                              role="button"
                                                                              data-toggle="dropdown" aria-haspopup="true"
                                                                              aria-expanded="false" v-pre> <i
-                                                            class="fas fa-envelope"></i>
+                                                            class="fas fa-envelope fa-lg"></i>
                                                    <span class="label label-success total_inbox_messages" style="position: absolute;top: 8px;right: 7px;text-align: center;font-size: 9px;padding: 2px 3px;line-height: .9;">{{ $total=\App\Models\PsiInbox::count()}}</span>
                                                 </a>
 

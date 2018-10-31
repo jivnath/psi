@@ -213,7 +213,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::prefix('notification')->group(function () {
                 Route::get('/inbox_data', ['as' => 'notification.inbox', 'uses' => 'NotificationHandler@get_current_message']);
             });
-//    });
+   // });
+
     });
 
 });
