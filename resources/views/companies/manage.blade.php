@@ -98,7 +98,7 @@
                                                     <i class="fa fa-building"></i>
                                                 </div>
                                                 <input type="text" placeholder="Sub-section Name" class="form-control"
-                                                       name="subsection_name"><br>
+                                                       name="subsection_name" required><br>
                                             </div>
                                             <br>
 
@@ -223,7 +223,7 @@
                                                     </div>
                                                     <input type="text" placeholder="Sub-section Name"
                                                            class="form-control" name="existing_subsection_name"
-                                                           id="existing_subsection_name"><br>
+                                                           id="existing_subsection_name" required><br>
                                                 </div>
                                             </div>
                                             <br>

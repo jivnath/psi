@@ -46,7 +46,7 @@ Route::group(['middleware'=> ['employee']], function(){
     });
 });
 Route::group(['middleware' => ['auth']], function () {
-   //Route::group(['middleware'=>['check.user']], function(){
+//   Route::group(['middleware'=>['check.user']], function(){
     Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', ['as' => 'employees', 'uses' => 'EmployeeController@index']);
@@ -78,6 +78,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/employee_report', ['as' => 'employee.detail.report', 'uses' => 'EmployeeController@FetchEmployeeDetails']);
             Route::get('/employee_worksheet', ['as' => 'employee.worksheet.report', 'uses' => 'EmployeeController@employeeWorksheet']);
             Route::get('/getWorksheetData', ['as'=>'getWorksheetData', 'uses'=> 'EmployeeController@getWorksheetData']);
+            Route::get('/attendance_management', ['as' => 'attendance.mgmt', 'uses'=>'EmployeeController@attendanceManagement']);
         });
         Route::prefix('column')->group(function(){
                 Route::post('/customize', ['as' => 'customize.field', 'uses' => 'CustomerTableView@saveCustomizedField']);
@@ -213,6 +214,7 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('/inbox_data', ['as' => 'notification.inbox', 'uses' => 'NotificationHandler@get_current_message']);
             });
    // });
+
     });
 
 });

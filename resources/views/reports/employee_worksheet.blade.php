@@ -20,13 +20,13 @@
 
                                 {{--<input class="date form-control" id="from" name="from" type="text" required>--}}
                             </div>
-                            {{--<div class="col-md-1" style="text-align: right">--}}
-                                {{--<label for="from">To</label>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-md-2">--}}
-                                {{--{{ Form::date('start_date', \Carbon\Carbon::now(), array('class' => 'form-control','id'=>'to', 'required'=>''))}}--}}
+                            <div class="col-md-1" style="text-align: right">
+                                <label for="from">To</label>
+                            </div>
+                            <div class="col-md-2">
+                                {{ Form::date('start_date', \Carbon\Carbon::now(), array('class' => 'form-control','id'=>'to', 'required'=>''))}}
                                 {{--<input class="date form-control" id="to" name="to" type="text" required>--}}
-                            {{--</div>--}}
+                            </div>
                             <div class="col-md-1">
                                 <span class="btn btn-primary" id="submit">Submit</span>
                             </div>
@@ -34,6 +34,7 @@
                         </div>
                     </div>
                     <div class="box-body">
+                        <div id="loadingDiv" style="display: none"><h5><b>Loading, Please wait...</b></h5></div>
                         <div class='wrapper' id="allTable" style="display: none">
                             <table class="table table-striped">
                                 <thead>
@@ -78,7 +79,11 @@
                 data: {'from': from, 'to': to},
                 dataType: "json",
                 async: true,
+                beforeSend: function(){
+                    $("#loadingDiv").show();
+                },
                 success: function (data) {
+                    $("#loadingDiv").hide();
                     // console.log(data);
                     // alert('hey');
                     let i;

@@ -709,4 +709,61 @@ WHERE
         return $data;
     }
 
+    public static function getAttendanceMgmtData()
+    {
+        $sql = "SELECT
+        pde.id,
+        pde.staff_no,
+        pde.conformation_day_before,
+        pde.conformation_3_hours_ago,
+        e.name,
+        e.cell_no,
+        e.phoetic_kanji,
+        e.country_citizenship,
+        c.name subsection,
+        smd.start_time,
+        smd.end_time
+    FROM
+        psi_dessert_entry pde,
+        employees e,
+        company_time_schedules cts,
+        company_time_tables ctt,
+        shift_master_datas smd,
+        companies c
+    WHERE
+        pde.staff_no = e.psi_number AND
+        pde.cts_id = cts.id AND
+        cts.companyTT_id = ctt.id AND
+        ctt.company_id = smd.company_id AND
+        cts.time = smd.start_time AND
+        c.id = ctt.company_id
+        
+    ORDER BY
+        pde.id DESC";
+
+        $data = DB::select($sql);
+
+        return $data;
+    }
+
+    public static function getAllRequests()
+    {
+        $sql = "SELECT 
+                    pi.*,
+                    e.name
+                FROM
+                    psi_inbox pi,
+                    employees e
+                WHERE
+                    pi.employeeid = e.psi_number
+                
+                ORDER BY
+                    pi.status DESC,
+                    pi.created_at DESC,
+                    pi.updated_at DESC";
+
+        $requests = DB::select($sql);
+
+        return $requests;
+    }
 }

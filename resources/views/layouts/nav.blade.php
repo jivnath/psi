@@ -203,8 +203,6 @@
                                                        href="{{route('sheet.dessert')}}">
                                                         <i class="far fa-calendar-alt" aria-hidden="true"></i> Self
                                                         Sheet </a>
-                                                    <a class="dropdown-item" href="#"><i class="fas fa-book"></i>
-                                                        Attendance Management </a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown"><a id="shift_management"
@@ -223,6 +221,12 @@
                                                        href="{{ route('employee.detail.report') }}"><i
                                                                 class="fa fa-users" aria-hidden="true"></i> Employee
                                                         Details </a>
+                                                    <a class="dropdown-item"
+                                                       href="{{ route('employee.worksheet.report') }}"><i
+                                                                class="fa fa-clock" aria-hidden="true"></i> Employee
+                                                        Worksheet </a>
+                                                    <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i class="fas fa-book"></i>
+                                                        Attendance Management </a>
                                                 </div>
                                             </li>
                                             <!-- company login as -->
@@ -276,7 +280,7 @@
                                                                              role="button"
                                                                              data-toggle="dropdown" aria-haspopup="true"
                                                                              aria-expanded="false" v-pre> <i
-                                                            class="fas fa-envelope"></i>
+                                                            class="fas fa-envelope fa-lg"></i>
                                                    <span class="label label-success total_inbox_messages" style="position: absolute;top: 8px;right: 7px;text-align: center;font-size: 9px;padding: 2px 3px;line-height: .9;">{{ $total=\App\Models\PsiInbox::count()}}</span>
                                                 </a>
 

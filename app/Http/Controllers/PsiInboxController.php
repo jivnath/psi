@@ -15,16 +15,18 @@ use Illuminate\Support\Facades\View;
 //use DB;
 //use Session;
 use Session;
+use App\Models\Raw;
 
 class PsiInboxController extends Controller
 {
     public function messages()
     {
-        $umsg = PsiInbox::where('status',1)->get();
-        $rmsg = PsiInbox::where('status',0)->get();
-        $employee = Employee::all();
+        $requests = Raw::getAllRequests();
+//        $umsg = PsiInbox::where('status',1)->get();
+//        $rmsg = PsiInbox::where('status',0)->get();
+//        $employee = Employee::all();
 
-        return view('messages')->with(array('umsg' => $umsg,'rmsg' => $rmsg, 'employee' => $employee));
+        return view('messages', compact('requests'));
     }
 
     public function store(Request $request)
