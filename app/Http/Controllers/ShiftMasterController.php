@@ -45,7 +45,7 @@ class ShiftMasterController extends Controller
     }
 	public function add()
 	{
-		$data['shifts'] = ShiftMasterData::all();
+		$data['shifts'] = Raw::getSubsectionShifts();
 		$data['companies']= Raw::getThirdLevelCompanies();
 //		$data['companies'] = Raw::getCompaniesForShift();
 		return view('shift.add')->withData($data);

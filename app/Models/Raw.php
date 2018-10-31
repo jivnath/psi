@@ -766,4 +766,12 @@ WHERE
 
         return $requests;
     }
+
+    public static function getSubsectionShifts()
+    {
+        $sql = "SELECT c.master_id, c.id, smd.* FROM shift_master_datas smd, companies c WHERE smd.company_id = c.id ORDER BY `c`.`master_id` ASC";
+        $shifts = DB::select($sql);
+
+        return $shifts;
+    }
 }

@@ -27,7 +27,7 @@
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
-                                                                      style="right: 20px;color: #004d99"> {{$req->message_date}}
+                                                                      style="right: 20px;color: #004d99"> {{substr($req->message_date, 0, -3)}}
                                                                 </i></small>
                                                         </h5>
                                                         </p>
@@ -42,7 +42,7 @@
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
-                                                                      style="right: 20px;color: #004d99"> {{$req->message_date}}
+                                                                      style="right: 20px;color: #004d99"> {{substr($req->message_date, 0, -3)}}
                                                                 </i></small>
                                                         </h5>
                                                         </p>
@@ -67,7 +67,7 @@
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
-                                                                      style="right: 20px;color: #004d99"> {{$req->message_date}}
+                                                                      style="right: 20px;color: #004d99"> {{substr($req->message_date, 0, -3)}}
                                                                 </i></small>
                                                         </h5>
                                                         </p>
@@ -92,7 +92,7 @@
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
-                                                                      style="right: 20px;color: #004d99"> {{$req->message_date}}
+                                                                      style="right: 20px;color: #004d99"> {{substr($req->message_date, 0, -3)}}
                                                                 </i></small>
                                                         </h5>
                                                         </p>

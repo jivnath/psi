@@ -209,7 +209,7 @@
                     }
                     else {
                         var forSec = '<div id="' + sectionId + 'sec' + '"<div class="row" style="text-align:center">' +
-                            '<div class="col-md-4"><label>' + sectionName + '\'s Shift</label></div>' +
+                            '<div class="col-md-4" style="text-align:right"><label>' + sectionName + '\'s Shift</label></div>' +
                             '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
                             '<div id="' + sectionId + 'allShifts">No Shift For This Company<br> </div>' +
                             '</ul> ' +

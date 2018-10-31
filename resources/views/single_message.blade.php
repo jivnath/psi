@@ -21,7 +21,7 @@
                     {{$edit->request_message}}
                 </div>
 
-                <i class="fas fa-clock" style="color:#004d99;margin-left:80%" ;>{{$edit->message_date}}</i><hr>
+                <i class="fas fa-clock" style="color:#004d99;margin-left:80%" ;>{{substr($edit->message_date, 0, -3)}}</i><hr>
 
                 @if($edit->file_upload_path!=null)
                 <a href="{{route('inbox.download',$edit->id)}}" class="btn btn-success btn-sm"><i class="fas fa-download">  Download File</i></a>  {{$edit->file_upload_path}}
@@ -44,8 +44,8 @@
                             <button type="submit" class="btn btn-danger">Send</button>
                         </div>
                     </div>
-            </div>
             </form>
+        </div>
 
         </div>
 
