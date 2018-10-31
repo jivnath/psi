@@ -746,4 +746,24 @@ WHERE
         return $data;
     }
 
+    public static function getAllRequests()
+    {
+        $sql = "SELECT 
+                    pi.*,
+                    e.name
+                FROM
+                    psi_inbox pi,
+                    employees e
+                WHERE
+                    pi.employeeid = e.psi_number
+                
+                ORDER BY
+                    pi.status DESC,
+                    pi.created_at DESC,
+                    pi.updated_at DESC";
+
+        $requests = DB::select($sql);
+
+        return $requests;
+    }
 }
