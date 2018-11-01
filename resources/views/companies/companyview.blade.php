@@ -19,7 +19,7 @@ $last_p='';
                                 <tr>
                                  	<th>SN</th>
                                     <th>Company Name</th>
-                                    <th>Sections Hierachy</th>
+                                    <th>Sections Hierarchy</th>
 
                                 </tr>
                                 </thead>

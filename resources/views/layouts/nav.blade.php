@@ -51,9 +51,9 @@
 
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item"
-                                           href="{{ url('/employee/profile') }}">Profile</a></li>
+                                           href="{{ url('/employee/profile') }}"><i  class="fa fa-address-book"></i>Profile</a></li>
                                     <li><a class="dropdown-item"
-                                           href="{{ route('employee.logout') }}">Logout</a></li>
+                                           href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
 
                                 </ul>
                             </li>
@@ -125,7 +125,7 @@
                                                                             class="fas fa-pen-alt"></i> Roles</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('update.user') }}"><i
-                                                                            class="fas fa-key"></i> Permssion</a></li>
+                                                                            class="fas fa-key"></i> Permission</a></li>
 
                                                         </ul>
                                                     </li>

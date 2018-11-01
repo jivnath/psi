@@ -71,11 +71,10 @@ class EmployeeLoginController extends Controller
             }
 //             dd($employee);
 
-//            $psi_number = $employee->psi_number;
+//          $psi_number = $employee->psi_number;
             $request->session()->put('username', $request->psi_number);
-//            $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
+//          $request->session()->put('cell_no', Auth::guard('employee')->user()->psi_number);
             $request->session()->put('user_id', Auth::guard('employee')->user()->id);
-
             $request->session()->put('employee_name', $employee->name);
             $request->session()->put('employee_psi_number', $employee->psi_number);
             // $request->session()->put('employee_language', $employee->language);
