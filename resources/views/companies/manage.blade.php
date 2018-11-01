@@ -41,7 +41,7 @@
                                                     <i class="fa fa-building"></i>
                                                 </div>
                                                 <input type="text" placeholder="Company Name" class="form-control"
-                                                       name="company_name"><br>
+                                                       name="company_name" required><br>
                                             </div>
                                             <br>
 
@@ -50,7 +50,7 @@
                                                     <i class="	fa fa-phone"></i>
                                                 </div>
                                                 <input type="text" placeholder="Contact No." class="form-control"
-                                                       name="company_contact"><br>
+                                                       name="company_contact" required><br>
                                             </div>
                                             <br>
 
@@ -59,7 +59,7 @@
                                                     <i class="fas fa-map-marker-alt"></i>
                                                 </div>
                                                 <input type="text" placeholder="Address" class="form-control"
-                                                       name="company_address"><br>
+                                                       name="company_address" required><br>
                                             </div>
                                             <br>
 
@@ -70,7 +70,7 @@
                                                     <i class="fa fa-building"></i>
                                                 </div>
                                                 <input type="text" placeholder="Section Name" class="form-control"
-                                                       name="section_name"><br>
+                                                       name="section_name" required><br>
                                             </div>
                                             <br>
 
@@ -79,7 +79,7 @@
                                                     <i class="	fa fa-phone"></i>
                                                 </div>
                                                 <input type="text" placeholder="Contact No." class="form-control"
-                                                       name="section_contact"><br>
+                                                       name="section_contact" required><br>
                                             </div>
                                             <br>
 
@@ -88,7 +88,7 @@
                                                     <i class="fas fa-map-marker-alt"></i>
                                                 </div>
                                                 <input type="text" placeholder="Address" class="form-control"
-                                                       name="section_address"><br>
+                                                       name="section_address" required><br>
                                             </div>
                                             <br>
 
@@ -317,7 +317,7 @@
             $('#existing_section_address').val('');
             $('#existing_subsection_name').val('');
             $('#subNameDiv').hide();
-            console.log(selectedSection);
+            // console.log(selectedSection);
 
 
             if (selectedSection != 0) {
@@ -359,6 +359,7 @@
                     success: function (data) {
                         $('#subNameDiv').show();
                         $('#existing_subsection_name').val(data.name);
+                        // alert(data.name);
                     }
                 });
             }
@@ -389,7 +390,7 @@
                 $.ajax({
                     type: 'POST',
                     url: '{{route("updateCompanies")}}',
-                    dataType:'json',
+                    dataType: 'json',
                     async: true,
                     data: {
                         'companyId': companyId,
@@ -406,15 +407,15 @@
                     },
                     success: function (data) {
                         $("#alert").show()
-                    $("#message").text('Updated!');
-                    $(function(){
-                        $('html, body').animate({
-                     scrollTop: $("#alert").offset().top
-                    }, 500);
-                        setTimeout(function() {
-                            $("#alert").hide(500);
-                        }, 4000);
-                    });
+                        $("#message").text('Updated!');
+                        $(function () {
+                            $('html, body').animate({
+                                scrollTop: $("#alert").offset().top
+                            }, 500);
+                            setTimeout(function () {
+                                $("#alert").hide(500);
+                            }, 4000);
+                        });
                     }
                 });
             }
@@ -462,7 +463,7 @@
             $("#subsectionDiv *").prop('disabled', true);
         });
 
-        $('#cancelSubsection').click(function(){
+        $('#cancelSubsection').click(function () {
             $(this).hide();
             $('#subNameDiv').hide();
             $('#submit').show();
@@ -477,7 +478,7 @@
         });
 
         $('#cancelSection').click(function () {
-           $(this).hide();
+            $(this).hide();
             $('#addSubsection').show();
             $('#addSection').show();
             $('#sectionDropdown').show();
@@ -491,7 +492,6 @@
             $('#submit').show();
 
 
-
         });
 
         $(document).on('click', '.addSection', function () {
@@ -500,92 +500,103 @@
             var sectionContact = $('#existing_section_contact').val();
             var sectionAddress = $('#existing_section_address').val();
             var subName = $('#existing_subsection_name').val();
-            $.ajax({
-                type: 'POST',
-                data: {
-                    'selectedCompany': selectedCompany,
-                    'sectionName': sectionName,
-                    'sectionContact': sectionContact,
-                    'sectionAddress': sectionAddress,
-                    'subName': subName
-                },
-                url: "{{route('addmoreSection')}}",
-                dataType:'json',
-                async: true,
-                success: function (data) {
-                    $(this).hide();
-                    $('#addSubsection').show();
-                    $('#addSection').show();
-                    $('#sectionDropdown').show();
-                    $('#sectionDropdown').prop('selectedIndex', 0);
-                    $('#dynamicButton').hide();
-                    $("#sectionDiv *").prop('disabled', false);
-                    $("#companyDiv *").prop('disabled', false);
-                    $("#subsectionDiv *").prop('disabled', false);
-                    $("#subsectionDiv").hide();
-                    $('#subNameDiv').hide();
-                    $('#cancelSection').hide();
+            if (sectionName != '' && sectionContact != '' && sectionAddress != '' && subName != '') {
 
-                    var newSection = '<option value="'+data.id+'">'+data.name +'</option>'
-                    $('#sectionDropdown').append(newSection);
+                $.ajax({
+                    type: 'POST',
+                    data: {
+                        'selectedCompany': selectedCompany,
+                        'sectionName': sectionName,
+                        'sectionContact': sectionContact,
+                        'sectionAddress': sectionAddress,
+                        'subName': subName
+                    },
+                    url: "{{route('addmoreSection')}}",
+                    dataType: 'json',
+                    async: true,
+                    success: function (data) {
+                        $(this).hide();
+                        $('#addSubsection').show();
+                        $('#addSection').show();
+                        $('#sectionDropdown').show();
+                        $('#sectionDropdown').prop('selectedIndex', 0);
+                        $('#dynamicButton').hide();
+                        $("#sectionDiv *").prop('disabled', false);
+                        $("#companyDiv *").prop('disabled', false);
+                        $("#subsectionDiv *").prop('disabled', false);
+                        $("#subsectionDiv").hide();
+                        $('#subNameDiv').hide();
+                        $('#cancelSection').hide();
 
-                    $("#alert").show()
-                    $("#message").text('Section Added!');
-                    $(function(){
-                        $('html, body').animate({
-                     scrollTop: $("#alert").offset().top
-                    }, 500);
-                        setTimeout(function() {
-                            $("#alert").hide(500);
-                        }, 4000);
-                    });
-                }
-            });
+                        var newSection = '<option value="' + data.id + '">' + data.name + '</option>'
+                        $('#sectionDropdown').append(newSection);
+
+                        $("#alert").show()
+                        $("#message").text('Section Added!');
+                        $(function () {
+                            $('html, body').animate({
+                                scrollTop: $("#alert").offset().top
+                            }, 500);
+                            setTimeout(function () {
+                                $("#alert").hide(500);
+                            }, 4000);
+                        });
+                    }
+                });
+            }
+            else
+                alert('* Input all fields!');
+
         });
 
         $(document).on('click', '.addSubsection', function () {
             var selectedCompany = $('#dynamicButton').attr('title');
             var subName = $('#existing_subsection_name').val();
-            $.ajax({
-                type: 'POST',
-                data: {
-                    'selectedCompany': selectedCompany,
-                    'subName': subName
-                },
-                url: "{{route('addmoreSubsection')}}",
-                dataType:'json',
-                async: true,
-                success: function (data) {
-                    $(this).hide();
-                    $('#subNameDiv').hide();
-                    $('#submit').show();
-                    $('#addSubsection').show();
-                    $("#sectionDiv *").prop('disabled', false);
-                    $("#companyDiv *").prop('disabled', false);
-                    $("#subsectionDiv *").prop('disabled', false);
-                    $('#addSection').show();
-                    $('#dynamicButton').hide();
-                    $('#subsectionDropdown').show();
-                    $('#subsectionDropdown').prop('selectedIndex', 0);
-                    $('#cancelSubsection').hide();
+            if (subName != '') {
+                $.ajax({
+                    type: 'POST',
+                    data: {
+                        'selectedCompany': selectedCompany,
+                        'subName': subName
+                    },
+                    url: "{{route('addmoreSubsection')}}",
+                    dataType: 'json',
+                    async: true,
+                    success: function (data) {
+                        $(this).hide();
+                        $('#subNameDiv').hide();
+                        $('#submit').show();
+                        $('#addSubsection').show();
+                        $("#sectionDiv *").prop('disabled', false);
+                        $("#companyDiv *").prop('disabled', false);
+                        $("#subsectionDiv *").prop('disabled', false);
+                        $('#addSection').show();
+                        $('#dynamicButton').hide();
+                        $('#subsectionDropdown').show();
+                        $('#subsectionDropdown').prop('selectedIndex', 0);
+                        $('#cancelSubsection').hide();
 
-                    var newSub = '<option value="'+data.id +'">'+ data.name +'</option>';
-                    $('#subsectionDropdown').append(newSub);                  
+                        var newSub = '<option value="' + data.id + '">' + data.name + '</option>';
+                        $('#subsectionDropdown').append(newSub);
 
-                    $("#alert").show()
-                    $("#message").text('Subsection Added!');
-                    $(function(){
-                        $('html, body').animate({
-                     scrollTop: $("#alert").offset().top
-                    }, 500);
-                        setTimeout(function() {
-                            $("#alert").hide(500);
-                        }, 4000);
-                    });
-                }
-            });
+                        $("#alert").show()
+                        $("#message").text('Subsection Added!');
+                        $(function () {
+                            $('html, body').animate({
+                                scrollTop: $("#alert").offset().top
+                            }, 500);
+                            setTimeout(function () {
+                                $("#alert").hide(500);
+                            }, 4000);
+                        });
+                    }
+                });
+            }
+            else{
+                alert('* Input sub-section name!')
+            }
         });
-        
+
 
     </script>
 @endpush
