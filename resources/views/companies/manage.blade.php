@@ -1,158 +1,142 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('content')
-    <section class="content">
-        <div id="alert" style="display: none">
-            <div class="alert alert-success" role="alert">
-                <strong>Success: </strong><span id="message"></span>
-            </div>
+<section class="content">
+    <div id="alert" style="display: none">
+        <div class="alert alert-success" role="alert">
+            <strong>Success: </strong><span id="message"></span>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h4>Manage Company</h4>
-                    </div>
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="radio_click btn btn-primary"> <input type="radio"
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <h4>Manage Company</h4>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="radio_click btn btn-primary"> <input type="radio"
                                                                                        name="manage_type" value="0"> New
                                         Company
                                     </label> <label class="radio_click btn btn-primary"> <input
                                                 type="radio" name="manage_type" value="1"> Existing Company
                                     </label>
-                                </div>
+                            </div>
 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="forNew" style="display: none">
+                            <div class="box box-info">
+
+                                <div class="box-body">
+                                    <form action="{{route('company.saveCompany')}}" method="POST" class="form-group">
+                                        @csrf @method('post')
+                                        <label for="company"><h4><b>Company</b></h4></label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-building"></i>
+                                            </div>
+                                            <input type="text" placeholder="Company Name" class="form-control" name="company_name" required><br>
+                                        </div>
+                                        <br>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="	fa fa-phone"></i>
+                                            </div>
+                                            <input type="text" placeholder="Contact No." class="form-control" name="company_contact" required><br>
+                                        </div>
+                                        <br>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </div>
+                                            <input type="text" placeholder="Address" class="form-control" name="company_address" required><br>
+                                        </div>
+                                        <br>
+
+
+                                        <label for="section"><h4><b>Section</b></h4></label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-building"></i>
+                                            </div>
+                                            <input type="text" placeholder="Section Name" class="form-control" name="section_name" required><br>
+                                        </div>
+                                        <br>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="	fa fa-phone"></i>
+                                            </div>
+                                            <input type="text" placeholder="Contact No." class="form-control" name="section_contact" required><br>
+                                        </div>
+                                        <br>
+
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </div>
+                                            <input type="text" placeholder="Address" class="form-control" name="section_address" required><br>
+                                        </div>
+                                        <br>
+
+                                        <label for="section"><h4><b>Sub-Section</b></h4></label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-building"></i>
+                                            </div>
+                                            <input type="text" placeholder="Sub-section Name" class="form-control" name="subsection_name" required><br>
+                                        </div>
+                                        <br>
+
+                                        <input type="submit" id="toSubmit" value="Submit" class="btn btn-success">
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12" id="forNew" style="display: none">
-                                <div class="box box-info">
-
-                                    <div class="box-body">
-                                        <form action="{{route('company.saveCompany')}}" method="POST"
-                                              class="form-group">
-                                            @csrf
-                                            @method('post')
+                        {{--edit part starts here--}}
+                        <div class="col-md-12" id="forExisting" style="display: none">
+                            <div class="box box-info">
+                                <div class="box-body">
+                                    <form class="form-group">
+                                        <div id="companyDiv">
                                             <label for="company"><h4><b>Company</b></h4></label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-building"></i>
-                                                </div>
-                                                <input type="text" placeholder="Company Name" class="form-control"
-                                                       name="company_name" required><br>
-                                            </div>
-                                            <br>
-
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="	fa fa-phone"></i>
-                                                </div>
-                                                <input type="text" placeholder="Contact No." class="form-control"
-                                                       name="company_contact" required><br>
-                                            </div>
-                                            <br>
-
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fas fa-map-marker-alt"></i>
-                                                </div>
-                                                <input type="text" placeholder="Address" class="form-control"
-                                                       name="company_address" required><br>
-                                            </div>
-                                            <br>
-
-
-                                            <label for="section"><h4><b>Section</b></h4></label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-building"></i>
-                                                </div>
-                                                <input type="text" placeholder="Section Name" class="form-control"
-                                                       name="section_name" required><br>
-                                            </div>
-                                            <br>
-
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="	fa fa-phone"></i>
-                                                </div>
-                                                <input type="text" placeholder="Contact No." class="form-control"
-                                                       name="section_contact" required><br>
-                                            </div>
-                                            <br>
-
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fas fa-map-marker-alt"></i>
-                                                </div>
-                                                <input type="text" placeholder="Address" class="form-control"
-                                                       name="section_address" required><br>
-                                            </div>
-                                            <br>
-
-                                            <label for="section"><h4><b>Sub-Section</b></h4></label>
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-building"></i>
-                                                </div>
-                                                <input type="text" placeholder="Sub-section Name" class="form-control"
-                                                       name="subsection_name" required><br>
-                                            </div>
-                                            <br>
-
-                                            <input type="submit" id="toSubmit" value="Submit" class="btn btn-success">
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--edit part starts here--}}
-                            <div class="col-md-12" id="forExisting" style="display: none">
-                                <div class="box box-info">
-                                    <div class="box-body">
-                                        <form class="form-group">
-                                            <div id="companyDiv">
-                                                <label for="company"><h4><b>Company</b></h4></label>
-                                                <select class="form-control" id="companyDropdown" name="allCompanies"
-                                                        style="width:75%">
+                                            <select class="form-control" id="companyDropdown" name="allCompanies" style="width:75%">
                                                     <option value="0">--Select Company--</option>
                                                     @foreach($masterCompany as $master)
                                                         <option value="{{$master->id}}">{{$master->name}}</option>
                                                     @endforeach
                                                 </select><br>
+                                        </div>
+                                        <div id="sectionDiv" style="display:none">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-building"></i>
+                                                </div>
+                                                <input type="text" placeholder="Company Name" class="form-control" name="existing_company_name" id="existing_company_name">
                                             </div>
-                                            <div id="sectionDiv" style="display:none">
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-building"></i>
-                                                    </div>
-                                                    <input type="text" placeholder="Company Name"
-                                                           class="form-control" name="existing_company_name"
-                                                           id="existing_company_name">
-                                                </div>
-                                                <br>
+                                            <br>
 
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-phone"></i>
-                                                    </div>
-                                                    <input type="text" placeholder="Contact No."
-                                                           class="form-control" name="existing_company_contact"
-                                                           id="existing_company_contact">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
                                                 </div>
-                                                <br>
+                                                <input type="text" placeholder="Contact No." class="form-control" name="existing_company_contact" id="existing_company_contact">
+                                            </div>
+                                            <br>
 
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </div>
-                                                    <input style="width: 70%" type="text" placeholder="Address"
-                                                           class="form-control" name="existing_company_address"
-                                                           id="existing_company_address">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fas fa-map-marker-alt"></i>
                                                 </div>
-                                                <div style="margin-top: 20px;">
-                                                    <label for="section"><h4><b>Section</b><span
+                                                <input style="width: 70%" type="text" placeholder="Address" class="form-control" name="existing_company_address" id="existing_company_address">
+                                            </div>
+                                            <div style="margin-top: 20px;">
+                                                <label for="section"><h4><b>Section</b><span
                                                                     style="margin-left: 20px"
                                                                     class="btn btn-primary btn-sm"
                                                                     id="addSection">Add more</span>
@@ -161,45 +145,38 @@
                                                                     class="btn btn-danger btn-sm"
                                                                     id="cancelSection">Cancel</span>
                                                         </h4></label>
-                                                    <select class="form-control input-shorter" name="allSections"
-                                                            id="sectionDropdown">
+                                                <select class="form-control input-shorter" name="allSections" id="sectionDropdown">
                                                     </select><br>
-                                                </div>
                                             </div>
+                                        </div>
 
 
-                                            <div id="subsectionDiv" style="display:none">
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-building"></i>
-                                                    </div>
-                                                    <input type="text" placeholder="Section Name"
-                                                           class="form-control" name="existing_section_name"
-                                                           id="existing_section_name"><br>
+                                        <div id="subsectionDiv" style="display:none">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-building"></i>
                                                 </div>
-                                                <br>
+                                                <input type="text" placeholder="Section Name" class="form-control" name="existing_section_name" id="existing_section_name"><br>
+                                            </div>
+                                            <br>
 
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-phone"></i>
-                                                    </div>
-                                                    <input type="text" placeholder="Contact No."
-                                                           class="form-control" name="existing_section_contact"
-                                                           id="existing_section_contact"><br>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-phone"></i>
                                                 </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fas fa-map-marker-alt"></i>
-                                                    </div>
-                                                    <input type="text" placeholder="Address" class="form-control"
-                                                           name="existing_section_address"
-                                                           id="existing_section_address"><br>
+                                                <input type="text" placeholder="Contact No." class="form-control" name="existing_section_contact" id="existing_section_contact"><br>
+                                            </div>
+                                            <br>
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fas fa-map-marker-alt"></i>
                                                 </div>
-                                                <br>
+                                                <input type="text" placeholder="Address" class="form-control" name="existing_section_address" id="existing_section_address"><br>
+                                            </div>
+                                            <br>
 
-                                                <div style="margin-top: 20px;">
-                                                    <label for="subsection"><h4><b>Sub-Section</b><span
+                                            <div style="margin-top: 20px;">
+                                                <label for="subsection"><h4><b>Sub-Section</b><span
                                                                     id="addSubsection"
                                                                     style="margin-left: 20px"
                                                                     class="btn btn-primary btn-sm">Add more</span>
@@ -210,30 +187,28 @@
                                                         </h4></label>
 
 
-                                                    <select class="form-control input-shorter"
-                                                            name="subsectionDropdown"
-                                                            id="subsectionDropdown">
+                                                <select class="form-control input-shorter" name="subsectionDropdown" id="subsectionDropdown">
                                                     </select><br>
-                                                </div>
                                             </div>
-                                            <div id="subNameDiv" style="display: none;">
-                                                <div class="input-group">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-building"></i>
-                                                    </div>
-                                                    <input type="text" placeholder="Sub-section Name"
-                                                           class="form-control" name="existing_subsection_name"
-                                                           id="existing_subsection_name" required><br>
+                                        </div>
+                                        <div id="subNameDiv" style="display: none;">
+                                            <div class="input-group">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-building"></i>
                                                 </div>
+                                                <input type="text" placeholder="Sub-section Name" class="form-control" name="existing_subsection_name" id="existing_subsection_name"
+                                                    required><br>
                                             </div>
-                                            <br>
+                                        </div>
+                                        <br>
+                                        
+                                        <div id="inputalert" style="display:none;margin-left:61%;color:red;font-size:medium" class="col-md-4">
+                                                <span id="imessage"></span>
+                                        </div>
 
-                                            <span id="dynamicButton" style="display: none;margin-top: 12px"
-                                                  class="btn btn-primary">Add</span>
-                                            <span style="margin-top: 12px; display:none;" id="submit"
-                                                  class="btn btn-success">Update</span>
-                                        </form>
-                                    </div>
+                                        <span id="dynamicButton" style="display: none;margin-top: 12px" class="btn btn-primary">Add</span>
+                                        <span style="margin-top: 12px; display:none;" id="submit" class="btn btn-success">Update</span>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -241,11 +216,13 @@
                 </div>
             </div>
         </div>
-        </div>
-    </section>
-@endsection @push('scripts')
-    <script type="text/javascript">
-        $.ajaxSetup({
+    </div>
+    </div>
+</section>
+@endsection
+ @push('scripts')
+<script type="text/javascript">
+    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
@@ -473,6 +450,7 @@
             $("#subsectionDiv *").prop('disabled', false);
             $('#addSection').show();
             $('#dynamicButton').hide();
+            $("#inputalert").hide()
             $('#subsectionDropdown').show();
             $('#subsectionDropdown').prop('selectedIndex', 0);
         });
@@ -490,6 +468,7 @@
             $("#subsectionDiv").hide();
             $('#subNameDiv').hide();
             $('#submit').show();
+            $("#inputalert").hide()
 
 
         });
@@ -530,7 +509,7 @@
 
                         var newSection = '<option value="' + data.id + '">' + data.name + '</option>'
                         $('#sectionDropdown').append(newSection);
-
+                        $("#inputalert").hide()
                         $("#alert").show()
                         $("#message").text('Section Added!');
                         $(function () {
@@ -540,13 +519,17 @@
                             setTimeout(function () {
                                 $("#alert").hide(500);
                             }, 4000);
-                        });
+                        });  
                     }
                 });
             }
             else
-                alert('* Input all fields!');
-
+              // alert('* Input all fields!');
+              $("#inputalert").show()
+                        $("#imessage").text('Please input all fields');
+                           
+                       
+             
         });
 
         $(document).on('click', '.addSubsection', function () {
@@ -574,11 +557,11 @@
                         $('#dynamicButton').hide();
                         $('#subsectionDropdown').show();
                         $('#subsectionDropdown').prop('selectedIndex', 0);
-                        $('#cancelSubsection').hide();
+                        $('#cancelSubsection').hide()
 
                         var newSub = '<option value="' + data.id + '">' + data.name + '</option>';
                         $('#subsectionDropdown').append(newSub);
-
+                        $("#inputalert").hide();
                         $("#alert").show()
                         $("#message").text('Subsection Added!');
                         $(function () {
@@ -593,10 +576,11 @@
                 });
             }
             else{
-                alert('* Input sub-section name!')
+               // alert('* Input sub-section name!')
+               $("#inputalert").show()
+                        $("#imessage").text('Please input sub-section name');
             }
         });
+</script>
 
-
-    </script>
 @endpush

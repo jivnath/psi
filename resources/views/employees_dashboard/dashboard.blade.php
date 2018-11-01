@@ -22,13 +22,13 @@
                                 <label for="red">Not full.</label>
                             </div>
                         </li>
-                        <li class="list-inline-item"  style="margin-left:8%">
+                        <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #2ac633;width:10px;height:10px;display:inline-block;"></div>
                                 <label for="red">Applied shifts.</label>
                             </div>
                         </li>
-                        <li class="list-inline-item"  style="margin-left:8%">
+                        <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #2a7ce9;width:10px;height:10px;display:inline-block;"></div>
                                 <label for="red">Worked in the past.</label>
