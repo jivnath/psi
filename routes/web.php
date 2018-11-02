@@ -72,6 +72,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/skill/delete',['as' => 'delete.skill', 'uses' => 'EmployeeSkillController@removeSkill']);
 
             Route::post('/updateEmployeeGender', ['as'=>'updateEmployeeGender', 'uses'=> 'EmployeeController@updateEmployeeGender']);
+            Route::post('/updateEmployeeStatusResidence', ['as'=>'updateEmployeeStatusResidence', 'uses'=> 'EmployeeController@updateEmployeeStatusResidence']);
+            Route::post('/updateEmployeeHourlyWage', ['as'=>'updateEmployeeHourlyWage', 'uses'=> 'EmployeeController@updateEmployeeHourlyWage']);
+            Route::post('/updateEmployeeOperatingStatus', ['as'=>'updateEmployeeOperatingStatus', 'uses'=> 'EmployeeController@updateEmployeeOperatingStatus']);
+            Route::post('/updateEmployeeStatus', ['as'=>'updateEmployeeStatus', 'uses'=> 'EmployeeController@updateEmployeeStatus']);
+            Route::post('/updateEmployeeViberInstall', ['as'=>'updateEmployeeViberInstall', 'uses'=> 'EmployeeController@updateEmployeeViberInstall']);
 
 
         });

@@ -51,6 +51,7 @@
         $employee_account = \Session::get('employee_account');
         $employee_input = \Session::get('employee_input');
         $employee_operating_status= \Session::get('employee_operating_status');
+        $employee_status= \Session::get('employee_status');
         $employee_office = \Session::get('employee_office');
         $employee_old_double_registration = \Session::get('employee_old_double_registration');
         $employee_lane_employee_no = \Session::get('employee_lane_employee_no');
@@ -401,6 +402,18 @@
                                         <tr>
                                             <td>Operating Status</td>
                                             <td>{{ $employee_operating_status }}</td>
+                                        </tr>
+                                    @endif
+                                    @if(  $employee_viber_install!=null)
+                                        <tr>
+                                            <td>Viber Install</td>
+                                            <td>{{   $employee_viber_install }}</td>
+                                        </tr>
+                                    @endif
+                                    @if($employee_status!=null)
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>{{ $employee_status }}</td>
                                         </tr>
                                     @endif
                             </table>

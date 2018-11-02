@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <style>
         thead input {
@@ -36,8 +37,8 @@
                                 <thead>
                                 <tr>
                                     @foreach($all_col as $column)
-                                        <th class="sticky-top" style="word-wrap: break-word">{{__('employee.'.
-									ucwords(str_replace('_','',ucwords($column->field_name,'_'))))}}</th>
+                                        <th class="sticky-top" style="word-wrap: break-word">{{
+									ucwords(str_replace('_',' ',ucwords($column->field_name,'_')))}}</th>
                                     @endforeach
 
                                 </tr>
@@ -65,7 +66,8 @@
                                                             </select>
 
                                                         @elseif ($column->field_name == 'status_residence')
-                                                            <select name="status_residence" class="status_residence" data-psi_data="{{$psi_value}}">
+                                                            <select name="status_residence" class="status_residence"
+                                                                    data-psi_data="{{$psi_value}}">
                                                                 <option>none</option>
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == '就労') ? 'selected="selected"' : ''?> value="就労">
@@ -82,7 +84,8 @@
                                                             </select>
 
                                                         @elseif ($column->field_name == 'hourly_wage')
-                                                            <select name="hourly_wage" class="hourly_wage" data-psi_data="{{$psi_value}}">
+                                                            <select name="hourly_wage" class="hourly_wage"
+                                                                    data-psi_data="{{$psi_value}}">
                                                                 <option>none</option>
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == '通常の雇用主') ? 'selected="selected"' : ''?> value="通常の雇用主">
@@ -97,7 +100,6 @@
                                                                     アルバイト
                                                                 </option>
                                                             </select>
-
                                                         @elseif($column->field_name == 'operating_status')
                                                             <select name="operating_status" class="operating_status" data-psi_data="{{$psi_value}}">
                                                                 <option>none</option>
@@ -110,8 +112,33 @@
                                                                     低頻度の仕事
                                                                 </option>
                                                                 <option
-                                                                    <?= ($cell->{$column->field_name} == 'やめて ') ? 'selected="selected"' : ''?> value="やめて">
+                                                                    <?= ($cell->{$column->field_name} == 'やめて') ? 'selected="selected"' : ''?> value="やめて">
                                                                     やめて
+                                                                </option>
+                                                            </select>
+                                                        @elseif($column->field_name == 'status')
+                                                            <select name="status" class="status" data-psi_data="{{$psi_value}}">
+
+                                                                <option
+                                                                    <?= ($cell->{$column->field_name} == 1) ? 'selected="selected"' : ''?> value="1">
+                                                                    Available
+                                                                </option>
+                                                                <option
+                                                                    <?= ($cell->{$column->field_name} == 0) ? 'selected="selected"' : ''?> value="0">
+                                                                    Not Available
+                                                                </option>
+
+                                                            </select>
+                                                        @elseif($column->field_name == 'viber_install')
+                                                            <select name="viber_install" class="viber_install" data-psi_data="{{$psi_value}}">
+
+                                                                <option
+                                                                    <?= ($cell->{$column->field_name} == 1) ? 'selected="selected"' : ''?> value="1">
+                                                                    Yes
+                                                                </option>
+                                                                <option
+                                                                    <?= ($cell->{$column->field_name} == 0) ? 'selected="selected"' : ''?> value="0">
+                                                                    No
                                                                 </option>
                                                             </select>
                                                         @else
@@ -221,6 +248,82 @@
                 type: "POST",
                 url: "{{route('updateEmployeeGender')}}",
                 data: {'sex': sex, 'psi': psi},
+                dataType: "json",
+                async: true,
+                success: function (data) {
+
+                }
+            });
+        });
+
+        $(".status_residence").change(function () {
+            var status = $(this).val();
+            var psi = $(this).attr('data-psi_data');
+            $.ajax({
+                type: "POST",
+                url: "{{route('updateEmployeeStatusResidence')}}",
+                data: {'status': status, 'psi': psi},
+                dataType: "json",
+                async: true,
+                success: function (data) {
+
+                }
+            });
+        });
+
+        $(".hourly_wage").change(function () {
+            var wage = $(this).val();
+            var psi = $(this).attr('data-psi_data');
+            alert(wage);
+            $.ajax({
+                type: "POST",
+                url: "{{route('updateEmployeeHourlyWage')}}",
+                data: {'wage': wage, 'psi': psi},
+                dataType: "json",
+                async: true,
+                success: function (data) {
+
+                }
+            });
+        });
+
+        $(".operating_status").change(function () {
+            var status = $(this).val();
+            var psi = $(this).attr('data-psi_data');
+            $.ajax({
+                type: "POST",
+                url: "{{route('updateEmployeeOperatingStatus')}}",
+                data: {'status': status, 'psi': psi},
+                dataType: "json",
+                async: true,
+                success: function (data) {
+
+                }
+            });
+        });
+
+        $(".status").change(function () {
+            var status = $(this).val();
+            var psi = $(this).attr('data-psi_data');
+            $.ajax({
+                type: "POST",
+                url: "{{route('updateEmployeeStatus')}}",
+                data: {'status': status, 'psi': psi},
+                dataType: "json",
+                async: true,
+                success: function (data) {
+
+                }
+            });
+        });
+
+        $(".viber_install").change(function () {
+            var viber = $(this).val();
+            var psi = $(this).attr('data-psi_data');
+            $.ajax({
+                type: "POST",
+                url: "{{route('updateEmployeeViberInstall')}}",
+                data: {'viber': viber, 'psi': psi},
                 dataType: "json",
                 async: true,
                 success: function (data) {
