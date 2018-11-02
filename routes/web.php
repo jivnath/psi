@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/skill/all', ['as' => 'skill.all', 'uses' => 'EmployeeSkillController@findSkill']);
             Route::get('/skill/delete',['as' => 'delete.skill', 'uses' => 'EmployeeSkillController@removeSkill']);
 
+            Route::post('/updateEmployeeGender', ['as'=>'updateEmployeeGender', 'uses'=> 'EmployeeController@updateEmployeeGender']);
+
 
         });
 

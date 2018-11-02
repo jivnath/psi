@@ -120,6 +120,22 @@ class EmployeeController extends Controller
         return view('reports.attendance_management', compact('data'));
     }
 
+    public function updateEmployeeGender(Request $request)
+    {
+        if($request->ajax())
+        {
+            $sex = $request->get('sex');
+            $psi = $request->get('psi');
+
+            $employee = Employee::where('psi_number', $psi)->first();
+            $employee->sex = $sex;
+            $employee->save();
+//            dd($employee);
+
+            echo json_encode($employee);
+        }
+    }
+
     /**
      * Define cell update rules
      */
