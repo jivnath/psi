@@ -27,8 +27,8 @@
 						<thead>
 							<tr>
 								@foreach($all_col as $column)
-								<th class="sticky-top" style="word-wrap: break-word">{{__('employee.'.
-									ucwords(str_replace('_','',ucwords($column->field_name,'_'))))}}</th>
+								<th class="sticky-top" style="word-wrap: break-word">{{
+									ucwords(str_replace('_',' ',ucwords($column->field_name,'_')))}}</th>
 								@endforeach
 
 							</tr>
@@ -71,6 +71,19 @@
 														<option <?= ($cell->{$column->field_name}=='低頻度の仕事')? 'selected="selected"':''?> value="低頻度の仕事"> 低頻度の仕事 </option>
 														<option <?= ($cell->{$column->field_name}=='やめて ')? 'selected="selected"':''?> value="やめて"> やめて </option>
 													</select>
+											@elseif($column->field_name == 'status')
+												<select name = "status">
+
+													<option <?= ($cell->{$column->field_name}== 1)? 'selected="selected"':''?> value="1"> Available </option>
+													<option <?= ($cell->{$column->field_name}== 0)? 'selected="selected"':''?> value="0"> Not Available </option>
+
+												</select>
+											@elseif($column->field_name == 'viber_install')
+												<select name = "viber_install">
+
+													<option <?= ($cell->{$column->field_name}== 1)? 'selected="selected"':''?> value="1"> Yes </option>
+													<option <?= ($cell->{$column->field_name}== 0)? 'selected="selected"':''?> value="0"> No </option>
+												</select>
 											@else
 												{{ $cell->{$column->field_name} }}
 											@endif
