@@ -42,7 +42,15 @@ thead input {
 						<thead>
 							<tr>
 								@foreach($all_col as $count_key=>$column)
+								@if ($column->field_name == 'sex')
+                                    	<td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
+                                    	<option value="">--All--</option>
+                                    	<option value="男性">男性</option>
+                                        <option value="女性">女性</option>
+                                        </select></td>
+								@else
 									<td><input type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
+								@endif
 								@endforeach
 
 							</tr>
