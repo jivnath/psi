@@ -13,7 +13,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Confirmation</span>
-                        <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}} 75%</span>
+                        <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}}%</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
