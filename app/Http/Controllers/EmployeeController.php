@@ -120,6 +120,105 @@ class EmployeeController extends Controller
         return view('reports.attendance_management', compact('data'));
     }
 
+    public function updateEmployeeGender(Request $request)
+    {
+        if($request->ajax())
+        {
+            $sex = $request->get('sex');
+            $psi = $request->get('psi');
+
+            $employee = Employee::where('psi_number', $psi)->first();
+            $employee->sex = $sex;
+            $employee->save();
+//            dd($employee);
+
+            echo json_encode($employee);
+        }
+    }
+
+    public function updateEmployeeStatusResidence(Request $request)
+    {
+        if($request->ajax())
+        {
+            $status = $request->get('status');
+            $psi = $request->get('psi');
+
+            $employee = Employee::where('psi_number', $psi)->first();
+//            dd($employee);
+            $employee->status_residence = $status;
+            $employee->save();
+//            dd($employee);
+
+            echo json_encode($employee);
+        }
+    }
+
+    public function updateEmployeeHourlyWage(Request $request)
+    {
+        if($request->ajax())
+        {
+            $wage = $request->get('wage');
+            $psi = $request->get('psi');
+//            dd($wage);
+
+            $employee = Employee::where('psi_number', $psi)->first();
+            $employee->hourly_wage = $wage;
+            $employee->save();
+//            dd($employee);
+
+            echo json_encode($employee);
+        }
+    }
+
+    public function updateEmployeeOperatingStatus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $status = $request->get('status');
+            $psi = $request->get('psi');
+//            dd($wage);
+
+            $employee = Employee::where('psi_number', $psi)->first();
+            $employee->operating_status = $status;
+            $employee->save();
+//            dd($employee);
+
+            echo json_encode($employee);
+        }
+    }
+
+    public function updateEmployeeStatus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $status = $request->get('status');
+            $psi = $request->get('psi');
+
+            $employee = Employee::where('psi_number', $psi)->first();
+            $employee->status = $status;
+            $employee->save();
+//            dd($employee);
+
+            echo json_encode($employee);
+        }
+    }
+
+    public function updateEmployeeViberInstall(Request $request)
+    {
+        if($request->ajax())
+        {
+            $viber = $request->get('viber');
+            $psi = $request->get('psi');
+
+            $employee = Employee::where('psi_number', $psi)->first();
+            $employee->viber_install = $viber;
+            $employee->save();
+//            dd($employee);
+
+            echo json_encode($employee);
+        }
+    }
+
     /**
      * Define cell update rules
      */
