@@ -13,7 +13,7 @@ thead input {
 		<div class="col-md-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Employees List<a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>@lang('employee.UploadNew')</small></a></h3>
+					<h3 class="box-title">@lang('translation.EmployeesList')<a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>@lang('translation.UploadNew')</small></a></h3>
 					<div class="box-tools pull-right">
 						<div class="btn-group">
 							<button type="button" class="btn btn-box-tool dropdown-toggle"

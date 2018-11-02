@@ -66,8 +66,6 @@
         $employee_expiration_date = \Session::get('employee_expiration_date');
         $employee_account_registration = \Session::get('employee_account_registration');
 
-
-
     @endphp
 
     <div class="row">
@@ -79,9 +77,13 @@
                     <img class="profile-user-img img-responsive img-circle" src="https://adminlte.io/themes/AdminLTE/dist/img/user4-128x128.jpg" alt="User profile picture">
                     <h3 class="profile-username text-center"><?= $employee_name.'(<small>'.$employee_sex.'</small>)'?></h3>
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
-                    <p class="text-center"><i class="fa fa-circle text-success"></i> Available</p>
-
-
+                    <p class="text-center">
+                        @if($employee_status==1)
+                            <i class="fa fa-circle text-success"></i> Available
+                        @elseif($employee_status==0)
+                            <i class="fa fa-circle text-danger"></i> Not Available
+                        @endif
+                    </p>
 
                 </div>
                 <!-- /.box-body -->
@@ -398,24 +400,28 @@
                                         <td>{{ $employee_notes }}</td>
                                     </tr>
                                 @endif
-                                    @if($employee_operating_status!=null)
-                                        <tr>
-                                            <td>Operating Status</td>
-                                            <td>{{ $employee_operating_status }}</td>
-                                        </tr>
-                                    @endif
-                                    @if(  $employee_viber_install!=null)
-                                        <tr>
-                                            <td>Viber Install</td>
-                                            <td>{{   $employee_viber_install }}</td>
-                                        </tr>
-                                    @endif
-                                    @if($employee_status!=null)
-                                        <tr>
-                                            <td>Status</td>
-                                            <td>{{ $employee_status }}</td>
-                                        </tr>
-                                    @endif
+                                @if($employee_operating_status!=null)
+                                    <tr>
+                                        <td>Operating Status</td>
+                                        <td>{{ $employee_operating_status }}</td>
+                                    </tr>
+                                @endif
+
+                                @if($employee_viber_install !== null)
+
+                                    {{--{{dd($employee_viber_install)}}--}}
+                                    <tr>
+                                        <td>Viber Install</td>
+                                        <td>
+                                            @if($employee_viber_install==1)
+                                                    yes
+                                            @elseif($employee_viber_install==0)
+                                                   no
+                                            @endif
+                                            </td>
+                                    </tr>
+                                @endif
+
                             </table>
                         </div>
                     </div>

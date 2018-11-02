@@ -109,11 +109,10 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_dependent_exemption', $employee->dependent_exemption);
             $request->session()->put('employee_notes', $employee->notes);
 
-            $request->session()->put('employee_status', $employee->status);
-
             $request->session()->put('employee_account', $employee->account);
             $request->session()->put('employee_input', $employee->input);
             $request->session()->put('employee_operating_status', $employee->operating_status);
+            $request->session()->put('employee_status', $employee->status);
             $request->session()->put('employee_office', $employee->office);
             $request->session()->put('employee_old_double_registration', $employee->old_double_registration);
             $request->session()->put('employee_lane_employee_no', $employee->lane_employee_no);
