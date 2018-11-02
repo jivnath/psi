@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('content')
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <style>
+        thead input {
+            padding: 3px;
+            box-sizing: border-box;
+        }
+    </style>
     <section class="content">
         @include('layouts.duplicate_employees')
         <div class="row">
@@ -26,7 +32,7 @@
                     <div class="box-body">
                         <div>
                             <table class="table table-striped table-fixed"
-                                   style="text-align: center">
+                                   style="text-align: center" id='example'>
                                 <thead>
                                 <tr>
                                     @foreach($all_col as $column)
@@ -50,7 +56,8 @@
                                                     <td class="contenteditable" data-column="{{ $column->field_name }}"
                                                         data-old="" contenteditable="true">
                                                         @if ($column->field_name == 'sex')
-                                                            <select name="sex" class="sex_class" data-psi_data="{{$psi_value}}">
+                                                            <select name="sex" class="sex_class"
+                                                                    data-psi_data="{{$psi_value}}">
                                                                 @foreach($sex as $s)
                                                                     <option
                                                                         <?= ($cell->{$column->field_name} == $s->name) ? 'selected="selected"' : ''?> value="{{$s->name}}">{{ $s->name }}</option>
@@ -58,7 +65,7 @@
                                                             </select>
 
                                                         @elseif ($column->field_name == 'status_residence')
-                                                            <select name="status_residence">
+                                                            <select name="status_residence" class="status_residence" data-psi_data="{{$psi_value}}">
                                                                 <option>none</option>
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == '就労') ? 'selected="selected"' : ''?> value="就労">
@@ -75,7 +82,7 @@
                                                             </select>
 
                                                         @elseif ($column->field_name == 'hourly_wage')
-                                                            <select name="hourly_wage">
+                                                            <select name="hourly_wage" class="hourly_wage" data-psi_data="{{$psi_value}}">
                                                                 <option>none</option>
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == '通常の雇用主') ? 'selected="selected"' : ''?> value="通常の雇用主">
@@ -92,7 +99,7 @@
                                                             </select>
 
                                                         @elseif($column->field_name == 'operating_status')
-                                                            <select name="operating_status">
+                                                            <select name="operating_status" class="operating_status" data-psi_data="{{$psi_value}}">
                                                                 <option>none</option>
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == '働くこと') ? 'selected="selected"' : ''?> value="働くこと">
@@ -174,8 +181,10 @@
             </div>
         </div>
     </div>
-
 @endsection @push('scripts')
+    <script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
+    <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
+
 
     <script>
         $(document).ready(function () {
@@ -205,19 +214,46 @@
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');
         });
-        $(".sex_class").change(function(){
-           var sex = $(this).val();
-           var psi = $(this).attr('data-psi_data');
-           $.ajax({
-              type:"POST",
-              url:"{{route('updateEmployeeGender')}}",
-              data:{'sex':sex, 'psi':psi},
-              dataType:"json",
-              async:true,
-              success:function(data){
+        $(".sex_class").change(function () {
+            var sex = $(this).val();
+            var psi = $(this).attr('data-psi_data');
+            $.ajax({
+                type: "POST",
+                url: "{{route('updateEmployeeGender')}}",
+                data: {'sex': sex, 'psi': psi},
+                dataType: "json",
+                async: true,
+                success: function (data) {
 
-              }
-           });
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#example thead th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+
+            // DataTable
+            var table = $('#example').DataTable();
+
+            // Apply the search
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.header()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+        });
+        $('#view_columns').click(function () {
+            $('#exampleModalLong').modal('show');
         });
     </script>
 @endpush
