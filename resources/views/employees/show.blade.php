@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <style>
         thead input {
@@ -38,7 +37,23 @@
                                 <tr>
                                     @foreach($all_col as $column)
                                         <th class="sticky-top" style="word-wrap: break-word">{{
-									ucwords(str_replace('_',' ',ucwords($column->field_name,'_')))}}</th>
+                                    ucwords(str_replace('_',' ',ucwords($column->field_name,'_')))}}</th>
+                                    @endforeach
+
+                                </tr>
+                                </thead>
+                                <thead>
+                                <tr>
+                                    @foreach($all_col as $count_key=>$column)
+                                        @if ($column->field_name == 'sex')
+                                            <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
+                                                    <option value="">--All--</option>
+                                                    <option value="男性">男性</option>
+                                                    <option value="女性">女性</option>
+                                                </select></td>
+                                        @else
+                                            <td><input type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
+                                        @endif
                                     @endforeach
 
                                 </tr>
@@ -334,26 +349,26 @@
 
         $(document).ready(function () {
             // Setup - add a text input to each footer cell
-            $('#example thead th').each(function () {
-                var title = $(this).text();
-                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-            });
+            // Setup - add a text input to each footer cell
+
 
             // DataTable
             var table = $('#example').DataTable();
+            $("#example_filter").css("display","none");  // hiding global search box
 
-            // Apply the search
-            table.columns().every(function () {
-                var that = this;
-
-                $('input', this.header()).on('keyup change', function () {
-                    if (that.search() !== this.value) {
-                        that
-                            .search(this.value)
-                            .draw();
-                    }
-                });
-            });
+            $('.search-input-text').keypress( function (e) {   // for text boxes
+                if(e.which == 13) {
+                    var i =$(this).attr('data-column');  // getting column index
+                    var v =$(this).val();  // getting search input value
+//              if(v!='')
+                    table.columns(i).search(v).draw();
+                }
+            } );
+            $('.search-input-select').on( 'change', function () {   // for select box
+                var i =$(this).attr('data-column');
+                var v =$(this).val();
+                table.columns(i).search(v).draw();
+            } );
         });
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');
