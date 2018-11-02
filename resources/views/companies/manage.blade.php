@@ -1,5 +1,6 @@
 @extends('layouts.app') 
 @section('content')
+
 <section class="content">
     <div id="alert" style="display: none">
         <div class="alert alert-success" role="alert">
@@ -202,8 +203,8 @@
                                         </div>
                                         <br>
                                         
-                                        <div id="inputalert" style="display:none;margin-left:61%;color:red;font-size:medium" class="col-md-4">
-                                                <span id="imessage"></span>
+                                        <div id="inputalert" style="display:none;margin-left:1.1%;color:red;font-size:medium" class="col-md-9">
+                                                <span id="imessage" style="float:right"></span>
                                         </div>
 
                                         <span id="dynamicButton" style="display: none;margin-top: 12px" class="btn btn-primary">Add</span>
@@ -578,7 +579,7 @@
             else{
                // alert('* Input sub-section name!')
                $("#inputalert").show()
-                        $("#imessage").text('Please input sub-section name');
+                        $("#imessage").text('Input sub-section name');
             }
         });
 </script>
