@@ -39,6 +39,14 @@ thead input {
 
 							</tr>
 						</thead>
+						<thead>
+							<tr>
+								@foreach($all_col as $count_key=>$column)
+									<td><input type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
+								@endforeach
+
+							</tr>
+						</thead>
 						<tbody>
 							@if(count($cells) > 0)
 							@foreach($cells as $index => $cell)
@@ -158,26 +166,25 @@ thead input {
     });
     $(document).ready(function() {
         // Setup - add a text input to each footer cell
-        $('#example thead th').each( function () {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-        } );
+
 
         // DataTable
         var table = $('#example').DataTable();
+        $("#example_filter").css("display","none");  // hiding global search box
 
-        // Apply the search
-        table.columns().every( function () {
-            var that = this;
-
-            $( 'input', this.header() ).on( 'keyup change', function () {
-                if ( that.search() !== this.value ) {
-                    that
-                        .search( this.value )
-                        .draw();
-                }
-            } );
-        } );
+		$('.search-input-text').keypress( function (e) {   // for text boxes
+			if(e.which == 13) {
+				var i =$(this).attr('data-column');  // getting column index
+				var v =$(this).val();  // getting search input value
+// 				if(v!='')
+					table.columns(i).search(v).draw();
+			}
+		} );
+		$('.search-input-select').on( 'change', function () {   // for select box
+			var i =$(this).attr('data-column');
+			var v =$(this).val();
+			table.columns(i).search(v).draw();
+		} );
     } );
     $('#view_columns').click(function(){
     	$('#exampleModalLong').modal('show');
