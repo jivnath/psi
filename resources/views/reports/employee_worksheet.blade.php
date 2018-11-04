@@ -85,7 +85,7 @@
                 success: function (data) {
                     $("#loadingDiv").hide();
                     // console.log(data);
-                    alert({{trans('message.Companiessuccessfullyadded')}});
+{{--                    alert({{trans('message.Companiessuccessfullyadded')}});--}}
                     let i;
                     $("#tbody").html('');
 
