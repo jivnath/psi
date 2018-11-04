@@ -13,7 +13,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Employees List<a href="{{ route('employees.uploadForm') }}"
+                        <h3 class="box-title">@lang('translation.EmployeesList')<a href="{{ route('employees.uploadForm') }}"
                                                                class="btn btn-link" style="margin-left:10px">
                                 <small>@lang('employee.UploadNew')</small>
                             </a></h3>
@@ -46,13 +46,16 @@
                                 <tr>
                                     @foreach($all_col as $count_key=>$column)
                                         @if ($column->field_name == 'sex')
-                                            <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
+                                            <td><select data-column="{{$count_key}}"
+                                                        class="search-input-select chosen-select"
+                                                        tabindex="{{$count_key+1}}">
                                                     <option value="">--All--</option>
                                                     <option value="男性">男性</option>
                                                     <option value="女性">女性</option>
                                                 </select></td>
                                         @else
-                                            <td><input type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
+                                            <td><input type="text" data-column="{{$count_key}}"
+                                                       class="search-input-text" tabindex="{{$count_key+1}}"></td>
                                         @endif
                                     @endforeach
 
@@ -68,9 +71,14 @@
                                                         $psi_value=$cell->{$column->field_name}
                                                     @endphp
                                                 @endif
-                                                @if($column->field_name != 'updated_at' && $column->field_name != 'psi_number')
+                                                @if($column->field_name != 'updated_at' && $column->field_name != 'psi_number' && $column->field_name != 'sex' && $column->field_name != 'status_residence' && $column->field_name != 'status' && $column->field_name != 'hourly_wage' && $column->field_name != 'status_residence' && $column->field_name != 'operating_satus' && $column->field_name != 'viber_install')
                                                     <td class="contenteditable" data-column="{{ $column->field_name }}"
                                                         data-old="" contenteditable="true">
+
+                                                        {{ $cell->{$column->field_name} }}
+                                                    </td>
+                                                @else
+                                                    <td>
                                                         @if ($column->field_name == 'sex')
                                                             <select name="sex" class="sex_class"
                                                                     data-psi_data="{{$psi_value}}">
@@ -116,7 +124,8 @@
                                                                 </option>
                                                             </select>
                                                         @elseif($column->field_name == 'operating_status')
-                                                            <select name="operating_status" class="operating_status" data-psi_data="{{$psi_value}}">
+                                                            <select name="operating_status" class="operating_status"
+                                                                    data-psi_data="{{$psi_value}}">
                                                                 <option>none</option>
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == '働くこと') ? 'selected="selected"' : ''?> value="働くこと">
@@ -132,7 +141,8 @@
                                                                 </option>
                                                             </select>
                                                         @elseif($column->field_name == 'status')
-                                                            <select name="status" class="status" data-psi_data="{{$psi_value}}">
+                                                            <select name="status" class="status"
+                                                                    data-psi_data="{{$psi_value}}">
 
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == 1) ? 'selected="selected"' : ''?> value="1">
@@ -145,7 +155,8 @@
 
                                                             </select>
                                                         @elseif($column->field_name == 'viber_install')
-                                                            <select name="viber_install" class="viber_install" data-psi_data="{{$psi_value}}">
+                                                            <select name="viber_install" class="viber_install"
+                                                                    data-psi_data="{{$psi_value}}">
 
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == 1) ? 'selected="selected"' : ''?> value="1">
@@ -157,12 +168,10 @@
                                                                 </option>
                                                             </select>
                                                         @else
+
                                                             {{ $cell->{$column->field_name} }}
                                                         @endif
                                                     </td>
-                                                @else
-
-                                                    <td>{{ $cell->{$column->field_name} }}</td>
                                                 @endif
                                             @endforeach
                                         </tr>
@@ -289,7 +298,7 @@
         $(".hourly_wage").change(function () {
             var wage = $(this).val();
             var psi = $(this).attr('data-psi_data');
-            alert(wage);
+            // alert(wage);
             $.ajax({
                 type: "POST",
                 url: "{{route('updateEmployeeHourlyWage')}}",
@@ -354,21 +363,21 @@
 
             // DataTable
             var table = $('#example').DataTable();
-            $("#example_filter").css("display","none");  // hiding global search box
+            $("#example_filter").css("display", "none");  // hiding global search box
 
-            $('.search-input-text').keypress( function (e) {   // for text boxes
-                if(e.which == 13) {
-                    var i =$(this).attr('data-column');  // getting column index
-                    var v =$(this).val();  // getting search input value
+            $('.search-input-text').keypress(function (e) {   // for text boxes
+                if (e.which == 13) {
+                    var i = $(this).attr('data-column');  // getting column index
+                    var v = $(this).val();  // getting search input value
 //              if(v!='')
                     table.columns(i).search(v).draw();
                 }
-            } );
-            $('.search-input-select').on( 'change', function () {   // for select box
-                var i =$(this).attr('data-column');
-                var v =$(this).val();
+            });
+            $('.search-input-select').on('change', function () {   // for select box
+                var i = $(this).attr('data-column');
+                var v = $(this).val();
                 table.columns(i).search(v).draw();
-            } );
+            });
         });
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');
