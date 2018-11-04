@@ -13,7 +13,7 @@
 						<thead>
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">Sub-section</th>
+								<th scope="col">{{ __('translation.Subsections') }}</th>
 								<th scope="col">From</th>
 								<th scope="col">To</th>
 								<th scope="col">Created At</th>
