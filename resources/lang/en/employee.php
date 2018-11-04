@@ -67,7 +67,7 @@ return [
 'MasterData'=>'Master Data',
 'Users'=>'Users',
 'UserList'=>'User List',
-'Name'=>'Name',
+'Namez'=>'Name',
 'Email'=>'Email',
 'DateTimeAdded'=>'Date/Time Added',
 'UserRoles'=>'User Roles',

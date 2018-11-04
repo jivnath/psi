@@ -135,7 +135,7 @@ class EmployeeController extends Controller
                     $html = '<tr><td>'. ($index+1) .'</td><td>' . $datum->staff_no . '</td><td>' . $datum->name . '</td>' .
                         '<td>' . $datum->phoetic_kanji . '</td><td>' . $datum->country_citizenship . '</td><td>' . $datum->conformation_day_before . '</td>' .
                         '<td>' . $datum->conformation_3_hours_ago . '</td><td>' . $datum->cell_no . '</td>' .
-                        '<td></td><td></td><td></td><td></td><td></td><td></td>' .
+                        '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>' .
                         '</tr>';
                     $output .= $html;
                 }
@@ -143,7 +143,7 @@ class EmployeeController extends Controller
             }
             else
             {
-                $output = '<tr><td colspan="14">No Data Available</td></tr>';
+                $output = '<tr><td colspan="16">No Data Available</td></tr>';
             }
         }
 
