@@ -709,7 +709,7 @@ WHERE
         return $data;
     }
 
-    public static function getAttendanceMgmtData()
+    public static function getAttendanceMgmtData($id, $date, $shift)
     {
         $sql = "SELECT
         pde.id,
@@ -720,7 +720,6 @@ WHERE
         e.cell_no,
         e.phoetic_kanji,
         e.country_citizenship,
-        c.name subsection,
         smd.start_time,
         smd.end_time
     FROM
@@ -728,18 +727,16 @@ WHERE
         employees e,
         company_time_schedules cts,
         company_time_tables ctt,
-        shift_master_datas smd,
-        companies c
+        shift_master_datas smd
     WHERE
-        pde.staff_no = e.psi_number AND
-        pde.cts_id = cts.id AND
+    	pde.cts_id = cts.id AND
         cts.companyTT_id = ctt.id AND
-        ctt.company_id = smd.company_id AND
-        cts.time = smd.start_time AND
-        c.id = ctt.company_id
-        
-    ORDER BY
-        pde.id DESC";
+        ctt.company_id = $id AND
+        smd.company_id = $id AND
+        smd.start_time = '$shift' AND
+        cts.time = '$shift' AND 
+        cts.date = '$date' AND
+        e.psi_number = pde.staff_no";
 
         $data = DB::select($sql);
 
@@ -773,5 +770,12 @@ WHERE
         $shifts = DB::select($sql);
 
         return $shifts;
+    }
+
+    public static function getShift($id)
+    {
+        $sql ="SELECT smd.* FROM shift_master_datas smd WHERE smd.company_id = $id";
+        $shift = DB::select($sql);
+        return $shift;
     }
 }

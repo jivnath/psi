@@ -71,7 +71,7 @@
                                                         $psi_value=$cell->{$column->field_name}
                                                     @endphp
                                                 @endif
-                                                @if($column->field_name != 'updated_at' && $column->field_name != 'psi_number' && $column->field_name != 'sex' && $column->field_name != 'status_residence' && $column->field_name != 'status' && $column->field_name != 'hourly_wage' && $column->field_name != 'status_residence' && $column->field_name != 'operating_satus' && $column->field_name != 'viber_install')
+                                                @if($column->field_name != 'updated_at' && $column->field_name != 'psi_number' && $column->field_name != 'sex' && $column->field_name != 'status_residence' && $column->field_name != 'status' && $column->field_name != 'hourly_wage' && $column->field_name != 'status_residence' && $column->field_name != 'operating_status' && $column->field_name != 'viber_install')
                                                     <td class="contenteditable" data-column="{{ $column->field_name }}"
                                                         data-old="" contenteditable="true">
 
