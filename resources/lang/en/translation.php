@@ -162,6 +162,9 @@ return [
 'EndTime'=>'End Time',
 //'Save'=>'Save',
 'SectionManager'=>'Section Manager',
+
+'SectionName'=>'Section Name',
+
 'ShiftManagement'=>'Shift Management',
 'Sectionshift'=>'Section shift',
 'From'=>'From',
@@ -177,10 +180,20 @@ return [
 'AddNewShift'=>'Add New Shift',
 'SelfSheet'=>'Self Sheet',
 'SelectSubsection'=>'Select Subsection',
+
 'Date'=>'Date',
     'Number'=>'Number',
 'StaffNumber'=>'Staff Number',
 'Country'=>'Country',
+
+'Submit'=>'Submit',
+'Date'=>'Date',
+'Time'=>'Time',
+'Number'=>'Number',
+'StaffNumber'=>'Staff Number',
+'Country'=>'Country',
+'Name'=>'Name',
+
 'TelephoneNumber'=>'Telephone Number',
 'Responsible'=>'Responsible',
 'Confirmationthedaybefore'=>'Confirmation the day before',
@@ -255,6 +268,10 @@ return [
     'Available'=>'Available',
     'NotAvailable'=>'Not Available',
     'Today'=>'Today',
-    'RemainingHours'=>'Remaining Hours'
+
+    'RemainingHours'=>'Remaining Hours',
+
+
+    'RemainingHours'=>'Remaining Hours',
 
 ];

@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
     <div class="container">
-        <h2 class="row justify-content-center">Company Shift Time Table </h2>
+        <h2 class="row justify-content-center">@lang('employee.CompanyShiftTimeTable') </h2>
         <div class="row">
             <div class="col-md-7">
                 <div id="alert" style="display: none">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="box">
                     <div class="box-header">
-                        <h4>{{ "Add Shifts" }}</h4>
+                        <h4>@lang('employee.AddShifts')</h4>
                     </div>
                     <div class="box-body " style="padding: 10px;">
                         <form action="{{ route('shift.store') }}" method="POST">
@@ -22,11 +22,11 @@
 
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-5">
-                                    <label for="shiftName"> Subsection Name </label>
+                                    <label for="shiftName"> @lang('employee.SubsectionName') </label>
                                 </div>
                                 <div class="col-md-7 ">
                                     <select class="form-control" name="company_name" required>
-                                        <option value="">--Select Subsection--</option>
+                                        <option value="">--@lang('employee.SelectSubsection')--</option>
                                         @foreach($data['companies'] as $company )
                                             <option value="{{ $company->id }}"> {{ $company->name }} </option>
                                         @endforeach
@@ -36,7 +36,7 @@
                             <br/>
                             <div class="row" style="text-align: center">
                                 <div class="col-md-5">
-                                    Shift Time Table
+                                    @lang('employee.ShiftTimeTable')
                                 </div>
                                 <!--Dynamic Field Start -->
                                 <div class="col-md-7">
@@ -63,10 +63,10 @@
                                 <div class="col-md-7"></div>
                                 <div class="col-md-5" style="text-align: right">
                                     <button style="margin-top: 15px" type="submit" class="btn btn-primary">
-                                        Save
+                                        @lang('employee.Save')
                                     </button>
                                     <button style="margin-top: 15px" type="reset" class="btn btn-danger">
-                                        Clear
+                                        @lang('employee.Clear')
                                     </button>
                                 </div>
                             </div>
@@ -80,15 +80,15 @@
             <div class="col-md-5">
                 <div class="box">
                     <div class="box-header">
-                        <h4>Shifts</h4>
+                        <h4>@lang('employee.Shifts')</h4>
                     </div>
                     <div class="box-body">
                         <table id="shiftTable" class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Subsection Name</th>
-                                <th>Start-End Time</th>
-                                <th>Action</th>
+                                <th>@lang('employee.SubsectionName')</th>
+                                <th>@lang('employee.StartEndTime')</th>
+                                <th>@lang('employee.Action')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -101,10 +101,10 @@
                                         {{ substr($shift->start_time, 0, -3).' - '.substr($shift->end_time, 0, -3) }}
                                     </td>
                                     <td><a href="{{ route('shift.edit', $shift->id) }}" class="btn btn-link btn-sm">
-                                            Edit</a></td>
+                                            @lang('employee.Edit')</a></td>
                                 </tr>
                             @endforeach @else
-                                <h3>No Shift Available</h3>
+                                <h3>@lang('employee.NoShiftAvailable')</h3>
                             @endif
                             </tbody>
                         </table>

@@ -53,7 +53,7 @@
                                     <li><a class="dropdown-item"
                                            href="{{ url('/employee/profile') }}"><i  class="fa fa-address-book"></i>Profile</a></li>
                                     <li><a class="dropdown-item"
-                                           href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+                                           href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a></li>
 
                                 </ul>
                             </li>

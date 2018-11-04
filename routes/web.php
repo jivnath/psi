@@ -86,6 +86,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/employee_worksheet', ['as' => 'employee.worksheet.report', 'uses' => 'EmployeeController@employeeWorksheet']);
             Route::get('/getWorksheetData', ['as'=>'getWorksheetData', 'uses'=> 'EmployeeController@getWorksheetData']);
             Route::get('/attendance_management', ['as' => 'attendance.mgmt', 'uses'=>'EmployeeController@attendanceManagement']);
+            Route::get('/getShiftsForSubsection', ['as' => 'getShiftsForSubsection', 'uses'=>'EmployeeController@getShiftsForSubsection']);
+            Route::get('/getAttendanceMgmtData', ['as' => 'getAttendanceMgmtData', 'uses'=>'EmployeeController@getAttendanceMgmtData']);
         });
         Route::prefix('column')->group(function(){
                 Route::post('/customize', ['as' => 'customize.field', 'uses' => 'CustomerTableView@saveCustomizedField']);
