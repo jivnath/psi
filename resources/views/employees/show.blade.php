@@ -13,7 +13,7 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">@lang('translation.EmployeesList')<a href="{{ route('employees.uploadForm') }}"
+                        <h3 class="box-title">@lang('employee.EmployeesListTag')<a href="{{ route('employees.uploadForm') }}"
                                                                class="btn btn-link" style="margin-left:10px">
                                 <small>@lang('employee.UploadNew')</small>
                             </a></h3>
