@@ -1,8 +1,8 @@
 <style>
-.footer_message{
- background: #21469b2e;
-    margin-bottom: -8px;
-}
+    .footer_message {
+        background: #21469b2e;
+        margin-bottom: -8px;
+    }
 
 
 </style>
@@ -42,21 +42,47 @@
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown"><a id="master_data"
-                                                             class="nav-link dropdown-toggle" id="navbarDropdown"
-                                                             role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                             aria-expanded="false"> <i class="fas fa-home"></i>
+                            <li class="nav-item dropdown dropdown-menu-left"><a id="master_data"
+                                                                                class="nav-link dropdown-toggle"
+                                                                                id="navbarDropdown"
+                                                                                role="button" data-toggle="dropdown"
+                                                                                aria-haspopup="true"
+                                                                                aria-expanded="false"> <i
+                                            class="fas fa-home"></i>
                                     Settings <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item"
-                                           href="{{ url('/employee/profile') }}"><i  class="fa fa-address-book"></i>Profile</a></li>
+                                           href="{{ url('/employee/profile') }}"><i class="fa fa-address-book"></i>Profile</a>
+                                    </li>
                                     <li><a class="dropdown-item"
-                                           href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a></li>
+                                           href="{{ route('employee.logout') }}"><i
+                                                    class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a></li>
 
                                 </ul>
                             </li>
+
+                            <li class="nav-item dropdown dropdown-menu-left">{!!
+								Form::open(['method' => 'POST', 'route' => 'changelocale',
+								'class' => 'form-inline navbar-select']) !!}
+                                <div
+                                        class="form-group @if($errors->first('locale')) has-error @endif">
+                                    <span aria-hidden="true"></span> {!! Form::select( 'locale',
+									['en' => 'EN', 'ja' => 'JA'], \App::getLocale(), [ 'id' =>
+									'locale', 'class' => 'form-control', 'required' => 'required',
+									'style' => 'font-size:11px;height:35px;border:none', 'onchange'
+									=> 'this.form.submit()', ] ) !!} <a id="master_data"
+                                                                        class="nav-link dropdown-toggle"
+                                                                        id="navbarDropdown"
+                                                                        role="button" data-toggle="dropdown"
+                                                                        aria-haspopup="true"
+                                                                        aria-expanded="false"> {{ $errors->first('locale') }} </a>
+                                </div>
+
+                                <div class="btn-group pull-right sr-only">{!!
+									Form::submit("Change", ['class' => 'btn btn-success']) !!}</div>
+                                {!! Form::close() !!}
 
                             </li>
 
@@ -118,13 +144,16 @@
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('users.index') }}"><i
-                                                                            class="	fa fa-address-book"></i>@lang('employee.UserList')</a></li>
+                                                                            class="	fa fa-address-book"></i>@lang('employee.UserList')
+                                                                </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('roles.index') }}"><i
-                                                                            class="fas fa-pen-alt"></i>@lang('employee.Roles')</a></li>
+                                                                            class="fas fa-pen-alt"></i>@lang('employee.Roles')
+                                                                </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('update.user') }}"><i
-                                                                            class="fas fa-key"></i> @lang('employee.Permission')</a></li>
+                                                                            class="fas fa-key"></i> @lang('employee.Permission')
+                                                                </a></li>
 
                                                         </ul>
                                                     </li>
@@ -132,7 +161,8 @@
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
                                                                             aria-expanded="false"><i
-                                                                    class="fa fa-users"></i>@lang('employee.Employees')</a>
+                                                                    class="fa fa-users"></i>@lang('employee.Employees')
+                                                        </a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('employees.show') }}"><i
@@ -141,13 +171,16 @@
                                                             </li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('manageSkills') }}"><i
-                                                                            class="fa fa-bullseye"></i> @lang('employee.Skills') </a></li>
+                                                                            class="fa fa-bullseye"></i> @lang('employee.Skills')
+                                                                </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('employee.skill') }}"><i
-                                                                            class="fas fa-user-graduate"></i> @lang('employee.EmployeeSkills')</a></li>
+                                                                            class="fas fa-user-graduate"></i> @lang('employee.EmployeeSkills')
+                                                                </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('availability.index') }}"><i
-                                                                            class="fas fa-user-clock"></i> @lang('employee.EmployeeAvailability')</a></li>
+                                                                            class="fas fa-user-clock"></i> @lang('employee.EmployeeAvailability')
+                                                                </a></li>
 
                                                         </ul>
                                                     </li>
@@ -156,7 +189,8 @@
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
                                                                             aria-expanded="false"><i
-                                                                    class="fas fa-city"></i>@lang('employee.Companies')</a>
+                                                                    class="fas fa-city"></i>@lang('employee.Companies')
+                                                        </a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('company.details') }}"> <i
@@ -165,7 +199,8 @@
                                                                 </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('manageCompanies') }}"><i
-                                                                            class="fas fa-briefcase"></i>@lang('employee.CompanyManage') </a></li>
+                                                                            class="fas fa-briefcase"></i>@lang('employee.CompanyManage')
+                                                                </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('shift.add') }}"><i
                                                                             class="fa fa-clock" aria-hidden="true"></i>
@@ -221,7 +256,8 @@
                                                        href="{{ route('employee.worksheet.report') }}"><i
                                                                 class="fa fa-clock" aria-hidden="true"></i>
                                                         @lang('employee.EmployeeWorksheet') </a>
-                                                    <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i class="fas fa-book"></i>
+                                                    <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
+                                                                class="fas fa-book"></i>
                                                         @lang('employee.AttendanceManagement')</a>
                                                 </div>
                                             </li>
@@ -277,23 +313,27 @@
                                                                              data-toggle="dropdown" aria-haspopup="true"
                                                                              aria-expanded="false" v-pre> <i
                                                             class="fas fa-envelope fa-lg"></i>
-                                                   <span class="label label-success total_inbox_messages" style="position: absolute;top: 8px;right: 7px;text-align: center;font-size: 9px;padding: 2px 3px;line-height: .9;">{{ $total=\App\Models\PsiInbox::count()}}</span>
+                                                    <span class="label label-success total_inbox_messages"
+                                                          style="position: absolute;top: 8px;right: 7px;text-align: center;font-size: 9px;padding: 2px 3px;line-height: .9;">{{ $total=\App\Models\PsiInbox::count()}}</span>
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting" style="margin-left: -50%;">
                                                     <div style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
                                                     </div>
-                                                     @if($total>0)
-                                                        <div class='messages_space' style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
+                                                    @if($total>0)
+                                                        <div class='messages_space'
+                                                             style="max-height: 200px;margin: 0;padding: 0;list-style: none;overflow-x: hidden;">
 
                                                         </div>
-                                                        <a class="footer_message dropdown-item text-center" href="{{route('inbox.messages')}}">See All Requests</a>
+                                                        <a class="footer_message dropdown-item text-center"
+                                                           href="{{route('inbox.messages')}}">See All Requests</a>
 
-                                                     @endif
-                                                     @empty($total)
-                                                     <a class="footer_message dropdown-item text-center">Messages not available</a>
-                                                     @endempty
+                                                    @endif
+                                                    @empty($total)
+                                                        <a class="footer_message dropdown-item text-center">Messages not
+                                                            available</a>
+                                                    @endempty
 
                                                 </div>
 
@@ -358,85 +398,91 @@
 
                                         </ul>
                                     </div>
-
                             </div>
                         </div>
                     </nav>
             </nav>
         @endif
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-            	update();
-                $('.dropdown-menu a.test').on("click", function (e) {
-                    $(this).next('ul').toggle();
-                    e.stopPropagation();
-                    e.preventDefault();
-                });
-            });
-            (function ($) {
-                $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
-                    if (!$(this).next().hasClass('show')) {
-                        $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
-                    }
-                    var $subMenu = $(this).next(".dropdown-menu");
-                    $subMenu.toggleClass('show');
+        @if(!Auth::guard('employee')->check())
+            @auth
 
-                    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
-                        $('.dropdown-submenu .show').removeClass("show");
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        update();
+                        $('.dropdown-menu a.test').on("click", function (e) {
+                            $(this).next('ul').toggle();
+                            e.stopPropagation();
+                            e.preventDefault();
+                        });
+                    });
+                    (function ($) {
+                        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+                            if (!$(this).next().hasClass('show')) {
+                                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                            }
+                            var $subMenu = $(this).next(".dropdown-menu");
+                            $subMenu.toggleClass('show');
+
+                            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
+                                $('.dropdown-submenu .show').removeClass("show");
+                            });
+
+                            return false;
+                        });
+                    })(jQuery)
+
+                    $("#logo_small").click(function () {
+                        location.href = "{{route('dashboard')}}";
                     });
 
-                   return false;
-                });
-            })(jQuery)
 
-            $("#logo_small").click(function () {
-                location.href = "{{route('dashboard')}}";
-            });
+                    $("#logout").click(function () {
+                        swal({
+                            title: "Logout?",
+                            text: "Are you sure to logout?",
+                            type: "warning",
+                            buttons: true,
+                            showCancelButton: true,
+                            confirmButtonClass: "btn-warning",
+                            confirmButtonText: "Yes, delete it!",
+                            closeOnConfirm: false
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: {"_token": "{{ csrf_token() }}"},
+                                        url: "{{route('logout')}}",
+                                        success: function (data) {
+                                            window.location.replace("{{route('login')}}");
+                                        }
+                                    });
+                                }
+                                else {
 
-
-            $("#logout").click(function () {
-                swal({
-                    title: "Logout?",
-                    text: "Are you sure to logout?",
-                    type: "warning",
-                    buttons: true,
-                    showCancelButton: true,
-                    confirmButtonClass: "btn-warning",
-                    confirmButtonText: "Yes, delete it!",
-                    closeOnConfirm: false
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            $.ajax({
-                                type: 'POST',
-                                data: {"_token": "{{ csrf_token() }}"},
-                                url: "{{route('logout')}}",
-                                success: function (data) {
-                                    window.location.replace("{{route('login')}}");
                                 }
                             });
-                        }
-                        else {
-
-                        }
                     });
-            });
-            function update() {
-                // return false;
-                to_fill='';
-                $.get("{{route('notification.inbox')}}", function(data, status){
-                    var obj=data;
-                    $('.total_inbox_messages').html(obj.count);
-                    if(obj.status!='fail'){
-                        $.each(obj.data, function(k, v) {
-						url="{{route('inbox.smessage') }}"+"/"+k;
-                        to_fill +='<a class="dropdown-item text-center" href="'+url+'" style="white-space:normal;border-bottom: 1px solid;width: 235px">'+v+'</a>';
+
+                    function update() {
+                        // return false;
+                        to_fill = '';
+                        $.get("{{route('notification.inbox')}}", function (data, status) {
+                            var obj = data;
+                            $('.total_inbox_messages').html(obj.count);
+                            if (obj.status != 'fail') {
+                                $.each(obj.data, function (k, v) {
+                                    url = "{{route('inbox.smessage') }}" + "/" + k;
+                                    to_fill += '<a class="dropdown-item text-center" href="' + url + '" style="white-space:normal;border-bottom: 1px solid;width: 235px">' + v + '</a>';
+                                });
+                                $('.messages_space').html(to_fill);
+                            }
+
                         });
-                        $('.messages_space').html(to_fill);
                     }
 
-                });
-            }
-            setInterval(update, 10000); //every 10 secs
-        </script>
+                    setInterval(update, 10000); //every 10 secs
+                </script>
+@endauth
+@endif
