@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="box">
-                    <div class="box-header"><h3>Section Manager</h3></div>
+                    <div class="box-header"><h3>@lang('employee.SectionManager')</h3></div>
 
                     <div class="box-body " style="padding: 10px;">
                         <form  action="{{ route('leader.store') }}" method="POST" >
@@ -13,7 +13,7 @@
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-2">
-                                    <label for="company_name"> Section Name </label>
+                                    <label for="company_name"> @lang('employee.SectionName') </label>
                                 </div>
                                 <div class="col-md-6">
                                     {{--{{dd($companies)}}--}}
@@ -29,7 +29,7 @@
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-2">
-                                    <label for="psi_num"> PSI-S No </label>
+                                    <label for="psi_num"> @lang('employee.PSISNumber') </label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" id="psi_num" name="psi_num" class="form-control">
@@ -41,7 +41,7 @@
 
                             <div class="row" style="text-align: right; margin-top: 5px;">
                                 <div class="col-md-2">
-                                    <label for="contact_num"> Contact No. </label>
+                                    <label for="contact_num"> @lang('employee.ContactNo') </label>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" name="contact_num" class="form-control">
@@ -53,7 +53,7 @@
                                 <div class="col-md-2"></div>
                                 <div class="col-md-6">
                                     <button type="submit" class="btn btn-primary">
-                                        Save
+                                        @lang('employee.Save')
                                     </button>
                                 </div>
                                 <div class="col-md-4"></div>

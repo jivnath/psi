@@ -7,26 +7,26 @@
             <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Attendance Management</h3>
+                        <h3 class="box-title">@lang('employee.AttendanceManagement')</h3>
                     </div>
                     <div class="box-body">
                         <table id="attendance" class="table table-striped">
                             <thead>
                                 <th>#</th>
-                                <th>PSI-S No.</th>
-                                <th>Name</th>
-                                <th>Phonetic</th>
-                                <th>Country</th>
-                                <th>Shift</th>
-                                <th>Subsection</th>
-                                <th>Confirmation Day Before</th>
-                                <th>Confirmation 3 Hours Before</th>
-                                <th>Contact No.</th>
+                                <th>@lang('employee.PSISNumber')</th>
+                                <th>@lang('employee.Name')</th>
+                                <th>@lang('employee.Phonetic')</th>
+                                <th>@lang('employee.Country')</th>
+                                <th>@lang('employee.Shifts')</th>
+                                <th>@lang('employee.SubSection')</th>
+                                <th>@lang('employee.Confirmationthedaybefore')</th>
+                                <th>@lang('employee.Confirmation3hoursbefore')</th>
+                                <th>@lang('employee.ContactNo')</th>
                                 <th>出勤ｼｭｯｷﾝ</th>
                                 <th>カード</th>
                                 <th>出勤時刻</th>
                                 <th>退勤時刻</th>
-                                <th>Break Time</th>
+                                <th>@lang('employee.BreakTime')</th>
                                 <th>移動</th>
                             </thead>
                             <tbody>

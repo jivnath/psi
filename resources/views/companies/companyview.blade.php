@@ -11,15 +11,15 @@ $last_p='';
         	<div class='col-md-12'>
         	 <div class="box box-info">
                     <div class="box-header with-border">
-                  		<h3 class="box-title">Company Details</h3>
+                  		<h3 class="box-title">@lang('employee.CompanyDetails')</h3>
                 	</div>
                 	<div class="box-body">
                             <table class="table table-bordered" id='table'>
                             <thead>
                                 <tr>
-                                 	<th>SN</th>
-                                    <th>Company Name</th>
-                                    <th>Sections Hierarchy</th>
+                                 	<th>@lang('employee.SymbolNumber')</th>
+                                    <th>@lang('employee.CompanyName')</th>
+                                    <th>@lang('employee.SectionsHierarchy')</th>
 
                                 </tr>
                                 </thead>
@@ -50,8 +50,8 @@ $last_p='';
 										<table class='table table-bordered'>
 											<thead class="thead-light">
 												<tr>
-													<th class="table_th_fix">Sections</th>
-													<th class="table_th_fix">Sub-sections</th>
+													<th class="table_th_fix">@lang('employee.Sections')</th>
+													<th class="table_th_fix">@lang('employee.Subsections')</th>
 												</tr>
 												@php
 												$increment_val=0
@@ -97,8 +97,8 @@ $last_p='';
 										<table class='table table-bordered'>
 											<thead class="thead-light">
 												<tr>
-													<th class="table_th_fix">Sections</th>
-													<th class="table_th_fix">Sub-sections</th>
+													<th class="table_th_fix">@lang('employee.Sections')</th>
+													<th class="table_th_fix">@lang('employee.Subsections')</th>
 												</tr>
 												<tr>
 

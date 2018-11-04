@@ -12,7 +12,7 @@ div.dataTables_wrapper {
 		<div class="col-md-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Employee Details</h3>
+					<h3 class="box-title">@lang('employee.EmployeeDetails')</h3>
 					<div class="box-tools pull-right">
 						<div class="btn-group">
 							<button type="button" class="btn btn-box-tool dropdown-toggle"
@@ -20,7 +20,7 @@ div.dataTables_wrapper {
 								<i class="fa fa-wrench"></i>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#" class='dropdown-item' id='view_columns'>Customize Columns</a></li>
+								<li><a href="#" class='dropdown-item' id='view_columns'>@lang('employee.CustomizeColumns')</a></li>
 							</ul>
 						</div>
 					</div>
@@ -64,7 +64,7 @@ div.dataTables_wrapper {
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Customize Your Columns</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">@lang('employee.CustomizeYourColumns')</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -91,7 +91,7 @@ div.dataTables_wrapper {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" >Save changes</button>
+					<button type="submit" class="btn btn-primary" >@lang('employee.SaveChanges')</button>
 				</div>
 				</form>
 
