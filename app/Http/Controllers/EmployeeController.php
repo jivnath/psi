@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ExcelReader;
@@ -39,8 +40,8 @@ class EmployeeController extends Controller
             'created_at',
             'updated_at'
         ]);
-        $data['all_col']=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
-        $data['customize_columns']=PsiViewCustimizeModel::where('type','employee')->get();
+        $data['all_col'] = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
+        $data['customize_columns'] = PsiViewCustimizeModel::where('type', 'employee')->get();
         return view('reports.employee_details', $data);
     }
 
@@ -71,10 +72,10 @@ class EmployeeController extends Controller
             'created_at'
         ]);
         $sex = Gender::all();
-        $all_col=PsiViewCustimizeModel::where(['status'=>'y','type'=>'employee'])->get();
-        $customize_columns=PsiViewCustimizeModel::where('type','employee')->get();
+        $all_col = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
+        $customize_columns = PsiViewCustimizeModel::where('type', 'employee')->get();
 
-        return view('employees.show', compact('cells', 'columns', 'customize_columns','all_col'))->withSex($sex);
+        return view('employees.show', compact('cells', 'columns', 'customize_columns', 'all_col'))->withSex($sex);
     }
 
     public function updateCell(Request $request)
@@ -95,8 +96,7 @@ class EmployeeController extends Controller
 
     public function getWorksheetData(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $fr = $request->get('from');
             $t = $request->get('to');
             $today = date('Y-m-d');
@@ -116,14 +116,58 @@ class EmployeeController extends Controller
 
     public function attendanceManagement()
     {
-        $data = Raw::getAttendanceMgmtData();
-        return view('reports.attendance_management', compact('data'));
+        $subSections = Raw::getCompaniesHavingShift();
+        return view('reports.attendance_management', compact('data', 'subSections'));
+    }
+
+    public function getAttendanceMgmtData(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->get('id');
+            $date = $request->get('date');
+            $shift = $request->get('shift');
+
+            $data = Raw::getAttendanceMgmtData($id, $date, $shift);
+
+            $output = '';
+            if (count($data)>0) {
+                foreach ($data as $index => $datum) {
+                    $html = '<tr><td>'. ($index+1) .'</td><td>' . $datum->staff_no . '</td><td>' . $datum->name . '</td>' .
+                        '<td>' . $datum->phoetic_kanji . '</td><td>' . $datum->country_citizenship . '</td><td>' . $datum->conformation_day_before . '</td>' .
+                        '<td>' . $datum->conformation_3_hours_ago . '</td><td>' . $datum->cell_no . '</td>' .
+                        '<td></td><td></td><td></td><td></td><td></td><td></td>' .
+                        '</tr>';
+                    $output .= $html;
+                }
+
+            }
+            else
+            {
+                $output = '<tr><td colspan="14">No Data Available</td></tr>';
+            }
+        }
+
+        echo json_encode($output);
+    }
+
+    public function getShiftsForSubsection(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->get('id');
+            $shifts = Raw::getShift($id);
+            $output = '';
+            foreach ($shifts as $shift) {
+                $html = '<option value=' . $shift->start_time . '>' . substr($shift->start_time, 0, -3) . ' - ' . substr($shift->end_time, 0, -3) . '</option>';
+                $output .= $html;
+            }
+
+            echo json_encode($output);
+        }
     }
 
     public function updateEmployeeGender(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $sex = $request->get('sex');
             $psi = $request->get('psi');
 
@@ -138,8 +182,7 @@ class EmployeeController extends Controller
 
     public function updateEmployeeStatusResidence(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $status = $request->get('status');
             $psi = $request->get('psi');
 
@@ -155,8 +198,7 @@ class EmployeeController extends Controller
 
     public function updateEmployeeHourlyWage(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $wage = $request->get('wage');
             $psi = $request->get('psi');
 //            dd($wage);
@@ -172,8 +214,7 @@ class EmployeeController extends Controller
 
     public function updateEmployeeOperatingStatus(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $status = $request->get('status');
             $psi = $request->get('psi');
 //            dd($wage);
@@ -189,8 +230,7 @@ class EmployeeController extends Controller
 
     public function updateEmployeeStatus(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $status = $request->get('status');
             $psi = $request->get('psi');
 
@@ -205,8 +245,7 @@ class EmployeeController extends Controller
 
     public function updateEmployeeViberInstall(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $viber = $request->get('viber');
             $psi = $request->get('psi');
 
