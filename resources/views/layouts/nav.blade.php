@@ -4,7 +4,7 @@
     margin-bottom: -8px;
 }
 
-}
+
 </style>
 <div id="navbar-main">
     <div class="clearfix"></div>
@@ -118,14 +118,13 @@
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('users.index') }}"><i
-                                                                            class="	fa fa-address-book"></i> User
-                                                                    List</a></li>
+                                                                            class="	fa fa-address-book"></i>@lang('employee.UserList')</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('roles.index') }}"><i
-                                                                            class="fas fa-pen-alt"></i> Roles</a></li>
+                                                                            class="fas fa-pen-alt"></i>@lang('employee.Roles')</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('update.user') }}"><i
-                                                                            class="fas fa-key"></i> Permission</a></li>
+                                                                            class="fas fa-key"></i> @lang('employee.Permission')</a></li>
 
                                                         </ul>
                                                     </li>
@@ -133,7 +132,7 @@
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
                                                                             aria-expanded="false"><i
-                                                                    class="fa fa-users"></i>Employees</a>
+                                                                    class="fa fa-users"></i>@lang('employee.Employees')</a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('employees.show') }}"><i
@@ -142,15 +141,13 @@
                                                             </li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('manageSkills') }}"><i
-                                                                            class="fa fa-bullseye"></i> Skills </a></li>
+                                                                            class="fa fa-bullseye"></i> @lang('employee.Skills') </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('employee.skill') }}"><i
-                                                                            class="fas fa-user-graduate"></i> Employee
-                                                                    Skills</a></li>
+                                                                            class="fas fa-user-graduate"></i> @lang('employee.EmployeeSkills')</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('availability.index') }}"><i
-                                                                            class="fas fa-user-clock"></i> Employee
-                                                                    Availability</a></li>
+                                                                            class="fas fa-user-clock"></i> @lang('employee.EmployeeAvailability')</a></li>
 
                                                         </ul>
                                                     </li>
@@ -159,7 +156,7 @@
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
                                                                             aria-expanded="false"><i
-                                                                    class="fas fa-city"></i> Companies</a>
+                                                                    class="fas fa-city"></i>@lang('employee.Companies')</a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('company.details') }}"> <i
@@ -168,17 +165,16 @@
                                                                 </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('manageCompanies') }}"><i
-                                                                            class="fas fa-briefcase"></i> Company
-                                                                    Manage</a></li>
+                                                                            class="fas fa-briefcase"></i>@lang('employee.CompanyManage') </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('shift.add') }}"><i
                                                                             class="fa fa-clock" aria-hidden="true"></i>
-                                                                    Sub-section Shift</a></li>
+                                                                    @lang('employee.SubsectionShift')</a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('leader.create') }}"><i
                                                                             class="fa fa-user-circle"
                                                                             aria-hidden="true"></i>
-                                                                    Section Manager </a></li>
+                                                                    @lang('employee.SectionManager')</a></li>
 
                                                         </ul>
                                                     </li>
@@ -198,11 +194,11 @@
                                                      aria-labelledby="shift_management">
                                                     <a class="dropdown-item" href="{{ route('pages.shift') }}"><i
                                                                 class="fas fa-table"></i>
-                                                        Section Shift </a>
+                                                        @lang('employee.SectionShift') </a>
                                                     <a class="dropdown-item"
                                                        href="{{route('sheet.dessert')}}">
-                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i> Self
-                                                        Sheet </a>
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                                                        @lang('employee.SelfSheet') </a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown"><a id="shift_management"
@@ -212,21 +208,21 @@
                                                                              aria-expanded="false" v-pre> <i
                                                             class="fa fa-line-chart"></i>
 
-                                                    @lang('nav.Rpts') <span class="caret"></span>
+                                                    @lang('employee.Reports') <span class="caret"></span>
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="report">
                                                     <a class="dropdown-item"
                                                        href="{{ route('employee.detail.report') }}"><i
-                                                                class="fa fa-users" aria-hidden="true"></i> Employee
-                                                        Details </a>
+                                                                class="fa fa-users" aria-hidden="true"></i>
+                                                        @lang('employee.EmployeeDetails')</a>
                                                     <a class="dropdown-item"
                                                        href="{{ route('employee.worksheet.report') }}"><i
-                                                                class="fa fa-clock" aria-hidden="true"></i> Employee
-                                                        Worksheet </a>
+                                                                class="fa fa-clock" aria-hidden="true"></i>
+                                                        @lang('employee.EmployeeWorksheet') </a>
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i class="fas fa-book"></i>
-                                                        Attendance Management </a>
+                                                        @lang('employee.AttendanceManagement')</a>
                                                 </div>
                                             </li>
                                             <!-- company login as -->

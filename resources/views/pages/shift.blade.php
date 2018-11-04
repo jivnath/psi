@@ -4,8 +4,8 @@
 		<div class="col-md-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Section Shift <a href="{{ route('generator') }}"
-						class="btn btn-link" style="margin-left: 10px"><small>Generate New</small></a></h3>
+					<h3 class="box-title">@lang('employee.SectionShift') <a href="{{ route('generator') }}"
+						class="btn btn-link" style="margin-left: 10px"><small>@lang('employee.GenerateNew')</small></a></h3>
 				</div>
 				<div class="table-responsive">
 					<table
@@ -13,11 +13,11 @@
 						<thead>
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">Sub-section</th>
-								<th scope="col">From</th>
-								<th scope="col">To</th>
-								<th scope="col">Created At</th>
-								<th scope="col">Action</th>
+								<th scope="col">@lang('employee.SubSection')</th>
+								<th scope="col">@lang('employee.From')</th>
+								<th scope="col">@lang('employee.To')</th>
+								<th scope="col">@lang('employee.CreatedAt')</th>
+								<th scope="col">@lang('employee.Action')</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -32,7 +32,7 @@
 							<td>{{ Carbon\Carbon::parse( $shift->schedule_from)->format('d-m-Y') }}</td>
 							<td>{{ Carbon\Carbon::parse( $shift->schedule_to)->format('d-m-Y') }}</td>
 							<td>{{ Carbon\Carbon::parse( $shift->created_at)->format('d-m-Y i:s A') }}</td>
-							<td> <a href="{{ route('shift.show',['id' => $shift->schedule_session_id]) }}">View</a></td>
+							<td> <a href="{{ route('shift.show',['id' => $shift->schedule_session_id]) }}">@lang('employee.View')</a></td>
 							</tr>
 							@endforeach @else
 							<tr>

@@ -5,7 +5,7 @@
     <div class='col-md-8 offset-2'>
         <div class="box">
             <div class="box-header">
-                <h4> Edit User: '{{$user->name}}'</h4>
+                <h4>@lang('employee.EditUser:') '{{$user->name}}'</h4>
                 <hr>
             </div>
             <div class="box-body">
@@ -22,7 +22,7 @@
                     {{ $user->email }}
                 </div>
 
-                <b>Give Role</b>
+                <b>@lang('employee.GiveRole')</b>
 
                 <div class='form-group'>
                     <select name="role" class="form-control" style="width: 60%">

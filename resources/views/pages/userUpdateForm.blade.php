@@ -10,7 +10,7 @@
             <div class='col-md-12'>
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Update User</h3>
+                        <h3 class="box-title">@lang('employee.UpdateUser')</h3>
                     </div>
 
                     <form id="form" name="customize_form" action="{{route('storePermissionToUser')}}" class="form-horizontal" method="POST">
@@ -18,7 +18,7 @@
                         <div class='box-body'>
                             <div class="row">
                                 <div class="col-md-1">
-                                    <label style="margin-left:50px;margin-top:5px">User</label>
+                                    <label style="margin-left:50px;margin-top:5px">@lang('employee.User')</label>
                                 </div>
                                 <div class="col-md-11">
                                     <select id="userDropdown" name="userUpdate" class="form-control" style="width:40%">

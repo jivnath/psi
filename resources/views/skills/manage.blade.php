@@ -9,13 +9,13 @@
         </div>
         <div class="box">
             <div class="box-header">
-                <h3>Skills Master</h3>
+                <h3>@lang('employee.SkillsMaster')</h3>
             </div>
             <div class="box-body">
                 <div class="form-group" id="box">
-                    <label for="skill"><h5><b>Skills</b></h5></label>
+                    <label for="skill"><h5><b>@lang('employee.Skills')</b></h5></label>
                     <input type="text" class="form-control input-shorter" placeholder="Enter Skill" id="skill" required>
-                    <span id="add" style="margin-top: 10px" class="btn btn-success add">Add</span>
+                    <span id="add" style="margin-top: 10px" class="btn btn-success add">@lang('employee.Add')</span>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
     <div class="col-md-6">
         <div class="box box-info">
             <div class="box-header">
-                <h5><b>All Skills</b></h5>
+                <h5><b>@lang('employee.AllSkills')</b></h5>
             </div>
             <div class="box-body">
                 @if(count($skills)>0)
@@ -32,9 +32,9 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th> Skills</th>
-                                <th> No. of Employee</th>
-                                <th> Actions</th>
+                                <th> @lang('employee.Skills')</th>
+                                <th> @lang('employee.NoofEmployee')</th>
+                                <th> @lang('employee.Actions')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,22 +42,22 @@
                             <tr id="skill{{$skill->id}}">
                                 <td id="skillname{{$skill->id}}">{{$skill->name}}</td>
                                 <td>{{$skill->count}}</td>
-                                <td><span id="remove" class="btn btn-link" name="{{$skill->id}}">Delete</span>
-                                    <span id="rename" data-name="{{$skill->name}}" class="btn btn-link" name="{{$skill->id}}">Rename</span>
+                                <td><span id="remove" class="btn btn-link" name="{{$skill->id}}">@lang('employee.Delete')</span>
+                                    <span id="rename" data-name="{{$skill->name}}" class="btn btn-link" name="{{$skill->id}}">@lang('employee.Rename')</span>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                <p style="display:none;" id="noSkills">No Skills Available</p>
+                <p style="display:none;" id="noSkills">@lang('employee.NoSkillsAvailable')</p>
                 @else
                 <div id="skillDiv" style="margin-top:25px;display: none">
                     <h5><b>All Skills</b></h5>
                     <div id="allSkills">
                     </div>
                 </div>
-                <p id="noSkills">No Skills Available</p>
+                <p id="noSkills">@lang('employee.NoSkillsAvailable')</p>
                 @endif
             </div>
         </div>

@@ -4,7 +4,7 @@
     <div class="col-md-10 offset-1">
         <div class="box">
             <div class="box-header">
-                <h4> Users<a href="{{ route('users.create') }}" class="btn btn-link pull-right">Add New User</a>
+                <h4> @lang('employee.Users')<a href="{{ route('users.create') }}" class="btn btn-link pull-right">@lang('employee.AddNewUser')</a>
                     {{--<a href="{{ route('permissions.index') }}" class="btn btn-link pull-right">Permissions</a>--}}</h4>
                 <hr>
             </div>
@@ -14,11 +14,11 @@
 
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Date/Time Added</th>
-                                <th>User Roles</th>
-                                <th>Operations</th>
+                                <th>@lang('employee.Name')</th>
+                                <th>@lang('employee.Email')</th>
+                                <th>@lang('employee.DateTimeAdded')</th>
+                                <th>@lang('employee.UserRoles')</th>
+                                <th>@lang('employee.Operations')</th>
                             </tr>
                         </thead>
 
@@ -31,7 +31,7 @@
                                 <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
                                 <td>{{ $user->roles()->pluck('name')->implode(' ') }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
                                 <td>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">@lang('employee.Edit')</a>
                                 </td>
                             </tr>
                             @endforeach
