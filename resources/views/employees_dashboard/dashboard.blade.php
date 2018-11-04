@@ -18,20 +18,20 @@
                     <ul class="list-inline" style="margin-top:10%">
                         <li class="list-inline-item">
                             <div class="input-color">
-                                <div class="color-box" style="background-color:#f56954;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Not full.</label>
+                                <div class="color-box" style="background-color:#f5b1ae;width:10px;height:10px;display:inline-block;"></div>
+                                <label for="red">Available.</label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
-                                <div class="color-box" style="background-color: #2ac633;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Applied shifts.</label>
+                                <div class="color-box" style="background-color: #74c673;width:10px;height:10px;display:inline-block;"></div>
+                                <label for="red">Booked.</label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
-                                <div class="color-box" style="background-color: #2a7ce9;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Worked in the past.</label>
+                                <div class="color-box" style="background-color: #9faee9;width:10px;height:10px;display:inline-block;"></div>
+                                <label for="red">Worked.</label>
                             </div>
                         </li>
                     </ul>
@@ -281,8 +281,8 @@
                             allDay: true,
                             old: 1,
                             companyId: data['date'][i].company_id,
-                            backgroundColor: '#2a7ce9', //blue
-                            borderColor: '#2a7ce9' //blue
+                            backgroundColor: '#9faee9', //blue
+                            borderColor: '#9faee9' //blue
                         }, 'stick');
                     }
                     for (i = 0; i < data['red'].length; i++) {
@@ -295,8 +295,8 @@
                             allDay: true,
                             selected: 'no',
                             company: data['red'][i].company_name,
-                            backgroundColor: '#f56954', //red
-                            borderColor: '#f56954' //red
+                            backgroundColor: '#f5b1ae', //red
+                            borderColor: '#f5b1ae' //red
                         }, 'stick');
                     }
                     for (i = 0; i < data.green.length; i++) {
@@ -308,8 +308,8 @@
                             allDay: true,
                             selected: 'yes',
                             company: data['green'][i].company_name,
-                            backgroundColor: '#2ac633', //green
-                            borderColor: '#2ac633' //green
+                            backgroundColor: '#74c673', //green
+                            borderColor: '#74c673' //green
                         }, 'stick');
                     }
                 }
@@ -331,8 +331,8 @@
                 success: function (data) {
                     $("#calendar").fullCalendar('clientEvents', function (event) {
                         if (event.id == selectedShift) {
-                            event.backgroundColor = '#2ac633',
-                                event.borderColor = '#2ac633',
+                            event.backgroundColor = '#74c673',
+                                event.borderColor = '#74c673',
                                 event.selected = 'yes'
                             $('#calendar').fullCalendar('updateEvent', event);
                             $('#shifts').html('');
