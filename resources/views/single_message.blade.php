@@ -21,17 +21,16 @@
                     {{$edit->request_message}}
                 </div>
 
-                <i class="fas fa-clock" style="color:#004d99;margin-left:80%" ;>{{substr($edit->message_date, 0, -3)}}</i><hr>
-
-                @if($edit->file_upload_path!=null)
-                <a href="{{route('inbox.download',$edit->id)}}" class="btn btn-success btn-sm"><i class="fas fa-download">  Download File</i></a>  {{$edit->file_upload_path}}
-                <hr> @endif 
+                <i class="fas fa-clock" style="color:#004d99;margin-left:80%" ;>{{substr($edit->message_date, 0, -3)}}</i>
+                <hr> @if($edit->file_upload_path!=null)
+                <a href="{{route('inbox.download',$edit->id)}}" class="btn btn-success btn-sm"><i class="fas fa-download">  @lang('employee.DownloadFile')</i></a>                {{$edit->file_upload_path}}
+                <hr> @endif
 
                 <form action="{{route('inbox.update', $edit->id)}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                     @csrf @method('PUT')
 
                     <div class="form-group">
-                        <label for="language" class="col-sm-3 control-label" style="color:#004d99;font-weight:bold;font-size:110%;">Response Message</label>
+                        <label for="language" class="col-sm-3 control-label" style="color:#004d99;font-weight:bold;font-size:110%;">@lang('employee.ResponseMessage')</label>
                         <div class="col-sm-12">
                             <textarea name="response" rows="4" cols="110"></textarea>
                         </div>
@@ -41,11 +40,11 @@
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-danger">Send</button>
+                            <button type="submit" class="btn btn-danger">@lang('employee.Send')</button>
                         </div>
                     </div>
-            </form>
-        </div>
+                </form>
+            </div>
 
         </div>
 
