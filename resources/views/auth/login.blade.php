@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
-                <div class="card-header">{{ __('login.Login') }}</div>
+                <div class="card-header">{{ __('login.Login') }}
+                <a href="{{route('employee.login')}}" style="margin-left:70%;font-size:85%">Employee Login</a>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('login.Login') }}">

@@ -35,7 +35,7 @@ class ExcelReader extends FormRequest
     public function rules()
     {
         return [
-            'company_id' => 'bail|required:exists,companies',
+//            'company_id' => 'bail|required:exists,companies',
             'excelFile' => 'required|mimes:xls,xlsx'
         ];
     }
@@ -65,7 +65,7 @@ class ExcelReader extends FormRequest
      */
     public function iterateSheet()
     {
-        $columns = Employee::columns(['id', 'company_id', 'created_at', 'updated_at']);
+        $columns = Employee::columns(['id', 'created_at', 'updated_at']);
 
         foreach ($this->currentSpreadsheet->getAllSheets() as $worksheet) {
             $highestRow = $worksheet->getHighestRow(); // e.g. 10
@@ -76,16 +76,17 @@ class ExcelReader extends FormRequest
                 for ($col = 1; $col <= $highestColumnIndex; ++$col) {
                     $value = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
                     //echo $value . ' - ';
-                    if ($col == 1 && Employee::isRecordExist((int)$value, $this->company_id)) {
-                        break;
-                    }
+//                    if ($col == 1 && Employee::isRecordExist((int)$value, $this->company_id)) {
+//                        break;
+//                    }
                     $this->setColumnData($columns, $value, $row - 1, $col - 1, $highestColumnIndex);
                 }
             }
         }
-
         return $this;
     }
+
+    protected $checkDuplicates = [];
 
     /**
      * Check if the  Employee data already exists
@@ -105,37 +106,42 @@ class ExcelReader extends FormRequest
                 'psi_number' => $this->data[$i]['psi_number']
             ]);
             if ($employee->exists) {
-
-            } else {
+                array_push($yes, $this->data[$i]);
+            }
+            else {
                 array_push($no, $this->data[$i]);
             }
 
-            $companyToEmployee = CompanyToEmployee_rel::firstOrNew([
-                'psi_number' => $this->data[$i]['psi_number'],
-                'company_id' => $this->company_id
-            ]);
-            if ($companyToEmployee->exists)
-            {
-                break;
-            }
-            else
-            {
-                $companyToEmployee_rel = ['psi_number' => $this->data[$i]['psi_number'], 'company_id' => $this->company_id];
 
-                array_push($yes, $companyToEmployee_rel);
-            }
+//            $companyToEmployee = CompanyToEmployee_rel::firstOrNew([
+//                'psi_number' => $this->data[$i]['psi_number'],
+//                'company_id' => $this->company_id
+//            ]);
+//            if ($companyToEmployee->exists)
+//            {
+//                break;
+//            }
+//            else
+//            {
+//                $companyToEmployee_rel = ['psi_number' => $this->data[$i]['psi_number'], 'company_id' => $this->company_id];
+//
+//                array_push($yes, $companyToEmployee_rel);
+//            }
         }
+//        dd($no);
         $checkDuplicates['yes'] = $yes;
         $checkDuplicates['no'] = $no;
-//        dd($checkDuplicates['yes']);
+//        dd($checkDuplicates['no']);
         try {
             Employee::inserts($checkDuplicates['no']);
-            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
+//            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
 
         } catch (\Exception $e) {
-            // print_r($e->getMessage());
-           // die;
+             print_r($e->getMessage());
+            die;
         }
+        $this->checkDuplicates = $checkDuplicates;
+        return $this->checkDuplicates;
     }
 
     /**
@@ -155,7 +161,7 @@ class ExcelReader extends FormRequest
             $dateTime = date('Y-m-d H:i:s');
             $this->data[$rowIndex]['created_at'] = $dateTime;
             $this->data[$rowIndex]['updated_at'] = $dateTime;
-            $this->data[$rowIndex]['company_id'] = $this->company_id; //from request
+//            $this->data[$rowIndex]['company_id'] = $this->company_id; //from request
         }
     }
 

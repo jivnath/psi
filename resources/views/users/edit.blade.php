@@ -5,7 +5,7 @@
     <div class='col-md-8 offset-2'>
         <div class="box">
             <div class="box-header">
-                <h3> Edit {{$user->name}}</h3>
+                <h4>@lang('employee.EditUser:') '{{$user->name}}'</h4>
                 <hr>
             </div>
             <div class="box-body">
@@ -22,7 +22,7 @@
                     {{ $user->email }}
                 </div>
 
-                <b>Give Role</b>
+                <b>@lang('employee.GiveRole')</b>
 
                 <div class='form-group'>
                     <select name="role" class="form-control" style="width: 60%">
@@ -31,29 +31,11 @@
                         @endforeach
                     </select>
                 </div>
-                    <div class="form-group">
-                        <b><label for="companies">Companies</label></b><br>
 
-                        @foreach($allCompanies->chunk(3) as $chunk)
-                            <?php
-                            ?>
-                            <div class="row">
-                                @foreach($chunk as $comp)
-                                    <div class="col-md-4">
-                                        <input type="checkbox" name="companies[]" value="{{$comp->id}}"<?=(in_array($comp->id, $compid))?'checked':''?>>
-                                        {{Form::label($comp->name, $comp->name)}}
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endforeach
-                    </div>
-
-                {{ Form::submit('Edit', array('class' => 'btn btn-primary')) }}
+                {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
 
                 {{ Form::close() }}
             </div>
         </div>
     </div>
-
-
 @endsection

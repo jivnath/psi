@@ -4,25 +4,25 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <h3>Employee Skills</h3>
+                    <h3>@lang('employee.EmployeeSkills')</h3>
                 </div>
 
                 <div class="box-body">
                     <form action="{{ route('skill.store') }}" class="form-group" method="POST">
                         @csrf
-                        <label><b>PSI Number</b></label>
-                        <input type="text" name="psi_num" id="psi_num" placeholder="PSIS_No"
-                               class="form-control input-shorter" required><span class="loading"></span>
+                        <label><b>@lang('employee.PSISNumber')</b></label>
+                        <input type="text" name="psi_num" id="psi_num" placeholder="PSI-S_No"
+                               class="form-control" style="width: 50%;" required><span class="loading"></span>
 
                         <div style="display: none" id="nameDiv">
-                            <p id="name_label"><b>Name</b></p>
+                            <p id="name_label"><b>@lang('employee.Name')</b></p>
                             <p id="employee_name" style="text-align: left"></p>
                         </div>
                         <div id="skillsDiv" style="display: none">
-                            <label><b> All Skills </b></label>
+                            <label><b>@lang('employee.AllSkills')</b></label>
                             <div id="allSkills">
                             </div>
-                            <input type="submit" class="btn btn-primary" value="Save Changes" style="margin-top: 20px">
+                            <input type="submit" class="btn btn-primary" value="@lang('employee.Save')" style="margin-top: 20px">
                         </div>
                     </form>
                 </div>

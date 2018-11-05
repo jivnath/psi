@@ -7,14 +7,14 @@
         <div class="row">
             <div class="col-md-8 offset-2">
                 <div class="box">
-                    <div class="box-header"><h4>Choose Your Primary Company</h4></div>
+                    <div class="box-header"><h4>Choose Your Primary Section</h4></div>
                     <div class="box-body">
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th> Role </th>
-                                <th> Company </th>
-                                <th> Team Leader </th>
+                                <th> Section </th>
+                                <th> Team Manager </th>
                                 <th> Action </th>
                             </tr>
                             </thead>

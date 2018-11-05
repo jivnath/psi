@@ -5,9 +5,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Employee;
+
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
+
     /**
      * Show the application’s login form.
      *
@@ -18,8 +21,9 @@ class LoginController extends Controller
         return view('employee_login.login');
     }
 
-    protected function guard(){
-        return Auth::guard('employee');
+    protected function guard()
+    {
+        return \Auth::guard('employee');
     }
 
     /**
@@ -27,9 +31,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/employee/dashboard';
 
     protected $psi_number = 'psi_number';
+
     /**
      * Create a new controller instance.
      *
@@ -44,12 +49,21 @@ class LoginController extends Controller
     {
         $login = request()->input('psi_number');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'psi_number';
-        request()->merge([$field => $login]);
+        request()->merge([
+            $field => $login
+        ]);
         return $field;
     }
 
-//    public function postLogin()
-//    {
-//
-//    }
+    public function logout()
+    {
+        Auth::guard('employee')->logout();
+        Session::flush();
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/employee/login');
+    }
+
+    // public function postLogin()
+    // {
+    //
+    // }
 }

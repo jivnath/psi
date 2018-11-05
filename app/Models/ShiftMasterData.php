@@ -11,7 +11,7 @@ class ShiftMasterData extends Model implements Auditable
     protected $table = "shift_master_datas";
 
     // public $fillable = ['shift'];
-    public function companies()
+    public function company()
     {
         $this->belongsTo('App\Models\Company', 'company_id');
     }

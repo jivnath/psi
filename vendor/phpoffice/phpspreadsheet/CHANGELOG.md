@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.0] - 2018-10-21
+
+### Added
+
+- PHP 7.3 support
+- Add the DAYS() function - [#594](https://github.com/PHPOffice/PhpSpreadsheet/pull/594)
+
+### Fixed
+
+- Sheet title can contain exclamation mark - [#325](https://github.com/PHPOffice/PhpSpreadsheet/issues/325)
+- Xls file cause the exception during open by Xls reader - [#402](https://github.com/PHPOffice/PhpSpreadsheet/issues/402)
+- Skip non numeric value in SUMIF - [#618](https://github.com/PHPOffice/PhpSpreadsheet/pull/618)
+- OFFSET should allow omitted height and width - [#561](https://github.com/PHPOffice/PhpSpreadsheet/issues/561)
+- Correctly determine delimiter when CSV contains line breaks inside enclosures - [#716](https://github.com/PHPOffice/PhpSpreadsheet/issues/716)
+
+## [1.4.1] - 2018-09-30
+
+### Fixed
+
+- Remove locale from formatting string - [#644](https://github.com/PHPOffice/PhpSpreadsheet/pull/644)
+- Allow iterators to go out of bounds with prev - [#587](https://github.com/PHPOffice/PhpSpreadsheet/issues/587)
+- Fix warning when reading xlsx without styles - [#631](https://github.com/PHPOffice/PhpSpreadsheet/pull/631)
+- Fix broken sample links on windows due to $baseDir having backslash - [#653](https://github.com/PHPOffice/PhpSpreadsheet/pull/653)
+
 ## [1.4.0] - 2018-08-06
 
 ### Added

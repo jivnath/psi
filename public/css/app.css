@@ -1950,7 +1950,7 @@ pre code {
 
 .table th,
 .table td {
-  padding: 0.75rem;
+  padding: 0.5rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
    white-space: nowrap;
@@ -8546,7 +8546,7 @@ button.bg-dark:focus {
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 1030;
+  z-index: 1;
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -8554,7 +8554,7 @@ button.bg-dark:focus {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
-    z-index: 1020;
+    z-index: 1;
   }
   .sticky-left {
     position: -webkit-sticky;
@@ -10616,7 +10616,7 @@ table.floatThead-table {
   transition: all .3s ease;
 }
 .custom-radios input[type="radio"]#color-1 + label span {
-  background-color: #2ecc71;
+  background-color: #ff0000;
 }
 .custom-radios input[type="radio"]#color-2 + label span {
   background-color: #3498db;
@@ -10767,3 +10767,4 @@ button, input, select, textarea {
     font-size: inherit;
     line-height: inherit;
 }
+.i-am-centered { margin: auto; max-width: 80%;}

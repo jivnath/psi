@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Raw;
 use App\Models\DessertSheet;
-use DB;
 use App\Models\Employee;
-use App\Models\Audit;
+use App\Models\EmployeeLogin;
+use App\Models\Raw;
+use DB;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -24,12 +25,42 @@ class DashboardController extends Controller
         $dessert_report = $dessert_obj->select('conformation_day_before', DB::raw('count(*) as total_count'))
             ->groupBy('conformation_day_before')
             ->get();
-        $data['audits'] = $dessert_obj->find(1)->audits;
-        
+
+        $data['audits'] = '';//$dessert_obj->find(1)->audits;
+
+
         $data['dessert_report'] = $this->simplify_dessert_report($dessert_report->toArray());
         $data['employee_summery'] = Raw::getConfirmedEmployees();
         $data['total_emp'] = Employee::count();
         return view('dashboard', $data);
+
+    }
+    public function viewExp()
+    {
+        $data['dashboard'] = Raw::expiredRC();
+        return view('exp_date', $data);
+    }
+    public function viewTotal()
+    {
+        $data['total_ncessary_data'] = Raw::getTotalNeccessory();
+        return view('total_necessary', $data);
+    }
+    public function viewSheet()
+    {
+        $data['recent_dessert_activity'] = Raw::getDessertActivity();
+        return view('recent_sheet', $data);
+    }
+    public function viewSummary()
+    {
+        $dessert_obj = new DessertSheet();
+        $dessert_report = $dessert_obj->select('conformation_day_before', DB::raw('count(*) as total_count'))
+            ->groupBy('conformation_day_before')
+            ->get();
+
+        $data['dessert_report'] = $this->simplify_dessert_report($dessert_report->toArray());
+        $data['employee_summery'] = Raw::getConfirmedEmployees();
+        $data['total_emp'] = Employee::count();
+        return view('alert_summary', $data);
     }
 
     /**
@@ -48,4 +79,5 @@ class DashboardController extends Controller
         }
         return $desser_report;
     }
+
 }

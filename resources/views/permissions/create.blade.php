@@ -5,7 +5,7 @@
     <div class='col-md-8 offset-2'>
         <div class="box">
             <div class="box-header">
-                <h3> Add Permission</h3>
+                <h4> Add Permission</h4>
                 <br>
             </div>
             <div class="box-body">
@@ -14,10 +14,10 @@
 
                 <div class="form-group">
                     <b>{{ Form::label('name', 'Name') }}</b>
-                    {{ Form::text('name', '', array('class' => 'form-control', 'style' => 'width:80%')) }}
+                    {{ Form::text('name', '', array('class' => 'form-control', 'style' => 'width:50%')) }}
                 </div><br>
                 @if(!$roles->isEmpty())
-                    <b>Assign Permission to Roles</b><br>
+                    <b>Roles</b><br>
 
                     @foreach ($roles as $role)
                         {{ Form::checkbox('roles[]',  $role->id ) }}

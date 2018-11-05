@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserType;
 use App\Models\User;
+use App\Models\Raw;
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -31,8 +32,8 @@ class UserController extends Controller
 	{
     //Get all roles and pass it to the view
         $roles = Role::get();
-        $companies = Company::where('master_id', null)->get();
-        return view('users.create', ['roles'=>$roles], ['companies'=>$companies]);
+//        $companies = Company::where('master_id', null)->get();
+        return view('users.create', ['roles'=>$roles]);
     }
 
     public function store(Request $request) {
@@ -52,18 +53,18 @@ class UserController extends Controller
         $role = $request->role; //Retrieving the roles field
         $user->assignRole($role); //Assigning role to user
 
-        $companies = $request['companies'];
-        if(isset($companies))
-        {
-            foreach($companies as $company)
-            {
-                $companyToUser = new CompanyToUser_rel();
-
-                $companyToUser->user_id = $user->id;
-                $companyToUser->company_id = $company;
-                $companyToUser->save();
-            }
-        }
+//        $companies = $request['companies'];
+//        if(isset($companies))
+//        {
+//            foreach($companies as $company)
+//            {
+//                $companyToUser = new CompanyToUser_rel();
+//
+//                $companyToUser->user_id = $user->id;
+//                $companyToUser->company_id = $company;
+//                $companyToUser->save();
+//            }
+//        }
 
 
         //Redirect to the users.index view and display message
@@ -75,23 +76,23 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::get();
 
-        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
-        $companies = [];
-        $compid = [];
-        foreach ($userCompanies as $company) {
-            $comp = Company::find($company->company_id);
-            array_push($companies, $comp);
-            array_push($compid, $comp->id);
-        }
-
-
-        $allCompanies = Company::where('master_id', null)->get();
+//        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
+//        $companies = [];
+//        $compid = [];
+//        foreach ($userCompanies as $company) {
+//            $comp = Company::find($company->company_id);
+//            array_push($companies, $comp);
+//            array_push($compid, $comp->id);
+//        }
+//
+//
+//        $allCompanies = Company::where('master_id', null)->get();
 
         return view('users.edit')->withUser($user)
-            ->withRoles($roles)
-            ->withCompanies($companies)
-            ->withAllCompanies($allCompanies)
-            ->withCompid($compid);
+            ->withRoles($roles);
+//            ->withCompanies($companies)
+//            ->withAllCompanies($allCompanies)
+//            ->withCompid($compid);
     }
 
 	public function updateUser(Request $request, $id)
@@ -103,24 +104,24 @@ class UserController extends Controller
         $user->roles()->detach();
         $user->assignRole($role);
 
-        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
-        foreach ($userCompanies as $userCompany)
-        {
-            $userCompany->delete();
-
-
-        }
-
-        $companies = $request->input('companies');
-
-        foreach ($companies as $company)
-        {
-            $user_company_rel = new CompanyToUser_rel();
-            $user_company_rel->user_id = $id;
-            $user_company_rel->company_id = $company;
-            $user_company_rel->save();
-        }
-
+//        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
+//        foreach ($userCompanies as $userCompany)
+//        {
+//            $userCompany->delete();
+//
+//
+//        }
+//
+//        $companies = $request->input('companies');
+//
+//        foreach ($companies as $company)
+//        {
+//            $user_company_rel = new CompanyToUser_rel();
+//            $user_company_rel->user_id = $id;
+//            $user_company_rel->company_id = $company;
+//            $user_company_rel->save();
+//        }
+//
 
         return redirect()->route('users.index');
 	}
@@ -162,11 +163,11 @@ class UserController extends Controller
         $user_id = \Session::get('user_id');
 
         $user = User::find($user_id);
-        $company = CompanyToUser_rel::where('user_id', $user_id)->get();
+        $company = Raw::getSecondLevelCompanies();
         $companies = [];
         foreach($company as $comp)
         {
-            array_push($companies, $comp->company_id);
+            array_push($companies, $comp->id);
         }
 
 //        dd($companies);

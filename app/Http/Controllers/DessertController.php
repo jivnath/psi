@@ -10,20 +10,24 @@ use App\Models\Company;
 use App\Models\Raw;
 use App\Models\CompanyTimeTable;
 use App\Models\PsiSelfSheetComments;
+use App\Models\CompanyTimeSchedule;
+use DB;
+use App\Models\User;
+
 
 class DessertController extends Controller
 {
 
     public function dessert()
     {
-        $allcompanies = CompanyTimeTable::all('company_id');
+        $allCompanies = CompanyTimeTable::all('company_id');
         $companies=[];
-            foreach($allcompanies as $comp)
+            foreach($allCompanies as $comp)
             {
                 $company = Company::find($comp->company_id);
                 array_push($companies, $company);
             }
-        return view('sheets.dessert')->withCompanies($companies);
+        return view('sheets.dessert')->withCompanies(array_unique($companies));
     }
 
     public function generateTimeTable(Request $request)
@@ -34,7 +38,10 @@ class DessertController extends Controller
                 $schedule_results = \App\Models\Company::find($id)->companyTimeTable();
                 if (count($schedule_results->get()) > 0) {
                     $schedule_id = $schedule_results->first()->id;
-                    $schedule_data = \App\Models\CompanyTimeTable::find($schedule_id)->companyTimeSchedule()->get();
+                    $schedule_data = $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
+                        $query->where('id', $id);
+                    })->groupBy('date')->get();
+		
 
                     return view('sheets.dessert_schedule_view', compact('schedule_data'));
                 } else {
@@ -51,8 +58,11 @@ class DessertController extends Controller
             if ($id != null) {
 
                 $date = $request->get('selected_date');
+              
                 $dessert = Raw::getDessertInfo($id, $date);
-                return view('sheets.dessert_view', compact('dessert'));
+                $userlist=User::all();
+
+                return view('sheets.dessert_view', compact('dessert','userlist'));
             }
         }
     }
@@ -70,33 +80,55 @@ class DessertController extends Controller
             $dessert_id = $request->get('schedule_id');
             if ($psi != null) {
                 $employee = Employee::where('psi_number', $psi)->first();
-                if (count($employee) > 0) {
+
+                if ($employee) {
                     if (DessertSheet::where([['staff_no', $psi],['cts_id', $dessert_id]])->count() > 0) {
                         $data = [];
                     } else {
 
-                        $data = [
-                            4 => $employee->country_citizenship,
-                            5 => $employee->phoetic_kanji,
-                            6 => $employee->name,
-                            7 => $employee->cell_no
-                        ];
-                        if (empty($request->dessert_id)) {
-                            $merge_new = [
-                                23 => $this->auto_store_dessert($request)
+                            //check time limit
+                        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
+                        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
+                        $total_used=DessertSheet::where(['cts_id'=>$dessert_id])->whereNull('deleted_at')->count();
+                        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+                            $data = [
+                                'total_worked' => $total_worked['total_worked']
                             ];
-                            array_push($data, $merge_new);
-                        } else {
-                            $request->request->add([
-                                'action_type' => 'update'
-                            ]);
+                        } elseif($total_needed <=$total_used){
+                            $data = [
+                                'total_worked' => $total_worked['total_worked'],
+                                'total_needed'=>$total_needed,
+                                'total_used'=>$total_used
+                            ];
+                        }
+                        else {
+                            $data = [
+                                4 => $employee->country_citizenship,
+                                5 => $employee->phoetic_kanji,
+                                6 => $employee->name,
+                                7 => $employee->cell_no,
+                                'total_worked' => $total_worked['total_worked']
+                            ];
+                            if (empty($request->dessert_id)) {
+                                $merge_new = [
+                                    23 => $this->auto_store_dessert($request)
+                                ];
+                                array_push($data, $merge_new);
+                            } else {
+                                $request->request->add([
+                                    'action_type' => 'update'
+                                ]);
 
                             $merge_new = [
                                 23 => $this->auto_store_dessert($request)
                             ];
                             array_push($data, $merge_new);
                         }
+                        }
                     }
+                }
+                else{
+                    $data = $default_arr;
                 }
             } else {
                 $data = $default_arr;
@@ -149,6 +181,7 @@ class DessertController extends Controller
 
     public function dessert_update(Request $request)
     {
+
         if ($request->field == 'comments') {
             $psi_self = new PsiSelfSheetComments();
             $psi_self->self_id = $request->dessert_id;
@@ -157,12 +190,23 @@ class DessertController extends Controller
             $psi_self->msg_medium = 'viber';
             $psi_self->save();
             return $psi_self->where('self_id', $request->dessert_id)->count();
-        } else {
+        }
+        elseif($request->field=='deleted'){
+            $dessert = DessertSheet::find($request->dessert_id);
+            $dessert->delete();
+            return response()->json($dessert);
+        }else {
 
             $dessert = DessertSheet::find($request->dessert_id);
             $dessert->{$request->field} = $request->field_value;
             $dessert->save();
-            return response()->json($dessert);
+            $response=response()->json($dessert);
+            if($request->field=='flag'){
+                Employee::where('psi_number', $dessert->staff_no)->update([
+                    'flag' => $request->field_value
+                ]);
+            }
+            return $response;
         }
     }
 }

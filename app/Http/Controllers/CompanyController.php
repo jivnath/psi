@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use DB;
 use App\Models\Raw;
-use Illuminate\Support\Facades\Session;
-
+//use Illuminate\Support\Facades\Session;
+use Session;
 class CompanyController extends Controller
 {
 
@@ -39,7 +39,7 @@ class CompanyController extends Controller
         $company->master_id = $request->company;
         $company->contact_num = $request->contact_num;
         $company->save();
-
+        Session::flash('success', 'Companies successfully added!');
         return redirect()->route('company.create');
     }
 
@@ -65,7 +65,7 @@ class CompanyController extends Controller
         $company->contact_num = $request->input('contact');
 
         $company->save();
-
+        Session::flash('success', 'Companies successfully updated!');
         return redirect()->route('company.edit', $id);
     }
 
@@ -114,6 +114,7 @@ class CompanyController extends Controller
             $sub->master_id = $master;
 
             $sub->save();
+            Session::flash('success', 'Sub companies successfully added!');
             return redirect()->route('company.create');
         }
     }
@@ -129,7 +130,7 @@ class CompanyController extends Controller
     {
         return [
             'name' => 'bail|unique:companies|required|max:191',
-            'contact_num' => 'required',
+            'contact_num' => 'required|numeric',
             'address' => 'required'
         ];
     }
@@ -160,6 +161,7 @@ class CompanyController extends Controller
         $subSection->save();
 
         Session::flash('success', 'Companies successfully added!');
+        return redirect()->route('manageCompanies');
     }
 
     public function updateCompanies(Request $request)
@@ -203,7 +205,7 @@ class CompanyController extends Controller
                     }
                 }
             }
-            Session::flash('success', 'Companies successfully updated!');
+            // Session::flash('success', 'Companies successfully updated!');
         }
         echo json_encode($data);
     }
@@ -285,7 +287,6 @@ class CompanyController extends Controller
             $sub->master_id = $master;
             $sub->contact_num = $company->contact_num;
             $sub->address = $company->address;
-
             $sub->save();
 
             $data = [

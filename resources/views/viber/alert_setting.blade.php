@@ -1,118 +1,201 @@
 @extends('layouts.app')
 @section('content')
+    @php
+        $intervalType=['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
+    @endphp
     <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                <h3 style="text-align: center">Viber Alert Setting</h3>
-                <br>
-                <br>
-                <div class="row">
+        <div class="box box-info">
+            <div class="box-header"><h3 style="text-align: center">Viber Alert Setting</h3></div>
+            <div class="box-body">
+                <div class="row" style="margin-top: 30px">
                     <div class="col-md-8 offset-2">
-                        <div name="employee_master_data">
-                            <h5 style="text-decoration: underline;">Employee Master Data</h5>
-                            <div class="row" style="width: 70%; height: 50px;">
-                                <div class="col-md-4">
-                                    <label for="card_expiry">Residance Card Expiry </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <table width="60%">
-                                        <col style="width: 20%">
-                                        <col style="width: 20%">
-                                        <col style="width: 20%">
-                                        <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid black">30 </td>
-                                            <td style="border: 1px solid black">Day<i class="fa fa-sort-down"></i></td>
-                                            <td><i><small>before</small></i></td>
+                        <form action="{{route('storeSetting')}}" method="POST">
+                            @csrf
+                            <div name="employee_master_data">
+                                <h5 style="text-decoration: underline;">Employee Master Data</h5>
+                                <div class="row" style="height: 50px;">
+                                    <div class="col-md-4">
+                                        <label for="card_expiry">Residence Card Expiry </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                @if($expiry)
+                                                    <input type="text" value="{{$expiry->interval_value}}" name="expiryInt" class="form-control">
+                                                @else
+                                                    <input type="text" name="expiryInt" class="form-control">
+                                                @endif
 
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <hr>
+                                            </div>
+                                            <div class="col-md-3">
 
-                        <h5 style="text-decoration: underline;">Dessert Sheet</h5>
-                        <div name="dessert_sheet" style="width: 80%; height: 150px;">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="card_expiry">Before 1 Day </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <table width="65%" style="text-align: center">
-                                        <col style="width: 15%">
-                                        <col style="width: 15%">
-                                        <col style="width: 15%">
-                                        <col style="width: 5%">
-                                        <col style="width: 15%">
-                                        <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid black">15 </td>
-                                            <td style="border: 1px solid black">Min &nbsp <i class="fa fa-sort-down"></i></td>
-                                            <td><i><small>interval</small></i></td>
-                                            <td style="border: 1px solid black">5</td>
-                                            <td><i><small>Total Count</small></i></td>
-
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                                <select name="expiryType" class="form-control">
+                                                    @foreach($intervalType as $type)
+                                                        @if($expiry)
+                                                            <option value="{{$type}}"<?=($expiry->interval_types == $type)?'selected="selected"':''?>>{{$type}}</option>
+                                                        @else
+                                                            <option value="{{$type}}">{{$type}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i>
+                                                    <small>before</small>
+                                                </i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <br>
+                            <hr>
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="card_expiry">3 Hours Before </label>
+                            <h5 style="text-decoration: underline;">Dessert Sheet</h5>
+                            <div name="dessert_sheet" style=" margin-top:10px; margin-bottom: 50px">
+                                <div class="row" style="">
+                                    <div class="col-md-4">
+                                        <label for="card_expiry">Before 1 Day </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                @if($one)
+                                                    <input type="text" value="{{$one->interval_value}}" name="beforeOneInt" class="form-control">
+                                                @else
+                                                    <input type="text" name="beforeOneInt" class="form-control">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select name="beforeOneType" class="form-control">
+                                                    @foreach($intervalType as $type)
+                                                        @if($one)
+                                                            <option value="{{$type}}"<?=($one->interval_types == $type)?'selected="selected"':''?>>{{$type}}</option>
+                                                        @else
+                                                            <option value="{{$type}}">{{$type}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select></div>
+                                            <div class="col-md-1">
+                                                <i>
+                                                    <small>interval</small>
+                                                </i>
+                                            </div>
+                                            <div class="col-md-2">
+                                                @if($one)
+                                                    <input value="{{$one->interval_endpoint}}" type="text" name="beforeOneCount" class="form-control">
+                                                @else
+                                                    <input type="text" name="beforeOneCount" class="form-control">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i>
+                                                    <small>Total Count</small>
+                                                </i>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <table width="65%" style="text-align: center">
-                                        <col style="width: 15%">
-                                        <col style="width: 15%">
-                                        <col style="width: 15%">
-                                        <col style="width: 5%">
-                                        <col style="width: 15%">
-                                        <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid black">15 </td>
-                                            <td style="border: 1px solid black">Min &nbsp <i class="fa fa-sort-down"></i></td>
-                                            <td><i><small>interval</small></i></td>
-                                            <td style="border: 1px solid black">5</td>
-                                            <td><i><small>Total Count</small></i></td>
 
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="row" style="margin-top:10px">
+                                    <div class="col-md-4">
+                                        <label for="card_expiry">3 Hours Before </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                @if($three)
+                                                    <input value="{{$three->interval_value}}" type="text" name="beforeThreeInt" class="form-control">
+                                                @else
+                                                    <input type="text" name="beforeThreeInt" class="form-control">
+                                                @endif
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <select name="beforeThreeType" class="form-control">
+                                                    @foreach($intervalType as $type)
+                                                        @if($three)
+                                                            <option value="{{$type}}"<?=($three->interval_types == $type)?'selected="selected"':''?>>{{$type}}</option>
+                                                        @else
+                                                            <option value="{{$type}}">{{$type}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <i>
+                                                    <small>interval</small>
+                                                </i>
+                                            </div>
+                                            <div class="col-md-2">
+                                                @if($three)
+                                                    <input value="{{$three->interval_endpoint}}" type="text" name="beforeThreeCount" class="form-control">
+                                                @else
+                                                    <input type="text" name="beforeThreeCount" class="form-control">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i>
+                                                    <small>Total Count</small>
+                                                </i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-top: 10px">
+                                    <div class="col-md-4">
+                                        <label for="card_expiry">Arrival Confirmation </label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                @if($arrival)
+                                                    <input value="{{$arrival->interval_value}}" type="text" name="arrivalInt" class="form-control">
+                                                @else
+                                                    <input type="text" name="arrivalInt" class="form-control">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select name="arrivalType" class="form-control">
+                                                    @foreach($intervalType as $type)
+                                                        @if($arrival)
+                                                            <option value="{{$type}}"<?=($arrival->interval_types == $type)?'selected="selected"':''?>>{{$type}}</option>
+                                                        @else
+                                                            <option value="{{$type}}">{{$type}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-1">
+                                                <i>
+                                                    <small>interval</small>
+                                                </i>
+                                            </div>
+                                            <div class="col-md-2">
+                                                @if($arrival)
+                                                    <input value="{{$arrival->interval_endpoint}}" type="text" name="arrivalCount" class="form-control">
+                                                @else
+                                                    <input type="text" name="arrivalCount" class="form-control">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i>
+                                                    <small>Total Count</small>
+                                                </i>
+                                                <br>
+                                                <div>
+                                                    <input type="submit" value="Save" style="margin-top: 30px;" id="submit"
+                                                           class="btn btn-primary">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="card_expiry">Arrival Conformation </label>
-                                </div>
-                                <div class="col-md-8">
-                                    <table width="65%" style="text-align: center">
-                                        <col style="width: 15%">
-                                        <col style="width: 15%">
-                                        <col style="width: 15%">
-                                        <col style="width: 5%">
-                                        <col style="width: 15%">
-                                        <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid black">15 </td>
-                                            <td style="border: 1px solid black">Min &nbsp <i class="fa fa-sort-down"></i></td>
-                                            <td><i><small>interval</small></i></td>
-                                            <td style="border: 1px solid black">5</td>
-                                            <td><i><small>Total Count</small></i></td>
-
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-
+                        </form>
                     </div>
                 </div>
             </div>
@@ -120,3 +203,9 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+
+    </script>
+@endpush

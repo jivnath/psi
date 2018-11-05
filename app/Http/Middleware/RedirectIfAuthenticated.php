@@ -22,7 +22,7 @@ class RedirectIfAuthenticated
         switch ($guard) {
             case 'employee' :
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('/dashboard');
+                    return redirect()->route('employee.dashboard');
                 }
                 break;
             default:

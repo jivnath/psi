@@ -3,14 +3,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 
 class DessertSheet extends Model implements Auditable
 {
     use \OwenIt\Auditing\Auditable;
+    use SoftDeletes;
+
 
 
     protected $table = 'psi_dessert_entry';
+
+    protected $fillable = ['staff_no', 'cts_id'];
 
     public function user()
     {

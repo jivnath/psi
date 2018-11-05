@@ -4,6 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\Models\Company;
+use Session;
 
 class Raw extends Model
 {
@@ -25,6 +26,22 @@ class Raw extends Model
             p.address address_p,
             c1.address address_c1,
             c2.address address_c2,
+            (
+                SELECT
+                    psi_num
+                FROM
+                    leaders l
+                WHERE
+                    l.company_id = c1.id
+            ) team_leader,
+            (
+                SELECT
+                	emp.name 
+                FROM
+                	employees emp
+                WHERE
+                	emp.psi_number = team_leader
+            ) employee,
             CASE
                     WHEN c1.id IS NULL
                          AND c2.id IS NULL
@@ -50,13 +67,16 @@ where     p.master_id IS NULL
         $companies = DB::select($sql);
 
         foreach ($companies as $row) {
+            $manager = Employee::where('psi_number', $row->team_leader)->first();
             $fetch_detail[$row->parent_name][$row->child_name_1][$row->child_name_2][][] = [
-                'contact_p' => ($row->contact_num)?$row->contact_num:'...',
-                'contact_c1' => ($row->contact_c1)?$row->contact_c1:'...',
-                'contact_c2' => ($row->contact_c2)?$row->contact_c2:'...',
-                'address_p' => ($row->address_p)?$row->address_p:'...',
-                'address_c1' => ($row->address_c1)?$row->address_c1:'...',
-                'address_c2' => ($row->address_c2)?$row->address_c2:'...'
+                'contact_p' => ($row->contact_num) ? $row->contact_num : '...',
+                'contact_c1' => ($row->contact_c1) ? $row->contact_c1 : '...',
+                'contact_c2' => ($row->contact_c2) ? $row->contact_c2 : '...',
+                'address_p' => ($row->address_p) ? $row->address_p : '...',
+                'address_c1' => ($row->address_c1) ? $row->address_c1 : '...',
+                'address_c2' => ($row->address_c2) ? $row->address_c2 : '...',
+                'team_leader' => ($row->team_leader) ?? $row->team_leader,
+                'manager' => ($row->employee) ?? $row->employee
             ];
         }
         return $fetch_detail;
@@ -84,10 +104,10 @@ where     p.master_id IS NULL
         SELECT
             COUNT(*) occupied_shift
         FROM
-            company_to_employees_rel cte
+            company_to_employees_rels cte
         WHERE
             cte.cts_id = cts.id
-    ) total_occupied_shift
+     ) total_occupied_shift
 FROM
     company_time_schedules cts,
     company_time_tables ctt
@@ -111,6 +131,37 @@ WHERE
         $thirdCompanies = DB::select("$sql");
 
         return $thirdCompanies;
+    }
+
+    public static function getWorkedHours($user, $start, $end)
+    {
+        $sql = "SELECT
+                  SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000 AS totalWorked
+              FROM
+                  psi_dessert_entry pde,
+                  company_time_schedules cts,
+                  company_time_tables ctt,
+                  shift_master_datas smd
+              WHERE
+                  pde.staff_no = $user
+                  AND cts.id = pde.cts_id
+                  AND cts.companyTT_id = ctt.id
+                  AND smd.company_id = ctt.company_id
+                  AND cts.time = smd.start_time
+                  AND cts.date BETWEEN $start AND $end";
+
+        $hour = DB::select("$sql");
+        return $hour;
+    }
+
+    public static function getSkillsDetails()
+    {
+        $sql = "SELECT sk.id, sk.skill_name name, (SELECT COUNT(*) FROM employee_skills WHERE skill_id = sk.id) as count FROM psi_skill_master sk";
+        $skills = DB::select("$sql");
+
+        // dd($skills);
+
+        return $skills;
     }
 
     public static function companies($id)
@@ -155,24 +206,66 @@ WHERE
     public static function getShiftView()
     {
         $sql = "SELECT
-                (
-                    SELECT
-                        name
-                    FROM
-                        companies
-                    WHERE
-                        companies.id = c.master_id
-                ) master_company_name,
-                master_id,
-                COUNT(master_id) total_subcompany,
-                ctt.created_at
-            FROM
-                companies c,
-                company_time_tables ctt
-            WHERE
-                c.id = ctt.company_id
-            GROUP BY
-                master_id";
+    t1.*,
+    t2.*,
+    (
+        SELECT
+            name
+        FROM
+            companies
+        WHERE
+            companies.id = master_main_id
+    ) section_name
+FROM
+    (
+        SELECT
+            ctt.id,
+            ctt.company_id,
+            c.name,
+            ctt.created_at,
+        	ctt.schedule_session_id,
+            c.master_id,
+            (
+                SELECT
+                    cc.master_id
+                FROM
+                    companies cc
+                WHERE
+                    cc.id = ctt.company_id
+            ) master_main_id,
+            (
+                SELECT
+                    p.id AS parent_id
+                FROM
+                    companies p
+                    LEFT JOIN companies c1 ON c1.master_id = p.id
+                    LEFT JOIN companies c2 ON c2.master_id = c1.id
+                    LEFT JOIN companies c3 ON c3.master_id = c2.id
+                WHERE
+                    p.master_id IS NULL
+                    AND ( c2.id = ctt.company_id )
+            ) master_main_id1
+        FROM
+            companies c,
+            company_time_tables ctt
+        WHERE
+            c.id = ctt.company_id
+    ) t1,
+    (
+        SELECT
+            companytt_id,
+            MIN(DATE) schedule_from,
+            MAX(DATE) schedule_to
+        FROM
+            company_time_schedules
+        GROUP BY
+            companytt_id
+    ) t2
+WHERE
+    t1.id = t2.companytt_id
+    AND t1.master_main_id1 IS NOT NULL
+    GROUP BY t1.schedule_session_id
+    ORDER BY t2.companytt_id DESC";
         return DB::select($sql);
     }
 
@@ -183,7 +276,8 @@ WHERE
             companytt_id,
             date,
             time,
-            ( normal + help ) total_require,
+            ( normal ) total_require,
+            ctt.schedule_session_id,
             ctt.company_id,
             (
                 SELECT
@@ -214,6 +308,7 @@ WHERE
                 'total_require' => $row->total_require,
                 'date' => $row->date,
                 'time' => $row->time,
+                'schedule_session_id' => $row->schedule_session_id,
                 'dessert_info' => \App\Models\DessertSheet::select('employees.*', 'psi_dessert_entry.*', 'psi_dessert_entry.id As psi_id')->join('employees', 'psi_dessert_entry.staff_no', '=', 'employees.psi_number')
                     ->where('cts_id', $row->id)
                     ->get()
@@ -280,6 +375,24 @@ WHERE
         die();
     }
 
+    public static function getCompaniesForShiftShow($session)
+    {
+        $sql = "SELECT c.name, c.id, ctt.id as companyTT_id FROM companies c,company_time_tables ctt WHERE ctt.schedule_session_id = '$session' AND c.id=ctt.company_id";
+        return DB::select($sql);
+    }
+
+    public static function getDatesForShiftShow($id)
+    {
+        $sql = "SELECT DISTINCT cts.date FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = '$id' AND cts.companyTT_id = ctt.id";
+        return DB::select($sql);
+    }
+
+    public static function getTimesForShiftShow($id)
+    {
+        $sql = "SELECT DISTINCT cts.time FROM company_time_schedules cts, company_time_tables ctt WHERE ctt.schedule_session_id = '$id' AND cts.companyTT_id = ctt.id";
+        return DB::select($sql);
+    }
+
     public static function getTotalNeccessory()
     {
         $sql = "SELECT
@@ -287,7 +400,7 @@ WHERE
                 companytt_id,
                 DATE,
                 time,
-                ( normal + help ) total_require,
+                ( help ) total_require,
                 ctt.company_id,
                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used,
                 c.name,
@@ -311,12 +424,20 @@ WHERE
 
     public static function getDessertActivity()
     {
+        $today = date("Ymd");
+        $cond='';
+        $user = Session::get('user_id');
+        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
+            $cond=" AND pde.responsible1 = $user";
+        }
+
         $sql = "SELECT
-                    id,
+                    pde.id,
                     staff_no,
-                    responsible1 user,
                     conformation_day_before comments,
                     call_medium activity,
+                    responsible1,
+                    (select name from users where id=responsible1) operator,
                     (
                         SELECT
                             COUNT(*)
@@ -325,9 +446,33 @@ WHERE
                         WHERE
                             pssc.self_id = pde.id
                     ) total_comment,
-                    date(created_at) date
+                    date(cts.date) date
                 FROM
-                    `psi_dessert_entry` pde";
+                	company_time_schedules cts,
+                    `psi_dessert_entry` pde
+                WHERE cts.date >= $today
+                	AND pde.cts_id = cts.id $cond
+                GROUP BY
+                	cts.date ASC";
+//        $sql = "SELECT
+//                    id,
+//                    staff_no,
+//                    conformation_day_before comments,
+//                    call_medium activity,
+//                    responsible1,
+//                    (select name from users where id=responsible1) operator,
+//                    (
+//                        SELECT
+//                            COUNT(*)
+//                        FROM
+//                            psi_self_sheet_comments pssc
+//                        WHERE
+//                            pssc.self_id = pde.id
+//                    ) total_comment,
+//                    date(created_at) date
+//                FROM
+//                    `psi_dessert_entry` pde
+//                WHERE 1=1 $cond";
         return DB::select($sql);
     }
 
@@ -367,5 +512,270 @@ WHERE
                 AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(),interval 1 month)
                 AND pde.conformation_day_before = 'OK'";
         return DB::select($sql);
+    }
+
+    public static function getWorkedShift($staff, $date, $company)
+    {
+        $sql = "SELECT
+                    pd.staff_no,
+                    cts.date,
+                    cts.time as start_time,
+                    sm.end_time
+                FROM
+                    psi_dessert_entry pd,
+                    shift_master_datas sm,
+                    company_time_schedules cts
+                WHERE
+                    cts.companyTT_id in (SELECT ctt.id from company_time_tables ctt WHERE ctt.company_id =$company)
+                    AND cts.date = $date
+                    AND pd.staff_no = $staff
+                    AND pd.cts_id = cts.id
+                    AND sm.company_id = $company
+                    AND sm.start_time = cts.time";
+        $data = DB::select($sql);
+        return $data;
+    }
+
+    public static function workedDate($staff, $company)
+    {
+        $sql = "SELECT
+            DISTINCT date,
+            ctt.company_id
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt,
+            psi_dessert_entry pde
+        WHERE
+        	pde.cts_id = cts.id
+        	AND	pde.staff_no = $staff
+        	AND cts.companyTT_id = ctt.id
+            AND ctt.company_id = $company";
+
+        $data = DB::select($sql);
+        return $data;
+    }
+
+    public static function totalNecessary($id)
+    {
+        $sql = "SELECT
+            ctt.company_id,
+            (
+                SELECT
+                    name
+                FROM
+                    companies c
+                WHERE
+                    c.id = ctt.company_id
+            ) company_name,
+            companytt_id time_table_id,
+            cts.id AS rel_id,
+
+            date,
+            time start_time,
+            (
+            	SELECT
+                	smd.end_time
+                FROM
+                	shift_master_datas smd
+                WHERE
+                	start_time = cts.time
+                	AND company_id = ctt.company_id
+
+            ) end_time,
+            (
+            	SELECT
+                TIMEDIFF(smd.end_time, smd.start_time)
+                FROM
+                	shift_master_datas smd
+                WHERE
+                	start_time = cts.time
+                	AND company_id = ctt.company_id
+
+            ) hours,
+
+            (normal) necessary,
+            (
+                SELECT
+                    COUNT(*)
+                FROM
+                    psi_dessert_entry pde
+                WHERE
+                    pde.cts_id = cts.id
+            ) occupied
+
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt
+        WHERE
+            cts.companytt_id = ctt.id
+            AND ctt.company_id = $id";
+        $data = DB::select($sql);
+        return $data;
+    }
+
+    public static function getCompaniesHavingShift()
+    {
+        $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id";
+        $data = DB::select($sql);
+        return $data;
+    }
+
+    public static function dessert_calculation_method($schedule_id, $staff_id)
+    {
+        $sql = "SELECT
+            ##main_table.*,
+            sum(time_to_sec(main_table.shift_time_diff)) total_sec
+        FROM
+            ( SELECT
+            cts.*,
+            ctt.company_id,
+            (
+                SELECT
+                    timediff(smd.end_time,smd.start_time)
+                FROM
+                    shift_master_datas smd
+                WHERE
+                    smd.company_id = ctt.company_id
+                    AND smd.start_time = cts.time
+            ) shift_time_diff
+        FROM
+            company_time_schedules cts,
+            company_time_tables ctt
+        WHERE
+            cts.companytt_id = ctt.id
+            AND cts.id IN (
+                SELECT
+                    cts_id
+                FROM
+                    `psi_dessert_entry`
+                WHERE
+                    staff_no = $staff_id
+            )
+            AND cts.id >= $schedule_id
+        AND DATE( cts.DATE) between (select date from company_time_schedules WHERE
+            id = $schedule_id) and DATE_ADD((select date from company_time_schedules WHERE
+            id = $schedule_id),interval 7 day)
+                ORDER BY
+                    DATE ASC
+            ) main_table";
+        $data = collect(DB::select(DB::raw($sql)))->first();
+        return $calculated_arr = [
+            'total_worked' => $data->total_sec / 3600
+        ];
+    }
+
+    public static function get_user_info($sender_id)
+    {
+        try {
+            $sql = "SELECT e.* FROM employee_logins el,employees e where concat(0,el.psi_number)=replace(cell_no,'-','') and  viber_id='$sender_id'";
+            return collect(DB::select(DB::raw($sql)))->first();
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public static function getEmpDetail($mobile)
+    {
+        $mobile=(isset($mobile[0]) && $mobile[0]!=0)? '0'.$mobile:$mobile;
+        $sql = "select * from (select  e.*,replace(e.cell_no,'-','') replaced_num from employees e)em where em.replaced_num='$mobile'";
+        return collect(DB::select(DB::raw($sql)))->first();
+    }
+
+    public static function employeeWorksheetData($start, $end)
+    {
+//        dd($start);
+        $sql = "SELECT
+        pde.staff_no, 
+        e.name, 
+        COUNT(DISTINCT cts.date) totalWorkdays, 
+        FLOOR(SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000) AS totalWorked
+    FROM
+        psi_dessert_entry pde,
+        company_time_schedules cts,
+        company_time_tables ctt,
+        shift_master_datas smd,
+        employees e
+    WHERE
+       cts.id = pde.cts_id
+        AND pde.staff_no = e.psi_number
+        AND cts.companyTT_id = ctt.id
+        AND smd.company_id = ctt.company_id
+        AND cts.time = smd.start_time
+        AND cts.date BETWEEN '$start' AND '$end'
+        group by pde.staff_no, 
+        e.name";
+        $data = DB::select($sql);
+//        print_r($data);die;
+        return $data;
+    }
+
+    public static function getAttendanceMgmtData($id, $date, $shift)
+    {
+        $sql = "SELECT
+        pde.id,
+        pde.staff_no,
+        pde.conformation_day_before,
+        pde.conformation_3_hours_ago,
+        e.name,
+        e.cell_no,
+        e.phoetic_kanji,
+        e.country_citizenship,
+        smd.start_time,
+        smd.end_time
+    FROM
+        psi_dessert_entry pde,
+        employees e,
+        company_time_schedules cts,
+        company_time_tables ctt,
+        shift_master_datas smd
+    WHERE
+    	pde.cts_id = cts.id AND
+        cts.companyTT_id = ctt.id AND
+        ctt.company_id = $id AND
+        smd.company_id = $id AND
+        smd.start_time = '$shift' AND
+        cts.time = '$shift' AND 
+        cts.date = '$date' AND
+        e.psi_number = pde.staff_no";
+
+        $data = DB::select($sql);
+
+        return $data;
+    }
+
+    public static function getAllRequests()
+    {
+        $sql = "SELECT 
+                    pi.*,
+                    e.name
+                FROM
+                    psi_inbox pi,
+                    employees e
+                WHERE
+                    pi.employeeid = e.psi_number
+                
+                ORDER BY
+                    pi.status DESC,
+                    pi.created_at DESC,
+                    pi.updated_at DESC";
+
+        $requests = DB::select($sql);
+
+        return $requests;
+    }
+
+    public static function getSubsectionShifts()
+    {
+        $sql = "SELECT c.master_id, c.id, smd.* FROM shift_master_datas smd, companies c WHERE smd.company_id = c.id ORDER BY `c`.`master_id` ASC";
+        $shifts = DB::select($sql);
+
+        return $shifts;
+    }
+
+    public static function getShift($id)
+    {
+        $sql ="SELECT smd.* FROM shift_master_datas smd WHERE smd.company_id = $id";
+        $shift = DB::select($sql);
+        return $shift;
     }
 }

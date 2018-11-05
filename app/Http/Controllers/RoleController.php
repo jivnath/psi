@@ -35,9 +35,9 @@ class RoleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        $permissions = Permission::all();//Get all permissions
+//        $permissions = Permission::all();//Get all permissions
 
-        return view('roles.create', ['permissions'=>$permissions]);
+        return view('roles.create');
     }
 
     /**
@@ -49,8 +49,8 @@ class RoleController extends Controller {
     public function store(Request $request) {
     //Validate name and permissions field
         $this->validate($request, [
-            'name'=>'required|unique:roles|max:10',
-            'permissions' =>'required',
+            'name'=>'required|unique:roles|max:20',
+//            'permissions' =>'required',
             ]
         );
 
@@ -58,16 +58,16 @@ class RoleController extends Controller {
         $role = new Role();
         $role->name = $name;
 
-        $permissions = $request['permissions'];
+//        $permissions = $request['permissions'];
 
         $role->save();
     //Looping thru selected permissions
-        foreach ($permissions as $permission) {
-            $p = Permission::where('id', '=', $permission)->firstOrFail(); 
-         //Fetch the newly created role and assign permission
-            $role = Role::where('name', '=', $name)->first(); 
-            $role->givePermissionTo($p);
-        }
+//        foreach ($permissions as $permission) {
+//            $p = Permission::where('id', '=', $permission)->firstOrFail();
+//         //Fetch the newly created role and assign permission
+//            $role = Role::where('name', '=', $name)->first();
+//            $role->givePermissionTo($p);
+//        }
 
         return redirect()->route('roles.index')
             ->with('flash_message',
@@ -91,10 +91,11 @@ class RoleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        $role = Role::findOrFail($id);
-        $permissions = Permission::all();
+        return redirect()->route('update.role', $id);
+//        $role = Role::findOrFail($id);
+//        $permissions = Permission::all();
 
-        return view('roles.edit', compact('role', 'permissions'));
+//        return view('roles.edit', compact('role', 'permissions'));
     }
 
     /**

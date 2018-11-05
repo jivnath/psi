@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\SkillMaster;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Raw;
 
 class SkillMasterController extends Controller
 {
     public function manage()
     {
-        $skills = SkillMaster::where('status', 'enabled')->get();
+        $skills = Raw::getSkillsDetails();
+//        dd($skills);
         return view('skills.manage')->withSkills($skills);
     }
 
@@ -19,8 +21,8 @@ class SkillMasterController extends Controller
         if($request->ajax())
         {
             $newSkill = $request->get('skill');
-//dd(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->get());
-            if(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->get())
+//dd(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->first());
+            if(SkillMaster::where(['skill_name'=> $newSkill, 'status'=> 'enabled' ])->first() != null)
             {
                 $skill = 0;
             }
@@ -41,6 +43,7 @@ class SkillMasterController extends Controller
                     $skill->status = 'enabled';
                     $skill->save();
                 }
+//                dd($skill);
             }
             echo json_encode($skill);
         }
@@ -56,6 +59,22 @@ class SkillMasterController extends Controller
             $skill->status = 'disabled';
 
             $skill->save();
+            return response()->json($skill);
+        }
+    }
+
+    public function rename(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->get('id');
+            $name = $request->get('skill');
+
+            $skill = SkillMaster::findOrFail($id);
+            $skill->skill_name = $name;
+
+            $skill->save();
+
             return response()->json($skill);
         }
     }

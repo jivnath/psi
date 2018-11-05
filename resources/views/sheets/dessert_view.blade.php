@@ -57,16 +57,8 @@ corresponding value from the list below*/
 
                 <div class="custom-radios" style='margin: 0 auto;'>
                   <div>
-                    <input type="radio" id="color-1" name="color" value="green">
+                    <input type="radio" id="color-1" name="color" value="red">
                     <label for="color-1">
-                      <span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <input type="radio" id="color-2" name="color" value="blue">
-                    <label for="color-2">
                       <span>
                       </span>
                     </label>
@@ -94,23 +86,23 @@ corresponding value from the list below*/
 <table class="table table-borderd">
                 <thead class="thead-dark">
                 <tr>
-                <th class="sticky-top">Date</th>
-                <th class="sticky-top">Time</th>
-                <th class="sticky-top">No</th>
-                <th class="border_field sticky-top">Staff No.</th>
-                <th class="border_field sticky-top">Country</th>
-                <th class="border_field sticky-top">Name（フリガナ）</th>
-                <th class="border_field sticky-top">Name（氏名）</th>
-                <th class="border_field sticky-top">Tel No</th>
-                <th class="background_responsible sticky-top">Responsible</th>
-                <th class="background_responsible sticky-top">Conformation the day before</th>
-                <th class="background_responsible sticky-top">Responsible</th>
-                <th class="background_responsible sticky-top">Conform 3 hours ago</th>
-                <th class="sticky-top">Arrival time in case of late arrival</th>
-                <th class="sticky-top">Reason for late arrival and absence</th>
-                <th class="sticky-top">Call Medium/Through</th>
-                <th class="sticky-top">Comments</th>
-                <th class="sticky-top">Action</th>
+                <th class="sticky-top">@lang('employee.Date')</th>
+                <th class="sticky-top">@lang('employee.Time')</th>
+                <th class="sticky-top">@lang('employee.Number')</th>
+                <th class="border_field sticky-top">@lang('employee.StaffNumber')</th>
+                <th class="border_field sticky-top">@lang('employee.Country')</th>
+                <th class="border_field sticky-top">@lang('employee.Name')（フリガナ）</th>
+                <th class="border_field sticky-top">@lang('employee.Name')（氏名）</th>
+                <th class="border_field sticky-top">@lang('employee.TelephoneNumber')</th>
+                <th class="background_responsible sticky-top">@lang('employee.Responsible')</th>
+                <th class="background_responsible sticky-top">@lang('employee.Confirmationthedaybefore')</th>
+                <th class="background_responsible sticky-top">@lang('employee.Responsible')</th>
+                <th class="background_responsible sticky-top">@lang('employee.Confirm3hoursago')</th>
+                <th class="sticky-top">@lang('employee.Arrivaltimeincaseoflatearrival')</th>
+                <th class="sticky-top">@lang('employee.Reasonforlatearrivalandabsence')</th>
+                <th class="sticky-top">@lang('employee.CallMediumThrough')</th>
+                <th class="sticky-top">@lang('employee.Comments')</th>
+                <th class="sticky-top">@lang('employee.Action')</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -130,18 +122,32 @@ corresponding value from the list below*/
                             <td  class="border_field">{{$info->phoetic_kanji}}</td>
                             <td  class="border_field">{{$info->name}}</td>
                             <td  class="border_field">{{$info->cell_no}}</td>
-                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>{{$info->responsible1}}</td>
+                            <td class="background_responsible" data-usage='responsibile'>
+                             <select class='responsibile'>
+                             		<option value=''>--select--</option>
+                             		@foreach($userlist as $row_user)
+                                		<option value='{{$row_user->id}}' {{ ($info->responsible1==$row_user->id) ? 'selected':''}}>{{$row_user->name}}</option>
+                                	@endforeach
+                             </select>
+                            </td>
                             <td class="background_responsible" data-usage='confirmation'>
-                                <select class='form-control confirmation'>
+                                <select class='confirmation'>
                                 	<option value=''>--select--</option>
                                 	<option value='OK' {{ ($info->conformation_day_before=='OK') ? 'selected':''}}>OK</option>
                                 	<option value='Not OK' {{ ($info->conformation_day_before=='Not OK') ? 'selected':''}}>Not OK</option>
                                 	<option value='No response' {{ ($info->conformation_day_before=='No response') ? 'selected':''}}>No response</option>
                                 </select>
                             </td>
-                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>{{$info->responsible2}}</td>
+                             <td class="background_responsible" data-usage='responsibile_1'>
+                             <select class='responsibile_1'>
+                             		<option value=''>--select--</option>
+                             		@foreach($userlist as $row_user)
+                                		<option value='{{$row_user->id}}' {{ ($info->responsible2==$row_user->id) ? 'selected':''}}>{{$row_user->name}}</option>
+                                	@endforeach
+                             </select>
+                            </td>
                             <td class="background_responsible" data-usage='confirmation_1'>
-                             <select class='form-control confirmation_1'>
+                             <select class='confirmation_1'>
                              		<option value=''>--select--</option>
                                 	<option value='OK' {{ ($info->conformation_3_hours_ago=='OK') ? 'selected':''}}>OK</option>
                                 	<option value='Not OK' {{ ($info->conformation_3_hours_ago=='Not OK') ? 'selected':''}}>Not OK</option>
@@ -151,7 +157,7 @@ corresponding value from the list below*/
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>{{$info->arrival_time_if_late}}</td>
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>{{$info->reason_for_late}}</td>
                             <td  data-usage='cmt'>
-                            <select class='form-control cmt'>
+                            <select class='cmt'>
                             		<option value=''>--select--</option>
                                 	<option value='viber' {{ ($info->call_medium=='viber') ? 'selected':''}}>viber</option>
                                 	<option value='call' {{ ($info->call_medium=='call') ? 'selected':''}}>call</option>
@@ -167,6 +173,8 @@ corresponding value from the list below*/
                              <td style='visibility: hidden;display: none;'>{{$dessert_row['id']}}</td>
                              <td style='visibility: hidden;display: none;'>{{$info->id}}</td>
                              <td style='visibility: hidden;display: none;'>{{$info->flag}}</td>
+                             <td style='visibility: hidden;display: none;'>{{$info->responsible1}}</td>
+                             <td style='visibility: hidden;display: none;'>{{$info->responsible2}}</td>
 
                         </tr>
                         @endforeach
@@ -180,9 +188,16 @@ corresponding value from the list below*/
                             <td  class="border_field">  </td>
                             <td  class="border_field">  </td>
                             <td  class="border_field">  </td>
-                            <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile'>  </td>
+                            <td class="background_responsible" data-usage='responsibile'>
+                             <select class='responsibile'>
+                             		<option value=''>--select--</option>
+                             		@foreach($userlist as $row_user)
+                                		<option value='{{$row_user->id}}'>{{$row_user->name}}</option>
+                                	@endforeach
+                             </select>
+                            </td>
                             <td class="background_responsible" data-usage='confirmation'>
-                                <select class='form-control confirmation'>
+                                <select class='confirmation'>
                                 	<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -191,7 +206,7 @@ corresponding value from the list below*/
                             </td>
                             <td class="background_responsible contenteditable" contenteditable="true" data-usage='responsibile_1'>  </td>
                             <td class="background_responsible" data-usage='confirmation_1'>
-                             <select class='form-control confirmation_1'>
+                             <select class='confirmation_1'>
                              		<option value=''>--select--</option>
                                 	<option value='OK'>OK</option>
                                 	<option value='Not OK'>Not OK</option>
@@ -201,7 +216,7 @@ corresponding value from the list below*/
                             <td class="contenteditable" contenteditable="true" data-usage='atlr'>  </td>
                             <td class="contenteditable" contenteditable="true" data-usage='rlaa'>  </td>
                             <td  data-usage='cmt'>
-                            <select class='form-control cmt'>
+                            <select class='cmt'>
                             		<option value=''>--select--</option>
                                 	<option value='viber'>viber</option>
                                 	<option value='call'>call</option>
@@ -217,13 +232,15 @@ corresponding value from the list below*/
                              <td style='visibility: hidden;display:none'>{{$dessert_row['id']}}</td>
                              <td style='visibility: hidden;display: none;'></td>
                              <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
+                             <td style='visibility: hidden;display: none;'></td>
                         </tr>
                         @endfor
                         @if($dessert_row['total_require']==0)
                         <tr>
                             <td> {{$dessert_row['date']}} </td>
                             <td> {{$dessert_row['time']}} </td>
-                        <td colspan='13'>Not available, <a href="{{Route('shift.show',$dessert_row['master_id'])}}" target='_blank'>Add here </a></td>
+                        <td colspan='13'>Not available, <a href="{{Route('shift.show',$dessert_row['schedule_session_id'])}}" target='_blank'>Add here </a></td>
                         </tr>
                         @endif
                     @endforeach
@@ -247,6 +264,7 @@ corresponding value from the list below*/
             var no_of_comments=0;
             var my_this='';
             var confirmation_data='';
+            var responsibile_data='';
             var type_of_field='';
             var added_generated_value='';
             var company_schedule_id='';
@@ -310,11 +328,25 @@ corresponding value from the list below*/
                             console.log('dessert_id '+added_generated_value);
     						$.ajax({
     	                        type:"GET",
-    	                        url:"/dessert/findDetails",
+    	                        url:"{{route('dessert.findDetails')}}",
     	                        data:{'psi_num':main_val,'dessert_id':added_generated_value,'schedule_id':company_schedule_id},
     	                        dataType:'json',
     	                        success:function(data){
     	                        	main_logical_data=data;
+    	                        	console.log(checkProperties(data));
+
+    	                        	if(data.length == 0){
+        	                        	alert('already in use');
+        	                        	return false;
+    	                        	}
+    	                        	if(checkProperties(data)){
+    	                        		alert('Not available');
+        	                        	return false;
+        	                        }
+        	                        if(typeof data.total_worked !=='undefined' && data.total_worked > {{\Config('app.job_limit')}}){
+										alert('reached limit '+data.total_worked);
+										return false;
+            	                     }
     	                        	$.each(data,function(i,v){
     	                        		$('#all_saved_value').data(i,v);
     		                        });
@@ -325,6 +357,13 @@ corresponding value from the list below*/
 						}
                     }
                 });
+                function checkProperties(obj) {
+                    for (var key in obj) {
+                        if (obj[key] !== null && obj[key] != "")
+                            return false;
+                    }
+                    return true;
+                }
                 $('.add_now').click(function(){
 
 					click_flag_obj=$(this);
@@ -371,8 +410,23 @@ corresponding value from the list below*/
 					added_generated_value=$('#all_saved_value').data('23');
                     company_schedule_id=$('#all_saved_value').data('22');
 					send_it_to_update(added_generated_value,company_schedule_id,'flag',click_value_flag);
+					console.log(click_value_flag);
+					if(click_value_flag=='red'){
+						remove_content(click_flag_obj);
+						send_it_to_update(added_generated_value,company_schedule_id,'deleted',click_value_flag);
+					}
 					$('.showFlag').modal('hide');
                 });
+                function remove_content(click_flag_obj){
+                    prevent_remove=[0,1,2,9,11,14,16];
+                	click_flag_obj.closest('tr').find('td').each(
+	                	    function (i) {
+	                	    	if($.inArray(i,prevent_remove) ==-1){
+		                	    	$('#all_saved_value').data(i.toString(),'');
+		                    	    $(this).html('');
+	                	    	}
+	                	    });
+                    }
                 $('.confirmation').change(function(){
                 	$('#comment').val('');
                 	is_model_alert='';
@@ -495,6 +549,42 @@ corresponding value from the list below*/
 						$('#all_saved_value').data('14',confirmation_data);
 
                  });
+                $('.responsibile').change(function(){
+					var confirmation_data=$(this).find('option:selected').val();
+					var my_this=$(this);
+					getAllValue(my_this,25,confirmation_data);
+                    added_generated_value=$('#all_saved_value').data('23');
+                    company_schedule_id=$('#all_saved_value').data('22');
+					send_it_to_update(added_generated_value,company_schedule_id,'responsible1',confirmation_data);
+					$(this).data('responsibile',confirmation_data);
+					$(this).closest('tr').find('td').each(
+	                	    function (i) {
+	                    	    if(i==25){
+		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
+		                    	    $(this).html(confirmation_data);
+	                    	    }
+	                	    });
+					$('#all_saved_value').data('8',confirmation_data);
+
+             });
+                $('.responsibile_1').change(function(){
+					var confirmation_data=$(this).find('option:selected').val();
+					var my_this=$(this);
+					getAllValue(my_this,26,confirmation_data);
+                    added_generated_value=$('#all_saved_value').data('23');
+                    company_schedule_id=$('#all_saved_value').data('22');
+					send_it_to_update(added_generated_value,company_schedule_id,'responsible2',confirmation_data);
+					$(this).data('responsibile_1',confirmation_data);
+					$(this).closest('tr').find('td').each(
+	                	    function (i) {
+	                    	    if(i==26){
+		                	    	$('#all_saved_value').data(i.toString(),confirmation_data);
+		                    	    $(this).html(confirmation_data);
+	                    	    }
+	                	    });
+					$('#all_saved_value').data('10',confirmation_data);
+
+             });
 
                 function set_now(my_this,index,value){
                 	my_this.closest('tr').find('td').each(

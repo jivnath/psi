@@ -45,7 +45,7 @@ class ShiftMasterController extends Controller
     }
 	public function add()
 	{
-		$data['shifts'] = ShiftMasterData::all();
+		$data['shifts'] = Raw::getSubsectionShifts();
 		$data['companies']= Raw::getThirdLevelCompanies();
 //		$data['companies'] = Raw::getCompaniesForShift();
 		return view('shift.add')->withData($data);
@@ -75,10 +75,8 @@ class ShiftMasterController extends Controller
 
 	public function edit($id)
 	{
-		$shifts = ShiftMasterData::all();
 		$shiftData = ShiftMasterData::find($id);
-
-		return view('shift.edit')->withShifts($shifts)->withShiftData($shiftData);
+		return view('shift.edit')->withShiftData($shiftData);
 	}
 
 	public function update(Request $request, $id)
@@ -102,9 +100,9 @@ class ShiftMasterController extends Controller
     protected function rules()
     {
         return [
-            'company_id' => 'bail|required',
-            'start_time' => 'required',
-            'end_time' => 'required',
+            'company_name' => 'bail|required',
+            'start_shift' => 'required',
+            'end_shift' => 'required',
         ];
     }
 }

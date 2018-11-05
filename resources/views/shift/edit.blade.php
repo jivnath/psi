@@ -3,22 +3,22 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        @php
+            $c = App\Http\Controllers\ShiftMasterController::findCompany($shiftData->company_id);
+        @endphp
         <div class="col-md-8">
-            <div class="box">
-                <div class="box-header">{{ "Please fill out the form below." }}</div>
-
+            <div class="box box-info">
+                <div class="box-header"><h4>Shift | Edit</h4></div>
                 <div class="box-body " style="padding: 10px;">
-                    <form  action="{{ route('shift.update') }}" method="POST" >
+                    <form  action="{{ route('shift.update', [$shiftData['id']]) }}" method="POST" >
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        
+
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="shiftName"> Shift Name </label>
+                                <label for="shiftName"> Subsection </label>
                             </div>
-                            <div class="col-md-7">
-                                <input type="text" value="{{ $shiftData->shift_name }}" name="shiftName" class="form-control" required>
-                            </div>
+                            <div class="col-md-7" style="text-align: left">{{$c}}  </div>
                         </div>
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
@@ -26,7 +26,7 @@
                                 <label for="startTime"> Start Time </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" value="{{ $shiftData->start_time }}" name="startTime" class="form-control">
+                                <input type="time" value="{{ $shiftData['start_time'] }}" name="startTime" class="form-control">
                             </div>
                         </div>
 
@@ -35,7 +35,7 @@
                                 <label for="endTime"> End Time </label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" value="{{ $shiftData->end_time }}" name="endTime" class="form-control">
+                                <input type="time" value="{{ $shiftData['end_time'] }}" name="endTime" class="form-control">
                             </div>
                         </div>
 
@@ -46,32 +46,8 @@
                                     Save
                                 </button>
                             </div>
-                        </div>           
+                        </div>
                     </form>
-<br />
-                    <div>
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Shift Name</th>
-                                <th>Start-End Time</th>
-                                <th>Action</th>
-                            </tr>
-                            @if(count($shifts)>0)
-                                @foreach($shifts as $shift)
-                                    <tr>
-                                        <td> {{ $shift->shift_name }} </td>
-                                        <td>
-                                        {{ $shift->start_time.':00 - '.$shift->end_time.':00' }}
-                                        </td>                                      
-                                        <td> {{ $company->address }} </td>
-                                        <td><a href="{{ route('shift.edit', $shift->id) }}" class="btn btn-link btn-sm" > Edit</a> </td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                <h3>No Shift Available</h3>
-                            @endif
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>

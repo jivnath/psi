@@ -7,4 +7,8 @@ class PsiViewCustimizeModel extends Model
 {
 
     protected $table = 'psi_view_customizable';
+
+    protected $fillable = [
+        'type'
+    ];
 }

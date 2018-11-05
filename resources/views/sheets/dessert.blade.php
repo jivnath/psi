@@ -7,12 +7,12 @@
         <div class="col-md-12">
         	<div class="box box-info">
              <div class="box-header with-border">
-                      <h3 class="box-title">Company Shift</h3>
+                      <h3 class="box-title">@lang('employee.SelfSheet')</h3>
                     </div>
                      <div class="box-body row">
             <div class="col-md-3">
               <select name="company" class="form-control" id="company">
-                <option>--Select Company--</option>
+                <option>--@lang('employee.SelectSubsection')--</option>
                     @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                     @endforeach
@@ -22,7 +22,7 @@
 
             </div>
             <div class="col-md-2">
-				<button type="button" class="btn btn-primary view_dessert">Submit</button>
+				<button type="button" class="btn btn-primary view_dessert">@lang('employee.Submit')</button>
             </div>
             </div>
             </div>
