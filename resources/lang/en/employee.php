@@ -321,7 +321,7 @@ return [
 'Confirmation3hoursbefore'=>'Confirmation 3 hours before',
     'ContactNo'=>'Contact No',
     'BreakTime'=>'Break Time',
-    'LoadingPleaseWait'=>'読み込み中。。。待って下さい...',
+    'LoadingPleaseWait'=>'Loading Please Wait...',
     'English'=>'English',
     'Japanese'=>'Japanese',
     'SelectUser'=>'--Select User--',

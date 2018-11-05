@@ -6,7 +6,7 @@
         <div class='col-md-8 offset-2'>
             <div class="box">
                 <div class="box-header">
-                    <h4>Add Role</h4>
+                    <h4>@lang('employee.AddRole)</h4>
                     <hr>
                 </div>
                 <div class="box-body" style="margin-left: 15px">

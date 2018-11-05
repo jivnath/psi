@@ -268,10 +268,7 @@ return [
     'Available'=>'Available',
     'NotAvailable'=>'Not Available',
     'Today'=>'Today',
-
     'RemainingHours'=>'Remaining Hours',
 
-
-    'RemainingHours'=>'Remaining Hours',
 
 ];
