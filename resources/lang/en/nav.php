@@ -271,4 +271,7 @@ return [
     'NotAvailable'=>'Not Available',
     'Today'=>'Today',
     'RemainingHours'=>'Remaining Hours',
+    'SeeAllRequests'=>'See All Requests',
+    'MessageNotAvailable'=>'Message Not Available',
+    'LoggedAs'=>'Logged As'
 ];

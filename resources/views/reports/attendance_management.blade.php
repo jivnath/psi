@@ -12,11 +12,11 @@
                     <div class="box-body">
                         <div class="row">
                                 <div class="col-md-1 subsectionDiv" style="text-align: right">
-                                    <label for="subsection">Subsection</label>
+                                    <label for="subsection">@lang('employee.SubSection')</label>
                                 </div>
                                 <div class="col-md-2 subsectionDiv">
                                     <select class="form-control" name="subsection" id="subsection">
-                                        <option value="0">None</option>
+                                        <option value="0">@lang('employee.None')</option>
                                         @foreach($subSections as $sub)
                                             <option value="{{$sub->id}}">{{$sub->name}}</option>
                                         @endforeach
@@ -24,14 +24,14 @@
                                 </div>
 
                                 <div class="col-md-1 dateDiv" style="text-align: right;display: none">
-                                    <label for="date">Date</label>
+                                    <label for="date">@lang('employee.Date')</label>
                                 </div>
                                 <div class="col-md-2 dateDiv" style="display: none">
                                     {{ Form::date('date', \Carbon\Carbon::now(), array('class' => 'form-control','id'=>'date'))}}
                                 </div>
 
                                 <div class="col-md-1 shiftDiv" style="text-align: right;display:none;">
-                                    <label for="shift">Shift</label>
+                                    <label for="shift">@lang('employee.Shifts')</label>
                                 </div>
                                 <div class="col-md-2 shiftDiv" style="display: none">
                                     <select class="form-control" name="shift" id="shift">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="loadingDiv" style="display: none"><h5><b>Loading, Please wait...</b></h5></div>
+                        <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
                         <div id="tableDiv" style="display:none;margin-top: 25px;">
                             <table style="" id="attendance" class="table table-striped">
                                 <thead>

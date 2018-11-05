@@ -19,19 +19,19 @@
                         <li class="list-inline-item">
                             <div class="input-color">
                                 <div class="color-box" style="background-color:#f5b1ae;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Available.</label>
+                                <label for="red">@lang('employee.Available').</label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #74c673;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Booked.</label>
+                                <label for="red">@lang('employee.Booked').</label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #9faee9;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">Worked.</label>
+                                <label for="red">@lang('employee.Worked').</label>
                             </div>
                         </li>
                     </ul>
@@ -40,7 +40,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="form-group" style="margin-top: 15px;">
-                    <label for="subsection"><h5>Sub-Section</h5></label>
+                    <label for="subsection"><h5>@lang('employee.SubSection')</h5></label>
                     <select class="form-control input-shorter" id="companies">
                         @foreach($companies as $company)
                             <option
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div id="loadingDiv" style="display: none"><h5><b>Loading, Please wait...</b></h5></div>
+        <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
         <div class="row" id="calendarDiv">
             <div class="col-md-12">
                 <div class="box box-primary">
@@ -79,7 +79,7 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="color" class="col-sm-2 control-label">Shift</label>
+                            <label for="color" class="col-sm-2 control-label">@lang('employee.Shifts')</label>
                             <label id="message" style="display:none;" for="message" class="pull-right"></label>
                             <div class="col-sm-12">
                                 <select name="shifts" class="form-control" id="shifts" required>
@@ -89,8 +89,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="submit" class="btn btn-primary" disabled> Apply</button>
-                        <button type="button" class="btn btn-default" data-number="close_hamro_afanai">Close</button>
+                        <button id="submit" class="btn btn-primary" disabled> @lang('employee.Apply')</button>
+                        <button type="button" class="btn btn-default" data-number="close_hamro_afanai">@lang('employee.Close')</button>
                     </div>
                 </form>
             </div>
@@ -100,13 +100,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Worked Shifts</h4>
+                    <h4 class="modal-title" id="myModalLabel">@lang('employee.WorkedShifts')</h4>
                 </div>
                 <div id="allShifts" class="modal-body">
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@lang('employee.Close')</button>
                 </div>
             </div>
         </div>

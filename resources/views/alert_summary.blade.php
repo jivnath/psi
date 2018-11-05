@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Viber Alert Summary</h3>
+            <h3 class="box-title">@lang('employee.ViberAlertSummary')</h3>
         </div>
         <div class="box-body">
             {{--
@@ -23,14 +23,14 @@
             <table class="table" id='alert_viber'>
                 <thead>
                     <tr>
-                        <th>Message Type</th>
-                        <th>Sent</th>
-                        <th>Response Count</th>
+                        <th>@lang('employee.MessageType')</th>
+                        <th>@lang('employee.Sent')</th>
+                        <th>@lang('employee.ResponseCount')</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Residence card expiry</td>
+                        <td>Residencecardexpiry</td>
                         <td><i class="fas fa-check-double"></i></td>
                         <td>3</td>
                     </tr>

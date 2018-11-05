@@ -264,5 +264,8 @@ return [
 'Available'=>'利用可能',
 'NotAvailable'=>'利用不可',
 'Today'=>'今日',
-'RemainingHours'=>'残り時間'
+'RemainingHours'=>'残り時間',
+'SeeAllRequests'=>'すべてのリクエストを見る',
+'MessageNotAvailable'=>'メッセージが利用できません',
+'LoggedAs'=>'ログに記録される',
 ];

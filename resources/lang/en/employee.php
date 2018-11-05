@@ -363,5 +363,16 @@ return [
     'RenamedSuccessfully'=>'Renamed Successfully',
     'Youareloggedin!'=>'You are logged in!' ,
     'NoShiftsareuploaded'=>'No Shifts are uploaded',
+        'LoadingPleaseWait'=>'Loading Please wait...',
+    'None'=>'None',
+    'Apply'=>'Apply',
+    'Personal'=>'Personal',
+    'ProfileChange'=>'Profile Change',
+    'Others'=>'Others',
+    'RegisterOfficer'=>'Register Officer',
+    'ResidenceStatus'=>'Residence Status',
+    'Nameoffacility'=>'Name of facility',
+    'No'=>'No',
+    'Yes'=>'Yes',
 
 ];

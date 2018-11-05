@@ -79,9 +79,9 @@
                     <p class="text-muted text-center"><i class="fas fa-mobile-alt"></i> {{$employee_cell_no}}</p>
                     <p class="text-center">
                         @if($employee_status==1)
-                            <i class="fa fa-circle text-success"></i> Available
+                            <i class="fa fa-circle text-success"></i> @lang('employee.Available')
                         @elseif($employee_status==0)
-                            <i class="fa fa-circle text-danger"></i> Not Available
+                            <i class="fa fa-circle text-danger"></i> @lang('employee.NotAvailable')
                         @endif
                     </p>
 
@@ -93,7 +93,7 @@
             <!-- About Me Box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <center><h3 class="box-title">About Me</h3></center>
+                    <center><h3 class="box-title">@lang('employee.AboutMe')</h3></center>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -103,24 +103,24 @@
 
                     <p class="text-muted">{{$employee_address_ip}}</p>
 
-                    <strong><i class="fas fa-map-marker-alt"></i> Work Location</strong>
+                    <strong><i class="fas fa-map-marker-alt"></i> @lang('employee.WorkLocation')</strong>
 
                     <p class="text-muted">{{$employee_work_location}}</p>
                     <hr>
 
-                    <strong><i class="fas fa-mobile-alt"></i> Contact Number</strong>
+                    <strong><i class="fas fa-mobile-alt"></i>@lang('employee.ContactNumber')</strong>
 
                     <p class="text-muted">{{$employee_cell_no}}</p>
                     <hr>
-                    <strong><i class="far fa-address-card"></i> Resident Card No</strong>
+                    <strong><i class="far fa-address-card"></i> @lang('employee.ResidentCardNumber')</strong>
 
                     <p class="text-muted">{{$employee_residence_card_no}}</p>
                     <hr>
-                    <strong><i class="far fa-clock"></i> Residence Card Expiry Date</strong>
+                    <strong><i class="far fa-clock"></i> @lang('employee.ResidenceCardExpiryDate')</strong>
 
                     <p class="text-muted">{{$employee_residence_card_exp_date}}</p>
                     <hr>
-                    <strong><i class="far fa-calendar-alt"></i> Retirement Date</strong>
+                    <strong><i class="far fa-calendar-alt"></i> @lang('employee.RetirementDate')</strong>
 
                     <p class="text-muted">{{$employee_retirement_date}}</p>
                 </div>
@@ -132,8 +132,8 @@
         <div class="col-md-6">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#about_me" data-toggle="tab">Personal</a></li>
-                    <li><a href="#requests" data-toggle="tab">Requests</a></li>
+                    <li class="active"><a href="#about_me" data-toggle="tab">@lang('employee.Personal')</a></li>
+                    <li><a href="#requests" data-toggle="tab">@lang('employee.Request')</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
@@ -147,24 +147,24 @@
 
 
                             <div class="form-group">
-                                <label for="language" class="col-sm-3 control-label">Request Type</label>
+                                <label for="language" class="col-sm-3 control-label">@lang('employee.RequestType')</label>
 
                                 <div class="col-sm-12">
                                     <select name="type" class="form-control">
-                                        <option value="profile change">Profile Change</option>
-                                        <option value="other">Others</option>
+                                        <option value="profile change">@lang('employee.ProfileChange')</option>
+                                        <option value="other">@lang('employee.Others')</option>
                                     </select>
                                 </div>
                                 <br/>
                                  <div class="form-group">
-                                  <label for="exampleInputFile" class="col-sm-3 control-label">Browse File</label>
+                                  <label for="exampleInputFile" class="col-sm-3 control-label">@lang('employee.BrowseFile')</label>
                                    <div class="col-sm-12">
                                        <input type="file" class="form-control" name="cfile">
                                    </div>
                                 </div>
                                 <div class="form-group">
 
-                                    <label for="language" class="col-sm-3 control-label">Message</label>
+                                    <label for="language" class="col-sm-3 control-label">@lang('employee.Message')</label>
                                     <div class="col-sm-12">
                                         <textarea name="message" cols="82%" rows="10" required></textarea>
                                         {{--<input type="text" style="height: 200px" class="form-control" name="message" required>--}}
@@ -174,7 +174,7 @@
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Send</button>
+                                        <button type="submit" class="btn btn-danger">@lang('employee.Send')</button>
                                     </div>
                                 </div>
                             </div>
@@ -186,210 +186,210 @@
 
                                 @if($employee_name!=null)
                                     <tr>
-                                        <td>Name</td>
+                                        <td>@lang('employee.Name')</td>
                                         <td>{{$employee_name}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_psi_number!=null)
                                     <tr>
-                                        <td>PSI-S No.</td>
+                                        <td>@lang('employee.PSISNumber').</td>
                                         <td>{{$employee_psi_number}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_phoetic_kanji!=null)
                                     <tr>
-                                        <td>Phoetic Kanji</td>
+                                        <td>@lang('employee.PhoeticKanji')</td>
                                         <td>{{$employee_phoetic_kanji}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_cell_no!=null)
                                     <tr>
-                                        <td>Contact No.</td>
+                                        <td>@lang('employee.ContactNo').</td>
                                         <td>{{$employee_cell_no}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_address_ip!=null)
                                     <tr>
-                                        <td>Address</td>
+                                        <td>@lang('employee.Address')</td>
                                         <td>{{$employee_address_ip}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_work_location!=null)
                                     <tr>
-                                        <td>Work Location</td>
+                                        <td>@lang('employee.WorkLocation')</td>
                                         <td>{{$employee_work_location}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_retirement_date!=null)
                                     <tr>
-                                        <td>Retirement Date</td>
+                                        <td>@lang('employee.RetirementDate')</td>
                                         <td>{{$employee_retirement_date}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_birth_date!=null)
                                     <tr>
-                                        <td>Birthday</td>
+                                        <td>@lang('employee.Birthdate')</td>
                                         <td>{{$employee_birth_date}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_residence_card_no!=null)
                                     <tr>
-                                        <td>Residence Card No.</td>
+                                        <td>@lang('employee.ResidenceCardNo').</td>
                                         <td>{{$employee_residence_card_no}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_reg_officer!=null)
                                     <tr>
-                                        <td>Register Officer</td>
+                                        <td>@lang('employee.RegisterOfficer')</td>
                                         <td>{{$employee_reg_officer}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_hire_date!=null)
                                     <tr>
-                                        <td>Hire Date</td>
+                                        <td>@lang('employee.HireDate')</td>
                                         <td>{{$employee_hire_date}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_country_citizenship!=null)
                                     <tr>
-                                        <td>Country Citizenship</td>
+                                        <td>@lang('employee.CountryCitizenship')</td>
                                         <td>{{$employee_country_citizenship}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_residence_card_exp_date!=null)
                                     <tr>
-                                        <td>Residence Card Expiry Date</td>
+                                        <td>@lang('employee.ResidenceCardExpiryDate')</td>
                                         <td>{{$employee_residence_card_exp_date}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_hourly_wage!=null)
                                     <tr>
-                                        <td>Hourly Wage</td>
+                                        <td>@lang('employee.HourlyWage')</td>
                                         <td>{{$employee_hourly_wage}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_status_residence!=null)
                                     <tr>
-                                        <td>Residence Status</td>
+                                        <td>@lang('employee.ResidenceStatus')</td>
                                         <td>{{ $employee_status_residence}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_base!=null)
                                     <tr>
-                                        <td>Base</td>
+                                        <td>@lang('employee.Base')</td>
                                         <td>{{ $employee_base}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_for_work!=null)
                                     <tr>
-                                        <td>For Work</td>
+                                        <td>@lang('employee.ForWork')</td>
                                         <td>{{  $employee_for_work}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_opt_management!=null)
                                     <tr>
-                                        <td>Optional Management</td>
+                                        <td>@lang('employee.OptionalManagement')</td>
                                         <td>{{  $employee_opt_management}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_contract_collection!=null)
                                     <tr>
-                                        <td>Contract Collection</td>
+                                        <td>@lang('employee.ContractCollection')</td>
                                         <td>{{ $employee_contract_collection}}</td>
                                     </tr>
                                 @endif
 
                                 @if( $employee_res_confirmation!=null)
                                     <tr>
-                                        <td>Residence Confirmation</td>
+                                        <td>@lang('employee.ResidenceConfirmation')</td>
                                         <td>{{ $employee_res_confirmation}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_sex!=null)
                                     <tr>
-                                        <td>Sex</td>
+                                        <td>@lang('employee.Sex')</td>
                                         <td>{{ $employee_sex}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_postal_code!=null)
                                     <tr>
-                                        <td>Postal Code</td>
+                                        <td>@lang('employee.PostalCode')</td>
                                         <td>{{ $employee_postal_code}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_business_content!=null)
                                     <tr>
-                                        <td>Business Content</td>
+                                        <td>@lang('employee.BusinessContent')</td>
                                         <td>{{ $employee_business_content}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_dispatch_destination!=null)
                                     <tr>
-                                        <td>Dispatch Destination</td>
+                                        <td>@lang('employee.DispatchDestination')</td>
                                         <td>{{ $employee_dispatch_destination}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_name_of_facility!=null)
                                     <tr>
-                                        <td>Name of facility</td>
+                                        <td>@lang('employee.Nameoffacility')</td>
                                         <td>{{ $employee_name_of_facility}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_path!=null)
                                     <tr>
-                                        <td>Path</td>
+                                        <td>@lang('employee.Path')</td>
                                         <td>{{ $employee_path}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_one_way_rate!=null)
                                     <tr>
-                                        <td>One Way Rate</td>
+                                        <td>@lang('employee.OneWayRate')</td>
                                         <td>{{ $employee_one_way_rate}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_pass_price!=null)
                                     <tr>
-                                        <td>Pass Price</td>
+                                        <td>@lang('employee.PassPrice')</td>
                                         <td>{{ $employee_pass_price}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_hourly_employee!=null)
                                     <tr>
-                                        <td>Hourly Employee</td>
+                                        <td>@lang('employee.HourlyEmployee')</td>
                                         <td>{{ $employee_hourly_employee}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_dependent_exemption!=null)
                                     <tr>
-                                        <td>Dependent Exemption</td>
+                                        <td>@lang('employee.DependentExemption')</td>
                                         <td>{{ $employee_dependent_exemption}}</td>
                                     </tr>
                                 @endif
@@ -402,7 +402,7 @@
                                 @endif
                                 @if($employee_operating_status!=null)
                                     <tr>
-                                        <td>Operating Status</td>
+                                        <td>@lang('employee.OperatingStatus')</td>
                                         <td>{{ $employee_operating_status }}</td>
                                     </tr>
                                 @endif
@@ -411,12 +411,12 @@
 
                                     {{--{{dd($employee_viber_install)}}--}}
                                     <tr>
-                                        <td>Viber Install</td>
+                                        <td>@lang('employee.ViberInstall')</td>
                                         <td>
                                             @if($employee_viber_install==1)
-                                                    yes
+                                                    @lang('employee.Yes')
                                             @elseif($employee_viber_install==0)
-                                                   no
+                                                   @lang('employee.No')
                                             @endif
                                             </td>
                                     </tr>
@@ -435,7 +435,7 @@
         <div class="col-md-3 box box-info">
             <div class="box-header with-border">
 
-              <h3 class="box-title">Activity</h3>
+              <h3 class="box-title">@lang('employee.Activity')</h3>
             </div>
             <div class="box-body chat" id="chat-box">
               <!-- chat item -->
