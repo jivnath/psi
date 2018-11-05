@@ -331,7 +331,7 @@
 
                                                     @endif
                                                     @empty($total)
-                                                        <a class="footer_message dropdown-item text-center">@lang('nav.Messagesnotavailable')</a>
+                                                        <a class="footer_message dropdown-item text-center">@lang('nav.MessageNotAvailable')</a>
                                                     @endempty
 
                                                 </div>
