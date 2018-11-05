@@ -12,7 +12,7 @@
                     <span class="info-box-icon bg-aqua"><i class="ion ion-checkmark"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Confirmation</span>
+                        <span class="info-box-text">@lang('nav.CONFIRMATION')</span>
                         <span class="info-box-number">{{isset($dessert_report['OK'])??$dessert_report['OK']}}55%</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -26,12 +26,12 @@
                     <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Confirmed Shift</span>
+                        <span class="info-box-text">@lang('nav.CONFIRMEDSHIFT')</span>
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block" style='margin: 8px -10px!important'>
                                     <h5 class="description-header"> 5/5{{--{{$employee_summery[0]->total_count}}--}}</h5>
-                                    <span class="description-text" style='text-transform: none;'>Tomorrow</span>
+                                    <span class="description-text" style='text-transform: none;'>@lang('nav.Tomorrow')</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -39,7 +39,7 @@
                             <div class="col-sm-4 border-right">
                                 <div class="description-block" style="margin: 8px -10px!important;">
                                     <h5 class="description-header"> 4/5{{--}}{{$employee_summery[1]->total_count}}--}}</h5>
-                                    <span class="description-text" style='text-transform: none;'>Tomorrow To Week</span>
+                                    <span class="description-text" style='text-transform: none;'>@lang('nav.TomorrowToWeek')</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -48,7 +48,7 @@
                                 <div class="description-block" style="margin: 8px -10px!important;">
                                     <h5 class="description-header">2/5{{--{{$employee_summery[2]->total_count}}--}}</h5>
                                     <span class="description-text"
-                                          style='text-transform: none;'>Tomorrow To Month</span>
+                                          style='text-transform: none;'>@lang('nav.TomorrowToMonth')</span>
                                 </div>
                                 <!-- /.description-block -->
                             </div>
@@ -94,25 +94,25 @@
                         </table>
                     </div>
                     <div class="box-footer text-center">
-                        <a href="{{route('exp_date')}}" class="uppercase">View All</a>
+                        <a href="{{route('exp_date')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">@lang('dashboard.tn')</h3>
+                        <h3 class="box-title">@lang('employee.TotalNecessary')</h3>
                     </div>
                     <div class="box-body">
                         <table class="table table-striped table-bordered" id='tn_table'>
                             <thead>
                             <tr>
-                                <th>Section</th>
-                                <th>Sub-Section</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Total</th>
-                                <th>Necessary</th>
+                                <th>@lang('employee.Section')</th>
+                                <th>@lang('employee.SubSection')</th>
+                                <th>@lang('employee.Date')</th>
+                                <th>@lang('employee.Time')</th>
+                                <th>@lang('employee.Total')</th>
+                                <th>@lang('employee.Necessary')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -130,7 +130,7 @@
                         </table>
                     </div>
                     <div class="box-footer text-center">
-                        <a href="{{route('total_necessary')}}" class="uppercase">View All</a>
+                        <a href="{{route('total_necessary')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
             </div>
@@ -139,19 +139,19 @@
             <div class="col-md-6">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">@lang('dashboard.rssa')</h3>
+                        <h3 class="box-title">@lang('employee.RecentShelfSheetActivity')</h3>
                     </div>
                     <div class="box-body">
                         <table class="table table-striped" id='rda_table'>
                             <thead>
                             <tr>
-                                <th>PsisNo</th>
-                                <th>Responsible</th>
-                                <th>Activity</th>
-                                <th>Date</th>
-                                <th>Comment</th>
-                                <th>Total comments</th>
-                                <th>Action</th>
+                                <th>@lang('employee.PSISNumber')</th>
+                                <th>@lang('employee.Responsible')</th>
+                                <th>@lang('employee.Activity')</th>
+                                <th>@lang('employee.Date')</th>
+                                <th>@lang('employee.Comment')</th>
+                                <th>@lang('employee.TotalComments')</th>
+                                <th>@lang('employee.Action')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -171,22 +171,22 @@
                         </table>
                     </div>
                     <div class="box-footer text-center">
-                        <a href="{{route('recent_sheet')}}" class="uppercase">View All</a>
+                        <a href="{{route('recent_sheet')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Viber Alert Summary</h3>
+                        <h3 class="box-title">@lang('employee.ViberAlertSummary')</h3>
                     </div>
                     <div class="box-body">
                         <table class="table table-striped" id='alert_viber'>
                             <thead>
                             <tr>
-                                <th>Message Type</th>
-                                <th>Sent</th>
-                                <th>Response Count</th>
+                                <th>@lang('employee.MessageType')</th>
+                                <th>@lang('employee.Sent')</th>
+                                <th>@lang('employee.ResponseCount')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -214,7 +214,7 @@
                         </table>
                     </div>
                     <div class="box-footer text-center">
-                        <a href="{{route('alert_summary')}}" class="uppercase">View All</a>
+                        <a href="{{route('alert_summary')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
             </div>
