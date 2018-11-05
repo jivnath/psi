@@ -349,5 +349,9 @@ return [
     'Nameoffacility'=>' 施設名',
     'No'=>'いいえ',
     'Yes'=>'はい',
+    'ResponseMessage'=>'応答メッセージ',
+    'Send'=>'送信',
+    'Requests'=>'リクエスト',
+    'Response'=>'応答',
 
 ];

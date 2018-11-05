@@ -1,29 +1,29 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        @php
-            $c = App\Http\Controllers\ShiftMasterController::findCompany($shiftData->company_id);
-        @endphp
+        @php $c = App\Http\Controllers\ShiftMasterController::findCompany($shiftData->company_id); 
+@endphp
         <div class="col-md-8">
             <div class="box box-info">
-                <div class="box-header"><h4>Shift | Edit</h4></div>
+                <div class="box-header">
+                    <h4>@lang('employee.Shift|Edit')</h4>
+                </div>
                 <div class="box-body " style="padding: 10px;">
-                    <form  action="{{ route('shift.update', [$shiftData['id']]) }}" method="POST" >
+                    <form action="{{ route('shift.update', [$shiftData['id']]) }}" method="POST">
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="shiftName"> Subsection </label>
+                                <label for="shiftName"> @lang('employee.SubSection') </label>
                             </div>
-                            <div class="col-md-7" style="text-align: left">{{$c}}  </div>
+                            <div class="col-md-7" style="text-align: left">{{$c}} </div>
                         </div>
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="startTime"> Start Time </label>
+                                <label for="startTime"> @lang('employee.StartTime') </label>
                             </div>
                             <div class="col-md-7">
                                 <input type="time" value="{{ $shiftData['start_time'] }}" name="startTime" class="form-control">
@@ -32,7 +32,7 @@
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="endTime"> End Time </label>
+                                <label for="endTime"> @lang('employee.EndTime') </label>
                             </div>
                             <div class="col-md-7">
                                 <input type="time" value="{{ $shiftData['end_time'] }}" name="endTime" class="form-control">
@@ -43,7 +43,7 @@
                             <div class="col-md-5"></div>
                             <div class="col-md-7">
                                 <button style="margin-top: 15px" type="submit" class="btn btn-primary">
-                                    Save
+                                @lang('employee.Save')
                                 </button>
                             </div>
                         </div>

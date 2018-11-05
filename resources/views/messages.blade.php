@@ -4,14 +4,14 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
-                <div style="margin-left: 20px"><h3>Requests</h3></div>
+                <div style="margin-left: 20px"><h3>@lang('employee.Requests')</h3></div>
                 <div class="box-body">
                     <div class="col-md-10 offset-1">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#all" data-toggle="tab"><b>All</b></a></li>
-                                <li><a href="#unresponded" data-toggle="tab"><b>Unresponded</b></a></li>
-                                <li><a href="#responded" data-toggle="tab"><b>Responded</b></a></li>
+                                <li class="active"><a href="#all" data-toggle="tab"><b>@lang('employee.All')</b></a></li>
+                                <li><a href="#unresponded" data-toggle="tab"><b>@lang('employee.Unresponded')</b></a></li>
+                                <li><a href="#responded" data-toggle="tab"><b>@lang('employee.Responded')</b></a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="active tab-pane" id="all">
@@ -23,7 +23,7 @@
                                                 @if($req->status == 1)
                                                     <div style="font-weight:bold">
                                                         <p style="color: #004d99">{{$req->name}}</p>
-                                                        <p>Request type : {{$req->message_type}}</p>
+                                                        <p>@lang('employee.RequestType') : {{$req->message_type}}</p>
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
@@ -32,13 +32,13 @@
                                                         </h5>
                                                         </p>
                                                         <a class="btn btn-primary btn-sm"
-                                                           href="{{route('inbox.smessage', $req->id)}}">Response </a>
+                                                           href="{{route('inbox.smessage', $req->id)}}">@lang('employee.Response') </a>
                                                         <hr>
                                                     </div>
                                                 @else
                                                     <div>
                                                         <p style="color: #004d99">{{$req->name}}</p>
-                                                        <p>Request type : {{$req->message_type}}</p>
+                                                        <p>@lang('employee.RequestType'): {{$req->message_type}}</p>
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
@@ -47,7 +47,7 @@
                                                         </h5>
                                                         </p>
                                                         <a class="btn btn-primary btn-sm"
-                                                           href="{{route('inbox.view', $req->id)}}"> View</a>
+                                                           href="{{route('inbox.view', $req->id)}}">@lang('employee.View')</a>
                                                         <hr>
                                                     </div>
                                                 @endif
@@ -63,7 +63,7 @@
                                                 @if($req->status == 1)
                                                     <div style="font-weight:bold">
                                                         <p style="color: #004d99">{{$req->name}}</p>
-                                                        <p>Request type : {{$req->message_type}}</p>
+                                                        <p>@lang('employee.RequestType') : {{$req->message_type}}</p>
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
@@ -72,7 +72,7 @@
                                                         </h5>
                                                         </p>
                                                         <a class="btn btn-primary btn-sm"
-                                                           href="{{route('inbox.smessage', $req->id)}}">Response </a>
+                                                           href="{{route('inbox.smessage', $req->id)}}">@lang('employee.Response') </a>
                                                         <hr>
                                                     </div>
                                                 @endif
@@ -88,7 +88,7 @@
                                                 @if($req->status == 0)
                                                     <div>
                                                         <p style="color: #004d99">{{$req->name}}</p>
-                                                        <p>Request type : {{$req->message_type}}</p>
+                                                        <p>@lang('employee.RequestType'): {{$req->message_type}}</p>
                                                         <p style="width: 100%">{{$req->request_message}}
                                                         <h5 style="text-align: right">
                                                             <small><i class="fas fa-clock"
@@ -97,7 +97,7 @@
                                                         </h5>
                                                         </p>
                                                         <a class="btn btn-primary btn-sm"
-                                                           href="{{route('inbox.view', $req->id)}}"> View </a>
+                                                           href="{{route('inbox.view', $req->id)}}"> @lang('employee.View') </a>
                                                         <hr>
                                                     </div>
                                                 @endif
