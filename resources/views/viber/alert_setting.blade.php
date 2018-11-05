@@ -78,7 +78,7 @@
                                                 </select></div>
                                             <div class="col-md-1">
                                                 <i>
-                                                    <small>@lang('employee.interval')</small>
+                                                    <small>@lang('employee.Interval')</small>
                                                 </i>
                                             </div>
                                             <div class="col-md-2">
@@ -125,7 +125,7 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <i>
-                                                    <small>@lang('employee.interval')</small>
+                                                    <small>@lang('employee.Interval')</small>
                                                 </i>
                                             </div>
                                             <div class="col-md-2">
@@ -171,7 +171,7 @@
 
                                             <div class="col-md-1">
                                                 <i>
-                                                    <small>@lang('employee.interval')</small>
+                                                    <small>@lang('employee.Interval')</small>
                                                 </i>
                                             </div>
                                             <div class="col-md-2">
