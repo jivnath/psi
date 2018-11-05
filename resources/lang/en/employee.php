@@ -378,6 +378,7 @@ return [
     'Response'=>'Response',
     'none'=>'none',
     'All'=>'--All--',
+    'LoggedAs'=>'Logged As',
 
 
 ];
