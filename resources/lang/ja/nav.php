@@ -224,7 +224,7 @@ return [
 'Areyousuretologout?'=>'ログアウトしてもよろしいですか？',
 'Ok'=>'Ok',
 'CONFIRMATION'=>'確認',
-'CONFIRMED SHIFT'=>'確認済みのシフト',
+'CONFIRMEDSHIFT'=>'確認済みのシフト',
 'Tomorrow'=>'明日',
 'TomorrowToWeek'=>'明日までの週',
 'TomorrowToMonth'=>'明日は月に',
