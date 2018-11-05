@@ -291,7 +291,7 @@ return [
     'Total'=>'Total',
     'ViewAll'=>'View All',
     'Necessary'=>'Necessary',
-    'RecentSelfSheetActivity'=>'Recent Self Sheet Activity',
+    'RecentShelfSheetActivity'=>'Recent Self Sheet Activity',
     'Comment'=>'Comment',
     'TotalComments'=>'Total Comments',
     'ViberAlertSummary'=>'Viber Alert Summary',
