@@ -6,19 +6,19 @@
 <div class="col-md-12">
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">@lang('dashboard.tn')</h3>
+            <h3 class="box-title">@lang('employee.TotalNecessary')</h3>
 
         </div>
         <div class="box-body">
             <table class="table table-bordered" id='tn_table'>
                 <thead>
                     <tr>
-                        <th>Section</th>
-                        <th>Sub-section</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Total</th>
-                        <th>Necessary</th>
+                        <th>@lang('employee.Section')</th>
+                        <th>@lang('employee.SubSection')</th>
+                        <th>@lang('employee.Date')</th>
+                        <th>@lang('employee.Time')</th>
+                        <th>@lang('employee.Total')</th>
+                        <th>@lang('employee.Necessary')</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -7,18 +7,18 @@
     <div class="col-md-12">
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title">@lang('dashboard.rssa')</h3>
+                <h3 class="box-title">@lang('employee.RecentSelfSheetActivity')</h3>
             </div>
             <div class="box-body">
                 <table class="table" id='rda_table'>
                     <thead>
                         <tr>
-                            <th>PSI-S_No</th>
-                            <th>Activity</th>
-                            <th>Date</th>
-                            <th>Comment</th>
-                            <th>Total comments</th>
-                            <th>Action</th>
+                            <th>@lang('employee.PSISNumber')</th>
+                            <th>@lang('employee.Activity')</th>
+                            <th>@lang('employee.Date')</th>
+                            <th>@lang('employee.Comment')</th>
+                            <th>@lang('employee.TotalComments')</th>
+                            <th>@lang('employee.Action')</th>
                         </tr>
                     </thead>
                     <tbody>

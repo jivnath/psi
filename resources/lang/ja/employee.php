@@ -311,5 +311,16 @@ return [
     'BreakTime'=>'休憩時間',
     'LoadingPleaseWait'=>'読み込み中。。。待って下さい...',
     'Section'=>'セクション',
-
+    'None'=>'無し',
+    'Booked'=>'予約済み',
+    'Worked'=>'働いた',
+    'Apply'=>'適用',
+    'Personal'=>'パーソナル',
+    'ProfileChange'=>'プロフィールの変更',
+    'Others'=>'その他',
+    'RegisterOfficer'=>'登録士',
+    'ResidenceStatus'=>'在留資格',
+    'Nameoffacility'=>' 施設名',
+    'No'=>'いいえ',
+    'Yes'=>'はい',
 ];

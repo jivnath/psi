@@ -5,17 +5,17 @@
     @endphp
     <div class="container-fluid">
         <div class="box box-info">
-            <div class="box-header"><h3 style="text-align: center">Viber Alert Setting</h3></div>
+            <div class="box-header"><h3 style="text-align: center">@lang('employee.ViberAlertSetting')</h3></div>
             <div class="box-body">
                 <div class="row" style="margin-top: 30px">
                     <div class="col-md-8 offset-2">
                         <form action="{{route('storeSetting')}}" method="POST">
                             @csrf
                             <div name="employee_master_data">
-                                <h5 style="text-decoration: underline;">Employee Master Data</h5>
+                                <h5 style="text-decoration: underline;">@lang('employee.EmployeeMasterData')</h5>
                                 <div class="row" style="height: 50px;">
                                     <div class="col-md-4">
-                                        <label for="card_expiry">Residence Card Expiry </label>
+                                        <label for="card_expiry">@lang('employee.ResidenceCardExpiry') </label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <i>
-                                                    <small>before</small>
+                                                    <small>@lang('employee.Before')</small>
                                                 </i>
                                             </div>
                                         </div>
@@ -51,11 +51,11 @@
                             <br>
                             <hr>
 
-                            <h5 style="text-decoration: underline;">Dessert Sheet</h5>
+                            <h5 style="text-decoration: underline;">@lang('employee.DessertSheet')</h5>
                             <div name="dessert_sheet" style=" margin-top:10px; margin-bottom: 50px">
                                 <div class="row" style="">
                                     <div class="col-md-4">
-                                        <label for="card_expiry">Before 1 Day </label>
+                                        <label for="card_expiry">@lang('employee.Before1Day') </label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
@@ -78,7 +78,7 @@
                                                 </select></div>
                                             <div class="col-md-1">
                                                 <i>
-                                                    <small>interval</small>
+                                                    <small>@lang('employee.interval')</small>
                                                 </i>
                                             </div>
                                             <div class="col-md-2">
@@ -90,7 +90,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <i>
-                                                    <small>Total Count</small>
+                                                    <small>@lang('employee.TotalCount')</small>
                                                 </i>
                                             </div>
 
@@ -100,7 +100,7 @@
 
                                 <div class="row" style="margin-top:10px">
                                     <div class="col-md-4">
-                                        <label for="card_expiry">3 Hours Before </label>
+                                        <label for="card_expiry">@lang('employee.3HoursBefore') </label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
@@ -125,7 +125,7 @@
                                             </div>
                                             <div class="col-md-1">
                                                 <i>
-                                                    <small>interval</small>
+                                                    <small>@lang('employee.interval')</small>
                                                 </i>
                                             </div>
                                             <div class="col-md-2">
@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <i>
-                                                    <small>Total Count</small>
+                                                    <small>@lang('employee.TotalCount')</small>
                                                 </i>
                                             </div>
                                         </div>
@@ -146,7 +146,7 @@
 
                                 <div class="row" style="margin-top: 10px">
                                     <div class="col-md-4">
-                                        <label for="card_expiry">Arrival Confirmation </label>
+                                        <label for="card_expiry">@lang('employee.ArrivalConfirmation') </label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
@@ -171,7 +171,7 @@
 
                                             <div class="col-md-1">
                                                 <i>
-                                                    <small>interval</small>
+                                                    <small>@lang('employee.interval')</small>
                                                 </i>
                                             </div>
                                             <div class="col-md-2">
@@ -183,11 +183,11 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <i>
-                                                    <small>Total Count</small>
+                                                    <small>@lang('employee.TotalCount')</small>
                                                 </i>
                                                 <br>
                                                 <div>
-                                                    <input type="submit" value="Save" style="margin-top: 30px;" id="submit"
+                                                    <input type="submit" value="@lang('employee.Save')" style="margin-top: 30px;" id="submit"
                                                            class="btn btn-primary">
                                                 </div>
                                             </div>
