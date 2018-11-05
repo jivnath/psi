@@ -346,5 +346,6 @@ return [
     'Send'=>'送信',
     'Requests'=>'リクエスト',
     'Response'=>'応答',
-
+    'none'=>'無し',
+    'All'=>'- すべて -',
 ];
