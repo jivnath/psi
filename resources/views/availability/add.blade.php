@@ -5,7 +5,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-7">
             <div class="box" style="min-height: 300px">
-                <div class="box-header"><h4>{{ "Employee Availability | Add" }}</h4></div>
+                <div class="box-header"><h4>@lang('employee.EmployeeAvailabilityAdd')</h4></div>
 
                 <div class="box-body " style="padding: 20px;">
                     <form action="{{ route('availability.store') }}" method="POST">
@@ -14,25 +14,25 @@
 
                         <div class="form-group row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-4 col-form-label">
-                                <label for="psi_num">PSI-S No: </label>
+                                <label for="psi_num">@lang('employee.PSISNumber')</label>
                             </div>
                             <div class="col-md-8" style="text-align: center;">
                                 <input style=" width: 70%" type="text" class="form-control" id="psi_num" name="psi_num"
-                                       placeholder="Enter PSI-S Number">
+                                       placeholder="@lang('employee.EnterPSISnumber')">
                             </div>
                         </div>
 
                         <div id="message" class="row" style="margin-top: 5px; display: none">
                             <div class="col-md-4"></div>
                             <div class="col-md-8" style="text-align: left;">
-                                <span>Invalid PSI-S number.</span>
+                                <span>@lang('employee.InvalidPSISnumber')</span>
                             </div>
                         </div>
                         <div id="dynamicDiv" style="display: none">
                             <div class="form-group row"
                                  style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-4 col-form-label">
-                                    <label for="name"> Employee Name: </label>
+                                    <label for="name"> @lang('employee.EmployeeName') </label>
                                 </div>
                                 <div class="col-md-8" style="text-align: left;">
                                     <span id="name"></span>
@@ -49,7 +49,7 @@
                                                    name="{{ $weekday }}">
                                             @if($k==6)
                                                 <br>
-                                                <button type="submit" class="btn btn-primary">Add</button>
+                                                <button type="submit" class="btn btn-primary">@lang('employee.Add')</button>
                                             @endif
 
                                         </div>

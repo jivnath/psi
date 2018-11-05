@@ -11,17 +11,17 @@
                         </div>
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Section Shift</h3>
+                        <h3 class="box-title">@lang('employee.SectionShift')</h3>
                     </div>
                    
                     {!! Form::open(array('route' => 'generator.store','class'=>'form-horizontal')) !!}
                     <div class="box-body row">
                         <div class="col-md-4 form-group" style="text-align: right;">
-                            <label for="company"> Section </label>
+                            <label for="company"> @lang('employee.Section') </label>
                         </div>
                         <div class="col-md-7 form-group" style="">
                             <select class="form-control" name="company" id="companies" style="float: left" required>
-                                <option value="">--Select Section--</option>
+                                <option value="">@lang('employee.SelectSection')</option>
                                 @foreach ($companies as $company)
                                     <option name="{{$company->name}}"
                                             value="{{$company->id}}">{{ $company->name }}</option>
@@ -62,7 +62,7 @@
                         <div class="col-md-7" style="text-align: right">
                             {{ Form::submit('Generate', array('class' => 'btn btn-success btn-md'))}}
                             <a href="{{ route('generator') }}" class="btn btn-danger"
-                               style="margin-left: 5px">Cancel</a>
+                               style="margin-left: 5px">@lang('employee.Cancel')</a>
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -73,14 +73,14 @@
             <div class="col-md-5" id="shiftAdd" style="display: none">
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add Shift</h3>
+                        <h3 class="box-title">@lang('employee.AddShift')</h3>
                     </div>
                     <div class='form-horizontal'>
                         <div class="box-body">
                             <form id="addShiftForm"></form>
                             <div class="row" style="text-align: center; margin-top: 5px;">
                                 <div class="col-md-4">
-                                    <label for="company_name"> Company Name </label>
+                                    <label for="company_name"> @lang('employee.CompanyName') </label>
                                 </div>
                                 <div class="col-md-8 ">
                                     <span style="float:left;" id="company_name"></span>
@@ -90,7 +90,7 @@
                             <br/>
                             <div class="row" style="text-align: center">
                                 <div class="col-md-4">
-                                    Shift Time Table
+                                    @lang('employee.ShiftTimeTable')
                                 </div>
                                 <!--Dynamic Field Start -->
                                 <div class="col-md-8">
@@ -117,10 +117,10 @@
                                 <div class="col-md-7"></div>
                                 <div class="col-md-5" style="text-align: right">
                                     <button style="margin-top: 15px" id="submitshift" class="btn btn-primary">
-                                        Save
+                                        @lang('employee.Save')
                                     </button>
                                     <button id="clear" style="margin-top: 15px" type="reset" class="btn btn-danger">
-                                        Clear
+                                        @lang('employee.Clear')
                                     </button>
                                 </div>
                             </div>

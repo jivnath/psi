@@ -4,30 +4,30 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="box">
-                <div class="box-header"><h4>{{ "Employee Availability | Edit" }}</h4></div>
+                <div class="box-header"><h4>@lang('employee.EmployeeAvailabilityEdit')</h4></div>
 
                 <div class="box-body " style="padding: 20px;">
                     <form class="form-group">
                         <div class="form-group row" style="text-align: center; margin-top: 5px; margin-bottom: 25px;">
                             <div class="col-md-3" style="text-align: right">
-                                <label for="psi_num"><h5> PSI-S No: </h5></label>
+                                <label for="psi_num"><h5>@lang('employee.PSISNumber') </h5></label>
                             </div>
                             <div class="col-md-9" style="text-align: left;">
                                 <input type="text" id="psi_number" style="width:65%" class="form-control"
-                                       placeholder="PSI Nubmer">
+                                       placeholder="@lang('employee.PSISNumber')">
                             </div>
                         </div>
                         <div class="form-group row" style="text-align: center; margin-top: 5px; margin-bottom: 25px;">
                             <div class="col-md-3"></div>
                             <div class="col-md-9" style="text-align: left;">
-                                <div style="display: none" id="ifNo"><h5>No Employees Found</h5></div>
+                                <div style="display: none" id="ifNo"><h5>@lang('employee.NoEmployeeFound')</h5></div>
                             </div>
                         </div>
 
                         <div id="hiddenDiv" style="display: none">
                             <div id="nameDiv" class="form-group row" style="margin-bottom: 20px;">
                                 <div class="col-md-3" style="text-align: right">
-                                    <label for="employee"><h5> Employee Name: </h5></label>
+                                    <label for="employee"><h5>@lang('employee.EmployeeName') </h5></label>
                                 </div>
                                 <div class="col-md-9" style="text-align: left;">
                                     <h5 id="employee_name">{{$availability->employee->name}}</h5>
@@ -46,7 +46,7 @@
                                                    id="{{$weekday}}" name="{{ $weekday }}">
                                             @if($k==6)
                                                 <br>
-                                                <span id="update" class="btn btn-primary">Update</span>
+                                                <span id="update" class="btn btn-primary">@lang('employee.Update')</span>
                                             @endif
                                         </div>
 

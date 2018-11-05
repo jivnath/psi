@@ -14,7 +14,7 @@
             <div class="box-body">
                 <div class="form-group" id="box">
                     <label for="skill"><h5><b>@lang('employee.Skills')</b></h5></label>
-                    <input type="text" class="form-control input-shorter" placeholder="Enter Skill" id="skill" required>
+                    <input type="text" class="form-control input-shorter" placeholder="@lang('employee.EnterSkill')" id="skill" required>
                     <span id="add" style="margin-top: 10px" class="btn btn-success add">@lang('employee.Add')</span>
                 </div>
             </div>
@@ -161,7 +161,7 @@
             $("#add").attr('data-id', id);
             $("#skill").val(skill);
             $("#cancel").remove();
-            var button = '<span id="cancel" style="margin-top:10px" class="btn btn-danger">Cancel</span>';
+            var button = '<span id="cancel" style="margin-top:10px" class="btn btn-danger">@lang('employee.Cancel')</span>';
             $("#box").append(button);
         });
 

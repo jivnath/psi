@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="col-md-11">
                                     <select id="userDropdown" name="userUpdate" class="form-control" style="width:40%">
-                                        <option value="0">--Select User--</option>
+                                        <option value="0">@lang('employee.SelectUser')</option>
                                         @foreach($user as $users)
                                             <option value="{{$users->id}}">{{$users->name}}</option>
                                         @endforeach
@@ -67,7 +67,7 @@
                             <div class="row">
                                 <div class="col-md-10"></div>
                                 <div class="col-md-2" style="text-align: left">
-                                    <input id="submit" type="submit" class="btn btn-primary" value="Save">
+                                    <input id="submit" type="submit" class="btn btn-primary" value="@lang('employee.Save')">
                                 </div>
                             </div>
                         </div>

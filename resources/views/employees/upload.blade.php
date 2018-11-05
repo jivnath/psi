@@ -18,7 +18,7 @@
                 {{--@endif--}}
             {{--</div>--}}
             <div class="form-group">
-                <label for="excelFile">Select Excel File</label>
+                <label for="excelFile">@lang('employee.SelectExcelFile')</label>
                 <input type="file" name="excelFile" class="form-control {{ $errors->has('excelFile') ? ' is-invalid' : '' }}" id="excelFile">
                 @if ($errors->has('excelFile'))
                     <div class="invalid-feedback" role="alert">
@@ -28,7 +28,7 @@
             </div>
 
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">Upload</button>
+                <button class="btn btn-primary" type="submit">@lang('employee.Upload')</button>
             </div>
         </form>
     </div>  

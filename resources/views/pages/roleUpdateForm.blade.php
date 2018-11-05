@@ -10,7 +10,7 @@ margin-left: 17px;
 			{{--{{dd($permissionsOfRole)}}--}}
 			<div class="box box-info">
 				<div class="box-header with-border">
-					<h3 class="box-title">Update Role{{' : '.$role->name}}</h3>
+					<h3 class="box-title">@lang('employee.UpdateRole'){{' : '.$role->name}}</h3>
 				</div>
 				<div class='box-body'>
 					<form name="customize_form" class="form-horizontal" action="{{route('storePermissionToRole', $role->id)}}" method="POST">
@@ -51,7 +51,7 @@ margin-left: 17px;
 						<div class="row">
 							<div class="col-md-10"></div>
 							<div class="col-md-2" style="text-align: left">
-								<input type="submit" class="btn btn-primary" value="Save">
+								<input type="submit" class="btn btn-primary" value="@lang('employee.Save')">
 							</div>
 						</div>
 					</form>

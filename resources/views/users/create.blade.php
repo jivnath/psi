@@ -7,7 +7,7 @@
     <div class='col-md-8 offset-2'>
         <div class="box">
             <div class="box-header">
-                <h4> Add User</h4>
+                <h4>  @lang('employee.AddUser')</h4>
                 <hr>
             </div>
             <div class="box-body">
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class='form-group'>
-                    <label for="role">Role</label><br>
+                    <label for="role">@lang('employee.Role')</label><br>
                     <select name="role" class="form-control" style="width:80%">
                         @foreach($roles as $role)
                             <option value="{{$role->id}}"> {{$role->name}} </option>
@@ -45,10 +45,10 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="language">Preferred Language</label><br>
+                    <label for="language">@lang('employee.PreferredLanguage')</label><br>
                     <select name="language" class="form-control" style="width:80%">
-                        <option value="0" >English</option>
-                        <option value="1">Japanese</option>
+                        <option value="0" >@lang('employee.English')</option>
+                        <option value="1">@lang('employee.Japanese')</option>
                     </select>
                 </div>
 

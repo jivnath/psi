@@ -5,30 +5,30 @@
         <div class="col-md-10 offset-1">
             <div class="box" style="min-height: 200px">
                 <div class="box-header">
-                    <a href="{{route('availability.edit')}}" class="btn btn-link pull-right">Edit</a>
-                    <a href="{{route('availability.add')}}" class="btn btn-link pull-right">Add</a>
-                    <h4>{{ 'Employee Availability' }}</h4>
+                    <a href="{{route('availability.edit')}}" class="btn btn-link pull-right">@lang('employee.Edit')</a>
+                    <a href="{{route('availability.add')}}" class="btn btn-link pull-right">@lang('employee.Add')</a>
+                    <h4>@lang('employee.EmployeeAvailability')</h4>
                 </div>
 
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <span>PSI-S No:</span>
+                            <span>@lang('employee.PSISNumber')</span>
                         </div>
                         <div class="col-md-10" style="text-align: left">
-                            <input type="text" class="form-control" placeholder="Enter PSI-S number" id="psi_number" style="width:50%;">
+                            <input type="text" class="form-control" placeholder="@lang('employee.EnterPSISnumber')" id="psi_number" style="width:50%;">
                         </div>
                     </div>
                     <div id="errorId" class="row" style="margin-top:10px; margin-bottom: 10px;display: none">
                         <div class="col-md-2"></div>
                         <div class="col-md-10" style="text-align: left">
-                            <span id="message">No Employee Found</span>
+                            <span id="message">@lang('employee.NoEmployeeFound')</span>
                         </div>
                     </div>
                     <div id="allData" style="display: none">
                         <div class="row" style="margin-top:10px; margin-bottom: 10px">
                             <div class="col-md-2">
-                                <span>Employee Name:</span>
+                                <span>@lang('employee.EmployeeName')</span>
                             </div>
                             <div class="col-md-10" style="text-align: left">
                                 <span id="name"></span>
@@ -36,18 +36,18 @@
                         </div>
                         <table class="table table-striped">
                             <thead>
-                            <th>Weekdays</th>
-                            <th>Sunday</th>
-                            <th>Monday</th>
-                            <th>Tuesday</th>
-                            <th>Wednesday</th>
-                            <th>Thursday</th>
-                            <th>Friday</th>
-                            <th>Saturday</th>
+                            <th>@lang('employee.Weekdays')</th>
+                            <th>@lang('employee.Sunday')</th>
+                            <th>@lang('employee.Monday')</th>
+                            <th>@lang('employee.Tuesday')</th>
+                            <th>@lang('employee.Wednesday')</th>
+                            <th>@lang('employee.Thursday')</th>
+                            <th>@lang('employee.Friday')</th>
+                            <th>@lang('employee.Saturday')</th>
                             </thead>
                             <tbody>
                             <tr>
-                                <td><b>Available Time</b></td>
+                                <td><b>@lang('employee.AvailableTime')</b></td>
                                 <td id="sun"></td>
                                 <td id="mon"></td>
                                 <td id="tue"></td>
