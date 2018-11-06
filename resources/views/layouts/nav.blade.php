@@ -23,7 +23,6 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{route('employee.dashboard')}}"> <img alt="PSI-S"
                                                                                          src="/images/logo_small.png">
-
                     </a>
                 </div>
 
@@ -247,6 +246,9 @@
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
                                                                 class="fas fa-book"></i>
                                                         @lang('employee.AttendanceManagement')</a>
+                                                    <a class="dropdown-item" href="{{route('report_total_necessary')}}"><i
+                                                                class="fas fa-user-check"></i>
+                                                        @lang('employee.TotalNecessary')</a>
                                                 </div>
                                             </li>
                                             <!-- company login as -->
