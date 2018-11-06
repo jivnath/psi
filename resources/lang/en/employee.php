@@ -99,7 +99,7 @@ return [
     'CustomizeColumns' => 'Customize Columns',
     'CustomizeYourColumns' => 'Customize Your Columns',
     'PSISNumber' => 'PSI-S Number',
-    'PSISNumber' => 'PSI-S No:',
+    //'PSISNumber' => 'PSI-S No:',
     'ForWork' => 'For Work',
     'OptionalManagement' => 'Optional Management',
     'ResidenceConfirmation' => 'Residence Confirmation',
@@ -393,4 +393,5 @@ return [
     'Location'=>'Location',
     'Settings'=>'Settings',
     'PrimaryCompany'=>'Primary Company',
+    'Loading'=>'Loading...'
 ];

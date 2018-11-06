@@ -6,7 +6,7 @@
             <div class="col-md-6">
                     <div id="alert" style="display: none">
                             <div class="alert alert-success" role="alert">
-                                <strong>@lang('employee.Success'):</strong><span id="message"></span>
+                                <strong>@lang('employee.Success')</strong><span id="message"></span>
                             </div>
                         </div>
                 <div class="box box-info">
@@ -312,7 +312,7 @@
                     }
                     
                     $("#alert").show()
-                        $("#message").html('<span>{{trans('employee.NewShiftAdded')}}</span>'));
+                        $("#message").html('<span>{{trans('employee.NewShiftAdded')}}</span>');
                         $(function(){
                         $('html, body').animate({
                         scrollTop: $("#alert").offset().top

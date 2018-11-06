@@ -104,7 +104,7 @@ return [
     'CustomizeColumns'=>'列をカスタマイズする',
     'CustomizeYourColumns'=>'列をカスタマイズする',
     'PSISNumber'=>'PSI-S番号',
-    'PSISNumber'=>'PSI-S番号:',
+    //'PSISNumber'=>'PSI-S番号:',
     'ForWork'=>'作業用',
     'OptionalManagement'=>'オプションの管理',
     'ResidenceConfirmation'=>'居住確認',
@@ -364,6 +364,7 @@ return [
     'Location'=>'ロケーション',
     'Settings'=>'設定',
     'PrimaryCompany'=>'プライマリーカンパニー',
-    'company_id'=>'会社のID'
+    'company_id'=>'会社のID',
+     'Loading'=>'読み込んでいます...',
 ];
 
