@@ -4,7 +4,7 @@
 <section class="content">
     <div id="alert" style="display: none">
         <div class="alert alert-success" role="alert">
-            <strong>Success: </strong><span id="message"></span>
+            <strong>@lang('employee.Success'): </strong><span id="message"></span>
         </div>
     </div>
     <div class="row">
@@ -384,7 +384,7 @@
                     },
                     success: function (data) {
                         $("#alert").show()
-                        $("#message").text('Updated!');
+                        $("#message").html('<span>{{trans('employee.Updated!')}}</span>');
                         $(function () {
                             $('html, body').animate({
                                 scrollTop: $("#alert").offset().top
@@ -511,7 +511,7 @@
                         $('#sectionDropdown').append(newSection);
                         $("#inputalert").hide()
                         $("#alert").show()
-                        $("#message").text('Section Added!');
+                        $("#message").html('<span>{{trans('employee.SectionAdded!')}}</span>');
                         $(function () {
                             $('html, body').animate({
                                 scrollTop: $("#alert").offset().top
@@ -526,7 +526,7 @@
             else
               // alert('* Input all fields!');
               $("#inputalert").show()
-                        $("#imessage").text('Please input all fields');
+                        $("#imessage").html('<span>{{trans('employee.Pleaseinputallfields')}}</span>');
                            
                        
              
@@ -563,7 +563,7 @@
                         $('#subsectionDropdown').append(newSub);
                         $("#inputalert").hide();
                         $("#alert").show()
-                        $("#message").text('Subsection Added!');
+                        $("#message").html('<span>{{trans('employee.SubsectionAdded!')}}</span>');
                         $(function () {
                             $('html, body').animate({
                                 scrollTop: $("#alert").offset().top
@@ -578,7 +578,7 @@
             else{
                // alert('* Input sub-section name!')
                $("#inputalert").show()
-                        $("#imessage").text('Input sub-section name');
+                        $("#imessage").html('<span>{{trans('employee.Pleaseinputsubsectionname')}}</span>');
             }
         });
 </script>

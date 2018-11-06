@@ -6,7 +6,7 @@
         <div class="col-md-7">
  			<div class="box box-info">
                     <div class="box-header with-border">
-                      <h3 class="box-title">{{ "Please fill out the form below." }}</h3>
+                      <h3 class="box-title">@lang('employee.Pleasefillouttheformbelow').</h3>
                     </div>
                     <form name="companyForm" class='form-horizontal' action="{{ route('company.store') }}" method="POST" >
                         <div class="box-body">
@@ -15,11 +15,11 @@
 
                         <div class="row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-5">
-                                <label for="company_type"> Company Type </label>
+                                <label for="company_type"> @lang('employee.CompanyType') </label>
                             </div>
                             <div class="col-md-7">
                                 <select class="form-control" name="company_type" id="companytype">
-                                    <option value="0">Master Company</option>
+                                    <option value="0">@lang('employee.MasterCompany')</option>
                                     <option value="1" selected="selected">Sub Company</option>
                                 </select>
                             </div>
@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-md-7">
                                 <select name="company" class="form-control" id="master_company">
-                                    <option value="">--Select Master Company-- </option>
+                                    <option value="">--@lang('employee.SelectMasterCompany')-- </option>
                                     @foreach($companies as $company)
                                         <option value="{{$company->id}}">{{$company->name}}</option>
                                     @endforeach
@@ -132,12 +132,12 @@
             if(master_company_val==0)
             {
                 $("#dropdown").hide();
-                $("#companyorsub").text('Company Name');
+                $("#companyorsub").html('<span>{{trans('employee.CompanyName')}}</span>');
             }
             else
             {
                 $("#dropdown").show();
-                $("#companyorsub").text('Sub-Company Name');
+                $("#companyorsub").html('<span>{{trans('employee.SubCompanyName')}}</span>');
             }
             $("#master_company").prop('selectedIndex',0);
         });

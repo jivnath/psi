@@ -378,6 +378,13 @@ return [
     'Response'=>'Response',
     'none'=>'none',
     'All'=>'--All--',
+    'SelectCompany'=>'Select Company',
+    'Success'=>'Success',
+    'CompanyDetails'=>'Company Details',
+    'SelectMasterCompany'=>'Select Master Company',
+    'Pleasefillouttheformbelow'=>'Please fill out the form below',
+    'CompanyType'=>'Company Type',
+    'MasterCompany'=>'Master Company'
 
 
 ];

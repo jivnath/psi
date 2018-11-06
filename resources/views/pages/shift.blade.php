@@ -36,7 +36,7 @@
 							</tr>
 							@endforeach @else
 							<tr>
-								<td colspan="6">No Shifts are uploaded</td>
+								<td colspan="6">@lang('employee.NoShiftsareuploaded')</td>
 							</tr>
 							@endif
 						</tbody>

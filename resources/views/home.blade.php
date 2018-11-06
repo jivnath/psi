@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @lang('employee.Youareloggedin!')
                 </div>
             </div>
         </div>

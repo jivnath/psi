@@ -348,4 +348,11 @@ return [
     'Response'=>'応答',
     'none'=>'無し',
     'All'=>'- すべて -',
+    'SelectCompany'=>'会社を選択',
+    'Success'=>'成功',
+    'CompanyDetails'=>'会社の詳細',
+    'SelectMasterCompany'=>'マスター会社を選択',
+    'Pleasefillouttheformbelow'=>'下のフォームに必要事項を記入してください',
+    'CompanyType'=>'会社の種類',
+    'MasterCompany'=>'マスターカンパニー',
 ];
