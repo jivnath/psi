@@ -38,7 +38,7 @@
                                 <tr>
                                     @foreach($all_col as $column)
                                         <th class="sticky-top" style="word-wrap: break-word">{{
-                                    ucwords(str_replace('_',' ',ucwords($column->field_name,'_')))}}</th>
+                                    ucwords(str_replace('_',' ',ucwords(trans('employee.'.$column->field_name),'_')))}}</th>
                                     @endforeach
 
                                 </tr>
@@ -216,7 +216,7 @@
  id="customCheck{{$field->id}}" name='customized[]'
  value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
  <label class="custom-control-label"
- for="customCheck{{$field->id}}">{{$field->field_name}}</label>
+ for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
  </div>
  </div>
  @endforeach

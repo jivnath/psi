@@ -364,4 +364,6 @@ return [
     'Location'=>'ロケーション',
     'Settings'=>'設定',
     'PrimaryCompany'=>'プライマリーカンパニー',
+    'company_id'=>'会社のID'
 ];
+
