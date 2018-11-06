@@ -238,4 +238,37 @@ class PagesController extends Controller
         return $master->name;
     }
 
+    public function reportTotalNecessary()
+    {
+        $sections = Raw::getSecondLevelCompanies();
+//        $data = Raw::getTotalNecesaryReport();
+        return view('reports.total_necessary', compact('sections'));
+    }
+
+    public function getTotalNecessaryReportData(Request $request)
+    {
+        if($request->ajax())
+        {
+            $section = $request->get('section');
+            $date = $request->get('date');
+
+            $data = Raw::getTotalNecessaryReport($section, $date);
+            $output = '';
+            if(count($data)>0)
+            {
+                foreach($data as $datum)
+                {
+                    $html = '<tr><td>'.$datum->name.'</td><td>'.substr($datum->start_time, 0, -3).' - '.substr($datum->end_time,0, -3).'</td><td>'.$datum->total_require.'</td><td>'.$datum->total_used.'</td></tr>';
+                    $output .= $html;
+                }
+            }
+            else
+                $output = '<tr><td colspan="4">No data available.</td></tr>';
+        }
+        else
+            $output = '';
+
+        echo json_encode($output);
+    }
+
 }

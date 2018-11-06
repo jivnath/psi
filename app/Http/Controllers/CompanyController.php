@@ -15,11 +15,11 @@ class CompanyController extends Controller
     // {
     // $this->middleware(['auth', 'clearance']);
     // }
-    public function create()
-    {
-        $companies = DB::table('companies')->where('master_id', null)->get();
-        return view('companies.create')->withCompanies($companies);
-    }
+//    public function create()
+//    {
+//        $companies = DB::table('companies')->where('master_id', null)->get();
+//        return view('companies.create')->withCompanies($companies);
+//    }
 
     public static function sections($id)
     {
@@ -28,46 +28,46 @@ class CompanyController extends Controller
         return $s;
     }
 
-    public function store(Request $request)
-    {
-        $this->validate($request, $this->rules());
+//    public function store(Request $request)
+//    {
+//        $this->validate($request, $this->rules());
+//
+//        $company = new Company();
+//
+//        $company->name = $request->company_name;
+//        $company->address = $request->address;
+//        $company->master_id = $request->company;
+//        $company->contact_num = $request->contact_num;
+//        $company->save();
+//        Session::flash('success', 'Companies successfully added!');
+//        return redirect()->route('company.create');
+//    }
 
-        $company = new Company();
+//    public function edit($id)
+//    {
+//        $companies = Raw::companies($id);
+//        if (count($companies) === 1)
+//            $subCompanies = '';
+//        else
+//            $subCompanies = $companies['sub_com'];
+//        $master = Raw::master();
+//        return view('companies.edit')->withCompanies($companies)
+//            ->withSubCompanies($subCompanies)
+//            ->withMaster($master); /* , compact($companies, $subCompanies)); */
+//    }
 
-        $company->name = $request->company_name;
-        $company->address = $request->address;
-        $company->master_id = $request->company;
-        $company->contact_num = $request->contact_num;
-        $company->save();
-        Session::flash('success', 'Companies successfully added!');
-        return redirect()->route('company.create');
-    }
-
-    public function edit($id)
-    {
-        $companies = Raw::companies($id);
-        if (count($companies) === 1)
-            $subCompanies = '';
-        else
-            $subCompanies = $companies['sub_com'];
-        $master = Raw::master();
-        return view('companies.edit')->withCompanies($companies)
-            ->withSubCompanies($subCompanies)
-            ->withMaster($master); /* , compact($companies, $subCompanies)); */
-    }
-
-    public function update(Request $request, $id)
-    {
-        $company = Company::find($id);
-
-        $company->name = $request->input('company_name');
-        $company->address = $request->input('address');
-        $company->contact_num = $request->input('contact');
-
-        $company->save();
-        Session::flash('success', 'Companies successfully updated!');
-        return redirect()->route('company.edit', $id);
-    }
+//    public function update(Request $request, $id)
+//    {
+//        $company = Company::find($id);
+//
+//        $company->name = $request->input('company_name');
+//        $company->address = $request->input('address');
+//        $company->contact_num = $request->input('contact');
+//
+//        $company->save();
+//        Session::flash('success', 'Companies successfully updated!');
+//        return redirect()->route('company.edit', $id);
+//    }
 
     // function for displaying master company
     public static function master($id)
@@ -97,27 +97,27 @@ class CompanyController extends Controller
         echo json_encode($subComp);
     }
 
-    public function subCompanyUpdate(Request $request)
-    {
-        if ($request->ajax()) {
-            $id = $request->get('id');
-            $name = $request->get('name');
-            $contact = $request->get('contact');
-            $address = $request->get('address');
-            $master = $request->get('master');
-
-            $sub = Company::find($id);
-
-            $sub->name = $name;
-            $sub->contact_num = $contact;
-            $sub->address = $address;
-            $sub->master_id = $master;
-
-            $sub->save();
-            Session::flash('success', 'Sub companies successfully added!');
-            return redirect()->route('company.create');
-        }
-    }
+//    public function subCompanyUpdate(Request $request)
+//    {
+//        if ($request->ajax()) {
+//            $id = $request->get('id');
+//            $name = $request->get('name');
+//            $contact = $request->get('contact');
+//            $address = $request->get('address');
+//            $master = $request->get('master');
+//
+//            $sub = Company::find($id);
+//
+//            $sub->name = $name;
+//            $sub->contact_num = $contact;
+//            $sub->address = $address;
+//            $sub->master_id = $master;
+//
+//            $sub->save();
+//            Session::flash('success', 'Sub companies successfully added!');
+//            return redirect()->route('company.create');
+//        }
+//    }
 
     public function manageCompanies(Request $request)
     {
@@ -160,7 +160,7 @@ class CompanyController extends Controller
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
 
-        Session::flash('success', 'Companies successfully added!');
+        Session::flash('success', 'company added');
         return redirect()->route('manageCompanies');
     }
 

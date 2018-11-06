@@ -13,23 +13,19 @@
             $employee_name = \Session::get('employee_cell_no');
 		    $employee_psi_number = \Session::get('user_psi_number');
         @endphp
-        {{--{{dd(session()->all())}}--}}
+
 
         <nav class="navbar navbar-expand-md navbar-light"
              style="background: #fff">
 
 
-            <div class="container" style="padding: 5px 20px 20px">
+            <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{route('employee.dashboard')}}"> <img alt="PSI-S"
                                                                                          src="/images/logo_small.png">
-
                     </a>
                 </div>
-                <div class="hrms">
-                    <img alt="PSI-S" src="/images/hrms1.png">
 
-                </div>
             </div>
             <div style="background: #21469b">
                 <div class="container">
@@ -42,28 +38,16 @@
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item dropdown dropdown-menu-left"><a id="master_data"
-                                                                                class="nav-link dropdown-toggle"
-                                                                                id="navbarDropdown"
-                                                                                role="button" data-toggle="dropdown"
-                                                                                aria-haspopup="true"
-                                                                                aria-expanded="false"> <i
-                                            class="fas fa-home"></i>
-                                    @lang('nav.Setting') <span class="caret"></span>
-                                </a>
 
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item"
-                                           href="{{ url('/employee/profile') }}"><i class="fa fa-address-book"></i>@lang('nav.Profile')</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                           href="{{ route('employee.logout') }}"><i
-                                                    class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                                <div class="dropdown-menu" aria-labelledby="master_data">
+                                 <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i class="fa fa-address-book"></i>@lang('nav.Profile')</a>
+                                  <a class="dropdown-item" href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a>
+                                </div>
+                              </li>
 
-                                </ul>
-                            </li>
-
-                            <li class="nav-item dropdown dropdown-menu-left">{!!
+                            <li class="nav-item dropdown">{!!
 								Form::open(['method' => 'POST', 'route' => 'changelocale',
 								'class' => 'form-inline navbar-select']) !!}
                                 <div
@@ -101,7 +85,7 @@
                          style="background: #21469b">
                         @endauth
 
-                        <div class="container" style="padding: 5px 20px 20px">
+                        <div class="container">
                             <div class="navbar-header">
                                 <a class="navbar-brand" href="#"> @auth <img alt="PSI-S"
                                                                              id="logo_small"
@@ -109,9 +93,12 @@
                                             alt="PSI-S" src="/images/logo.png"> @endauth
                                 </a>
                             </div>
-                            <div class="hrms">
-                                @auth <img alt="PSI-S" src="/images/hrms1.png"> @else <img
-                                        alt="PSI-S" src="/images/hrms.png"> @endauth
+                          <div class="hrms">
+                                @auth
+                                	<img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms1.png">
+                                @else
+                                	<img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms.png">
+                                @endauth
                             </div>
                         </div>
                         <div style="background: #21469b">
@@ -259,6 +246,9 @@
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
                                                                 class="fas fa-book"></i>
                                                         @lang('employee.AttendanceManagement')</a>
+                                                    <a class="dropdown-item" href="{{route('report_total_necessary')}}"><i
+                                                                class="fas fa-user-check"></i>
+                                                        @lang('employee.TotalNecessary')</a>
                                                 </div>
                                             </li>
                                             <!-- company login as -->
@@ -331,7 +321,8 @@
 
                                                     @endif
                                                     @empty($total)
-                                                        <a class="footer_message dropdown-item text-center">@lang('nav.MessageNotAvailable')</a>
+                                                        <a class="footer_message dropdown-item text-center"><a class="footer_message dropdown-item text-center">@lang('nav.MessageNotAvailable')</a></a>
+
                                                     @endempty
 
                                                 </div>
@@ -350,7 +341,7 @@
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting">
                                                     <a class="dropdown-item" href="{{route('viberAlert')}}"><i
-                                                                class="fa fa-bell" aria-hidden="true"></i> @lang('nav.AlertManagement') </a>
+                                                                class="fa fa-bell" aria-hidden="true"></i> @lang('nav.AlertManagement')</a>
                                                 </div>
                                             </li>
 
@@ -366,9 +357,9 @@
                                                 <div class="dropdown-menu dropdown-menu-right"
                                                      aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item" href="{{route('profile', $user_id)}}"><i
-                                                                class="fa fa-address-book"></i> @lang('nav.Profile')</a>
+                                                                class="fa fa-address-book"></i> Profile</a>
                                                     <a class="dropdown-item" href="#" id="logout"><i
-                                                                class="fas fa-sign-out-alt"></i> @lang('nav.Logout')</a>
+                                                                class="fas fa-sign-out-alt"></i> Logout</a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown dropdown-menu-left">{!!
