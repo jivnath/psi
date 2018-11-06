@@ -40,7 +40,7 @@
                         <ul class="navbar-nav mr-auto">
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                                <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('employee.Settings')</a>
                                 <div class="dropdown-menu" aria-labelledby="master_data">
                                  <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i class="fa fa-address-book"></i>@lang('nav.Profile')</a>
                                   <a class="dropdown-item" href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a>
