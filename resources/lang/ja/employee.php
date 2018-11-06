@@ -355,4 +355,13 @@ return [
     'Pleasefillouttheformbelow'=>'下のフォームに必要事項を記入してください',
     'CompanyType'=>'会社の種類',
     'MasterCompany'=>'マスターカンパニー',
+    'LoggedAs'=>'ログに記録される',
+    'Noemployeesareuploaded'=>'従業員はアップロードされていません',
+    'Nosheetsareuploaded'=>'シートがアップロードされていない',
+    'Permissions'=>'許可',
+    'AddPermission'=>'権限を追加する',
+    'Education'=>'教育',
+    'Location'=>'ロケーション',
+    'Settings'=>'設定',
+    'PrimaryCompany'=>'プライマリーカンパニー',
 ];

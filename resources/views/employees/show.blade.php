@@ -179,7 +179,7 @@
  @endforeach
  @else
  <tr>
- <td colspan="6">No sheets are uploaded</td>
+ <td colspan="6">@lang('employee.Nosheetsareuploaded')</td>
  </tr>
  @endif
  </tbody>
@@ -195,7 +195,7 @@
  <div class="modal-dialog modal-lg" role="document">
  <div class="modal-content">
  <div class="modal-header">
- <h5 class="modal-title" id="exampleModalLongTitle">Customize Your Columns</h5>
+ <h5 class="modal-title" id="exampleModalLongTitle">@lang('employee.CustomizeYourColumns')</h5>
  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
  <span aria-hidden="true">&times;</span>
  </button>
@@ -224,9 +224,9 @@
  @endforeach
  <div class="modal-footer">
  <button type="button" class="btn btn-secondary"
- data-dismiss="modal">Close
+ data-dismiss="modal">@lang('employee.Close')
  </button>
- <button type="submit" class="btn btn-primary">Save changes</button>
+ <button type="submit" class="btn btn-primary">@lang('employee.SaveChanges')</button>
  </div>
  </form>
  </div>
