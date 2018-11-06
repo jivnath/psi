@@ -343,12 +343,11 @@ return [
     'Pleaseinputsubsectionname'=>'Please input sub-section name',
     'PSInumberinvalid!!!'=>'PSI number invalid!!!',
     'NoAvailabilityavailable'=>'No Availability available',
-    'InvalidPSISnumber'=>'Invalid PSI-S number.',
+    'AInvalidPSISnumber'=>'Invalid PSI-S number.',
     'Noavailabilitydatafound.'=>'No availability data found.',
     'CompanyName'=>'Company Name',
     'SubCompanyName'=>'Sub-Company Name',
     'Saved'=>'Saved',
-    'Updated!'=>'Updated!',
     'SectionAdded!'=>'Section Added!',
     'Pleaseinputallfields'=>'Please input all fields',
     'SubsectionAdded!'=>'Subsection Added!',
@@ -379,6 +378,12 @@ return [
     'none'=>'none',
     'All'=>'--All--',
     'LoggedAs'=>'Logged As',
-
-
+    'Noemployeesareuploaded'=>'No employees are uploaded',
+    'Nosheetsareuploaded'=>'No sheets are uploaded',
+    'Permissions'=>'Permissions',
+    'AddPermission'=>'Add Permission',
+    'Education'=>'Education',
+    'Location'=>'Location',
+    'Settings'=>'Settings',
+    'PrimaryCompany'=>'Primary Company',
 ];

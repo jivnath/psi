@@ -78,12 +78,12 @@
                     success: function (data) {
                         if (data == 0) {
                             $('#errorId').show();
-                            $('#message').text('Invalid PSI number.');
+                            $('#message').html('<span>{{trans('employee.InvalidPSISnumber')}}</span>');
                             $('#allData').hide();
                         }
                         else if (data == 1) {
                             $('#errorId').show();
-                            $('#message').text('No availability data found.');
+                            $('#message').html('<span>{{trans('employee.Noavailabilitydatafound.')}}</span>');
                             $('#allData').hide();
                         }
                         else {

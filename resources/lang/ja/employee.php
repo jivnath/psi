@@ -349,4 +349,13 @@ return [
     'none'=>'無し',
     'All'=>'- すべて -',
     'LoggedAs'=>'ログに記録される',
+    'Noemployeesareuploaded'=>'従業員はアップロードされていません',
+    'Nosheetsareuploaded'=>'シートがアップロードされていない',
+    'Permissions'=>'許可',
+    'AddPermission'=>'権限を追加する',
+    'Education'=>'教育',
+    'Location'=>'ロケーション',
+    'Settings'=>'設定',
+    'PrimaryCompany'=>'プライマリーカンパニー',
+
 ];

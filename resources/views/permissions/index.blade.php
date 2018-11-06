@@ -5,8 +5,8 @@
     <div class="col-md-10 offset-1">
         <div class="box">
             <div class="box-header">
-                <h4>Permissions
-                    <a href="{{ route('roles.index') }}" class="btn btn-link pull-right">Roles</a></h4>
+                <h4>@lang('employee.Permissions')
+                    <a href="{{ route('roles.index') }}" class="btn btn-link pull-right">@lang('employee.Roles')</a></h4>
                 <hr>
             </div>
             <div class="box-body">
@@ -15,8 +15,8 @@
 
                         <thead>
                         <tr>
-                            <th>Permissions</th>
-                            <th>Operation</th>
+                            <th>@lang('employee.Permissions')</th>
+                            <th>@lang('employee.Operation')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -25,7 +25,7 @@
                                 <td>{{ $permission->name }}</td>
                                 <td>
                                     <a href="{{ URL::to('permissions/'.$permission->id.'/edit') }}"
-                                       class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
+                                       class="btn btn-info pull-left" style="margin-right: 3px;">@lang('employee.Edit')</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -33,7 +33,7 @@
                     </table>
                 </div>
 
-                <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">Add Permission</a>
+                <a href="{{ URL::to('permissions/create') }}" class="btn btn-success">@lang('employeeAddPermission')</a>
 
             </div>
         </div>
