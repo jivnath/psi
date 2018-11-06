@@ -400,7 +400,7 @@ WHERE
                 companytt_id,
                 DATE,
                 time,
-                ( help ) total_require,
+                ( normal ) total_require,
                 ctt.company_id,
                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used,
                 c.name,
@@ -420,6 +420,42 @@ WHERE
                 cts.DATE,time
                 asc";
         return DB::select($sql);
+    }
+
+    public static function getTotalNecessaryReport($id, $date)
+    {
+        $sql = "SELECT
+                cts.id,
+                companytt_id,
+                DATE,
+                time,
+                smd.start_time,
+                smd.end_time,
+                ( normal ) total_require,
+                ctt.company_id,
+                (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used,
+                c.name,
+                (CASE
+                when c.master_id is NULL THEN c.id
+                when c.master_id is not Null THEN (select cc.id from companies cc where cc.id=c.master_id)
+                ELSE
+                  c.id
+                end) master_main_company
+            FROM
+            	shift_master_datas smd,
+                company_time_schedules cts
+                INNER JOIN  company_time_tables ctt on cts.companytt_id = ctt.id
+                INNER JOIN companies c ON c.id=ctt.company_id
+            WHERE
+            normal is not NULL AND
+            c.master_id = $id AND
+            smd.start_time = cts.time AND 
+            DATE = '$date'
+            ORDER BY
+            	company_id ASC";
+        $data = DB::select($sql);
+
+        return $data;
     }
 
     public static function getDessertActivity()
