@@ -11,24 +11,24 @@
             <div class="box-body">
                 <div class="row" id="filterDiv">
                     <div class="col-md-1 sections" style="text-align: right">
-                        <label for="section">Section</label>
+                        <label for="section">@lang('employee.Section')</label>
                     </div>
                     <div class="col-md-2 sections">
                         <select id="section" class="form-control">
-                            <option value="0">None</option>
+                            <option value="0">@lang('employee.none')</option>
                             @foreach($sections as $section)
                                 <option value="{{$section->id}}">{{$section->name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-1 date" style="display: none; text-align: right">
-                        <label for="date">Date</label>
+                        <label for="date">@lang('employee.Date')</label>
                     </div>
                     <div class="col-md-2 date" style="display: none">
                         {{ Form::date('date', \Carbon\Carbon::now(), array('class' => 'form-control','id'=>'date'))}}
                     </div>
                     <div class="col-md-1 submit" style="display: none">
-                        <span class="btn btn-primary" id="submit">Submit</span>
+                        <span class="btn btn-primary" id="submit">@lang('employee.Submit')</span>
                     </div>
                 </div>
                 <hr>

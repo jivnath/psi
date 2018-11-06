@@ -225,7 +225,7 @@
                             dataType: 'json',
                             success: function (data) {
                                 // alert(data);
-                                $('#remaining').html('<b id="remainingHours" name="' + data["hours"] + '">Remaining Hours: ' + data["hours"] + '</b>');
+                                $('#remaining').html('<b id="remainingHours" name="' + data["hours"] + '">@lang('employee.RemainingHours'): ' + data["hours"] + '</b>');
                                 $('#remaining').show();
                                 $('#myModalLabel').html(data['name'] + '<h6>(' + moment(date).format('YYYY-MM-DD') + ')</h6>');
 
@@ -234,7 +234,7 @@
 
                         $('#myModalLabel').text(moment(date).format('YYYY-MM-DD'));
                         $('#shifts').html('');
-                        var select = '<option value="0">--Choose Shift--</option>';
+                        var select = '<option value="0">--@lang('employee.ChooseShift')--</option>';
                         $('#shifts').append(select);
                         $('#calendar').fullCalendar('clientEvents', function (event) {
 

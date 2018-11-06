@@ -312,7 +312,7 @@
                     }
                     
                     $("#alert").show()
-                        $("#message").html('<span>{{trans('employee.NewShiftAdded')}}</span>'));
+                        $("#message").html('<span>{{trans('employee.NewShiftAdded')}}</span>');
                         $(function(){
                         $('html, body').animate({
                         scrollTop: $("#alert").offset().top

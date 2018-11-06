@@ -206,8 +206,8 @@ return [
     'AddNewShift'=>'新しいシフトを追加',
     'SelfSheet'=>'棚板',
     'SelectSubsection'=>'サブセクションを選択',
-        'Date'=>'日付',
-        'Number'=>'数',
+    'Date'=>'日付',
+    'Number'=>'数',
     'StaffNumber'=>'スタッフ番号',
     'Country'=>'国',
     'TelephoneNumber'=>'電話番号',
@@ -364,6 +364,7 @@ return [
     'Location'=>'ロケーション',
     'Settings'=>'設定',
     'PrimaryCompany'=>'プライマリーカンパニー',
-    'company_id'=>'会社のID'
+    'company_id'=>'会社のID',
+    'ChooseShift'=>'シフトを選択',
 ];
 

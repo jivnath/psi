@@ -393,4 +393,5 @@ return [
     'Location'=>'Location',
     'Settings'=>'Settings',
     'PrimaryCompany'=>'Primary Company',
+    'ChooseShift'=>'Choose Shift',
 ];
