@@ -88,6 +88,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/attendance_management', ['as' => 'attendance.mgmt', 'uses'=>'EmployeeController@attendanceManagement']);
             Route::get('/getShiftsForSubsection', ['as' => 'getShiftsForSubsection', 'uses'=>'EmployeeController@getShiftsForSubsection']);
             Route::get('/getAttendanceMgmtData', ['as' => 'getAttendanceMgmtData', 'uses'=>'EmployeeController@getAttendanceMgmtData']);
+            Route::get('/total_necessary', ['as'=>'report_total_necessary', 'uses'=>'PagesController@reportTotalNecessary']);
         });
         Route::prefix('column')->group(function(){
                 Route::post('/customize', ['as' => 'customize.field', 'uses' => 'CustomerTableView@saveCustomizedField']);
@@ -97,13 +98,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::prefix('company')->group(function () {
             Route::get('/manage', ['as' => 'manageCompanies', 'uses' => 'CompanyController@manageCompanies']);
             Route::post('/manage', ['as' => 'company.saveCompany', 'uses' => 'CompanyController@saveCompany']);
-            Route::get('/create', ['as' => 'company.create', 'uses' => 'CompanyController@create']);
+//            Route::get('/create', ['as' => 'company.create', 'uses' => 'CompanyController@create']);
             Route::get('/view', ['as' => 'company.details', 'uses' => 'CompanyController@viewDetail']);
-            Route::post('/create', ['as' => 'company.store', 'uses' => 'CompanyController@store']);
-            Route::get('edit/{id}', ['as' => 'company.edit', 'uses' => 'CompanyController@edit']);
-            Route::put('{id}', ['as' => 'company.update', 'uses' => 'CompanyController@update']);
-            Route::get('/sub', ['as' => 'company.sub', 'uses' => 'CompanyController@sub']);
-            Route::post('/subCompanyUpdate', ['as' => 'subcompany', 'uses' => 'CompanyController@subCompanyUpdate']);
+//            Route::post('/create', ['as' => 'company.store', 'uses' => 'CompanyController@store']);
+//            Route::get('edit/{id}', ['as' => 'company.edit', 'uses' => 'CompanyController@edit']);
+//            Route::put('{id}', ['as' => 'company.update', 'uses' => 'CompanyController@update']);
+//            Route::get('/sub', ['as' => 'company.sub', 'uses' => 'CompanyController@sub']);
+//            Route::post('/subCompanyUpdate', ['as' => 'subcompany', 'uses' => 'CompanyController@subCompanyUpdate']);
             Route::get('/getSection', ['as' => 'getSection', 'uses' => 'CompanyController@getSection']);
             Route::get('/subSection', ['as' => 'subSection', 'uses' => 'CompanyController@subSection']);
             Route::post('/update', ['as' => 'updateCompanies', 'uses' => 'CompanyController@updateCompanies']);

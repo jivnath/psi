@@ -238,4 +238,9 @@ class PagesController extends Controller
         return $master->name;
     }
 
+    public function reportTotalNecessary()
+    {
+        return view('reports.total_necessary');
+    }
+
 }
