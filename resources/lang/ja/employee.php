@@ -348,4 +348,5 @@ return [
     'Response'=>'応答',
     'none'=>'無し',
     'All'=>'- すべて -',
+    'company_id'=>'会社のID'
 ];
