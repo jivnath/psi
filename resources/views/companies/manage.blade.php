@@ -241,9 +241,9 @@
         });
 
         $('#companyDropdown').change(function () {
-            var html = '<option value="0">--Select Section--</option>';
+            var html = '<option value="0">--@lang('employee.SelectSection')--</option>';
             $('#sectionDropdown').html(html);
-            var subHtml = '<option value="0">--Select Sub-Section--</option>';
+            var subHtml = '<option value="0">--@lang('employee.SelectSubsection')--</option>';
             $('#subsectionDropdown').html(subHtml);
             $('#existing_company_name').val('');
             $('#existing_company_contact').val('');
@@ -286,7 +286,7 @@
 
         $('#sectionDropdown').change(function () {
             var selectedSection = $('#sectionDropdown').val();
-            var option = '<option value="0">--Select Sub-Section--</option>';
+            var option = '<option value="0">--@lang('employee.SelectSubsection')--</option>';
             $('#subsectionDropdown').show();
             $('#subsectionDropdown').html(option);
             $('#existing_section_name').val('');
