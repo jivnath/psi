@@ -8,7 +8,7 @@
             <div class="col-md-7">
                 <div id="alert" style="display: none">
                     <div class="alert alert-success" role="alert">
-                        <strong>Success:</strong><span id="message"></span>
+                        <strong>@lang('employee.Success'):</strong><span id="message"></span>
                     </div>
                 </div>
                 <div class="box">
@@ -163,7 +163,7 @@
                             $(".print-success-msg").find("ul").append('<li>Record Inserted Successfully.</li>');
 
                             $("#alert").show()
-                            $("#message").text('Saved');
+                            $("#message").html('<span>{{trans('employee.Saved')}}</span>');
                             $(function () {
                                 $('html, body').animate({
                                     scrollTop: $("#alert").offset().top

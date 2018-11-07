@@ -31,11 +31,11 @@
             <!-- About Me Box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">About Me</h3>
+                    <h3 class="box-title">@lang('employee.AboutMe')</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                    <strong><i class="fa fa-book margin-r-5"></i> @lang('employee.Education')</strong>
 
                     <p class="text-muted">
                         B.S. in Computer Science from the University of Tennessee at Knoxville
@@ -43,7 +43,7 @@
 
                     <hr>
 
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> @lang('employee.Location')</strong>
 
                     <p class="text-muted">Malibu, California</p>
                 </div>
@@ -55,8 +55,8 @@
         <div class="col-md-9">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                    <li class="active"><a href="#activity" data-toggle="tab">@lang('employee.Activity')</a></li>
+                    <li><a href="#settings" data-toggle="tab">@lang('employee.Settings')</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="active tab-pane" id="activity">
@@ -69,7 +69,7 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                             <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                <label for="inputEmail" class="col-sm-2 control-label">@lang('employee.Email')</label>
 
                                 <div class="col-sm-10">
                                     <input type="email" name="email" class="form-control" id="inputEmail" value="{{$userEmail}}">
@@ -77,7 +77,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="primaryCompany" class="col-sm-2 control-label">Primary Company</label>
+                                <label for="primaryCompany" class="col-sm-2 control-label">@lang('employee.PrimaryCompany')</label>
 
                                 <div class="col-sm-10">
                                     <select name="primary_company" class="form-control">
@@ -88,19 +88,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="language" class="col-sm-2 control-label">Preferred Language</label>
+                                <label for="language" class="col-sm-2 control-label">@lang('employee.PreferredLanguage')</label>
 
                                 <div class="col-sm-10">
                                     <select name="language" class="form-control">
-                                        <option value="0"<?=($language==0)?'selected="selected"':''?>>English</option>
-                                        <option value="1"<?=($language==1)?'selected="selected"':''?>>Japanese</option>
+                                        <option value="0"<?=($language==0)?'selected="selected"':''?>>@lang('employee.English')</option>
+                                        <option value="1"<?=($language==1)?'selected="selected"':''?>>@lang('employee.Japanese')</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                    <button type="submit" class="btn btn-danger">@lang('employee.Submit')</button>
                                 </div>
                             </div>
                         </form>

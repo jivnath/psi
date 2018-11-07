@@ -67,7 +67,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" >
                             <li class="dropdown"><a class="dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Information</a>
                                 <ul class="dropdown-menu"  aria-labelledby="navbarDropdown" >
-                                    <li><a class="dropdown-item" href="">Login</a></li>
+                                    <li><a class="dropdown-item" href="">@lang('employee.Login')</a></li>
                                 </ul>
                             </li>
                         </ul>

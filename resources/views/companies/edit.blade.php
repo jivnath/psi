@@ -196,7 +196,7 @@
                     async: true,
                     success: function(data){
                         alert('saved');
-                        $("#subsubmit").text('Saved');
+                        $("#subsubmit")..html('<span>{{trans('employee.Saved')}}</span>');
                     }
                 });
         });

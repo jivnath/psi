@@ -48,7 +48,7 @@
                url:"{{ route('dessert') }}",
                data:{'selected':selected,'selected_date':selected_date},
                beforeSend:function(){
-            	   $('#dessert_response').html('Loading,Please wait....');
+            	   $('#dessert_response').html('<span>{{trans('employee.LoadingPleaseWait')}}</span>');
                    },
                success:function(data,status) {
             	   $('#dessert_response').html('');
@@ -67,7 +67,7 @@
                url:"{{ route('sheet.time_table') }}",
                data:{'selected':selected},
                beforeSend:function(){
-            	   $('#dessert_response').html('Loading,Please wait....');
+            	   $('#dessert_response').html('<span>{{trans('employee.LoadingPleaseWait')}}</span>');
                    },
                success:function(data,status) {
             	   $('#dessert_response').html('');

@@ -4,7 +4,7 @@
     <div class="col-md-6">
         <div id="alert" style="display: none">
             <div class="alert alert-success" role="alert">
-                <strong>Success:</strong><span id="message"></span>
+                <strong>@lang('employee.Success'):</strong><span id="message"></span>
             </div>
         </div>
         <div class="box">
@@ -53,7 +53,7 @@
                 <p style="display:none;" id="noSkills">@lang('employee.NoSkillsAvailable')</p>
                 @else
                 <div id="skillDiv" style="margin-top:25px;display: none">
-                    <h5><b>All Skills</b></h5>
+                    <h5><b>@lang('employee.AllSkills')</b></h5>
                     <div id="allSkills">
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                         $("#skill").val('');
 
                          $("#alert").show()
-                        $("#message").text('Skill Added!');
+                        $("#message").html('<span>{{trans('employee.SkillAdded')}}</span>');
                         $(function(){
                         $('html, body').animate({
                         scrollTop: $("#alert").offset().top
@@ -129,7 +129,7 @@
                     $("#skill").val('');
                     
                     $("#alert").show()
-                        $("#message").text('Skill Deleted Successfully');
+                        $("#message").html('<span>{{trans('employee.SkillDeletedSuccessfully')}}</span>');
                         $(function(){
                         $('html, body').animate({
                         scrollTop: $("#alert").offset().top
@@ -189,7 +189,7 @@
                     $('#skill').val('');
                     alert(skill);
                     $("#alert").show()
-                    $("#message").text('Renamed Successfully');
+                    $("#message").html('<span>{{trans('employee.RenamedSuccessfully')}}</span>');
                     $(function(){
                         $('html, body').animate({
                      scrollTop: $("#alert").offset().top
