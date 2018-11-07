@@ -322,6 +322,7 @@
 
         $('#submit').click(function () {
             var selectedShift = $('#shifts').val();
+            // alert('hey');
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
