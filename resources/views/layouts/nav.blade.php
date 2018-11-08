@@ -23,6 +23,7 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{route('employee.dashboard')}}"> <img alt="PSI-S"
                                                                                          src="/images/logo_small.png">
+
                     </a>
                 </div>
 
@@ -42,7 +43,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('employee.Settings')</a>
                                 <div class="dropdown-menu" aria-labelledby="master_data">
-                                 <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i class="fa fa-address-book"></i>@lang('nav.Profile')</a>
+                                 <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i class="fa fa-address-book"></i>@lang('employee.Profile')</a>
                                   <a class="dropdown-item" href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a>
                                 </div>
                               </li>
@@ -246,9 +247,6 @@
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
                                                                 class="fas fa-book"></i>
                                                         @lang('employee.AttendanceManagement')</a>
-                                                    <a class="dropdown-item" href="{{route('report_total_necessary')}}"><i
-                                                                class="fas fa-user-check"></i>
-                                                        @lang('employee.TotalNecessary')</a>
                                                 </div>
                                             </li>
                                             <!-- company login as -->
@@ -317,12 +315,12 @@
 
                                                         </div>
                                                         <a class="footer_message dropdown-item text-center"
-                                                           href="{{route('inbox.messages')}}">@lang('nav.SeeAllRequests')</a>
+                                                           href="{{route('inbox.messages')}}">See All Requests</a>
 
                                                     @endif
                                                     @empty($total)
-                                                        <a class="footer_message dropdown-item text-center"><a class="footer_message dropdown-item text-center">@lang('nav.MessageNotAvailable')</a></a>
-
+                                                        <a class="footer_message dropdown-item text-center">Messages not
+                                                            available</a>
                                                     @endempty
 
                                                 </div>
@@ -341,7 +339,8 @@
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting">
                                                     <a class="dropdown-item" href="{{route('viberAlert')}}"><i
-                                                                class="fa fa-bell" aria-hidden="true"></i> @lang('nav.AlertManagement')</a>
+                                                                class="fa fa-bell" aria-hidden="true"></i> Alert
+                                                        Management </a>
                                                 </div>
                                             </li>
 
@@ -357,9 +356,9 @@
                                                 <div class="dropdown-menu dropdown-menu-right"
                                                      aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item" href="{{route('profile', $user_id)}}"><i
-                                                                class="fa fa-address-book"></i> @lang('employee.Profile')</a>
+                                                                class="fa fa-address-book"></i> Profile</a>
                                                     <a class="dropdown-item" href="#" id="logout"><i
-                                                                class="fas fa-sign-out-alt"></i>  @lang('employee.Logout')</a>
+                                                                class="fas fa-sign-out-alt"></i> @lang('employee.Logout')</a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown dropdown-menu-left">{!!
@@ -429,7 +428,7 @@
                     $("#logout").click(function () {
                         swal({
                             title: "Logout?",
-                            text: "Are you sure to logout?",
+                            text: "{{trans('employee.logout_msg')}}",
                             type: "warning",
                             buttons: true,
                             showCancelButton: true,
