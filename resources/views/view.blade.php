@@ -18,7 +18,7 @@
 
                 </div>
                 <div class="box-body">
-                    <b style="color:#004d99;font-size:110%;margin-left:3%;">Request</b>
+                    <b style="color:#004d99;font-size:110%;margin-left:3%;">@lang('employee.Request')</b>
                     <div style="margin-left:3%;">
                         {{$view->request_message}}
                         <i class="fas fa-clock" style="color:#004d99;margin-left:80%"
@@ -27,11 +27,10 @@
 
                     @if($view->file_upload_path!=null)
                         <a href="{{route('inbox.download',$view->id)}}" class="btn btn-success btn-sm"
-                           style="margin-left:3%"><i class="fas fa-download"> Download
-                                File</i></a>                {{$view->file_upload_path}}
+                           style="margin-left:3%"><i class="fas fa-download"> @lang('employee.DownloadFile')</i></a>                {{$view->file_upload_path}}
                         <hr> @endif
 
-                    <b style="color:#004d99;font-size:110%;margin-left:3%;">Response</b>
+                    <b style="color:#004d99;font-size:110%;margin-left:3%;">@lang('employee.Response')</b>
                     <div style="margin-left:3%;">
                         {{$view->response_message}}
                         <i class="fas fa-clock" style="color:#004d99;margin-left:80%"

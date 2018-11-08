@@ -4,7 +4,7 @@
 <section class="content">
     <div id="alert" style="display: none">
         <div class="alert alert-success" role="alert">
-            <strong>Success: </strong><span id="message"></span>
+            <strong>@lang('employee.Success'): </strong><span id="message"></span>
         </div>
     </div>
     <div class="row">
@@ -241,9 +241,9 @@
         });
 
         $('#companyDropdown').change(function () {
-            var html = '<option value="0">--Select Section--</option>';
+            var html = '<option value="0">--@lang('employee.SelectSection')--</option>';
             $('#sectionDropdown').html(html);
-            var subHtml = '<option value="0">--Select Sub-Section--</option>';
+            var subHtml = '<option value="0">--@lang('employee.SelectSubsection')--</option>';
             $('#subsectionDropdown').html(subHtml);
             $('#existing_company_name').val('');
             $('#existing_company_contact').val('');
@@ -286,7 +286,7 @@
 
         $('#sectionDropdown').change(function () {
             var selectedSection = $('#sectionDropdown').val();
-            var option = '<option value="0">--Select Sub-Section--</option>';
+            var option = '<option value="0">--@lang('employee.SelectSubsection')--</option>';
             $('#subsectionDropdown').show();
             $('#subsectionDropdown').html(option);
             $('#existing_section_name').val('');
@@ -384,7 +384,7 @@
                     },
                     success: function (data) {
                         $("#alert").show()
-                        $("#message").text('Updated!');
+                        $("#message").html('<span>{{trans('employee.Updated!')}}</span>');
                         $(function () {
                             $('html, body').animate({
                                 scrollTop: $("#alert").offset().top
@@ -511,7 +511,7 @@
                         $('#sectionDropdown').append(newSection);
                         $("#inputalert").hide()
                         $("#alert").show()
-                        $("#message").text('Section Added!');
+                        $("#message").html('<span>{{trans('employee.SectionAdded!')}}</span>');
                         $(function () {
                             $('html, body').animate({
                                 scrollTop: $("#alert").offset().top
@@ -526,7 +526,7 @@
             else
               // alert('* Input all fields!');
               $("#inputalert").show()
-                        $("#imessage").text('Please input all fields');
+                        $("#imessage").html('<span>{{trans('employee.Pleaseinputallfields')}}</span>');
                            
                        
              
@@ -563,7 +563,7 @@
                         $('#subsectionDropdown').append(newSub);
                         $("#inputalert").hide();
                         $("#alert").show()
-                        $("#message").text('Subsection Added!');
+                        $("#message").html('<span>{{trans('employee.SubsectionAdded!')}}</span>');
                         $(function () {
                             $('html, body').animate({
                                 scrollTop: $("#alert").offset().top
@@ -578,7 +578,7 @@
             else{
                // alert('* Input sub-section name!')
                $("#inputalert").show()
-                        $("#imessage").text('Input sub-section name');
+                        $("#imessage").html('<span>{{trans('employee.Pleaseinputsubsectionname')}}</span>');
             }
         });
 </script>
