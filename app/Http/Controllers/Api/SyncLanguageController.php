@@ -60,7 +60,17 @@ class SyncLanguageController extends Controller
             }
         }
 
+//         print_r($data_transalted);die;
+        $d='';
+foreach ($data_transalted as $key=> $row){
+    foreach ($row as $k1=>$v1){
+        $d .='"'.str_replace(' ','_',$k1).'"=>"'.$v1.'",';
+    }
+}
+echo $d;
+die;
         \Storage::disk('local')->put('test.log', json_encode($data_transalted));
+
         return $data_transalted;
     }
 
