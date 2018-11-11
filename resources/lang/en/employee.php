@@ -1,4 +1,4 @@
-﻿<?php
+﻿﻿<?php
 
 return [
 
@@ -447,5 +447,6 @@ return [
     "for_work" => "For Work",
     "hourly_employee" => "Hourly Employee",
     "flag" => "Flag",
+    "logout_msg"=>'Are you sure to logout?'
 
 ];
