@@ -135,9 +135,7 @@ class EmployeeLoginController extends Controller
             return redirect()->intended($this->redirectPath());
         } else {
             return redirect('/employee/login')->withInput($request->only($request->psi_number, 'remember'))
-                ->withErrors([
-                $request->psi_number => 'error'
-            ]);
+                ->with('error', 'Please input valid information.');
         }
     }
 

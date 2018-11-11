@@ -127,7 +127,7 @@ WHERE
 
     public static function getThirdLevelCompanies()
     {
-        $sql = "select * from companies where master_id in (select id from companies where master_id in (SELECT id FROM `companies` WHERE master_id is null))";
+        $sql = "select * from companies where master_id in (select id from companies where master_id in (SELECT id FROM `companies` WHERE master_id is null))order by master_id asc";
         $thirdCompanies = DB::select("$sql");
 
         return $thirdCompanies;
