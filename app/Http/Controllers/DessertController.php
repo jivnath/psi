@@ -34,13 +34,14 @@ class DessertController extends Controller
     {
         if ($request->ajax()) {
             $id = $request->get('selected');
+            $today = date('Y-m-d');
             if ($id != null) {
                 $schedule_results = \App\Models\Company::find($id)->companyTimeTable();
                 if (count($schedule_results->get()) > 0) {
                     $schedule_id = $schedule_results->first()->id;
                     $schedule_data = $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
                         $query->where('id', $id);
-                    })->groupBy('date')->get();
+                    })->where('date', '>=', $today)->groupBy('date')->get();
 		
 
                     return view('sheets.dessert_schedule_view', compact('schedule_data'));
