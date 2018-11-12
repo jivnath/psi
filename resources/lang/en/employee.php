@@ -422,5 +422,6 @@ return [
     'Noheetsareuploaded'=>'No sheets are uploaded',
     'Name:'=>'Name:',
     'Email:'=>'Email',
-    'NoShiftForThisCompany'=>'No Shift For This Company'
+    'NoShiftForThisCompany'=>'No Shift For This Company',
+    'SeeAllRequests'=>'See All Requests'
 ];

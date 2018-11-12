@@ -181,11 +181,6 @@
                                                         </a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('company.details') }}"> <i
-                                                                            class="fa fa-building"
-                                                                            aria-hidden="true"></i>@lang('nav.Company')
-                                                                </a></li>
-                                                            <li><a class="dropdown-item"
                                                                    href="{{ route('manageCompanies') }}"><i
                                                                             class="fas fa-briefcase"></i>@lang('employee.CompanyManage')
                                                                 </a></li>
@@ -237,6 +232,10 @@
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="report">
                                                     <a class="dropdown-item"
+                                                   href="{{ route('company.details') }}"> <i
+                                                            class="fa fa-building"
+                                                            aria-hidden="true"></i>@lang('employee.Company')</a>
+                                                    <a class="dropdown-item"
                                                        href="{{ route('employee.detail.report') }}"><i
                                                                 class="fa fa-users" aria-hidden="true"></i>
                                                         @lang('employee.EmployeeDetails')</a>
@@ -244,6 +243,9 @@
                                                        href="{{ route('employee.worksheet.report') }}"><i
                                                                 class="fa fa-clock" aria-hidden="true"></i>
                                                         @lang('employee.EmployeeWorksheet') </a>
+                                                    <a class="dropdown-item" href="{{route('report_total_necessary')}}">
+                                                        <i class="fas fa-user-check"></i>
+                                                        @lang('employee.TotalNecessary')</a>
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
                                                                 class="fas fa-book"></i>
                                                         @lang('employee.AttendanceManagement')</a>
@@ -262,8 +264,8 @@
                                                                              aria-haspopup="true"
                                                                              aria-expanded="false"> <i
                                                             class="fas fa-sign-in-alt"></i>
-                                                    {{isset($primaryCompany->name)?'Logged As
-                                                    '.$primaryCompany->name:'Primary Company not set'}} <span
+                                                    {{isset($primaryCompany->name)?trans('employee.LoggedAs')
+                                                    .$primaryCompany->name:'Primary Company not set'}} <span
                                                             class="caret"></span>
                                                 </a>
 
@@ -315,7 +317,7 @@
 
                                                         </div>
                                                         <a class="footer_message dropdown-item text-center"
-                                                           href="{{route('inbox.messages')}}">See All Requests</a>
+                                                           href="{{route('inbox.messages')}}">@lang('SeeAllRequests')</a>
 
                                                     @endif
                                                     @empty($total)

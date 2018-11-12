@@ -426,6 +426,7 @@ return [
     'Messagesnotavailable'=>'メッセージは利用できません',
     'Name:'=>'名：',
     'Email:'=>'Eメール：',
-    'NoShiftForThisCompany'=>'この会社のシフトはありません'
+    'NoShiftForThisCompany'=>'この会社のシフトはありません',
+    'SeeAllRequests'=>'すべてのリクエストを見る'
 ];
 

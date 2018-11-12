@@ -27,14 +27,20 @@
                                             value="{{$company->id}}">{{ $company->name }}</option>
                                 @endforeach
                             </select>
-                            <div id="sections" style="margin-top: 7px;"></div>
+
                             <div class="col-md-1"></div>
                         </div>
+                    </div>
+                    <div class="row" id="subsection" style="display: none">
+                        <div class="col-md-4" style="text-align: right">
+                            <label for="subsection">@lang('employee.Subsections')</label>
+                        </div>
+                        <div class="col-md-7" id="sections"></div>
+                        <div class="col-md-1"></div>
                     </div>
                     <div id="shift" style="margin-bottom: 10px">
 
                     </div>
-
                     <div class="row">
                         <div class="col-md-4 form-group" style="text-align: right;">
                             {{ Form::label('start_date',trans('employee.StartDate'))}}
@@ -149,6 +155,7 @@
                     success: function (data) {
                         $("#sections").html(data.output);
                         $("#shift").html('');
+                        $("#subsection").show();
 
                         if (data.section.length == 0) {
                             var forSection = '<div class="row" style="text-align:right">' +
@@ -173,6 +180,7 @@
             else {
                 $("#sections").html('');
                 $("#shift").html('');
+                $("#subsection").hide();
             }
         });
     });

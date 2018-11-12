@@ -14,23 +14,23 @@
                 {{ Form::open(array('route' => 'users.store')) }}
 
                 <div class="form-group">
-                  {{ Form::label('name', trans('employee.Name') }}
+                  {{ Form::label('name', trans('employee.Name')) }}
                     {{ Form::text('name', '', array('class' => 'form-control', 'style'=>'width:80%')) }}
                 </div>
 
                 <div class="form-group">
-                {{ Form::label('email', trans('employee.Email') }}
+                {{ Form::label('email', trans('employee.Email')) }}
                     {{ Form::email('email', '', array('class' => 'form-control', 'style'=>'width:80%')) }}
 
                 </div>
 
                 <div class="form-group">
-               {{ Form::label('password', trans('employee.Password') }}<br>
+               {{ Form::label('password', trans('employee.Password')) }}<br>
                     {{ Form::password('password', array('class' => 'form-control', 'style'=>'width:80%')) }}
 
 
                 <div class="form-group">
-                    {{ Form::label('password', trans('employee.ConfirmPassword') }}<br>
+                    {{ Form::label('password', trans('employee.ConfirmPassword')) }}<br>
                     {{ Form::password('password_confirmation', array('class' => 'form-control', 'style'=>'width:80%')) }}
 
                 </div>

@@ -6,7 +6,7 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-header">{{ __('login.Login') }}
-                <a href="{{route('employee.login')}}" style="margin-left:70%;font-size:85%">Employee Login</a>
+                <a href="{{route('employee.login')}}" style="margin-left:70%;font-size:85%">@lang('employee.EmployeeLogin')</a>
                 </div>
 
                 <div class="card-body">
