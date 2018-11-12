@@ -196,6 +196,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('employee.Close')
  </button>
                         <button type="submit" class="btn btn-primary">@lang('employee.SaveChanges')</button>
+
                     </div>
                 </form>
             </div>
@@ -353,6 +354,5 @@
         });
 
 </script>
-
 
 @endpush
