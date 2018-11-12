@@ -441,7 +441,6 @@
               <!-- chat item -->
               <div class="item">
                 <img src="{{asset('images/dist/user4-128x128.jpg')}}" alt="user image" class="online">
-
                 <p class="message">
                   <a href="#" class="name">
                     <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
@@ -452,6 +451,7 @@
                  私は2ヶ月間ネパールに行くので、2019年1月1日までは利用できません
                 </p>
                 </div>
+                
                 <div class="item">
                 <img src="{{asset('images/dist/user1-128x128.jpg')}}" alt="user image" class="online">
                   <p class="message">

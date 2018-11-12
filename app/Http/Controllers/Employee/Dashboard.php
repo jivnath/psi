@@ -12,6 +12,7 @@ use Session;
 use App\Models\Company;
 use DB;
 use App\Models\EmployeeLogin;
+use Illuminate\Support\Facades\View;
 
 
 class Dashboard extends Controller
@@ -135,7 +136,20 @@ class Dashboard extends Controller
     }
 
     public function employeeProfile()
-    {
+    {   
+       /** $id = Session::get('employee_psi_number');
+        $uname = DB::table('psi_inbox')
+        ->join('users','psi_inbox.response_by_userid','=','users.id')->get();
+      
+
+        $ename = DB::table('psi_inbox')
+        ->join('employees','psi_inbox.employeeid','=','employees.psi_number')
+        ->select('employees.name')->where('psi_inbox.employeeid',$id)->get();
+
+        $data = DB::table('psi_inbox')->where('employeeid',$id)->get();
+        return View::make('employees_dashboard.employeeProfile')->with(array('uname' => $uname, 'ename' => $ename,'data'=>$data));
+*/
+
         return view('employees_dashboard.employeeProfile');
     }
 
