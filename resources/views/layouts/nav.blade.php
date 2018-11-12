@@ -101,34 +101,8 @@
                                 @auth
                                     <img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms1.png">
                                 @else
-                                    <ul style="list-style: none">
-                                        <li class="nav-item dropdown">{!!
-								Form::open(['method' => 'POST', 'route' => 'changelocale',
-								'class' => 'form-inline navbar-select']) !!}
-                                            <div
-                                                    class="form-group @if($errors->first('locale')) has-error @endif">
-                                                <span aria-hidden="true"></span> {!! Form::select( 'locale',
-									['en' => 'EN', 'ja' => 'JA'], \App::getLocale(), [ 'id' =>
-									'locale', 'class' => 'form-control', 'required' => 'required',
-									'style' => 'font-size:11px;height:35px;border:none', 'onchange'
-									=> 'this.form.submit()', ] ) !!} <a id="master_data"
-                                                                        class="nav-link"
-                                                                        id="navbarDropdown"
-                                                                        role="button" data-toggle="dropdown"
-                                                                        aria-haspopup="true"
-                                                                        aria-expanded="false"> {{ $errors->first('locale') }} </a>
-                                            </div>
 
-                                            <div class="btn-group pull-right sr-only">{!!
-									Form::submit("Change", ['class' => 'btn btn-success']) !!}</div>
-                                            {!! Form::close() !!}
-
-                                        </li>
-
-                                <li>
                                     <img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms.png">
-                                </li>
-                                    </ul>
                                 @endauth
                             </div>
                         </div>
