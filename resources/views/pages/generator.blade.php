@@ -37,7 +37,7 @@
 
                     <div class="row">
                         <div class="col-md-4 form-group" style="text-align: right;">
-                            {{ Form::label('start_date','Start Date')}}
+                            {{ Form::label('start_date',trans('employee.StartDate'))}}
                         </div>
                         <div class="col-md-7 form-group">
                             {{ Form::date('start_date', \Carbon\Carbon::now(), array('class' => 'form-control', 'required'=>''))}}
@@ -48,7 +48,7 @@
 
                     <div class="row">
                         <div class="col-md-4 form-group" style="text-align: right;">
-                            {{ Form::label('end_date','End Date')}}
+                            {{ Form::label('end_date',trans('employee.EndDate'))}}
                         </div>
                         <div class="col-md-7 form-group">
                             {{ Form::date('end_date', \Carbon\Carbon::now(), array('class' => 'form-control', 'required'=>''))}}
@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-7" style="text-align: right">
-                            {{ Form::submit('Generate', array('class' => 'btn btn-success btn-md'))}}
+                            {{ Form::submit(trans('employee.Generate'), array('class' => 'btn btn-success btn-md'))}}
                             <a href="{{ route('generator') }}" class="btn btn-danger"
                                style="margin-left: 5px">@lang('employee.Cancel')</a>
                         </div>
@@ -196,7 +196,7 @@
                             '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
                             '<div id="' + sectionId + 'allShifts"> </div>' +
                             '</ul> ' +
-                            '<span id="' + sectionId + '" name="' + sectionName + '" class="btn btn-sm btn-info">Add New Shift</span> </div>' +
+                            '<span id="' + sectionId + '" name="' + sectionName + '" class="btn btn-sm btn-info">@lang('employee.AddNewShift')</span> </div>' +
                             '</div><br>' +
                             '</div>';
                         $("#shift").append(forSection);
@@ -211,9 +211,9 @@
                         var forSec = '<div id="' + sectionId + 'sec' + '"<div class="row" style="text-align:center">' +
                             '<div class="col-md-4" style="text-align:right"><label>' + sectionName + '\'s Shift</label></div>' +
                             '<div class="col-md-8" style="text-align: left"><ul style="list-style: none">' +
-                            '<div id="' + sectionId + 'allShifts">No Shift For This Company<br> </div>' +
+                            '<div id="' + sectionId + 'allShifts">@lang('employee.NoShiftForThisCompany')<br> </div>' +
                             '</ul> ' +
-                            '<span id="' + sectionId + '" name="' + sectionName + '" class="btn btn-sm btn-info">Add New Shift</span></div>' +
+                            '<span id="' + sectionId + '" name="' + sectionName + '" class="btn btn-sm btn-info">@lang('employee.AddNewShift')</span></div>' +
                             '</div>' +
                             '</div>';
                         $("#shift").append(forSec);

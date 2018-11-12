@@ -319,8 +319,8 @@
 
                                                     @endif
                                                     @empty($total)
-                                                        <a class="footer_message dropdown-item text-center">Messages not
-                                                            available</a>
+                                                        <a class="footer_message dropdown-item text-center">@lang('employee.Messagesnotavailable')
+                                                            </a>
                                                     @endempty
 
                                                 </div>
@@ -339,8 +339,8 @@
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="setting">
                                                     <a class="dropdown-item" href="{{route('viberAlert')}}"><i
-                                                                class="fa fa-bell" aria-hidden="true"></i> Alert
-                                                        Management </a>
+                                                                class="fa fa-bell" aria-hidden="true"></i>@lang('employee.AlertManagement')
+                                                       </a>
                                                 </div>
                                             </li>
 
@@ -356,7 +356,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right"
                                                      aria-labelledby="navbarDropdown">
                                                     <a class="dropdown-item" href="{{route('profile', $user_id)}}"><i
-                                                                class="fa fa-address-book"></i> Profile</a>
+                                                                class="fa fa-address-book"></i> @lang('employee.Profile')</a>
                                                     <a class="dropdown-item" href="#" id="logout"><i
                                                                 class="fas fa-sign-out-alt"></i> @lang('employee.Logout')</a>
                                                 </div>

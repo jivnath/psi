@@ -14,7 +14,7 @@
                     {{ Form::open(array('url' => 'roles')) }}
 
                     <div class="form-group">
-                        {{ Form::label('name', 'Name') }}
+                        {{ Form::label('name', trans('employee.Name') }}
                         {{ Form::text('name', null, array('class' => 'form-control input-shorter', 'style' => 'width:50%')) }}
                     </div>
                     {{--<b>Permissions</b>--}}
@@ -27,7 +27,7 @@
                         {{--@endforeach--}}
                     {{--</div>--}}
 
-                    {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
+                    {{ Form::submit(trans('employee.Add'), array('class' => 'btn btn-primary')) }}
 
                     {{ Form::close() }}
 
