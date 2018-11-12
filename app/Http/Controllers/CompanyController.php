@@ -160,7 +160,7 @@ class CompanyController extends Controller
         $subSection->contact_num = $request->section_contact;
         $subSection->save();
 
-        Session::flash('success', 'company added');
+        Session::flash('success', trans('employee.Companiessuccessfullyadded!'));
         return redirect()->route('manageCompanies');
     }
 

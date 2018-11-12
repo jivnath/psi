@@ -716,7 +716,12 @@ return [
     "for_work" => "作業用",
     "hourly_employee" => "時間従業員",
     "flag" => "フラグ",
-    "logout_msg"=>'ログアウトしてもよろしいですか？'
-
+    "logout_msg"=>'ログアウトしてもよろしいですか？',
+    'CompanyAdded'=>'会社追加',
+    'Usersuccessfullyadded'=>'ユーザーが追加されました',
+    'Usersuccessfullyupdated'=>'ユーザーが更新されました',
+    'Messagesent'=>'送信されたメッセージ',
+    'Permissionsuccessfullyassigned'=>'権限が割り当てられました',
+    'Error'=>'エラー',
 ];
 

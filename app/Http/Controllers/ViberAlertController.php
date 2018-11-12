@@ -77,7 +77,7 @@ class ViberAlertController extends Controller
         $arrival->medium = 'viber';
         $arrival->save();
 
-        Session::flash('success', 'Setting successfully saved!');
+        Session::flash('success', trans('employee.Settingsuccessfullysaved!'));
         return redirect()->route('viberAlert');
 
     }

@@ -1,11 +1,11 @@
 @if(Session::has('success'))
     <div class="msg alert alert-success" role="alert">
-        <strong>Success : </strong> {{Session::get('success')}}
+        <strong>@lang('employee.Success') : </strong> {{Session::get('success')}}
     </div>
 @endif
 @if(Session::has('error'))
     <div class="msg alert alert-danger" role="alert">
-        <strong>Error : </strong>{{Session::get('error')}}
+        <strong>@lang('employee.Error') : </strong>{{Session::get('error')}}
     </div>
 @endif
 

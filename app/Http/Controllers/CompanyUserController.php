@@ -48,7 +48,7 @@ class CompanyUserController extends Controller
             }
         }
 
-        Session::flash('success', 'User successfully added!');
+        Session::flash('success', trans('employee.Usersuccessfullyadded'));
         return redirect()->back();
 
     }
@@ -94,7 +94,7 @@ class CompanyUserController extends Controller
             $companytouser->company_id = $company;
             $companytouser->save();
         }
-        Session::flash('success', 'User successfully updated!');
+        Session::flash('success', trans('employee.Usersuccessfullyupdated'));
         return redirect()->back();
 
     }

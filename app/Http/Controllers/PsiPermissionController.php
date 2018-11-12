@@ -50,7 +50,7 @@ class PsiPermissionController extends Controller
             $userToPermission->save();
         }
 
-        Session::flash('success', 'Permission successfully assigned!');
+        Session::flash('success', trans('employee.Permissionsuccessfullyassigned!'));
         return redirect()->route('update.role', $roleid);
 
     }
@@ -127,7 +127,7 @@ class PsiPermissionController extends Controller
             $userToPermission->save();
         }
 
-        Session::flash('success', 'Permission successfully assigned!');
+        Session::flash('success', trans('employee.Permissionsuccessfullyassigned!'));
         return redirect()->route('update.user');
     }
 

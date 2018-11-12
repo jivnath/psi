@@ -31,7 +31,7 @@ class UserGroupController extends Controller
 
             $data = $group->id;
 
-            Session::flash('success', 'The group is successfully added!');
+            Session::flash('success', trans('employee.Thegroupissuccessfullyadded!'));
         }
 
         echo json_encode($data);
@@ -53,7 +53,7 @@ class UserGroupController extends Controller
 
             $group->save();
 
-            Session::flash('success', 'Group is successfully renamed!');
+            Session::flash('success', trans('employee.Groupissuccessfullyrenamed!'));
         }
     }
 }

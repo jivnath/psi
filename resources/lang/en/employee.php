@@ -447,6 +447,11 @@ return [
     "for_work" => "For Work",
     "hourly_employee" => "Hourly Employee",
     "flag" => "Flag",
-    "logout_msg"=>'Are you sure to logout?'
-
+    "logout_msg"=>'Are you sure to logout?',
+    'CompanyAdded'=>'Company Added',
+    'Usersuccessfullyadded'=>'User successfully added',
+    'Usersuccessfullyupdated'=>'User successfully updated',
+    'Messagesent'=>'Message sent',
+    'Permissionsuccessfullyassigned'=>'Permission successfully assigned',
+    'Error'=>'Error',
 ];

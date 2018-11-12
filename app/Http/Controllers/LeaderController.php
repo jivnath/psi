@@ -30,7 +30,7 @@ class LeaderController extends Controller
 
         $leader->save();
 
-        Session::flash('success', 'Leader successfully added!');
+        Session::flash('success', trans('employee.Leadersuccessfullyadded!'));
         return redirect()->route('leader.create');
     }
 
