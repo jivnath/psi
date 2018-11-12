@@ -36,7 +36,7 @@ class Raw extends Model
             ) team_leader,
             (
                 SELECT
-                	emp.name 
+                	emp.name
                 FROM
                 	employees emp
                 WHERE
@@ -449,7 +449,7 @@ WHERE
             WHERE
             normal is not NULL AND
             c.master_id = $id AND
-            smd.start_time = cts.time AND 
+            smd.start_time = cts.time AND
             DATE = '$date'
             ORDER BY
             	company_id ASC";
@@ -549,6 +549,43 @@ WHERE
                 AND pde.conformation_day_before = 'OK'";
         return DB::select($sql);
     }
+    public static function getConfirmedEmployeesCount()
+    {
+        $sql = "SELECT
+                COUNT(pde.conformation_day_before) total_count,
+                    'to' days
+                FROM
+                    psi_dessert_entry pde,
+                    company_time_schedules cts
+                WHERE
+                    pde.cts_id = cts.id
+                AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+                union
+                SELECT
+
+                    COUNT(pde.conformation_day_before) total_count,
+                    'to_week'
+                FROM
+                    psi_dessert_entry pde,
+                    company_time_schedules cts
+                WHERE
+                    pde.cts_id = cts.id
+                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
+                union
+                SELECT
+
+
+                    COUNT(pde.conformation_day_before) total_count,
+                    'to_month'
+                FROM
+                    psi_dessert_entry pde,
+                    company_time_schedules cts
+                WHERE
+                    pde.cts_id = cts.id
+                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(),interval 1 month)";
+        return DB::select($sql);
+    }
+
 
     public static function getWorkedShift($staff, $date, $company)
     {
@@ -695,9 +732,9 @@ WHERE
                     DATE ASC
             ) main_table";
         $data = collect(DB::select(DB::raw($sql)))->first();
+
         return $calculated_arr = [
-            'total_worked' => $data->total_sec / 3600
-        ];
+            'total_worked' => ($data)?$data->total_sec:0 / 3600];
     }
 
     public static function get_user_info($sender_id)
@@ -721,9 +758,9 @@ WHERE
     {
 //        dd($start);
         $sql = "SELECT
-        pde.staff_no, 
-        e.name, 
-        COUNT(DISTINCT cts.date) totalWorkdays, 
+        pde.staff_no,
+        e.name,
+        COUNT(DISTINCT cts.date) totalWorkdays,
         FLOOR(SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000) AS totalWorked
     FROM
         psi_dessert_entry pde,
@@ -738,7 +775,7 @@ WHERE
         AND smd.company_id = ctt.company_id
         AND cts.time = smd.start_time
         AND cts.date BETWEEN '$start' AND '$end'
-        group by pde.staff_no, 
+        group by pde.staff_no,
         e.name";
         $data = DB::select($sql);
 //        print_r($data);die;
@@ -770,7 +807,7 @@ WHERE
         ctt.company_id = $id AND
         smd.company_id = $id AND
         smd.start_time = '$shift' AND
-        cts.time = '$shift' AND 
+        cts.time = '$shift' AND
         cts.date = '$date' AND
         e.psi_number = pde.staff_no";
 
@@ -781,7 +818,7 @@ WHERE
 
     public static function getAllRequests()
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                     pi.*,
                     e.name
                 FROM
@@ -789,7 +826,7 @@ WHERE
                     employees e
                 WHERE
                     pi.employeeid = e.psi_number
-                
+
                 ORDER BY
                     pi.status DESC,
                     pi.created_at DESC,

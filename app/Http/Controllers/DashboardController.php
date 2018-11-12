@@ -30,7 +30,9 @@ class DashboardController extends Controller
 
 
         $data['dessert_report'] = $this->simplify_dessert_report($dessert_report->toArray());
+
         $data['employee_summery'] = Raw::getConfirmedEmployees();
+        $data['employee_summery_count'] = Raw::getConfirmedEmployeesCount();
         $data['total_emp'] = Employee::count();
         return view('dashboard', $data);
 
