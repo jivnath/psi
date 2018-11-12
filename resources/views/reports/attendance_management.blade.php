@@ -38,7 +38,7 @@
                                     </select>
                                 </div>
                             <div class="col-md-1 submit" style="display: none">
-                                <span class="btn btn-primary" id="submit">Submit</span>
+                                <span class="btn btn-primary" id="submit">@lang('employee.Submit')</span>
                             </div>
                         </div>
                         <hr>

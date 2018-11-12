@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card">
-                    <div class="card-header">Employee {{ __('login.Login') }}</div>
+                    <div class="card-header">@lang('employee.Employee') {{ __('login.Login') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('employee.login') }}" aria-label="{{ __('login.Login') }}">

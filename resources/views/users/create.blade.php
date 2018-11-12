@@ -11,26 +11,26 @@
                 <hr>
             </div>
             <div class="box-body">
-
                 {{ Form::open(array('route' => 'users.store')) }}
 
                 <div class="form-group">
-                    {{ Form::label('name', 'Name') }}
+                  {{ Form::label('name', trans('employee.Name')) }}
                     {{ Form::text('name', '', array('class' => 'form-control', 'style'=>'width:80%')) }}
                 </div>
+
                 <div class="form-group">
-                    {{ Form::label('email', 'Email') }}
+                {{ Form::label('email', trans('employee.Email')) }}
                     {{ Form::email('email', '', array('class' => 'form-control', 'style'=>'width:80%')) }}
+
                 </div>
 
                 <div class="form-group">
-                    {{ Form::label('password', 'Password') }}<br>
+               {{ Form::label('password', trans('employee.Password')) }}<br>
                     {{ Form::password('password', array('class' => 'form-control', 'style'=>'width:80%')) }}
 
-                </div>
 
                 <div class="form-group">
-                    {{ Form::label('password', 'Confirm Password') }}<br>
+                    {{ Form::label('password', trans('employee.ConfirmPassword')) }}<br>
                     {{ Form::password('password_confirmation', array('class' => 'form-control', 'style'=>'width:80%')) }}
 
                 </div>
@@ -52,8 +52,7 @@
                     </select>
                 </div>
 
-                {{ Form::submit('Add', array('class' => 'btn btn-primary')) }}
-
+                {{ Form::submit(trans('employee.Add'), array('class' => 'btn btn-primary')) }}
                 {{ Form::close() }}
 
             </div>

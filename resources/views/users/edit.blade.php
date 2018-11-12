@@ -5,7 +5,7 @@
     <div class='col-md-8 offset-2'>
         <div class="box">
             <div class="box-header">
-                <h4>@lang('employee.EditUser:') '{{$user->name}}'</h4>
+                <h4>@lang('employee.EditUser') '{{$user->name}}'</h4>
                 <hr>
             </div>
             <div class="box-body">
@@ -13,12 +13,12 @@
                 {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with user data --}}
 
                 <div class="form-group">
-                   <b> {{ Form::label('name', 'Name:') }}</b>
+                   <b> {{ Form::label('name', trans('employee.Name:')) }}</b>
                     {{ $user->name }}
                 </div>
 
                 <div class="form-group">
-                    <b>{{ Form::label('email', 'Email:') }}</b>
+                    <b>{{ Form::label('email', trans('employee.Email:')) }}</b>
                     {{ $user->email }}
                 </div>
 
@@ -32,7 +32,8 @@
                     </select>
                 </div>
 
-                {{ Form::submit('Update', array('class' => 'btn btn-primary')) }}
+                {{ Form::submit(trans('employee.Update'), array('class' => 'btn btn-primary')) }}
+
 
                 {{ Form::close() }}
             </div>

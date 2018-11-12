@@ -125,7 +125,8 @@
                     $(this).hide();
                     $("#add").addClass('add');
                     $("#add").removeClass('rename');
-                    $("#add").text('Add');
+                    //$("#add").text('Add');
+                    $("#add").html('<span>{{trans('employee.Add')}}</span>');
                     $("#skill").val('');
                     
                     $("#alert").show()
@@ -157,7 +158,8 @@
             var skill = $(this).attr('data-name');
             $("#add").removeClass('add');
             $("#add").addClass('rename');
-            $("#add").text('Rename');
+            //$("#add").text('Rename');
+            $("#add").html('<span>{{trans('employee.Rename')}}</span>');
             $("#add").attr('data-id', id);
             $("#skill").val(skill);
             $("#cancel").remove();
@@ -169,7 +171,7 @@
             $(this).hide();
             $("#add").addClass('add');
             $("#add").removeClass('rename');
-            $("#add").text('Add');
+            ("#add").text('Add');
             $("#skill").val('');
         });
 
