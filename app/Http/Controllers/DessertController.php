@@ -14,7 +14,6 @@ use App\Models\CompanyTimeSchedule;
 use DB;
 use App\Models\User;
 
-
 class DessertController extends Controller
 {
 
@@ -25,7 +24,9 @@ class DessertController extends Controller
             foreach($allCompanies as $comp)
             {
                 $company = Company::find($comp->company_id);
+                if($company){
                 array_push($companies, $company);
+                }
             }
         return view('sheets.dessert')->withCompanies(array_unique($companies));
     }
@@ -42,7 +43,6 @@ class DessertController extends Controller
                     $schedule_data = $dates = CompanyTimeSchedule::whereHas('companyTimeTable.comp', function ($query) use ($id) {
                         $query->where('id', $id);
                     })->where('date', '>=', $today)->groupBy('date')->get();
-		
 
                     return view('sheets.dessert_schedule_view', compact('schedule_data'));
                 } else {
@@ -59,7 +59,7 @@ class DessertController extends Controller
             if ($id != null) {
 
                 $date = $request->get('selected_date');
-              
+
                 $dessert = Raw::getDessertInfo($id, $date);
                 $userlist=User::all();
 
@@ -81,7 +81,6 @@ class DessertController extends Controller
             $dessert_id = $request->get('schedule_id');
             if ($psi != null) {
                 $employee = Employee::where('psi_number', $psi)->first();
-
                 if ($employee) {
                     if (DessertSheet::where([['staff_no', $psi],['cts_id', $dessert_id]])->count() > 0) {
                         $data = [];
