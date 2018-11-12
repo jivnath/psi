@@ -423,5 +423,6 @@ return [
     'Name:'=>'Name:',
     'Email:'=>'Email',
     'NoShiftForThisCompany'=>'No Shift For This Company',
-    'SeeAllRequests'=>'See All Requests'
+    'SeeAllRequests'=>'See All Requests',
+
 ];

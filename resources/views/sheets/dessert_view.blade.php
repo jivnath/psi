@@ -115,7 +115,7 @@ corresponding value from the list below*/
                 @foreach($dessert_row['dessert_info'] as $key=> $info)
                         <tr class="{{isset($info->flag)? 'text-'.$info->flag:''}}">
                             <td class='background_global'> {{$dessert_row['date']}} </td>
-                            <td class='background_global'> {{$dessert_row['time']}} </td>
+                            <td class='background_global'> {{substr($dessert_row['time'], 0, -3)}} </td>
                             <td class='background_global'> {{$key+1}} </td>
                             <td class="border_field contenteditable" contenteditable="{{ ($info->conformation_day_before=='OK') ? 'false':'true'}}" style="{{ ($info->conformation_day_before=='OK') ? 'border:1px solid red':'border:none'}}">{{$info->staff_no}}</td>
                             <td  class="border_field">{{$info->country_citizenship}}</td>
@@ -181,7 +181,7 @@ corresponding value from the list below*/
                     @for($i=$total_reserved+1;$i<=($dessert_row['total_require']);$i++)
                         <tr>
                             <td class='background_global'> {{$dessert_row['date']}} </td>
-                            <td class='background_global'> {{$dessert_row['time']}} </td>
+                            <td class='background_global'> {{substr($dessert_row['time'],0, -3)}} </td>
                             <td class='background_global'> {{$i}} </td>
                             <td class="border_field contenteditable" contenteditable="true">  </td>
                             <td  class="border_field">  </td>
@@ -239,7 +239,7 @@ corresponding value from the list below*/
                         @if($dessert_row['total_require']==0)
                         <tr>
                             <td> {{$dessert_row['date']}} </td>
-                            <td> {{$dessert_row['time']}} </td>
+                            <td> {{substr($dessert_row['time'], 0, -3)}} </td>
                         <td colspan='13'>Not available, <a href="{{Route('shift.show',$dessert_row['schedule_session_id'])}}" target='_blank'>Add here </a></td>
                         </tr>
                         @endif

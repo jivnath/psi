@@ -348,10 +348,10 @@ return [
     'Requests'=>'リクエスト',
     'Response'=>'応答',
     'none'=>'無し',
-    'All'=>'- すべて -',
-    'SelectCompany'=>'会社を選択',
+//    'All'=>'- すべて -',
+//    'SelectCompany'=>'会社を選択',
     'Success'=>'成功',
-    'CompanyDetails'=>'会社の詳細',
+//    'CompanyDetails'=>'会社の詳細',
     'SelectMasterCompany'=>'マスター会社を選択',
     'Pleasefillouttheformbelow'=>'下のフォームに必要事項を記入してください',
     'CompanyType'=>'会社の種類',
@@ -368,7 +368,7 @@ return [
     'company_id'=>'会社のID',
     'ChooseShift'=>'シフトを選択',
      'Loading'=>'読み込んでいます...',
-    "account" => "アカウント",
+        "account" => "アカウント",
     "account_holder" => "アカウントの所有者",
     "account_number" => "アカウント番号",
     "account_registration" => "アカウント登録",
@@ -413,8 +413,8 @@ return [
     "sex" => "セックス",
     "status" => "ステータス",
     "status_residence" => "ステータスレジデンス",
-    "viber_install" => " viber install ",
-    "work_location" => "職場",
+//    "viber_install" => " viber install ",
+//    "work_location" => "職場",
     "viber_install" => " Viberインストール ",
     "work_location" => "職場",
     "hire_date" => "雇用日",
@@ -428,5 +428,6 @@ return [
     'Email:'=>'Eメール：',
     'NoShiftForThisCompany'=>'この会社のシフトはありません',
     'SeeAllRequests'=>'すべてのリクエストを見る'
+
 ];
 
