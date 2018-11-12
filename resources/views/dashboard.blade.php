@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block" style='margin: 8px -10px!important'>
-                                    <h5 class="description-header"> 5/5{{--{{$employee_summery[0]->total_count}}--}}</h5>
+                                    <h5 class="description-header"> {{$employee_summery[0]->total_count.'/'.$employee_summery_count[0]->total_count}}</h5>
                                     <span class="description-text" style='text-transform: none;'>@lang('nav.Tomorrow')</span>
                                 </div>
                                 <!-- /.description-block -->
@@ -38,7 +38,7 @@
                             <!-- /.col -->
                             <div class="col-sm-4 border-right">
                                 <div class="description-block" style="margin: 8px -10px!important;">
-                                    <h5 class="description-header"> 4/5{{--}}{{$employee_summery[1]->total_count}}--}}</h5>
+                                    <h5 class="description-header"> {{$employee_summery[1]->total_count.'/'.$employee_summery_count[1]->total_count}}</h5>
                                     <span class="description-text" style='text-transform: none;'>@lang('nav.TomorrowToWeek')</span>
                                 </div>
                                 <!-- /.description-block -->
@@ -46,7 +46,7 @@
                             <!-- /.col -->
                             <div class="col-sm-4">
                                 <div class="description-block" style="margin: 8px -10px!important;">
-                                    <h5 class="description-header">2/5{{--{{$employee_summery[2]->total_count}}--}}</h5>
+                                    <h5 class="description-header">{{$employee_summery[2]->total_count.'/'.$employee_summery_count[2]->total_count}}</h5>
                                     <span class="description-text"
                                           style='text-transform: none;'>@lang('nav.TomorrowToMonth')</span>
                                 </div>

@@ -552,7 +552,7 @@ WHERE
     public static function getConfirmedEmployeesCount()
     {
         $sql = "SELECT
-                COUNT(pde.conformation_day_before) total_count,
+                COUNT(*) total_count,
                     'to' days
                 FROM
                     psi_dessert_entry pde,
@@ -563,7 +563,7 @@ WHERE
                 union
                 SELECT
 
-                    COUNT(pde.conformation_day_before) total_count,
+                    COUNT(*) total_count,
                     'to_week'
                 FROM
                     psi_dessert_entry pde,
@@ -575,7 +575,7 @@ WHERE
                 SELECT
 
 
-                    COUNT(pde.conformation_day_before) total_count,
+                    COUNT(*) total_count,
                     'to_month'
                 FROM
                     psi_dessert_entry pde,
