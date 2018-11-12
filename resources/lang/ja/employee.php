@@ -1,4 +1,4 @@
-﻿<?php
+﻿﻿<?php
 return [
 
     /*
@@ -716,6 +716,7 @@ return [
     "for_work" => "作業用",
     "hourly_employee" => "時間従業員",
     "flag" => "フラグ",
+    "logout_msg"=>'ログアウトしてもよろしいですか？'
 
 ];
 
