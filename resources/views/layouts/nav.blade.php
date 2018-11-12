@@ -18,7 +18,6 @@
         <nav class="navbar navbar-expand-md navbar-light"
              style="background: #fff">
 
-
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="{{route('employee.dashboard')}}"> <img alt="PSI-S"
@@ -41,12 +40,16 @@
                         <ul class="navbar-nav mr-auto">
 
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('employee.Settings')</a>
+                                <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data"
+                                   data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">@lang('employee.Settings')</a>
                                 <div class="dropdown-menu" aria-labelledby="master_data">
-                                 <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i class="fa fa-address-book"></i>@lang('employee.Profile')</a>
-                                  <a class="dropdown-item" href="{{ route('employee.logout') }}"><i class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a>
+                                    <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i
+                                                class="fa fa-address-book"></i>@lang('employee.Profile')</a>
+                                    <a class="dropdown-item" href="{{ route('employee.logout') }}"><i
+                                                class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a>
                                 </div>
-                              </li>
+                            </li>
 
                             <li class="nav-item dropdown">{!!
 								Form::open(['method' => 'POST', 'route' => 'changelocale',
@@ -94,11 +97,38 @@
                                             alt="PSI-S" src="/images/logo.png"> @endauth
                                 </a>
                             </div>
-                          <div class="hrms">
+                            <div class="hrms">
                                 @auth
-                                	<img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms1.png">
+                                    <img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms1.png">
                                 @else
-                                	<img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms.png">
+                                    <ul style="list-style: none">
+                                        <li class="nav-item dropdown">{!!
+								Form::open(['method' => 'POST', 'route' => 'changelocale',
+								'class' => 'form-inline navbar-select']) !!}
+                                            <div
+                                                    class="form-group @if($errors->first('locale')) has-error @endif">
+                                                <span aria-hidden="true"></span> {!! Form::select( 'locale',
+									['en' => 'EN', 'ja' => 'JA'], \App::getLocale(), [ 'id' =>
+									'locale', 'class' => 'form-control', 'required' => 'required',
+									'style' => 'font-size:11px;height:35px;border:none', 'onchange'
+									=> 'this.form.submit()', ] ) !!} <a id="master_data"
+                                                                        class="nav-link"
+                                                                        id="navbarDropdown"
+                                                                        role="button" data-toggle="dropdown"
+                                                                        aria-haspopup="true"
+                                                                        aria-expanded="false"> {{ $errors->first('locale') }} </a>
+                                            </div>
+
+                                            <div class="btn-group pull-right sr-only">{!!
+									Form::submit("Change", ['class' => 'btn btn-success']) !!}</div>
+                                            {!! Form::close() !!}
+
+                                        </li>
+
+                                <li>
+                                    <img alt="PSI-S" style='width: 100%;height: 100%' src="/images/hrms.png">
+                                </li>
+                                    </ul>
                                 @endauth
                             </div>
                         </div>
@@ -358,7 +388,8 @@
                                                     <a class="dropdown-item" href="{{route('profile', $user_id)}}"><i
                                                                 class="fa fa-address-book"></i> Profile</a>
                                                     <a class="dropdown-item" href="#" id="logout"><i
-                                                                class="fas fa-sign-out-alt"></i> @lang('employee.Logout')</a>
+                                                                class="fas fa-sign-out-alt"></i> @lang('employee.Logout')
+                                                    </a>
                                                 </div>
                                             </li>
                                             <li class="nav-item dropdown dropdown-menu-left">{!!
