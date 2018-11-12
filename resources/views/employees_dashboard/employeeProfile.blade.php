@@ -437,7 +437,7 @@
 
               <h3 class="box-title">@lang('employee.Activity')</h3>
             </div>
-            <div class="box-body chat" id="chat-box">
+           {{-- <div class="box-body chat" id="chat-box">
               <!-- chat item -->
               <div class="item">
                 <img src="{{asset('images/dist/user4-128x128.jpg')}}" alt="user image" class="online">
@@ -445,12 +445,42 @@
                   <a href="#" class="name">
                     <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
 
-                    <?= $employee_name?>
                   </a>
                  I am going to nepal for 2 months so i am not avialable till 01 Jan 2019<br/> 
                  私は2ヶ月間ネパールに行くので、2019年1月1日までは利用できません
                 </p>
-                </div>
+            </div>
+                <div class="item">
+                        <img src="{{asset('images/dist/user4-128x128.jpg')}}" alt="user image" class="online">--}}
+                @foreach($inbox as $i)
+                <div class="box-body chat" id="chat-box">
+                    @foreach($employees as $e)
+                    
+                        @if($e->psi_number==$i->employeeid)
+                        <div class="item">
+                        <img src="{{asset('images/dist/user4-128x128.jpg')}}" alt="user image" class="online">
+                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{$i->message_date}}</small>
+                        <p class="message" style="font-size:small;">
+                                <a href="#" class="name" style="font-weight:bold">
+                        {{$e->name}}</a><br>
+                        {{$i->request_message}}</p></div><br>
+                         @endif
+                    @endforeach
+                    @foreach($users as $u)
+                        @if($u->id==$i->response_by_userid)
+                        <div class="item">
+                        <img src="{{asset('images/dist/user1-128x128.jpg')}}" alt="user image" class="online">
+                        <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{$i->response_date}}</small>
+                        <p class="message" style="font-size:small;">
+                                <a href="#" class="name" style="font-weight:bold">
+                         {{$u->name}}</a><br>
+                        {{$i->response_message}}</p></div>
+                        @endif
+                    @endforeach
+                </div> <hr><hr>               
+                @endforeach
+
+               {{--
                 
                 <div class="item">
                 <img src="{{asset('images/dist/user1-128x128.jpg')}}" alt="user image" class="online">
@@ -461,7 +491,7 @@
                     Thank you for the information.Please let us know after you returned.<br/>
                   情報ありがとうございました。返品後にお知らせください
                   </p>
-                </div>
+                </div>--}}
                 </div>
                 <!-- /.attachment -->
               
