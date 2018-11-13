@@ -64,7 +64,7 @@ class EmployeeController extends Controller
         return redirect()->route('employees.show');
     }
 
-    public function show()
+    public function show($option=false)
     {
         $cells = Employee::all();
 
@@ -76,7 +76,7 @@ class EmployeeController extends Controller
         $all_col = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
         $customize_columns = PsiViewCustimizeModel::where('type', 'employee')->get();
 
-        return view('employees.show', compact('cells', 'columns', 'customize_columns', 'all_col'))->withSex($sex);
+        return view('employees.show', compact('cells', 'columns', 'customize_columns', 'all_col','option'))->withSex($sex);
     }
 
     public function updateCell(Request $request)
