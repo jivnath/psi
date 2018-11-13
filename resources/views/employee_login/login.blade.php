@@ -5,6 +5,25 @@
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card">
+                    <div class='card-header'>
+                            {!!
+                                Form::open(['method' => 'POST', 'route' => 'changelocale',
+                                'class' => 'form-inline navbar-select pull-right']) !!}
+
+                            {!! Form::select( 'locale',
+                             ['en' => 'EN', 'ja' => 'JA'], \App::getLocale(), [ 'id' =>
+                             'locale', 'class' => 'form-control', 'required' => 'required','onchange'
+                             => 'this.form.submit()', ] ) !!} <a id="master_data"
+                                                                        class=""
+                                                                        id="navbarDropdown"
+                                                                        role="button" data-toggle="dropdown"
+                                                                        aria-haspopup="true"
+                                                                        aria-expanded="false"> {{ $errors->first('locale') }} </a>
+
+                            <div class="btn-group pull-right sr-only">{!!
+									Form::submit("Change", ['class' => 'btn btn-success']) !!}</div>
+                            {!! Form::close() !!}
+                        </div>
                     <div class="card-header">@lang('employee.Employee') {{ __('login.Login') }}</div>
 
                     <div class="card-body">
