@@ -43,7 +43,8 @@
                             </thead>
                             <thead>
                                 <tr>
-                                    @foreach($all_col as $count_key=>$column) @if ($column->field_name == 'sex')
+                                    @foreach($all_col as $count_key=>$column)
+                                    @if ($column->field_name == 'sex')
                                     <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
                                                     <option value="">@lang('employee.All')</option>
                                                     <option value="男性">男性</option>
@@ -69,8 +70,10 @@
                                         {{ $cell->{$column->field_name} }}
                                     </td>
                                     @else
+
                                     <td>
-                                        @if ($column->field_name == 'sex')
+                                    @if($option=='edit')
+                                    @if ($column->field_name == 'sex')
                                         <select name="sex" class="sex_class" data-psi_data="{{$psi_value}}">
                                                                 @foreach($sex as $s)
                                                                     <option
@@ -151,7 +154,11 @@
                                                                 </option>
                                                             </select> @else {{ $cell->{$column->field_name}
                                         }} @endif
+                                        @else {{ $cell->{$column->field_name}
+                                        }}
+                                        @endif
                                     </td>
+
                                     @endif @endforeach
                                 </tr>
                                 @endforeach @else
