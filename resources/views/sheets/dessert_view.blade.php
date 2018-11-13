@@ -360,7 +360,7 @@
                             return false;
                         }
                         if (typeof data.total_worked !== 'undefined' && data.total_worked > {{\Config('app.job_limit')}}) {
-                            alert('reached limit ' + (data.total_worked));
+                            alert('Limit exceeded : ' + (data.total_worked)+' hrs.');
                             return false;
                         }
                         $.each(data, function (i, v) {

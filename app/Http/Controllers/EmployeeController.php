@@ -31,7 +31,7 @@ class EmployeeController extends Controller
     public function FetchEmployeeDetails()
     {
         $employee_data = Employee::with([
-            'employeeSkill'
+            'employeeSkill.skill'
         ]);
         $data['employee_data'] = $employee_data->get();
 //        dd($data['employee_data']);

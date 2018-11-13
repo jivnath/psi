@@ -126,7 +126,7 @@ class DessertController extends Controller
 //                        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
                         $total_needed = CompanyTimeSchedule::select(DB::raw('normal as total_needed'))->find($dessert_id)->total_needed;
                         $total_used=DessertSheet::where(['cts_id'=>$dessert_id])->whereNull('deleted_at')->count();
-                        if($total_worked > 28) {
+                        if($total_worked > \Config('app.job_limit')) {
                             $data = [
                                 'total_worked' => $total_worked
                             ];
