@@ -104,18 +104,35 @@ class DessertController extends Controller
                     if (DessertSheet::where([['staff_no', $psi],['cts_id', $dessert_id]])->count() > 0) {
                         $data = [];
                     } else {
+                        $cts = CompanyTimeSchedule::find($dessert_id);
+                        $date = $cts->date;
+                        if($employee->hire_date)
+                            $hireDate = $employee->hire_date;
+                        else
+                            $hireDate = $date;
 
+                        $day = date('l', strtotime($hireDate));
+                        if ((date('l', strtotime($date))) == $day)
+                            $first_date = str_replace('-', '', date('Y-m-d', strtotime($date)));
+                        else
+                            $first_date = str_replace('-', '', date('Y-m-d', strtotime('previous ' . $day, strtotime($date))));
+
+                        $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
+                        $total_work = Raw::getWorkedHours($psi, $first_date, $last_date);
+                        $selectedShift = Raw::getShiftTime($dessert_id);
+//                        dd($total_worked);
+                        $total_worked = $total_work[0]->totalWorked + $selectedShift[0]->shiftTime;
                             //check time limit
-                        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
-                        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($dessert_id)->total_needed;
+//                        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
+                        $total_needed = CompanyTimeSchedule::select(DB::raw('normal as total_needed'))->find($dessert_id)->total_needed;
                         $total_used=DessertSheet::where(['cts_id'=>$dessert_id])->whereNull('deleted_at')->count();
-                        if($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+                        if($total_worked > 28) {
                             $data = [
-                                'total_worked' => $total_worked['total_worked']
+                                'total_worked' => $total_worked
                             ];
                         } elseif($total_needed <=$total_used){
                             $data = [
-                                'total_worked' => $total_worked['total_worked'],
+                                'total_worked' => $total_worked,
                                 'total_needed'=>$total_needed,
                                 'total_used'=>$total_used
                             ];
@@ -126,7 +143,7 @@ class DessertController extends Controller
                                 5 => $employee->phoetic_kanji,
                                 6 => $employee->name,
                                 7 => $employee->cell_no,
-                                'total_worked' => $total_worked['total_worked']
+                                'total_worked' => $total_worked
                             ];
                             if (empty($request->dessert_id)) {
                                 $merge_new = [

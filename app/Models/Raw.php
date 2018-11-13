@@ -150,6 +150,13 @@ WHERE
         return $hour;
     }
 
+    public static function getShiftTime($cts_id)
+    {
+        $sql = "SELECT TIMEDIFF(smd.end_time, smd.start_time)/10000 AS shiftTime FROM company_time_schedules cts, company_time_tables ctt, shift_master_datas smd WHERE cts.id = $cts_id AND cts.companyTT_id = ctt.id AND smd.company_id = ctt.company_id AND cts.time = smd.start_time";
+        $data = DB::select($sql);
+        return $data;
+    }
+
     public static function getSkillsDetails()
     {
         $sql = "SELECT sk.id, sk.skill_name name, (SELECT COUNT(*) FROM employee_skills WHERE skill_id = sk.id) as count FROM psi_skill_master sk";
