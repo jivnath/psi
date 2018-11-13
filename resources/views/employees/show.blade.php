@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <style>
@@ -58,7 +58,7 @@
                             <tbody>
                                 @if(count($cells) > 0) @foreach($cells as $index => $cell)
                                 <tr>
-                                    @foreach($all_col as $column) @if($column->field_name == 'psi_number') @php $psi_value=$cell->{$column->field_name} 
+                                    @foreach($all_col as $column) @if($column->field_name == 'psi_number') @php $psi_value=$cell->{$column->field_name}
 @endphp
                                     @endif @if($column->field_name != 'updated_at' && $column->field_name != 'psi_number'
                                     && $column->field_name != 'sex' && $column->field_name != 'status_residence' && $column->field_name
@@ -186,8 +186,13 @@
                         @foreach($customize_columns_index as $field)
                         <div class="col-md-4 mb-3">
                             <div class="custom-control custom-checkbox">
+                                @if($field->field_name=='psi_number')
+                                <input type="checkbox" class="custom-control-input" id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'
+                                    ~~ '.$field->status}}' {{($field->status=='y')?'checked':''}} onclick='return false;'>
+                                @else
                                 <input type="checkbox" class="custom-control-input" id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'
                                     ~~ '.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                @endif
                                 <label class="custom-control-label" for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
                             </div>
                         </div>
@@ -346,7 +351,9 @@
             });
             $('.search-input-select').on('change', function () {   // for select box
                 var i = $(this).attr('data-column');
+
                 var v = $(this).val();
+                console.log(v);
                 table.columns(i).search(v).draw();
             });
         });

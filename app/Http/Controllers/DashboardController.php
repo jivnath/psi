@@ -26,15 +26,19 @@ class DashboardController extends Controller
             ->groupBy('conformation_day_before')
             ->get();
 
-        $data['audits'] = '';//$dessert_obj->find(1)->audits;
-
+        $data['audits'] = ''; // $dessert_obj->find(1)->audits;
 
         $data['dessert_report'] = $this->simplify_dessert_report($dessert_report->toArray());
 
         $data['employee_summery'] = Raw::getConfirmedEmployees();
 
         $data['employee_summery_count'] = Raw::getConfirmedEmployeesCount();
-        $data['confirmation_per']=(array_sum(array_column($data['employee_summery'],'total_count') )*100)/array_sum(array_column($data['employee_summery_count'],'total_count') );
+        $total_confiration = array_sum(array_column($data['employee_summery_count'], 'total_count'));
+        if ($total_confiration <= 0) {
+            $data['confirmation_per'] = 0;
+        } else {
+            $data['confirmation_per'] = (array_sum(array_column($data['employee_summery'], 'total_count')) * 100) / $total_confiration;
+        }
         $data['total_emp'] = Employee::count();
         return view('dashboard', $data);
 
