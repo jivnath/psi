@@ -75,12 +75,11 @@ class DessertController extends Controller
             $cts_id = $request->get('cts_id');
             $responsible = $request->get('responsible');
             $desserts = DessertSheet::where('cts_id', $cts_id)->get();
-//            dd($desserts);
             foreach ($desserts as $dessert)
             {
-                if($dessert->responsible1 = null)
+                if(!$dessert->responsible1)
                 {
-                    $dessert->responsible1 =$responsible;
+                    $dessert->responsible1 = $responsible;
                     $dessert->save();
                 }
             }

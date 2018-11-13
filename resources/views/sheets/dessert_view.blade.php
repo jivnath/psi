@@ -360,7 +360,7 @@
                             return false;
                         }
                         if (typeof data.total_worked !== 'undefined' && data.total_worked > {{\Config('app.job_limit')}}) {
-                            alert('reached limit ' + data.total_worked);
+                            alert('reached limit ' + (data.total_worked));
                             return false;
                         }
                         $.each(data, function (i, v) {
@@ -574,7 +574,7 @@
         // alert('hey');
         company_schedule_id = $('#all_saved_value').data('22');
         var responsible = $(this).val();
-        alert(responsible);
+        // alert(responsible);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -585,7 +585,8 @@
            dataType: "json",
            async:true,
            success:function(data){
-               alert('hey');
+               // $(".responsibile").val('4');
+               // alert('hey');
            }
         });
         var confirmation_data = $(this).find('option:selected').val();
