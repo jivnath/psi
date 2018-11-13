@@ -36,7 +36,9 @@
                                     {{--{{dd($all_col)}}--}} @foreach($all_col as $column)
                                     <th class="sticky-top" style="word-wrap: break-word">{{ ucwords(trans('employee.'.$column->field_name))}}</th>
                                     @endforeach
-
+                                    <th class="sticky-top" style="word-wrap: break-word">
+                                        Skills
+                                    </th>
                                 </tr>
                             </thead>
                             <thead>
@@ -196,7 +198,6 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('employee.Close')
  </button>
                         <button type="submit" class="btn btn-primary">@lang('employee.SaveChanges')</button>
-                        <<<<<<< HEAD=======>>>>>>> b1f72a16b9f4b5746cc045df503b70c9c6711175
                     </div>
                 </form>
             </div>
