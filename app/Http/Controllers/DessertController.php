@@ -61,10 +61,29 @@ class DessertController extends Controller
                 $date = $request->get('selected_date');
 
                 $dessert = Raw::getDessertInfo($id, $date);
+//                dd($dessert);
                 $userlist=User::all();
 
                 return view('sheets.dessert_view', compact('dessert','userlist'));
             }
+        }
+    }
+
+    public function allResponsible(Request $request)
+    {
+        if($request->ajax()){
+            $cts_id = $request->get('cts_id');
+            $responsible = $request->get('responsible');
+            $desserts = DessertSheet::where('cts_id', $cts_id)->get();
+            foreach ($desserts as $dessert)
+            {
+                if(!$dessert->responsible1)
+                {
+                    $dessert->responsible1 = $responsible;
+                    $dessert->save();
+                }
+            }
+            echo json_encode(1);
         }
     }
 
