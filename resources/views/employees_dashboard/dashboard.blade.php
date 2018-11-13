@@ -330,16 +330,18 @@
                 data: {'shift': selectedShift},
                 async: true,
                 success: function (data) {
+                    // alert('hey');
                     $("#calendar").fullCalendar('clientEvents', function (event) {
+                        // alert(event.id);
                         if (event.id == selectedShift) {
+                            // alert('hey');
                             event.backgroundColor = '#74c673',
-                                event.borderColor = '#74c673',
-                                event.selected = 'yes'
+                            event.borderColor = '#74c673',
+                            event.selected = 'yes'
                             $('#calendar').fullCalendar('updateEvent', event);
                             $('#shifts').html('');
                             $('#ModalAdd').hide();
                         }
-
                     });
                 }
             });

@@ -33,12 +33,12 @@
                         <table class="table table-striped table-fixed" style="text-align: center" id='example'>
                             <thead>
                                 <tr>
-                                    {{--{{dd($all_col)}}--}} @foreach($all_col as $column)
-                                    <th class="sticky-top" style="word-wrap: break-word">{{ ucwords(trans('employee.'.$column->field_name))}}</th>
+                                    @foreach($all_col as $column)
+                                    <th class="sticky-top" style="word-wrap: break-word">{{(trans('employee.'.$column->field_name))}}</th>
                                     @endforeach
-                                    <th class="sticky-top" style="word-wrap: break-word">
-                                        Skills
-                                    </th>
+                                    {{--<th class="sticky-top" style="word-wrap: break-word">--}}
+                                        {{--Skills--}}
+                                    {{--</th>--}}
                                 </tr>
                             </thead>
                             <thead>

@@ -74,43 +74,65 @@ class Dashboard extends Controller
 
     public function storeEmployeeApplication(Request $request)
     {
-
-
         $cts_id = $request->get('shift');
         $user = \Session::get('username');
 
         $total_worked = Raw::dessert_calculation_method($cts_id, $user);
 //        dd($total_worked);
-        $total_needed = CompanyTimeSchedule::select(DB::raw('normal+help as total_needed'))->find($cts_id)->total_needed;
+        $total_needed = CompanyTimeSchedule::select(DB::raw('normal as total_needed'))->find($cts_id)->total_needed;
         $total_used = DessertSheet::where(['cts_id' => $cts_id])->whereNull('deleted_at')->count();
-        if ($total_worked['total_worked'] > \Config::get('app.job_limit')) {
+//        dd($total_used);
+
+        if ($total_worked['total_worked'] < \Config::get('app.job_limit'))
+        {
             $data = [
                 'total_worked' => $total_worked['total_worked']
             ];
-        } elseif ($total_needed <= $total_used) {
+//            dd($data);
+            echo json_encode(1);
+        }
+        elseif ($total_needed <= $total_used)
+        {
             $data = [
                 'total_worked' => $total_worked['total_worked'],
                 'total_needed' => $total_needed,
                 'total_used' => $total_used
             ];
-        } else {
+//            echo json_encode(1);
+//            dd($data);
+        }
+        else
+        {
+//            $date= 'g';
+//            dd($date);
             $employee = DessertSheet::firstOrNew([
                 'staff_no' => $user,
                 'cts_id' => $cts_id
             ]);
-            if ($employee->exists) {
-            } else {
+            if ($employee->exists)
+            {
+//                $date= 'g';
+//                dd($date);
+//                echo json_encode(1);
+
+            }
+            else
+            {
+//                $date= 'g';
+//                dd($date);
+//                dd($employee);
                 $employee->staff_no = $user;
                 $employee->cts_id = $cts_id;
                 $employee->save();
 
                 $data['staff_no'] = $user;
                 $data['cts_id'] = $cts_id;
+//                echo json_encode($employee);
             }
-            echo json_encode($employee);
+//            dd($employee);
+            echo json_encode(1);
         }
-
-
+        echo json_encode(1);
     }
 
     public function getCompanyName(Request $request)
