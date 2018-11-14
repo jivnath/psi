@@ -46,10 +46,10 @@ div.dataTables_wrapper {
                                  @endforeach
                                  <td>
                                  @foreach($cell->employeeSkill as $skill_index)
-									<span class="label label-success">{{$skill_index->skill_id}}</span>
+									<span class="label label-success">{{$skill_index->skill->skill_name}}</span>
                                  @endforeach
                                  </td>
-                                </tr>
+                              </tr>
 							@endforeach
 
 							</tbody>

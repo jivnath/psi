@@ -24,10 +24,7 @@
                             @endphp
                             @foreach($times as $time)
                                 @foreach($companies as $company)
-
-
                                     @foreach($types as $type)
-
                                         <tr>
                                             @if($last !==$time->time)
                                                 <td rowspan={{ count($companies)*2}} style="vertical-align:middle;text-align:center;font-weight:bolder;"> {{ $time->time }} </td>
@@ -40,13 +37,12 @@
                                                 <td> {{ $company->name }} </td>
                                                 <td>
                                                     @if($type=='normal')
-                                                        Necessary
+                                                        @lang('employee.Necessary')
                                                     @else
-                                                        {{ ucfirst($type) }}
+                                                        @lang('employee.Help')
                                                     @endif
                                                 </td>
-
-                                                @foreach($dates as $date)
+                                                    @foreach($dates as $date)
                                                     @php
                                                         $ctt = App\Http\Controllers\PagesController::getCtt($time->time, $company->companyTT_id, $date->date);
                                                     @endphp

@@ -61,8 +61,8 @@ class DessertController extends Controller
                 $date = $request->get('selected_date');
 
                 $dessert = Raw::getDessertInfo($id, $date);
-//                dd($dessert);
-                $userlist=User::all();
+                $role = \Session::get('user_role_id');
+                $userlist=User::where('role_id', $role)->get();
 
                 return view('sheets.dessert_view', compact('dessert','userlist'));
             }
@@ -146,19 +146,13 @@ class DessertController extends Controller
                                 'total_worked' => $total_worked
                             ];
                             if (empty($request->dessert_id)) {
-                                $merge_new = [
-                                    23 => $this->auto_store_dessert($request)
-                                ];
-                                array_push($data, $merge_new);
+
+                                $data[23]=$this->auto_store_dessert($request);
                             } else {
                                 $request->request->add([
                                     'action_type' => 'update'
                                 ]);
-
-                            $merge_new = [
-                                23 => $this->auto_store_dessert($request)
-                            ];
-                            array_push($data, $merge_new);
+                            $data[23]=$this->auto_store_dessert($request);
                         }
                         }
                     }

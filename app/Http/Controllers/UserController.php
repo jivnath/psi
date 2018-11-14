@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\Company;
 use App\Models\CompanyToUser_rel;
+use Session;
 
 
 class UserController extends Controller
@@ -49,8 +50,10 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->language = $request->language;
-        $user->save();
         $role = $request->role; //Retrieving the roles field
+        $user->role_id = $role;
+        $user->save();
+
         $user->assignRole($role); //Assigning role to user
 
 //        $companies = $request['companies'];
@@ -66,7 +69,7 @@ class UserController extends Controller
 //            }
 //        }
 
-
+        Session::flash('success', trans('employee.Usersuccessfullyadded!'));
         //Redirect to the users.index view and display message
         return redirect()->route('users.index');
     }
@@ -101,28 +104,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $role = $request->input('role'); //Retreive all roles
+        $user->role_id = $role;
         $user->roles()->detach();
         $user->assignRole($role);
+        $user->save();
 
-//        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
-//        foreach ($userCompanies as $userCompany)
-//        {
-//            $userCompany->delete();
-//
-//
-//        }
-//
-//        $companies = $request->input('companies');
-//
-//        foreach ($companies as $company)
-//        {
-//            $user_company_rel = new CompanyToUser_rel();
-//            $user_company_rel->user_id = $id;
-//            $user_company_rel->company_id = $company;
-//            $user_company_rel->save();
-//        }
-//
-
+        Session::flash('success', trans('employee.Usersuccessfullyupdated!'));
         return redirect()->route('users.index');
 	}
 
