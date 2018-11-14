@@ -51,6 +51,7 @@ class UserController extends Controller
         $user->language = $request->language;
         $user->save();
         $role = $request->role; //Retrieving the roles field
+
         $user->assignRole($role); //Assigning role to user
 
 //        $companies = $request['companies'];

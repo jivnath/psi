@@ -97,7 +97,7 @@
                         $("#skill").val('');
 
                          $("#alert").show()
-                        $("#message").html('<span>{{trans('employee.SkillAdded')}}</span>');
+                        $("#message").html('<span>{{trans('employee.SkillAdded!')}}</span>');
                         $(function(){
                         $('html, body').animate({
                         scrollTop: $("#alert").offset().top
@@ -172,6 +172,7 @@
             $("#add").addClass('add');
             $("#add").removeClass('rename');
             ("#add").text('Add');
+           // $("#add").html('<span>{{trans('employee.Add')}}</span>');
             $("#skill").val('');
         });
 
@@ -187,7 +188,8 @@
                     $('#skillname'+id).text(skill);
                     $("#add").removeClass('rename');
                     $("#add").addClass('add');
-                    $("#add").text('Add');
+                   // $("#add").text('Add');
+                    $("#add").html('<span>{{trans('employee.Add')}}</span>');
                     $('#skill').val('');
                     alert(skill);
                     $("#alert").show()
