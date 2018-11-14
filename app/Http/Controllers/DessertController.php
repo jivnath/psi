@@ -145,19 +145,13 @@ class DessertController extends Controller
                                 'total_worked' => $total_worked
                             ];
                             if (empty($request->dessert_id)) {
-                                $merge_new = [
-                                    23 => $this->auto_store_dessert($request)
-                                ];
-                                array_push($data, $merge_new);
+
+                                $data[23]=$this->auto_store_dessert($request);
                             } else {
                                 $request->request->add([
                                     'action_type' => 'update'
                                 ]);
-
-                            $merge_new = [
-                                23 => $this->auto_store_dessert($request)
-                            ];
-                            array_push($data, $merge_new);
+                            $data[23]=$this->auto_store_dessert($request);
                         }
                         }
                     }

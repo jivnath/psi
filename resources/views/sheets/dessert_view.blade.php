@@ -267,7 +267,7 @@
 <script>
     var down_to_top = window.innerHeight;
     $('#dessert_response').css('height', down_to_top / 1.3);
-    var allowed_field = [4, 5, 6, 7];
+    var allowed_field = [4, 5, 6, 7,23];
     var main_val;
     var allowed_pop_up = ['Not OK', 'No response'];
     var is_model_alert = false;
@@ -638,9 +638,11 @@
         obj.closest('tr').find('td').each(
             function (i) {
                 if ($.inArray(i, allowed_field) != -1) {
+                	console.log(i);
                     $(this).html($('#all_saved_value').data(i.toString()));
                 }
                 if ($.inArray(i, [0, 1, 2]) != -1) {
+
                     $('#all_saved_value').data(i.toString(), $(this).html());
                 }
             });
