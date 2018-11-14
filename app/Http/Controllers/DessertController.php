@@ -61,7 +61,6 @@ class DessertController extends Controller
                 $date = $request->get('selected_date');
 
                 $dessert = Raw::getDessertInfo($id, $date);
-//                dd($dessert);
                 $userlist=User::all();
 
                 return view('sheets.dessert_view', compact('dessert','userlist'));

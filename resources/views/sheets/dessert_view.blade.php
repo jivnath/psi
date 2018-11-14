@@ -128,7 +128,7 @@
                     <select class='responsibile'>
                         <option value=''>--select--</option>
                         @foreach($userlist as $row_user)
-                            <option value='{{$row_user->id}}' {{ ($info->responsible1==$row_user->id) ? 'selected':''}}>{{$row_user->name}}</option>
+                            <option value='{{$row_user->id}}' {{ ($info->responsible1==$row_user->id) ? 'selected':''}} data-dessert_id="{{$dessert_row['id']}}">{{$row_user->name}}</option>
                         @endforeach
                     </select>
                 </td>
