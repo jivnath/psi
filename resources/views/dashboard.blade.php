@@ -13,7 +13,7 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">@lang('nav.CONFIRMATION')</span>
-                        <span class="info-box-number">{{$confirmation_per}}%</span>
+                        <span class="info-box-number">{{round($confirmation_per,2)}}%</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
