@@ -32,9 +32,9 @@ div.dataTables_wrapper {
 							<thead class="thead-dark">
 								<tr>
 									@foreach($all_col as $columns_index)
-									<th class="sticky" style="word-wrap: break-word">{{$columns_index->field_name}}</th>
+									<th class="sticky" style="word-wrap: break-word">{{trans('employee.'.$columns_index->field_name)}}</th>
 									@endforeach
-									<th class="sticky" style="word-wrap: break-word">Skill</th>
+									<th class="sticky" style="word-wrap: break-word">@lang('employee.Skills')</th>
 
 								</tr>
 							</thead>
@@ -46,10 +46,10 @@ div.dataTables_wrapper {
                                  @endforeach
                                  <td>
                                  @foreach($cell->employeeSkill as $skill_index)
-									<span class="label label-success">{{$skill_index->skill}}</span>
+									<span class="label label-success">{{$skill_index->skill->skill_name}}</span>
                                  @endforeach
                                  </td>
-                                </tr>
+                              </tr>
 							@endforeach
 
 							</tbody>
@@ -82,7 +82,7 @@ div.dataTables_wrapper {
         						<div class="custom-control custom-checkbox">
         							<input type="checkbox" class="custom-control-input"
         								id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}> <label class="custom-control-label"
-        								for="customCheck{{$field->id}}" >{{$field->field_name}}</label>
+        								for="customCheck{{$field->id}}" >{{trans('employee.'.$field->field_name)}}</label>
         						</div>
         					</div>
         				@endforeach

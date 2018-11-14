@@ -37,11 +37,6 @@ Route::group(['middleware'=> ['employee']], function(){
             Route::get('/profile', ['as'=>'employee.profile', 'uses'=>'Employee\Dashboard@employeeProfile']);
             Route::get('/getWorkedShift', ['as' => 'getWorkedShift', 'uses' => 'Employee\Dashboard@getWorkedShift']);
             Route::post('/storeMessage', ['as' => 'inbox.store', 'uses' => 'PsiInboxController@store']);
-
-
-
-
-
         });
     });
 });
@@ -50,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['check.primary.company']], function(){
         Route::prefix('employees')->group(function () {
             Route::get('/', ['as' => 'employees', 'uses' => 'EmployeeController@index']);
-            Route::get('/show', ['as' => 'employees.show', 'uses' => 'EmployeeController@show']);
+            Route::get('/show/{option?}', ['as' => 'employees.show', 'uses' => 'EmployeeController@show']);
             Route::get('/upload', ['as' => 'employees.uploadForm','uses' => 'EmployeeController@uploadForm']);
             Route::post('/upload', ['as' => 'employees.upload', 'uses' => 'EmployeeController@upload']);
             Route::post('/updateCell', ['as' => 'employees.updateCell', 'uses' => 'EmployeeController@updateCell']);
@@ -202,6 +197,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::prefix('sheet')->group(function(){
             Route::get('time_table', ['as' => 'sheet.time_table', 'uses' => 'DessertController@generateTimeTable']);
             Route::get('self', ['as' => 'sheet.dessert', 'uses' => 'DessertController@dessert']);
+            Route::post('allResponsible', ['as' => 'allResponsible', 'uses' => 'DessertController@allResponsible']);
         });
 
         Route::prefix('dessert')->group(function(){

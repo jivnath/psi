@@ -381,7 +381,7 @@ return [
     "place" => "場所",
     "postal_code" => "郵便番号",
     "psi_number" => " psi番号",
-    "reg_officer" => " 登録士",
+    "reg_officer" => "登録士",
     "res_confirmation" => " レジデンスカードの有効期限確認 ",
     "residence_card_exp_date" => "レジデンスカード有効期限 ",
     "residence_card_no" => "レジデンスカード番号",

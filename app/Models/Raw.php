@@ -11,7 +11,9 @@ class Raw extends Model
 
     public static function AllCompanyData()
     {
-        $sql = "SELECT
+        $fetch_detail=[];
+        $sql = "select with_table.*
+from(SELECT
             p.id AS parent_id,
             p.name AS parent_name,
             c1.id AS child_id_1,
@@ -26,29 +28,23 @@ class Raw extends Model
             p.address address_p,
             c1.address address_c1,
             c2.address address_c2,
-            (
-                SELECT
-                    psi_num
-                FROM
-                    leaders l
-                WHERE
-                    l.company_id = c1.id
-            ) team_leader,
-            (
-                SELECT
-                	emp.name
+            ( SELECT CAST(GROUP_CONCAT(psi_num SEPARATOR ',') AS CHAR)
+                    FROM leaders l where l.company_id = c1.id) team_leader,
+                    (SELECT
+                	GROUP_CONCAT(emp.name SEPARATOR ' | ')
                 FROM
                 	employees emp
                 WHERE
-                	emp.psi_number = team_leader
-            ) employee,
+                	emp.psi_number in( SELECT psi_num
+                    FROM leaders ll where ll.company_id=c1.id)) employee,
+
             CASE
                     WHEN c1.id IS NULL
                          AND c2.id IS NULL
                          AND c3.id IS NULL THEN 0
                     WHEN c1.id IS NOT NULL
                          AND c2.id IS NULL
-                         AND c3.id IS NULL THEN 1
+                         AND c3.id IS NULL THEN     1
                     WHEN c1.id IS NOT NULL
                          AND c2.id IS NOT NULL
                          AND c3.id IS NULL THEN 2
@@ -63,7 +59,7 @@ class Raw extends Model
             LEFT JOIN companies c3 ON c3.master_id = c2.id
 where     p.master_id IS NULL
         ORDER BY
-            p.id,c1.id,c2.id,c3.id ASC";
+            p.id,c1.id,c2.id,c3.id ASC) as with_table";
         $companies = DB::select($sql);
 
         foreach ($companies as $row) {
@@ -152,6 +148,13 @@ WHERE
 
         $hour = DB::select("$sql");
         return $hour;
+    }
+
+    public static function getShiftTime($cts_id)
+    {
+        $sql = "SELECT TIMEDIFF(smd.end_time, smd.start_time)/10000 AS shiftTime FROM company_time_schedules cts, company_time_tables ctt, shift_master_datas smd WHERE cts.id = $cts_id AND cts.companyTT_id = ctt.id AND smd.company_id = ctt.company_id AND cts.time = smd.start_time";
+        $data = DB::select($sql);
+        return $data;
     }
 
     public static function getSkillsDetails()

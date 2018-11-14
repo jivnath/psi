@@ -125,6 +125,8 @@
         });
         var last_click = '';
         $(document).ready(function () {
+
+            var initialLocaleCode = 'ja';
             /* initialize the calendar
                   -----------------------------------------------------------------*/
             //Date for the calendar events (dummy data)
@@ -139,6 +141,7 @@
                     center: 'title',
                     right: 'next, today'
                 },
+                locale: initialLocaleCode,
                 buttonText: {
                     today: 'today',
                     month: 'month',
@@ -181,23 +184,6 @@
                     edit(event);
 
                 },
-                // dayRender: function (date, cell){
-                //     var today = $('#calendar').fullCalendar('getDate');
-                //     var newdate = moment(today).format('YYYY-MM-DD');
-                //     let i = 0;
-                //     $('#calendar').fullCalendar('clientEvents', function (event) {
-                //
-                //         if (moment(date).format('YYYY-MM-DD') == moment(event.start).format('YYYY-MM-DD') && moment(date).format('YYYY-MM-DD') >= newdate) {
-                //             i = 1;
-                //             alert('hey');
-                //             // cell.css("background-color", '#2a7ce9');
-                //         }
-                //     });
-                //     if (i === 1) {
-                //         // alert(i);
-                //         cell.css("background-color", '#2a7ce9');
-                //     }
-                // },
                 dayClick: function (date, allDay) {
                     var today = $('#calendar').fullCalendar('getDate');
                     var newdate = moment(today).format('YYYY-MM-DD');
@@ -254,6 +240,23 @@
                 },
                 editable: true,
             });
+
+            $.each($.fullCalendar.locales, function(localeCode) {
+                $('#locale-selector').append(
+                    $('<option/>')
+                        .attr('value', localeCode)
+                        .prop('selected', localeCode == initialLocaleCode)
+                        .text(localeCode)
+                );
+            });
+
+        });
+
+        $("#locale").change(function(){
+            var locale = $(this).val();
+            // alert(locale);
+            $('#calendar').fullCalendar('option', 'locale', 'ja');
+
         });
 
         function getData() {
@@ -330,16 +333,18 @@
                 data: {'shift': selectedShift},
                 async: true,
                 success: function (data) {
+                    // alert('hey');
                     $("#calendar").fullCalendar('clientEvents', function (event) {
+                        // alert(event.id);
                         if (event.id == selectedShift) {
+                            // alert('hey');
                             event.backgroundColor = '#74c673',
-                                event.borderColor = '#74c673',
-                                event.selected = 'yes'
+                            event.borderColor = '#74c673',
+                            event.selected = 'yes'
                             $('#calendar').fullCalendar('updateEvent', event);
                             $('#shifts').html('');
                             $('#ModalAdd').hide();
                         }
-
                     });
                 }
             });
