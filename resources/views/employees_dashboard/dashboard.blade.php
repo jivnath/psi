@@ -252,9 +252,6 @@
 
         });
 
-        // var initiakLocaleCode = 'en';
-
-
         $("#locale").change(function(){
             var locale = $(this).val();
             // alert(locale);
