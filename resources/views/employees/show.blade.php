@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('content')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <style>
@@ -34,38 +34,22 @@
                             <thead>
                                 <tr>
                                     @foreach($all_col as $column)
-                                    <th class="sticky-top" style="word-wrap: break-word">{{(trans('employee.'.$column->field_name))}}</th>
+                                    <th class="sticky-top" style="word-wrap: break-word">{{ ucwords(trans('employee.'.$column->field_name))}}</th>
                                     @endforeach
-                                    {{--<th class="sticky-top" style="word-wrap: break-word">--}}
-                                        {{--Skills--}}
-                                    {{--</th>--}}
+                                    <th class="sticky-top" style="word-wrap: break-word">Skills</th>
+
                                 </tr>
                             </thead>
                             <thead>
                                 <tr>
-                                    @foreach($all_col as $count_key=>$column)
-                                    @if ($column->field_name == 'sex')
+                                    @foreach($all_col as $count_key=>$column) @if ($column->field_name == 'sex')
                                     <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
                                                     <option value="">@lang('employee.All')</option>
                                                     <option value="男性">男性</option>
                                                     <option value="女性">女性</option>
                                                 </select></td>
-                                    @elseif ($column->field_name == 'status_residence')
-                                    <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
-                                                    <option>@lang('employee.none')</option>
-                                                    <option value="就労">就労</option>
-                                                    <option value="家族滞在">家族滞在</option>
-                                                    <option value="留学">留学</option>
-                                                </select></td>
-                                                @elseif ($column->field_name == 'operating_status')
-                                    <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
-                                                    <option>none</option>
-                                                                <option value="働くこと">働くこと</option>
-                                                                <option value="低頻度の仕事">低頻度の仕事</option>
-                                                                <option value="やめて">やめて</option>
-                                                </select></td>
                                     @else
-                                    <td><input type="text" data-col="{{$column->field_name }}" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
+                                    <td><input type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
                                     @endif @endforeach
 
                                 </tr>
@@ -73,7 +57,7 @@
                             <tbody>
                                 @if(count($cells) > 0) @foreach($cells as $index => $cell)
                                 <tr>
-                                    @foreach($all_col as $column) @if($column->field_name == 'psi_number') @php $psi_value=$cell->{$column->field_name}
+                                    @foreach($all_col as $column) @if($column->field_name == 'psi_number') @php $psi_value=$cell->{$column->field_name} 
 @endphp
                                     @endif @if($column->field_name != 'updated_at' && $column->field_name != 'psi_number'
                                     && $column->field_name != 'sex' && $column->field_name != 'status_residence' && $column->field_name
@@ -84,10 +68,8 @@
                                         {{ $cell->{$column->field_name} }}
                                     </td>
                                     @else
-
                                     <td>
-                                    @if($option=='edit')
-                                    @if ($column->field_name == 'sex')
+                                        @if ($column->field_name == 'sex')
                                         <select name="sex" class="sex_class" data-psi_data="{{$psi_value}}">
                                                                 @foreach($sex as $s)
                                                                     <option
@@ -129,6 +111,7 @@
                                         == 'operating_status')
                                         <select name="operating_status" class="operating_status" data-psi_data="{{$psi_value}}">
                                                                 <option>@lang('employee.none')</option>
+
                                                                 <option
                                                                     <?= ($cell->{$column->field_name} == '働くこと') ? 'selected="selected"' : ''?> value="働くこと">
                                                                     働くこと
@@ -168,12 +151,11 @@
                                                                 </option>
                                                             </select> @else {{ $cell->{$column->field_name}
                                         }} @endif
-                                        @else {{ $cell->{$column->field_name}
-                                        }}
-                                        @endif
                                     </td>
-
                                     @endif @endforeach
+                                    <td><span id="{{$psi_value}}" class="employee_skills btn btn-primary" data-toggle="modal"
+                                            data-target="#myModal">Choose Skill</span></td>>
+
                                 </tr>
                                 @endforeach @else
                                 <tr>
@@ -188,6 +170,44 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <form action="{{route('skill.store')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                @csrf
+            <div class="modal-header">
+                <h4 class="modal-title">Skills</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+
+            <div class="modal-body">
+                <div id="formDiv">
+                    
+                </div>
+                <div id="allSkills" style="margin-top:20px">
+
+                </div>
+            {{-- <input type="text" name="psi_num" value="{{old('psi_num')}}"> --}}
+               
+                
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">@lang('employee.Save')</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+
+        </div>
+    </div>
+</div>
+
 <div class="modal" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -207,13 +227,8 @@
                         @foreach($customize_columns_index as $field)
                         <div class="col-md-4 mb-3">
                             <div class="custom-control custom-checkbox">
-                                @if($field->field_name=='psi_number')
-                                <input type="checkbox" class="custom-control-input" id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'
-                                    ~~ '.$field->status}}' {{($field->status=='y')?'checked':''}} onclick='return false;'>
-                                @else
                                 <input type="checkbox" class="custom-control-input" id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'
                                     ~~ '.$field->status}}' {{($field->status=='y')?'checked':''}}>
-                                @endif
                                 <label class="custom-control-label" for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
                             </div>
                         </div>
@@ -224,6 +239,7 @@
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('employee.Close')
  </button>
                         <button type="submit" class="btn btn-primary">@lang('employee.SaveChanges')</button>
+
                     </div>
                 </form>
             </div>
@@ -372,17 +388,49 @@
             });
             $('.search-input-select').on('change', function () {   // for select box
                 var i = $(this).attr('data-column');
-
                 var v = $(this).val();
-                console.log(v);
                 table.columns(i).search(v).draw();
             });
         });
+
+        $(".employee_skills").click(function(){
+            var selected = $(this).attr('id');
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('skill.all') }}",
+                data: {'selected': selected},
+                dataType: 'json',
+                success: function (data) {
+                    let i;
+                    $("#allSkills").html('');
+                    for (i = 0; i < data.masterSkills.length; i++) {
+                        console.log(data.masterSkills);
+                        var check = $.inArray(data.masterSkills[i].id, data.employeeSkills);
+                        if (check >= 0) {
+                            var html = '<input type="checkbox" name="employeeSkills[]" value="' + data.masterSkills[i].id + '" checked>' + data.masterSkills[i].skill_name + '<br>';
+                            $("#allSkills").append(html);
+                        }
+                        else {
+                            var html = '<input type="checkbox" name="employeeSkills[]" value="' + data.masterSkills[i].id + '">' + data.masterSkills[i].skill_name + '<br>';
+                            $("#allSkills").append(html);
+                        }
+                        var form = '<input type="text" class="form-conrol" value=' +selected + ' name="psi_num">';
+                        $("#formDiv").html(form);
+                    }
+                    
+                }
+            });
+        });
+
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');
         });
+       
+       
 
 </script>
+
+
 
 
 @endpush

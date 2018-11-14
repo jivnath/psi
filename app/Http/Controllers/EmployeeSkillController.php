@@ -14,6 +14,11 @@ class EmployeeSkillController extends Controller
         $masterSkills = SkillMaster::where('status', 'enabled')->get();
         return view('employees.skill')->withMasterSkills($masterSkills);
     }
+    public function show() 
+    {
+        $masterSkills = SkillMaster::where('status', 'enabled')->get();
+        return view('employees.show')->withMasterSkills($masterSkills);
+    }
 
     public function store(Request $request)
     {
@@ -34,13 +39,14 @@ class EmployeeSkillController extends Controller
             }
             EmployeeSkill::insert($update_data);
         }
-        return redirect()->route('employee.skill');
+        return redirect()->route('employees');
     }
 
     public function findSkill(Request $request)
     {
 
         $psi_num = $request->get('selected');
+        // dd($psi_num);
 
         $skill = EmployeeSkill::where('psi_num', $psi_num)->get();
         $masterSkills = SkillMaster::where('status', 'enabled')->get();
@@ -53,6 +59,7 @@ class EmployeeSkillController extends Controller
             'employeeSkills' => $skills,
             'masterSkills' => $masterSkills
         ];
+        // dd($data);
             echo json_encode($data);
     }
 
