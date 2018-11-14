@@ -49,7 +49,7 @@ div.dataTables_wrapper {
 									<span class="label label-success">{{$skill_index->skill_id}}</span>
                                  @endforeach
                                  </td>
-                                </tr>
+                              </tr>
 							@endforeach
 
 							</tbody>
