@@ -274,7 +274,6 @@ return [
     'Japanese'=>'Japanese',
     'SelectUser'=>'--Select User--',
     'NoEmployeeFound'=>'No Employee Found',
-    'SelectSection'=>'--Select Section--',
     'AddShift'=>'Add Shift',
     'Companiessuccessfullyadded!'=>'Companies successfully added!',
     'Companiessuccessfullyupdated!'=>'Companies successfully updated!',
@@ -323,7 +322,6 @@ return [
     'Requests'=>'Requests',
     'Response'=>'Response',
     'none'=>'none',
-    'All'=>'--All--',
     'SelectCompany'=>'Select Company',
     'Success'=>'Success',
     'CompanyDetails'=>'Company Details',
@@ -403,13 +401,15 @@ return [
     'Error'=>'Error',
     'Messagesnotavailable'=>'Messages not available',
     'Noheetsareuploaded'=>'No sheets are uploaded',
-    'Name:'=>'Name:',
-    'Email:'=>'Email',
     'NoShiftForThisCompany'=>'No Shift For This Company',
     'SeeAllRequests'=>'See All Requests',
     'Help'=>'Help',
     'PrintTable'=>'Print Table',
     'ChooseSkill'=>'Choose Skill',
-    'NoDataAvailable'=>'No Data Available'
+    'NoDataAvailable'=>'No Data Available',
+    'Notavailable'=>'Not available',
+    'Addhere'=>'Add here',
+    'sent'=>'sent',
+    'request'=>'request'
 
 ];

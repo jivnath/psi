@@ -255,7 +255,6 @@ return [
     'AboutMe'=>'私について',
     'ResidentCardNumber'=>'住民番号',
     'All'=>'すべて',
-    'All'=>'- すべて - ',
     'Unresponded'=>'未応答',
     'Responded'=>'応答した',
     'Request'=>'要求',
@@ -276,7 +275,6 @@ return [
     'Japanese'=>'日本人',
     'SelectUser'=>'- ユーザーを選択 -',
     'NoEmployeeFound'=>'従業員が見つかりません',
-    'SelectSection'=>'- セクションを選択 -',
     'AddShift'=>'シフトを追加',
     'Companiessuccessfullyupdated!'=>'企業は正常に更新されました！',
     'Subcompaniessuccessfully added!'=>'サブ企業は正常に追加されました！',
@@ -403,13 +401,14 @@ return [
     'Permissionsuccessfullyassigned'=>'権限が割り当てられました',
     'Error'=>'エラー',
     'Messagesnotavailable'=>'メッセージは利用できません',
-    'Name:'=>'名：',
-    'Email:'=>'Eメール：',
     'NoShiftForThisCompany'=>'この会社のシフトはありません',
     'SeeAllRequests'=>'すべてのリクエストを見る',
     'Help'=>'助けて',
     'PrintTable'=>'テーブルを印刷する',
     'ChooseSkill'=>'スキルを選ぶ',
-    'NoDataAvailable'=>'データなし'
-
+    'NoDataAvailable'=>'データなし',
+    'Notavailable'=>'利用不可',
+    'Addhere'=>'ここに追加',
+    'sent'=>'送られた',
+    'request'=>'要求'
 ];
