@@ -420,8 +420,8 @@ WHERE
             WHERE
             normal is not NULL
             ORDER BY
-                cts.DATE,time
-                asc";
+                cts.DATE
+                desc";
         return DB::select($sql);
     }
 
