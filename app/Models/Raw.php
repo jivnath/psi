@@ -95,7 +95,7 @@ where     p.master_id IS NULL
 
     DATE,
     time,
-    (help+normal) necessary,
+    (normal) necessary,
      (
         SELECT
             COUNT(*) occupied_shift
@@ -279,7 +279,7 @@ WHERE
             companytt_id,
             date,
             time,
-            ( normal ) total_require,
+            normal total_require,
             ctt.schedule_session_id,
             ctt.company_id,
             (
@@ -420,8 +420,8 @@ WHERE
             WHERE
             normal is not NULL
             ORDER BY
-                cts.DATE,time
-                asc";
+                cts.DATE
+                desc";
         return DB::select($sql);
     }
 
