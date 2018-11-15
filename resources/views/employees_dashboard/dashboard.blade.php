@@ -117,6 +117,7 @@
     <!-- fullCalendar -->
     <script src="{{asset('bower_components/moment/moment.js')}}"></script>
     <script src="{{asset('bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+    <script src="{{asset('bower_components/fullcalendar/locale/es.js')}}"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -241,14 +242,23 @@
                 editable: true,
             });
 
-            $.each($.fullCalendar.locales, function(localeCode) {
-                $('#locale-selector').append(
-                    $('<option/>')
-                        .attr('value', localeCode)
-                        .prop('selected', localeCode == initialLocaleCode)
-                        .text(localeCode)
-                );
-            });
+            // $.each($.fullCalendar.locales, function(localeCode) {
+            //     $('#locale-selector').append(
+            //         $('<option/>')
+            //             .attr('value', localeCode)
+            //             .prop('selected', localeCode == initialLocaleCode)
+            //             .text(localeCode)
+            //     );
+            // });
+            //
+            // $.each($.fullCalendar.locales, function(localeCode) {
+            //     $('#locale-selector').append(
+            //         $('<option/>')
+            //             .attr('value', localeCode)
+            //             .prop('selected', localeCode == initialLocaleCode)
+            //             .text(localeCode)
+            //     );
+            // });
 
         });
 
