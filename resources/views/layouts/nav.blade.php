@@ -321,7 +321,7 @@
 
                                                         </div>
                                                         <a class="footer_message dropdown-item text-center"
-                                                           href="{{route('inbox.messages')}}">@lang('SeeAllRequests')</a>
+                                                           href="{{route('inbox.messages')}}">@lang('employee.SeeAllRequests')</a>
 
                                                     @endif
                                                     @empty($total)

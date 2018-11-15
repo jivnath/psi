@@ -158,7 +158,6 @@ return [
     'CompanyManage' => 'Company Manage',
     'ManageCompany' => 'Manage Company',
     'NewCompany' => 'New Company',
-//'CompanyName'=>'Company Name',
     'ContactNumber' => 'Contact Number',
     'Address' => 'Address',
     'Section' => 'Section',
@@ -309,7 +308,6 @@ return [
     'RenamedSuccessfully'=>'Renamed Successfully',
     'Youareloggedin!'=>'You are logged in!' ,
     'NoShiftsareuploaded'=>'No Shifts are uploaded',
-    'LoadingPleaseWait'=>'Loading Please wait...',
     'None'=>'None',
     'Apply'=>'Apply',
     'Personal'=>'Personal',
@@ -410,6 +408,8 @@ return [
     'NoShiftForThisCompany'=>'No Shift For This Company',
     'SeeAllRequests'=>'See All Requests',
     'Help'=>'Help',
-    'PrintTable'=>'Print Table'
+    'PrintTable'=>'Print Table',
+    'ChooseSkill'=>'Choose Skill',
+    'NoDataAvailable'=>'No Data Available'
 
 ];

@@ -39,7 +39,7 @@ class EmployeeSkillController extends Controller
             }
             EmployeeSkill::insert($update_data);
         }
-        return redirect()->route('employees');
+        return redirect()->route('employees.show');
     }
 
     public function findSkill(Request $request)
