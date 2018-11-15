@@ -426,11 +426,5 @@
             $('#exampleModalLong').modal('show');
         });
        
-       
-
 </script>
-
-
-
-
 @endpush
