@@ -36,7 +36,7 @@
                                     @foreach($all_col as $column)
                                     <th class="sticky-top" style="word-wrap: break-word">{{ ucwords(trans('employee.'.$column->field_name))}}</th>
                                     @endforeach
-                                    <th class="sticky-top" style="word-wrap: break-word">Skills</th>
+                                    <th class="sticky-top" style="word-wrap: break-word">@lang('employee.Skills')</th>
 
                                 </tr>
                             </thead>
@@ -154,7 +154,7 @@
                                     </td>
                                     @endif @endforeach
                                     <td><span id="{{$psi_value}}" class="employee_skills btn btn-primary" data-toggle="modal"
-                                            data-target="#myModal">Choose Skill</span></td>>
+                                            data-target="#myModal">@lang('employee.ChooseSkill')</span></td>
 
                                 </tr>
                                 @endforeach @else
@@ -179,7 +179,7 @@
             <form action="{{route('skill.store')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                 @csrf
             <div class="modal-header">
-                <h4 class="modal-title">Skills</h4>
+                <h4 class="modal-title">@lang('employee.Skills')</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -200,7 +200,7 @@
             <!-- Modal footer -->
             <div class="modal-footer">
                     <button type="submit" class="btn btn-success">@lang('employee.Save')</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">@lang('employee.Close')</button>
             </div>
         </form>
 
@@ -404,7 +404,7 @@
                     let i;
                     $("#allSkills").html('');
                     for (i = 0; i < data.masterSkills.length; i++) {
-                        console.log(data.masterSkills);
+                        // console.log(data.masterSkills);
                         var check = $.inArray(data.masterSkills[i].id, data.employeeSkills);
                         if (check >= 0) {
                             var html = '<input type="checkbox" name="employeeSkills[]" value="' + data.masterSkills[i].id + '" checked>' + data.masterSkills[i].skill_name + '<br>';
@@ -414,11 +414,12 @@
                             var html = '<input type="checkbox" name="employeeSkills[]" value="' + data.masterSkills[i].id + '">' + data.masterSkills[i].skill_name + '<br>';
                             $("#allSkills").append(html);
                         }
-                        var form = '<input type="text" class="form-conrol" value=' +selected + ' name="psi_num">';
+                        var form = '<input type="hidden" class="form-conrol" value=' +selected + ' name="psi_num" >';
                         $("#formDiv").html(form);
                     }
                     
                 }
+
             });
         });
 
