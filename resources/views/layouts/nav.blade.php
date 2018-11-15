@@ -165,10 +165,10 @@
                                                                    href="{{ route('manageSkills') }}"><i
                                                                             class="fa fa-bullseye"></i> @lang('employee.Skills')
                                                                 </a></li>
-                                                            <li><a class="dropdown-item"
+                                                            {{-- <li><a class="dropdown-item"
                                                                    href="{{ route('employee.skill') }}"><i
                                                                             class="fas fa-user-graduate"></i> @lang('employee.EmployeeSkills')
-                                                                </a></li>
+                                                                </a></li> --}}
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('availability.index') }}"><i
                                                                             class="fas fa-user-clock"></i> @lang('employee.EmployeeAvailability')
