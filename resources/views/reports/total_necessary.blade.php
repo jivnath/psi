@@ -75,7 +75,6 @@
                     $.ajax({
                         type: "GET",
                         url: "{{route('getTotalNecessaryReportData')}}",
-                        dataType: "json",
                         data: {'section': section, 'date': date},
                         beforeSend:function(){
                             $("#loadingDiv").show();
