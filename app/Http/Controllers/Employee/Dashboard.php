@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Models\CompanyTimeSchedule;
 use App\Models\DessertSheet;
+use App\Models\Employee;
 use App\Models\ShiftMasterData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -76,53 +77,64 @@ class Dashboard extends Controller
     {
         $cts_id = $request->get('shift');
         $user = \Session::get('username');
+        $cts = CompanyTimeSchedule::where('id', $cts_id)->first();
+        $selected_date = $cts->date;
+//        dd($selected_date);
+        $psi_number = \Session::get('employee_psi_number');
+        $start_date = \Session::get('employee_hire_date');
+//        dd($start_date);
+        if($start_date == null || $start_date=='')
+            $start_date = $selected_date;
+//        dd($start_date);
+        $day = date('l', strtotime($start_date));
+        if ((date('l', strtotime($selected_date))) == $day)
+            $first_date = str_replace('-', '', date('Y-m-d', strtotime($selected_date)));
+        else
+            $first_date = str_replace('-', '', date('Y-m-d', strtotime('previous ' . $day, strtotime($selected_date))));
 
-        $total_worked = Raw::dessert_calculation_method($cts_id, $user);
-//        dd($total_worked);
+        $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
+        $total_worked = Raw::getWorkedHours($psi_number, $first_date, $last_date);
+
+//        $total_worked = Raw::dessert_calculation_method($cts_id, $user);
+//        dd($total_worked[0]->totalWorked);
         $total_needed = CompanyTimeSchedule::select(DB::raw('normal as total_needed'))->find($cts_id)->total_needed;
         $total_used = DessertSheet::where(['cts_id' => $cts_id])->whereNull('deleted_at')->count();
 //        dd($total_used);
 
-        if ($total_worked['total_worked'] < \Config::get('app.job_limit'))
+        if ($total_worked[0]->totalWorked > \Config::get('app.job_limit'))
         {
             $data = [
-                'total_worked' => $total_worked['total_worked']
+                'total_worked' => $total_worked[0]->totalWorked
             ];
-//            dd($data);
-            echo json_encode(1);
+//            dd(1);
         }
         elseif ($total_needed <= $total_used)
         {
             $data = [
-                'total_worked' => $total_worked['total_worked'],
+                'total_worked' => $total_worked[0]->totalWorked,
                 'total_needed' => $total_needed,
                 'total_used' => $total_used
             ];
-//            echo json_encode(1);
-//            dd($data);
+//            dd(2);
         }
         else
         {
-//            $date= 'g';
-//            dd($date);
             $employee = DessertSheet::firstOrNew([
                 'staff_no' => $user,
                 'cts_id' => $cts_id
             ]);
             if ($employee->exists)
             {
-//                $date= 'g';
-//                dd($date);
-//                echo json_encode(1);
-
+                $data['staff_no'] = $user;
+                $data['cts_id'] = $cts_id;
+//                dd(3);
             }
             else
             {
-//                $date= 'g';
-//                dd($date);
-//                dd($employee);
                 $employee->staff_no = $user;
                 $employee->cts_id = $cts_id;
+//                dd(4);
+
                 $employee->save();
 
                 $data['staff_no'] = $user;
@@ -130,9 +142,9 @@ class Dashboard extends Controller
 //                echo json_encode($employee);
             }
 //            dd($employee);
-            echo json_encode(1);
+//            echo json_encode($data);
         }
-        echo json_encode(1);
+        echo json_encode($data);
     }
 
     public function getCompanyName(Request $request)

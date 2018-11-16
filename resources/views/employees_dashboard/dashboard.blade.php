@@ -117,7 +117,7 @@
     <!-- fullCalendar -->
     <script src="{{asset('bower_components/moment/moment.js')}}"></script>
     <script src="{{asset('bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
-    <script src="{{asset('bower_components/fullcalendar/locale/es.js')}}"></script>
+    {{--<script src="{{asset('bower_components/fullcalendar/locale/es.js')}}"></script>--}}
     <script>
         $.ajaxSetup({
             headers: {
@@ -127,7 +127,7 @@
         var last_click = '';
         $(document).ready(function () {
 
-            var initialLocaleCode = 'ja';
+            // var initialLocaleCode = 'ja';
             /* initialize the calendar
                   -----------------------------------------------------------------*/
             //Date for the calendar events (dummy data)
@@ -142,7 +142,7 @@
                     center: 'title',
                     right: 'next, today'
                 },
-                locale: initialLocaleCode,
+                // locale: initialLocaleCode,
                 buttonText: {
                     today: 'today',
                     month: 'month',
@@ -262,12 +262,12 @@
 
         });
 
-        $("#locale").change(function(){
-            var locale = $(this).val();
-            // alert(locale);
-            $('#calendar').fullCalendar('option', 'locale', 'ja');
-
-        });
+        // $("#locale").change(function(){
+        //     var locale = $(this).val();
+        //     // alert(locale);
+        //     $('#calendar').fullCalendar('option', 'locale', 'ja');
+        //
+        // });
 
         function getData() {
             var company = $("#companies").val();
