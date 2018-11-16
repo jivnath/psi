@@ -10,6 +10,7 @@ use App\Models\CompanyTimeSchedule;
 use App\Models\Raw;
 use DB;
 use Date;
+use Session;
 
 class PagesController extends Controller
 {
@@ -19,6 +20,7 @@ class PagesController extends Controller
         $allCompanies = Company::all();
         $companies = Raw::getSecondLevelCompanies();
 //        dd($companies);
+
         return view('pages.generator')->withCompanies($companies)->withAllCompanies($allCompanies);
     }
 
@@ -76,40 +78,48 @@ class PagesController extends Controller
 
     public function generatorStore(Request $request)
     {
-        $section = $request['section'];
-        $shift_schedule_id = uniqid();
-        if (sizeof($section) > 0) {
-            foreach ($section as $company)
-            {
-                $shifts = ShiftMasterData::where('company_id', $company)->get();
 
-                $timeTable = new CompanyTimeTable();
-                $timeTable->schedule_session_id = $shift_schedule_id;
-                $timeTable->company_id = $company;
-                $timeTable->save();
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        $today = date('Y-m-d');
+        if($startDate < $today || $endDate < $today || $endDate < $startDate )
+        {
+            Session::flash('error', 'Please input valid date!');
+            return redirect()->route('generator');
+        }
+        else{
+            $section = $request['section'];
+            $shift_schedule_id = uniqid();
+            if (sizeof($section) > 0) {
+                foreach ($section as $company)
+                {
+                    $shifts = ShiftMasterData::where('company_id', $company)->get();
 
-                $id = $timeTable->id;
+                    $timeTable = new CompanyTimeTable();
+                    $timeTable->schedule_session_id = $shift_schedule_id;
+                    $timeTable->company_id = $company;
+                    $timeTable->save();
 
-                $startDate = $request->start_date;
-                $endDate = $request->end_date;
+                    $id = $timeTable->id;
 
-                foreach ($shifts as $s) {
-                    $startDate = $request->start_date;
-                    while (strtotime($startDate) <= strtotime($endDate)) {
-                        $schedule = new CompanyTimeSchedule();
 
-                        $schedule->companyTT_id = $id;
-                        $schedule->date = $startDate;
-                        $schedule->time = $s->start_time;
-                        $schedule->normal = null;
-                        $schedule->help = null;
+                    foreach ($shifts as $s) {
+                        $startDate = $request->start_date;
+                        while (strtotime($startDate) <= strtotime($endDate)) {
+                            $schedule = new CompanyTimeSchedule();
 
-                        $schedule->save();
-                        $startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
+                            $schedule->companyTT_id = $id;
+                            $schedule->date = $startDate;
+                            $schedule->time = $s->start_time;
+                            $schedule->normal = null;
+                            $schedule->help = null;
+
+                            $schedule->save();
+                            $startDate = date('Y-m-d', strtotime($startDate . '+1 days'));
+                        }
                     }
                 }
-            }
-        } else
+            } else
             {
                 $company = $request->company;
                 $shifts = ShiftMasterData::where('company_id', $company)->get();
@@ -141,7 +151,9 @@ class PagesController extends Controller
                 }
             }
 
-        return redirect()->route('pages.shift');
+            return redirect()->route('pages.shift');
+        }
+
     }
 
     public function ajaxAddShifts(Request $request)
