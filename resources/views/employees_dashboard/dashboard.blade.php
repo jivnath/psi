@@ -19,19 +19,19 @@
                         <li class="list-inline-item">
                             <div class="input-color">
                                 <div class="color-box" style="background-color:#f5b1ae;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">@lang('employee.Available').</label>
+                                <label for="red"><b>@lang('employee.Available').</b></label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #74c673;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">@lang('employee.Booked').</label>
+                                <label for="red"><b>@lang('employee.Booked').</b></label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
                                 <div class="color-box" style="background-color: #9faee9;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red">@lang('employee.Worked').</label>
+                                <label for="red"><b>@lang('employee.Worked').</b></label>
                             </div>
                         </li>
                     </ul>
