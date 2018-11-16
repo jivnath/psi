@@ -13,12 +13,12 @@
                 {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with user data --}}
 
                 <div class="form-group">
-                   <b> {{ Form::label('name', trans('employee.Name:')) }}</b>
+                   <b> {{ Form::label('name', trans('employee.Name'))}}:</b>
                     {{ $user->name }}
                 </div>
 
                 <div class="form-group">
-                    <b>{{ Form::label('email', trans('employee.Email:')) }}</b>
+                    <b>{{ Form::label('email', trans('employee.Email')) }}:</b>
                     {{ $user->email }}
                 </div>
 
