@@ -27,7 +27,7 @@
                 <div class='form-group'>
                     <select name="role" class="form-control" style="width: 60%">
                         @foreach($roles as $role)
-                            <option value="{{$role['name']}}" <?=($user->roles()->pluck('name')->first()==$role['name'])? 'selected="selected"':''?>> {{$role['name']}} </option>
+                            <option value="{{$role['id']}}" <?=($user->roles()->pluck('name')->first()==$role['name'])? 'selected="selected"':''?>> {{$role['name']}} </option>
                         @endforeach
                     </select>
                 </div>

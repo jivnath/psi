@@ -640,6 +640,9 @@
                 if ($.inArray(i, allowed_field) != -1) {
                 	console.log(i);
                     $(this).html($('#all_saved_value').data(i.toString()));
+                    if(i==23){
+                    	 $(this).data('dessert_id',$('#all_saved_value').data(i.toString()));
+                     }
                 }
                 if ($.inArray(i, [0, 1, 2]) != -1) {
 

@@ -33,11 +33,13 @@ class DashboardController extends Controller
         $data['employee_summery'] = Raw::getConfirmedEmployees();
 
         $data['employee_summery_count'] = Raw::getConfirmedEmployeesCount();
-        $total_confiration = array_sum(array_column($data['employee_summery_count'], 'total_count'));
-        if ($total_confiration <= 0) {
+
+        $data['confirmation'] = Raw::getConfirmation();
+        $total_confirmation = array_sum(array_column($data['confirmation'], 'total_require'));
+        if ($total_confirmation <= 0) {
             $data['confirmation_per'] = 0;
         } else {
-            $data['confirmation_per'] = (array_sum(array_column($data['employee_summery'], 'total_count')) * 100) / $total_confiration;
+            $data['confirmation_per'] = (array_sum(array_column($data['confirmation'], 'total_used')) * 100) / $total_confirmation;
         }
         $data['total_emp'] = Employee::count();
         return view('dashboard', $data);

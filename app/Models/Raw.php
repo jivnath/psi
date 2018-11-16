@@ -518,77 +518,97 @@ WHERE
     public static function getConfirmedEmployees()
     {
         $sql = "SELECT
-                COUNT(pde.conformation_day_before) total_count,
+                    COUNT(*) total_count,
                     'to' days
                 FROM
-                    psi_dessert_entry pde,
-                    company_time_schedules cts
-                WHERE
-                    pde.cts_id = cts.id
-                AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day) and pde.conformation_day_before='OK'
-                union
+                            (SELECT
+                                DATE,
+                                ( normal ) total_require,
+                                (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
+                            FROM
+                                company_time_schedules cts
+                            WHERE
+                            normal is not NULL
+                            AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t1
+                UNION
                 SELECT
-
-                    COUNT(pde.conformation_day_before) total_count,
-                    'to_week'
+                    COUNT(*) total_count,
+                    'to' week
                 FROM
-                    psi_dessert_entry pde,
-                    company_time_schedules cts
-                WHERE
-                    pde.cts_id = cts.id
-                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week) and pde.conformation_day_before='OK'
-                union
+                            (SELECT
+                                DATE,
+                                ( normal ) total_require,
+                                (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
+                            FROM
+                                company_time_schedules cts
+                            WHERE
+                            normal is not NULL
+                            AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t2
+                UNION
                 SELECT
-
-
-                    COUNT(pde.conformation_day_before) total_count,
-                    'to_month'
+                    COUNT(*) total_count,
+                    'to_month' days
                 FROM
-                    psi_dessert_entry pde,
-                    company_time_schedules cts
-                WHERE
-                    pde.cts_id = cts.id
-                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(),interval 1 month)
-                AND pde.conformation_day_before = 'OK'";
+                            (SELECT
+                                DATE,
+                                ( normal ) total_require,
+                                (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
+                            FROM
+                                company_time_schedules cts
+                            WHERE
+                            normal is not NULL
+                            AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 month)
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t3";
         return DB::select($sql);
     }
     public static function getConfirmedEmployeesCount()
     {
         $sql = "SELECT
-                COUNT(*) total_count,
+                    COUNT(*) total_count,
                     'to' days
                 FROM
-                    psi_dessert_entry pde,
-                    company_time_schedules cts
+                    company_time_schedules cts 
                 WHERE
-                    pde.cts_id = cts.id
-                AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
-                union
+                    DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
+                    AND cts.normal IS NOT null
+                UNION
                 SELECT
-
                     COUNT(*) total_count,
-                    'to_week'
+                    'to_week' days
                 FROM
-                    psi_dessert_entry pde,
-                    company_time_schedules cts
+                    company_time_schedules cts 
                 WHERE
-                    pde.cts_id = cts.id
-                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
-                union
+                    DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
+                    AND cts.normal IS NOT null
+                UNION
                 SELECT
-
-
                     COUNT(*) total_count,
-                    'to_month'
+                    'to_month' days
                 FROM
-                    psi_dessert_entry pde,
-                    company_time_schedules cts
+                    company_time_schedules cts 
                 WHERE
-                    pde.cts_id = cts.id
-                AND date(cts.date) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(),interval 1 month)";
+                    DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 month)
+                    AND cts.normal IS NOT null";
         return DB::select($sql);
     }
 
+    public static function getConfirmation()
+    {
+        $today = date('Ymd');
+
+        $sql = "SELECT
+                ( (normal)) total_require,
+                ( (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) total_used
+            FROM
+                company_time_schedules cts
+            WHERE
+            	normal is not NULL
+            	AND date = $today";
+        $data = DB::select($sql);
+        return $data;
+    }
 
     public static function getWorkedShift($staff, $date, $company)
     {

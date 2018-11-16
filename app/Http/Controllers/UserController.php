@@ -105,6 +105,7 @@ class UserController extends Controller
 
         $role = $request->input('role'); //Retreive all roles
         $user->role_id = $role;
+        //dd($role);
         $user->roles()->detach();
         $user->assignRole($role);
         $user->save();
