@@ -491,7 +491,6 @@ WHERE
                     `psi_dessert_entry` pde
                 WHERE cts.date >= $today
                 	AND pde.cts_id = cts.id $cond
-                	AND pde.responsible1 = ()
                 GROUP BY
                 	cts.date ASC";
 //        $sql = "SELECT

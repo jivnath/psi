@@ -260,7 +260,9 @@
 							\Session::get('user_companies'); $primaryCompany =
 							\Session::get('primary_company'); $language =
 							\Session::get('user_language'); $user_id =
-							\Session::get('user_id'); @endphp
+                            \Session::get('user_id');
+                            $user_role=\Session::get('user_role_id'); @endphp
+                                {{--@if($user_role!= 4)--}}
                                             <li class="nav-item dropdown"><a id="shift_management"
                                                                              class="nav-link dropdown-toggle company_default_select"
                                                                              href="#"
@@ -281,6 +283,7 @@
                                                                               href="{{route('changecompany',['change_to'=>$company->id,'name'=>$company->name])}}">
                                                             {{$company->name}} </a> @endif @endforeach
                                                 </div> {{--{{dd($primaryCompany)}}--}}</li>
+                                                {{--@endif--}}
 
                                         </ul>
                                     @endauth
