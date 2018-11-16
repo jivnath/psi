@@ -106,7 +106,6 @@ class Dashboard extends Controller
             $data = [
                 'total_worked' => $total_worked[0]->totalWorked
             ];
-//            dd(1);
         }
         elseif ($total_needed <= $total_used)
         {
@@ -115,7 +114,6 @@ class Dashboard extends Controller
                 'total_needed' => $total_needed,
                 'total_used' => $total_used
             ];
-//            dd(2);
         }
         else
         {
@@ -127,13 +125,11 @@ class Dashboard extends Controller
             {
                 $data['staff_no'] = $user;
                 $data['cts_id'] = $cts_id;
-//                dd(3);
             }
             else
             {
                 $employee->staff_no = $user;
                 $employee->cts_id = $cts_id;
-//                dd(4);
 
                 $employee->save();
 
