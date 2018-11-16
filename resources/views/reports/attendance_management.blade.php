@@ -44,6 +44,9 @@
                         <hr>
                         <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
                         <div id="tableDiv" style="display:none;margin-top: 25px;">
+                            <p>
+                                <button class="specific">@lang('employee.PrintTable')</button>
+                            </p>
                             <table style="" id="attendance" class="table table-striped">
                                 <thead>
                                 <th>#</th>
@@ -147,6 +150,14 @@
            });
         });
 
+        $('.specific').click(function(){
+            var print =  document.getElementById('attendance');
+            var wr = window.open();
+            wr.document.write(print.outerHTML);
+            wr.document.close();
+            wr.focus();
+            wr.print();
+            wr.close();
+        });
     </script>
-
 @endpush
