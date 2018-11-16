@@ -144,11 +144,13 @@ class EmployeeController extends Controller
             }
             else
             {
-                $output = '<tr><td colspan="16">No Data Available</td></tr>';
-            }
-        }
 
-        echo json_encode($output);
+                $lang = trans("employee.NoDataAvailable");
+                $output = '<tr><td colspan="16"> '. $lang .' </td></tr>';
+//                $output = '<tr><td colspan="16"> No Data Available データなし </td></tr>';
+            }
+            echo ($output);
+        }
     }
 
     public function getShiftsForSubsection(Request $request)

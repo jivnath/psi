@@ -252,8 +252,8 @@
             <tr>
                 <td> {{$dessert_row['date']}} </td>
                 <td> {{substr($dessert_row['time'], 0, -3)}} </td>
-                <td colspan='13'>Not available, <a href="{{Route('shift.show',$dessert_row['schedule_session_id'])}}"
-                                                   target='_blank'>Add here </a></td>
+                <td colspan='13'>@lang('employee.Notavailable'), <a href="{{Route('shift.show',$dessert_row['schedule_session_id'])}}"
+                                                   target='_blank'>@lang('employee.Addhere') </a></td>
             </tr>
         @endif
     @endforeach
@@ -359,7 +359,7 @@
                             alert('Not available');
                             return false;
                         }
-                        if (typeof data.total_worked !== 'undefined' && data.total_worked > {{\Config('app.job_limit')}}) {
+                        if (typeof data.total_worked !== 'undefined' && data.total_worked >{{\Config('app.job_limit')}}) {
                             alert('Limit exceeded : ' + (data.total_worked)+' hrs.');
                             return false;
                         }

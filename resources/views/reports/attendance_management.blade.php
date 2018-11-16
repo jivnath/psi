@@ -138,7 +138,6 @@
                type:"GET",
                url:"{{route('getAttendanceMgmtData')}}",
                data:{'id':id, 'date':date, 'shift':shift},
-               dataType:"json",
                beforeSend:function(){
                    $("#loadingDiv").show();
                },
