@@ -410,5 +410,6 @@ return [
     'Notavailable'=>'利用不可',
     'Addhere'=>'ここに追加',
     'sent'=>'送られた',
-    'request'=>'要求'
+    'request'=>'要求',
+    'Pleaseinputvaliddate!'=>'有効な日付を入力してください！'
 ];

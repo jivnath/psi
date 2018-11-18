@@ -410,6 +410,7 @@ return [
     'Notavailable'=>'Not available',
     'Addhere'=>'Add here',
     'sent'=>'sent',
-    'request'=>'request'
+    'request'=>'request',
+    'Pleaseinputvaliddate!'=>'Please input valid date!'
 
 ];
