@@ -180,7 +180,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/addmore', 'ShiftMasterController@addMore');
             Route::post('/addmore', 'ShiftMasterController@addMorePost');
 
-            Route::prefix('leader')->group(function () {
+            Route::prefix('manager')->group(function () {
                 Route::get('/create', ['as' => 'leader.create', 'uses' => 'LeaderController@create']);
                 Route::post('/create', ['as' => 'leader.store', 'uses' => 'LeaderController@store']);
                 //    Route::get('/leader/edit/{id}', 'LeaderController@edit')->name('leader.edit');
