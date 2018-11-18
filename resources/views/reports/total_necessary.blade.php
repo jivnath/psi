@@ -13,6 +13,7 @@
                     <div class="col-md-1 sections" style="text-align: right">
                         <label for="section">@lang('employee.Section')</label>
                     </div>
+
                     @if(\Session::get('user_role_id')==5)
                         <div class="col-md-2 sections">
                             @php $primary_company = \Session::get('primary_company') @endphp

@@ -33,8 +33,13 @@ class UserController extends Controller
 	{
     //Get all roles and pass it to the view
         $roles = Role::get();
+        $section = Raw::getSecondLevelCompanies();
+
 //        $companies = Company::where('master_id', null)->get();
-        return view('users.create', ['roles'=>$roles]);
+        return view('users.create', ['roles'=>$roles, 'section'=>$section]);
+
+
+
     }
 
     public function store(Request $request) {
@@ -50,6 +55,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->language = $request->language;
+        $user->primary_company = $request->primary_company;
         $role = $request->role; //Retrieving the roles field
         $user->role_id = $role;
         $user->save();
@@ -78,6 +84,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::get();
+        $companies = Raw::getSecondLevelCompanies();
+//        dd($companies);
 
 //        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
 //        $companies = [];
@@ -92,8 +100,8 @@ class UserController extends Controller
 //        $allCompanies = Company::where('master_id', null)->get();
 
         return view('users.edit')->withUser($user)
-            ->withRoles($roles);
-//            ->withCompanies($companies)
+            ->withRoles($roles)
+            ->withCompanies($companies);
 //            ->withAllCompanies($allCompanies)
 //            ->withCompid($compid);
     }
@@ -102,10 +110,12 @@ class UserController extends Controller
 	{
 
         $user = User::findOrFail($id);
+        $section = $request->primary_company;
 
         $role = $request->input('role'); //Retreive all roles
         $user->role_id = $role;
         //dd($role);
+        $user->primary_company = $section;
         $user->roles()->detach();
         $user->assignRole($role);
         $user->save();

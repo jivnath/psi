@@ -22,6 +22,17 @@
                     {{ $user->email }}
                 </div>
 
+                <b>@lang('employee.PrimaryCompany')</b>
+
+                <div class='form-group'>
+                    <select name="primary_company" class="form-control" style="width: 60%">
+                        <option value="">@lang('employee.None')</option>>
+                        @foreach($companies as $company)
+                            <option value="{{$company->id}}" <?=($user->primary_company==$company->id)? 'selected="selected"':''?>> {{$company->name}} </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <b>@lang('employee.GiveRole')</b>
 
                 <div class='form-group'>
