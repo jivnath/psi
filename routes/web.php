@@ -10,10 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
 //Route::group(['middleware' => ['check.company']], function () {
 Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
@@ -23,9 +23,12 @@ Route::get('/select/primary', ['as' => 'primary', 'uses' => 'UserController@prim
 Route::get('/primarySub/{id}', ['as' => 'selectPrimarySub', 'uses' => 'Employee\Dashboard@selectPrimary']);
 Route::get('select/primarySub', ['as' => 'primarySub', 'uses' => 'Employee\Dashboard@primary']);
 
+Route::group(['middleware' => ['check.login']], function () {
 Route::get('employee/login', 'Auth\EmployeeLoginController@getLogin');
 Route::post('employee/login', ['as' => 'employee.login', 'uses' => 'Auth\EmployeeLoginController@login']);
 Route::get('employee/logout', ['as' => 'employee.logout', 'uses' => 'Auth\EmployeeLoginController@logout']);
+});
+
 
 Auth::routes();
 Route::group(['middleware' => ['employee']], function () {
