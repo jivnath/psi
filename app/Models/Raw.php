@@ -398,6 +398,10 @@ WHERE
 
     public static function getTotalNeccessory()
     {
+        $cond = '';
+        $primary = \Session::get('primary_company');
+        if(\Session::get('user_role_id')==5)
+            $cond = 'AND c.master_id = '.$primary->id;
         $sql = "SELECT
                 cts.id,
                 companytt_id,
@@ -418,7 +422,7 @@ WHERE
                 INNER JOIN  company_time_tables ctt on cts.companytt_id = ctt.id
                 INNER JOIN companies c ON c.id=ctt.company_id
             WHERE
-            normal is not NULL
+            normal is not NULL $cond
             ORDER BY
                 cts.DATE
                 desc";
