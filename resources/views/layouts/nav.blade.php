@@ -275,7 +275,8 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="shift_management">
-                                                    @foreach($companies as $company)
+                                                    {{--{{dd($companies)}}--}}
+                                                @foreach($companies as $company)
                                                         @if(isset($primaryCompany->name) && $primaryCompany->name
                                                         !==$company->name) <a class="dropdown-item"
                                                                               href="{{route('changecompany',['change_to'=>$company->id,'name'=>$company->name])}}">
