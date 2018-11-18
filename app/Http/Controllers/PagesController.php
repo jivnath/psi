@@ -78,7 +78,6 @@ class PagesController extends Controller
 
     public function generatorStore(Request $request)
     {
-
         $startDate = $request->start_date;
         $endDate = $request->end_date;
         $today = date('Y-m-d');
@@ -270,10 +269,16 @@ class PagesController extends Controller
                     $html = '<tr><td>' . $datum->name . '</td><td>' . substr($datum->start_time, 0, -3) . ' - ' . substr($datum->end_time, 0, -3) . '</td><td>' . $datum->total_require . '</td><td>' . $datum->total_used . '</td></tr>';
                     $output .= $html;
                 }
-            } else
-                //$output = '<tr><td colspan="4">No data available.</td></tr>';
-            $lang = trans("employee.NoDataAvailable");
-            $output = '<tr><td colspan="16"> ' . $lang . ' </td></tr>';
+//                dd(1);
+            }
+            else
+            {
+//              $output = '<tr><td colspan="4">No data available.</td></tr>';
+                $lang = trans("employee.NoDataAvailable");
+//                dd($lang);
+                $output = '<tr><td colspan="16"> ' . $lang . ' </td></tr>';
+//                dd(2);
+            }
 
         } else
             $output = '';

@@ -534,7 +534,7 @@ WHERE
                 UNION
                 SELECT
                     COUNT(*) total_count,
-                    'to' week
+                    'to_week' days
                 FROM
                             (SELECT
                                 DATE,
@@ -561,7 +561,9 @@ WHERE
                             normal is not NULL
                             AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 month)
                             AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t3";
-        return DB::select($sql);
+        $data = DB::select($sql);
+//        print_r($data);die;
+        return $data;
     }
     public static function getConfirmedEmployeesCount()
     {
