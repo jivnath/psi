@@ -117,7 +117,7 @@ class EmployeeController extends Controller
 
     public function attendanceManagement()
     {
-        $subSections = Raw::getCompaniesHavingShift();
+        $subSections = Raw::getSectionForAttendance();
         return view('reports.attendance_management', compact('data', 'subSections'));
     }
 

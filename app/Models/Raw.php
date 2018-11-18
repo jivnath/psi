@@ -398,6 +398,10 @@ WHERE
 
     public static function getTotalNeccessory()
     {
+        $cond = '';
+        $primary = \Session::get('primary_company');
+        if(\Session::get('user_role_id')==5)
+            $cond = 'AND c.master_id = '.$primary->id;
         $sql = "SELECT
                 cts.id,
                 companytt_id,
@@ -418,7 +422,7 @@ WHERE
                 INNER JOIN  company_time_tables ctt on cts.companytt_id = ctt.id
                 INNER JOIN companies c ON c.id=ctt.company_id
             WHERE
-            normal is not NULL
+            normal is not NULL $cond
             ORDER BY
                 cts.DATE
                 desc";
@@ -718,6 +722,18 @@ WHERE
         return $data;
     }
 
+    public static function getSectionForAttendance()
+    {
+        $cond = '';
+        $role = \Session::get('user_role_id');
+        $company = \Session::get('primary_company');
+        if($role==5)
+            $cond = 'AND c.master_id = '.$company->id;
+        $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id $cond";
+        $data = DB::select($sql);
+        return $data;
+    }
+
     public static function dessert_calculation_method($schedule_id, $staff_id)
     {
         $sql = "SELECT
@@ -781,7 +797,6 @@ WHERE
 
     public static function employeeWorksheetData($start, $end)
     {
-//        dd($start);
         $sql = "SELECT
         pde.staff_no,
         e.name,
