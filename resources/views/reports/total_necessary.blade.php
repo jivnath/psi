@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-2 sections">
                         <select id="section" class="form-control">
-                            <option value="0">@lang('employee.none')</option>
+                            <option value="0">@lang('employee.None')</option>
                             @foreach($sections as $section)
                                 <option value="{{$section->id}}">{{$section->name}}</option>
                             @endforeach
