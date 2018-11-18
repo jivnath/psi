@@ -10768,3 +10768,7 @@ button, input, select, textarea {
     line-height: inherit;
 }
 .i-am-centered { margin: auto; max-width: 80%;}
+
+/*.fc-event-title{*/
+  /*font-size: 20px;*/
+/*}*/

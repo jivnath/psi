@@ -70,6 +70,7 @@
             $("#submit").click(function () {
                 var section = $('#section').val();
                 var date = $('#date').val();
+                $("#table_body").html('');
                 // alert(date);
                 if (section != 0) {
                     $.ajax({

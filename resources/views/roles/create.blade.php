@@ -11,21 +11,12 @@
                 </div>
                 <div class="box-body" style="margin-left: 15px">
 
-                    {{ Form::open(array('url' => 'roles')) }}
+                    {{ Form::open(array('route' => 'roles.store')) }}
 
                     <div class="form-group">
-                        {{ Form::label('name', trans('employee.Name') }}
-                        {{ Form::text('name', null, array('class' => 'form-control input-shorter', 'style' => 'width:50%')) }}
+                        {{ Form::label('name', trans('employee.Name')) }}
+                        {{ Form::text('name', '', array('class' => 'form-control input-shorter', 'style' => 'width:50%')) }}
                     </div>
-                    {{--<b>Permissions</b>--}}
-
-                    {{--<div class='form-group'>--}}
-                        {{--@foreach ($permissions as $permission)--}}
-                            {{--{{ Form::checkbox('permissions[]',  $permission->id ) }}--}}
-                            {{--{{ Form::label($permission->name, ucfirst($permission->name)) }}<br>--}}
-
-                        {{--@endforeach--}}
-                    {{--</div>--}}
 
                     {{ Form::submit(trans('employee.Add'), array('class' => 'btn btn-primary')) }}
 
