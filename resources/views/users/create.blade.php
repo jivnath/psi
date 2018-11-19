@@ -36,8 +36,8 @@
                     </div>
 
                     <div class='form-group'>
-                        <label for="primarycompany">@lang('employee.PrimaryCompany')</label><br>
-                        <select name="primarycompany" class="form-control" style="width:80%">
+                        <label for="primary_company">@lang('employee.PrimaryCompany')</label><br>
+                        <select name="primary_company" class="form-control" style="width:80%">
                             <option value="">@lang('employee.None')</option>>
                             @foreach($section as $primarycompany)
                                 <option value="{{$primarycompany->id}}"> {{$primarycompany->name}} </option>
