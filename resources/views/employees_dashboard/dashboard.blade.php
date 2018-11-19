@@ -117,7 +117,7 @@
     <!-- fullCalendar -->
     <script src="{{asset('bower_components/moment/moment.js')}}"></script>
     <script src="{{asset('bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
-    {{--<script src="{{asset('bower_components/fullcalendar/locale/es.js')}}"></script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/ja.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -127,6 +127,9 @@
         var last_click = '';
         $(document).ready(function () {
 
+            var locale = $("#locale").val();
+            // alert(locale);
+            // if()
             // var initialLocaleCode = 'ja';
             /* initialize the calendar
                   -----------------------------------------------------------------*/
@@ -142,7 +145,7 @@
                     center: 'title',
                     right: 'next, today'
                 },
-                // locale: initialLocaleCode,
+                locale: locale,
                 buttonText: {
                     today: 'today',
                     month: 'month',
