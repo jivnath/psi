@@ -228,10 +228,36 @@
     <script>
         var last_click = '';
         $(document).ready(function () {
-            $('#tn_table').DataTable({"pageLength": 3});
-            $('#expire_info').DataTable({"pageLength": 3});
-            $('#rda_table').DataTable({"pageLength": 3});
-            $('#alert_viber').DataTable({"pageLength": 4});
+            var locale = $("#locale").val();
+            if(locale == 'en'){
+                $('#tn_table').DataTable({"pageLength": 3});
+                $('#expire_info').DataTable({"pageLength": 3});
+                $('#rda_table').DataTable({"pageLength": 3});
+                $('#alert_viber').DataTable({"pageLength": 4});
+            }
+            else
+            {
+                $('#tn_table').DataTable({
+                    "pageLength": 3,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    }});
+                $('#expire_info').DataTable({
+                    "pageLength": 3,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    }});
+                $('#rda_table').DataTable({
+                    "pageLength": 3,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    }});
+                $('#alert_viber').DataTable({
+                    "pageLength": 4,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    }});
+            }
         });
         $('.viber_messessing').on('click', function (e) {
             $('#card_expiry').modal('show');
