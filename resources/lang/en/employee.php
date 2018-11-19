@@ -411,6 +411,14 @@ return [
     'Addhere'=>'Add here',
     'sent'=>'sent',
     'request'=>'request',
-    'Pleaseinputvaliddate!'=>'Please input valid date!'
+    'Pleaseinputvaliddate!'=>'Please input valid date!',
+    'WorkedShifts'=>'Worked Shifts',
+    'ModalHeader'=>'Modal Header',
+    'NotOk'=>'Not Ok',
+    'Noresponse'=>'No response',
+    'Workingtimeexceeded'=>'Working time exceeded!',
+    'Remaininghourswillbe'=>'Remaining hours will be',
+    'hours'=>'hrs.'
+
 
 ];

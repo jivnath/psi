@@ -411,5 +411,13 @@ return [
     'Addhere'=>'ここに追加',
     'sent'=>'送られた',
     'request'=>'要求',
-    'Pleaseinputvaliddate!'=>'有効な日付を入力してください！'
+    'Pleaseinputvaliddate!'=>'有効な日付を入力してください！',
+    'WorkedShifts'=>'働いたシフト',
+    'Comment'=>'コメント：',
+    'ModalHeader'=>'モーダルヘッダ',
+    'NotOk'=>'良くないですよ',
+    'Noresponse'=>'応答なし',
+    'Workingtimeexceeded'=>'作業時間を超過しました！',
+    'Remaininghourswillbe'=>'残りの時間は',
+    'hours'=>'時間.'
 ];

@@ -367,11 +367,11 @@
             if (selected != 0) {
                 var hours = remaining - $(this).find(':selected').attr('data-Hours');
                 if (hours >= 0) {
-                    $('#message').html('<b style="color:darkgreen">Remaining hours will be ' + hours + ' hrs.</b>');
+                    $('#message').html('<b style="color:darkgreen"> <span>{{trans('employee.Remaininghourswillbe')}}</span> ' + hours + ' <span>{{trans('employee.hours')}}</span></b>');
                     $("#submit").attr("disabled", false);
                 }
                 else {
-                    $('#message').html('<b style="color:red">Working time exceeded!</b>')
+                    $('#message').html('<b style="color:red"><span>{{trans('employee.Workingtimeexceeded')}}</span></b>');
                     $("#submit").attr("disabled", true);
                 }
                 $("#message").show();

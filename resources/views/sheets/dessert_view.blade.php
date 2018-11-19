@@ -27,18 +27,18 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title comments_header">Modal Header</h4>
+                <h4 class="modal-title comments_header">@lang('employee.ModalHeader')</h4>
             </div>
             <div class="modal-body comments_body">
                 <div class="form-group">
-                    <label for="comment">Comment:</label>
+                    <label for="comment">@lang('employee.Comment'):</label>
                     <textarea class="form-control comment" id='comment' rows="5"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" id='save'>Save</button>
+                <button type="button" class="btn btn-default" id='save'>@lang('employee.Save')</button>
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('employee.Close')</button>
             </div>
         </div>
 
@@ -50,7 +50,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title showFlag_header">Modal Header</h4>
+                <h4 class="modal-title showFlag_header">@lang('employee.ModalHeader')</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -75,9 +75,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default save_flag">Save</button>
+                <button type="button" class="btn btn-default save_flag">@lang('employee.Save')</button>
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('employee.Close')</button>
             </div>
         </div>
 
@@ -126,7 +126,7 @@
                 <td class="border_field">{{$info->cell_no}}</td>
                 <td class="background_responsible" data-usage='responsibile'>
                     <select class='responsibile'>
-                        <option value=''>--select--</option>
+                        <option value=''>--@lang('employee.Select')--</option>
                         @foreach($userlist as $row_user)
                             <option value='{{$row_user->id}}' {{ ($info->responsible1==$row_user->id) ? 'selected':''}} data-dessert_id="{{$dessert_row['id']}}">{{$row_user->name}}</option>
                         @endforeach
@@ -134,18 +134,18 @@
                 </td>
                 <td class="background_responsible" data-usage='confirmation'>
                     <select class='confirmation'>
-                        <option value=''>--select--</option>
-                        <option value='OK' {{ ($info->conformation_day_before=='OK') ? 'selected':''}}>OK</option>
-                        <option value='Not OK' {{ ($info->conformation_day_before=='Not OK') ? 'selected':''}}>Not OK
+                        <option value=''> --@lang('employee.Select')-- </option>
+                        <option value='OK' {{ ($info->conformation_day_before=='OK') ? 'selected':''}}> @lang('employee.Ok') </option>
+                        <option value='Not OK' {{ ($info->conformation_day_before=='Not OK') ? 'selected':''}}>@lang('employee.NotoK')
                         </option>
                         <option value='No response' {{ ($info->conformation_day_before=='No response') ? 'selected':''}}>
-                            No response
+                            @lang('employee.Noresponse')
                         </option>
                     </select>
                 </td>
                 <td class="background_responsible" data-usage='responsibile_1'>
                     <select class='responsibile_1'>
-                        <option value=''>--select--</option>
+                        <option value=''>--@lang('employee.Select')--</option>
                         @foreach($userlist as $row_user)
                             <option value='{{$row_user->id}}' {{ ($info->responsible2==$row_user->id) ? 'selected':''}}>{{$row_user->name}}</option>
                         @endforeach
@@ -153,7 +153,7 @@
                 </td>
                 <td class="background_responsible" data-usage='confirmation_1'>
                     <select class='confirmation_1'>
-                        <option value=''>--select--</option>
+                        <option value=''>--@lang('employee.Select')--</option>
                         <option value='OK' {{ ($info->conformation_3_hours_ago=='OK') ? 'selected':''}}>OK</option>
                         <option value='Not OK' {{ ($info->conformation_3_hours_ago=='Not OK') ? 'selected':''}}>Not OK
                         </option>

@@ -83,7 +83,7 @@ class PagesController extends Controller
         $today = date('Y-m-d');
         if($startDate < $today || $endDate < $today || $endDate < $startDate )
         {
-            Session::flash('error', 'Please input valid date!');
+            Session::flash('error', trans('employee.Pleaseinputvaliddate!'));
             return redirect()->route('generator');
         }
         else{
