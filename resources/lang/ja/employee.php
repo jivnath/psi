@@ -226,7 +226,7 @@ return [
     'Logout'=>'ログアウト',
     'Logout?'=>'ログアウト？',
     'Areyousuretologout?'=>'ログアウトしてもよろしいですか？',
-    'Ok'=>'Ok',
+    'OK'=>'オーケー',
     'CONFIRMATION'=>'確認',
     'CONFIRMED SHIFT'=>'確認済みのシフト',
     'Tomorrow'=>'明日',
@@ -413,11 +413,16 @@ return [
     'request'=>'要求',
     'Pleaseinputvaliddate!'=>'有効な日付を入力してください！',
     'WorkedShifts'=>'働いたシフト',
-    'Comment'=>'コメント：',
     'ModalHeader'=>'モーダルヘッダ',
-    'NotOk'=>'良くないですよ',
+    'NotOK'=>'良くないですよ',
     'Noresponse'=>'応答なし',
     'Workingtimeexceeded'=>'作業時間を超過しました！',
     'Remaininghourswillbe'=>'残りの時間は',
-    'hours'=>'時間.'
+    'hours'=>'時間.',
+    'viber'=>'ヴィーバー',
+    'call'=>'コール',
+    'alreadyinuse'=>'すでに使用されています',
+    'for'=>'にとって',
+    'Flagfor'=>'のためのフラグ',
+
 ];

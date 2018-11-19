@@ -121,8 +121,18 @@
     <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
     <script>
         $(document).ready(function () {
-            $('#shiftTable').DataTable({"pageLength": 5});
-
+            var locale = $("#locale").val();
+            if(locale == 'en')
+            {
+                $('#shiftTable').DataTable({"pageLength": 5});
+            }
+            else{
+                $('#shiftTable').DataTable({
+                    "pageLength": 5,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    }});
+            }
             var postURL = "<?php echo url('addmore'); ?>";
             var i = 1;
             $('#add').click(function () {

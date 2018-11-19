@@ -228,7 +228,7 @@ return [
     'Logout'=>'Logout',
     'Logout?'=>'Logout?',
     'Areyousuretologout?'=>'Are you sure to logout?',
-    'Ok'=>'Ok',
+    'OK'=>'OK',
     'CONFIRMATION'=>'CONFIRMATION',
     'CONFIRMEDSHIFT'=>'CONFIRMED SHIFT',
     'Tomorrow'=>'Tomorrow',
@@ -414,11 +414,16 @@ return [
     'Pleaseinputvaliddate!'=>'Please input valid date!',
     'WorkedShifts'=>'Worked Shifts',
     'ModalHeader'=>'Modal Header',
-    'NotOk'=>'Not Ok',
+    'NotOK'=>'Not OK',
     'Noresponse'=>'No response',
     'Workingtimeexceeded'=>'Working time exceeded!',
     'Remaininghourswillbe'=>'Remaining hours will be',
-    'hours'=>'hrs.'
+    'hours'=>'hrs.',
+    'viber'=>'viber',
+    'call'=>'call',
+    'alreadyinuse'=>'already in use',
+    'for'=>'for',
+    'Flagfor'=>'Flag for',
 
 
 ];
