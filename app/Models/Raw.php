@@ -521,7 +521,18 @@ WHERE
 
     public static function getConfirmedEmployees()
     {
-        $sql = "SELECT
+        $table = '';
+        $cond = '';
+        $primary = \Session::get('primary_company');
+        if(\Session::get('user_role_id') == 5) {
+            $table = ',company_time_tables ctt,
+                    companies c';
+            $cond = 'AND cts.companyTT_id = ctt.id 
+                    AND ctt.company_id = c.id
+                    AND c.master_id =' . $primary->id;
+        }
+
+            $sql = "SELECT
                     COUNT(*) total_count,
                     'to' days
                 FROM
@@ -530,11 +541,11 @@ WHERE
                                 ( normal ) total_require,
                                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
                             FROM
-                                company_time_schedules cts
+                                company_time_schedules cts $table
                             WHERE
                             normal is not NULL
                             AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
-                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t1
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) $cond) t1
                 UNION
                 SELECT
                     COUNT(*) total_count,
@@ -545,11 +556,11 @@ WHERE
                                 ( normal ) total_require,
                                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
                             FROM
-                                company_time_schedules cts
+                                company_time_schedules cts $table
                             WHERE
                             normal is not NULL
                             AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
-                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t2
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) $cond) t2
                 UNION
                 SELECT
                     COUNT(*) total_count,
@@ -560,43 +571,54 @@ WHERE
                                 ( normal ) total_require,
                                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
                             FROM
-                                company_time_schedules cts
+                                company_time_schedules cts $table
                             WHERE
                             normal is not NULL
                             AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 month)
-                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t3";
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) $cond) t3";
         $data = DB::select($sql);
 //        print_r($data);die;
         return $data;
     }
     public static function getConfirmedEmployeesCount()
     {
+        $table = '';
+        $cond = '';
+        $primary = \Session::get('primary_company');
+        if(\Session::get('user_role_id') == 5)
+        {
+            $table = ',company_time_tables ctt,
+                    companies c';
+            $cond = 'AND cts.companyTT_id = ctt.id 
+                    AND ctt.company_id = c.id
+                    AND c.master_id ='.$primary->id;
+        }
         $sql = "SELECT
                     COUNT(*) total_count,
                     'to' days
                 FROM
-                    company_time_schedules cts 
+                    company_time_schedules cts $table
                 WHERE
                     DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
-                    AND cts.normal IS NOT null
+                    AND cts.normal IS NOT null $cond
                 UNION
                 SELECT
                     COUNT(*) total_count,
                     'to_week' days
                 FROM
-                    company_time_schedules cts 
+                    company_time_schedules cts $table
                 WHERE
                     DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
-                    AND cts.normal IS NOT null
+                    AND cts.normal IS NOT null $cond
                 UNION
                 SELECT
                     COUNT(*) total_count,
                     'to_month' days
                 FROM
-                    company_time_schedules cts 
+                    company_time_schedules cts $table
                 WHERE
                     DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 month)
-                    AND cts.normal IS NOT null";
+                    AND cts.normal IS NOT null $cond";
         return DB::select($sql);
     }
 
