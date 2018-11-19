@@ -37,7 +37,7 @@
                     </button>
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
+                        <ul class="navbar-nav ml-auto">
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data"
@@ -59,9 +59,9 @@
                                     <span aria-hidden="true"></span> {!! Form::select( 'locale',
 									['en' => 'EN', 'ja' => 'JA'], \App::getLocale(), [ 'id' =>
 									'locale', 'class' => 'form-control', 'required' => 'required',
-									'style' => 'font-size:11px;height:35px;border:none', 'onchange'
+									'style' => 'font-size:11px;height:35px;margin-top:2px;border:none', 'onchange'
 									=> 'this.form.submit()', ] ) !!} <a id="master_data"
-                                                                        class="nav-link dropdown-toggle"
+                                                                        class="nav-link"
                                                                         id="navbarDropdown"
                                                                         role="button" data-toggle="dropdown"
                                                                         aria-haspopup="true"
@@ -372,7 +372,7 @@
                                                     </a>
                                                 </div>
                                             </li>
-                                            <li class="nav-item dropdown dropdown-menu-left">{!!
+                                            <li class="nav-item dropdown">{!!
 								Form::open(['method' => 'POST', 'route' => 'changelocale',
 								'class' => 'form-inline navbar-select']) !!}
                                                 <div
@@ -380,9 +380,9 @@
                                                     <span aria-hidden="true"></span> {!! Form::select( 'locale',
 									['en' => 'EN', 'ja' => 'JA'], \App::getLocale(), [ 'id' =>
 									'locale', 'class' => 'form-control', 'required' => 'required',
-									'style' => 'font-size:11px;height:35px;border:none', 'onchange'
+									'style' => 'font-size:11px;height:35px;margin-top:2px;border:none', 'onchange'
 									=> 'this.form.submit()', ] ) !!} <a id="master_data"
-                                                                        class="nav-link dropdown-toggle"
+                                                                        class="nav-link"
                                                                         id="navbarDropdown"
                                                                         role="button" data-toggle="dropdown"
                                                                         aria-haspopup="true"
@@ -393,7 +393,8 @@
 									Form::submit("Change", ['class' => 'btn btn-success']) !!}</div>
                                                 {!! Form::close() !!}
 
-                                            </li> @endguest
+                                            </li>
+                                            @endguest
 
                                         </ul>
                                     </div>
