@@ -426,5 +426,6 @@ return [
     'Flagfor'=>'のためのフラグ',
     'NoShiftAvailable'=>'シフトなし',
     'WorkedOnThisDay'=>'この日に働いた',
+    'Limitexceeded'=>'限度超過 ：',
 
 ];

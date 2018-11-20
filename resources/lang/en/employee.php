@@ -426,5 +426,5 @@ return [
     'Flagfor'=>'Flag for',
     'NoShiftAvailable'=>'No shift available.',
     'WorkedOnThisDay'=>'Worked on this day',
-
+    'Limitexceeded'=>'Limit exceeded :',
 ];
