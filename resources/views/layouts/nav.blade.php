@@ -271,7 +271,7 @@
                                                                              aria-expanded="false"> <i
                                                             class="fas fa-sign-in-alt"></i>
                                                     {{isset($primaryCompany->name)?trans('employee.LoggedAs')
-                                                    .$primaryCompany->name:'Primary Company not set'}} <span
+                                                    .' '.$primaryCompany->name:'Primary Company not set'}} <span
                                                             class="caret"></span>
                                                 </a>
 

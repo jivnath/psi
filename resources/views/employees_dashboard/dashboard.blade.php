@@ -302,7 +302,7 @@
                         }, 'stick');
                     }
                     for (i = 0; i < data['red'].length; i++) {
-                        console.log(data['red'][i].hours);
+                        // console.log(data['red'][i].hours);
                         $('#calendar').fullCalendar('renderEvent', {
                             title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
                             id: data['red'][i].rel_id,
