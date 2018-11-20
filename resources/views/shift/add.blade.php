@@ -103,8 +103,7 @@
                                     <td><a href="{{ route('shift.edit', $shift->id) }}" class="btn btn-link btn-sm">
                                             @lang('employee.Edit')</a></td>
                                 </tr>
-                            @endforeach @else
-                                <h3>@lang('employee.NoShiftAvailable')</h3>
+                            @endforeach
                             @endif
                             </tbody>
                         </table>

@@ -117,7 +117,9 @@ class EmployeeController extends Controller
 
     public function attendanceManagement()
     {
-        $subSections = Raw::getSectionForAttendance();
+//        $subSections = Raw::getSectionForAttendance();
+        $primary = \Session::get('primary_company');
+        $subSections = Company::where('master_id', $primary->id)->get();
         return view('reports.attendance_management', compact('data', 'subSections'));
     }
 
@@ -163,6 +165,7 @@ class EmployeeController extends Controller
                 $html = '<option value=' . $shift->start_time . '>' . substr($shift->start_time, 0, -3) . ' - ' . substr($shift->end_time, 0, -3) . '</option>';
                 $output .= $html;
             }
+//            dd($output);
 
             echo json_encode($output);
         }

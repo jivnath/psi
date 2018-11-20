@@ -20,14 +20,15 @@ class DessertController extends Controller
     public function dessert()
     {
         $allCompanies = CompanyTimeTable::all('company_id');
+        $primary = \Session::get('primary_company');
         $companies=[];
-            foreach($allCompanies as $comp)
-            {
-                $company = Company::find($comp->company_id);
-                if($company){
-                array_push($companies, $company);
-                }
+        foreach($allCompanies as $comp)
+        {
+            $company = Company::find($comp->company_id);
+            if($company->master_id == $primary->id){
+            array_push($companies, $company);
             }
+        }
         return view('sheets.dessert')->withCompanies(array_unique($companies));
     }
 

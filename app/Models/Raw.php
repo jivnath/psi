@@ -208,6 +208,7 @@ WHERE
 
     public static function getShiftView()
     {
+        $section = \Session::get('primary_company');
         $sql = "SELECT
     t1.*,
     t2.*,
@@ -253,6 +254,7 @@ FROM
             company_time_tables ctt
         WHERE
             c.id = ctt.company_id
+            AND c.master_id = $section->id
     ) t1,
     (
         SELECT
@@ -398,9 +400,9 @@ WHERE
 
     public static function getTotalNeccessory()
     {
-        $cond = '';
+//        $cond = '';
         $primary = \Session::get('primary_company');
-        if(\Session::get('user_role_id')==5)
+//        if(\Session::get('user_role_id')==5)
             $cond = 'AND c.master_id = '.$primary->id;
         $sql = "SELECT
                 cts.id,
@@ -521,16 +523,16 @@ WHERE
 
     public static function getConfirmedEmployees()
     {
-        $table = '';
-        $cond = '';
+//        $table = '';
+//        $cond = '';
         $primary = \Session::get('primary_company');
-        if(\Session::get('user_role_id') == 5) {
+//        if(\Session::get('user_role_id') == 5) {
             $table = ',company_time_tables ctt,
                     companies c';
             $cond = 'AND cts.companyTT_id = ctt.id 
                     AND ctt.company_id = c.id
                     AND c.master_id =' . $primary->id;
-        }
+//        }
 
             $sql = "SELECT
                     COUNT(*) total_count,
@@ -582,17 +584,17 @@ WHERE
     }
     public static function getConfirmedEmployeesCount()
     {
-        $table = '';
-        $cond = '';
+//        $table = '';
+//        $cond = '';
         $primary = \Session::get('primary_company');
-        if(\Session::get('user_role_id') == 5)
-        {
+//        if(\Session::get('user_role_id') == 5)
+//        {
             $table = ',company_time_tables ctt,
                     companies c';
             $cond = 'AND cts.companyTT_id = ctt.id 
                     AND ctt.company_id = c.id
                     AND c.master_id ='.$primary->id;
-        }
+//        }
         $sql = "SELECT
                     COUNT(*) total_count,
                     'to' days
@@ -746,10 +748,10 @@ WHERE
 
     public static function getSectionForAttendance()
     {
-        $cond = '';
-        $role = \Session::get('user_role_id');
+//        $cond = '';
+//        $role = \Session::get('user_role_id');
         $company = \Session::get('primary_company');
-        if($role==5)
+//        if($role==5)
             $cond = 'AND c.master_id = '.$company->id;
         $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id $cond";
         $data = DB::select($sql);
@@ -901,7 +903,8 @@ WHERE
 
     public static function getSubsectionShifts()
     {
-        $sql = "SELECT c.master_id, c.id, smd.* FROM shift_master_datas smd, companies c WHERE smd.company_id = c.id ORDER BY `c`.`master_id` ASC";
+        $primary = \Session::get('primary_company');
+        $sql = "SELECT c.master_id, c.id, smd.* FROM shift_master_datas smd, companies c WHERE smd.company_id = c.id AND c.master_id = $primary->id ORDER BY `c`.`master_id` ASC";
         $shifts = DB::select($sql);
 
         return $shifts;
