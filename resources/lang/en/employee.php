@@ -424,6 +424,7 @@ return [
     'alreadyinuse'=>'already in use',
     'for'=>'for',
     'Flagfor'=>'Flag for',
-
+    'NoShiftAvailable'=>'No shift available.',
+    'WorkedOnThisDay'=>'Worked on this day',
 
 ];

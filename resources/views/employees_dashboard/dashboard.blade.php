@@ -290,9 +290,11 @@
                     $('#calendar').fullCalendar('removeEvents', function () {
                         return true;
                     });
+                    var trans = '{{trans('employee.WorkedOnThisDay')}}';
+                    // alert(trans);
                     for (i = 0; i < data['date'].length; i++) {
                         $('#calendar').fullCalendar('renderEvent', {
-                            title: 'Worked on this day',
+                            title: trans,
                             start: data['date'][i].date,
                             allDay: true,
                             old: 1,

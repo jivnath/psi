@@ -43,7 +43,7 @@
                         </div>
                         <hr>
                         <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
-                        <div id="error" style="display: none"><b>No shifts available</b></div>
+                        <div id="error" style="display: none"><b>@lang('employee.NoShiftAvailable')</b></div>
                         <div id="tableDiv" style="display:none;margin-top: 25px;">
                             <p>
                                 <button class="specific">@lang('employee.PrintTable')</button>

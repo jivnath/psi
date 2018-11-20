@@ -424,5 +424,7 @@ return [
     'alreadyinuse'=>'すでに使用されています',
     'for'=>'にとって',
     'Flagfor'=>'のためのフラグ',
+    'NoShiftAvailable'=>'シフトなし',
+    'WorkedOnThisDay'=>'この日に働いた',
 
 ];
