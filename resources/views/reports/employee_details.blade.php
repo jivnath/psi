@@ -105,9 +105,22 @@ div.dataTables_wrapper {
 	src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
 <script>
 $(document).ready(function() {
+    var locale = $("#locale").val();
+    if(locale == 'en')
+    {
 
-    $('#employee_details').DataTable({ "scrollX": true, "scrollCollapse": true, scrollY:'50vh'});
-    $('.wrapper').css('width',(window.innerWidth-80));
+        $('#employee_details').DataTable({"scrollX": true, "scrollCollapse": true, scrollY: '50vh'});
+        $('.wrapper').css('width', (window.innerWidth - 80));
+    }
+    else {
+        $('#employee_details').DataTable({
+            "scrollX": true, "scrollCollapse": true, scrollY: '50vh',
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+            }
+        });
+        $('.wrapper').css('width', (window.innerWidth - 80));
+    }
 });
     var stickyOffset = $('.sticky').offset().top;
 

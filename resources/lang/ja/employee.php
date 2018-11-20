@@ -424,5 +424,6 @@ return [
     'alreadyinuse'=>'すでに使用されています',
     'for'=>'にとって',
     'Flagfor'=>'のためのフラグ',
+    'Limitexceeded'=>'限度超過 ：',
 
 ];

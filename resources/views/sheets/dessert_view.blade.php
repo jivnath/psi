@@ -351,17 +351,19 @@ success: function (data) {
 main_logical_data = data;
 console.log(checkProperties(data));
 
-if (data.length == 0) {
-alert('already in use');
-return false;
+if (data.length == 0)
+{
+    alert("{{trans('employee.alreadyinuse')}}");
+    //alert('already in use');
+    return false;
 }
 if (checkProperties(data)) {
-alert('Not available');
-return false;
+    alert("{{trans('employee.NotAvailable')}}");
+    return false;
 }
-if (typeof data.total_worked !== 'undefined' && data.total_worked >{{\Config('app.job_limit')}}) {
-alert('Limit exceeded : ' + (data.total_worked)+' hrs.');
-return false;
+if (typeof data.total_worked !== 'undefined' && data.total_worked > {{\Config('app.job_limit')}}) {
+    alert(trans('employee.Limitexceeded')  + (data.total_worked)+ trans('employee.hours'));
+    return false;
 }
 $.each(data, function (i, v) {
 $('#all_saved_value').data(i, v);
