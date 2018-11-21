@@ -627,15 +627,22 @@ WHERE
     public static function getConfirmation()
     {
         $today = date('Ymd');
+        $primary = \Session::get('primary_company');
+
 
         $sql = "SELECT
                 ( (normal)) total_require,
                 ( (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) total_used
             FROM
-                company_time_schedules cts
+                company_time_schedules cts,
+                company_time_tables ctt,
+                companies c
             WHERE
             	normal is not NULL
-            	AND date = $today";
+            	AND date = $today
+            	AND cts.companyTT_id = ctt.id
+                AND c.id=ctt.company_id
+                AND c.master_id = $primary->id";
         $data = DB::select($sql);
         return $data;
     }
