@@ -77,16 +77,18 @@ class DessertController extends Controller
             $cts_id = $request->get('cts_id');
             $responsible = $request->get('responsible');
             $desserts = DessertSheet::where('cts_id', $cts_id)->get();
+            $extra_desserts = [];
             foreach ($desserts as $dessert)
             {
                 if(!$dessert->responsible1)
                 {
                     $dessert->responsible1 = $responsible;
                     $dessert->save();
+                    array_push($extra_desserts, $dessert->id);
                 }
             }
 //            dd(1);
-            echo json_encode(1);
+            echo json_encode($extra_desserts);
         }
     }
 
