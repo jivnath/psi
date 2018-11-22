@@ -20,6 +20,18 @@ class LeaderController extends Controller
 
     }
 
+    public function removeManager(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->get('id');
+            $leader = Leader::find($id);
+            $leader->delete();
+
+            echo json_encode(1);
+        }
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, $this->rules());
@@ -53,7 +65,7 @@ class LeaderController extends Controller
             else
                 $leaderName = 0;
         }
-        echo $leaderName;
+        echo json_encode($leaderName);
 
 
     }

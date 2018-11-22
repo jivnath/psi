@@ -186,6 +186,7 @@ Route::group(['middleware' => ['auth']], function () {
                 //    Route::get('/leader/edit/{id}', 'LeaderController@edit')->name('leader.edit');
                 //    Route::get('/leader/{id}', 'LeaderController@update')->name('leader.update');
                 Route::get('/', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
+                Route::post('/removeManager', ['as' => 'removeManager', 'uses' => 'LeaderController@removeManager']);
             });
 
             Route::get('/messages', ['as' => 'inbox.messages', 'uses' => 'PsiInboxController@messages']);
