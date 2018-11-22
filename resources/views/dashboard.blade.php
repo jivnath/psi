@@ -146,7 +146,7 @@
                             <thead>
                             <tr>
                                 <th>@lang('employee.PSISNumber')</th>
-                                <th>@lang('employee.Responsible')</th>
+                                {{--<th>@lang('employee.Responsible')</th>--}}
                                 <th>@lang('employee.Activity')</th>
                                 <th>@lang('employee.Date')</th>
                                 <th>@lang('employee.Comment')</th>
@@ -158,7 +158,7 @@
                             @foreach ($recent_dessert_activity as $rda_info)
                                 <tr>
                                     <td>{{$rda_info->staff_no}}</td>
-                                    <td>{{$rda_info->operator}}</td>
+                                    {{--<td>{{$rda_info->operator}}</td>--}}
                                     <td>{{$rda_info->activity}}</td>
                                     <td>{{$rda_info->date}}</td>
                                     <td>{{$rda_info->comments}}</td>

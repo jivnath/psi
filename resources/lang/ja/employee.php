@@ -224,7 +224,7 @@ return [
     'Profile'=>'プロフィール',
     'Activity'=>'アクティビティ',
     'Logout'=>'ログアウト',
-    'Logout?'=>'ログアウト？',
+   // 'Logout?'=>'ログアウト？',
     'Areyousuretologout?'=>'ログアウトしてもよろしいですか？',
     'OK'=>'オーケー',
     'CONFIRMATION'=>'確認',

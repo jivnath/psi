@@ -439,7 +439,7 @@
 
                     $("#logout").click(function () {
                         swal({
-                            title: "Logout?",
+                            title: "{{trans('employee.Logout')}}?",
                             text: "{{trans('employee.logout_msg')}}",
                             type: "warning",
                             buttons: true,

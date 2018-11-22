@@ -82,7 +82,7 @@ return [
     'Operation' => 'Operation',
     'UpdateRole' => 'Update Role',
     'Employee' => 'Employee',
-    'EnterSkill' => 'EnterSkill',
+    'EnterSkill' => 'Enter Skill',
     'EnterPSISnumber' => 'Enter PSI-S number',
     'Action' => 'Action',
     'AddRole' => 'Add Role',
