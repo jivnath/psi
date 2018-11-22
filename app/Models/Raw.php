@@ -305,6 +305,7 @@ WHERE
         ORDER BY
             cts.date,time asc";
         $re = DB::select($sql);
+        if(count($re)>0){
         foreach ($re as $row) {
             $output_results[] = [
                 'id' => $row->id,
@@ -317,9 +318,8 @@ WHERE
                 'dessert_info' => \App\Models\DessertSheet::select('employees.*', 'psi_dessert_entry.*', 'psi_dessert_entry.id As psi_id')->join('employees', 'psi_dessert_entry.staff_no', '=', 'employees.psi_number')
                     ->where('cts_id', $row->id)
                     ->get()
-
             ];
-        }
+        }}
         return $output_results;
     }
 
@@ -470,11 +470,11 @@ WHERE
     public static function getDessertActivity()
     {
         $today = date("Ymd");
-        $cond='';
+//        $cond='';
         $user = Session::get('user_id');
-        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
+//        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
             $cond=" AND pde.responsible1 = $user";
-        }
+//        }
 
         $sql = "SELECT
                     pde.id,
@@ -627,15 +627,22 @@ WHERE
     public static function getConfirmation()
     {
         $today = date('Ymd');
+        $primary = \Session::get('primary_company');
+
 
         $sql = "SELECT
                 ( (normal)) total_require,
                 ( (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) total_used
             FROM
-                company_time_schedules cts
+                company_time_schedules cts,
+                company_time_tables ctt,
+                companies c
             WHERE
             	normal is not NULL
-            	AND date = $today";
+            	AND date = $today
+            	AND cts.companyTT_id = ctt.id
+                AND c.id=ctt.company_id
+                AND c.master_id = $primary->id";
         $data = DB::select($sql);
         return $data;
     }
@@ -915,5 +922,12 @@ WHERE
         $sql ="SELECT smd.* FROM shift_master_datas smd WHERE smd.company_id = $id";
         $shift = DB::select($sql);
         return $shift;
+    }
+
+    public static function getDataForSectionManager()
+    {
+        $sql ="SELECT l.id, c.name section, e.name manager_name, l.psi_num FROM leaders l, companies c, employees e where e.psi_number = l.psi_num AND l.company_id = c.id";
+        $data = DB::select($sql);
+        return $data;
     }
 }

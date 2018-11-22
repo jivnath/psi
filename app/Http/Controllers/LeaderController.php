@@ -15,7 +15,8 @@ class LeaderController extends Controller
     public function create()
     {
         $companies = Raw::getSecondLevelCompanies();
-        return view('leader.create', compact('companies'));
+        $managers = Raw::getDataForSectionManager();
+        return view('leader.create', compact('companies', 'managers'));
 
     }
 
