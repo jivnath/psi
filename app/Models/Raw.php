@@ -470,11 +470,11 @@ WHERE
     public static function getDessertActivity()
     {
         $today = date("Ymd");
-        $cond='';
+//        $cond='';
         $user = Session::get('user_id');
-        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
+//        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
             $cond=" AND pde.responsible1 = $user";
-        }
+//        }
 
         $sql = "SELECT
                     pde.id,
@@ -922,5 +922,12 @@ WHERE
         $sql ="SELECT smd.* FROM shift_master_datas smd WHERE smd.company_id = $id";
         $shift = DB::select($sql);
         return $shift;
+    }
+
+    public static function getDataForSectionManager()
+    {
+        $sql ="SELECT l.id, c.name section, e.name manager_name, l.psi_num FROM leaders l, companies c, employees e where e.psi_number = l.psi_num AND l.company_id = c.id";
+        $data = DB::select($sql);
+        return $data;
     }
 }
