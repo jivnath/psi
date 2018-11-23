@@ -100,12 +100,12 @@
                     success: function (data) {
                         if (data == 0) {
                             $("#hiddenDiv").hide();
-                            alert('PSI number invalid!!!');
+                            alert("{{trans('employee.PSInumberinvalid!!!')}}");
 
                         }
                         else if (data == 1) {
                             $("#hiddenDiv").hide();
-                            alert('No Availability available');
+                            alert("{{trans('employee.NoAvailabilityavailable')}}");
                         }
 
                         else {

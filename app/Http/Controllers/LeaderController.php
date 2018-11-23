@@ -35,16 +35,29 @@ class LeaderController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->rules());
+        $manager = Leader::firstOrNew(
+            ['psi_num' => $request->psi_num,
+            'company_id' => $request->company_name]
+        );
 
-        $leader = new Leader;
-        $leader->company_id = $request->company_name;
-        $leader->psi_num = $request->psi_num;
-        $leader->contact_num = $request->contact_num;
+        if ($manager->exists)
+        {
+            Session::flash('error', trans('employee.Manageralreadyexists'));
+            return redirect()->route('leader.create');
+        }
+        else
+        {
+//            $leader = new Leader;
+            $manager->company_id = $request->company_name;
+            $manager->psi_num = $request->psi_num;
+            $manager->contact_num = $request->contact_num;
+            $manager->save();
 
-        $leader->save();
+            Session::flash('success', trans('employee.Managersuccessfullyadded!'));
+            return redirect()->route('leader.create');
+        }
 
-        Session::flash('success', trans('employee.Managersuccessfullyadded!'));
-        return redirect()->route('leader.create');
+
     }
 
     public function showName(Request $request)

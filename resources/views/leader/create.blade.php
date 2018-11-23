@@ -165,7 +165,7 @@
         });
 
         $(".delete").click(function(){
-            var result = confirm("Want to delete?");
+            var result = confirm("{{trans('employee.Wanttodelete')}}");
             if(result){
                 var id = $(this).data('id');
                     $.ajax({
