@@ -291,7 +291,7 @@ return [
     'Pleaseinputsubsectionname'=>'Please input sub-section name',
     'PSInumberinvalid!!!'=>'PSI number invalid!!!',
     'NoAvailabilityavailable'=>'No Availability available',
-    'AInvalidPSISnumber'=>'Invalid PSI-S number.',
+    'InvalidPSISnumber'=>'Invalid PSI-S number.',
     'Noavailabilitydatafound.'=>'No availability data found.',
     'SubCompanyName'=>'Sub-Company Name',
     'Saved'=>'Saved',
@@ -429,5 +429,7 @@ return [
     'Limitexceeded'=>'Limit exceeded :',
     'SectionManagerList'=>'Section Manager List',
     'Remove'=>'Remove',
-    'SuccessfullyRemoved'=>'Successfully Removed'
+    'SuccessfullyRemoved'=>'Successfully Removed',
+    'Wanttodelete'=>'Want to delete?',
+    'Manageralreadyexists'=>'Manager already exists'
 ];

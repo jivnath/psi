@@ -372,7 +372,7 @@
             var locale = $("#locale").val();
             if(locale == 'ja')
             {
-                var table = $('#example').DataTable( {
+                 var table = $('#example').DataTable( {
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
                     }

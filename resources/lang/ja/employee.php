@@ -132,7 +132,7 @@ return [
     'Cancel'=>'キャンセル',
     'EmployeeSkills'=>'従業員のスキル',
     'EmployeeAvailability'=>'従業員の在庫状況',
-    'EmployeeName'=>'従業員名:',
+    'EmployeeName'=>'従業員名',
     'Weekdays'=>'平日',
     'Sunday'=>'日曜日',
     'Monday'=>'月曜',
@@ -429,5 +429,7 @@ return [
     'Limitexceeded'=>'限度超過 ：',
     'SectionManagerList'=>'セクションマネージャリスト',
     'Remove'=>'削除する',
-    'SuccessfullyRemoved'=>'削除が成功しました'
+    'SuccessfullyRemoved'=>'削除が成功しました',
+    'Wanttodelete'=>'削除しますか？',
+    'Manageralreadyexists'=>'マネージャーは既に存在します'
 ];
