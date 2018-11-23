@@ -82,7 +82,7 @@ return [
     'Operation' => 'Operation',
     'UpdateRole' => 'Update Role',
     'Employee' => 'Employee',
-    'EnterSkill' => 'EnterSkill',
+    'EnterSkill' => 'Enter Skill',
     'EnterPSISnumber' => 'Enter PSI-S number',
     'Action' => 'Action',
     'AddRole' => 'Add Role',
@@ -135,7 +135,7 @@ return [
     'EmployeeSkills' => 'Employee Skills',
     'Save' => 'Save',
     'EmployeeAvailability' => 'Employee Availability',
-    'EmployeeName' => 'Employee Name:',
+    'EmployeeName' => 'Employee Name',
     'Weekdays' => 'Weekdays',
     'Sunday' => 'Sunday',
     'Monday' => 'Monday',
@@ -427,4 +427,7 @@ return [
     'NoShiftAvailable'=>'No shift available.',
     'WorkedOnThisDay'=>'Worked on this day',
     'Limitexceeded'=>'Limit exceeded :',
+    'SectionManagerList'=>'Section Manager List',
+    'Remove'=>'Remove',
+    'SuccessfullyRemoved'=>'Successfully Removed'
 ];

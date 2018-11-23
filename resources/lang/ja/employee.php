@@ -169,7 +169,7 @@ return [
     'Clear'=>'クリア',
     'Shifts'=>'シフト',
     'StartEndTime'=>'開始時刻',
-    'Shift|Edit'=>'シフト|編集',
+    'ShiftEdit'=>'シフト|編集',
     'StartTime'=>'始まる時間',
     'EndTime'=>'終了時間',
     'Save'=>'保存する',
@@ -224,7 +224,7 @@ return [
     'Profile'=>'プロフィール',
     'Activity'=>'アクティビティ',
     'Logout'=>'ログアウト',
-    'Logout?'=>'ログアウト？',
+   // 'Logout?'=>'ログアウト？',
     'Areyousuretologout?'=>'ログアウトしてもよろしいですか？',
     'OK'=>'オーケー',
     'CONFIRMATION'=>'確認',
@@ -427,5 +427,7 @@ return [
     'NoShiftAvailable'=>'シフトなし',
     'WorkedOnThisDay'=>'この日に働いた',
     'Limitexceeded'=>'限度超過 ：',
-
+    'SectionManagerList'=>'セクションマネージャリスト',
+    'Remove'=>'削除する',
+    'SuccessfullyRemoved'=>'削除が成功しました'
 ];

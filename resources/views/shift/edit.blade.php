@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="box box-info">
                 <div class="box-header">
-                    <h4>@lang('employee.Shift|Edit')</h4>
+                    <h4>@lang('employee.ShiftEdit')</h4>
                 </div>
                 <div class="box-body " style="padding: 10px;">
                     <form action="{{ route('shift.update', [$shiftData['id']]) }}" method="POST">
