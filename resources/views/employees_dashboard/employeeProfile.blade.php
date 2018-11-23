@@ -447,7 +447,7 @@
 
                   </a>
                  I am going to nepal for 2 months so i am not avialable till 01 Jan 2019<br/> 
-                 私は2ヶ月間ネパールに行くので、2019年1月1日までは利用できません
+                 私は2ヶ月間ネパールに行くので、2019年1月1++++++++++++++++++++++++++++++++++++日までは利用できません
                 </p>
             </div>
                 <div class="item">
@@ -480,7 +480,7 @@
                 </div> <hr><hr>               
                 @endforeach
 
-               {{--
+               {{--/////
                 
                 <div class="item">
                 <img src="{{asset('images/dist/user1-128x128.jpg')}}" alt="user image" class="online">

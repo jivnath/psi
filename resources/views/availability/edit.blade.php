@@ -128,7 +128,6 @@
                 $("#hiddenDiv").hide();
             }
 
-
         });
 
         $("#update").click(function () {
