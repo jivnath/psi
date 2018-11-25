@@ -30,6 +30,7 @@
                 </div>
                 <div class="box-body">
                     <div>
+
                         <table class="table table-striped table-fixed table-condensed" style="text-align: center" id='example'>
                             <thead>
                                 <tr>

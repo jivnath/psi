@@ -49,30 +49,6 @@
         <main class="py-4" style='background: #ecf0f5;'>
         @auth
         <section class="content-header">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-             <?php $segments = '';
-             $total=count(Request::segments());
-             ?>
-              @foreach(Request::segments() as $key=> $segment)
-                <?php $segments .= '/'.$segment; ?>
-                <?php
-                if ($key === ($total-1)){?>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $segment }}</li>
-                    @php
-                    $primaryCompany=\Session::get('primary_company');
-                    @endphp
-                    <li class="breadcrumb-item pull-right text-bold">({{isset($primaryCompany->name)?$primaryCompany->name:''}})</li>
-
-                <?php }else{
-                ?>
-                <li class="breadcrumb-item">
-                    <a href="{{ $segments }}">{{$segment}}</a>
-                </li>
-                <?php }?>
-            @endforeach
-              </ol>
-              </div>
             </section>
             @endauth
             <div class="container" style='background: #ecf0f5;'>

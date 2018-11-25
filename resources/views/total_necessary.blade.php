@@ -24,7 +24,7 @@
                 <tbody>
                     @foreach ($total_ncessary_data as $tn_data)
                         @if($tn_data->total_used < $tn_data->total_require)
-                            <tr bgcolor="#e9a294">
+                            <tr class="table-danger">
                                 <td>{{$tn_data->master_main_company}}</td>
                                 <td>{{$tn_data->name}}</td>
                                 <td>{{$tn_data->DATE}}</td>

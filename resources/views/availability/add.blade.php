@@ -90,7 +90,6 @@
                             $("#dynamicDiv").hide();
                             $("#message").show();
                         }
-
                     }
                 });
             }
@@ -98,7 +97,6 @@
                 $("#dynamicDiv").hide();
                 $("#message").hide();
             }
-
         });
     });
 
