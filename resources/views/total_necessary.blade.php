@@ -10,7 +10,7 @@
 
         </div>
         <div class="box-body">
-            <table class="table table-bordered" id='tn_table'>
+            <table class="table table-bordered table-condensed" id='tn_table'>
                 <thead>
                     <tr>
                         <th>@lang('employee.Section')</th>
@@ -24,7 +24,7 @@
                 <tbody>
                     @foreach ($total_ncessary_data as $tn_data)
                         @if($tn_data->total_used < $tn_data->total_require)
-                            <tr bgcolor="#e9a294">
+                            <tr class="table-danger">
                                 <td>{{$tn_data->master_main_company}}</td>
                                 <td>{{$tn_data->name}}</td>
                                 <td>{{$tn_data->DATE}}</td>

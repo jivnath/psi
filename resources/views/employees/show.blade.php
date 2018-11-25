@@ -30,7 +30,7 @@
                 </div>
                 <div class="box-body">
                     <div>
-                        <table class="table table-striped table-fixed" style="text-align: center" id='example'>
+                        <table class="table table-condensed table-striped table-fixed" style="text-align: center" id='example'>
                             <thead>
                                 <tr>
                                     @foreach($all_col as $column)
