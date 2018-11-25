@@ -10,26 +10,54 @@
             </div>
             <div class="box-body">
                 <div class="row" id="filterDiv">
-                    <div class="col-md-1 sections" style="text-align: right">
-                        <label for="section">@lang('employee.Section')</label>
-                    </div>
-                    <div class="col-md-2 sections">
-                        <select id="section" class="form-control">
-                            <option value="0">@lang('employee.none')</option>
-                            @foreach($sections as $section)
-                                <option value="{{$section->id}}">{{$section->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-md-1 date" style="display: none; text-align: right">
-                        <label for="date">@lang('employee.Date')</label>
-                    </div>
-                    <div class="col-md-2 date" style="display: none">
-                        {{ Form::date('date', \Carbon\Carbon::now(), array('class' => 'form-control','id'=>'date'))}}
-                    </div>
-                    <div class="col-md-1 submit" style="display: none">
-                        <span class="btn btn-primary" id="submit">@lang('employee.Submit')</span>
-                    </div>
+                    {{--<div class="col-md-1 sections" style="text-align: right">--}}
+                        {{--<label for="section">@lang('employee.Section')</label>--}}
+                    {{--</div>--}}
+
+                    {{--@if(\Session::get('user_role_id')==5)--}}
+                        {{--<div class="col-md-2 sections">--}}
+                            {{--@php $primary_company = \Session::get('primary_company') @endphp--}}
+                            {{--{{dd($primary_company->id)}}--}}
+                            {{--<select id="section" class="form-control" disabled>--}}
+                                {{--<option value="0">@lang('employee.none')</option>--}}
+                                {{--@foreach($sections as $section)--}}
+                                    {{--<option value="{{$section->id}}"{{$primary_company->id==$section->id? 'selected':''}}>{{$section->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-1 date" style="text-align: right">--}}
+                            {{--<label for="date">@lang('employee.Date')</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-2 date">--}}
+                            {{--{{ Form::date('date', \Carbon\Carbon::now(), array('class' => 'form-control','id'=>'date'))}}--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-1 submit">--}}
+                            {{--<span class="btn btn-primary" id="submit">@lang('employee.Submit')</span>--}}
+                        {{--</div>--}}
+                    {{--@else--}}
+                        @php
+                            $primary = \Session::get('primary_company');
+                        @endphp
+                        <input type="hidden" value="{{$primary->id}}" id="section">
+                        {{--<div class="col-md-2 sections">--}}
+                            {{--<select id="section" class="form-control">--}}
+                                {{--<option value="0">@lang('employee.none')</option>--}}
+                                {{--@foreach($sections as $section)--}}
+                                    {{--<option value="{{$section->id}}">{{$section->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                        <div class="col-md-1 date" style="text-align: right">
+                            <label for="date">@lang('employee.Date')</label>
+                        </div>
+                        <div class="col-md-2 date">
+                            {{ Form::date('date', \Carbon\Carbon::now(), array('class' => 'form-control','id'=>'date'))}}
+                        </div>
+                        <div class="col-md-1 submit">
+                            <span class="btn btn-primary" id="submit">@lang('employee.Submit')</span>
+                        </div>
+
+                    {{--@endif--}}
                 </div>
                 <hr>
                 <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
@@ -56,17 +84,17 @@
         <script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
         <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
         <script>
-            $("#section").change(function () {
-                var section = $(this).val();
-                if (section != 0) {
-                    $('.date').show();
-                    $('.submit').show();
-                }
-                else {
-                    $('.date').hide();
-                    $('.submit').hide();
-                }
-            });
+            // $("#section").change(function () {
+            //     var section = $(this).val();
+            //     if (section != 0) {
+            //         $('.date').show();
+            //         $('.submit').show();
+            //     }
+            //     else {
+            //         $('.date').hide();
+            //         $('.submit').hide();
+            //     }
+            // });
             $("#submit").click(function () {
                 var section = $('#section').val();
                 var date = $('#date').val();
@@ -77,7 +105,7 @@
                         type: "GET",
                         url: "{{route('getTotalNecessaryReportData')}}",
                         data: {'section': section, 'date': date},
-                        beforeSend:function(){
+                        beforeSend: function () {
                             $("#loadingDiv").show();
                         },
                         success: function (data) {

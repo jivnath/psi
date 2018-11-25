@@ -172,15 +172,30 @@
 
 @endsection
 @push('scripts')
-    <script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
-    <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#table').DataTable({
-                dom: "<'row'<'col-sm-3'l><'col-sm-3'f><'col-sm-6'p>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            });
-        });
-    </script>
+    {{--<script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>--}}
+    {{--<script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>--}}
+    {{--<script type="text/javascript">--}}
+        {{--$(document).ready(function () {--}}
+            {{--var locale = $("#locale").val();--}}
+            {{--if(locale == 'en')--}}
+            {{--{--}}
+                {{--$('#table').DataTable({--}}
+                    {{--dom: "<'row'<'col-sm-3'l><'col-sm-3'f><'col-sm-6'p>>" +--}}
+                        {{--"<'row'<'col-sm-12'tr>>" +--}}
+                        {{--"<'row'<'col-sm-5'i><'col-sm-7'p>>",--}}
+                {{--});--}}
+            {{--}--}}
+            {{--else--}}
+            {{--{--}}
+                {{--$('#table').DataTable({--}}
+                    {{--dom: "<'row'<'col-sm-3'l><'col-sm-3'f><'col-sm-6'p>>" +--}}
+                        {{--"<'row'<'col-sm-12'tr>>" +--}}
+                        {{--"<'row'<'col-sm-5'i><'col-sm-7'p>>",--}}
+                    {{--"language": {--}}
+                        {{--"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"--}}
+                    {{--}--}}
+                 {{--});--}}
+            {{--}--}}
+        {{--});--}}
+    {{--</script>--}}
 @endpush

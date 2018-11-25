@@ -20,14 +20,15 @@ class DessertController extends Controller
     public function dessert()
     {
         $allCompanies = CompanyTimeTable::all('company_id');
+        $primary = \Session::get('primary_company');
         $companies=[];
-            foreach($allCompanies as $comp)
-            {
-                $company = Company::find($comp->company_id);
-                if($company){
-                array_push($companies, $company);
-                }
+        foreach($allCompanies as $comp)
+        {
+            $company = Company::find($comp->company_id);
+            if($company->master_id == $primary->id){
+            array_push($companies, $company);
             }
+        }
         return view('sheets.dessert')->withCompanies(array_unique($companies));
     }
 
@@ -63,6 +64,7 @@ class DessertController extends Controller
                 $dessert = Raw::getDessertInfo($id, $date);
                 $role = \Session::get('user_role_id');
                 $userlist = User::where('role_id', $role)->get();
+//                dd($userlist);
 
                 return view('sheets.dessert_view', compact('dessert','userlist'));
             }
@@ -75,16 +77,18 @@ class DessertController extends Controller
             $cts_id = $request->get('cts_id');
             $responsible = $request->get('responsible');
             $desserts = DessertSheet::where('cts_id', $cts_id)->get();
+            $extra_desserts = [];
             foreach ($desserts as $dessert)
             {
                 if(!$dessert->responsible1)
                 {
                     $dessert->responsible1 = $responsible;
                     $dessert->save();
+                    array_push($extra_desserts, $dessert->id);
                 }
             }
 //            dd(1);
-            echo json_encode(1);
+            echo json_encode($extra_desserts);
         }
     }
 
@@ -121,7 +125,6 @@ class DessertController extends Controller
                         $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
                         $total_work = Raw::getWorkedHours($psi, $first_date, $last_date);
                         $selectedShift = Raw::getShiftTime($dessert_id);
-//                        dd($total_worked);
                         $total_worked = $total_work[0]->totalWorked + $selectedShift[0]->shiftTime;
                             //check time limit
 //                        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);

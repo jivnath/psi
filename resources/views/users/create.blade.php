@@ -36,6 +36,16 @@
                     </div>
 
                     <div class='form-group'>
+                        <label for="primary_company">@lang('employee.PrimaryCompany')</label><br>
+                        <select name="primary_company" class="form-control" style="width:80%">
+                            <option value="">@lang('employee.None')</option>>
+                            @foreach($section as $primarycompany)
+                                <option value="{{$primarycompany->id}}"> {{$primarycompany->name}} </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class='form-group'>
                         <label for="role">@lang('employee.Role')</label><br>
                         <select name="role" class="form-control" style="width:80%">
                             @foreach($roles as $role)

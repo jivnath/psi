@@ -43,6 +43,7 @@
                         </div>
                         <hr>
                         <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
+                        <div id="error" style="display: none"><b>@lang('employee.NoShiftAvailable')</b></div>
                         <div id="tableDiv" style="display:none;margin-top: 25px;">
                             <p>
                                 <button class="specific">@lang('employee.PrintTable')</button>
@@ -67,27 +68,7 @@
                                 <th>移動</th>
                                 </thead>
                                 <tbody id="body">
-                                {{--@foreach($data as $index => $datum)--}}
-                                    {{--<tr>--}}
-                                        {{--<td scope="row">{{$index + 1}}</td>--}}
-                                        {{--<td>{{$datum->staff_no}}</td>--}}
-                                        {{--<td>{{$datum->name}}</td>--}}
-                                        {{--<td>{{$datum->phoetic_kanji}}</td>--}}
-                                        {{--<td>{{$datum->country_citizenship}}</td>--}}
-                                        {{--<td>{{substr($datum->start_time, 0, -3)}}--}}
-                                            {{--- {{substr($datum->end_time, 0, -3)}}</td>--}}
-                                        {{--<td>{{$datum->subsection}}</td>--}}
-                                        {{--<td>{{$datum->conformation_day_before}}</td>--}}
-                                        {{--<td>{{$datum->conformation_3_hours_ago}}</td>--}}
-                                        {{--<td>{{$datum->cell_no}}</td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                        {{--<td></td>--}}
-                                    {{--</tr>--}}
-                                {{--@endforeach--}}
+
                                 </tbody>
                             </table>
                         </div>
@@ -106,6 +87,7 @@
         // });
 
         $("#subsection").change(function(){
+            $("#error").hide();
             var id = $(this).val();
             if(id != 0) {
                 $("#shift").html('');
@@ -115,10 +97,19 @@
                     data: {'id': id},
                     dataType: "json",
                     success: function (data) {
-                        $("#shift").append(data);
-                        $(".dateDiv").show();
-                        $(".shiftDiv").show();
-                        $(".submit").show();
+                        if(data==''){
+                            $("#tableDiv").hide();
+                            $(".dateDiv").hide();
+                            $(".shiftDiv").hide();
+                            $("#error").show();
+                        }
+                        else{
+                            $("#error").hide();
+                            $("#shift").append(data);
+                            $(".dateDiv").show();
+                            $(".shiftDiv").show();
+                            $(".submit").show();
+                        }
                     }
                 });
             }

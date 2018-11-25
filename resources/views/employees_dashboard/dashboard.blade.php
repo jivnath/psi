@@ -117,7 +117,7 @@
     <!-- fullCalendar -->
     <script src="{{asset('bower_components/moment/moment.js')}}"></script>
     <script src="{{asset('bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
-    {{--<script src="{{asset('bower_components/fullcalendar/locale/es.js')}}"></script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/ja.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -127,6 +127,9 @@
         var last_click = '';
         $(document).ready(function () {
 
+            var locale = $("#locale").val();
+            // alert(locale);
+            // if()
             // var initialLocaleCode = 'ja';
             /* initialize the calendar
                   -----------------------------------------------------------------*/
@@ -142,7 +145,7 @@
                     center: 'title',
                     right: 'next, today'
                 },
-                // locale: initialLocaleCode,
+                locale: locale,
                 buttonText: {
                     today: 'today',
                     month: 'month',
@@ -287,9 +290,11 @@
                     $('#calendar').fullCalendar('removeEvents', function () {
                         return true;
                     });
+                    var trans = '{{trans('employee.WorkedOnThisDay')}}';
+                    // alert(trans);
                     for (i = 0; i < data['date'].length; i++) {
                         $('#calendar').fullCalendar('renderEvent', {
-                            title: 'Worked on this day',
+                            title: trans,
                             start: data['date'][i].date,
                             allDay: true,
                             old: 1,
@@ -299,7 +304,7 @@
                         }, 'stick');
                     }
                     for (i = 0; i < data['red'].length; i++) {
-                        console.log(data['red'][i].hours);
+                        // console.log(data['red'][i].hours);
                         $('#calendar').fullCalendar('renderEvent', {
                             title: data['red'][i].start_time + ' - ' + data['red'][i].end_time,
                             id: data['red'][i].rel_id,
@@ -367,11 +372,11 @@
             if (selected != 0) {
                 var hours = remaining - $(this).find(':selected').attr('data-Hours');
                 if (hours >= 0) {
-                    $('#message').html('<b style="color:darkgreen">Remaining hours will be ' + hours + ' hrs.</b>');
+                    $('#message').html('<b style="color:darkgreen"> <span>{{trans('employee.Remaininghourswillbe')}}</span> ' + hours + ' <span>{{trans('employee.hours')}}</span></b>');
                     $("#submit").attr("disabled", false);
                 }
                 else {
-                    $('#message').html('<b style="color:red">Working time exceeded!</b>')
+                    $('#message').html('<b style="color:red"><span>{{trans('employee.Workingtimeexceeded')}}</span></b>');
                     $("#submit").attr("disabled", true);
                 }
                 $("#message").show();

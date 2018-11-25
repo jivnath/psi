@@ -11,6 +11,7 @@
         $language = \Session::get('user_language');
         $user_id = \Session::get('user_id');
         $userEmail = \Session::get('user_email');
+        $role_id = \Session::get('user_role_id');
     @endphp
 
     <div class="row">
@@ -80,7 +81,7 @@
                                 <label for="primaryCompany" class="col-sm-2 control-label">@lang('employee.PrimaryCompany')</label>
 
                                 <div class="col-sm-10">
-                                    <select name="primary_company" class="form-control">
+                                    <select name="primary_company" class="form-control"{{($role_id==5) ? 'disabled':''}}>
                                         @foreach($companies as $company)
                                             <option value="{{$company->id}}"<?=(Auth::user()->primary_company==$company->id)?'selected="selected"':''?>>{{$company->name}}</option>
                                         @endforeach

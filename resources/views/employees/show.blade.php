@@ -34,7 +34,7 @@
                             <thead>
                                 <tr>
                                     @foreach($all_col as $column)
-                                    <th class="sticky-top" style="word-wrap: break-word">{{ ucwords(trans('employee.'.$column->field_name))}}</th>
+                                    <th class="sticky-top" style="word-wrap: break-word">{{(trans('employee.'.$column->field_name))}}</th>
                                     @endforeach
                                     <th class="sticky-top" style="word-wrap: break-word">@lang('employee.Skills')</th>
 
@@ -269,12 +269,6 @@
             })
         });
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');
         });
@@ -284,7 +278,7 @@
             $.ajax({
                 type: "POST",
                 url: "{{route('updateEmployeeGender')}}",
-                data: {'sex': sex, 'psi': psi},
+                data: {'sex': sex, 'psi': psi, "_token": "{{ csrf_token() }}"},
                 dataType: "json",
                 async: true,
                 success: function (data) {
@@ -299,7 +293,7 @@
             $.ajax({
                 type: "POST",
                 url: "{{route('updateEmployeeStatusResidence')}}",
-                data: {'status': status, 'psi': psi},
+                data: {'status': status, 'psi': psi, "_token": "{{ csrf_token() }}"},
                 dataType: "json",
                 async: true,
                 success: function (data) {
@@ -315,7 +309,7 @@
             $.ajax({
                 type: "POST",
                 url: "{{route('updateEmployeeHourlyWage')}}",
-                data: {'wage': wage, 'psi': psi},
+                data: {'wage': wage, 'psi': psi, "_token": "{{ csrf_token() }}"},
                 dataType: "json",
                 async: true,
                 success: function (data) {
@@ -330,7 +324,7 @@
             $.ajax({
                 type: "POST",
                 url: "{{route('updateEmployeeOperatingStatus')}}",
-                data: {'status': status, 'psi': psi},
+                data: {'status': status, 'psi': psi, "_token": "{{ csrf_token() }}"},
                 dataType: "json",
                 async: true,
                 success: function (data) {
@@ -345,7 +339,7 @@
             $.ajax({
                 type: "POST",
                 url: "{{route('updateEmployeeStatus')}}",
-                data: {'status': status, 'psi': psi},
+                data: {'status': status, 'psi': psi, "_token": "{{ csrf_token() }}"},
                 dataType: "json",
                 async: true,
                 success: function (data) {
@@ -360,7 +354,7 @@
             $.ajax({
                 type: "POST",
                 url: "{{route('updateEmployeeViberInstall')}}",
-                data: {'viber': viber, 'psi': psi},
+                data: {'viber': viber, 'psi': psi, "_token": "{{ csrf_token() }}"},
                 dataType: "json",
                 async: true,
                 success: function (data) {
@@ -375,7 +369,19 @@
 
 
             // DataTable
-            var table = $('#example').DataTable();
+            var locale = $("#locale").val();
+            if(locale == 'ja')
+            {
+                 var table = $('#example').DataTable( {
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    }
+                });
+            }
+            else
+            {
+                var table = $('#example').DataTable();
+            }
             $("#example_filter").css("display", "none");  // hiding global search box
 
             $('.search-input-text').keypress(function (e) {   // for text boxes
@@ -417,7 +423,7 @@
                         var form = '<input type="hidden" class="form-conrol" value=' +selected + ' name="psi_num" >';
                         $("#formDiv").html(form);
                     }
-                    
+
                 }
 
             });

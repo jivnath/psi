@@ -23,13 +23,13 @@ margin-left: 17px;
 									<input type="checkbox" class="custom-control-input"
 										id="customCheck-{{str_replace('/','',$k)}}"name="customized[]" value="{{str_replace('/','',$k)}}"
 										 onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')" {{ (in_array(str_replace('/','',$k), $permissionsOfRole))?'checked':''}} > <label class="custom-control-label"
-										for="customCheck-{{str_replace('/','',$k)}}">{{$k}}</label>
+										for="customCheck-{{str_replace('/','',$k)}}">{{ucwords(str_replace('/','' ,$k))}}</label>
 								</div>
 							</div>
 
 						</div>
 						<br>
-						<div class="form-row child-row">
+						<div class="form-row child-row" style="display: none">
 							@foreach($i as $item)
 								{{--{{dd($item['id'])}}--}}
 

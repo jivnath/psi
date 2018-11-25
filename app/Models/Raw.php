@@ -208,6 +208,7 @@ WHERE
 
     public static function getShiftView()
     {
+        $section = \Session::get('primary_company');
         $sql = "SELECT
     t1.*,
     t2.*,
@@ -253,6 +254,7 @@ FROM
             company_time_tables ctt
         WHERE
             c.id = ctt.company_id
+            AND c.master_id = $section->id
     ) t1,
     (
         SELECT
@@ -303,6 +305,7 @@ WHERE
         ORDER BY
             cts.date,time asc";
         $re = DB::select($sql);
+        if(count($re)>0){
         foreach ($re as $row) {
             $output_results[] = [
                 'id' => $row->id,
@@ -315,9 +318,8 @@ WHERE
                 'dessert_info' => \App\Models\DessertSheet::select('employees.*', 'psi_dessert_entry.*', 'psi_dessert_entry.id As psi_id')->join('employees', 'psi_dessert_entry.staff_no', '=', 'employees.psi_number')
                     ->where('cts_id', $row->id)
                     ->get()
-
             ];
-        }
+        }}
         return $output_results;
     }
 
@@ -398,6 +400,10 @@ WHERE
 
     public static function getTotalNeccessory()
     {
+//        $cond = '';
+        $primary = \Session::get('primary_company');
+//        if(\Session::get('user_role_id')==5)
+            $cond = 'AND c.master_id = '.$primary->id;
         $sql = "SELECT
                 cts.id,
                 companytt_id,
@@ -418,7 +424,7 @@ WHERE
                 INNER JOIN  company_time_tables ctt on cts.companytt_id = ctt.id
                 INNER JOIN companies c ON c.id=ctt.company_id
             WHERE
-            normal is not NULL
+            normal is not NULL $cond
             ORDER BY
                 cts.DATE
                 desc";
@@ -464,11 +470,11 @@ WHERE
     public static function getDessertActivity()
     {
         $today = date("Ymd");
-        $cond='';
+//        $cond='';
         $user = Session::get('user_id');
-        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
+//        if(!in_array(\Session::get('user_role_id'),\Config('constant.allow_self_sheet'))){
             $cond=" AND pde.responsible1 = $user";
-        }
+//        }
 
         $sql = "SELECT
                     pde.id,
@@ -517,7 +523,18 @@ WHERE
 
     public static function getConfirmedEmployees()
     {
-        $sql = "SELECT
+//        $table = '';
+//        $cond = '';
+        $primary = \Session::get('primary_company');
+//        if(\Session::get('user_role_id') == 5) {
+            $table = ',company_time_tables ctt,
+                    companies c';
+            $cond = 'AND cts.companyTT_id = ctt.id 
+                    AND ctt.company_id = c.id
+                    AND c.master_id =' . $primary->id;
+//        }
+
+            $sql = "SELECT
                     COUNT(*) total_count,
                     'to' days
                 FROM
@@ -526,11 +543,11 @@ WHERE
                                 ( normal ) total_require,
                                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
                             FROM
-                                company_time_schedules cts
+                                company_time_schedules cts $table
                             WHERE
                             normal is not NULL
                             AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
-                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t1
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) $cond) t1
                 UNION
                 SELECT
                     COUNT(*) total_count,
@@ -541,11 +558,11 @@ WHERE
                                 ( normal ) total_require,
                                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
                             FROM
-                                company_time_schedules cts
+                                company_time_schedules cts $table
                             WHERE
                             normal is not NULL
                             AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
-                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t2
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) $cond) t2
                 UNION
                 SELECT
                     COUNT(*) total_count,
@@ -556,58 +573,76 @@ WHERE
                                 ( normal ) total_require,
                                 (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) total_used
                             FROM
-                                company_time_schedules cts
+                                company_time_schedules cts $table
                             WHERE
                             normal is not NULL
                             AND DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 month)
-                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) t3";
+                            AND normal <= (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id) $cond) t3";
         $data = DB::select($sql);
 //        print_r($data);die;
         return $data;
     }
     public static function getConfirmedEmployeesCount()
     {
+//        $table = '';
+//        $cond = '';
+        $primary = \Session::get('primary_company');
+//        if(\Session::get('user_role_id') == 5)
+//        {
+            $table = ',company_time_tables ctt,
+                    companies c';
+            $cond = 'AND cts.companyTT_id = ctt.id 
+                    AND ctt.company_id = c.id
+                    AND c.master_id ='.$primary->id;
+//        }
         $sql = "SELECT
                     COUNT(*) total_count,
                     'to' days
                 FROM
-                    company_time_schedules cts 
+                    company_time_schedules cts $table
                 WHERE
                     DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 day)
-                    AND cts.normal IS NOT null
+                    AND cts.normal IS NOT null $cond
                 UNION
                 SELECT
                     COUNT(*) total_count,
                     'to_week' days
                 FROM
-                    company_time_schedules cts 
+                    company_time_schedules cts $table
                 WHERE
                     DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 week)
-                    AND cts.normal IS NOT null
+                    AND cts.normal IS NOT null $cond
                 UNION
                 SELECT
                     COUNT(*) total_count,
                     'to_month' days
                 FROM
-                    company_time_schedules cts 
+                    company_time_schedules cts $table
                 WHERE
                     DATE( cts.DATE) BETWEEN DATE_ADD(CURDATE(), INTERVAL 1 day) AND DATE_ADD(CURDATE(), INTERVAL 1 month)
-                    AND cts.normal IS NOT null";
+                    AND cts.normal IS NOT null $cond";
         return DB::select($sql);
     }
 
     public static function getConfirmation()
     {
         $today = date('Ymd');
+        $primary = \Session::get('primary_company');
+
 
         $sql = "SELECT
                 ( (normal)) total_require,
                 ( (select count(*) from psi_dessert_entry pde where pde.cts_id= cts.id)) total_used
             FROM
-                company_time_schedules cts
+                company_time_schedules cts,
+                company_time_tables ctt,
+                companies c
             WHERE
             	normal is not NULL
-            	AND date = $today";
+            	AND date = $today
+            	AND cts.companyTT_id = ctt.id
+                AND c.id=ctt.company_id
+                AND c.master_id = $primary->id";
         $data = DB::select($sql);
         return $data;
     }
@@ -718,6 +753,18 @@ WHERE
         return $data;
     }
 
+    public static function getSectionForAttendance()
+    {
+//        $cond = '';
+//        $role = \Session::get('user_role_id');
+        $company = \Session::get('primary_company');
+//        if($role==5)
+            $cond = 'AND c.master_id = '.$company->id;
+        $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id $cond";
+        $data = DB::select($sql);
+        return $data;
+    }
+
     public static function dessert_calculation_method($schedule_id, $staff_id)
     {
         $sql = "SELECT
@@ -781,7 +828,6 @@ WHERE
 
     public static function employeeWorksheetData($start, $end)
     {
-//        dd($start);
         $sql = "SELECT
         pde.staff_no,
         e.name,
@@ -864,7 +910,8 @@ WHERE
 
     public static function getSubsectionShifts()
     {
-        $sql = "SELECT c.master_id, c.id, smd.* FROM shift_master_datas smd, companies c WHERE smd.company_id = c.id ORDER BY `c`.`master_id` ASC";
+        $primary = \Session::get('primary_company');
+        $sql = "SELECT c.master_id, c.id, smd.* FROM shift_master_datas smd, companies c WHERE smd.company_id = c.id AND c.master_id = $primary->id ORDER BY `c`.`master_id` ASC";
         $shifts = DB::select($sql);
 
         return $shifts;
@@ -875,5 +922,12 @@ WHERE
         $sql ="SELECT smd.* FROM shift_master_datas smd WHERE smd.company_id = $id";
         $shift = DB::select($sql);
         return $shift;
+    }
+
+    public static function getDataForSectionManager()
+    {
+        $sql ="SELECT l.id, c.name section, e.name manager_name, l.psi_num FROM leaders l, companies c, employees e where e.psi_number = l.psi_num AND l.company_id = c.id";
+        $data = DB::select($sql);
+        return $data;
     }
 }
