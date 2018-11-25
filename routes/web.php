@@ -10,8 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::group(['middleware' => ['check.log']], function () {
 Route::get('/', function () {
     return redirect()->route('login');
+});
 });
 
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
