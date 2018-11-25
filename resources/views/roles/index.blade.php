@@ -10,7 +10,7 @@
             </div>
             <div class="box-body">
                 <div class="table-responsive col-md-8">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-condensed">
                         <thead>
                         <tr>
                             <th>@lang('employee.Role')</th>

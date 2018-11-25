@@ -8,7 +8,7 @@
                         <h3 class="box-title">@lang('employee.SectionShift')</h3>
                     </div>
                     <div class='box-body container_class' style="overflow-x: scroll">
-                        <table class="table table-striped" id='example'>
+                        <table class="table table-striped table-condensed" id='example'>
                             <thead>
                             <th>@lang('employee.Time')</th>
                             <th>@lang('employee.SubSection')</th>

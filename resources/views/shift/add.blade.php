@@ -40,7 +40,7 @@
                                 </div>
                                 <!--Dynamic Field Start -->
                                 <div class="col-md-7">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive table-condensed">
                                         <table id="dynamic_field" style="width: 100%">
                                             <tr class="form-group">
                                                 <td style="padding: 10px"><input type="time" name="start_shift[]"
@@ -83,7 +83,7 @@
                         <h4>@lang('employee.Shifts')</h4>
                     </div>
                     <div class="box-body">
-                        <table id="shiftTable" class="table table-striped">
+                        <table id="shiftTable" class="table table-striped table-condensed">
                             <thead>
                             <tr>
                                 <th>@lang('employee.SubsectionName')</th>

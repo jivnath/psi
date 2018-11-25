@@ -182,7 +182,7 @@
                     </div>
                     <div class="active tab-pane" id="about_me">
                         <div class="post clearfix">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-condensed">
 
                                 @if($employee_name!=null)
                                     <tr>

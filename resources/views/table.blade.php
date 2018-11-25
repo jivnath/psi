@@ -2,7 +2,7 @@
 @section('content')
 
 
-<table id="table_id" class="table">
+<table id="table_id" class="table table-condensed">
     <thead>
         <tr>
             <th>Company</th>

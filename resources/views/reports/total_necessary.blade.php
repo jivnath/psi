@@ -62,7 +62,7 @@
                 <hr>
                 <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
                 <div id="table" style="display: none">
-                    <table class="table table-bordered" id='tn_table'>
+                    <table class="table table-bordered table-condensed" id='tn_table'>
                         <thead>
                         <tr>
                             <th>@lang('employee.SubSection')</th>

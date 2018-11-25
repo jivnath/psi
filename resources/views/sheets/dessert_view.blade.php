@@ -83,7 +83,7 @@
 
     </div>
 </div>
-<table class="table table-borderd">
+<table class="table table-borderd table-condensed">
     <thead class="thead-dark">
     <tr>
         <th class="sticky-top">@lang('employee.Date')</th>

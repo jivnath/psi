@@ -27,7 +27,7 @@ div.dataTables_wrapper {
 				</div>
 				<div class="box-body">
 					<div class='wrapper'>
-						<table class="table display nowrap" id='employee_details'
+						<table class="table display nowrap table-condensed" id='employee_details'
 							style="width: 100%">
 							<thead class="thead-dark">
 								<tr>

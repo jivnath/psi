@@ -10,7 +10,7 @@
 
         </div>
         <div class="box-body">
-            <table class="table table-bordered" id='tn_table'>
+            <table class="table table-bordered table-condensed" id='tn_table'>
                 <thead>
                     <tr>
                         <th>@lang('employee.Section')</th>

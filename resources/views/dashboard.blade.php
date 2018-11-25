@@ -68,7 +68,7 @@
                         <h3 class="box-title">@lang('dashboard.cardExpire')</h3>
                     </div>
                     <div class="box-body">
-                        <table class="table table-striped" id='expire_info'>
+                        <table class="table table-striped table-condensed" id='expire_info'>
                             <thead>
                             <tr>
                                 <th>@lang('dashboard.psisno')</th>
@@ -104,7 +104,7 @@
                         <h3 class="box-title">@lang('employee.TotalNecessary')</h3>
                     </div>
                     <div class="box-body">
-                        <table class="table table-striped table-bordered" id='tn_table'>
+                        <table class="table table-striped table-bordered table-condensed" id='tn_table'>
                             <thead>
                             <tr>
                                 <th>@lang('employee.Section')</th>
@@ -142,7 +142,7 @@
                         <h3 class="box-title">@lang('employee.RecentShelfSheetActivity')</h3>
                     </div>
                     <div class="box-body">
-                        <table class="table table-striped" id='rda_table'>
+                        <table class="table table-striped table-condensed" id='rda_table'>
                             <thead>
                             <tr>
                                 <th>@lang('employee.PSISNumber')</th>
@@ -181,7 +181,7 @@
                         <h3 class="box-title">@lang('employee.ViberAlertSummary')</h3>
                     </div>
                     <div class="box-body">
-                        <table class="table table-striped" id='alert_viber'>
+                        <table class="table table-striped table-condensed" id='alert_viber'>
                             <thead>
                             <tr>
                                 <th>@lang('employee.MessageType')</th>

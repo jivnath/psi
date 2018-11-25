@@ -14,7 +14,7 @@
                         <h3 class="box-title">@lang('employee.CompanyDetails')</h3>
                     </div>
                     <div class="box-body">
-                        <table class="table table-bordered" id='table'>
+                        <table class="table table-bordered table-condensed" id='table'>
                             <thead>
                             <tr>
                                 <th>@lang('employee.SymbolNumber')</th>
@@ -107,7 +107,7 @@
                                                 @else
                                                     @foreach($section as $index2=>$subsection)
                                                         <div class="table-responsive">
-                                                            <table class='table table-bordered'>
+                                                            <table class='table table-bordered table-condensed'>
                                                                 <thead class="thead-light">
                                                                 <tr>
                                                                     <th class="table_th_fix">@lang('employee.Sections')</th>
