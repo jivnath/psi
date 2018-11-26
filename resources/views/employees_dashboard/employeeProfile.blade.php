@@ -477,8 +477,11 @@
                         {{$i->response_message}}</p></div>
                         @endif
                     @endforeach
-                </div> <hr><hr>               
+                </div> <hr><hr>             
                 @endforeach
+                <div class="box-footer text-center">
+                    <a href="" class="uppercase">@lang('employee.ViewAll')</a>
+                </div>
 
                {{--/////
                 
