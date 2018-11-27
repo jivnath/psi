@@ -19,7 +19,7 @@
 
             <!-- Profile Image -->
             <div class="box box-primary">
-                <div class="box-body box-profile">
+                <div class="box-body box-profile" style="padding-top:2px;padding-bottom: 2px">
                     <h4 class="profile-username text-center">{{$username}}</h4>
 
                     <p class="text-muted text-center">{{ Auth::user()->roles()->pluck('name')->implode('')}}</p>
@@ -31,11 +31,11 @@
 
             <!-- About Me Box -->
             <div class="box box-primary">
-                <div class="box-header with-border">
+                <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
                     <h3 class="box-title">@lang('employee.AboutMe')</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                     <strong><i class="fa fa-book margin-r-5"></i> @lang('employee.Education')</strong>
 
                     <p class="text-muted">

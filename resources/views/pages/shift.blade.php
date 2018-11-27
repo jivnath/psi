@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-info">
-				<div class="box-header with-border">
+				<div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
 					<h3 class="box-title">@lang('employee.SectionShift') <a href="{{ route('generator') }}"
 						class="btn btn-link" style="margin-left: 10px"><small>@lang('employee.GenerateNew')</small></a></h3>
 				</div>

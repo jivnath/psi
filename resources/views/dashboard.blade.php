@@ -64,10 +64,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="box box-info">
-                    <div class="box-header with-border">
+                    <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
                         <h3 class="box-title">@lang('dashboard.cardExpire')</h3>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                         <table class="table table-striped" id='expire_info'>
                             <thead>
                             <tr>
@@ -93,17 +93,17 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="box-footer text-center">
+                    <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
                         <a href="{{route('exp_date')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="box box-info">
-                    <div class="box-header with-border">
+                    <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
                         <h3 class="box-title">@lang('employee.TotalNecessary')</h3>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                         <table class="table table-striped table-bordered" id='tn_table'>
                             <thead>
                             <tr>
@@ -129,7 +129,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="box-footer text-center">
+                    <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
                         <a href="{{route('total_necessary')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
@@ -138,10 +138,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="box box-info">
-                    <div class="box-header with-border">
+                    <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
                         <h3 class="box-title">@lang('employee.RecentShelfSheetActivity')</h3>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                         <table class="table table-striped" id='rda_table'>
                             <thead>
                             <tr>
@@ -170,17 +170,17 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="box-footer text-center">
+                    <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
                         <a href="{{route('recent_sheet')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="box box-info">
-                    <div class="box-header with-border">
+                    <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
                         <h3 class="box-title">@lang('employee.ViberAlertSummary')</h3>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                         <table class="table table-striped" id='alert_viber'>
                             <thead>
                             <tr>
@@ -213,7 +213,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="box-footer text-center">
+                    <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
                         <a href="{{route('alert_summary')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>

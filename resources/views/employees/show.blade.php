@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-info">
-                <div class="box-header with-border">
+                <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
 
                     <h3 class="box-title">@lang('employee.EmployeesList')<a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px">
                                 <small>@lang('employee.UploadNew')</small>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="padding-top:2px ">
                     <div>
                         <table class="table table-condensed table-striped table-fixed" style="text-align: center" id='example'>
                             <thead>
@@ -43,13 +43,13 @@
                             <thead>
                                 <tr>
                                     @foreach($all_col as $count_key=>$column) @if ($column->field_name == 'sex')
-                                    <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
+                                    <td style="padding: 1px;"><select style="width:70%" data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
                                                     <option value="">@lang('employee.All')</option>
                                                     <option value="男性">男性</option>
                                                     <option value="女性">女性</option>
                                                 </select></td>
                                     @else
-                                    <td><input type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
+                                    <td style="padding: 1px;"><input style="width:70%" type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
                                     @endif @endforeach
 
                                 </tr>

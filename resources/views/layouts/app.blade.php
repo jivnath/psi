@@ -46,12 +46,8 @@
         <div>
             @include('layouts.messages')
         </div>
-        <main class="py-4" style='background: #ecf0f5;'>
-        @auth
-        <section class="content-header">
-            </section>
-            @endauth
-            <div class="container" style='background: #ecf0f5;'>
+        <main class="py-4" style='margin-top:0px; background: #ecf0f5;'>
+            <div class="container" style='margin-top:0px;background: #ecf0f5;'>
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}

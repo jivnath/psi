@@ -91,6 +91,7 @@ class RoleController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
+//        dd($id);
         return redirect()->route('update.role', $id);
 //        $role = Role::findOrFail($id);
 //        $permissions = Permission::all();

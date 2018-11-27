@@ -4,11 +4,11 @@
 
     <div class='col-md-8 offset-2'>
         <div class="box">
-            <div class="box-header">
+            <div class="box-header" style="padding-top:2px;padding-bottom: 2px">
                 <h4>@lang('employee.EditUser') '{{$user->name}}'</h4>
                 <hr>
             </div>
-            <div class="box-body">
+            <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
 
                 {{ Form::model($user, array('route' => array('users.update', $user->id), 'method' => 'PUT')) }}{{-- Form model binding to automatically populate our fields with user data --}}
 

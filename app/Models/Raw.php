@@ -842,6 +842,7 @@ WHERE
     WHERE
        cts.id = pde.cts_id
         AND pde.staff_no = e.psi_number
+        AND pde.conformation_3_hours_ago = 'OK'
         AND cts.companyTT_id = ctt.id
         AND smd.company_id = ctt.company_id
         AND cts.time = smd.start_time
