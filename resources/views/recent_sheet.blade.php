@@ -10,7 +10,7 @@
                 <h3 class="box-title">@lang('employee.RecentShelfSheetActivity')</h3>
             </div>
             <div class="box-body">
-                <table class="table" id='rda_table'>
+                <table class="table table-condensed" id='rda_table'>
                     <thead>
                         <tr>
                             <th>@lang('employee.PSISNumber')</th>

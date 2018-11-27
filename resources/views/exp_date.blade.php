@@ -10,7 +10,7 @@
                 <h3 class="box-title">@lang('dashboard.cardExpire')</h3>
             </div>
             <div class="box-body">
-                <table class="table" id='expire_info'>
+                <table class="table table-condensed" id='expire_info'>
                     <thead>
                         <tr>
                             <th>@lang('dashboard.psisno')</th>

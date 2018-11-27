@@ -15,7 +15,7 @@
                     <div class="box-header" style="padding-top:2px;padding-bottom: 2px;">
                         <h4>@lang('employee.AddShifts')</h4>
                     </div>
-                    <div class="box-body " style="padding-top:2px;padding-bottom: 2px;"">
+                    <div class="box-body " style="padding-top:2px;padding-bottom: 2px;">
                         <form action="{{ route('shift.store') }}" method="POST">
                             <input type="hidden" name="_method" value="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -40,7 +40,7 @@
                                 </div>
                                 <!--Dynamic Field Start -->
                                 <div class="col-md-7">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive table-condensed">
                                         <table id="dynamic_field" style="width: 100%">
                                             <tr class="form-group">
                                                 <td style="padding: 10px"><input type="time" name="start_shift[]"

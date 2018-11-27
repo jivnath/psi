@@ -36,7 +36,7 @@
                     <div class="box-body">
                         <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
                         <div class='wrapper' id="allTable" style="display: none">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-condensed">
                                 <thead>
                                     <th>@lang('employee.PSISNumber')</th>
                                     <th>@lang('employee.Name')</th>

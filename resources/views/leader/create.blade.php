@@ -84,7 +84,7 @@
 
                 <div class="box-body">
                     <div id="sectionManager">
-                        <table id="managerTable" class="table table-striped">
+                        <table id="managerTable" class="table table-striped table-condensed">
                             <thead>
                             <tr>
                                 <th> @lang('employee.psi_number')</th>

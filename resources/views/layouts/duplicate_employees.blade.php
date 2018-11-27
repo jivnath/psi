@@ -7,7 +7,7 @@
             <div class="alert" role="alert">
                 <div class="col-md-6 offset-3" style="margin-bottom: 50px">
                     <strong><h4>Duplicate Employees</h4></strong>
-                    <table class="table table-striped">
+                    <table class="table table-striped table-condensed">
                         <th scope="col">#</th>
                         <th>PSI-S No</th>
                         <th>Name</th>

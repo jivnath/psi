@@ -10,7 +10,7 @@
             </div>
             <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-condensed">
 
                         <thead>
                             <tr>

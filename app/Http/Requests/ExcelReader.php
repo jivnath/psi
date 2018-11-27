@@ -92,7 +92,7 @@ class ExcelReader extends FormRequest
             }
         }
 
-        dd($this->data);
+//        dd($this->data);
         return $this;
     }
 

@@ -22,24 +22,26 @@ class EmployeeSkillController extends Controller
 
     public function store(Request $request)
     {
-
-        $update_data=[];
-        $employeeSkills= $request->employeeSkills;
-        $psi_num = $request->psi_num;
-        $emp_skills = EmployeeSkill::where('psi_num', $psi_num)->get();
-        foreach ($emp_skills as $emp)
+        if($request->ajax())
         {
-            $emp->delete();
-        }
-//        dd($employeeSkills);
-        if(isset($employeeSkills))
-        {
-            foreach ($employeeSkills as $skill){
-                $update_data[]=['psi_num'=>$psi_num,'skill_id'=>$skill];
+            $psi = $request->get('psi');
+            $skills = $request->get('skill');
+            $update_data=[];
+            $emp_skills = EmployeeSkill::where('psi_num', $psi)->get();
+            foreach ($emp_skills as $emp)
+            {
+                $emp->delete();
             }
-            EmployeeSkill::insert($update_data);
+            if(isset($skills))
+            {
+                // dd($skills);
+                foreach ($skills as $skill){
+                    $update_data[]=['psi_num'=>$psi, 'skill_id'=>$skill];
+                }
+                EmployeeSkill::insert($update_data);
+            }
         }
-        return redirect()->route('employees.show');
+        echo json_encode($psi);
     }
 
     public function findSkill(Request $request)

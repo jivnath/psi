@@ -48,7 +48,7 @@
                             <p>
                                 <button class="specific">@lang('employee.PrintTable')</button>
                             </p>
-                            <table style="" id="attendance" class="table table-striped">
+                            <table style="" id="attendance" class="table table-striped table-condensed">
                                 <thead>
                                 <th>#</th>
                                 <th>@lang('employee.PSISNumber')</th>

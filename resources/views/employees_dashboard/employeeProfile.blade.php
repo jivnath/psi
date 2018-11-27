@@ -182,7 +182,7 @@
                     </div>
                     <div class="active tab-pane" id="about_me">
                         <div class="post clearfix">
-                            <table class="table table-striped">
+                            <table class="table table-striped table-condensed">
 
                                 @if($employee_name!=null)
                                     <tr>
@@ -477,8 +477,11 @@
                         {{$i->response_message}}</p></div>
                         @endif
                     @endforeach
-                </div> <hr><hr>               
+                </div> <hr><hr>             
                 @endforeach
+                <div class="box-footer text-center">
+                    <a href="" class="uppercase">@lang('employee.ViewAll')</a>
+                </div>
 
                {{--/////
                 

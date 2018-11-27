@@ -100,7 +100,7 @@
                                 </div>
                                 <!--Dynamic Field Start -->
                                 <div class="col-md-8">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive table-condensed">
                                         <table id="dynamic_field">
                                             <tr>
                                                 <td style="padding-right:10px;"><input type="time" name="start_shift[]"

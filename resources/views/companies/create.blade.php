@@ -88,7 +88,7 @@
                   		<h3 class="box-title">Company Entry</h3>
                 	</div>
                 	<div class="box-body">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-condensed">
                                 <tr>
                                     <th>Company Name</th>
                                     <th>Sections</th>

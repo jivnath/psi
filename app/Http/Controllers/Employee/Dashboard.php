@@ -185,6 +185,14 @@ class Dashboard extends Controller
 
         //return view('employees_dashboard.employeeProfile');
     }
+    public function employeeMessage()
+    {   
+        $id = Session::get('employee_psi_number');
+        $employees = DB::table('employees')->where('psi_number',$id)->get();
+        $users = DB::table('users')->get();
+        $inbox= DB::table('psi_inbox')->where('employeeid',$id)->get();
+        return  View::make('employee_message')->with(array('employees' => $employees, 'users' => $users,'inbox'=>$inbox));
+    }
 
     public function getWorkedShift(Request $request)
     {
