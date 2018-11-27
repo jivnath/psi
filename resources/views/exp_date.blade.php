@@ -44,7 +44,19 @@
     <script>
         var last_click = '';
         $(document).ready(function () {
-            $('#expire_info').DataTable({"pageLength": 20});
+            var locale = $("#locale").val();
+            if(locale == 'en') {
+                $('#expire_info').DataTable({"pageLength": 20});
+            }
+            else {
+                $('#expire_info').DataTable({
+                    "pageLength": 20,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    }
+                });
+            }
+
         });
         $('.viber_messessing').on('click', function (e) {
             $('#card_expiry').modal('show');

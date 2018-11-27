@@ -275,4 +275,44 @@ class EmployeeController extends Controller
             'value' => 'bail|required'
         ];
     }
+    public function selfsheetReport()
+    {
+        $primary = \Session::get('primary_company');
+        $subSection = Company::where('master_id', $primary->id)->get();
+        return view('reports.selfsheet_report', compact('data', 'subSection'));
+    }
+
+    public function getSelfSheetReport(Request $request)
+    {
+        if ($request->ajax()) {
+            $id = $request->get('id');
+            $date = $request->get('date');
+//            dd($date);
+
+
+            $sheet = Raw::getSelfSheetReport($id, $date);
+//            dd($sheet);
+
+            $output = '';
+            if (count($sheet)>0) {
+                foreach ($sheet as $index => $datum) {
+                    $html = '<tr>'.
+                        '<td>'. ($index+1) .'</td><td>' . $datum->staff_no . '</td><td>' . $datum->employee_name . '</td>'.
+                        '<td>'.substr($datum->start_time, 0,-3).' - '.substr($datum->end_time, 0, -3).'</td>'.
+                        '<td>'.$datum->responsible1.'</td><td>'.$datum->conformation_day_before.'</td><td>'.$datum->responsible2.'</td>'.
+                        '<td>'. $datum->conformation_3_hours_ago.'</td><td>'.$datum->arrival_time_if_late.'</td><td>'.$datum->reason_for_late.'</td>'.
+                        '<td>'.$datum->call_medium.'</td><td>'.$datum->flag.'</td><td>'. $datum->deleted_at . '</td></tr>';
+                    $output .= $html;
+                }
+
+            }
+            else
+            {
+
+                $lang = trans("employee.NoDataAvailable");
+                $output = '<tr><td colspan="13"> '. $lang .' </td></tr>';
+            }
+            echo ($output);
+        }
+    }
 }

@@ -30,7 +30,7 @@
                                     <label for="employee"><h5>@lang('employee.EmployeeName') </h5></label>
                                 </div>
                                 <div class="col-md-9" style="text-align: left;">
-                                    <h5 id="employee_name">{{$availability->employee->name}}</h5>
+                                    <h5 id="employee_name"></h5>
                                 </div>
                             </div>
 
@@ -116,7 +116,7 @@
                             $("#thursday").val(data.thu);
                             $("#friday").val(data.fri);
                             $("#saturday").val(data.sat);
-                            $("#employee_name").val(data.name);
+                            $("#employee_name").text(data.name);
                             // $('#nameDiv').show();
                             $("#hiddenDiv").show();
                         }

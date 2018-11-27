@@ -250,6 +250,11 @@
                                                     <a class="dropdown-item" href="{{route('report_total_necessary')}}">
                                                         <i class="fas fa-user-check"></i>
                                                         @lang('employee.TotalNecessary')</a>
+
+                                                    <a class="dropdown-item" href="{{route('selfsheet.report')}}">
+                                                        {{--<i class="fas fa-user-check"></i>--}}
+                                                        @lang('employee.SelfSheetReport')</a>
+
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
                                                                 class="fas fa-book"></i>
                                                         @lang('employee.AttendanceManagement')</a>
