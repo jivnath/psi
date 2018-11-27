@@ -6,10 +6,10 @@
     <div class="row">
         <div class="col-md-12">
         	<div class="box box-info">
-             <div class="box-header with-border">
+             <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px;">
                       <h3 class="box-title">@lang('employee.SelfSheet')</h3>
                     </div>
-                     <div class="box-body row">
+                     <div class="box-body row" style="padding-top:2px;padding-bottom: 2px;">
             <div class="col-md-3">
               <select name="company" class="form-control" id="company">
                 <option>--@lang('employee.SelectSubsection')--</option>

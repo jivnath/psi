@@ -1,15 +1,15 @@
 @extends('layouts.app') 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 5px;">
     <div class="row justify-content-center">
         @php $c = App\Http\Controllers\ShiftMasterController::findCompany($shiftData->company_id); 
 @endphp
         <div class="col-md-8">
             <div class="box box-info">
-                <div class="box-header">
+                <div class="box-header" style="padding-top:2px;padding-bottom: 2px;">
                     <h4>@lang('employee.ShiftEdit')</h4>
                 </div>
-                <div class="box-body " style="padding: 10px;">
+                <div class="box-body " style="padding-top:2px;padding-bottom: 2px;">
                     <form action="{{ route('shift.update', [$shiftData['id']]) }}" method="POST">
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

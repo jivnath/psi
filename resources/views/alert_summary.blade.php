@@ -20,7 +20,7 @@
                 </li>--}} {{--@empty--}} {{--
                 <p>@lang('article.unavailable_audits')</p>--}} {{--@endforelse--}} {{--
             </ul>--}}
-            <table class="table" id='alert_viber'>
+            <table class="table table-condensed" id='alert_viber'>
                 <thead>
                     <tr>
                         <th>@lang('employee.MessageType')</th>

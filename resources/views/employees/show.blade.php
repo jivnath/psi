@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-info">
-                <div class="box-header with-border">
+                <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
 
                     <h3 class="box-title">@lang('employee.EmployeesList')<a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px">
                                 <small>@lang('employee.UploadNew')</small>
@@ -28,9 +28,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="box-body">
+                <div class="box-body" style="padding-top:2px ">
                     <div>
-                        <table class="table table-condensed table-striped table-fixed" style="text-align: center" id='example'>
+
+                        <table class="table table-striped table-fixed table-condensed" style="text-align: center" id='example'>
                             <thead>
                                 <tr>
                                     @foreach($all_col as $column)
@@ -43,13 +44,13 @@
                             <thead>
                                 <tr>
                                     @foreach($all_col as $count_key=>$column) @if ($column->field_name == 'sex')
-                                    <td><select data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
+                                    <td style="padding: 1px;"><select style="width:70%" data-column="{{$count_key}}" class="search-input-select chosen-select" tabindex="{{$count_key+1}}">
                                                     <option value="">@lang('employee.All')</option>
                                                     <option value="男性">男性</option>
                                                     <option value="女性">女性</option>
                                                 </select></td>
                                     @else
-                                    <td><input type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
+                                    <td style="padding: 1px;"><input style="width:70%" type="text" data-column="{{$count_key}}" class="search-input-text" tabindex="{{$count_key+1}}"></td>
                                     @endif @endforeach
 
                                 </tr>
@@ -176,8 +177,6 @@
         <div class="modal-content">
 
             <!-- Modal Header -->
-            <form action="{{route('skill.store')}}" method="POST" class="form-horizontal" enctype="multipart/form-data">
-                @csrf
             <div class="modal-header">
                 <h4 class="modal-title">@lang('employee.Skills')</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -191,19 +190,14 @@
                 </div>
                 <div id="allSkills" style="margin-top:20px">
 
-                </div>
-            {{-- <input type="text" name="psi_num" value="{{old('psi_num')}}"> --}}
-               
-                
+                </div>             
             </div>
 
             <!-- Modal footer -->
-            <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">@lang('employee.Save')</button>
+            <div class="modal-footer"><span>
+                    <span  id="submit" class="btn btn-success">@lang('employee.Save')</span>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">@lang('employee.Close')</button>
-            </div>
-        </form>
-
+            </span></div>
         </div>
     </div>
 </div>
@@ -413,14 +407,14 @@
                         // console.log(data.masterSkills);
                         var check = $.inArray(data.masterSkills[i].id, data.employeeSkills);
                         if (check >= 0) {
-                            var html = '<input type="checkbox" name="employeeSkills[]" value="' + data.masterSkills[i].id + '" checked>' + data.masterSkills[i].skill_name + '<br>';
+                            var html = '<input type="checkbox" class="skill_checkboxes" name="employeeSkills[]" value="' + data.masterSkills[i].id + '" checked>' + data.masterSkills[i].skill_name + '<br>';
                             $("#allSkills").append(html);
                         }
                         else {
-                            var html = '<input type="checkbox" name="employeeSkills[]" value="' + data.masterSkills[i].id + '">' + data.masterSkills[i].skill_name + '<br>';
+                            var html = '<input type="checkbox" class="skill_checkboxes" name="employeeSkills[]" value="' + data.masterSkills[i].id + '">' + data.masterSkills[i].skill_name + '<br>';
                             $("#allSkills").append(html);
                         }
-                        var form = '<input type="hidden" class="form-conrol" value=' +selected + ' name="psi_num" >';
+                        var form = '<input type="hidden" class="form-conrol" id="hidden_psi" value=' +selected + ' name="psi_num" >';
                         $("#formDiv").html(form);
                     }
 
@@ -431,6 +425,24 @@
 
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');
+        });
+
+        $("#submit").click(function () {
+            var skills = $('.skill_checkboxes:checked').map(function() {
+    return this.value;
+}).get();
+            var skill = $('.skill_checkboxes').val();
+            var psi = $("#hidden_psi").val();
+            $.ajax({
+                type: "POST",
+                url: "{{route('skill.store')}}",
+                data: {'skill': skills, 'psi': psi, "_token": "{{ csrf_token() }}"},
+                dataType: "json",
+                async: true,
+                success: function (data) {
+                    $("#myModal").hide();
+                }
+            });
         });
        
 </script>

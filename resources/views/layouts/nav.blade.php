@@ -38,18 +38,27 @@
                     <div class="collapse navbar-collapse " id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="https://example.com" id="master_data"
-                                   data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false">@lang('employee.Settings')</a>
-                                <div class="dropdown-menu" aria-labelledby="master_data">
-                                    <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i
-                                                class="fa fa-address-book"></i>@lang('employee.Profile')</a>
-                                    <a class="dropdown-item" href="{{ route('employee.logout') }}"><i
-                                                class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a>
-                                </div>
-                            </li>
+                            
+                                @if(Auth::guard('employee')->check())
+                                @php
+                                    $employee_name = \Session::get('employee_name');
+                                @endphp
+                                @endif
+                                <li class="nav-item dropdown"><a id="navbarDropdown"
+                                    class="nav-link dropdown-toggle" href="#"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" v-pre> <i
+                                    class="fas fa-user"></i> {{
+                                    $employee_name }} 
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="master_data">
+                                        <a class="dropdown-item" href="{{ url('/employee/profile') }}"><i
+                                                    class="fa fa-address-book"></i>@lang('employee.Profile')</a>
+                                        <a class="dropdown-item" href="{{ route('employee.logout') }}"><i
+                                                    class="fas fa-sign-out-alt"></i>@lang('nav.Logout')</a>
+                                    </div>
+                                </li>    
+                            
 
                             <li class="nav-item dropdown">{!!
 								Form::open(['method' => 'POST', 'route' => 'changelocale',

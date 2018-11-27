@@ -34,7 +34,7 @@
                                 <span id="name"></span>
                             </div>
                         </div>
-                        <table class="table table-striped">
+                        <table class="table table-striped  table-condensed">
                             <thead>
                             <th>@lang('employee.Weekdays')</th>
                             <th>@lang('employee.Sunday')</th>

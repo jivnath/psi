@@ -10,7 +10,7 @@
                     </div>
                     <div class="box-body">
                         @if($user_group)
-                            <table class="table table-hover" id="group_table" style="text-align: center">
+                            <table class="table table-hover table-condensed" id="group_table" style="text-align: center">
                                 <thead>
                                 <tr>
                                     {{--<th>#</th>--}}

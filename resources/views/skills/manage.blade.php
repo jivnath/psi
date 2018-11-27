@@ -29,7 +29,7 @@
             <div class="box-body">
                 @if(count($skills)>0)
                 <div id="allSkills">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-condensed">
                         <thead>
                             <tr>
                                 <th> @lang('employee.Skills')</th>

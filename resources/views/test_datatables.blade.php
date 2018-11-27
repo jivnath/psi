@@ -9,7 +9,7 @@
 				<div class="card-header">Dashboard</div>
 
 				<div class="card-body">
-					<table id="dataable_record" class="table table-striped table-bordered"
+					<table id="dataable_record" class="table table-striped table-bordered table-condensed"
 						style="width: 100%">
 						<thead>
 							<tr>

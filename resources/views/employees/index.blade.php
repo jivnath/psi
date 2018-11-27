@@ -5,7 +5,7 @@
         <h1>@lang('employee.MasterDataEmployee')<a href="{{ route('employees.uploadForm') }}" class="btn btn-link" style="margin-left:10px"><small>@lang('employee.UploadNew')</small></a></h1>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered table-responsive-md table-striped">
+        <table class="table table-bordered table-responsive-md table-striped table-condensed">
             <thead>
                 <tr>
                     <th scope="col">#</th>

@@ -10,7 +10,7 @@
             </div>
             <div class="box-body">
                 <div class="table-responsive col-md-8">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped table-condensed">
                         <thead>
                         <tr>
                             <th>@lang('employee.Role')</th>
@@ -28,7 +28,7 @@
 
                                 {{--<td>{{ str_replace(array('[',']','"'),'', $role->permissions()->pluck('name')) }}</td>--}}{{-- Retrieve array of permissions associated to a role and convert to string --}}
                                 <td>
-                                    <a href="{{ URL::to('roles/'.$role->id.'/edit') }}" class="btn btn-info pull-left"
+                                    <a href="{{ route("roles.edit", $role->id) }}" class="btn btn-info pull-left"
                                        style="margin-right: 3px;">@lang('employee.Edit')</a>
                                 </td>
                             </tr>
@@ -37,7 +37,7 @@
 
                     </table>
                 </div>
-                <a href="{{ URL::to('roles/create') }}" class="btn btn-success">@lang('employee.AddRole')</a>
+                <a href="{{ route('roles.create') }}" class="btn btn-success">@lang('employee.AddRole')</a>
             </div>
         </div>
     </div>

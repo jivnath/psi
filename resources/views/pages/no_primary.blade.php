@@ -9,7 +9,7 @@
                 <div class="box">
                     <div class="box-header"><h4>Choose Your Primary Section</h4></div>
                     <div class="box-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-condensed">
                             <thead>
                             <tr>
                                 <th> Role </th>
