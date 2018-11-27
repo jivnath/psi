@@ -448,4 +448,5 @@ return [
     'Schoolinformation'=>'School information',
     'Totalworkdays'=>'Total workdays',
     'Company'=>'Company',
+    'Messages'=>'Messages',
 ];

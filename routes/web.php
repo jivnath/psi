@@ -243,3 +243,6 @@ Route::get('/hierrchy', function () {
 });
 
 
+Route::get('password/reset/{taken?}','Auth\ResetPasswordController@showResetForm');
+Route::post('password/email','Auth\ResetPasswordController@sendResetLinkEmail');
+Route::post('password/reset','Auth\ResetPasswordController@reset');

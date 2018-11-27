@@ -450,6 +450,5 @@ return [
     'Schoolinformation'=>'学校の情報',
     'Totalworkdays'=>'総勤務日数',
     'Company'=>'会社',
-
-
+    'Messages'=>'メッセージ',
 ];
