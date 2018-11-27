@@ -431,5 +431,6 @@ return [
     'Remove'=>'Remove',
     'SuccessfullyRemoved'=>'Successfully Removed',
     'Wanttodelete'=>'Want to delete?',
-    'Manageralreadyexists'=>'Manager already exists'
+    'Manageralreadyexists'=>'Manager already exists',
+    'Messages'=>'Messages',
 ];

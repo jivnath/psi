@@ -92,6 +92,9 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                                       </button>
                     </div>
                 </div>
+                
+            <form  method="post" action="password/email" enctype="multipart/form-code">
+                @csrf
                 <div class="modal" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -105,12 +108,20 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <div class="form-group">
+                                        <label class="col-sm-4 control-label">Email</label>
+        
+                                         <div class="col-sm-10">
+                                            <input type="email" name="email" class="form-control" id="inputEmail">
+                                        </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-4 control-label">Old Password</label>
 
                                     <div class="col-sm-10">
                                         <input type="password" name="oldpassword" class="form-control" id="inputOpassword">
                                     </div>
                                 </div>
+                               
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">New Password</label>
 
@@ -130,7 +141,7 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
+                                <button type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
                             </div>
 
                         </div>

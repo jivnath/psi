@@ -431,5 +431,6 @@ return [
     'Remove'=>'削除する',
     'SuccessfullyRemoved'=>'削除が成功しました',
     'Wanttodelete'=>'削除しますか？',
-    'Manageralreadyexists'=>'マネージャーは既に存在します'
+    'Manageralreadyexists'=>'マネージャーは既に存在します',
+    'Messages'=>'メッセージ',
 ];

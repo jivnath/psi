@@ -190,7 +190,7 @@ class Dashboard extends Controller
         $id = Session::get('employee_psi_number');
         $employees = DB::table('employees')->where('psi_number',$id)->get();
         $users = DB::table('users')->get();
-        $inbox= DB::table('psi_inbox')->where('employeeid',$id)->get();
+        $inbox= DB::table('psi_inbox')->where('employeeid',$id)->orderBy('id','desc')->get();
         return  View::make('employee_message')->with(array('employees' => $employees, 'users' => $users,'inbox'=>$inbox));
     }
 

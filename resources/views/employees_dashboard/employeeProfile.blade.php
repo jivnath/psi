@@ -480,7 +480,7 @@
                 </div> <hr><hr>             
                 @endforeach
                 <div class="box-footer text-center">
-                    <a href="" class="uppercase">@lang('employee.ViewAll')</a>
+                    <a href="{{route('employee.message')}}" class="uppercase">@lang('employee.ViewAll')</a>
                 </div>
 
                {{--/////
