@@ -13,7 +13,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Session;
 use Spatie\Permission\Models\Role;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     // public function __construct()
@@ -154,14 +155,11 @@ class UserController extends Controller
 
     public function admin_credential_rules(array $data)
     {
-        $messages = [
-            'current-password.required' => 'Please enter current password',
-            'password.required' => 'Please enter password',
-          ];
+       
         $validator = Validator::make($data, [
             'current-password' => 'required',
             'password' => 'required|same:password',
-            'password_confirmation' => 'required|same:password',
+            'password_confirmation'=> 'required|same:password',
         ], $messages);
 
         return $validator;
@@ -170,22 +168,28 @@ class UserController extends Controller
     public function updatePassword(Request $request)
     {
 
+        $request->validate([
+            'current-password' => 'required',
+            'password' => 'required|same:password',
+            'password_confirmation'=> 'required|same:password',        
+        ]);
         $user = Auth::user();
 
         $curPassword = $request->input('current-password');
         $newPassword = $request->input('password');
+        $confirmPassword = $request->input('password_confirmation');
     
         if (Hash::check($curPassword, $user->password)) {
             $user_id = $user->id;
             $obj_user = User::find($user_id)->first();
             $obj_user->password = Hash::make($newPassword);
             $obj_user->save();
-    
-            Session::flash('success', 'successfully added!');
+            echo "1";
+            
         }
         else
         {
-            Session::flash('error','not successfull');
+            echo "0";
         }
     
 
