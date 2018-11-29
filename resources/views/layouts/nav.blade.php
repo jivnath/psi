@@ -115,6 +115,12 @@
                                 @endauth
                             </div>
                         </div>
+                        @auth
+                            @php
+                                $role_id = \Session::get('user_role_id');
+                                $user_id = \Session::get('user_id');
+                            @endphp
+                        @endauth
                         <div style="background: #21469b">
                             <div class="container">
                                 @auth
@@ -126,7 +132,18 @@
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                         <!-- Left Side Of Navbar -->
+
+                                        @php
+                                            $users = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'users');
+                                        @endphp
+                                        @php
+                                            $employees = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'employees');
+                                        @endphp
+                                        @php
+                                            $companies = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'companies');
+                                        @endphp
                                         <ul class="navbar-nav mr-auto">
+                                            @if($users || $employees || $companies)
                                             <li class="nav-item dropdown"><a id="master_data"
                                                                              class="nav-link dropdown-toggle"
                                                                              id="navbarDropdown"
@@ -137,6 +154,8 @@
                                                     @lang('nav.MasterData') <span class="caret"></span>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                                    @if($users)
                                                     <li class="dropdown"><a class="dropdown-toggle dropdown-item"
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
@@ -158,6 +177,9 @@
 
                                                         </ul>
                                                     </li>
+                                                    @endif
+
+                                                    @if($employees)
                                                     <li class="dropdown"><a class="dropdown-toggle dropdown-item"
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
@@ -185,7 +207,9 @@
 
                                                         </ul>
                                                     </li>
+                                                    @endif
 
+                                                    @if($companies)
                                                     <li class="dropdown"><a class="dropdown-toggle dropdown-item"
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
@@ -209,8 +233,20 @@
 
                                                         </ul>
                                                     </li>
+                                                    @endif
                                                 </ul>
                                             </li>
+                                            @endif
+                                                @php
+                                                    $shift_management = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'shift_management');
+                                                @endphp
+                                                @php
+                                                    $section_shift = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'section_shift');
+                                                @endphp
+                                                @php
+                                                    $self_sheet = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'self_sheet');
+                                                @endphp
+                                                @if($shift_management || $section_shift || $self_sheet)
                                             <li class="nav-item dropdown"><a id="shift_management"
                                                                              class="nav-link dropdown-toggle" href="#"
                                                                              role="button"
@@ -223,16 +259,43 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="shift_management">
+                                                    @if($section_shift)
                                                     <a class="dropdown-item" href="{{ route('pages.shift') }}"><i
                                                                 class="fas fa-table"></i>
                                                         @lang('employee.SectionShift') </a>
+                                                    @endif
+                                                    @if($self_sheet)
                                                     <a class="dropdown-item"
                                                        href="{{route('sheet.dessert')}}">
                                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                                         @lang('employee.SelfSheet') </a>
+                                                        @endif
                                                 </div>
                                             </li>
-                                            <li class="nav-item dropdown"><a id="shift_management"
+                                                @endif
+
+                                                @php
+                                                    $company = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'company');
+                                                @endphp
+                                                @php
+                                                    $employee_details = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'employee_details');
+                                                @endphp
+                                                @php
+                                                    $employee_worksheet = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'employee_worksheet');
+                                                @endphp
+                                                @php
+                                                    $total_necessary = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'total_necessary');
+                                                @endphp
+                                                @php
+                                                    $self_sheet_report = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'self_sheet_report');
+                                                @endphp
+                                                @php
+                                                    $attendance_management = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'attendance_management');
+                                                @endphp
+
+
+                                                @if($company || $employee_details || $employee_worksheet || $total_necessary || $self_sheet_report || $attendance_management)
+                                            <li class="nav-item dropdown"><a id="reports"
                                                                              class="nav-link dropdown-toggle" href="#"
                                                                              role="button"
                                                                              data-toggle="dropdown" aria-haspopup="true"
@@ -244,31 +307,49 @@
 
                                                 <div class="dropdown-menu dropdown-menu-left"
                                                      aria-labelledby="report">
+
+                                                    @if($company)
                                                     <a class="dropdown-item"
                                                    href="{{ route('company.details') }}"> <i
                                                             class="fa fa-building"
                                                             aria-hidden="true"></i>@lang('employee.Company')</a>
+                                                    @endif
+
+                                                    @if($employee_details)
                                                     <a class="dropdown-item"
                                                        href="{{ route('employee.detail.report') }}"><i
                                                                 class="fa fa-users" aria-hidden="true"></i>
                                                         @lang('employee.EmployeeDetails')</a>
+                                                    @endif
+
+                                                    @if($employee_worksheet)
                                                     <a class="dropdown-item"
                                                        href="{{ route('employee.worksheet.report') }}"><i
                                                                 class="fa fa-clock" aria-hidden="true"></i>
                                                         @lang('employee.EmployeeWorksheet') </a>
+                                                    @endif
+
+                                                    @if($total_necessary)
                                                     <a class="dropdown-item" href="{{route('report_total_necessary')}}">
                                                         <i class="fas fa-user-check"></i>
                                                         @lang('employee.TotalNecessary')</a>
+                                                    @endif
 
+                                                    @if($self_sheet_report)
                                                     <a class="dropdown-item" href="{{route('selfsheet.report')}}">
                                                         {{--<i class="fas fa-user-check"></i>--}}
+                                                        <i class="far fa-calendar-alt" aria-hidden="true"></i>
                                                         @lang('employee.SelfSheetReport')</a>
+                                                    @endif
 
+                                                    @if($attendance_management)
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
                                                                 class="fas fa-book"></i>
                                                         @lang('employee.AttendanceManagement')</a>
+                                                    @endif
                                                 </div>
                                             </li>
+                                                @endif
                                             <!-- company login as -->
                                             @php $username = \Session::get('username'); $companies =
 							\Session::get('user_companies'); $primaryCompany =
@@ -276,7 +357,7 @@
 							\Session::get('user_language'); $user_id =
                             \Session::get('user_id');
                             $user_role=\Session::get('user_role_id'); @endphp
-                                {{--@if($user_role!= 4)--}}
+                                @if($user_role!= 5)
                                             <li class="nav-item dropdown"><a id="shift_management"
                                                                              class="nav-link dropdown-toggle company_default_select"
                                                                              href="#"
@@ -298,7 +379,7 @@
                                                                               href="{{route('changecompany',['change_to'=>$company->id,'name'=>$company->name])}}">
                                                             {{$company->name}} </a> @endif @endforeach
                                                 </div> {{--{{dd($primaryCompany)}}--}}</li>
-                                                {{--@endif--}}
+                                                @endif
 
                                         </ul>
                                     @endauth
@@ -318,8 +399,11 @@
                                              </li> -->
 							--}}
 
-
-                                            <li class="nav-item dropdown"><a id="setting"
+                                            @php
+                                                $inbox = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'inbox');
+                                            @endphp
+                                        @if($inbox)
+                                            <li class="nav-item dropdown"><a id="inbox"
                                                                              class="nav-link dropdown-toggle" href="#"
                                                                              role="button"
                                                                              data-toggle="dropdown" aria-haspopup="true"
@@ -350,7 +434,11 @@
                                                 </div>
 
                                             </li>
-
+                                            @endif
+                                            @php
+                                                $setting = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'setting');
+                                            @endphp
+                                            @if($setting)
                                             <li class="nav-item dropdown"><a id="setting"
                                                                              class="nav-link dropdown-toggle" href="#"
                                                                              role="button"
@@ -367,6 +455,7 @@
                                                        </a>
                                                 </div>
                                             </li>
+                                            @endif
 
                                             <li class="nav-item dropdown"><a id="navbarDropdown"
                                                                              class="nav-link dropdown-toggle" href="#"
