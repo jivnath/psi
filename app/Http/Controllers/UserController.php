@@ -167,27 +167,24 @@ class UserController extends Controller
     public function updatePassword(Request $request)
     {
 
-        if (Auth::Check()) {
-            $request_data = $request->All();
-            $validator = $this->admin_credential_rules($request_data);
-            if ($validator->fails()) {
-                return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-            } else {
-                $current_password = Auth::User()->password;
-                if (Hash::check($request_data['current-password'], $current_password)) {
-                    $user_id = Auth::User()->id;
-                    $obj_user = User::find($user_id);
-                    $obj_user->password = Hash::make($request_data['password']);
-                    $obj_user->save();
-                    return "ok";
-                } else {
-                    $error = array('current-password' => 'Please enter correct current password');
-                    return response()->json(array('error' => $error), 400);
-                }
-            }
-        } else {
-            return redirect()->to('/denied');
+        $user = Auth::user();
+
+        $curPassword = $request->input('current-password');
+        $newPassword = $request->input('password');
+    
+        if (Hash::check($curPassword, $user->password)) {
+            $user_id = $user->id;
+            $obj_user = User::find($user_id)->first();
+            $obj_user->password = Hash::make($newPassword);
+            $obj_user->save();
+    
+            Session::flash('success', 'successfully added!');
         }
+        else
+        {
+            Session::flash('error','not successfull');
+        }
+    
 
     }
 

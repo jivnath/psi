@@ -13,7 +13,7 @@
                         <hr>--}}
                         <div class="box-body row">
                                 <div class="col-md-3">
-                                <h3 class="box-title">@lang('employee.EmployeeWorksheet')</h3>
+                                <h4 class="box-title">@lang('employee.EmployeeWorksheet')</h4>
                                 </div>
                             <div class="col-md-1" style="text-align: right">
                                 <label for="from">@lang('employee.From')</label>

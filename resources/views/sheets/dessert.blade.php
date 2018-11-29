@@ -1,45 +1,44 @@
-@extends('layouts.app')
-
+@extends('layouts.app') 
 @section('content')
 
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-        	<div class="box box-info">
+            <div class="box box-info">
 
-            {{-- <div class="box-header with-border">
-                      <h3 class="box-title">@lang('employee.SelfSheet')</h3>
-                    </div>--}}
-                     <div class="box-body row">
-                            <div class="col-md-3">
-                            <h4 class="box-title">@lang('employee.SelfSheet')</h4>
-                            </div>
+                {{--
+                <div class="box-header with-border">
+                    <h3 class="box-title">@lang('employee.SelfSheet')</h3>
+                </div>--}}
+                <div class="box-body row">
+                    <div class="col-md-3">
+                        <h4 class="box-title">@lang('employee.SelfSheet')</h4>
+                    </div>
 
-            <div class="col-md-3">
-              <select name="company" class="form-control" id="company">
-                <option>--@lang('employee.SelectSubsection')--</option>
-                    @foreach($companies as $company)
+                    <div class="col-md-3">
+                        <select name="company" class="form-control" id="company">
+                        <option>--@lang('employee.SelectSubsection')--</option>
+                        @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-3 schedule_date">
+                        @endforeach
+                        </select>
+                        </div>
+                        <div class="col-md-3 schedule_date">
 
-            </div>
-            <div class="col-md-2">
-				<button type="button" class="btn btn-primary view_dessert">@lang('employee.Submit')</button>
-            </div>
-            </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary view_dessert">@lang('employee.Submit')</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class='col-md-12'>
-        <div id='dessert_response' class='' style="width: 100%;overflow: scroll;position: absolute;"></div>
+            <div id='dessert_response' class='' style="width: 100%;overflow: scroll;position: absolute;"></div>
         </div>
     </div>
-    </section>
+</section>
 @endsection
-
-@push('scripts')
+ @push('scripts')
 
 <script>
     var main_logical_data='';
@@ -84,6 +83,6 @@
         });
     });
 
-
 </script>
+
 @endpush
