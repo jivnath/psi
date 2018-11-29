@@ -14,7 +14,7 @@
 
                         <div class="form-group row" style="text-align: center; margin-top: 5px;">
                             <div class="col-md-4 col-form-label">
-                                <label for="psi_num">@lang('employee.PSISNumber')</label>
+                                <label for="psi_num">@lang('employee.psi_number')</label>
                             </div>
                             <div class="col-md-8" style="text-align: center;">
                                 <input style=" width: 70%" type="text" class="form-control" id="psi_num" name="psi_num"

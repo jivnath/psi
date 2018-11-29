@@ -13,7 +13,7 @@
                 <table class="table table-condensed" id='rda_table'>
                     <thead>
                         <tr>
-                            <th>@lang('employee.PSISNumber')</th>
+                            <th>@lang('employee.psi_number')</th>
                             <th>@lang('employee.Activity')</th>
                             <th>@lang('employee.Date')</th>
                             <th>@lang('employee.Comment')</th>

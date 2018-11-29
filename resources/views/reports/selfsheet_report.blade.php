@@ -6,12 +6,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">@lang('employee.SelfSheetReport')</h3>
-                    </div>
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-1 subsectionDiv" style="text-align: right">
+                            <div class="col-md-3"><h3>@lang('employee.SelfSheetReport')</h3></div>
+                            <div class="col-md-2 subsectionDiv" style="text-align: right">
                                 <label for="subsection">@lang('employee.SubSection')</label>
                             </div>
                             <div class="col-md-2 subsectionDiv">
@@ -42,7 +40,7 @@
                             <table style="" id="selfsheet" class="table table-striped">
                                 <thead>
                                 <th>#</th>
-                                <th>@lang('employee.PSISNumber')</th>
+                                <th>@lang('employee.psi_number')</th>
                                 <th>@lang('employee.EmployeeName')</th>
                                 <th>@lang('employee.Shifts')</th>
                                 <th>@lang('employee.Responsible')</th>

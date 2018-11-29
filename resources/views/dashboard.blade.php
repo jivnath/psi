@@ -71,11 +71,11 @@
                         <table class="table table-striped" id='expire_info'>
                             <thead>
                             <tr>
-                                <th>@lang('dashboard.psisno')</th>
-                                <th>@lang('dashboard.name')</th>
-                                <th>@lang('dashboard.cellno')</th>
-                                <th>@lang('dashboard.expiredate')   </th>
-                                <th>@lang('dashboard.action')</th>
+                                <th>@lang('employee.psi_number')</th>
+                                <th>@lang('employee.Name')</th>
+                                <th>@lang('employee.cell_no')</th>
+                                <th>@lang('employee.Expireddate')</th>
+                                <th>@lang('employee.Action')</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -101,7 +101,7 @@
             <div class="col-md-6">
                 <div class="box box-info">
                     <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
-                        <h3 class="box-title">@lang('employee.TotalNecessary')</h3>
+                        <h3 class="box-title">@lang('employee.Totalnecessary')</h3>
                     </div>
                     <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                         <table class="table table-striped table-bordered" id='tn_table'>
@@ -145,7 +145,7 @@
                         <table class="table table-striped" id='rda_table'>
                             <thead>
                             <tr>
-                                <th>@lang('employee.PSISNumber')</th>
+                                <th>@lang('employee.psi_number')</th>
                                 {{--<th>@lang('employee.Responsible')</th>--}}
                                 <th>@lang('employee.Activity')</th>
                                 <th>@lang('employee.Date')</th>

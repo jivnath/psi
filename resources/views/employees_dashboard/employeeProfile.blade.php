@@ -193,14 +193,14 @@
 
                                 @if($employee_psi_number!=null)
                                     <tr>
-                                        <td>@lang('employee.PSISNumber').</td>
+                                        <td>@lang('employee.psi_number')</td>
                                         <td>{{$employee_psi_number}}</td>
                                     </tr>
                                 @endif
 
                                 @if($employee_phoetic_kanji!=null)
                                     <tr>
-                                        <td>@lang('employee.PhoeticKanji')</td>
+                                        <td>@lang('employee.PhoneticKanji')</td>
                                         <td>{{$employee_phoetic_kanji}}</td>
                                     </tr>
                                 @endif
@@ -228,7 +228,7 @@
 
                                 @if($employee_retirement_date!=null)
                                     <tr>
-                                        <td>@lang('employee.RetirementDate')</td>
+                                        <td>@lang('employee.Retirementdate')</td>
                                         <td>{{$employee_retirement_date}}</td>
                                     </tr>
                                 @endif
@@ -256,7 +256,7 @@
 
                                 @if($employee_hire_date!=null)
                                     <tr>
-                                        <td>@lang('employee.HireDate')</td>
+                                        <td>@lang('employee.Hiredate')</td>
                                         <td>{{$employee_hire_date}}</td>
                                     </tr>
                                 @endif
@@ -326,7 +326,7 @@
 
                                 @if($employee_sex!=null)
                                     <tr>
-                                        <td>@lang('employee.Sex')</td>
+                                        <td>@lang('employee.sex')</td>
                                         <td>{{ $employee_sex}}</td>
                                     </tr>
                                 @endif
@@ -375,7 +375,7 @@
 
                                 @if($employee_pass_price!=null)
                                     <tr>
-                                        <td>@lang('employee.PassPrice')</td>
+                                        <td>@lang('employee.Passprice')</td>
                                         <td>{{ $employee_pass_price}}</td>
                                     </tr>
                                 @endif

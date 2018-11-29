@@ -19,7 +19,7 @@
                             <tr>
                                 <th>@lang('employee.SymbolNumber')</th>
                                 <th>@lang('employee.CompanyName')</th>
-                                <th>@lang('employee.SectionsHierarchy')</th>
+                                <th>@lang('employee.Sectionhierarchy')</th>
 
                             </tr>
                             </thead>
