@@ -19,7 +19,7 @@ class CheckCompany
         $user_role=Auth::user()->role_id;
         $req = $next($request);
         
-        if ($user_role != 4) {
+        if ($user_role != 5) {
             return $req;
         } else {
             return redirect()->route('access.denied');

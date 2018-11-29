@@ -6,6 +6,9 @@
 
     </style>
     <section class="content">
+        @php
+            $role_id = \Session::get('user_role_id');
+        @endphp
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
@@ -98,6 +101,7 @@
                     </div>
                 </div>
             </div>
+            @if($role_id != 5)
             <div class="col-md-6">
                 <div class="box box-info">
                     <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">
@@ -175,6 +179,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="col-md-6">
                 <div class="box box-info">
                     <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px">

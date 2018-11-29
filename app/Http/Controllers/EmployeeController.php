@@ -61,7 +61,7 @@ class EmployeeController extends Controller
 //        dd($data);
 
         Session::flash('duplicate', $data);
-        dd($data);
+//        dd($data);
         return redirect()->route('employees.show');
     }
 

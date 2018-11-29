@@ -1,5 +1,5 @@
-@extends('layouts.app') 
-@section('title', '| Profile') 
+@extends('layouts.app')
+@section('title', '| Profile')
 @section('content') @php $username = \Session::get('username'); $companies
 = \Session::get('user_companies'); $primaryCompany = \Session::get('primary_company'); $language = \Session::get('user_language');
 $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $role_id = \Session::get('user_role_id');
@@ -67,10 +67,10 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
 
                     <div class="col-sm-9">
                         <select name="primary_company" class="form-control" {{($role_id==5) ? 'disabled': ''}}>
-                                        @foreach($companies as $company)
-                                            <option value="{{$company->id}}"<?=(Auth::user()->primary_company==$company->id)?'selected="selected"':''?>>{{$company->name}}</option>
-                                        @endforeach
-                                    </select>
+                            @foreach($companies as $company)
+                                <option value="{{$company->id}}"<?=(Auth::user()->primary_company == $company->id) ? 'selected="selected"' : ''?>>{{$company->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -78,22 +78,23 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
 
                     <div class="col-sm-9">
                         <select name="language" class="form-control">
-                                        <option value="0"<?=($language==0)?'selected="selected"':''?>>@lang('employee.English')</option>
-                                        <option value="1"<?=($language==1)?'selected="selected"':''?>>@lang('employee.Japanese')</option>
-                                    </select>
+                            <option value="0"<?=($language == 0) ? 'selected="selected"' : ''?>>@lang('employee.English')</option>
+                            <option value="1"<?=($language == 1) ? 'selected="selected"' : ''?>>@lang('employee.Japanese')</option>
+                        </select>
                     </div>
                 </div>
+            </form>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-danger">@lang('employee.Submit')</button>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                        Change Password
-                                      </button>
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-danger">@lang('employee.Submit')</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                        Change Password
+                    </button>
                 </div>
-                
-            <form  method="post" action="password/email" enctype="multipart/form-code">
+            </div>
+
+            <form method="post" action="password/email" enctype="multipart/form-code">
                 @csrf
                 <div class="modal" id="myModal">
                     <div class="modal-dialog">
@@ -108,32 +109,35 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <div class="form-group">
-                                        <label class="col-sm-4 control-label">Email</label>
-        
-                                         <div class="col-sm-10">
-                                            <input type="email" name="email" class="form-control" id="inputEmail">
-                                        </div>
+                                    <label class="col-sm-4 control-label">Email</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="email" name="email" class="form-control">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Old Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="oldpassword" class="form-control" id="inputOpassword">
+                                        <input type="password" name="oldpassword" class="form-control"
+                                               id="inputOpassword">
                                     </div>
                                 </div>
-                               
+
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">New Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="newpassword" class="form-control" id="inputNpassword">
+                                        <input type="password" name="newpassword" class="form-control"
+                                               id="inputNpassword">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Confirm Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="confirmpassword" class="form-control" id="inputCpassword">
+                                        <input type="password" name="confirmpassword" class="form-control"
+                                               id="inputCpassword">
                                     </div>
                                 </div>
                             </div>
