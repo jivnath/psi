@@ -17,8 +17,8 @@
                                 <div class="col-md-2 subsectionDiv">
                                     <select class="form-control" name="subsection" id="subsection">
                                         <option value="0">@lang('employee.None')</option>
-                                        @foreach($subSections as $sub)
-                                            <option value="{{$sub->id}}">{{$sub->name}}</option>
+                                        @foreach($subSections as $sec)
+                                            <option value="{{$sec->id}}">{{$sec->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

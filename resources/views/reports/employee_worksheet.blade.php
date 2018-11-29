@@ -84,27 +84,30 @@
                 async: true,
                 beforeSend: function(){
                     $("#loadingDiv").show();
+                    $("#tbody").html('');
+                    $("#allTable").hide();
                 },
                 success: function (data) {
                     $("#loadingDiv").hide();
-                    // console.log(data);
-{{--                    alert({{trans('message.Companiessuccessfullyadded')}});--}}
                     let i;
-                    $("#tbody").html('');
-
-                    for (i = 0; i < data.length; i++) {
-                        var html = '<tr>' +
-                            '<td>' + data[i].staff_no + '</td>' +
-                            '<td>' + data[i].name + '</td>' +
-                            '<td>' + data[i].totalWorkdays + '</td>' +
-                            '<td>' + data[i].totalWorked + '</td>'
-                        '</tr>';
-
-                        $("#tbody").append(html);
+                    if(data.length > 0)
+                    {
+                        for (i = 0; i < data.length; i++) {
+                            var html = '<tr>' +
+                                '<td>' + data[i].staff_no + '</td>' +
+                                '<td>' + data[i].name + '</td>' +
+                                '<td>' + data[i].totalWorkdays + '</td>' +
+                                '<td>' + data[i].totalWorked + '</td>'
+                            '</tr>';
+                        }
                     }
+                    else
+                    {
+                        var html = '<tr><td colspan="4">{{trans("employee.NoDataAvailable")}}</td></tr>';
+
+                    }
+                    $("#tbody").append(html);
                     $("#allTable").show();
-
-
                 }
             });
         });

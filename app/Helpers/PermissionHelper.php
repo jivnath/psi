@@ -11,6 +11,7 @@ class PermissionHelper
     {
         $paths = array();
         $routes = Route::getRoutes();
+
         foreach ($routes as $route) {
             $uri = $route->uri();
             $prefix = $route->getPrefix();

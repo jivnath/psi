@@ -4,11 +4,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info">
-                    <div class="box-header with-border">
+                    <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px;">
                         <h3 class="box-title">@lang('employee.SectionShift')</h3>
                     </div>
-                    <div class='box-body container_class' style="overflow-x: scroll">
-                        <table class="table table-striped table-condensed" id='example'>
+                    <div class='box-body container_class' style="padding-top:2px;padding-bottom: 2px;overflow-x: scroll">
+                        <table class="table table-striped" id='example'>
                             <thead>
                             <th>@lang('employee.Time')</th>
                             <th>@lang('employee.SubSection')</th>

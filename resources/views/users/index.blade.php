@@ -3,12 +3,12 @@
 @section('content')
     <div class="col-md-10 offset-1">
         <div class="box">
-            <div class="box-header">
+            <div class="box-header" style="padding-top:2px;padding-bottom: 2px">
                 <h4> @lang('employee.Users')<a href="{{ route('users.create') }}" class="btn btn-link pull-right">@lang('employee.AddNewUser')</a>
                     {{--<a href="{{ route('permissions.index') }}" class="btn btn-link pull-right">Permissions</a>--}}</h4>
                 <hr>
             </div>
-            <div class="box-body">
+            <div class="box-body" style="padding-top:2px;padding-bottom: 2px">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-condensed">
 

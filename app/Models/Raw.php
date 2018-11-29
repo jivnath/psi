@@ -159,7 +159,7 @@ WHERE
 
     public static function getSkillsDetails()
     {
-        $sql = "SELECT sk.id, sk.skill_name name, (SELECT COUNT(*) FROM employee_skills WHERE skill_id = sk.id) as count FROM psi_skill_master sk";
+        $sql = "SELECT sk.id, sk.skill_name name, (SELECT COUNT(*) FROM employee_skills WHERE skill_id = sk.id) as count FROM psi_skill_master sk WHERE sk.status= 'enabled'";
         $skills = DB::select("$sql");
 
         // dd($skills);
@@ -842,6 +842,7 @@ WHERE
     WHERE
        cts.id = pde.cts_id
         AND pde.staff_no = e.psi_number
+        AND pde.conformation_3_hours_ago = 'OK'
         AND cts.companyTT_id = ctt.id
         AND smd.company_id = ctt.company_id
         AND cts.time = smd.start_time
@@ -919,7 +920,7 @@ WHERE
 
     public static function getShift($id)
     {
-        $sql ="SELECT smd.* FROM shift_master_datas smd WHERE smd.company_id = $id";
+        $sql = "SELECT smd.* FROM shift_master_datas smd WHERE smd.company_id = $id";
         $shift = DB::select($sql);
         return $shift;
     }
@@ -930,4 +931,29 @@ WHERE
         $data = DB::select($sql);
         return $data;
     }
+
+    public static function getSelfSheetReport($id, $date)
+    {
+        $sql = "SELECT
+	pde.*,c.name company_name,e.name employee_name, smd.start_time, smd.end_time
+FROM
+	psi_dessert_entry pde,
+    company_time_schedules cts,
+    company_time_tables ctt,
+    employees e,
+    companies c,
+    shift_master_datas smd
+WHERE
+	pde.staff_no = e.psi_number
+    AND pde.cts_id = cts.id
+    AND cts.companyTT_id = ctt.id
+    AND ctt.company_id = $id
+    AND cts.date ='$date'
+    AND c.id = ctt.company_id
+    AND smd.company_id = ctt.company_id
+    AND cts.time = smd.start_time";
+        $sheet = DB::select($sql);
+        return $sheet;
+    }
+
 }

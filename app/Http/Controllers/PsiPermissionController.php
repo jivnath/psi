@@ -24,13 +24,27 @@ class PsiPermissionController extends Controller
         $role = Role::find($roleid);
         $permission_relation = [];
         $permissions = PermissionModel::orderBy('prefix', 'perm_name')->get();
+//        dd($permissions);
         foreach ($permissions as $row) {
             $permission_relation[$row->prefix][] = $row;
         }
 //        dd($permissionsOfRole);
 //        dd($permission_relation);
         //roles for roleid
-        return view('pages/roleUpdateForm', compact('permission_relation'))->withRole($role)->withPermissionsOfRole($permissionsOfRole);
+        $new = PermissionModel::all();
+        $a=[];
+        foreach ($new as $n){
+            if($n->prefix[0]=='/')
+                $n->prefix = substr($n->prefix, 1);
+            $b = explode('/', $n->prefix);
+            if(count($b)==1)
+                $a[$b[0]][]=$n;
+            elseif (count($b)==2)
+                $a[$b[0]][$b[1]][]=$n;
+
+        }
+//        dd($a);
+        return view('pages/roleUpdateForm', compact('permission_relation', 'a'))->withRole($role)->withPermissionsOfRole($permissionsOfRole);
     }
 
     public function storeUpdate(Request $request, $roleid)

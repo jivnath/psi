@@ -12,10 +12,10 @@
                     </div>
                 </div>
                 <div class="box">
-                    <div class="box-header">
+                    <div class="box-header" style="padding-top:2px;padding-bottom: 2px;">
                         <h4>@lang('employee.AddShifts')</h4>
                     </div>
-                    <div class="box-body " style="padding: 10px;">
+                    <div class="box-body " style="padding-top:2px;padding-bottom: 2px;">
                         <form action="{{ route('shift.store') }}" method="POST">
                             <input type="hidden" name="_method" value="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -79,11 +79,11 @@
             <!--Table List Start -->
             <div class="col-md-5">
                 <div class="box">
-                    <div class="box-header">
+                    <div class="box-header" style="padding-top:2px;padding-bottom: 2px;">
                         <h4>@lang('employee.Shifts')</h4>
                     </div>
-                    <div class="box-body">
-                        <table id="shiftTable" class="table table-striped table-condensed">
+                    <div class="box-body" style="padding-top:2px;padding-bottom: 2px;">
+                        <table id="shiftTable" class="table table-striped">
                             <thead>
                             <tr>
                                 <th>@lang('employee.SubsectionName')</th>
