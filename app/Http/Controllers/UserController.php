@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CompanyToEmployee_rel;
+use App\Models\RolesToPermission_rel;
+use App\Models\UserToPermission_rel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\UserType;
@@ -37,9 +39,6 @@ class UserController extends Controller
 
 //        $companies = Company::where('master_id', null)->get();
         return view('users.create', ['roles'=>$roles, 'section'=>$section]);
-
-
-
     }
 
     public function store(Request $request) {
@@ -186,5 +185,32 @@ class UserController extends Controller
     public function primary()
     {
         return view('pages.no_primary');
+    }
+
+    public static function controlMenu($id, $role, $menu)
+    {
+        $allPermission = [];
+        $permissions = UserToPermission_rel::where('user_id', $id)->get();
+        if(count($permissions)>0)
+        {
+            foreach ($permissions as $permission){
+                array_push($allPermission, $permission->permission_id);
+            }
+        }
+        else
+        {
+            $permissions = RolesToPermission_rel::where('role_id', $role)->get();
+            if(count($permissions)>0)
+            {
+                foreach ($permissions as $permission){
+                    array_push($allPermission, $permission->permission_id);
+                }
+            }
+        }
+        if(in_array($menu, $allPermission)){
+            return true;
+        }
+        else
+            return false;
     }
 }

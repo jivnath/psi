@@ -76,13 +76,13 @@ class ExcelReader extends FormRequest
             $highestColumn = $worksheet->getHighestColumn(); // e.g 'F'
             $highestColumnIndex = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::columnIndexFromString($highestColumn);
 
-            for ($row = 4; $row <= $highestRow; ++$row) { //skip header so $row = 2
-                for ($col = 1; $col <= $highestColumnIndex; ++$col) {
+            for ($row = 3; $row <= $highestRow; ++$row) { //skip header so $row = 2
+                for ($col = 2; $col <= $highestColumnIndex; ++$col) {
 
                     $value = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
-                    $excel_actual_cell = $worksheet->getCellByColumnAndRow($col, 2)->getValue();
-                    if($col==14)
-                        $excel_actual_cell = 'name';
+                    $excel_actual_cell = $worksheet->getCellByColumnAndRow($col, 1)->getValue();
+//                    if($col==14)
+//                        $excel_actual_cell = 'name';
 
 //                    dd($excel_actual_cell);
 
@@ -153,14 +153,14 @@ class ExcelReader extends FormRequest
      * Prepare each cell data with key value pair using db column
      * @todo $columns remove for nxt release
      */
-    protected function setColumnData($columns, $cellValue, $rowIndex, $cellIndex, $totalCell,$excel_actual_cell)
+    protected function setColumnData($columns, $cellValue, $rowIndex, $cellIndex, $totalCell, $excel_actual_cell)
     {
         $column = '';
 //        dd($this->dateColumns());
-        if(isset($this->mapColumns()[$excel_actual_cell])){
-            $column = $this->mapColumns()[$excel_actual_cell];
-        }
-        elseif ($excel_actual_cell == 'name')
+//        if(isset($this->mapColumns()[$excel_actual_cell])){
+//            $column = $this->mapColumns()[$excel_actual_cell];
+//        }
+//        elseif ($excel_actual_cell == 'name')
             $column = $excel_actual_cell;
 //        $column =$excel_actual_cell;
         // isset($columns[$cellIndex]) ? $columns[$cellIndex] : null;
@@ -168,6 +168,7 @@ class ExcelReader extends FormRequest
         if ($column && in_array($column, $this->dateColumns())) {
 
             $this->data[$rowIndex][$column] = (strlen($cellValue) > 0) ? ExcelDate::excelToDateTimeObject($cellValue) : null;
+
         } elseif ($column) {
 
             $this->data[$rowIndex][$column] = $cellValue;

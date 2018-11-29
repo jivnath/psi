@@ -13,12 +13,13 @@
                         <h3 class="box-title">@lang('employee.UpdateUser')</h3>
                     </div>
 
-                    <form id="form" name="customize_form" action="{{route('storePermissionToUser')}}" class="form-horizontal" method="POST">
+                    <form id="form" name="customize_form" action="{{route('storePermissionToUser')}}"
+                          class="form-horizontal" method="POST">
                         @csrf
                         <div class='box-body'>
                             <div class="row">
                                 <div class="col-md-1">
-                                    <label style="margin-left:50px;margin-top:5px">@lang('employee.User')</label>
+                                    <label style="margin-left:5px;margin-top:5px">@lang('employee.User')</label>
                                 </div>
                                 <div class="col-md-11">
                                     <select id="userDropdown" name="userUpdate" class="form-control" style="width:40%">
@@ -32,42 +33,79 @@
                         </div>
 
                         <div class='box-body' style="display: none" id="allPermissions">
-                            @foreach($permission_relation as $k=>$i)
-                                <div class="form-row">
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   id="customCheck{{str_replace('/','',$k)}}" name="customized[]"
-                                                   value="{{str_replace('/','',$k)}}"
-                                                   onclick="toggleSectionCheck('{{str_replace('/','',$k)}}')">
-                                            <label class="custom-control-label"
-                                                   for="customCheck{{str_replace('/','',$k)}}">{{$k}}</label>
-                                        </div>
-                                        {{--{{dd(str_replace('/','',$k))}}--}}
-                                    </div>
+                            @foreach($a as $key=>$as)
+                                {{--{{dd($as)}}--}}
+                                @php $keys = $key; @endphp
+                                @if($key != '' && $key != 'api' && $key != '_debugbar' && $key != 'employee' && $key != 'dashboard')
+                                    <div class="form-row">
+                                        <div class="col-md-12">
 
-                                </div>
-                                <br>
-                                <div class="form-row child-row">
-                                    @foreach($i as $item)
-                                        {{--{{dd($item['id'])}}--}}
-                                        <div class="col-md-3 mb-3">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
-                                                       id="customCheck{{$item['id']}}" name="customized[]"
-                                                       value="{{$item['id']}}"
-                                                       data-child="{{str_replace('/','',$k)}}"> <label
-                                                        class="custom-control-label"
-                                                        for="customCheck{{$item['id']}}">{{$item['perm_name']?$item['perm_name']:$item['perm_desc']}}</label>
+                                                       id="customCheck{{$keys}}" name="customized[]" value="{{$keys}}"
+                                                       onclick="toggleSectionCheck('{{$keys}}')">
+                                                <label class="custom-control-label"
+                                                       for="customCheck{{$keys}}"><b>{{ucwords(str_replace('_', ' ', $keys))}}</b></label>
+                                                <i style="display: none" onclick="showChild('{{$keys}}')"
+                                                   class="fa fa-eye-slash eyeclose{{$keys}}"></i>
+                                                <i style="display: none" onclick="showChild('{{$keys}}', this)"
+                                                   class="fa fa-eye eyeopen{{$keys}}"></i>
                                             </div>
                                         </div>
+
+                                    </div>
+                                    <br>
+                                    @foreach($as as $key => $ass)
+                                        @php $k = $key; @endphp
+                                        @if(gettype($ass)=='object')
+                                            <div class="col-md-3 mb-3 object" style="display:none;">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                           id="customCheck{{$ass['id']}}" name="customized[]"
+                                                           value="{{$ass['id']}}"
+                                                           data-child="{{$keys}}"> <label
+                                                            class="custom-control-label"
+                                                            for="customCheck{{$ass['id']}}">{{$ass['perm_name']?$ass['perm_name']:$ass['perm_desc']}}</label>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="col-md-3 mb-3 array{{$keys}}" style="display: none">
+                                                <script type="text/javascript">
+                                                    var item = '{{$keys}}';
+                                                    // alert('hey');
+                                                    $(".eyeopen" + item).show();
+                                                </script>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                           data-check="{{$keys}}" id="customCheck{{$key}}"
+                                                           onchange="check('{{$keys}}', this)" name="customized[]"
+                                                           value="{{$key}}"
+                                                           data-child="{{$keys}}"> <label
+                                                            class="custom-control-label"
+                                                            for="customCheck{{$key}}">{{ucwords(str_replace('_', ' ', $key))}}</label>
+                                                </div>
+                                            </div>
+                                            @foreach($ass as $key => $asss)
+                                                <div class="col-md-3 mb-3 object" style="display: none; margin: 2px;">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                               id="customCheck{{$asss['id']}}"
+                                                               name="customized[]" data-children="{{$k}}"
+                                                               value="{{$asss['id']}}"
+                                                               data-child="{{$keys}}"> <label
+                                                                class="custom-control-label"
+                                                                for="customCheck{{$asss['id']}}">{{$asss['perm_name']?$asss['perm_name']:$asss['perm_desc']}}</label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     @endforeach
-                                </div>
+                                @endif
                             @endforeach
                             <div class="row">
                                 <div class="col-md-10"></div>
                                 <div class="col-md-2" style="text-align: left">
-                                    <input id="submit" type="submit" class="btn btn-primary" value="@lang('employee.Save')">
+                                    <input type="submit" class="btn btn-primary" value="@lang('employee.Save')">
                                 </div>
                             </div>
                         </div>
@@ -96,12 +134,42 @@
             checkboxes.prop('checked', check);
         }
 
+        function showChild(item, aru){
+            // alert(item);
+            if($(aru).hasClass('eyeopen' + item)){
+                $(".eyeopen"+ item).hide();
+                $(".array"+item).show();
+                $(".eyeclose"+ item).show();
+            }
+            else{
+                $(".array"+item).hide();
+                $(".eyeclose"+ item).hide();
+                $(".eyeopen"+ item).show();
+
+            }
+        }
+
+        function check(item, aru) {
+            var key = $(aru).val();
+            var check = $(aru).is(':checked');
+            var checkboxes = $(document).find('input[data-children=' + key + ']');
+            checkboxes.prop('checked', check);
+
+            var a = $("input[data-check =" + item + "]");
+            // console.log(a);
+            if (a.length == a.filter(":checked").length) {
+                $("#customCheck" + item).prop('checked', true);
+            } else {
+                $("#customCheck" + item).prop('checked', false);
+            }
+        }
+
     </script>
 
     <script>
         $('#userDropdown').change(function () {
             var user_id = $(this).val();
-            console.log(user_id);
+            $("input[id^=customCheck]").prop('checked', false);
             if (user_id != '0') {
                 $.ajax({
                     type: "GET",
@@ -117,7 +185,6 @@
                             $("#allPermissions").show();
                         }
                         else {
-                            $("#allPermissions").hide();
                         }
 
                     }
