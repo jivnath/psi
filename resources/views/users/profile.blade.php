@@ -93,7 +93,7 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                     </div>
                 </div>
                 
-            <form  method="post" action="password/email" enctype="multipart/form-code">
+            <form  method="POST" action="{{route('updatePassword')}}" enctype="multipart/form-code">
                 @csrf
                 <div class="modal" id="myModal">
                     <div class="modal-dialog">
@@ -108,17 +108,10 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <div class="form-group">
-                                        <label class="col-sm-4 control-label">Email</label>
-        
-                                         <div class="col-sm-10">
-                                            <input type="email" name="email" class="form-control" id="inputEmail">
-                                        </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Old Password</label>
+                                    <label class="col-sm-4 control-label">Current Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="oldpassword" class="form-control" id="inputOpassword">
+                                        <input type="password" class="form-control" id="current-password" name="current-password" placeholder="Type Current Password">
                                     </div>
                                 </div>
                                
@@ -126,14 +119,14 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                                     <label class="col-sm-4 control-label">New Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="newpassword" class="form-control" id="inputNpassword">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Type New Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Confirm Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="confirmpassword" class="form-control" id="inputCpassword">
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Re-enter Password">
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +134,7 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
+                                <button type="submit" class="btn btn-success" >Submit</button>
                             </div>
 
                         </div>

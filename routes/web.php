@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::post('/upload', ['as' => 'employees.upload', 'uses' => 'EmployeeController@upload']);
                 Route::post('/updateCell', ['as' => 'employees.updateCell', 'uses' => 'EmployeeController@updateCell']);
 
+                Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+
                 Route::get('/availability', ['as' => 'availability.index', 'uses' => 'EmployeeAvailabilityController@index']);
                 Route::get('/availability/add', ['as' => 'availability.add', 'uses' => 'EmployeeAvailabilityController@add']);
                 Route::post('/availability/create', ['as' => 'availability.store', 'uses' => 'EmployeeAvailabilityController@store']);
@@ -159,6 +161,8 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::put('/{id}', ['as' => 'users.update', 'uses' => 'UserController@updateUser']);
                 Route::get('/profile', ['as' => 'profile', 'uses' => 'UserController@profile']);
                 Route::put('/profile/{id}', ['as' => 'updateProfile', 'uses' => 'UserController@updateProfile']);
+                Route::put('/password', ['as' => 'updatePassword', 'uses' => 'UserController@updatePassword']);
+
             });
 
             Route::prefix('pages')->group(function () {
@@ -237,7 +241,3 @@ Route::get('/hierrchy', function () {
     return view('hierrchy');
 });
 
-
-Route::get('password/reset/{taken?}','Auth\ResetPasswordController@showResetForm');
-Route::post('password/email','Auth\ResetPasswordController@sendResetLinkEmail');
-Route::post('password/reset','Auth\ResetPasswordController@reset');

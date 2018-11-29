@@ -8,10 +8,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info">
-                    <div class="box-header with-border">
+                    {{--<div class="box-header with-border">
                         <h3 class="box-title">@lang('employee.EmployeeWorksheet')</h3>
-                        <hr>
-                        <div class="row">
+                        <hr>--}}
+                        <div class="box-body row">
+                                <div class="col-md-3">
+                                <h3 class="box-title">@lang('employee.EmployeeWorksheet')</h3>
+                                </div>
                             <div class="col-md-1" style="text-align: right">
                                 <label for="from">@lang('employee.From')</label>
                             </div>

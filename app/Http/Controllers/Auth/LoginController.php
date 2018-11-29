@@ -77,4 +77,8 @@ class LoginController extends Controller
         Session::flush();
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
+
+    
+
+  
 }
