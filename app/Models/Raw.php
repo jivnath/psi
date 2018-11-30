@@ -201,7 +201,12 @@ WHERE
 
     public static function expiredRC()
     {
-        $sql = "select psi_number,name,cell_no,residence_card_exp_date from employees where `residence_card_exp_date` BETWEEN '2018-08-26' and '2018-10-26'";
+        $today = time();
+        $twoMonthsLater = strtotime("+2 months", $today);
+        $today = date('Y-m-d', $today);
+        $twoMonthsLater = date('Y-m-d', $twoMonthsLater);
+
+        $sql = "select psi_number,name,cell_no,residence_card_exp_date from employees where `residence_card_exp_date` BETWEEN '$today' and '$twoMonthsLater' order by residence_card_exp_date desc ";
         $expired = DB::select("$sql");
         return $expired;
     }

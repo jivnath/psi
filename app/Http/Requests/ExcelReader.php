@@ -128,7 +128,8 @@ class ExcelReader extends FormRequest
         $checkDuplicates['no'] = $no;
 //        dd($checkDuplicates);
         try {
-            Employee::inserts($checkDuplicates['no']);
+            foreach (array_chunk($checkDuplicates['no'], 500) as $no)
+            Employee::inserts($no);
 //            CompanyToEmployee_rel::insert($checkDuplicates['yes']);
 
         } catch (\Exception $e) {

@@ -190,8 +190,13 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/hierrchy', function () {
             return view('hierrchy');
-
         });
+        Route::prefix('change_company')->group(function () {
+            Route::group(['middleware' => ['check.company']], function () {
+                Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
+            });
+        });
+
         Route::get('/section_manager', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
     });
 });
@@ -201,9 +206,6 @@ Route::get('/', function () {
 });
 
 Route::post('changelocale', ['as' => 'changelocale', 'uses' => 'TranslationController@changeLocale']);
-Route::group(['middleware' => ['check.company']], function () {
-    Route::get('changecompany/{id}/{name}', ['as' => 'changecompany', 'uses' => 'UserController@changeCompany']);
-});
 Route::get('/primary/{id}', ['as' => 'selectPrimary', 'uses' => 'UserController@selectPrimary']);
 Route::get('/select/primary', ['as' => 'primary', 'uses' => 'UserController@primary']);
 Route::get('/primarySub/{id}', ['as' => 'selectPrimarySub', 'uses' => 'Employee\Dashboard@selectPrimary']);
