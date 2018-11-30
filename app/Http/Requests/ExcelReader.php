@@ -141,7 +141,7 @@ class ExcelReader extends FormRequest
 
     protected function dateColumns()
     {
-        return ['hire_date', 'retirement_date', 'birthdate', 'residence_card_exp_date', 'expiration_date'];
+        return ['hire_date', 'retirement_date', 'residence_card_exp_date', 'expiration_date'];
     }
 
     protected function mapColumns()

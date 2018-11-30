@@ -5,11 +5,14 @@
     </style>
     <div class="col-md-12">
         <div class="box box-info">
-            <div class="box-header with-border">
-                <h3 class="box-title">@lang('employee.TotalNecessary')</h3>
-            </div>
+            {{--<div class="box-header with-border">--}}
+                {{--<h3 class="box-title">@lang('employee.TotalNecessary')</h3>--}}
+            {{--</div>--}}
             <div class="box-body">
                 <div class="row" id="filterDiv">
+                    <div class="col-md-3">
+                        <h3 class="box-title">@lang('employee.TotalNecessary')</h3>
+                    </div>
                     {{--<div class="col-md-1 sections" style="text-align: right">--}}
                         {{--<label for="section">@lang('employee.Section')</label>--}}
                     {{--</div>--}}
@@ -47,7 +50,7 @@
                                 {{--@endforeach--}}
                             {{--</select>--}}
                         {{--</div>--}}
-                        <div class="col-md-1 date" style="text-align: right">
+                        <div class="col-md-3 date" style="text-align: right">
                             <label for="date">@lang('employee.Date')</label>
                         </div>
                         <div class="col-md-2 date">

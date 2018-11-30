@@ -15,7 +15,7 @@
                         <tr>
                             <th>@lang('employee.psi_number')</th>
                             <th>@lang('employee.Name')</th>
-                            <th>@lang('employee.Cellno')</th>
+                            <th>@lang('employee.cell_no')</th>
                             <th>@lang('employee.Expireddate') </th>
                             <th>@lang('employee.Action')</th>
                         </tr>
