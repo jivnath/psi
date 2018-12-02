@@ -449,4 +449,5 @@ return [
     'Totalworkdays'=>'Total workdays',
     'Company'=>'Company',
     'Messages'=>'Messages',
+    'passwordchanged'=>'Password Changed',
 ];

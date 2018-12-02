@@ -451,4 +451,5 @@ return [
     'Totalworkdays'=>'総勤務日数',
     'Company'=>'会社',
     'Messages'=>'メッセージ',
+    'passwordchanged'=>'パスワード変更済み',
 ];

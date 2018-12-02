@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CompanyToEmployee_rel;
-use App\Models\RolesToPermission_rel;
-use App\Models\UserToPermission_rel;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\Raw;
+use App\Models\RolesToPermission_rel;
 use App\Models\User;
+use App\Models\UserToPermission_rel;
 //Importing laravel-permission models
 use Illuminate\Http\Request;
-use Session;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Session;
+use Spatie\Permission\Models\Role;
+
 class UserController extends Controller
 {
     // public function __construct()
@@ -153,46 +153,45 @@ class UserController extends Controller
         return redirect()->route('profile');
     }
 
-    public function admin_credential_rules(array $data)
-    {
-       
-        $validator = Validator::make($data, [
-            'current-password' => 'required',
-            'password' => 'required|same:password',
-            'password_confirmation'=> 'required|same:password',
-        ], $messages);
-
-        return $validator;
-    }
-
     public function updatePassword(Request $request)
     {
+        if($request->ajax()){
+            $oldPassword = $request->get('cpassword');
+            $newPassword = $request->get('pass');
+            $confirmPassword = $request->get('rpass');
+            $userId = \Session::get('user_id');
+            $user = User::find($userId);
 
-        $request->validate([
-            'current-password' => 'required',
-            'password' => 'required|same:password',
-            'password_confirmation'=> 'required|same:password',        
-        ]);
-        $user = Auth::user();
+            if($oldPassword== null || $newPassword == null || $confirmPassword == null){
+                $data = 4;
+            }
+            else{
 
-        $curPassword = $request->input('current-password');
-        $newPassword = $request->input('password');
-        $confirmPassword = $request->input('password_confirmation');
-    
-        if (Hash::check($curPassword, $user->password)) {
-            $user_id = $user->id;
-            $obj_user = User::find($user_id)->first();
-            $obj_user->password = Hash::make($newPassword);
-            $obj_user->save();
-            echo "1";
-            
+            if (Hash::check($oldPassword, $user->password)) {
+                if($newPassword != $confirmPassword)
+                {
+                    $data = 3;
+                }
+                else
+                {
+                    if($oldPassword == $newPassword)
+                    {
+                        $data = 2;
+                    }
+                    else
+                    {
+                        $user->password = $newPassword;
+                        $user->save();
+                        $data = 1;
+                    }
+                }
+            }
+            else{
+                $data = 0;
+            }
         }
-        else
-        {
-            echo "0";
+            echo json_encode($data);        
         }
-    
-
     }
 
     public function selectPrimary(Request $request, $id)
@@ -229,26 +228,23 @@ class UserController extends Controller
     {
         $allPermission = [];
         $permissions = UserToPermission_rel::where('user_id', $id)->get();
-        if(count($permissions)>0)
-        {
-            foreach ($permissions as $permission){
+        if (count($permissions) > 0) {
+            foreach ($permissions as $permission) {
                 array_push($allPermission, $permission->permission_id);
             }
-        }
-        else
-        {
+        } else {
             $permissions = RolesToPermission_rel::where('role_id', $role)->get();
-            if(count($permissions)>0)
-            {
-                foreach ($permissions as $permission){
+            if (count($permissions) > 0) {
+                foreach ($permissions as $permission) {
                     array_push($allPermission, $permission->permission_id);
                 }
             }
         }
-        if(in_array($menu, $allPermission)){
+        if (in_array($menu, $allPermission)) {
             return true;
-        }
-        else
+        } else {
             return false;
+        }
+
     }
 }
