@@ -42,7 +42,7 @@
                                 <div class="form-group row" style="text-align: center;">
                                     @if($k < 7)
                                         <div class="col-md-4 col-form-label">
-                                            <label for="{{ $weekday }}">{{ ucfirst($weekday) }}</label>
+                                            <label for="{{ $weekday }}">{{trans('employee.' .$weekday) }}</label>
                                         </div>
                                         <div class="col-md-8">
                                             <input style="width: 70%" type="time" class="form-control" id="{{$weekday}}"

@@ -38,7 +38,7 @@
                                 <div class="form-group row" style="text-align: center;">
                                     @if($k < 7)
                                         <div class="col-md-3 col-form-label" style="text-align: right">
-                                            <label for="{{ $weekday }}"><h5> {{ ucfirst($weekday) }} </h5></label>
+                                            <label for="{{ $weekday }}"><h5> {{trans('employee.' .$weekday) }} </h5></label>
                                         </div>
                                         <div class="col-md-9">
                                             <input style="width: 65%" id="{{$weekday}}" type="time"

@@ -15,6 +15,7 @@
                         <form name="customize_form" class="form-horizontal"
                               action="{{route('storePermissionToRole', $role->id)}}" method="POST">
                             @csrf
+                            {{--{{dd($a)}}--}}
                             @foreach($a as $key=>$as)
                                 {{--{{dd($as)}}--}}
                                 @php $keys = $key; @endphp
@@ -27,7 +28,7 @@
                                                        id="customCheck-{{$keys}}" name="customized[]" value="{{$keys}}"
                                                        onclick="toggleSectionCheck('{{$keys}}')" {{ (in_array($keys, $permissionsOfRole))?'checked':''}} >
                                                 <label class="custom-control-label"
-                                                       for="customCheck-{{$keys}}"><b>{{ucwords(str_replace('_', ' ', $keys))}}</b></label>
+                                                       for="customCheck-{{$keys}}"><b>{{ trans('nav.'.$keys)}}</b></label>
                                                 <i style="display: none" onclick="showChild('{{$keys}}')" class="fa fa-eye-slash eyeclose{{$keys}}"></i>
                                                 <i style="display: none" onclick="showChild('{{$keys}}', this)" class="fa fa-eye eyeopen{{$keys}}"></i>
                                             </div>
@@ -63,7 +64,7 @@
                                                            data-child="{{$keys}}" <?=(in_array($key,
                                                         $permissionsOfRole)) ? 'checked' : ''?> > <label
                                                             class="custom-control-label"
-                                                            for="customCheck{{$key}}">{{ucwords(str_replace('_', ' ', $key))}}</label>
+                                                            for="customCheck{{$key}}">{{trans('nav.'.$key)}}</label>
                                                 </div>
                                             </div>
                                             @foreach($ass as $key => $asss)

@@ -151,7 +151,7 @@
                                                                              aria-haspopup="true"
                                                                              aria-expanded="false"> <i
                                                             class="fas fa-home"></i>
-                                                    @lang('nav.MasterData') <span class="caret"></span>
+                                                    @lang('nav.master_data') <span class="caret"></span>
                                                 </a>
                                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
@@ -160,7 +160,7 @@
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
                                                                             aria-expanded="false"><i
-                                                                    class="fa fa-user"></i>@lang('nav.Users')</a>
+                                                                    class="fa fa-user"></i>@lang('nav.users')</a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('users.index') }}"><i
@@ -184,7 +184,7 @@
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
                                                                             aria-expanded="false"><i
-                                                                    class="fa fa-users"></i>@lang('employee.Employees')
+                                                                    class="fa fa-users"></i>@lang('nav.employees')
                                                         </a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
@@ -214,7 +214,7 @@
                                                                             href="#" id="navbarDropdown" role="button"
                                                                             data-toggle="dropdown" aria-haspopup="true"
                                                                             aria-expanded="false"><i
-                                                                    class="fas fa-city"></i>@lang('employee.Companies')
+                                                                    class="fas fa-city"></i>@lang('nav.companies')
                                                         </a>
                                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                             <li><a class="dropdown-item"
@@ -254,7 +254,7 @@
                                                                              aria-expanded="false" v-pre> <i
                                                             class="far fa-clock"></i>
 
-                                                    @lang('nav.ShiftManagement') <span class="caret"></span>
+                                                    @lang('nav.shift_management') <span class="caret"></span>
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left"
@@ -262,13 +262,13 @@
                                                     @if($section_shift)
                                                     <a class="dropdown-item" href="{{ route('pages.shift') }}"><i
                                                                 class="fas fa-table"></i>
-                                                        @lang('employee.SectionShift') </a>
+                                                        @lang('nav.section_shift') </a>
                                                     @endif
                                                     @if($self_sheet)
                                                     <a class="dropdown-item"
                                                        href="{{route('sheet.dessert')}}">
                                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                                        @lang('employee.SelfSheet') </a>
+                                                        @lang('nav.self_sheet') </a>
                                                         @endif
                                                 </div>
                                             </li>
@@ -302,7 +302,7 @@
                                                                              aria-expanded="false" v-pre> <i
                                                             class="fa fa-line-chart"></i>
 
-                                                    @lang('employee.Reports') <span class="caret"></span>
+                                                    @lang('nav.reports') <span class="caret"></span>
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left"
@@ -312,40 +312,40 @@
                                                     <a class="dropdown-item"
                                                    href="{{ route('company.details') }}"> <i
                                                             class="fa fa-building"
-                                                            aria-hidden="true"></i>@lang('employee.Company')</a>
+                                                            aria-hidden="true"></i>@lang('nav.company')</a>
                                                     @endif
 
                                                     @if($employee_details)
                                                     <a class="dropdown-item"
                                                        href="{{ route('employee.detail.report') }}"><i
                                                                 class="fa fa-users" aria-hidden="true"></i>
-                                                        @lang('employee.EmployeeDetails')</a>
+                                                        @lang('nav.employee_details')</a>
                                                     @endif
 
                                                     @if($employee_worksheet)
                                                     <a class="dropdown-item"
                                                        href="{{ route('employee.worksheet.report') }}"><i
                                                                 class="fa fa-clock" aria-hidden="true"></i>
-                                                        @lang('employee.EmployeeWorksheet') </a>
+                                                        @lang('nav.employee_worksheet') </a>
                                                     @endif
 
                                                     @if($total_necessary)
                                                     <a class="dropdown-item" href="{{route('report_total_necessary')}}">
                                                         <i class="fas fa-user-check"></i>
-                                                        @lang('employee.TotalNecessary')</a>
+                                                        @lang('nav.total_necessary')</a>
                                                     @endif
 
                                                     @if($self_sheet_report)
                                                     <a class="dropdown-item" href="{{route('selfsheet.report')}}">
                                                         {{--<i class="fas fa-user-check"></i>--}}
                                                         <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                                                        @lang('employee.SelfSheetReport')</a>
+                                                        @lang('nav.self_sheet_report')</a>
                                                     @endif
 
                                                     @if($attendance_management)
                                                     <a class="dropdown-item" href="{{route('attendance.mgmt')}}"><i
                                                                 class="fas fa-book"></i>
-                                                        @lang('employee.AttendanceManagement')</a>
+                                                        @lang('nav.attendance_management')</a>
                                                     @endif
                                                 </div>
                                             </li>
@@ -445,7 +445,7 @@
                                                                              data-toggle="dropdown" aria-haspopup="true"
                                                                              aria-expanded="false" v-pre> <i
                                                             class="fas fa-cog"></i>
-                                                    @lang('nav.Setting') <span class="caret"></span>
+                                                    @lang('nav.setting') <span class="caret"></span>
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-left"

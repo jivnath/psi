@@ -37,13 +37,13 @@
                         <table class="table table-striped  table-condensed">
                             <thead>
                             <th>@lang('employee.Weekdays')</th>
-                            <th>@lang('employee.Sunday')</th>
-                            <th>@lang('employee.Monday')</th>
-                            <th>@lang('employee.Tuesday')</th>
-                            <th>@lang('employee.Wednesday')</th>
-                            <th>@lang('employee.Thursday')</th>
-                            <th>@lang('employee.Friday')</th>
-                            <th>@lang('employee.Saturday')</th>
+                            <th>@lang('employee.sunday')</th>
+                            <th>@lang('employee.monday')</th>
+                            <th>@lang('employee.tuesday')</th>
+                            <th>@lang('employee.wednesday')</th>
+                            <th>@lang('employee.thursday')</th>
+                            <th>@lang('employee.friday')</th>
+                            <th>@lang('employee.saturday')</th>
                             </thead>
                             <tbody>
                             <tr>

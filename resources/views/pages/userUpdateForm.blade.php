@@ -45,7 +45,7 @@
                                                        id="customCheck{{$keys}}" name="customized[]" value="{{$keys}}"
                                                        onclick="toggleSectionCheck('{{$keys}}')">
                                                 <label class="custom-control-label"
-                                                       for="customCheck{{$keys}}"><b>{{ucwords(str_replace('_', ' ', $keys))}}</b></label>
+                                                       for="customCheck{{$keys}}"><b>{{ trans('nav.'.$keys)}}</b></label>
                                                 <i style="display: none" onclick="showChild('{{$keys}}')"
                                                    class="fa fa-eye-slash eyeclose{{$keys}}"></i>
                                                 <i style="display: none" onclick="showChild('{{$keys}}', this)"
@@ -82,7 +82,7 @@
                                                            value="{{$key}}"
                                                            data-child="{{$keys}}"> <label
                                                             class="custom-control-label"
-                                                            for="customCheck{{$key}}">{{ucwords(str_replace('_', ' ', $key))}}</label>
+                                                            for="customCheck{{$key}}">{{ trans('nav.'.$key)}}</label>
                                                 </div>
                                             </div>
                                             @foreach($ass as $key => $asss)
