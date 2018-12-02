@@ -2,51 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CompanyToEmployee_rel;
-use App\Models\RolesToPermission_rel;
-use App\Models\UserToPermission_rel;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\UserType;
-use App\Models\User;
-use App\Models\Raw;
-//Importing laravel-permission models
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Models\Company;
-use App\Models\CompanyToUser_rel;
+use App\Models\Raw;
+use App\Models\RolesToPermission_rel;
+use App\Models\User;
+use App\Models\UserToPermission_rel;
+//Importing laravel-permission models
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Session;
-
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-	// public function __construct()
-	// {
- //        $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
- //    }
+    // public function __construct()
+    // {
+    //        $this->middleware(['auth', 'isAdmin']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+    //    }
 
-	public function index()
-	{
-		$users = User::all();
-		return view('users.index')->withUsers($users);
-	}
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index')->withUsers($users);
+    }
 
-	public function createUser()
-	{
-    //Get all roles and pass it to the view
+    public function createUser()
+    {
+        //Get all roles and pass it to the view
         $roles = Role::get();
         $section = Raw::getSecondLevelCompanies();
 
 //        $companies = Company::where('master_id', null)->get();
-        return view('users.create', ['roles'=>$roles, 'section'=>$section]);
+        return view('users.create', ['roles' => $roles, 'section' => $section]);
+
     }
 
-    public function store(Request $request) {
-    //Validate name, email and password fields
+    public function store(Request $request)
+    {
+        //Validate name, email and password fields
         $this->validate($request, [
-            'name'=>'required|max:120',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|confirmed'
+            'name' => 'required|max:120',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6|confirmed',
         ]);
 
         $user = new User();
@@ -62,24 +61,24 @@ class UserController extends Controller
         $user->assignRole($role); //Assigning role to user
 
 //        $companies = $request['companies'];
-//        if(isset($companies))
-//        {
-//            foreach($companies as $company)
-//            {
-//                $companyToUser = new CompanyToUser_rel();
-//
-//                $companyToUser->user_id = $user->id;
-//                $companyToUser->company_id = $company;
-//                $companyToUser->save();
-//            }
-//        }
+        //        if(isset($companies))
+        //        {
+        //            foreach($companies as $company)
+        //            {
+        //                $companyToUser = new CompanyToUser_rel();
+        //
+        //                $companyToUser->user_id = $user->id;
+        //                $companyToUser->company_id = $company;
+        //                $companyToUser->save();
+        //            }
+        //        }
 
         Session::flash('success', trans('employee.Usersuccessfullyadded!'));
         //Redirect to the users.index view and display message
         return redirect()->route('users.index');
     }
 
-	public function editUser($id)
+    public function editUser($id)
     {
         $user = User::find($id);
         $roles = Role::get();
@@ -87,26 +86,26 @@ class UserController extends Controller
 //        dd($companies);
 
 //        $userCompanies = CompanyToUser_rel::where('user_id', $id)->get();
-//        $companies = [];
-//        $compid = [];
-//        foreach ($userCompanies as $company) {
-//            $comp = Company::find($company->company_id);
-//            array_push($companies, $comp);
-//            array_push($compid, $comp->id);
-//        }
-//
-//
-//        $allCompanies = Company::where('master_id', null)->get();
+        //        $companies = [];
+        //        $compid = [];
+        //        foreach ($userCompanies as $company) {
+        //            $comp = Company::find($company->company_id);
+        //            array_push($companies, $comp);
+        //            array_push($compid, $comp->id);
+        //        }
+        //
+        //
+        //        $allCompanies = Company::where('master_id', null)->get();
 
         return view('users.edit')->withUser($user)
             ->withRoles($roles)
             ->withCompanies($companies);
 //            ->withAllCompanies($allCompanies)
-//            ->withCompid($compid);
+        //            ->withCompid($compid);
     }
 
-	public function updateUser(Request $request, $id)
-	{
+    public function updateUser(Request $request, $id)
+    {
 
         $user = User::findOrFail($id);
         $section = $request->primary_company;
@@ -121,16 +120,16 @@ class UserController extends Controller
 
         Session::flash('success', trans('employee.Usersuccessfullyupdated!'));
         return redirect()->route('users.index');
-	}
+    }
 
     public function profile()
     {
         return view('users.profile');
     }
 
-    public function changeCompany($id,$name)
+    public function changeCompany($id, $name)
     {
-        \Session::put('primary_company',Company::find($id));
+        \Session::put('primary_company', Company::find($id));
 
         return redirect()->back();
     }
@@ -140,18 +139,59 @@ class UserController extends Controller
 
         $user = User::find($id);
         $this->validate($request, [
-            'email'=>'required|email'
+            'email' => 'required|email',
         ]);
 
         $user->email = $request->input('email');
-        \Session::put('user_email',$request->input('email'));
+        \Session::put('user_email', $request->input('email'));
         $user->language = $request->input('language');
-        \Session::put('user_language',$request->input('language'));
+        \Session::put('user_language', $request->input('language'));
         $user->primary_company = $request->input('primary_company');
 
         $user->save();
 
         return redirect()->route('profile');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        if($request->ajax()){
+            $oldPassword = $request->get('cpassword');
+            $newPassword = $request->get('pass');
+            $confirmPassword = $request->get('rpass');
+            $userId = \Session::get('user_id');
+            $user = User::find($userId);
+
+            if($oldPassword== null || $newPassword == null || $confirmPassword == null){
+                $data = 4;
+            }
+            else{
+
+            if (Hash::check($oldPassword, $user->password)) {
+                if($newPassword != $confirmPassword)
+                {
+                    $data = 3;
+                }
+                else
+                {
+                    if($oldPassword == $newPassword)
+                    {
+                        $data = 2;
+                    }
+                    else
+                    {
+                        $user->password = $newPassword;
+                        $user->save();
+                        $data = 1;
+                    }
+                }
+            }
+            else{
+                $data = 0;
+            }
+        }
+            echo json_encode($data);        
+        }
     }
 
     public function selectPrimary(Request $request, $id)
@@ -162,20 +202,17 @@ class UserController extends Controller
         $user = User::find($user_id);
         $company = Raw::getSecondLevelCompanies();
         $companies = [];
-        foreach($company as $comp)
-        {
+        foreach ($company as $comp) {
             array_push($companies, $comp->id);
         }
 
 //        dd($companies);
-        if(in_array($id, $companies))
-        {
+        if (in_array($id, $companies)) {
             $user->primary_company = $id;
             $user->save();
             $primaryCompany = Company::find($id);
             $request->session()->put('primary_company', $primaryCompany);
-        }
-        else{
+        } else {
             return redirect()->back();
         }
 
@@ -191,26 +228,23 @@ class UserController extends Controller
     {
         $allPermission = [];
         $permissions = UserToPermission_rel::where('user_id', $id)->get();
-        if(count($permissions)>0)
-        {
-            foreach ($permissions as $permission){
+        if (count($permissions) > 0) {
+            foreach ($permissions as $permission) {
                 array_push($allPermission, $permission->permission_id);
             }
-        }
-        else
-        {
+        } else {
             $permissions = RolesToPermission_rel::where('role_id', $role)->get();
-            if(count($permissions)>0)
-            {
-                foreach ($permissions as $permission){
+            if (count($permissions) > 0) {
+                foreach ($permissions as $permission) {
                     array_push($allPermission, $permission->permission_id);
                 }
             }
         }
-        if(in_array($menu, $allPermission)){
+        if (in_array($menu, $allPermission)) {
             return true;
-        }
-        else
+        } else {
             return false;
+        }
+
     }
 }

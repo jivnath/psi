@@ -440,6 +440,7 @@ return [
     'Totalworkdays'=>'総勤務日数',
     'Company'=>'会社',
     'Messages'=>'メッセージ',
+    'passwordchanged'=>'パスワード変更済み',
     'Expireddate'=>'有効期限',
     'PhoneticKanji'=>'フリガナ',
     'Retirementdate'=>'満了日',

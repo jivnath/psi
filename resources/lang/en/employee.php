@@ -439,6 +439,7 @@ return [
     'Totalworkdays'=>'Total workdays',
     'Company'=>'Company',
     'Messages'=>'Messages',
+    'passwordchanged'=>'Password Changed',
     'Expireddate'=>'Expired date',
     'PhoneticKanji'=>'Phonetic Kanji',
     'Retirementdate'=>'Retirement date',

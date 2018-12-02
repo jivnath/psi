@@ -8,7 +8,6 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
 
 <div class="row">
     <div class="col-md-3">
-
         <!-- Profile Image -->
         <div class="box box-primary">
             <div class="box-body box-profile">
@@ -46,6 +45,11 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
     </div>
     <!-- /.col -->
     <div class="col-md-9">
+            <div id="alert" style="display: none">
+                    <div class="alert alert-success" role="alert">
+                        <strong>@lang('employee.Success'): </strong><span id="message"></span>
+                    </div>
+            </div>
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">@lang('employee.Setting')</h3>
@@ -92,10 +96,9 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                         Change Password
                     </button>
                 </div>
-            </div>
-
-            <form method="post" action="password/email" enctype="multipart/form-code">
-                @csrf
+                
+            {{-- <form  method="POST" action="{{route('updatePassword')}}" enctype="multipart/form-code"> --}}
+                {{-- @csrf --}}
                 <div class="modal" id="myModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -109,18 +112,11 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                             <!-- Modal body -->
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label class="col-sm-4 control-label">Email</label>
+                                    <label class="col-sm-4 control-label">Current Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="email" name="email" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Old Password</label>
+                                        <input type="password" class="form-control" id="current-password" name="current_password" placeholder="Type Current Password">
 
-                                    <div class="col-sm-10">
-                                        <input type="password" name="oldpassword" class="form-control"
-                                               id="inputOpassword">
                                     </div>
                                 </div>
 
@@ -128,16 +124,14 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                                     <label class="col-sm-4 control-label">New Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="newpassword" class="form-control"
-                                               id="inputNpassword">
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Type New Password">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Confirm Password</label>
 
                                     <div class="col-sm-10">
-                                        <input type="password" name="confirmpassword" class="form-control"
-                                               id="inputCpassword">
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Re-enter Password">
                                     </div>
                                 </div>
                             </div>
@@ -145,13 +139,13 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                             <!-- Modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-success" data-dismiss="modal">Confirm</button>
+                                <span id="submit" class="btn btn-success" >Submit</span>
                             </div>
 
                         </div>
                     </div>
                 </div>
-            </form>
+            {{-- </form> --}}
         </div>
 
     </div>
@@ -159,3 +153,61 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
 </div>
 <!-- /.row -->
 @endsection
+@push('scripts')
+<script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+$('#submit').click(function () {
+    var cpassword = $('#current-password').val();
+    var password= $('#password').val();
+    var rpassword = $('#password_confirmation').val();
+    alert(cpassword);
+    alert(password);
+    alert(rpassword);
+
+    if(password != rpassword){
+        alert('duiwata password milena');
+    }
+    else{
+        $.ajax({
+            type: 'POST',
+            url: '{{route("updatePassword")}}',
+            dataType: 'json',
+            async: true,
+            data: { 'cpassword':cpassword, 'pass':password, 'rpass':rpassword },
+            success: function (data) {
+                if(data==0){
+                    alert('pahile ko password milena');
+                }
+                else if(data==2){
+                    alert('new password should be entered');
+                }
+                else if(data==3){
+                    alert('the new password unmatched with confirm password');
+                }
+                else if(data == 4){
+                    alert('password all field must be entered');
+                }
+                else {
+                    $("#alert").show()
+                    $("#message").html('<span>{{trans('employee.passwordchanged')}}</span>');
+                    $("#myModal").hide()
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#alert").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#alert").hide(500);
+                        }, 4000);
+                    });
+                }
+
+            }
+        });
+    }
+});
+</script>
+@endpush

@@ -198,6 +198,7 @@ Route::group(['middleware' => ['auth']], function () {
         });
 
         Route::get('/section_manager', ['as' => 'leader', 'uses' => 'LeaderController@showName']);
+        Route::post('/password', ['as' => 'updatePassword', 'uses' => 'UserController@updatePassword']);
     });
 });
 
