@@ -152,8 +152,24 @@ WHERE
 
     public static function getShiftTime($cts_id)
     {
-        $sql = "SELECT TIMEDIFF(smd.end_time, smd.start_time)/10000 AS shiftTime FROM company_time_schedules cts, company_time_tables ctt, shift_master_datas smd WHERE cts.id = $cts_id AND cts.companyTT_id = ctt.id AND smd.company_id = ctt.company_id AND cts.time = smd.start_time";
+        $sql = "SELECT
+                (
+                    CASE
+                        WHEN smd.end_time > smd.start_time 
+                        THEN TIMEDIFF(smd.end_time, smd.start_time)/10000 
+                        ELSE 
+                        (24 + TIMEDIFF(smd.end_time, smd.start_time)/10000)
+                    END)AS shiftTime 
+                FROM 
+                    company_time_schedules cts, 
+                    company_time_tables ctt, 
+                    shift_master_datas smd 
+                WHERE cts.id = $cts_id 
+                    AND cts.companyTT_id = ctt.id 
+                    AND smd.company_id = ctt.company_id 
+                    AND cts.time = smd.start_time";
         $data = DB::select($sql);
+
         return $data;
     }
 
