@@ -51,7 +51,7 @@
                             <table style="" id="attendance" class="table table-striped table-condensed">
                                 <thead>
                                 <th>#</th>
-                                <th>@lang('employee.PSISNumber')</th>
+                                <th>@lang('employee.psi_number')</th>
                                 <th>@lang('employee.Name')</th>
                                 <th>@lang('employee.Phonetic')</th>
                                 <th>@lang('employee.Country')</th>

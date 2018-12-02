@@ -41,9 +41,9 @@
                         <div class='wrapper' id="allTable" style="display: none">
                             <table class="table table-striped table-condensed">
                                 <thead>
-                                    <th>@lang('employee.PSISNumber')</th>
+                                    <th>@lang('employee.psi_number')</th>
                                     <th>@lang('employee.Name')</th>
-                                    <th>@lang('employee.TotalWorkdays')</th>
+                                    <th>@lang('employee.Totalworkdays')</th>
                                     <th>@lang('employee.TotalWorkedHours')</th>
                                 </thead>
 

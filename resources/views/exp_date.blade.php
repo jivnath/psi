@@ -13,11 +13,11 @@
                 <table class="table table-condensed" id='expire_info'>
                     <thead>
                         <tr>
-                            <th>@lang('dashboard.psisno')</th>
-                            <th>@lang('dashboard.name')</th>
-                            <th>@lang('dashboard.cellno')</th>
-                            <th>@lang('dashboard.expiredate') </th>
-                            <th>@lang('dashboard.action')</th>
+                            <th>@lang('employee.psi_number')</th>
+                            <th>@lang('employee.Name')</th>
+                            <th>@lang('employee.cell_no')</th>
+                            <th>@lang('employee.Expireddate') </th>
+                            <th>@lang('employee.Action')</th>
                         </tr>
                     </thead>
                     <tbody>

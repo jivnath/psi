@@ -13,7 +13,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <span>@lang('employee.PSISNumber')</span>
+                            <span>@lang('employee.psi_number')</span>
                         </div>
                         <div class="col-md-10" style="text-align: left">
                             <input type="text" class="form-control" placeholder="@lang('employee.EnterPSISnumber')" id="psi_number" style="width:50%;">

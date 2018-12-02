@@ -33,7 +33,7 @@
 
                         <div class="row" style="text-align: right; margin-top: 5px;">
                             <div class="col-md-3">
-                                <label for="psi_num"> @lang('employee.PSISNumber') </label>
+                                <label for="psi_num"> @lang('employee.psi_number') </label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" id="psi_num" name="psi_num" class="form-control">

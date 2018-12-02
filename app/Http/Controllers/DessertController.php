@@ -124,8 +124,13 @@ class DessertController extends Controller
 
                         $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
                         $total_work = Raw::getWorkedHours($psi, $first_date, $last_date);
+//                        dd($total_work);
                         $selectedShift = Raw::getShiftTime($dessert_id);
-                        $total_worked = $total_work[0]->totalWorked + $selectedShift[0]->shiftTime;
+
+                        if($selectedShift != '')
+                            $total_worked = $total_work[0]->totalWorked + $selectedShift[0]->shiftTime;
+                        else
+                            $total_worked = $total_work[0]->totalWorked;
                             //check time limit
 //                        $total_worked=Raw::dessert_calculation_method($dessert_id,$psi);
                         $total_needed = CompanyTimeSchedule::select(DB::raw('normal as total_needed'))->find($dessert_id)->total_needed;
