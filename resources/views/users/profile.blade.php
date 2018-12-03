@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('title', '| Profile')
+@extends('layouts.app') 
+@section('title', '| Profile') 
 @section('content') @php $username = \Session::get('username'); $companies
 = \Session::get('user_companies'); $primaryCompany = \Session::get('primary_company'); $language = \Session::get('user_language');
 $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $role_id = \Session::get('user_role_id');
@@ -45,11 +45,11 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
     </div>
     <!-- /.col -->
     <div class="col-md-9">
-            <div id="alert" style="display: none">
-                    <div class="alert alert-success" role="alert">
-                        <strong>@lang('employee.Success'): </strong><span id="message"></span>
-                    </div>
+        <div id="alert" style="display: none">
+            <div class="alert alert-success" role="alert">
+                <strong>@lang('employee.Success'): </strong><span id="message"></span>
             </div>
+        </div>
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">@lang('employee.Setting')</h3>
@@ -96,105 +96,223 @@ $user_id = \Session::get('user_id'); $userEmail = \Session::get('user_email'); $
                         Change Password
                     </button>
                 </div>
-                
-            {{-- <form  method="POST" action="{{route('updatePassword')}}" enctype="multipart/form-code"> --}}
-                {{-- @csrf --}}
-                <div class="modal" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
 
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h5 class="modal-title">Change Password</h5>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
+                {{--
+                <form method="POST" action="{{route('updatePassword')}}" enctype="multipart/form-code"> --}} {{-- @csrf --}}
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
 
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Current Password</label>
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Change Password</h5>
+                                    <button type="button" id="quit" class="close" data-dismiss="modal">&times;</button>
+                                </div>
 
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="current-password" name="current_password" placeholder="Type Current Password">
-
+                                <div id="warn" class="form-group" style="display: none">
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong><span id="msg"></span></strong>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">New Password</label>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Current Password</label>
 
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Type New Password">
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" id="current-password" name="current_password" placeholder="Type Current Password">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">New Password</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Type New Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Confirm Password</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Re-enter Password">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-4 control-label">Confirm Password</label>
 
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Re-enter Password">
-                                    </div>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    {{--<button type="button" id="quit" class="btn btn-danger" data-dismiss="modal">Close</button>--}}
+                                    <span id="submit" class="btn btn-success">Submit</span>
                                 </div>
-                            </div>
 
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <span id="submit" class="btn btn-success" >Submit</span>
                             </div>
-
                         </div>
                     </div>
-                </div>
-            {{-- </form> --}}
+                    {{-- </form> --}}
+            </div>
+
         </div>
 
     </div>
-
-</div>
-<!-- /.row -->
+    <!-- /.row -->
 @endsection
-@push('scripts')
-<script type="text/javascript">
-$.ajaxSetup({
+ @push('scripts')
+    <script type="text/javascript">
+        $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
+});
+
+$('#quit').click(function () {
+    $("#current-password").val('')
+    $("#password").val('')
+    $("#password_confirmation").val('')
 });
 $('#submit').click(function () {
     var cpassword = $('#current-password').val();
     var password= $('#password').val();
     var rpassword = $('#password_confirmation').val();
-    alert(cpassword);
-    alert(password);
-    alert(rpassword);
-
-    if(password != rpassword){
-        alert('duiwata password milena');
+    // alert(cpassword);
+    // alert(password);
+    // alert(rpassword);
+  //  if((cpassword == null || password == null || rpassword == null) || (cpassword == null && password == null && rpassword == null)){
+  if(cpassword == '' || password == '' || rpassword == ''){
+         $("#warn").show()
+                    $("#msg").html('<span>{{trans('employee.allfieldsmustbefilled')}}</span>');
+                    $("#myModal").show()
+                   
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#warn").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#warn").hide(500);
+                        }, 4000);
+                    });
+            //   alert('All field must be filled')
     }
+    
     else{
+        
+        if(password != rpassword)
+                {
+                    $("#warn").show()
+                    $("#msg").html('<span>{{trans('employee.thepassworddoesntmatch')}}</span>');
+                    $("#myModal").show()
+                   $("#password_confirmation").val('')
+                   $("#password").val('')
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#warn").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#warn").hide(500);
+                        }, 4000);
+                    });
+                    //alert('the new password unmatched with confirm password');                
+                }
+          else{
+            if(cpassword == password)
+                {
+                    $("#warn").show()
+                    $("#msg").html('<span>{{trans('employee.thepasswordmustbenew')}}</span>');
+                    $("#myModal").show()
+                    $("#password").val('')
+
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#warn").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#warn").hide(500);
+                        }, 4000);
+                    });
+                    //alert('the new password unmatched with confirm password');                
+                }
+          else{      
+    
         $.ajax({
             type: 'POST',
             url: '{{route("updatePassword")}}',
             dataType: 'json',
             async: true,
             data: { 'cpassword':cpassword, 'pass':password, 'rpass':rpassword },
+            
             success: function (data) {
                 if(data==0){
-                    alert('pahile ko password milena');
+                    $("#warn").show()
+                    $("#msg").html('<span>{{trans('employee.thecurrentpassworddoesntmatch')}}</span>');
+                    $("#myModal").show()
+                    $("#current-password").val('')
+   
+                
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#warn").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#warn").hide(500);
+                        }, 4000);
+                    });
+                    //alert('pahile ko password milena');
                 }
                 else if(data==2){
-                    alert('new password should be entered');
+                    $("#warn").show()
+                    $("#msg").html('<span>{{trans('employee.thepasswordmustbenew')}}</span>');
+                    $("#myModal").show()
+                    $("#password").val('')
+                    $("#password_confirmation").val('')
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#warn").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#warn").hide(500);
+                        }, 4000);
+                    });
+                   // alert('new password should be entered');
                 }
                 else if(data==3){
-                    alert('the new password unmatched with confirm password');
+                    $("#warn").show()
+                    $("#msg").html('<span>{{trans('employee.thepassworddoesntmatch')}}</span>');
+                    $("#myModal").show()
+                    $("#password_confirmation").val('')
+                    $("#password_confirmation").val('')
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#warn").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#warn").hide(500);
+                        }, 4000);
+                    });
+                    //alert('the new password unmatched with confirm password');
                 }
                 else if(data == 4){
-                    alert('password all field must be entered');
+                    //alert('password all field must be entered');
+                    $("#warn").show()
+                    $("#msg").html('<span>{{trans('employee.allfieldsmustbefilled')}}</span>');
+                    $("#myModal").show()
+                    $(function () {
+                        $('html, body').animate({
+                            scrollTop: $("#warn").offset().top
+                        }, 500);
+                        setTimeout(function () {
+                            $("#warn").hide(500);
+                        }, 4000);
+                    });
                 }
                 else {
                     $("#alert").show()
-                    $("#message").html('<span>{{trans('employee.passwordchanged')}}</span>');
+                    $("#message").html('<span>{{trans('employee.passwordsuccessfullychanged')}}</span>');
                     $("#myModal").hide()
+                    $("#current-password").val('')
+                    $("#password").val('')
+                    $("#password_confirmation").val('')       
                     $(function () {
                         $('html, body').animate({
                             scrollTop: $("#alert").offset().top
@@ -208,6 +326,11 @@ $('#submit').click(function () {
             }
         });
     }
+    }
+    }
+
 });
-</script>
+    </script>
+
+    
 @endpush

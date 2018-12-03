@@ -444,7 +444,13 @@ return [
     'Expireddate'=>'有効期限',
     'PhoneticKanji'=>'フリガナ',
     'Retirementdate'=>'満了日',
-    'Hiredate'=>'入社日'
+    'Hiredate'=>'入社日',
+
+    'thecurrentpassworddoesntmatch'=>'現在のパスワードが一致しません',
+    'thepasswordmustbenew'=>'パスワードは新しいものでなければなりません',
+    'thepassworddoesntmatch'=>'パスワードが一致しません',
+    'allfieldsmustbefilled'=>'すべてのフィールドを入力する必要があります',
+    'passwordsuccessfullychanged'=>'パスワードが正常に変更されました',
 
 
 ];

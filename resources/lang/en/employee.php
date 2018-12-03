@@ -443,6 +443,13 @@ return [
     'Expireddate'=>'Expired date',
     'PhoneticKanji'=>'Phonetic Kanji',
     'Retirementdate'=>'Retirement date',
-    'Hiredate'=>'Hire date'
+    'Hiredate'=>'Hire date',
+
+    'thecurrentpassworddoesntmatch'=>'The current password doesnt match',
+    'thepasswordmustbenew'=>'The password must be new',
+    'thepassworddoesntmatch'=>'The password does not match',
+    'allfieldsmustbefilled'=>'All field must be filled',
+    'passwordsuccessfullychanged'=>'Password successfully changed',
+    
 
 ];
