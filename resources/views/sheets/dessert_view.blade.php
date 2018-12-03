@@ -44,6 +44,21 @@
 
     </div>
 </div>
+
+<div id="myModal" class="modal showMessege" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body comments_body">
+                <div style="text-align: center"><span id="message"></span></div>
+            </div>
+            <div class="modal-footer" style="height:45px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('employee.Close')</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal showFlag" role="dialog">
     <div class="modal-dialog modal-sm">
 
@@ -262,6 +277,7 @@
 
 
 </table>
+
 <input type='hidden' id='all_saved_value'>
 
 
@@ -353,16 +369,21 @@
                         console.log(checkProperties(data));
 
                         if (data.length == 0) {
-                            alert("{{trans('employee.alreadyinuse')}}");
-                            //alert('already in use');
+                            $('#myModal').modal('show');
+                            var message = "<span><h5>"+ "{{trans('employee.alreadyinuse')}}" +"</h5></span>";
+                            $('#message').html(message);
                             return false;
                         }
                         if (checkProperties(data)) {
-                            alert("{{trans('employee.NotAvailable')}}");
+                            $('#myModal').modal('show');
+                            var message = "<span><h5>"+ "{{trans('employee.NotAvailable')}}" +"</h5></span>";
+                            $('#message').html(message);
                             return false;
                         }
                         if (typeof data.total_worked !== 'undefined' && data.total_worked > {{\Config('app.job_limit')}}) {
-                            alert("{{trans('employee.Limitexceeded')}}" + (data.total_worked) + "{{trans('employee.hours')}}");
+                            $('#myModal').modal('show');
+                            var message = "<span><h5>"+ "{{trans('employee.Limitexceeded')}}" +"</h5></span>";
+                            $('#message').html(message);
                             return false;
                         }
                         $.each(data, function (i, v) {

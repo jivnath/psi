@@ -401,7 +401,7 @@ return [
     'hours'=>'hrs.',
     'viber'=>'viber',
     'call'=>'call',
-    'alreadyinuse'=>'already in use',
+    'alreadyinuse'=>'Already in use',
     'for'=>'for',
     'Flagfor'=>'Flag for',
     'NoShiftAvailable'=>'No shift available.',

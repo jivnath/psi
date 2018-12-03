@@ -448,7 +448,7 @@ WHERE
             normal is not NULL $cond
             ORDER BY
                 cts.DATE
-                desc";
+                ASC";
         return DB::select($sql);
     }
 
