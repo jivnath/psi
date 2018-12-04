@@ -292,6 +292,9 @@
                                                 @php
                                                     $attendance_management = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'attendance_management');
                                                 @endphp
+                                                 @php
+                                                 $change_company = \App\Http\Controllers\UserController::controlMenu($user_id, $role_id, 'change_company');
+                                                @endphp
 
 
                                                 @if($company || $employee_details || $employee_worksheet || $total_necessary || $self_sheet_report || $attendance_management)
@@ -357,7 +360,7 @@
 							\Session::get('user_language'); $user_id =
                             \Session::get('user_id');
                             $user_role=\Session::get('user_role_id'); @endphp
-                                @if($user_role!= 5)
+                                @if($change_company)
                                             <li class="nav-item dropdown"><a id="shift_management"
                                                                              class="nav-link dropdown-toggle company_default_select"
                                                                              href="#"
