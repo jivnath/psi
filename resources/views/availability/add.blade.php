@@ -4,10 +4,10 @@
     <div class="row justify-content-center">
         <div class="col-md-1"></div>
         <div class="col-md-7">
-            <div class="box" style="min-height: 300px">
+            <div class="box" style="min-height: 70px">
                 <div class="box-header"><h4>@lang('employee.EmployeeAvailabilityAdd')</h4></div>
 
-                <div class="box-body " style="padding: 20px;">
+                <div class="box-body " style="padding: 10px;">
                     <form action="{{ route('availability.store') }}" method="POST">
                         <input type="hidden" name="_method" value="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">

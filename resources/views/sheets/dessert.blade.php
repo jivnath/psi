@@ -17,7 +17,7 @@
 
                     <div class="col-md-3">
                         <select name="company" class="form-control" id="company">
-                        <option>--@lang('employee.SelectSubsection')--</option>
+                        <option value="">--@lang('employee.SelectSubsection')--</option>
                         @foreach($companies as $company)
                         <option value="{{ $company->id }}">{{ $company->name }}</option>
                         @endforeach
@@ -26,8 +26,8 @@
                         <div class="col-md-3 schedule_date">
 
                     </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-primary view_dessert">@lang('employee.Submit')</button>
+                    <div class="col-md-2" id="a" style="display:none">
+                        <button type="button" class="btn btn-primary view_dessert" >@lang('employee.Submit')</button>
                     </div>
                 </div>
             </div>
@@ -53,6 +53,7 @@
                data:{'selected':selected,'selected_date':selected_date},
                beforeSend:function(){
             	   $('#dessert_response').html('<span>{{trans('employee.LoadingPleaseWait')}}</span>');
+
                    },
                success:function(data,status) {
             	   $('#dessert_response').html('');
@@ -61,25 +62,41 @@
                     	window.location.href="<?= url()->full(); ?>"+'#dessert_response';
 
                    	}
+
                }
            });
         });
        $("#company").change(function(){
            var selected = $(this).val();
-           $.ajax({
-               type:'GET',
-               url:"{{ route('sheet.time_table') }}",
-               data:{'selected':selected},
-               beforeSend:function(){
-            	   $('#dessert_response').html('<span>{{trans('employee.LoadingPleaseWait')}}</span>');
+           if(selected !='') {
+               $.ajax({
+                   type: 'GET',
+                   url: "{{ route('sheet.time_table') }}",
+                   data: {'selected': selected},
+                   beforeSend: function () {
+                       $('#dessert_response').html('<span>{{trans('employee.LoadingPleaseWait')}}</span>');
                    },
-               success:function(data,status) {
-            	   $('#dessert_response').html('');
-                   	if(status=='success'){
-                    	$('.schedule_date').html(data);
-                   	}
-               }
-           });
+                   success: function (data, status) {
+                       $('#dessert_response').html('');
+                       if (status == 'success') {
+                           $('.schedule_date').html(data);
+                           $("#a").show();
+                           $('.schedule_date').show();
+
+                       }
+
+                   }
+
+               });
+           }
+           else{
+               $('#a').hide();
+               $('.schedule_date').hide();
+               $('.table-condensed').hide();
+
+           }
+
+
         });
     });
 

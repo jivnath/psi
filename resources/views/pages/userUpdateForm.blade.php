@@ -9,19 +9,20 @@
         <div class="row">
             <div class='col-md-12'>
                 <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">@lang('employee.UpdateUser')</h3>
-                    </div>
+                    {{--<div class="box-header with-border">--}}
+                        {{--<h3 class="box-title">@lang('employee.UpdateUser')</h3>--}}
+                    {{--</div>--}}
 
                     <form id="form" name="customize_form" action="{{route('storePermissionToUser')}}"
                           class="form-horizontal" method="POST">
                         @csrf
                         <div class='box-body'>
                             <div class="row">
+                                <div class="col-md-4"> <h3 class="box-title">@lang('employee.UpdateUser')</h3></div>
                                 <div class="col-md-1">
                                     <label style="margin-left:5px;margin-top:5px">@lang('employee.User')</label>
                                 </div>
-                                <div class="col-md-11">
+                                <div class="col-md-7">
                                     <select id="userDropdown" name="userUpdate" class="form-control" style="width:40%">
                                         <option value="0">@lang('employee.SelectUser')</option>
                                         @foreach($user as $users)

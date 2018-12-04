@@ -3,7 +3,7 @@
         $data = Session::get('duplicate');
     @endphp
     @if(count($data['yes']) > 0)
-        <div id="duplicateMessage" class="box box-danger" style="margin-bottom: 25px">
+        <div id="duplicateMessage" class="box box-danger" style="width: 100%;overflow-x:auto;position:absolute;">
             <div class="alert" role="alert">
                 <div class="col-md-6 offset-3" style="margin-bottom: 50px">
                     <strong><h4>Duplicate Employees</h4></strong>
@@ -24,6 +24,7 @@
             </div>
         </div>
     @endif
+
 @endif
 
 @push('scripts')

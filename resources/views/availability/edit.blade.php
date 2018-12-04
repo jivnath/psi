@@ -6,7 +6,7 @@
             <div class="box">
                 <div class="box-header"><h4>@lang('employee.EmployeeAvailabilityEdit')</h4></div>
 
-                <div class="box-body " style="padding: 20px;">
+                <div class="box-body " style="padding: 10px;">
                     <form class="form-group">
                         <div class="form-group row" style="text-align: center; margin-top: 5px; margin-bottom: 25px;">
                             <div class="col-md-3" style="text-align: right">

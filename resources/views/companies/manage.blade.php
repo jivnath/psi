@@ -18,7 +18,7 @@
                         <div class="col-md-12">
                             <div class="btn-group" data-toggle="buttons">
                                 <label class="radio_click btn btn-primary"> <input type="radio"
-                                                                                       name="manage_type" value="0"> @lang('employee.NewCompany')
+                                                 name="manage_type" value="0"> @lang('employee.NewCompany')
                                     </label> <label class="radio_click btn btn-primary"> <input
                                                 type="radio" name="manage_type" value="1"> @lang('employee.ExistingCompany')
                                     </label>
