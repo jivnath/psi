@@ -34,7 +34,8 @@
                         </div>
                         <hr>
 
-                        <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5></div>
+                        <div id="loadingDiv" style="display: none"><h5><b>@lang('employee.LoadingPleaseWait')</b></h5>
+                        </div>
                         <div id="error" style="display: none"><b>@lang('employee.NoShiftAvailable')</b></div>
                         <div id="tableDiv" style="display:none; margin-top: 25px;">
                             <table style="" id="selfsheet" class="table table-striped">
@@ -42,32 +43,20 @@
                                 <th>#</th>
                                 <th>@lang('employee.psi_number')</th>
                                 <th>@lang('employee.EmployeeName')</th>
-                                <th>@lang('employee.Shifts')</th>
                                 <th>@lang('employee.Responsible')</th>
                                 <th>@lang('employee.Confirmationthedaybefore')</th>
                                 <th>@lang('employee.Responsible')</th>
                                 <th>@lang('employee.Confirm3hoursago')</th>
-                                <th>@lang('employee.Arrivaltimeiflate')</th>
-                                <th>@lang('employee.Reasonforlate')</th>
-                                <th>@lang('employee.CallMedium')</th>
                                 <th>@lang('employee.Flag')</th>
-                                <th>@lang('employee.Deletedat')</th>
-
                                 </thead>
                                 <tbody id="body">
 
                                 </tbody>
                             </table>
                         </div>
-                        </div>
                     </div>
                 </div>
-
-
-            {{--<div class='col-md-12'>--}}
-                {{--<div id='selfsheet_report' class='' style="width: 100%;overflow: scroll;position: absolute;"></div>--}}
-            {{--</div>--}}
-
+            </div>
         </div>
     </section>
 @endsection
@@ -81,26 +70,26 @@
         $(document).ready(function () {
             $('#tableDiv').css({
                 'width': window.innerWidth - 90,
-                'overflow-x': 'scroll',
+                'overflow-x': 'auto',
                 'height': 'auto'
             });
         });
-        $("#section").change(function(){
+        $("#section").change(function () {
             $("#error").hide();
             var id = $(this).val();
-            if(id != 0) {
+            if (id != 0) {
                 $.ajax({
                     type: "GET",
                     url: "{{route('getShiftsForSubsection')}}",
                     data: {'id': id},
                     dataType: "json",
                     success: function (data) {
-                        if(data==''){
+                        if (data == '') {
                             $("#tableDiv").hide();
                             $(".dateDiv").hide();
                             $("#error").show();
                         }
-                        else{
+                        else {
                             $("#error").hide();
                             $(".dateDiv").show();
                             $(".submit").show();
@@ -114,18 +103,18 @@
                 $(".submit").hide();
             }
         });
-        $("#submit").click(function(){
+        $("#submit").click(function () {
             $("#body").html('');
             var id = $("#section").val();
             var date = $("#date").val();
             $.ajax({
-                type:"GET",
-                url:"{{route('getSelfSheetReport')}}",
-                data:{'id':id, 'date':date},
-                beforeSend:function(){
+                type: "GET",
+                url: "{{route('getSelfSheetReport')}}",
+                data: {'id': id, 'date': date},
+                beforeSend: function () {
                     $("#loadingDiv").show();
                 },
-                success:function(data,status){
+                success: function (data, status) {
                     $("#loadingDiv").hide();
                     $("#tableDiv").show();
                     $("#body").append(data);

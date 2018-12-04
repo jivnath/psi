@@ -50,7 +50,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body comments_body">
-                <div style="text-align: center"><span id="message"></span></div>
+                <div><span id="message"></span></div>
             </div>
             <div class="modal-footer" style="height:45px">
                 <button type="button" class="btn btn-default" data-dismiss="modal">@lang('employee.Close')</button>
