@@ -275,5 +275,6 @@ return [
     'RemainingHours'=>'Remaining Hours',
     'SeeAllRequests'=>'See All Requests',
     'MessageNotAvailable'=>'Message Not Available',
-    'LoggedAs'=>'Logged As'
+    'LoggedAs'=>'Logged As',
+    'change_company'=>'Change Section'
 ];

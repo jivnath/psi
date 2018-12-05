@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-10 offset-1">
-            <div class="box" style="min-height: 200px">
+            <div class="box" style="min-height: 110px">
                 <div class="box-header">
                     <a href="{{route('availability.edit')}}" class="btn btn-link pull-right">@lang('employee.Edit')</a>
                     <a href="{{route('availability.add')}}" class="btn btn-link pull-right">@lang('employee.Add')</a>

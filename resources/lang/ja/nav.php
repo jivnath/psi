@@ -269,4 +269,5 @@ return [
 'SeeAllRequests'=>'すべてのリクエストを見る',
 'MessageNotAvailable'=>'メッセージが利用できません',
 'LoggedAs'=>'ログに記録される',
+'change_company'=>'セクションを変更',
 ];

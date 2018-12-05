@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="row">
-        <div class='col-md-8 offset-2'>
+        <div class='col-md-6 offset-3'>
             <div class="box">
                 <div class="box-header">
                     <h4>@lang('employee.AddRole')</h4>
@@ -15,7 +15,7 @@
 
                     <div class="form-group">
                         {{ Form::label('name', trans('employee.Name')) }}
-                        {{ Form::text('name', '', array('class' => 'form-control input-shorter', 'style' => 'width:50%')) }}
+                        {{ Form::text('name', '', array('class' => 'form-control input-shorter', 'style' => 'width:75%')) }}
                     </div>
 
                     {{ Form::submit(trans('employee.Add'), array('class' => 'btn btn-primary')) }}
