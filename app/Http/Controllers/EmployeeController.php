@@ -58,7 +58,7 @@ class EmployeeController extends Controller
         $data = $excelReader->uploadSheet()
             ->iterateSheet()
             ->checkDuplicateAndStore();
-//        dd($data);
+//        dd($data['yes']);
 
         Session::flash('duplicate', $data);
 //        dd($data);

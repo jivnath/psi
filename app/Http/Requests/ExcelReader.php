@@ -112,21 +112,24 @@ class ExcelReader extends FormRequest
 //        dd($this->data);
         foreach($this->data as $data )
         {
-//            dd($this);
-            $employee = Employee::firstOrNew([
-                'psi_number' => $data['psi_number']
-            ]);
-            if ($employee->exists) {
-                array_push($yes, $data);
-            }
-            else {
-                array_push($no, $data);
+            if(str_replace(' ', '',$data['psi_number']) != '') {
+                $psi = explode('.', $data['psi_number']);
+//            dd($psi[0]);
+//            dd($data['psi_number']);
+                $employee = Employee::firstOrNew([
+                    'psi_number' => $psi[0]
+                ]);
+                if ($employee->exists) {
+                    array_push($yes, $data);
+                } else {
+                    array_push($no, $data);
+                }
             }
         }
 //        dd($no);
         $checkDuplicates['yes'] = $yes;
         $checkDuplicates['no'] = $no;
-//        dd($checkDuplicates);
+        dd($checkDuplicates);
         try {
             foreach (array_chunk($checkDuplicates['no'], 500) as $no)
             Employee::inserts($no);
@@ -142,7 +145,7 @@ class ExcelReader extends FormRequest
 
     protected function dateColumns()
     {
-        return ['hire_date', 'retirement_date', 'residence_card_exp_date', 'expiration_date'];
+        return ['hire_date', 'retirement_date', 'birthdate', 'residence_card_exp_date', 'expiration_date'];
     }
 
     protected function mapColumns()
@@ -168,7 +171,7 @@ class ExcelReader extends FormRequest
 //        dd($excel_actual_cell);
         if ($column && in_array($column, $this->dateColumns())) {
 
-            $this->data[$rowIndex][$column] = (strlen($cellValue) > 0) ? ExcelDate::excelToDateTimeObject($cellValue) : null;
+            $this->data[$rowIndex][$column] = (strlen(str_replace(' ', '', $cellValue)) > 0) ? ExcelDate::excelToDateTimeObject($cellValue) : null;
 
         } elseif ($column) {
 
