@@ -154,34 +154,40 @@
                         <table class="table table-striped" id='rda_table'>
                             <thead>
                             <tr>
-                                <th>@lang('employee.psi_number')</th>
+                                @if($role_id ==1)
+                                    <th>@lang('employee.Name')</th>
+                                @endif
                                 {{--<th>@lang('employee.Responsible')</th>--}}
-                                <th>@lang('employee.Activity')</th>
-                                <th>@lang('employee.Date')</th>
-                                <th>@lang('employee.Comment')</th>
-                                <th>@lang('employee.TotalComments')</th>
-                                <th>@lang('employee.Action')</th>
+                                {{--<th>@lang('employee.Activity')</th>--}}
+                                {{--<th>@lang('employee.Date')</th>--}}
+                                <th>@lang('employee.Confirmationthedaybefore')</th>
+                                <th>@lang('employee.Confirm3hoursago')</th>
+                                {{--<th>@lang('employee.Action')</th>--}}
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($recent_dessert_activity as $rda_info)
                                 <tr>
-                                    <td>{{$rda_info->staff_no}}</td>
+                                    @if($role_id ==1)
+                                        <td>{{$rda_info->name}}</td>
+                                    @endif
                                     {{--<td>{{$rda_info->operator}}</td>--}}
-                                    <td>{{$rda_info->activity}}</td>
-                                    <td>{{$rda_info->date}}</td>
-                                    <td>{{$rda_info->comments}}</td>
-                                    <td>{{$rda_info->total_comment}}</td>
-                                    <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span
-                                                class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
+                                    <td>{{$rda_info->day_before}}</td>
+                                    <td>{{$rda_info->three_hrs_before}}</td>
+                                    {{--<td>{{$rda_info->comments}}</td>--}}
+                                    {{--<td>{{$rda_info->total_comment}}</td>--}}
+                                    {{--<td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span--}}
+                                                {{--class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>--}}
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
-                        <a href="{{route('recent_sheet')}}" class="uppercase">@lang('employee.ViewAll')</a>
-                    </div>
+                    @if($role_id ==1)
+                        <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
+                            <a href="{{route('recent_sheet')}}" class="uppercase">@lang('employee.ViewAll')</a>
+                        </div>
+                    @endif
                 </div>
             </div>
             @if($role_id != 5)
@@ -223,9 +229,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
-                            <a href="{{route('alert_summary')}}" class="uppercase">@lang('employee.ViewAll')</a>
-                        </div>
+                        {{--<div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">--}}
+                            {{--<a href="{{route('alert_summary')}}" class="uppercase">@lang('employee.ViewAll')</a>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
             @endif

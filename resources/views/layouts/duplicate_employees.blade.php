@@ -2,7 +2,7 @@
     @php
         $data = Session::get('duplicate');
     @endphp
-    @if(count($data['yes']) > 0)
+    @if(count($data) > 0)
         <div id="duplicateMessage" class="box box-danger" style="width: 100%;overflow-x:auto;position:absolute;">
             <div class="alert" role="alert">
                 <div class="col-md-6 offset-3" style="margin-bottom: 50px">
@@ -11,7 +11,7 @@
                         <th scope="col">#</th>
                         <th>PSI-S No</th>
                         <th>Name</th>
-                        @foreach($data['yes'] as $index => $data)
+                        @foreach($data as $index => $data)
                             <tr>
                                 <td>{{$index+1}}</td>
                                 <td>{{$data['psi_number']}}</td>

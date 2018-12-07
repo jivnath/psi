@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\AlertSetting;
 use App\Models\DessertSheet;
 use App\Models\Employee;
 use App\Models\EmployeeLogin;
@@ -22,6 +23,7 @@ class DashboardController extends Controller
         $data['dashboard'] = Raw::expiredRC();
         $data['total_ncessary_data'] = Raw::getTotalNeccessory();
         $data['recent_dessert_activity'] = Raw::getDessertActivity();
+        $data['alert_setting'] = AlertSetting::all();
         $dessert_report = $dessert_obj->select('conformation_day_before', DB::raw('count(*) as total_count'))
             ->groupBy('conformation_day_before')
             ->get();

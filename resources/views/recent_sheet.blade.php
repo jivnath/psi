@@ -13,23 +13,23 @@
                 <table class="table table-condensed" id='rda_table'>
                     <thead>
                         <tr>
-                            <th>@lang('employee.psi_number')</th>
-                            <th>@lang('employee.Activity')</th>
-                            <th>@lang('employee.Date')</th>
-                            <th>@lang('employee.Comment')</th>
-                            <th>@lang('employee.TotalComments')</th>
-                            <th>@lang('employee.Action')</th>
+                            {{--<th>@lang('employee.psi_number')</th>--}}
+                            <th>@lang('employee.Name')</th>
+{{--                            <th>@lang('employee.Date')</th>--}}
+{{--                            <th>@lang('employee.Comment')</th>--}}
+                            <th>@lang('employee.Confirmationthedaybefore')</th>
+                            <th>@lang('employee.Confirm3hoursago')</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($recent_dessert_activity as $rda_info)
                         <tr>
-                            <td>{{$rda_info->staff_no}}</td>
-                            <td>{{$rda_info->activity}}</td>
-                            <td>{{$rda_info->date}}</td>
-                            <td>{{$rda_info->comments}}</td>
-                            <td>{{$rda_info->total_comment}}</td>
-                            <td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>
+                            {{--<td>{{$rda_info->staff_no}}</td>--}}
+                            {{--<td>{{$rda_info->activity}}</td>--}}
+                            <td>{{$rda_info->name}}</td>
+                            <td>{{$rda_info->day_before}}</td>
+                            <td>{{$rda_info->three_hrs_before}}</td>
+                            {{--<td><span class=""><a href="#"><i class="far fa-comment-dots"></i></a></span>&nbsp;&nbsp;<span class=""><a href="#"><i class="fas fa-phone"></i></a></span></td>--}}
                         </tr>
                         @endforeach
                     </tbody>
