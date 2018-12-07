@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 <style>
@@ -31,7 +31,7 @@
                 <div class="box-body" style="padding-top:2px ">
                     <div>
 
-                        <table class="table table-striped table-fixed table-condensed" style="text-align: center" id='example'>
+                        <table class="display responsive nowrap table table-striped table-fixed table-condensed" style="text-align: center" id='example2'>
                             <thead>
                                 <tr>
                                     @foreach($all_col as $column)
@@ -55,115 +55,14 @@
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if(count($cells) > 0) @foreach($cells as $index => $cell)
-                                <tr>
-                                    @foreach($all_col as $column) @if($column->field_name == 'psi_number') @php $psi_value=$cell->{$column->field_name} 
-@endphp
-                                    @endif @if($column->field_name != 'updated_at' && $column->field_name != 'psi_number'
-                                    && $column->field_name != 'sex' && $column->field_name != 'status_residence' && $column->field_name
-                                    != 'status' && $column->field_name != 'hourly_wage' && $column->field_name != 'status_residence'
-                                    && $column->field_name != 'operating_status' && $column->field_name != 'viber_install')
-                                    <td class="contenteditable" data-column="{{ $column->field_name }}" data-old="" contenteditable="true">
-
-                                        {{ $cell->{$column->field_name} }}
-                                    </td>
-                                    @else
-                                    <td>
-                                        @if ($column->field_name == 'sex')
-                                        <select name="sex" class="sex_class" data-psi_data="{{$psi_value}}">
-                                                                @foreach($sex as $s)
-                                                                    <option
-                                                                        <?= ($cell->{$column->field_name} == $s->name) ? 'selected="selected"' : ''?> value="{{$s->name}}">{{ $s->name }}</option>
-                                                                @endforeach
-                                                            </select> @elseif ($column->field_name
-                                        == 'status_residence')
-                                        <select name="status_residence" class="status_residence" data-psi_data="{{$psi_value}}">
-                                                                <option>@lang('employee.none')</option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == '就労') ? 'selected="selected"' : ''?> value="就労">
-                                                                    就労
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == '家族滞在') ? 'selected="selected"' : ''?>  value="家族滞在">
-                                                                    家族滞在
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == '留学') ? 'selected="selected"' : ''?> value="留学">
-                                                                    留学
-                                                                </option>
-                                                            </select> @elseif ($column->field_name
-                                        == 'hourly_wage')
-                                        <select name="hourly_wage" class="hourly_wage" data-psi_data="{{$psi_value}}">
-                                                                <option>@lang('employee.none')</option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == '通常の雇用主') ? 'selected="selected"' : ''?> value="通常の雇用主">
-                                                                    通常の雇用主
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == 'セミ雇用者') ? 'selected="selected"' : ''?> value="セミ雇用者">
-                                                                    セミ雇用者
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == 'アルバイト') ? 'selected="selected"' : ''?>value="アルバイト">
-                                                                    アルバイト
-                                                                </option>
-                                                            </select> @elseif($column->field_name
-                                        == 'operating_status')
-                                        <select name="operating_status" class="operating_status" data-psi_data="{{$psi_value}}">
-                                                                <option>@lang('employee.none')</option>
-
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == '働くこと') ? 'selected="selected"' : ''?> value="働くこと">
-                                                                    働くこと
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == '低頻度の仕事') ? 'selected="selected"' : ''?> value="低頻度の仕事">
-                                                                    低頻度の仕事
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == 'やめて') ? 'selected="selected"' : ''?> value="やめて">
-                                                                    やめて
-                                                                </option>
-                                                            </select> @elseif($column->field_name
-                                        == 'status')
-                                        <select name="status" class="status" data-psi_data="{{$psi_value}}">
-
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == 1) ? 'selected="selected"' : ''?> value="1">
-                                                                    @lang('employee.Available')
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == 0) ? 'selected="selected"' : ''?> value="0">
-                                                                    @lang('employee.NotAvailable')
-                                                                </option>
-
-                                                            </select> @elseif($column->field_name
-                                        == 'viber_install')
-                                        <select name="viber_install" class="viber_install" data-psi_data="{{$psi_value}}">
-
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == 1) ? 'selected="selected"' : ''?> value="1">
-                                                                    @lang('employee.Yes')
-                                                                </option>
-                                                                <option
-                                                                    <?= ($cell->{$column->field_name} == 0) ? 'selected="selected"' : ''?> value="0">
-                                                                    @lang('employee.No')
-                                                                </option>
-                                                            </select> @else {{ $cell->{$column->field_name}
-                                        }} @endif
-                                    </td>
-                                    @endif @endforeach
-                                    <td><span id="{{$psi_value}}" class="employee_skills btn btn-primary" data-toggle="modal"
-                                            data-target="#myModal">@lang('employee.ChooseSkill')</span></td>
-
+                            <tfoot>
+                            <tr>
+                                    @foreach($all_col as $column)
+                                    <th class="sticky-top" style="word-wrap: break-word">{{(trans('employee.'.$column->field_name))}}</th>
+                                    @endforeach
+                                    <th class="sticky-top" style="word-wrap: break-word">@lang('employee.Skills')</th>
                                 </tr>
-                                @endforeach @else
-                                <tr>
-                                    <td colspan="6">@lang('employee.Nosheetsareuploaded')</td>
-                                </tr>
-                                @endif
-                            </tbody>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -186,11 +85,11 @@
 
             <div class="modal-body">
                 <div id="formDiv">
-                    
+
                 </div>
                 <div id="allSkills" style="margin-top:20px">
 
-                </div>             
+                </div>
             </div>
 
             <!-- Modal footer -->
@@ -249,7 +148,7 @@
             $('.box-body div').css({
                 'width': window.innerWidth - 90,
                 'overflow': 'scroll',
-                'height': window.innerHeight / 1.5
+                'height': window.innerHeight / 1.3
             });
 
             var tds = document.querySelectorAll("td.contenteditable");
@@ -357,7 +256,7 @@
             });
         });
 
-        $(document).ready(function () {
+       /*  $(document).ready(function () {
             // Setup - add a text input to each footer cell
             // Setup - add a text input to each footer cell
 
@@ -391,7 +290,66 @@
                 var v = $(this).val();
                 table.columns(i).search(v).draw();
             });
-        });
+        }); */
+        $(document).ready(function() {
+        	$(".example2-grid-error").html("");
+               var dataTable = $('#example2').DataTable( {
+        	   "processing": true,
+           		"serverSide": true,
+           		"pagingType": "full_numbers",
+                    "ajax":{
+                    	headers: {
+                    	    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    	  },
+                        url :"{{route('employees.converted_info')}}", // json datasource
+						type: "post",  // method  , by default get
+            			error: function(jqXHR, exception){  // error handling
+
+      				          var msg = '';
+      				          if (jqXHR.status === 0) {
+      				              msg = 'ALERT !Not connect.\n Verify Network.';
+      				          } else if (jqXHR.status == 404) {
+      				              msg = 'Requested page not found. [404]';
+      				          } else if (jqXHR.status == 500) {
+      				              msg = 'Internal Server Error [500].';
+      				          } else if (exception === 'parsererror') {
+      				              msg = 'Requested JSON parse failed.';
+      				          } else if (exception === 'timeout') {
+      				              msg = 'Time out error.';
+      				          } else if (exception === 'abort') {
+      				              msg = 'Ajax request aborted.';
+      				          } else {
+      				              msg = 'Uncaught Error.\n' + jqXHR.responseText;
+      				          }
+      				          alert(msg);
+              				    $(".example2-grid-error").html("");
+                				$("#example2").append('<tbody class="employee2-grid-error blink"><tr><th colspan="9">'+msg+'</th></tr></tbody>');
+                				$("#example2_processing").css("display","none");
+
+            			}
+                    }
+                } );
+               $("#example_filter").css("display","none");  // hiding global search box
+		$('.search-input-text').keypress( function (e) {   // for text boxes
+			if(e.which == 13) {
+			var i =$(this).attr('data-column');  // getting column index
+			var v =$(this).val();  // getting search input value
+// 			if(v!='')
+			dataTable.columns(i).search(v).draw();
+			}
+		} );
+
+		/* $('.search-input-text').on( 'keyup change', function () {   // for text boxes
+			var i =$(this).attr('data-column');  // getting column index
+			var v =$(this).val();  // getting search input value
+			dataTable.columns(i).search(v).draw();
+		} ); */
+		$('.search-input-select').on( 'change', function () {   // for select box
+			var i =$(this).attr('data-column');
+			var v =$(this).val();
+			dataTable.columns(i).search(v).draw();
+		} );
+            } );
 
         $(".employee_skills").click(function(){
             var selected = $(this).attr('id');
@@ -444,6 +402,6 @@
                 }
             });
         });
-       
+
 </script>
 @endpush

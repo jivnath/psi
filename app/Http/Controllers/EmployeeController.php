@@ -79,6 +79,11 @@ class EmployeeController extends Controller
 
         return view('employees.show', compact('cells', 'columns', 'customize_columns', 'all_col','option'))->withSex($sex);
     }
+    public function parseDataAtt(Request $request){
+        $data=$request->all();
+        $data['username']=\Session::get('username');
+        return Employee::parseDataAtt($data);
+    }
 
     public function updateCell(Request $request)
     {

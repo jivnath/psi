@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
                 //<employees>
                 Route::prefix('employees')->group(function () {
                     Route::get('/show/{option?}', ['as' => 'employees.show', 'uses' => 'EmployeeController@show']);
+                    Route::post('/employee/converted_info', ['as' => 'employees.converted_info', 'uses' => 'EmployeeController@parseDataAtt']);
                     Route::get('/upload', ['as' => 'employees.uploadForm', 'uses' => 'EmployeeController@uploadForm']);
                     Route::post('/upload', ['as' => 'employees.upload', 'uses' => 'EmployeeController@upload']);
                     Route::post('/updateCell', ['as' => 'employees.updateCell', 'uses' => 'EmployeeController@updateCell']);

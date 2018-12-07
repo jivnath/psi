@@ -92,4 +92,45 @@ class Employee extends Model
             ['psi_number', $data['psi_num']]
         ])->update([$data['column'] => $data['value']]);
     }
+    public static function parseDataAtt($requestData){
+        $columns=[];
+        $customize_columns = PsiViewCustimizeModel::select('field_name')->where([
+            'status' => 'y',
+            'type' => 'employee'
+        ])
+            ->orderBy('id', 'asc')
+            ->get();
+        foreach ($customize_columns as $row){
+            $columns[]=$row->field_name;
+        }
+        $columns[count($columns)]='skill';
+        $c = $sql = "select count(*) As cnt from employees where 1=1";
+        $d = $sql ="select * from employees where 1=1";
+        $query_sql = str_replace($d, $c, $sql);
+        $totalFiltered=collect(\DB::select($query_sql))->pluck('cnt')[0];
+        $totalData = $totalFiltered;
+        $sql .= " ORDER BY " . $columns[$requestData['order'][0]['column']] . "   " . $requestData['order'][0]['dir'] . "  LIMIT " . $requestData['start'] . " ," . $requestData['length'] . "   ";
+        $query=\DB::select($sql);
+        $data=[];
+
+        foreach ($query as $row){
+            $nestedData = [];
+            foreach ($columns as $col) {
+                if ($col == 'skill')
+                    $nestedData[] = '---';
+                else
+                    $nestedData[] = $row->{$col};
+            }
+            $data[] = $nestedData;
+        }
+        $json_data = array(
+            "draw" => intval($requestData['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw.
+            "recordsTotal" => intval($totalData), // total number of records
+            "recordsFiltered" => intval($totalFiltered), // total number of records after searching, if there is no searching then totalFiltered = totalData
+            "data" => $data
+        ); // total data array
+
+        echo json_encode($json_data);
+
+    }
 }
