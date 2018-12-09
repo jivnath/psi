@@ -6,9 +6,11 @@ use App\Http\Requests\ExcelReader;
 use App\Models\Company;
 use App\Models\CompanyToEmployee_rel;
 use App\Models\Employee;
+use App\Models\EmployeeSkill;
 use App\Models\Gender;
 use App\Models\PsiViewCustimizeModel;
 use App\Models\Raw;
+use App\Models\SkillMaster;
 use Illuminate\Http\Request;
 use Session;
 
@@ -36,20 +38,86 @@ class EmployeeController extends Controller
 //        dd($data['employee_data']);
         $data['columns'] = $employee_data->first()->columns([
             'id',
-//            'company_id',
             'created_at',
             'updated_at'
         ]);
-        $data['all_col'] = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
-        $column = [];
+        $data['all_col'] = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->pluck('field_name');
         foreach ($data['all_col'] as $col) {
-            $h = '"data":"' . $col->field_name ;
-            array_push($column, $h);
+            $column[] = $col;
         }
         $data['column'] = $column;
-//        dd($data['column']);
         $data['customize_columns'] = PsiViewCustimizeModel::where('type', 'employee')->get();
         return view('reports.employee_details', $data);
+    }
+
+    public function getEmployeeDetailsAjax(Request $request)
+    {
+        $employee_data = Employee::with([
+            'employeeSkill.skill'
+        ]);
+        $allColumns = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
+        $columns = [];
+        foreach ($allColumns as $key => $col) {
+            array_push($columns, $col->field_name);
+        }
+
+        $totalData = Employee::count();
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        $data = array();
+
+        if (empty($request->input('search.value'))) {
+            $employees = Employee::offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
+                ->get();
+            $totalFiltered = Employee::count();
+        } else {
+            $search = $request->input('search.value');
+            $employees = Employee::where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
+                ->get();
+            $totalFiltered = Employee::where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->count();
+        }
+
+
+        if ($employees) {
+            foreach ($employees as $r) {
+                foreach (array_values($columns) as $column) {
+                    $nestedData[$column] = $r->$column;
+                }
+                $skills = EmployeeSkill::where('psi_num', $r->psi_number)->get();
+                if($skills)
+                {
+                    $sk='';
+                    foreach($skills as $skill)
+                    {
+                        $s = SkillMaster::find($skill->skill_id);
+                        $sk .= '<span class="label label-success">'.$s->skill_name.'</span>  ';
+                    }
+                }
+                $nestedData['skills'] = $sk;
+                $data[] = $nestedData;
+            }
+//            dd($data);
+        }
+
+        $json_data = array(
+            "draw" => intval($request->input('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+
+        echo json_encode($json_data);
     }
 
     public function uploadForm()
@@ -316,62 +384,5 @@ class EmployeeController extends Controller
             }
             echo($output);
         }
-    }
-
-    public function getEmployeeDetailsAjax(Request $request)
-    {
-        $allColumns = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
-        $columns = [];
-        foreach ($allColumns as $key => $col) {
-            $h = $col->field_name;
-            array_push($columns, $h);
-        }
-
-        $totalData = Employee::count();
-        $limit = $request->input('length');
-        $start = $request->input('start');
-        $order = $columns[$request->input('order.0.column')];
-        $dir = $request->input('order.0.dir');
-
-        $data = array();
-
-        if (empty($request->input('search.value'))) {
-            $employees = Employee::offset($start)
-                ->limit($limit)
-                ->orderBy($order, $dir)
-                ->get();
-            $totalFiltered = Employee::count();
-        } else {
-            $search = $request->input('search.value');
-            $employees = Employee::where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
-                ->offset($start)
-                ->limit($limit)
-                ->orderBy($order, $dir)
-                ->get();
-            $totalFiltered = Employee::where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
-                ->count();
-        }
-
-
-        if ($employees) {
-            foreach ($employees as $r) {
-                foreach (array_values($columns) as $column) {
-                    $nestedData[$column] = $r->$column;
-                }
-                $data[] = $nestedData;
-            }
-//            dd($data);
-        }
-
-        $json_data = array(
-            "draw" => intval($request->input('draw')),
-            "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data" => $data
-        );
-
-        echo json_encode($json_data);
     }
 }

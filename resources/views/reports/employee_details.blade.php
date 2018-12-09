@@ -35,9 +35,10 @@
                                     {{--{{dd($all_col)}}--}}
                                     @foreach($all_col as $columns_index)
                                         <th class="sticky"
-                                            style="word-wrap: break-word">{{trans('employee.'.$columns_index->field_name)}}</th>
+                                            style="word-wrap: break-word">{{trans('employee.'.$columns_index)}}
+                                        </th>
                                     @endforeach
-                                    {{--<th class="sticky" style="word-wrap: break-word">@lang('employee.Skills')</th>--}}
+                                    <th class="sticky" style="word-wrap: break-word">@lang('employee.Skills')</th>
                                 </tr>
                                 </thead>
                                 {{--<tbody>--}}
@@ -112,15 +113,24 @@
     <script>
         $(document).ready(function () {
             var locale = $("#locale").val();
-            // var columns = $(".thead-dark").data('column');
 
-            var columns = '{{json_encode($column)}}';
-            columns = columns.replace(/&quot;/g,'"');
-            console.log(columns);
+            var column = '{{json_encode($column)}}';
+            column = column.replace(/&quot;/g,'"');
+            column = column.replace(/&#039;/g,'"');
+
+            var columns = JSON.parse(column);
+            var col = [];
+            let i;
+            for(i = 0; i < columns.length; i++)
+            {
+                col.push({ 'data':columns[i]});
+            }
+            col.push({'data':'skills'})
 
             if (locale == 'en') {
 
                 $('#employee_details').DataTable({
+                    "scrollX": true, "scrollCollapse": true, scrollY: '50vh',
                     "processing": true,
                     "serverSide": true,
                     "ajax": {
@@ -129,7 +139,7 @@
                         "type":"POST",
                         "data":{"_token":"<?= csrf_token() ?>"}
                     },
-                    "columns":columns,
+                    "columns":col,
                 });
                 $('.wrapper').css('width', (window.innerWidth - 80));
             }
@@ -138,7 +148,16 @@
                     "scrollX": true, "scrollCollapse": true, scrollY: '50vh',
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
-                    }
+                    },
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": {
+                        "url":"<?= route('getEmployeeDetailsAjax') ?>",
+                        "dataType":"json",
+                        "type":"POST",
+                        "data":{"_token":"<?= csrf_token() ?>"}
+                    },
+                    "columns":col,
                 });
                 $('.wrapper').css('width', (window.innerWidth - 80));
             }
