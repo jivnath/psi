@@ -124,7 +124,7 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_financial_institution', $employee->financial_institution);
             $request->session()->put('employee_branch_name', $employee->branch_name);
             $request->session()->put('employee_account_number', $employee->account_number);
-            $request->session()->put('employee_expiration_date', $employee->expiration_date);
+//            $request->session()->put('employee_expiration_date', $employee->expiration_date);
             $request->session()->put('employee_account_registration', $employee->account_registration);
 
             $primary = EmployeeLogin::where('psi_number', $request->psi_number)->first();

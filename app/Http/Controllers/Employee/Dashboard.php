@@ -94,6 +94,7 @@ class Dashboard extends Controller
 
         $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
         $total_worked = Raw::getWorkedHours($psi_number, $first_date, $last_date);
+//        dd($total_worked);
 
 //        $total_worked = Raw::dessert_calculation_method($cts_id, $user);
 //        dd($total_worked[0]->totalWorked);
@@ -160,6 +161,9 @@ class Dashboard extends Controller
 
         $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
         $totalHours = Raw::getWorkedHours($psi_number, $first_date, $last_date);
+        if($totalHours[0]->totalWorked < 0)
+            $totalHours[0]->totalWorked = 24 + $totalHours[0]->totalWorked;
+//        dd($totalHours);
         $data['name'] = $company->name;
         $data['hours'] = 28 - $totalHours[0]->totalWorked;
         echo json_encode($data);
