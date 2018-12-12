@@ -181,7 +181,6 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/profile', ['as' => 'profile', 'uses' => 'UserController@profile']);
         Route::put('/profile/{id}', ['as' => 'updateProfile', 'uses' => 'UserController@updateProfile']);
-        Route::any('viber_bot', ['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
         Route::any('send_viber', ['as' => 'viber_send', 'uses' => 'ViberBitIntegration@send_viber']);
         Route::get('/denied', ['as' => 'access.denied', 'uses' => 'DisplayController@display']);
         Route::post('/viber_it', ['as' => 'viber.send', 'uses' => 'ViberMessageController@store_message']);
@@ -235,3 +234,4 @@ Route::group(['middleware' => ['employee']], function () {
         });
     });
 });
+    Route::any('viber_bot', ['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
