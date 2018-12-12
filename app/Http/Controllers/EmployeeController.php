@@ -377,8 +377,7 @@ class EmployeeController extends Controller
                 foreach ($sheet as $index => $datum) {
                     $html = '<tr>' .
                         '<td>' . ($index + 1) . '</td><td>' . $datum->staff_no . '</td><td>' . $datum->employee_name . '</td>' .
-                        '<td>' . $datum->responsible1 . '</td><td>' . $datum->conformation_day_before . '</td><td>' . $datum->responsible2 . '</td>' .
-                        '<td>' . $datum->conformation_3_hours_ago . '</td><td>' . $datum->flag . '</td></tr>';
+                        '<td>' . $datum->conformation_day_before . '</td><td>' . $datum->conformation_3_hours_ago . '</td></tr>';
                     $output .= $html;
                 }
 

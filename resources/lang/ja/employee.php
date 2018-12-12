@@ -451,6 +451,7 @@ return [
     'thepassworddoesntmatch'=>'パスワードが一致しません',
     'allfieldsmustbefilled'=>'すべてのフィールドを入力する必要があります',
     'passwordsuccessfullychanged'=>'パスワードが正常に変更されました',
+    'residence_card_expiration' => '在留カード期限満了',
 
 
 ];

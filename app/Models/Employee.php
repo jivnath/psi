@@ -82,6 +82,26 @@ class Employee extends Model
         return array_values($columns); //rebase
     }
 
+    public static function basicInfo()
+    {
+        return ['psi_number', 'name', 'phoetic_kanji', 'sex', 'country_citizenship', 'birthdate'];
+    }
+
+    public static function contacts()
+    {
+        return ['cell_no', 'viber_install', 'email'];
+    }
+
+    public static function residence()
+    {
+        return ['address_jp', 'residence_card_no', 'residence_card_exp_date', 'status_residence',];
+    }
+
+    public static function bank()
+    {
+        return ['financial_institution', 'branch_name', 'accout_numer', 'account_holder', 'account_registration',];
+    }
+
     /**
      * Update employee cell value
      */

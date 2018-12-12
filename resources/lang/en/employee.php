@@ -346,6 +346,7 @@ return [
     "dispatch_destination" => "Dispatch Destination",
     "email" => "Email",
     "expiration_date" => "Expiration Date",
+    "residence_card_expiration" => "Residence Card Expiration",
     "financial_institution" => "Financial Institution",
     "wage" => "Wage",
     "input" => "Input",

@@ -1,9 +1,9 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use DB;
-use App\Models\Company;
+use Illuminate\Database\Eloquent\Model;
 use Session;
 
 class Raw extends Model
@@ -11,7 +11,7 @@ class Raw extends Model
 
     public static function AllCompanyData()
     {
-        $fetch_detail=[];
+        $fetch_detail = [];
         $sql = "select with_table.*
 from(SELECT
             p.id AS parent_id,
@@ -188,7 +188,7 @@ WHERE
         $sql = "select * from companies where (id=$id or master_id=$id)";
         $companies = DB::select("$sql");
         foreach ($companies as $row) {
-            if (! $row->master_id) {
+            if (!$row->master_id) {
                 $data['master'] = [
                     'name' => $row->name,
                     'contact_num' => $row->contact_num,
@@ -326,22 +326,91 @@ WHERE
         ORDER BY
             cts.date,time asc";
         $re = DB::select($sql);
-        if(count($re)>0){
-        foreach ($re as $row) {
-            $output_results[] = [
-                'id' => $row->id,
-                'companytt_id' => $row->companytt_id,
-                'master_id' => $row->master_id,
-                'total_require' => $row->total_require,
-                'date' => $row->date,
-                'time' => $row->time,
-                'schedule_session_id' => $row->schedule_session_id,
-                'dessert_info' => \App\Models\DessertSheet::select('employees.*', 'psi_dessert_entry.*', 'psi_dessert_entry.id As psi_id')->join('employees', 'psi_dessert_entry.staff_no', '=', 'employees.psi_number')
-                    ->where('cts_id', $row->id)
-                    ->get()
-            ];
-        }}
+        if (count($re) > 0) {
+            foreach ($re as $row) {
+                $output_results[] = [
+                    'id' => $row->id,
+                    'companytt_id' => $row->companytt_id,
+                    'master_id' => $row->master_id,
+                    'total_require' => $row->total_require,
+                    'date' => $row->date,
+                    'time' => $row->time,
+                    'schedule_session_id' => $row->schedule_session_id,
+                    'dessert_info' => \App\Models\DessertSheet::select('employees.*', 'psi_dessert_entry.*', 'psi_dessert_entry.id As psi_id')->join('employees', 'psi_dessert_entry.staff_no', '=', 'employees.psi_number')
+                        ->where('cts_id', $row->id)
+                        ->get()
+                ];
+            }
+        }
         return $output_results;
+    }
+
+    public static function t()
+    {
+        $primary = \Session::get('primary_company')->id;
+
+        $sql = "SELECT
+                    c.name, c.id, c.master_id
+                FROM
+                    company_time_tables ctt,
+                    companies c
+                WHERE
+                    ctt.company_id = c.id
+                    AND c.master_id = $primary";
+        $t = DB::select($sql);
+        foreach ($t as $ts) {
+            $tot[] = [
+                'name' => $ts->name,
+                'smd' => Raw::getSectionTime($ts->id)
+            ];
+        }
+//        dd($tot);
+        return $tot;
+    }
+
+    public static function getSectionTime($id)
+    {
+        $sql = "SELECT
+                    smd.start_time
+                FROM
+                    shift_master_datas smd
+                WHERE
+                    smd.company_id = $id ";
+        $t = DB::select($sql);
+        if (count($t) > 0) {
+            foreach ($t as $ts) {
+                $tot[] = [
+                    'time' => $ts->start_time,
+                    'date' => Raw::getDateForTimeAndSection($id, $ts->start_time)
+                ];
+            }
+            return $tot;
+        }
+    }
+
+    public static function getDateForTimeAndSection($id, $time)
+    {
+        $today = date('n');
+//        dd($today);
+        $sql = "SELECT
+                    cts.date, cts.time, cts.normal,
+                    (SELECT
+                        count(*)
+                     FROM
+                        psi_dessert_entry pde
+                     WHERE
+                        pde.cts_id = cts.id
+                    ) occupied
+                FROM
+                    company_time_tables ctt,
+                    company_time_schedules cts
+                WHERE
+                    cts.companyTT_id = ctt.id
+                    AND ctt.company_id = $id
+                    AND MONTH(cts.date) = $today
+                    AND cts.time = '$time' ";
+        $t = DB::select($sql);
+        return $t;
     }
 
     public static function getScheduleData($id)
@@ -424,7 +493,7 @@ WHERE
 //        $cond = '';
         $primary = \Session::get('primary_company');
 //        if(\Session::get('user_role_id')==5)
-            $cond = 'AND c.master_id = '.$primary->id;
+        $cond = 'AND c.master_id = ' . $primary->id;
         $sql = "SELECT
                 cts.id,
                 companytt_id,
@@ -491,10 +560,10 @@ WHERE
     public static function getDessertActivity()
     {
         $today = date("Ymd");
-        $cond='';
+        $cond = '';
         $user = Session::get('user_id');
-        if(\Session::get('user_role_id') != 1){
-            $cond=" WHERE u.id = $user";
+        if (\Session::get('user_role_id') != 1) {
+            $cond = " WHERE u.id = $user";
         }
 
         $sql = "SELECT
@@ -548,14 +617,14 @@ WHERE
 //        $cond = '';
         $primary = \Session::get('primary_company');
 //        if(\Session::get('user_role_id') == 5) {
-            $table = ',company_time_tables ctt,
+        $table = ',company_time_tables ctt,
                     companies c';
-            $cond = 'AND cts.companyTT_id = ctt.id 
+        $cond = 'AND cts.companyTT_id = ctt.id 
                     AND ctt.company_id = c.id
                     AND c.master_id =' . $primary->id;
 //        }
 
-            $sql = "SELECT
+        $sql = "SELECT
                     COUNT(*) total_count,
                     'to' days
                 FROM
@@ -603,6 +672,7 @@ WHERE
 //        print_r($data);die;
         return $data;
     }
+
     public static function getConfirmedEmployeesCount()
     {
 //        $table = '';
@@ -610,11 +680,11 @@ WHERE
         $primary = \Session::get('primary_company');
 //        if(\Session::get('user_role_id') == 5)
 //        {
-            $table = ',company_time_tables ctt,
+        $table = ',company_time_tables ctt,
                     companies c';
-            $cond = 'AND cts.companyTT_id = ctt.id 
+        $cond = 'AND cts.companyTT_id = ctt.id 
                     AND ctt.company_id = c.id
-                    AND c.master_id ='.$primary->id;
+                    AND c.master_id =' . $primary->id;
 //        }
         $sql = "SELECT
                     COUNT(*) total_count,
@@ -780,7 +850,7 @@ WHERE
 //        $role = \Session::get('user_role_id');
         $company = \Session::get('primary_company');
 //        if($role==5)
-            $cond = 'AND c.master_id = '.$company->id;
+        $cond = 'AND c.master_id = ' . $company->id;
         $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id $cond";
         $data = DB::select($sql);
         return $data;
@@ -827,7 +897,7 @@ WHERE
         $data = collect(DB::select(DB::raw($sql)))->first();
 
         return $calculated_arr = [
-            'total_worked' => ($data)?$data->total_sec:0 / 3600];
+            'total_worked' => ($data) ? $data->total_sec : 0 / 3600];
     }
 
     public static function get_user_info($sender_id)
@@ -842,7 +912,7 @@ WHERE
 
     public static function getEmpDetail($mobile)
     {
-        $mobile=(isset($mobile[0]) && $mobile[0]!=0)? '0'.$mobile:$mobile;
+        $mobile = (isset($mobile[0]) && $mobile[0] != 0) ? '0' . $mobile : $mobile;
         $sql = "select * from (select  e.*,replace(e.cell_no,'-','') replaced_num from employees e)em where em.replaced_num='$mobile'";
         return collect(DB::select(DB::raw($sql)))->first();
     }
@@ -948,7 +1018,7 @@ WHERE
 
     public static function getDataForSectionManager()
     {
-        $sql ="SELECT l.id, c.name section, e.name manager_name, l.psi_num FROM leaders l, companies c, employees e where e.psi_number = l.psi_num AND l.company_id = c.id";
+        $sql = "SELECT l.id, c.name section, e.name manager_name, l.psi_num FROM leaders l, companies c, employees e where e.psi_number = l.psi_num AND l.company_id = c.id";
         $data = DB::select($sql);
         return $data;
     }

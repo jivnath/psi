@@ -55,6 +55,7 @@ class DashboardController extends Controller
     }
     public function viewTotal()
     {
+        $data['total'] = Raw::t();
         $data['total_ncessary_data'] = Raw::getTotalNeccessory();
         return view('total_necessary', $data);
     }

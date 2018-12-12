@@ -43,11 +43,11 @@
                                 <th>#</th>
                                 <th>@lang('employee.psi_number')</th>
                                 <th>@lang('employee.EmployeeName')</th>
-                                <th>@lang('employee.Responsible')</th>
+                                {{--<th>@lang('employee.Responsible')</th>--}}
                                 <th>@lang('employee.Confirmationthedaybefore')</th>
-                                <th>@lang('employee.Responsible')</th>
+                                {{--<th>@lang('employee.Responsible')</th>--}}
                                 <th>@lang('employee.Confirm3hoursago')</th>
-                                <th>@lang('employee.Flag')</th>
+                                {{--<th>@lang('employee.Flag')</th>--}}
                                 </thead>
                                 <tbody id="body">
 

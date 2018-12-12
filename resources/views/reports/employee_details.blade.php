@@ -41,21 +41,6 @@
                                     <th class="sticky" style="word-wrap: break-word">@lang('employee.Skills')</th>
                                 </tr>
                                 </thead>
-                                {{--<tbody>--}}
-                                {{--@foreach($employee_data as $index => $cell)--}}
-                                {{--<tr>--}}
-                                {{--@foreach($all_col as $column)--}}
-                                {{--<td>{{ $cell->{$column->field_name} }}</td>--}}
-                                {{--@endforeach--}}
-                                {{--<td>--}}
-                                {{--@foreach($cell->employeeSkill as $skill_index)--}}
-                                {{--<span class="label label-success">{{$skill_index->skill->skill_name}}</span>--}}
-                                {{--@endforeach--}}
-                                {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--@endforeach--}}
-
-                                {{--</tbody>--}}
                             </table>
                         </div>
                     </div>

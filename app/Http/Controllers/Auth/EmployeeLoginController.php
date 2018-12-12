@@ -67,7 +67,7 @@ class EmployeeLoginController extends Controller
             $employee = Employee::where('psi_number', $request->psi_number)->first();
             if(!$employee)
             {
-            $employee = Raw::getEmpDetail($request->psi_number);
+                $employee = Raw::getEmpDetail($request->psi_number);
             }
 //             dd($employee);
 
@@ -116,7 +116,7 @@ class EmployeeLoginController extends Controller
             $request->session()->put('employee_office', $employee->office);
             $request->session()->put('employee_old_double_registration', $employee->old_double_registration);
             $request->session()->put('employee_lane_employee_no', $employee->lane_employee_no);
-            $request->session()->put('employee_phonetic', $employee->phonetic);
+//            $request->session()->put('employee_phonetic', $employee->phonetic);
             $request->session()->put('employee_viber_install', $employee->viber_install);
             $request->session()->put('employee_email', $employee->email);
             $request->session()->put('employee_school_information', $employee->school_information);
@@ -129,7 +129,7 @@ class EmployeeLoginController extends Controller
 
             $primary = EmployeeLogin::where('psi_number', $request->psi_number)->first();
             $request->session()->put('employee_primary_company', $primary->primary_company);
-            $companies = Raw::getCompaniesHavingShift();
+            $companies = Raw::getSecondLevelCompanies();
             $request->session()->put('companies', $companies);
 
             return redirect()->intended($this->redirectPath());

@@ -12,18 +12,18 @@
                         <table class="table table-striped table-condensed">
                             <thead>
                             <tr>
-                                <th> Role </th>
+                                {{--<th> Role </th>--}}
                                 <th> Section </th>
-                                <th> Team Manager </th>
+                                {{--<th> Team Manager </th>--}}
                                 <th> Action </th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($companies as $company)
                                 <tr>
-                                    <td> {{ Auth::user()->roles()->pluck('name')->implode('') }} </td>
+                                    {{--<td> {{ Auth::user()->roles()->pluck('name')->implode('') }} </td>--}}
                                     <td> {{ $company->name }} </td>
-                                    <td> No </td>
+                                    {{--<td> No </td>--}}
                                     <td>
                                         <a class="btn btn-sm btn-primary" href="{{route('selectPrimary',[$company->id])}}">Manage</a>
                                     </td>
