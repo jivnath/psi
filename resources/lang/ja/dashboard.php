@@ -19,7 +19,7 @@ return [
 'Employee' =>'従業員',
 'Company' =>'会社',
 'ActiveUsers' =>'アクティブユーザー',
-'cardExpire'=>'レジデンスカードの期限切れ',
+'cardExpire'=>'満了日の近い在留カード',
 'RecentUpdate' =>'最新のアップデート',
 'ShiftManagement' =>'シフト管理',
 'Setting'=>'設定',

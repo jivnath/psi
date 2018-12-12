@@ -53,7 +53,7 @@ class Dashboard extends Controller
             foreach ($data as $datum) {
                 if ($datum->occupied < $datum->necessary && date(strtotime($datum->date)) > $yesterday) //                dd($datum);
                 {
-                    $datum->hours = date('H', strtotime($datum->hours));
+                    $datum->hours = floor($datum->hours);
                     $dessert = DessertSheet::where([['staff_no', '=', $user], ['cts_id', '=', $datum->rel_id]])->first();
                     if ($dessert) {
                         array_push($green, $datum);
@@ -68,6 +68,7 @@ class Dashboard extends Controller
             $events['green'] = $green;
             $events['date'] = $date;
             $events['company'] = $companyName->name;
+//            dd($events['red']);
 //            dd($events['red']);
             echo json_encode($events);
         }
@@ -161,8 +162,6 @@ class Dashboard extends Controller
 
         $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
         $totalHours = Raw::getWorkedHours($psi_number, $first_date, $last_date);
-        if($totalHours[0]->totalWorked < 0)
-            $totalHours[0]->totalWorked = 24 + $totalHours[0]->totalWorked;
 //        dd($totalHours);
         $data['name'] = $company->name;
         $data['hours'] = 28 - $totalHours[0]->totalWorked;

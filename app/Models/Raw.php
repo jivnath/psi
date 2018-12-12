@@ -132,7 +132,15 @@ WHERE
     public static function getWorkedHours($user, $start, $end)
     {
         $sql = "SELECT
-                  SUM(TIMEDIFF(smd.end_time, smd.start_time))/10000 AS totalWorked
+				  SUM(CASE
+                  WHEN
+                	smd.end_time > smd.start_time
+                  THEN
+                  	TIMEDIFF(smd.end_time, smd.start_time)/10000
+                  ELSE
+                  	24-TIMEDIFF(smd.start_time, smd.end_time)/10000
+                  END) as totalWorked
+                  
               FROM
                   psi_dessert_entry pde,
                   company_time_schedules cts,
@@ -808,7 +816,14 @@ WHERE
             ) end_time,
             (
             	SELECT
-                TIMEDIFF(smd.end_time, smd.start_time)
+            	case 
+            	  when 
+            	    smd.end_time > smd.start_time
+            	  then 
+                    TIMEDIFF(smd.end_time, smd.start_time)/10000
+                  else 
+                    24 - TIMEDIFF(smd.start_time, smd.end_time)/10000
+                end 
                 FROM
                 	shift_master_datas smd
                 WHERE

@@ -125,8 +125,6 @@ class DessertController extends Controller
                         $last_date = str_replace('-', '', date('Y-m-d', strtotime($first_date . ' + 6 days')));
                         $total_work = Raw::getWorkedHours($psi, $first_date, $last_date);
 //                        dd($total_work);
-                        if($total_work[0]->totalWorked < 0)
-                            $total_work[0]->totalWorked = 24 + $total_work[0]->totalWorked;
                         $selectedShift = Raw::getShiftTime($dessert_id);
 
                         if($selectedShift != '')
