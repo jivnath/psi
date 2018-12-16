@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'viber_bot'
+        'viber_bot',
+        'viber_send_msg'
     ];
 }

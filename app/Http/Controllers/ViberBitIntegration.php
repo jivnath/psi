@@ -138,7 +138,7 @@ class ViberBitIntegration extends Controller
         $data['type'] = "text";
         $data['text'] = $request->message;
 
-        $this->postToViberServer($data);
+        return $this->postToViberServer($data);
     }
 
     function keyboardTemplate()
@@ -182,6 +182,30 @@ class ViberBitIntegration extends Controller
         $story_obj->ask = $data['text_received'];
         $story_obj->ans = $data['ans'];
         $story_obj->save();
+    }
+
+    public function send_to_viber(Request $request){
+        $sender_type = $request->sender_type;
+        $sender_id = $request->sender_identity;
+        $sender_message = $request->sender_message;
+        $viber_details = PsiViberStory::where('ans', $sender_id)->first();
+
+        if ($viber_details) {
+            $sender_id = $viber_details->sender_id;
+
+            if (! empty($sender_id)) {
+                $request->request->add([
+                    'sender_id' => $sender_id,
+                    'message' => $sender_message
+                ]);
+                $response = $this->send_viber($request);
+                return response()->json(json_decode($response, true));
+            }
+        } else
+            return response()->json([
+                'status' => 500,
+                'msg' => 'error sending msg'
+            ]);
     }
 
     private function get_latest_story($sender_id)
