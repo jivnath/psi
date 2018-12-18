@@ -7,6 +7,11 @@
         .fc-scroller {
             overflow-x: visible !Important;
         }
+
+        .fc-title{
+            font-size: 1.2em;
+            font-weight:bold;
+        }
     </style>
     @php $primary = \Session::get('employee_primary_company'); @endphp
 
