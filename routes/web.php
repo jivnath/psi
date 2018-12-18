@@ -234,5 +234,6 @@ Route::group(['middleware' => ['employee']], function () {
         });
     });
 });
-    Route::any('viber_bot', ['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
-    Route::get('sendAlert', ['as' => 'sendAlert', 'uses' => 'ViberAlertController@sendAlert']);
+Route::get('sendAlert', ['as' => 'sendAlert', 'uses' => 'ViberAlertController@sendAlert']);//nivesh le add gareko
+Route::any('viber_bot', ['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+Route::any('viber_send_msg', ['as' => 'viber_send_msg', 'uses' => 'ViberBitIntegration@send_to_viber']);
