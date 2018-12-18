@@ -1062,4 +1062,31 @@ WHERE
         return $sheet;
     }
 
+    public static function getEmployeeForAlert()
+    {
+        $today = date("Y-m-d");
+//        $today = $today->format('Y-m-d H:i:s');
+        $tomorrow = date('Y-m-d',strtotime("+1 days"));
+//        dd($tomorrow);
+//        $tomorrow = $tomorrow->format('Y-m-d H:i:s');
+
+        $sql = "SELECT
+                    pde.staff_no,
+                    cts.date,
+                    cts.time,
+                    c.id,
+                    c.name
+                FROM 
+                    psi_dessert_entry pde,
+                    company_time_schedules cts,
+                    company_time_tables ctt,
+                    companies c
+                WHERE
+                    cts.date BETWEEN '$today' AND '$tomorrow'
+                    AND pde.cts_id = cts.id
+                    AND cts.companyTT_id = ctt.id
+                    AND ctt.company_id = c.id";
+        $employees = DB::select($sql);
+        return $employees;
+    }
 }

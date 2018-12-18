@@ -145,7 +145,7 @@
                                         <ul class="navbar-nav mr-auto">
                                             @if($users || $employees || $companies)
                                             <li class="nav-item dropdown"><a id="master_data"
-                                                                             class="nav-link dropdown-toggle"
+                                                                             class="nav-link dropdown-toggle" href="#"
                                                                              id="navbarDropdown"
                                                                              role="button" data-toggle="dropdown"
                                                                              aria-haspopup="true"

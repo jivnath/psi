@@ -266,7 +266,7 @@ class PagesController extends Controller
             $output = '';
             if (count($data) > 0) {
                 foreach ($data as $datum) {
-                    $html = '<tr><td>' . $datum->name . '</td><td>' . substr($datum->start_time, 0, -3) . ' - ' . substr($datum->end_time, 0, -3) . '</td><td>' . $datum->total_require . '</td><td>' . $datum->total_used . '</td></tr>';
+                    $html = '<tr><td>' . $datum->name . '</td><td>' . substr($datum->start_time, 0, -3) . ' - ' . substr($datum->end_time, 0, -3) . '</td><td>' . $datum->total_used . '</td><td>' . $datum->total_require . '</td></tr>';
                     $output .= $html;
                 }
 //                dd(1);

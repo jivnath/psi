@@ -235,3 +235,4 @@ Route::group(['middleware' => ['employee']], function () {
     });
 });
     Route::any('viber_bot', ['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
+    Route::get('sendAlert', ['as' => 'sendAlert', 'uses' => 'ViberAlertController@sendAlert']);

@@ -10,7 +10,7 @@
             $role_id = \Session::get('user_role_id');
         @endphp
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-12 col-xs-12">
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua"><i class="ion ion-checkmark"></i></span>
 
@@ -24,7 +24,7 @@
             </div>
             <!-- /.col -->
             <!-- /.col -->
-            <div class="col-md-9 col-sm-6 col-xs-12">
+            <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="info-box">
                     <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
 

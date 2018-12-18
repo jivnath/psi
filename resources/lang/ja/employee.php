@@ -230,6 +230,7 @@ return [
     'ExpireDate'=>'満了日',
     'TotalNecessary'=>'必要な合計',
     'Total'=>'合計',
+    'Nece' => '必要',
     'ViewAll'=>'すべて見る',
     'Necessary'=>'必要',
     'RecentShelfSheetActivity'=>'最近のセルフシフトのアクティビティ',

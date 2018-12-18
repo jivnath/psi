@@ -479,9 +479,12 @@
                     @endforeach
                 </div> <hr><hr>             
                 @endforeach
+            {{--{{dd($inbox)}}--}}
+            @if(count($inbox)>0)
                 <div class="box-footer text-center">
                     <a href="{{route('employee.message')}}" class="uppercase">@lang('employee.ViewAll')</a>
                 </div>
+            @endif
 
                {{--/////
                 
