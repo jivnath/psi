@@ -1062,8 +1062,10 @@ WHERE
         return $sheet;
     }
 
-    public static function getEmployeeForAlert()
+    public static function getEmployeeOneDayBefore()
     {
+        date_default_timezone_set('Asia/Tokyo');
+        $now = date('H:i:s');
         $today = date("Y-m-d");
 //        $today = $today->format('Y-m-d H:i:s');
         $tomorrow = date('Y-m-d',strtotime("+1 days"));
@@ -1082,7 +1084,44 @@ WHERE
                     company_time_tables ctt,
                     companies c
                 WHERE
-                    cts.date BETWEEN '$today' AND '$tomorrow'
+                    cts.date = '$tomorrow'
+                    AND pde.cts_id = cts.id
+                    AND cts.companyTT_id = ctt.id
+                    AND ctt.company_id = c.id";
+        $employees = DB::select($sql);
+        return $employees;
+    }
+
+    public static function getEmployeeResidenceExpiry()
+    {
+//        $today = date("Y-m-d");
+        $nextMonth = date('Y-m-d', strtotime('+1 month'));
+        $sql = "SELECT * FROM employees em WHERE em.residence_card_exp_date = '$nextMonth'";
+        $employee = DB::select($sql);
+        return $employee;
+    }
+
+    public static function getEmployeeThreeHoursAgo()
+    {
+        date_default_timezone_set('Asia/Tokyo');
+        $today = date('Y-m-d');
+        $now = date('H:i:s');
+        $threeHrsLater = date('H:i:s', strtotime('+3 hours'));
+
+        $sql = "SELECT
+                    pde.staff_no,
+                    cts.date,
+                    cts.time,
+                    c.id,
+                    c.name
+                FROM 
+                    psi_dessert_entry pde,
+                    company_time_schedules cts,
+                    company_time_tables ctt,
+                    companies c
+                WHERE
+                    cts.date = '$today'
+                    AND cts.time BETWEEN '$now' AND '$threeHrsLater'
                     AND pde.cts_id = cts.id
                     AND cts.companyTT_id = ctt.id
                     AND ctt.company_id = c.id";
