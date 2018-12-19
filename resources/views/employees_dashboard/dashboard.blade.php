@@ -23,20 +23,20 @@
                     <ul class="list-inline" style="margin-top:10%">
                         <li class="list-inline-item">
                             <div class="input-color">
-                                <div class="color-box" style="background-color:#f5b1ae;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red"><b>@lang('employee.Available').</b></label>
+                                <div class="color-box" style="background-color:#f5b1ae;width:12px;height:12px;display:inline-block;"></div>
+                                <label for="red"><b style="font-size: 1.2em">@lang('employee.Available').</b></label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
-                                <div class="color-box" style="background-color: #74c673;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red"><b>@lang('employee.Booked').</b></label>
+                                <div class="color-box" style="background-color: #74c673;width:12px;height:12px;display:inline-block;"></div>
+                                <label for="red"><b style="font-size: 1.2em">@lang('employee.Booked').</b></label>
                             </div>
                         </li>
                         <li class="list-inline-item"  style="margin-left:2%">
                             <div class="input-color">
-                                <div class="color-box" style="background-color: #9faee9;width:10px;height:10px;display:inline-block;"></div>
-                                <label for="red"><b>@lang('employee.Worked').</b></label>
+                                <div class="color-box" style="background-color: #9faee9;width:12px;height:12px;display:inline-block;"></div>
+                                <label for="red"><b style="font-size: 1.2em">@lang('employee.Worked').</b></label>
                             </div>
                         </li>
                     </ul>
