@@ -237,5 +237,6 @@ Route::group(['middleware' => ['employee']], function () {
 Route::get('sendAlertOneDayBefore', ['as' => 'sendAlertOneDayBefore', 'uses' => 'ViberAlertController@sendAlertOneDayBefore']);//nivesh le add gareko
 Route::get('sendAlertThreeHoursAgo', ['as' => 'sendAlertThreeHoursAgo', 'uses' => 'ViberAlertController@sendAlertThreeHoursAgo']);//nivesh le add gareko
 Route::get('sendAlertResidenceExpiry', ['as' => 'sendAlertResidenceExpiry', 'uses' => 'ViberAlertController@sendAlertResidenceExpiry']);//nivesh le add gareko
+Route::get('cron_process', ['as' => 'cron_process', 'uses' => 'ViberAlertController@cron_process']);
 Route::any('viber_bot', ['as' => 'viber_bot', 'uses' => 'ViberBitIntegration@handleViberRequest']);
 Route::any('viber_send_msg', ['as' => 'viber_send_msg', 'uses' => 'ViberBitIntegration@send_to_viber']);

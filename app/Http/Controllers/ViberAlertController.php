@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,21 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\AlertSetting;
 use App\Models\Raw;
 use Session;
+use Illuminate\Support\Facades\Log;
+use App\Models\Cron;
 
 class ViberAlertController extends Controller
 {
+
     public function setting()
     {
         $expiry = AlertSetting::where('schedule_title', 'card expiry')->first();
         $one = AlertSetting::where('schedule_title', 'before one day')->first();
         $three = AlertSetting::where('schedule_title', 'before three hours')->first();
         $arrival = AlertSetting::where('schedule_title', 'arrival confirmation')->first();
-        return view('viber.alert_setting')->withExpiry($expiry)->withOne($one)->withThree($three)->withArrival($arrival);
+        return view('viber.alert_setting')->withExpiry($expiry)
+            ->withOne($one)
+            ->withThree($three)
+            ->withArrival($arrival);
     }
 
     public function storeSetting(Request $request)
     {
-//        dd($request->all());
+        // dd($request->all());
         $expiryInt = $request->expiryInt;
         $expiryType = $request->expiryType;
         $beforeOneInt = $request->beforeOneInt;
@@ -33,7 +38,7 @@ class ViberAlertController extends Controller
         $arrivalInt = $request->arrivalInt;
         $arrivalType = $request->arrivalType;
         $arrivalCount = $request->arrivalCount;
-//            dd($expiryInt);
+        // dd($expiryInt);
 
         $expiry = AlertSetting::firstOrNew([
             'schedule_title' => 'card expiry'
@@ -45,7 +50,6 @@ class ViberAlertController extends Controller
         $expiry->interval_endpoint = null;
         $expiry->medium = 'viber';
         $expiry->save();
-
 
         $beforeOne = AlertSetting::firstOrNew([
             'schedule_title' => 'before one day'
@@ -80,7 +84,6 @@ class ViberAlertController extends Controller
 
         Session::flash('success', trans('employee.Settingsuccessfullysaved!'));
         return redirect()->route('viberAlert');
-
     }
 
     public function sendAlertResidenceExpiry()
@@ -103,8 +106,8 @@ class ViberAlertController extends Controller
                 CURLOPT_CUSTOMREQUEST => "POST",
                 CURLOPT_POSTFIELDS => $sender,
                 CURLOPT_HTTPHEADER => array(
-                    "Cache-Control: no-cache",
-                ),
+                    "Cache-Control: no-cache"
+                )
             ));
 
             $response = curl_exec($curl);
@@ -113,12 +116,12 @@ class ViberAlertController extends Controller
             curl_close($curl);
 
             if ($err) {
-                echo "cURL Error #:" . $err;
+                return "cURL Error #:" . $err;
             } else {
-                echo $response;
+                return $response;
             }
         }
-//        dd($employees);
+        // dd($employees);
     }
 
     public function sendAlertOneDayBefore()
@@ -141,8 +144,8 @@ class ViberAlertController extends Controller
                 CURLOPT_CUSTOMREQUEST => "POST",
                 CURLOPT_POSTFIELDS => $sender,
                 CURLOPT_HTTPHEADER => array(
-                    "Cache-Control: no-cache",
-                ),
+                    "Cache-Control: no-cache"
+                )
             ));
 
             $response = curl_exec($curl);
@@ -151,9 +154,9 @@ class ViberAlertController extends Controller
             curl_close($curl);
 
             if ($err) {
-                echo "cURL Error #:" . $err;
+                return "cURL Error #:" . $err;
             } else {
-                echo $response;
+                return $response;
             }
         }
     }
@@ -178,8 +181,8 @@ class ViberAlertController extends Controller
                 CURLOPT_CUSTOMREQUEST => "POST",
                 CURLOPT_POSTFIELDS => $sender,
                 CURLOPT_HTTPHEADER => array(
-                    "Cache-Control: no-cache",
-                ),
+                    "Cache-Control: no-cache"
+                )
             ));
 
             $response = curl_exec($curl);
@@ -188,9 +191,34 @@ class ViberAlertController extends Controller
             curl_close($curl);
 
             if ($err) {
-                echo "cURL Error #:" . $err;
+                return "cURL Error #:" . $err;
             } else {
-                echo $response;
+                return $response;
+            }
+        }
+    }
+
+    public function cron_process()
+    {
+        Log::info('Showing user profile for user');
+
+        $cron_obj = new Cron();
+        $all_data = AlertSetting::whereRaw("app_url!=''")->get();
+        foreach ($all_data as $row) {
+
+            $url = $row->app_url;
+
+            $start_date=$row->start_date;
+            $end_date=$row->end_date;
+
+            $period = $row->cron_run_period;
+            $exits = $cron_obj::where('setting_id', $row->id)->whereRaw("date(created_at) between date('$start_date') AND date('$end_date')");
+            if ($exits->count() <= $row->interval_endpoint) {
+                $cron_obj = new Cron();
+                $cron_obj->setting_id = $row->id;
+                $cron_obj->save();
+                $response = $this->$url();
+                Log::info('settings id:' . $row->id . ' with ' . $response);
             }
         }
     }
