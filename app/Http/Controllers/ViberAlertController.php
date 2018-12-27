@@ -202,24 +202,42 @@ class ViberAlertController extends Controller
     {
         Log::info('Showing user profile for user');
 
+        $current_date = date('Y-m-d');
         $cron_obj = new Cron();
         $all_data = AlertSetting::whereRaw("app_url!=''")->get();
         foreach ($all_data as $row) {
 
             $url = $row->app_url;
 
-            $start_date=$row->start_date;
-            $end_date=$row->end_date;
-
+            $start_date = $row->start_date;
+            $end_date = $row->end_date;
             $period = $row->cron_run_period;
+
+            $alert_update_obj = AlertSetting::find($row->id);
+            $alert_update_obj->start_date = $current_date;
+            $alert_update_obj->end_date = date('Y-m-d', strtotime($current_date . " + {$period} days"));
+            $store_date_period = $alert_update_obj->save();
+            if ($current_date === $end_date) {
+                $this->modifyALertDate($row->id, $period, $current_date);
+            }
+
             $exits = $cron_obj::where('setting_id', $row->id)->whereRaw("date(created_at) between date('$start_date') AND date('$end_date')");
             if ($exits->count() <= $row->interval_endpoint) {
-                $cron_obj = new Cron();
+
                 $cron_obj->setting_id = $row->id;
                 $cron_obj->save();
                 $response = $this->$url();
                 Log::info('settings id:' . $row->id . ' with ' . $response);
             }
         }
+    }
+
+    private function modifyALertDate($id, $period, $current_date)
+    {
+        $alert_update_obj = AlertSetting::find($id);
+        $alert_update_obj->start_date = $current_date;
+        $alert_update_obj->end_date = date('Y-m-d', strtotime($current_date . " + {$period} days"));
+        $store_date_period = $alert_update_obj->save();
+        Log::info('new date has been change ' . $store_date_period);
     }
 }
