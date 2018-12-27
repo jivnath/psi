@@ -140,7 +140,7 @@ WHERE
                   ELSE
                   	24-TIMEDIFF(smd.start_time, smd.end_time)/10000
                   END) as totalWorked
-                  
+
               FROM
                   psi_dessert_entry pde,
                   company_time_schedules cts,
@@ -163,18 +163,18 @@ WHERE
         $sql = "SELECT
                 (
                     CASE
-                        WHEN smd.end_time > smd.start_time 
-                        THEN TIMEDIFF(smd.end_time, smd.start_time)/10000 
-                        ELSE 
+                        WHEN smd.end_time > smd.start_time
+                        THEN TIMEDIFF(smd.end_time, smd.start_time)/10000
+                        ELSE
                         (24 + TIMEDIFF(smd.end_time, smd.start_time)/10000)
-                    END)AS shiftTime 
-                FROM 
-                    company_time_schedules cts, 
-                    company_time_tables ctt, 
-                    shift_master_datas smd 
-                WHERE cts.id = $cts_id 
-                    AND cts.companyTT_id = ctt.id 
-                    AND smd.company_id = ctt.company_id 
+                    END)AS shiftTime
+                FROM
+                    company_time_schedules cts,
+                    company_time_tables ctt,
+                    shift_master_datas smd
+                WHERE cts.id = $cts_id
+                    AND cts.companyTT_id = ctt.id
+                    AND smd.company_id = ctt.company_id
                     AND cts.time = smd.start_time";
         $data = DB::select($sql);
 
@@ -584,9 +584,9 @@ WHERE
                     WHERE
                         pde.responsible1 = u.id
                         AND pde.conformation_day_before IS null
-                        
+
                     ) day_before,
-                    (SELECT 
+                    (SELECT
                         count(*)
                     FROM
                         psi_dessert_entry pde
@@ -627,7 +627,7 @@ WHERE
 //        if(\Session::get('user_role_id') == 5) {
         $table = ',company_time_tables ctt,
                     companies c';
-        $cond = 'AND cts.companyTT_id = ctt.id 
+        $cond = 'AND cts.companyTT_id = ctt.id
                     AND ctt.company_id = c.id
                     AND c.master_id =' . $primary->id;
 //        }
@@ -690,7 +690,7 @@ WHERE
 //        {
         $table = ',company_time_tables ctt,
                     companies c';
-        $cond = 'AND cts.companyTT_id = ctt.id 
+        $cond = 'AND cts.companyTT_id = ctt.id
                     AND ctt.company_id = c.id
                     AND c.master_id =' . $primary->id;
 //        }
@@ -816,14 +816,14 @@ WHERE
             ) end_time,
             (
             	SELECT
-            	case 
-            	  when 
+            	case
+            	  when
             	    smd.end_time > smd.start_time
-            	  then 
+            	  then
                     TIMEDIFF(smd.end_time, smd.start_time)/10000
-                  else 
+                  else
                     24 - TIMEDIFF(smd.start_time, smd.end_time)/10000
-                end 
+                end
                 FROM
                 	shift_master_datas smd
                 WHERE
@@ -1078,7 +1078,7 @@ WHERE
                     cts.time,
                     c.id,
                     c.name
-                FROM 
+                FROM
                     psi_dessert_entry pde,
                     company_time_schedules cts,
                     company_time_tables ctt,
@@ -1114,7 +1114,7 @@ WHERE
                     cts.time,
                     c.id,
                     c.name
-                FROM 
+                FROM
                     psi_dessert_entry pde,
                     company_time_schedules cts,
                     company_time_tables ctt,
@@ -1127,5 +1127,9 @@ WHERE
                     AND ctt.company_id = c.id";
         $employees = DB::select($sql);
         return $employees;
+    }
+    public static function last_run_date($setting_id){
+        $sql = "SELECT id,min(created_at) min_date FROM cron where setting_id={$setting_id}";
+        return DB::select($sql);
     }
 }
