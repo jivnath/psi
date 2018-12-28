@@ -146,6 +146,7 @@ class ViberAlertController extends Controller
             $sender['sender_type'] = 'psi_number';
             $sender['sender_identity'] = $this->getPsi($employee->staff_no);
             $sender['sender_message'] = 'alert message';
+
             $curl = curl_init();
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://hrms.jp/viber_send_msg",
@@ -219,6 +220,14 @@ class ViberAlertController extends Controller
         $cron_obj = new Cron();
         $all_data = AlertSetting::whereRaw("app_url!=''")->get();
         foreach ($all_data as $row) {
+            $last_run_statement = Raw::last_run_date($row->id);
+            $last_run = $last_run_statement[0]->min_date;
+            $convert_to_sec = strtotime($last_run);
+            $interval_time = $row->interval_value * 60;
+            $next_run = $convert_to_sec + $interval_time;
+
+            $next_run_time = date("Y-m-d H:i", $next_run);
+            $current_run_time = date("Y-m-d H:i");
 
             $url = $row->app_url;
 
@@ -237,10 +246,12 @@ class ViberAlertController extends Controller
             $exits = $cron_obj::where('setting_id', $row->id)->whereRaw("date(created_at) between date('$start_date') AND date('$end_date')");
             if ($exits->count() <= $row->interval_endpoint) {
 
-                $cron_obj->setting_id = $row->id;
-                $cron_obj->save();
-                $response = $this->$url();
-                Log::info('settings id:' . $row->id . ' with ' . $response);
+                if ($next_run_time == $current_run_time) {
+                    $cron_obj->setting_id = $row->id;
+                    $cron_obj->save();
+                    $response = $this->$url();
+                    Log::info('settings id:' . $row->id . ' with ' . $response);
+                }
             }
         }
     }
