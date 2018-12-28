@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
+use App\Models\EmployeeLogin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AlertSetting;
@@ -86,13 +88,25 @@ class ViberAlertController extends Controller
         return redirect()->route('viberAlert');
     }
 
+    public static function getPsi($psi)
+    {
+        $emp = EmployeeLogin::where('psi_number', $psi)->first();
+        if(!$emp)
+        {
+            $emp = Employee::where('psi_number', $psi)->first();
+            return str_replace('-', '', $emp->cell_no);
+        }
+        return $emp->psi_number;
+
+    }
+
     public function sendAlertResidenceExpiry()
     {
         $employees = Raw::getEmployeeResidenceExpiry();
 
         foreach ($employees as $employee) {
             $sender['sender_type'] = 'psi_number';
-            $sender['sender_identity'] = $employee->psi_number;
+            $sender['sender_identity'] = $this->getPsi($employee->psi_number);
             $sender['sender_message'] = 'alert message';
             $curl = curl_init();
 
@@ -127,13 +141,12 @@ class ViberAlertController extends Controller
     public function sendAlertOneDayBefore()
     {
         $employees = Raw::getEmployeeOneDayBefore();
-
+//        dd($this->getPsi(70069));
         foreach ($employees as $employee) {
             $sender['sender_type'] = 'psi_number';
-            $sender['sender_identity'] = $employee->staff_no;
+            $sender['sender_identity'] = $this->getPsi($employee->staff_no);
             $sender['sender_message'] = 'alert message';
             $curl = curl_init();
-
             curl_setopt_array($curl, array(
                 CURLOPT_URL => "https://hrms.jp/viber_send_msg",
                 CURLOPT_RETURNTRANSFER => true,
@@ -167,7 +180,7 @@ class ViberAlertController extends Controller
 
         foreach ($employees as $employee) {
             $sender['sender_type'] = 'psi_number';
-            $sender['sender_identity'] = $employee->staff_no;
+            $sender['sender_identity'] = $this->getPsi($employee->staff_no);
             $sender['sender_message'] = 'alert message';
             $curl = curl_init();
 
