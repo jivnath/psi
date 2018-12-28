@@ -620,9 +620,9 @@
                     async: true,
                     success: function (data) {
                         $(this).parent().removeClass('empty');
-                        var empty = $(".empty.cts" + company_schedule_id + "cts > select");
+                        let empty = $(".empty.cts" + company_schedule_id + "cts > select");
                         empty.val(responsible);
-                        empty.removeClass('empty');
+                        empty.parent().removeClass("empty");
                     }
                 });
             }
