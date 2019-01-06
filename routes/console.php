@@ -26,3 +26,8 @@ Artisan::command('sync:uri', function () {
     $data = PermissionHelper::syncRoutes();
     $this->table($headers, $data);
 })->describe('Sync URI');
+Artisan::command('cron:run', function () {
+    $request = Request::create('/cron_process', 'GET');
+    $response = Route::dispatch($request);
+    return $response;
+})->describe('Sync URI');
