@@ -47230,7 +47230,7 @@ function Employee() {
         var data = {};
         data['company_id'] = $('#companyId').val();
         data['psi_num'] = $(event.target).parent('tr').find('td:first').text();
-        data['column'] = $(event.target).attr('data-column');
+        data['column'] = $(event.target).attr('class').split(' ').pop('');
         data['value'] = $(event.target).text();
         data['schedule_company_id']=$(event.target).data('company_id');
 		data['company_tt_id']=$(event.target).data('company_tt_id');

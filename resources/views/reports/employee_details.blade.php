@@ -68,6 +68,7 @@
                         @foreach($customize_columns->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
+                                    @if($field->field_name!='psi_number')
                                     <div class="col-md-4 mb-3">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input"
@@ -77,6 +78,7 @@
                                                    for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
                                         </div>
                                     </div>
+                                    @endif
                                 @endforeach
                             </div>
                         @endforeach

@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
                     Route::post('/updateEmployeeStatus', ['as' => 'updateEmployeeStatus', 'uses' => 'EmployeeController@updateEmployeeStatus']);
                     Route::post('/updateEmployeeViberInstall', ['as' => 'updateEmployeeViberInstall', 'uses' => 'EmployeeController@updateEmployeeViberInstall']);
                     Route::post('/getEmployeeDetailsAjax', ['as' => 'getEmployeeDetailsAjax', 'uses' => 'EmployeeController@getEmployeeDetailsAjax']);
+                    Route::post('/getEmployeeAjax', ['as' => 'getEmployeeAjax', 'uses' => 'EmployeeController@getEmployeeAjax']);
 
                     Route::get('/', ['as' => 'manageSkills', 'uses' => 'SkillMasterController@manage']);
                     Route::post('/add', ['as' => 'skills.master.add', 'uses' => 'SkillMasterController@addSkills']);

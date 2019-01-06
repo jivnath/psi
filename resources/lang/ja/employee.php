@@ -422,7 +422,7 @@ return [
 
     'SELFSHIFT'=>'セルフシフト',
     'Employeedetails'=>'従業員の情報',
-    'Totalnecessary'=>'トータルネセッサリ',
+    'Totalnecessary'=>'必要人数',
     'Sectionhierarchy'=>'セクション',
     'psi_number'=>'従業員番号',
     //'PSISNumberr'=>'従業員番号',

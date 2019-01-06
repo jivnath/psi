@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    @php
-        $companies = \Session::get('companies');
-    @endphp
+    {{--@php--}}
+        {{--$companies = \Session::get('companies');--}}
+    {{--@endphp--}}
     <div class="container" style="margin-top: 50px">
         <div class="row">
             <div class="col-md-8 offset-2">

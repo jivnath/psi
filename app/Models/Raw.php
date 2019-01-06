@@ -854,7 +854,7 @@ WHERE
 
     public static function getCompaniesHavingShift()
     {
-        $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id";
+        $sql = "SELECT DISTINCT c.name, c.id from companies c , company_time_tables ctt where c.id = ctt.company_id order by c.master_id asc";
         $data = DB::select($sql);
         return $data;
     }

@@ -36,6 +36,7 @@ class Dashboard extends Controller
     {
         if ($request->ajax()) {
             $user = \Session::get('username');
+            $psi_number = \Session::get('employee_psi_number');
             $company = $request->get('company');
             $data = Raw::totalNecessary($company);
 //            dd($data);
@@ -44,7 +45,7 @@ class Dashboard extends Controller
             $green = [];
             $date = [];
             $yesterday = date(strtotime("-1 days"));
-            $oldDate = Raw::workedDate($user, $company);
+            $oldDate = Raw::workedDate($psi_number, $company);
             foreach ($oldDate as $old) {
                 if (date(strtotime($old->date)) <= $yesterday)
                     array_push($date, $old);
@@ -54,7 +55,7 @@ class Dashboard extends Controller
                 if ($datum->occupied < $datum->necessary && date(strtotime($datum->date)) > $yesterday) //                dd($datum);
                 {
                     $datum->hours = floor($datum->hours);
-                    $dessert = DessertSheet::where([['staff_no', '=', $user], ['cts_id', '=', $datum->rel_id]])->first();
+                    $dessert = DessertSheet::where([['staff_no', '=', $psi_number], ['cts_id', '=', $datum->rel_id]])->first();
                     if ($dessert) {
                         array_push($green, $datum);
                     } else {
@@ -68,7 +69,7 @@ class Dashboard extends Controller
             $events['green'] = $green;
             $events['date'] = $date;
             $events['company'] = $companyName->name;
-//            dd($events['red']);
+//            dd($events);
 //            dd($events['red']);
             echo json_encode($events);
         }
@@ -120,22 +121,23 @@ class Dashboard extends Controller
         else
         {
             $employee = DessertSheet::firstOrNew([
-                'staff_no' => $user,
+                'staff_no' => $psi_number,
                 'cts_id' => $cts_id
             ]);
             if ($employee->exists)
             {
-                $data['staff_no'] = $user;
+                $data['staff_no'] = $psi_number;
                 $data['cts_id'] = $cts_id;
             }
             else
             {
-                $employee->staff_no = $user;
+//                dd(1);
+                $employee->staff_no = $psi_number;
                 $employee->cts_id = $cts_id;
 
                 $employee->save();
 
-                $data['staff_no'] = $user;
+                $data['staff_no'] = $psi_number;
                 $data['cts_id'] = $cts_id;
 //                echo json_encode($employee);
             }
@@ -199,21 +201,24 @@ class Dashboard extends Controller
 
     public function getWorkedShift(Request $request)
     {
-        if ($request->ajax())
+        if ($request->ajax()) {
             $user = \Session::get('username');
-        $companyId = $request->get('company');
-        $date = str_replace('-', '', $request->get('date'));
+            $psi_number = \Session::get('employee_psi_number');
+            $companyId = $request->get('company');
+            $date = str_replace('-', '', $request->get('date'));
 
 
-        $data = Raw::getWorkedShift($user, $date, $companyId);
+            $data = Raw::getWorkedShift($psi_number, $date, $companyId);
 
 //            dd($date);
-        echo json_encode($data);
+            echo json_encode($data);
+        }
     }
 
     public function primary()
     {
-        return view('employees_dashboard.choose_primary');
+        $companies = Raw::getCompaniesHavingShift();
+        return view('employees_dashboard.choose_primary')->withCompanies($companies);
     }
 
     public function  selectPrimary(Request $request , $id)

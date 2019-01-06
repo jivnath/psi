@@ -78,13 +78,13 @@ class EmployeeController extends Controller
         } else {
             $search = $request->input('search.value');
             $employees = Employee::where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('psi_number', 'like', "%{$search}%")
                 ->offset($start)
                 ->limit($limit)
                 ->orderBy($order, $dir)
                 ->get();
             $totalFiltered = Employee::where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('psi_number', 'like', "%{$search}%")
                 ->count();
         }
 
@@ -120,6 +120,127 @@ class EmployeeController extends Controller
         echo json_encode($json_data);
     }
 
+    public function getEmployeeAjax(Request $request)
+    {
+        $employee_data = Employee::with([
+            'employeeSkill.skill'
+        ]);
+        $allColumns = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
+        $columns = [];
+        foreach ($allColumns as $key => $col) {
+            array_push($columns, $col->field_name);
+        }
+
+        $totalData = Employee::count();
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+
+        $data = array();
+
+        if (empty($request->input('search.value'))) {
+            $employees = Employee::offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
+                ->get();
+            $totalFiltered = Employee::count();
+        } else {
+            $search = $request->input('search.value');
+            $employees = Employee::where('name', 'like', "%{$search}%")
+                ->orWhere('psi_number', 'like', "%{$search}%")
+                ->offset($start)
+                ->limit($limit)
+                ->orderBy($order, $dir)
+                ->get();
+            $totalFiltered = Employee::where('name', 'like', "%{$search}%")
+                ->orWhere('psi_number', 'like', "%{$search}%")
+                ->count();
+        }
+
+        $none = trans('employee.Available');
+        dd($none);
+        if ($employees) {
+            foreach ($employees as $r) {
+                foreach (array_values($columns) as $column) {
+                    if($column=='sex')
+                    {
+                        $nestedData['sex'] = '<select name="sex" class="sex_class" data-psi_data='.$r->psi_number.'>
+                                                <option value="男性"'.(str_replace(" ", "", $r->sex)=="男性"?"selected":"").'>男性</option>
+                                                <option value="女性"'.(str_replace(" ", "", $r->sex)=="女性"?"selected":"").'>女性</option>
+                                              </select>';
+                    }
+                    elseif ($column=='status_residence')
+                    {
+                        $nestedData['status_residence'] = '<select name="status_residence" class="status_residence" data-psi_data='.$r->psi_number.'>
+                                                           <option>-----</option>
+                                                           <option value="就労"'.(($r->status_residence=="就労")?"selected":"").'>就労</option>
+                                                           <option value="家族滞在"'.(($r->status_residence=="家族滞在")?"selected":"").'>家族滞在</option>
+                                                           <option value="留学"'.(($r->status_residence=="留学")?"selected":"").'>留学</option>
+                                                           </select>';
+                    }
+                    elseif($column == 'viber_install')
+                    {
+                        $nestedData['viber_install'] = '<select name="viber_install" class="viber_install" data-psi_data='.$r->psi_number.'>
+                                                        <option value="1"'.(($r->viber_install==1)?"selected":"").'>Yes</option>
+                                                        <option value="0"'.(($r->viber_install==0||$r->viber_install=="")?"selected":"").'>No</option>
+                                                        </select>';
+                    }
+                    elseif ($column=='hourly_wage')
+                    {
+                        $nestedData['hourly_wage']='<select name="hourly_wage" class="hourly_wage" data-psi_data='.$r->psi_number.'>
+                                                    <option>-----</option>
+                                                    <option value="通常の雇用主"'.(($r->hourly_wage=="通常の雇用主")?"selected":"").'>通常の雇用主</option>
+                                                    <option value="セミ雇用者"'.(($r->hourly_wage=="セミ雇用者")?"selected":"").'>セミ雇用者</option>
+                                                    <option value="アルバイト"'.(($r->hourly_wage=="アルバイト")?"selected":"").'>アルバイト</option>
+                                                    </select>';
+                    }
+                    elseif ($column == 'operating_status')
+                    {
+                        $nestedData['operating_status']='<select name="operating_status" class="operating_status" data-psi_data='.$r->psi_number.'>
+                                                         <option>-----</option>
+                                                         <option value="働くこと"'.(($r->operating_status=="働くこと")?"selected":"").'>働くこと</option>
+                                                         <option value="低頻度の仕事"'.(($r->operating_status=="低頻度の仕事")?"selected":"").'>低頻度の仕事</option>
+                                                         <option value="やめて"'.(($r->operating_status=="やめて")?"selected":"").'>やめて</option>
+                                                         </select>';
+                    }
+                    elseif ($column=='status')
+                    {
+                        $nestedData['status']='<select name="status" class="status" data-psi_data='.$r->psi_number.'>
+                                                <option value="1"'.(($r->status==1)?"selected":"").'>Available</option>
+                                                <option value="0"'.(($r->status==0)?"selected":"").'>Not Available</option>
+                                                </select>';
+                    }
+                    else
+                        $nestedData[$column] = $r->$column;
+                }
+//                $skills = EmployeeSkill::where('psi_num', $r->psi_number)->get();
+//                if($skills)
+//                {
+//                    $sk='';
+//                    foreach($skills as $skill)
+//                    {
+//                        $s = SkillMaster::find($skill->skill_id);
+                        $sk = '<span class="btn btn-primary employee_skills" id='.$r->psi_number.'>Skills</span>';
+//                    }
+//                }
+                $nestedData['skills'] = $sk;
+                $data[] = $nestedData;
+            }
+//            dd($data);
+        }
+
+        $json_data = array(
+            "draw" => intval($request->input('draw')),
+            "recordsTotal" => intval($totalData),
+            "recordsFiltered" => intval($totalFiltered),
+            "data" => $data
+        );
+//        dd($json_data);
+
+        echo json_encode($json_data);
+    }
+
     public function uploadForm()
     {
 //        $companies = Company::pluck('name', 'id');
@@ -150,8 +271,13 @@ class EmployeeController extends Controller
         $sex = Gender::all();
         $all_col = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
         $customize_columns = PsiViewCustimizeModel::where('type', 'employee')->get();
+        foreach ($all_col as $col) {
+            $column[] = $col->field_name;
+        }
+        $data = $column;
 
-        return view('employees.show', compact('cells', 'columns', 'customize_columns', 'all_col', 'option'))->withSex($sex);
+
+        return view('employees.show', compact('cells', 'columns', 'data', 'customize_columns', 'all_col', 'option'))->withSex($sex);
     }
     public function parseDataAtt(Request $request){
         $data=$request->all();
