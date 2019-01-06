@@ -158,8 +158,6 @@ class EmployeeController extends Controller
                 ->count();
         }
 
-        $none = trans('employee.Available');
-        dd($none);
         if ($employees) {
             foreach ($employees as $r) {
                 foreach (array_values($columns) as $column) {
