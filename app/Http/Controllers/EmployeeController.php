@@ -92,7 +92,18 @@ class EmployeeController extends Controller
         if ($employees) {
             foreach ($employees as $r) {
                 foreach (array_values($columns) as $column) {
-                    $nestedData[$column] = $r->$column;
+                    if($column=='viber_install')
+                    {
+                        $nestedData['viber_install'] = ($r->viber_install==1)?__("yes"):__("no");
+                    }
+                    elseif ($column=='status')
+                    {
+                        $nestedData['status'] = ($r->status==1)?__("available"):__("notavailable");
+                    }
+                    else
+                    {
+                        $nestedData[$column] = $r->$column;
+                    }
                 }
                 $skills = EmployeeSkill::where('psi_num', $r->psi_number)->get();
                 if($skills)
@@ -157,7 +168,8 @@ class EmployeeController extends Controller
                 ->orWhere('psi_number', 'like', "%{$search}%")
                 ->count();
         }
-
+        $none = __("none");
+//        dd($none);
         if ($employees) {
             foreach ($employees as $r) {
                 foreach (array_values($columns) as $column) {
@@ -171,7 +183,7 @@ class EmployeeController extends Controller
                     elseif ($column=='status_residence')
                     {
                         $nestedData['status_residence'] = '<select name="status_residence" class="status_residence" data-psi_data='.$r->psi_number.'>
-                                                           <option>-----</option>
+                                                           <option>'.__("none").'</option>
                                                            <option value="就労"'.(($r->status_residence=="就労")?"selected":"").'>就労</option>
                                                            <option value="家族滞在"'.(($r->status_residence=="家族滞在")?"selected":"").'>家族滞在</option>
                                                            <option value="留学"'.(($r->status_residence=="留学")?"selected":"").'>留学</option>
@@ -180,14 +192,14 @@ class EmployeeController extends Controller
                     elseif($column == 'viber_install')
                     {
                         $nestedData['viber_install'] = '<select name="viber_install" class="viber_install" data-psi_data='.$r->psi_number.'>
-                                                        <option value="1"'.(($r->viber_install==1)?"selected":"").'>Yes</option>
-                                                        <option value="0"'.(($r->viber_install==0||$r->viber_install=="")?"selected":"").'>No</option>
+                                                        <option value="1"'.(($r->viber_install==1)?"selected":"").'>'.__("yes").'</option>
+                                                        <option value="0"'.(($r->viber_install==0||$r->viber_install=="")?"selected":"").'>'.__("no").'</option>
                                                         </select>';
                     }
                     elseif ($column=='hourly_wage')
                     {
                         $nestedData['hourly_wage']='<select name="hourly_wage" class="hourly_wage" data-psi_data='.$r->psi_number.'>
-                                                    <option>-----</option>
+                                                    <option>'.__("none").'</option>
                                                     <option value="通常の雇用主"'.(($r->hourly_wage=="通常の雇用主")?"selected":"").'>通常の雇用主</option>
                                                     <option value="セミ雇用者"'.(($r->hourly_wage=="セミ雇用者")?"selected":"").'>セミ雇用者</option>
                                                     <option value="アルバイト"'.(($r->hourly_wage=="アルバイト")?"selected":"").'>アルバイト</option>
@@ -196,7 +208,7 @@ class EmployeeController extends Controller
                     elseif ($column == 'operating_status')
                     {
                         $nestedData['operating_status']='<select name="operating_status" class="operating_status" data-psi_data='.$r->psi_number.'>
-                                                         <option>-----</option>
+                                                         <option>'.__("none").'</option>
                                                          <option value="働くこと"'.(($r->operating_status=="働くこと")?"selected":"").'>働くこと</option>
                                                          <option value="低頻度の仕事"'.(($r->operating_status=="低頻度の仕事")?"selected":"").'>低頻度の仕事</option>
                                                          <option value="やめて"'.(($r->operating_status=="やめて")?"selected":"").'>やめて</option>
@@ -205,8 +217,8 @@ class EmployeeController extends Controller
                     elseif ($column=='status')
                     {
                         $nestedData['status']='<select name="status" class="status" data-psi_data='.$r->psi_number.'>
-                                                <option value="1"'.(($r->status==1)?"selected":"").'>Available</option>
-                                                <option value="0"'.(($r->status==0)?"selected":"").'>Not Available</option>
+                                                <option value="1"'.(($r->status==1)?"selected":"").'>'.__("available").'</option>
+                                                <option value="0"'.(($r->status==0)?"selected":"").'>'.__("notavailable").'</option>
                                                 </select>';
                     }
                     else
@@ -219,7 +231,7 @@ class EmployeeController extends Controller
 //                    foreach($skills as $skill)
 //                    {
 //                        $s = SkillMaster::find($skill->skill_id);
-                        $sk = '<span class="btn btn-primary employee_skills" id='.$r->psi_number.'>Skills</span>';
+                        $sk = '<span class="btn btn-primary employee_skills" id='.$r->psi_number.'>'.__("skills").'</span>';
 //                    }
 //                }
                 $nestedData['skills'] = $sk;
