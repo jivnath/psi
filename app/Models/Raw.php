@@ -364,7 +364,9 @@ WHERE
                     companies c
                 WHERE
                     ctt.company_id = c.id
-                    AND c.master_id = $primary";
+                    AND c.master_id = $primary
+                GROUP BY
+                    c.id";
         $t = DB::select($sql);
         foreach ($t as $ts) {
             $tot[] = [
