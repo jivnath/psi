@@ -39,12 +39,17 @@
                                         <tr>
                                             <td>{{substr($t['time'], 0, -3)}}</td>
                                             @foreach($t['date'] as $d)
-                                                @if($d->normal <= $d->occupied)
-                                                    <td class="table-primary">{{$d->occupied}}</td>
-                                                    <td class="table-primary">{{$d->normal}}</td>
+                                                @if ($d->normal!='' || $d->normal!=0)
+                                                    @if($d->normal <= $d->occupied)
+                                                        <td class="table-primary">{{$d->occupied}}</td>
+                                                        <td class="table-primary">{{$d->normal}}</td>
+                                                    @else
+                                                        <td class="table-danger">{{$d->occupied}}</td>
+                                                        <td class="table-danger">{{$d->normal}}</td>
+                                                    @endif
                                                 @else
-                                                    <td class="table-danger">{{$d->occupied}}</td>
-                                                    <td class="table-danger">{{$d->normal}}</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
                                                 @endif
                                             @endforeach
                                         </tr>
@@ -64,7 +69,7 @@
         <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
         <script>
             $(document).ready(function () {
-                $('.tableDiv').css('width', (window.innerWidth - 50));
+                $('.tableDiv').css('width', (window.innerWidth - 75));
             });
         </script>
     @endpush
