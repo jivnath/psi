@@ -151,6 +151,7 @@
                     right: 'next, today'
                 },
                 locale: locale,
+                droppable: false,
                 buttonText: {
                     today: 'today',
                     month: 'month',
@@ -302,6 +303,7 @@
                             title: trans,
                             start: data['date'][i].date,
                             allDay: true,
+                            editable:false,
                             old: 1,
                             companyId: data['date'][i].company_id,
                             backgroundColor: '#9faee9', //blue
@@ -315,6 +317,7 @@
                             id: data['red'][i].rel_id,
                             start: data['red'][i].date,
                             hours: data['red'][i].hours,
+                            editable:false,
                             allDay: true,
                             selected: 'no',
                             company: data['red'][i].company_name,
@@ -328,6 +331,7 @@
                             id: data['green'][i].rel_id,
                             start: data['green'][i].date,
                             hours: data['green'][i].hours,
+                            editable:false,
                             allDay: true,
                             selected: 'yes',
                             company: data['green'][i].company_name,
@@ -396,5 +400,4 @@
             $('#ModalAdd').hide();
         });
     </script>
-
 @endpush

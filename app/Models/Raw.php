@@ -353,54 +353,64 @@ WHERE
         return $output_results;
     }
 
-    public static function t()
+    public static function t($year, $month)
     {
         $primary = \Session::get('primary_company')->id;
 
         $sql = "SELECT
                     c.name, c.id, c.master_id
                 FROM
+                    company_time_schedules cts,
                     company_time_tables ctt,
                     companies c
                 WHERE
-                    ctt.company_id = c.id
+                    cts.companyTT_id = ctt.id
+                    AND ctt.company_id = c.id
                     AND c.master_id = $primary
+                    AND MONTH(cts.date) = $month
+                    AND YEAR (cts.date) = $year
                 GROUP BY
                     c.id";
         $t = DB::select($sql);
+        $tot=[];
         foreach ($t as $ts) {
             $tot[] = [
                 'name' => $ts->name,
-                'smd' => Raw::getSectionTime($ts->id)
+                'smd' => Raw::getSectionTime($ts->id, $year, $month)
             ];
         }
 //        dd($tot);
         return $tot;
     }
 
-    public static function getSectionTime($id)
+    public static function getSectionTime($id, $year, $today)
     {
         $sql = "SELECT
-                    smd.start_time
+                    DISTINCT cts.time
                 FROM
-                    shift_master_datas smd
+                    company_time_schedules cts,
+                    company_time_tables ctt
                 WHERE
-                    smd.company_id = $id ";
+                    ctt.company_id = $id
+                    AND cts.companyTT_id = ctt.id
+                    AND MONTH(cts.date) = $today
+                    AND YEAR (cts.date) = $year";
         $t = DB::select($sql);
         if (count($t) > 0) {
             foreach ($t as $ts) {
                 $tot[] = [
-                    'time' => $ts->start_time,
-                    'date' => Raw::getDateForTimeAndSection($id, $ts->start_time)
+                    'time' => $ts->time,
+                    'date' => Raw::getDateForTimeAndSection($id, $ts->time, $year, $today)
                 ];
             }
             return $tot;
         }
     }
 
-    public static function getDateForTimeAndSection($id, $time)
+    public static function getDateForTimeAndSection($id, $time, $year, $today)
     {
-        $today = date('n');
+//        $today = date('n');
+//        $year = date('Y');
 //        dd($today);
         $sql = "SELECT
                     cts.date, cts.time, cts.normal,
@@ -418,6 +428,7 @@ WHERE
                     cts.companyTT_id = ctt.id
                     AND ctt.company_id = $id
                     AND MONTH(cts.date) = $today
+                    AND YEAR (cts.date) = $year
                     AND cts.time = '$time' ";
         $t = DB::select($sql);
         return $t;
@@ -1130,8 +1141,19 @@ WHERE
         $employees = DB::select($sql);
         return $employees;
     }
+
     public static function last_run_date($setting_id){
         $sql = "SELECT id,min(created_at) min_date FROM cron where setting_id={$setting_id}";
+        return DB::select($sql);
+    }
+
+    public static function getYear($id){
+        $sql="SELECT DISTINCT YEAR(cts.date) as year FROM company_time_schedules cts, company_time_tables ctt WHERE cts.companyTT_id = ctt.id AND ctt.company_id IN (SELECT c.id FROM companies c WHERE c.master_id=$id)";
+        return DB::select($sql);
+    }
+
+    public static function getMonth($id, $year){
+        $sql="SELECT DISTINCT MONTH(cts.date) as month FROM company_time_schedules cts, company_time_tables ctt WHERE cts.companyTT_id = ctt.id AND YEAR(cts.date)=$year AND ctt.company_id IN (SELECT c.id FROM companies c WHERE c.master_id=$id)";
         return DB::select($sql);
     }
 }

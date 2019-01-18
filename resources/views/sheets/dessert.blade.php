@@ -60,7 +60,6 @@
                    	if(status=='success'){
                     	$('#dessert_response').html(data);
                     	window.location.href="<?= url()->full(); ?>"+'#dessert_response';
-
                    	}
 
                }

@@ -81,10 +81,6 @@ class ExcelReader extends FormRequest
 
                     $value = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
                     $excel_actual_cell = $worksheet->getCellByColumnAndRow($col, 1)->getValue();
-//                    if($col==14)
-//                        $excel_actual_cell = 'name';
-
-//                    dd($excel_actual_cell);
 
                     $this->setColumnData($columns, $value, $row - 1, $col - 1, $highestColumnIndex,$excel_actual_cell);
 //                    dd($this);
@@ -114,7 +110,7 @@ class ExcelReader extends FormRequest
         {
             if(str_replace(' ', '',$data['psi_number']) != '') {
                 $psi = explode('.', $data['psi_number']);
-//            dd($psi[0]);
+//            dd($psi);
 //            dd($data['psi_number']);
                 $employee = Employee::firstOrNew([
                     'psi_number' => $psi[0]

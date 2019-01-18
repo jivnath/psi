@@ -64,7 +64,6 @@ class DessertController extends Controller
                 $dessert = Raw::getDessertInfo($id, $date);
                 $role = \Session::get('user_role_id');
                 $userlist = User::where('role_id', $role)->get();
-//                dd($userlist);
 
                 return view('sheets.dessert_view', compact('dessert','userlist'));
             }

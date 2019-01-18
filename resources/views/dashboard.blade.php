@@ -137,7 +137,7 @@
                         </table>
                     </div>
                     <div class="box-footer text-center" style="padding-top:2px;padding-bottom: 2px">
-                        <a href="{{route('total_necessary')}}" class="uppercase">@lang('employee.ViewAll')</a>
+                        <a href="{{route('report_total_necessary')}}" class="uppercase">@lang('employee.ViewAll')</a>
                     </div>
                 </div>
             </div>

@@ -1,16 +1,17 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\ShiftMasterData;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Company;
-use App\Models\CompanyTimeTable;
 use App\Models\CompanyTimeSchedule;
+use App\Models\CompanyTimeTable;
 use App\Models\Raw;
-use DB;
+use App\Models\ShiftMasterData;
 use Date;
+use DB;
+use Illuminate\Http\Request;
 use Session;
+use DateTime;
 
 class PagesController extends Controller
 {
@@ -33,41 +34,36 @@ class PagesController extends Controller
             $shifts = DB::table('shift_master_datas')->where('company_id', $id)->get();
             $sh = [];
             $sec = [];
-            if($sections)
-            {
-                foreach ($sections as $section)
-                {
+            if ($sections) {
+                foreach ($sections as $section) {
                     $output .=
-                        '<input type="checkbox" id="'.$section->name.'" style ="margin-left:5px; margin-top:10px;" class="sections" name="section[]" value="' . $section->id . '">' . $section->name;
-                    array_push($sec, $section->name );
+                        '<input type="checkbox" id="' . $section->name . '" style ="margin-left:5px; margin-top:10px;" class="sections" name="section[]" value="' . $section->id . '">' . $section->name;
+                    array_push($sec, $section->name);
                 }
             }
-            if($shifts)
-            {
-                foreach($shifts as $shift)
-                {
+            if ($shifts) {
+                foreach ($shifts as $shift) {
                     array_push($sh, $shift);
                 }
             }
         }
 
-        $data=[
-            'output' =>$output,
-            'section'=>$sec,
-            'shift'=>$sh
+        $data = [
+            'output' => $output,
+            'section' => $sec,
+            'shift' => $sh
         ];
         echo json_encode($data);
     }
 
     public function getShift(Request $request)
     {
-        if($request->ajax())
-        {
+        if ($request->ajax()) {
             $id = $request->get('id');
 
             $shift = ShiftMasterData::where('company_id', $id)->get();
             $shifts = [];
-            foreach($shift as $s){
+            foreach ($shift as $s) {
                 array_push($shifts, $s);
             }
 
@@ -81,17 +77,14 @@ class PagesController extends Controller
         $startDate = $request->start_date;
         $endDate = $request->end_date;
         $today = date('Y-m-d');
-        if($startDate < $today || $endDate < $today || $endDate < $startDate )
-        {
+        if ($startDate < $today || $endDate < $today || $endDate < $startDate) {
             Session::flash('error', trans('employee.Pleaseinputvaliddate!'));
             return redirect()->route('generator');
-        }
-        else{
+        } else {
             $section = $request['section'];
             $shift_schedule_id = uniqid();
             if (sizeof($section) > 0) {
-                foreach ($section as $company)
-                {
+                foreach ($section as $company) {
                     $shifts = ShiftMasterData::where('company_id', $company)->get();
 
                     $timeTable = new CompanyTimeTable();
@@ -118,8 +111,7 @@ class PagesController extends Controller
                         }
                     }
                 }
-            } else
-            {
+            } else {
                 $company = $request->company;
                 $shifts = ShiftMasterData::where('company_id', $company)->get();
 
@@ -157,34 +149,41 @@ class PagesController extends Controller
 
     public function ajaxAddShifts(Request $request)
     {
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $start_shifts = $request->get('start_shifts');
             $end_shifts = $request->get('end_shifts');
             $id = $request->get('id');
 
             $shifts = array_combine($start_shifts, $end_shifts);
-            if (count($shifts) > 0)
-            {
-                $startShift=[];
-                $endShift=[];
+            if (count($shifts) > 0) {
+                $startShift = [];
+                $endShift = [];
                 foreach ($shifts as $key => $value) {
                     array_push($startShift, $key);
                     array_push($endShift, $value);
 
-                    $newshift = new ShiftMasterData();
+                    $newshift = ShiftMasterData::firstOrNew([
+                        'company_id' => $id,
+                        'start_time' => $key
+                    ]);
 
-                    $newshift->company_id = $id;
-                    $newshift->start_time = $key;
-                    $newshift->end_time = $value;
+                    if ($newshift->exists) {
+                        //do nothing
+                    } else {
+                        $newshift->company_id = $id;
+                        $newshift->start_time = $key;
+                        $newshift->end_time = $value;
 
-                    $newshift->save();
+                        $newshift->save();
+                    }
                 }
 
                 $shift = ShiftMasterData::where('company_id', $id)->get();
                 $shi = [];
-                foreach($shift as $s){
+                foreach ($shift as $s) {
                     array_push($shi, $s);
                 }
+//                dd($shi);
 
                 echo json_encode($shi);
             }
@@ -215,7 +214,7 @@ class PagesController extends Controller
 
     public function show($id)
     {
-        $data=[];
+        $data = [];
 
         $companies = Raw::getCompaniesForShiftShow($id);
         $types = collect([
@@ -251,9 +250,16 @@ class PagesController extends Controller
 
     public function reportTotalNecessary()
     {
+        $company = \Session::get('primary_company');
+//        dd($company);
+        $year = Raw::getYear($company->id);
+//        dd($year);
         $sections = Raw::getSecondLevelCompanies();
-//        $data = Raw::getTotalNecesaryReport();
-        return view('reports.total_necessary', compact('sections'));
+
+        $today = date('n');
+        $barsa = date('Y');
+        $total = Raw::t($barsa, $today);
+        return view('reports.total_necessary', compact('year', 'total'));
     }
 
     public function getTotalNecessaryReportData(Request $request)
@@ -270,9 +276,7 @@ class PagesController extends Controller
                     $output .= $html;
                 }
 //                dd(1);
-            }
-            else
-            {
+            } else {
 //              $output = '<tr><td colspan="4">No data available.</td></tr>';
                 $lang = trans("employee.NoDataAvailable");
 //                dd($lang);
@@ -283,8 +287,40 @@ class PagesController extends Controller
         } else
             $output = '';
 
-      echo ($output);
+        echo($output);
     }
 
+    public function getMonth(Request $request)
+    {
+        if ($request->ajax()) {
+            $company = \Session::get('primary_company');
+            $year = $request->get('year');
+            $month = Raw::getMonth($company->id, $year);
+            $data = '';
+            foreach ($month as $m) {
+//                dd($m->month);
+                $dateObj = DateTime::createFromFormat('!m', $m->month);
+//                dd($dateObj);
+                $monthName = $dateObj->format('F');
+//                dd($monthName);
+
+                $html = "<option value='" . $m->month . "'>" . $monthName . "</option>";
+                $data .= $html;
+            }
+//            dd($data);
+            echo json_encode($data);
+        }
+    }
+
+    public function generateTotalNecessaryReport(Request $request)
+    {
+        if($request->ajax()){
+            $year = $request->get('year');
+            $month = $request->get('month');
+            $total = Raw::t($year, $month);
+//            dd($total);
+            return view('reports.total_view', compact('total'));
+        }
+    }
 }
 //

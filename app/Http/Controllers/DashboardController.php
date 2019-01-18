@@ -55,7 +55,9 @@ class DashboardController extends Controller
     }
     public function viewTotal()
     {
-        $data['total'] = Raw::t();
+        $today = date('n');
+        $year = date('Y');
+        $data['total'] = Raw::t($year, $today);
         $data['total_ncessary_data'] = Raw::getTotalNeccessory();
         return view('total_necessary', $data);
     }
@@ -93,5 +95,5 @@ class DashboardController extends Controller
         }
         return $desser_report;
     }
-
 }
+

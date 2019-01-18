@@ -7,7 +7,8 @@
                     <div class="box-header with-border" style="padding-top:2px;padding-bottom: 2px;">
                         <h3 class="box-title">@lang('employee.SectionShift')</h3>
                     </div>
-                    <div class='box-body container_class' style="padding-top:2px;padding-bottom: 2px;overflow-x: scroll">
+                    <div class='box-body container_class'
+                         style="padding-top:2px;padding-bottom: 2px;overflow-x: scroll">
                         <table class="table table-striped" id='example'>
                             <thead>
                             <th>@lang('employee.Time')</th>
@@ -27,7 +28,7 @@
                                     @foreach($types as $type)
                                         <tr>
                                             @if($last !==$time->time)
-                                                <td rowspan={{ count($companies)*2}} style="vertical-align:middle;text-align:center;font-weight:bolder;"> {{ $time->time }} </td>
+                                                <td rowspan={{ count($companies)*2}} style="vertical-align:middle;text-align:center;font-weight:bolder;"> {{ substr($time->time,0,-3) }} </td>
                                             @endif
                                             @php
                                                 $last=$time->time;
@@ -42,27 +43,34 @@
                                                         @lang('employee.Help')
                                                     @endif
                                                 </td>
-                                                    @foreach($dates as $date)
+                                                @foreach($dates as $date)
                                                     @php
                                                         $ctt = App\Http\Controllers\PagesController::getCtt($time->time, $company->companyTT_id, $date->date);
+                                                        $today = date('Y-m-d');
                                                     @endphp
                                                     @if($ctt)
-                                                        @if ($ctt->$type !=0 && $ctt->$type!=null)
-                                                            <td class="contenteditable"
-                                                                contenteditable="true"
-                                                                data-company_id="{{$company->id}}"
-                                                                data-company_tt_id="{{$company->companyTT_id}}"
-                                                                data-schedule_date="{{ $date->date}}"
-                                                                data-job_type="{{$type}}" data-app_source="shift_update"
-                                                                data-ctt_id="{{$ctt->id}}"> {{ $ctt->$type }} </td>
+                                                        @if($date->date < $today)
+                                                            <td>{{$ctt->$type}}</td>
                                                         @else
-                                                            <td class="contenteditable"
-                                                                contenteditable="true"
-                                                                data-company_id="{{$company->id}}"
-                                                                data-company_tt_id="{{$company->companyTT_id}}"
-                                                                data-schedule_date="{{ $date->date}}"
-                                                                data-job_type="{{$type}}" data-app_source="shift_update"
-                                                                data-ctt_id="{{$ctt->id}}"> {{ '' }} </td>
+                                                            @if ($ctt->$type !=0 && $ctt->$type!=null)
+                                                                <td class="contenteditable"
+                                                                    contenteditable="true"
+                                                                    data-company_id="{{$company->id}}"
+                                                                    data-company_tt_id="{{$company->companyTT_id}}"
+                                                                    data-schedule_date="{{ $date->date}}"
+                                                                    data-job_type="{{$type}}"
+                                                                    data-app_source="shift_update"
+                                                                    data-ctt_id="{{$ctt->id}}"> {{ $ctt->$type }} </td>
+                                                            @else
+                                                                <td class="contenteditable"
+                                                                    contenteditable="true"
+                                                                    data-company_id="{{$company->id}}"
+                                                                    data-company_tt_id="{{$company->companyTT_id}}"
+                                                                    data-schedule_date="{{ $date->date}}"
+                                                                    data-job_type="{{$type}}"
+                                                                    data-app_source="shift_update"
+                                                                    data-ctt_id="{{$ctt->id}}"> {{ '' }} </td>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 @endforeach
@@ -85,7 +93,7 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            $('.container_class').css('width',window.innerWidth-30);
+            $('.container_class').css('width', window.innerWidth - 30);
             var tds = document.querySelectorAll("td.contenteditable");
             tds.forEach(function (el, index) {
                 employee.inlineEditable(el, function (response) {

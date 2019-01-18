@@ -452,6 +452,20 @@ return [
     'thepassworddoesntmatch'=>'The password does not match',
     'allfieldsmustbefilled'=>'All field must be filled',
     'passwordsuccessfullychanged'=>'Password successfully changed',
-    
+    'year'=>'Year',
+    'month'=>'Month',
+    'january'=>'January',
+    'february'=>'February',
+    'march'=>'March',
+    'april'=>'April',
+    'june'=>'June',
+    'july'=>'July',
+    'august'=>'August',
+    'september'=>'September',
+    'october'=>'October',
+    'may'=>'May',
+    'november'=>'November',
+    'december'=>'December',
+
 
 ];

@@ -144,6 +144,8 @@ Route::group(['middleware' => ['auth']], function () {
                 });
                 Route::prefix('total_necessary')->group(function () {
                     Route::get('/', ['as' => 'report_total_necessary', 'uses' => 'PagesController@reportTotalNecessary']);
+                    Route::get('/getMonth', ['as' => 'getMonth', 'uses' => 'PagesController@getMonth']);
+                    Route::get('/generateTotalNecessaryReport', ['as' => 'generateTotalNecessaryReport', 'uses' => 'PagesController@generateTotalNecessaryReport']);
                     Route::get('/getTotalNecessaryReportData', ['as' => 'getTotalNecessaryReportData', 'uses' => 'PagesController@getTotalNecessaryReportData']);
                 });
                 Route::prefix('attendance_management')->group(function () {

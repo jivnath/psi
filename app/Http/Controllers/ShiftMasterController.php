@@ -61,16 +61,22 @@ class ShiftMasterController extends Controller
         {
             $this->validate($request, $this->rules());
 
-            $newshift = new ShiftMasterData();
+            $newshift = ShiftMasterData::firstOrNew([
+                'company_id' => $request->company_name,
+                'start_time' => $key
+            ]);
 
-            $newshift->company_id = $request->company_name;
-            $newshift->start_time = $key;
-            $newshift->end_time = $value;
+            if($newshift->exists) {
+                //do nothing
+            }
+            else{
+                $newshift->company_id = $request->company_name;
+                $newshift->start_time = $key;
+                $newshift->end_time = $value;
 
-            $newshift->save();
+                $newshift->save();
+            }
         }
-
-
 		return redirect()->route('shift.add');
 	}
 

@@ -13,7 +13,7 @@
 						<thead>
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">@lang('employee.SubSection')</th>
+								<th scope="col">@lang('employee.Section')</th>
 								<th scope="col">@lang('employee.From')</th>
 								<th scope="col">@lang('employee.To')</th>
 								<th scope="col">@lang('employee.CreatedAt')</th>
