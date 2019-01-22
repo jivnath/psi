@@ -31,35 +31,106 @@ class EmployeeController extends Controller
 
     public function FetchEmployeeDetails()
     {
-        $employee_data = Employee::with([
-            'employeeSkill.skill'
-        ]);
-        $data['employee_data'] = $employee_data->get();
+//        $employee_data = Employee::with([
+//            'employeeSkill.skill'
+//        ]);
+//        $data['employee_data'] = $employee_data->get();
 //        dd($data['employee_data']);
-        $data['columns'] = $employee_data->first()->columns([
-            'id',
-            'created_at',
-            'updated_at'
-        ]);
+//        $data['columns'] = $employee_data->first()->columns([
+//            'id',
+//            'created_at',
+//            'updated_at'
+//        ]);
+        $basicInfo = [];
+        $contacts = [];
+        $residence = [];
+        $work = [];
+        $school = [];
+        $bank = [];
+        $other = [];
+        $a = $b = $c = $d =  $e = $f = $g = 0;
         $data['all_col'] = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->pluck('field_name');
         foreach ($data['all_col'] as $col) {
-            $column[] = $col;
+            if(in_array($col, Employee::basicInfo())) {
+                $basicInfo[] = $col;
+                $a++;
+            }
+            else if(in_array($col, Employee::contacts())) {
+                $contacts[] = $col;
+                $b++;
+            }
+            else if(in_array($col, Employee::residence())) {
+                $residence[] = $col;
+                $c++;
+            }
+            else if(in_array($col, Employee::work())) {
+                $work[] = $col;
+                $d++;
+            }
+            else if(in_array($col, Employee::school())) {
+                $school[] = $col;
+                $e++;
+            }
+            else if(in_array($col, Employee::bank())) {
+                $bank[] = $col;
+                $f++;
+            }
+            else {
+                $other[] = $col;
+                $g++;
+            }
         }
+        $column = array_merge($basicInfo, $contacts, $residence, $work, $school, $bank, $other);
         $data['column'] = $column;
+        $data['a'] = $a;
+        $data['b'] = $b;
+        $data['c'] = $c;
+        $data['d'] = $d;
+        $data['e'] = $e;
+        $data['f'] = $f;
+        $data['g'] = $g;
         $data['customize_columns'] = PsiViewCustimizeModel::where('type', 'employee')->get();
         return view('reports.employee_details', $data);
     }
 
     public function getEmployeeDetailsAjax(Request $request)
     {
-        $employee_data = Employee::with([
-            'employeeSkill.skill'
-        ]);
-        $allColumns = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->get();
-        $columns = [];
-        foreach ($allColumns as $key => $col) {
-            array_push($columns, $col->field_name);
+//        $employee_data = Employee::with([
+//            'employeeSkill.skill'
+//        ]);
+        $basicInfo = [];
+        $contacts = [];
+        $residence = [];
+        $work = [];
+        $school = [];
+        $bank = [];
+        $other = [];
+        $data['all_col'] = PsiViewCustimizeModel::where(['status' => 'y', 'type' => 'employee'])->pluck('field_name');
+        foreach ($data['all_col'] as $col) {
+            if(in_array($col, Employee::basicInfo())) {
+                $basicInfo[] = $col;
+            }
+            else if(in_array($col, Employee::contacts())) {
+                $contacts[] = $col;
+            }
+            else if(in_array($col, Employee::residence())) {
+                $residence[] = $col;
+            }
+            else if(in_array($col, Employee::work())) {
+                $work[] = $col;
+            }
+            else if(in_array($col, Employee::school())) {
+                $school[] = $col;
+            }
+            else if(in_array($col, Employee::bank())) {
+                $bank[] = $col;
+            }
+            else {
+                $other[] = $col;
+            }
         }
+        $column = array_merge($basicInfo, $contacts, $residence, $work, $school, $bank, $other);
+        $columns = $column;
 
         $totalData = Employee::count();
         $limit = $request->input('length');
@@ -168,8 +239,6 @@ class EmployeeController extends Controller
                 ->orWhere('psi_number', 'like', "%{$search}%")
                 ->count();
         }
-        $none = __("none");
-//        dd($none);
         if ($employees) {
             foreach ($employees as $r) {
                 foreach (array_values($columns) as $column) {
@@ -486,7 +555,7 @@ class EmployeeController extends Controller
         return [
             'psi_num' => 'bail|required',
             'column' => 'bail|required',
-            'value' => 'bail|required'
+//            'value' => 'bail|required'
         ];
     }
 

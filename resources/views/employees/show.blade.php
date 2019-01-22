@@ -146,7 +146,7 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
                                                        id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'
-                                    ~~ '.$field->status}}' checked disabled>
+                                    ~~ '.$field->status}}' checked onclick="return false;">
                                                 <label class="custom-control-label"
                                                        for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
                                             </div>
@@ -326,19 +326,40 @@
 
             }
             col.push({'data': 'skills'});
-            var dataTable = $('#example2').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "pagingType": "full_numbers",
-                "serverSide": true,
-                "ajax": {
-                    "url": "<?= route('getEmployeeAjax') ?>",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": {"_token": "<?= csrf_token() ?>"}
-                },
-                "columns": col,
-            });
+            var locale = $("#locale").val();
+            if(locale == 'en') {
+                var dataTable = $('#example2').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "pagingType": "full_numbers",
+                    "serverSide": true,
+                    "ajax": {
+                        "url": "<?= route('getEmployeeAjax') ?>",
+                        "dataType": "json",
+                        "type": "POST",
+                        "data": {"_token": "<?= csrf_token() ?>"}
+                    },
+                    "columns": col,
+                });
+            }
+            else {
+                var dataTable = $('#example2').DataTable({
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
+                    },
+                    "processing": true,
+                    "serverSide": true,
+                    "pagingType": "full_numbers",
+                    "serverSide": true,
+                    "ajax": {
+                        "url": "<?= route('getEmployeeAjax') ?>",
+                        "dataType": "json",
+                        "type": "POST",
+                        "data": {"_token": "<?= csrf_token() ?>"}
+                    },
+                    "columns": col,
+                });
+            }
             $("#example_filter").css("display", "none");  // hiding global search box
 // 		$('.search-input-text').keypress( function (e) {   // for text boxes
 // 			if(e.which == 13) {

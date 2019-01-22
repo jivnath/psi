@@ -94,12 +94,22 @@ class Employee extends Model
 
     public static function residence()
     {
-        return ['address_jp', 'residence_card_no', 'residence_card_exp_date', 'status_residence',];
+        return ['address_jp', 'residence_card_no', 'residence_card_exp_date', 'status_residence'];
     }
 
     public static function bank()
     {
-        return ['financial_institution', 'branch_name', 'accout_numer', 'account_holder', 'account_registration',];
+        return ['financial_institution', 'branch_name', 'accout_numer', 'account_holder', 'account_registration'];
+    }
+
+    public static function school()
+    {
+        return ['school_information', 'place'];
+    }
+
+    public static function work()
+    {
+        return ['office', 'operating_status', 'hourly_wage', 'work_location'];
     }
 
     /**

@@ -468,6 +468,28 @@ return [
     'november'=>'11月',
     'december'=>'12月',
 
+    //hotels columns
+    'employee_number' => '従業員番号',
+    'registration_officer' => '登録担当者',
+    'duplicate_name_and_employee_number' => '重複する名前/従業員番号',
+    'operational_status' => '運用状況',
+    'update_date' => '更新日',
+    'country_of_citizenship' => '国籍',
+    'record_in_kanji' => '漢字で記録する',
+    'birthday' => 'お誕生日',
+    'phone_number' => '電話番号',
+    'gender' => '電話番号',
+    'student' => '学生',
+    'address' => '住所',
+    'residence_card_duplication' => '在留カードの複製',
+    'residence_card_expiration_date' => '在留カードの有効期限',
+    'personal_payment_hourly_wage' => '個人支払い毎時賃金',
+    'residence_card_number' => '在留カード番号',
+    'after_renewal_hourly_wage' => '更新後毎時賃金',
+    'work_update_date' => '作業更新日',
+    'residence_status' => '在留資格',
+    'memo' => 'メモ',
+    'hotelEmployeesList' => 'ホテル従業員リスト',
 
 
 ];

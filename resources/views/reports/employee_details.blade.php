@@ -8,6 +8,7 @@
           href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
     <section class="content">
+        {{--{{dd($column)}}--}}
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info">
@@ -32,13 +33,38 @@
                                    style="width: 100%">
                                 <thead class="thead-dark">
                                 <tr>
-                                    {{--{{dd($all_col)}}--}}
-                                    @foreach($all_col as $columns_index)
+                                    @if($a > 0)
+                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$a}}">Basic Info
+                                        </th>
+                                    @endif
+                                    @if($b > 0)
+                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$b}}">Contacts</th>
+                                    @endif
+                                    @if($c > 0)
+                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$c}}">Residence</th>
+                                    @endif
+                                    @if($d > 0)
+                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$d}}">Work</th>
+                                    @endif
+                                    @if($e > 0)
+                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$e}}">School</th>
+                                    @endif
+                                    @if($f > 0)
+                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$f}}">Bank</th>
+                                    @endif
+                                    @if($g > 0)
+                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$g}}">Others</th>
+                                    @endif
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    @foreach($column as $columns_index)
                                         <th class="sticky"
                                             style="word-wrap: break-word">{{trans('employee.'.$columns_index)}}
                                         </th>
                                     @endforeach
                                     <th class="sticky" style="word-wrap: break-word">@lang('employee.Skills')</th>
+
                                 </tr>
                                 </thead>
                             </table>
@@ -83,7 +109,7 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
                                                        id="customCheck{{$field->id}}" name='customized[]'
-                                                       value='{{$field->id.'~~'.$field->status}}' checked disabled>
+                                                       value='{{$field->id.'~~'.$field->status}}' checked onclick="return false;">
                                                 <label class="custom-control-label"
                                                        for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
                                             </div>
@@ -102,7 +128,7 @@
             </div>
         </div>
     </div>
-                            {{--{{dd($columns)}}--}}
+    {{--{{dd($columns)}}--}}
 @endsection @push('scripts')
     <script src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
     <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
@@ -111,17 +137,16 @@
             var locale = $("#locale").val();
 
             var column = '{{json_encode($column)}}';
-            column = column.replace(/&quot;/g,'"');
-            column = column.replace(/&#039;/g,'"');
+            column = column.replace(/&quot;/g, '"');
+            column = column.replace(/&#039;/g, '"');
 
             var columns = JSON.parse(column);
             var col = [];
             let i;
-            for(i = 0; i < columns.length; i++)
-            {
-                col.push({ 'data':columns[i]});
+            for (i = 0; i < columns.length; i++) {
+                col.push({'data': columns[i]});
             }
-            col.push({'data':'skills'})
+            col.push({'data': 'skills'})
 
             if (locale == 'en') {
 
@@ -130,12 +155,12 @@
                     "processing": true,
                     "serverSide": true,
                     "ajax": {
-                        "url":"<?= route('getEmployeeDetailsAjax') ?>",
-                        "dataType":"json",
-                        "type":"POST",
-                        "data":{"_token":"<?= csrf_token() ?>"}
+                        "url": "<?= route('getEmployeeDetailsAjax') ?>",
+                        "dataType": "json",
+                        "type": "POST",
+                        "data": {"_token": "<?= csrf_token() ?>"}
                     },
-                    "columns":col,
+                    "columns": col,
                 });
                 $('.wrapper').css('width', (window.innerWidth - 80));
             }
@@ -148,12 +173,12 @@
                     "processing": true,
                     "serverSide": true,
                     "ajax": {
-                        "url":"<?= route('getEmployeeDetailsAjax') ?>",
-                        "dataType":"json",
-                        "type":"POST",
-                        "data":{"_token":"<?= csrf_token() ?>"}
+                        "url": "<?= route('getEmployeeDetailsAjax') ?>",
+                        "dataType": "json",
+                        "type": "POST",
+                        "data": {"_token": "<?= csrf_token() ?>"}
                     },
-                    "columns":col,
+                    "columns": col,
                 });
                 $('.wrapper').css('width', (window.innerWidth - 80));
             }

@@ -467,5 +467,28 @@ return [
     'november'=>'November',
     'december'=>'December',
 
+    //hotels columns
+    'employee_number' => 'Employee No.',
+    'registration_officer' => 'Registration Officer',
+    'duplicate_name_and_employee_number' => 'Duplicate Name/Employee No.',
+    'operational_status' => 'Operational Status',
+    'update_date' => 'Update Date',
+    'country_of_citizenship' => 'Country Of Citizenship',
+    'record_in_kanji' => 'Record In Kanji',
+    'birthday' => 'Birthday',
+    'phone_number' => 'Phone No.',
+    'gender' => 'Gender',
+    'student' => 'Student',
+    'address' => 'Address',
+    'residence_card_duplication' => 'Residence Card Duplication',
+    'residence_card_expiration_date' => 'Residence Card Exp. Date',
+    'personal_payment_hourly_wage' => 'Personal Payment Hourly Wage',
+    'residence_card_number' => 'Residence Card No.',
+    'after_renewal_hourly_wage' => 'After Renewal Hourly Wage',
+    'work_update_date' => 'Work Update Date',
+    'residence_status' => 'Residence Status',
+    'memo' => 'Memo',
+    'hotelEmployeesList' => 'Hotel Employees List',
+
 
 ];

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\HotelColumn;
 use Illuminate\Http\Request;
 use App\Models\PsiViewCustimizeModel;
 
@@ -51,5 +52,26 @@ class CustomerTableView extends Controller
         ])->delete();
         $completed = \App\Models\PsiViewCustimizeModel::insert($data);
         return response()->json($completed);
+    }
+
+    public function customize_hotel_columns(Request $request)
+    {
+        $on_id = '';
+        $request_data = $request->all('customized');
+//        dd($request_data);
+        foreach ($request_data as $row) {
+            foreach ($row as $r)
+                $on_id .= $r . ',';
+        }
+//        dd($on_id);
+        $include_id = explode(',', rtrim($on_id, ','));
+        HotelColumn::whereNotIn('field_name', $include_id)->update([
+            'status' => 'n'
+        ]);
+        HotelColumn::whereIn('field_name', $include_id)->update([
+            'status' => 'y'
+        ]);
+
+        return redirect()->back();
     }
 }

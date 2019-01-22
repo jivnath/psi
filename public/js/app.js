@@ -47238,7 +47238,8 @@ function Employee() {
 		data['job_type']=$(event.target).data('job_type');
 		data['application_source']=$(event.target).data('app_source');
 		data['ctt_id']=$(event.target).data('ctt_id');
-
+        console.log(data['psi_num']);
+        console.log(window.location.pathname);
         var oldValue = $(el).attr('data-old');
         var newValue = data['value'];
         if (oldValue != newValue) {
@@ -47248,7 +47249,14 @@ function Employee() {
 
     self.updateEmployeeCell = function (data, calback) {
         // alert(data.schedule_date+','+data.company_id+','+data.company_tt_id+','+data.application_source+','+data.job_type);
-        var application_api_url=(typeof data.application_source!='undefined') ? '/shift_management/section_shift/shift/updateCell':'/master_data/employees/updateCell';
+        if(window.location.pathname=='/master_data/hotels/employee')
+        {
+           var application_api_url = '/master_data/hotels/updateCell'
+        }
+        else
+        {
+            var application_api_url=(typeof data.application_source!='undefined') ? '/shift_management/section_shift/shift/updateCell':'/master_data/employees/updateCell';
+        }
         axios.post(application_api_url, data).then(function (response) {
             calback(response.data);
         }).catch(function (error) {

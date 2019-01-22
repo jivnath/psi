@@ -101,6 +101,20 @@ Route::group(['middleware' => ['auth']], function () {
                     Route::post('/removeManager', ['as' => 'removeManager', 'uses' => 'LeaderController@removeManager']);
                 });
                 //</companies>
+
+                //<hotels>
+                Route::prefix('hotels')->group(function(){
+                    Route::get('/employee', ['as' =>'hotels.employee', 'uses'=> 'HotelEmployeeController@index']);
+                    Route::get('/upload', ['as' =>'hotels.upload', 'uses'=> 'HotelEmployeeController@upload']);
+                    Route::post('/upload', ['as' =>'hotels.uploadExcel', 'uses'=> 'HotelEmployeeController@uploadExcel']);
+                    Route::post('/getHotelEmployeeAjax', ['as' =>'getHotelEmployeeAjax', 'uses'=> 'HotelEmployeeController@getHotelEmployeeAjax']);
+                    Route::post('/updateCell', ['as' =>'hotels.updateCell', 'uses'=> 'HotelEmployeeController@updateCell']);
+                    Route::post('/updateHotelGender', ['as' =>'updateHotelGender', 'uses'=> 'HotelEmployeeController@updateHotelGender']);
+                    Route::post('/updateHotelViberInstall', ['as' =>'updateHotelViberInstall', 'uses'=> 'HotelEmployeeController@updateHotelViberInstall']);
+                    Route::post('/updateHotelForWork', ['as' =>'updateHotelForWork', 'uses'=> 'HotelEmployeeController@updateHotelForWork']);
+                    Route::post('/updateHotelOperationalStatus', ['as' =>'updateHotelOperationalStatus', 'uses'=> 'HotelEmployeeController@updateHotelOperationalStatus']);
+                    Route::post('/updateHotelHourlyEmployee', ['as' =>'updateHotelHourlyEmployee', 'uses'=> 'HotelEmployeeController@updateHotelHourlyEmployee']);
+                });
             });
 
             //</master data>
@@ -188,6 +202,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/denied', ['as' => 'access.denied', 'uses' => 'DisplayController@display']);
         Route::post('/viber_it', ['as' => 'viber.send', 'uses' => 'ViberMessageController@store_message']);
         Route::post('/customize', ['as' => 'customize.field', 'uses' => 'CustomerTableView@saveCustomizedField']);
+        Route::post('/customize_hotel_columns', ['as' => 'customize_hotel_columns', 'uses' => 'CustomerTableView@customize_hotel_columns']);
         Route::get('/update_field/{type}', ['as' => 'field_update', 'uses' => 'CustomerTableView@update_table_view']);
         Route::get('/addmore', 'ShiftMasterController@addMore');
         Route::post('/addmore', 'ShiftMasterController@addMorePost');

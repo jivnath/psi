@@ -85,6 +85,7 @@ die;
             'created_at',
             'updated_at'
         ]);
+//        dd($columns);
         $insert_data = [];
         foreach ($columns as $row) {
             $insert_data[] = [

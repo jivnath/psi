@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <form method="POST" action="{{ route('employees.upload') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('hotels.uploadExcel') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="excelFile">@lang('employee.SelectExcelFile')</label>
@@ -18,5 +18,5 @@
                 <button class="btn btn-primary" type="submit">@lang('employee.Upload')</button>
             </div>
         </form>
-    </div>  
+    </div>
 @endsection
