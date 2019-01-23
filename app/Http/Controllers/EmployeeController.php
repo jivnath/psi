@@ -90,6 +90,39 @@ class EmployeeController extends Controller
         $data['f'] = $f;
         $data['g'] = $g;
         $data['customize_columns'] = PsiViewCustimizeModel::where('type', 'employee')->get();
+        foreach ($data['customize_columns'] as $column)
+        {
+            if(in_array($column->field_name, Employee::basicInfo())) {
+                $basicInf[] = $column;
+            }
+            else if(in_array($column->field_name, Employee::contacts())) {
+                $contact[] = $column;
+            }
+            else if(in_array($column->field_name, Employee::residence())) {
+                $residenc[] = $column;
+            }
+            else if(in_array($column->field_name, Employee::work())) {
+                $wor[] = $column;
+            }
+            else if(in_array($column->field_name, Employee::school())) {
+                $schoo[] = $column;
+            }
+            else if(in_array($column->field_name, Employee::bank())) {
+                $ban[] = $column;
+            }
+            else
+            {
+                $othe[] = $column;
+            }
+        }
+        $data['basicInfo'] = collect($basicInf);
+        $data['contacts'] = collect($contact);
+        $data['residence'] = collect($residenc);
+        $data['work'] = collect($wor);
+        $data['school'] = collect($schoo);
+        $data['bank'] = collect($ban);
+        $data['other'] = collect($othe);
+        $data['customize_columns'] = array_merge($basicInf, $contact, $residenc, $wor, $schoo, $ban, $othe);
         return view('reports.employee_details', $data);
     }
 

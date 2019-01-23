@@ -3,12 +3,14 @@
         div.dataTables_wrapper {
             margin: 0 auto;
         }
+        thead th{
+            color: white;
+        }
     </style>
     <link rel="stylesheet"
           href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
     <section class="content">
-        {{--{{dd($column)}}--}}
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-info">
@@ -31,39 +33,38 @@
                         <div class='wrapper'>
                             <table class="table display nowrap table-condensed" id='employee_details'
                                    style="width: 100%">
-                                <thead class="thead-dark">
-                                <tr>
+                                <thead>
+                                <tr class="firstHead">
                                     @if($a > 0)
-                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$a}}">Basic Info
-                                        </th>
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$a}}">@lang('employee.basicInfo')</th>
                                     @endif
                                     @if($b > 0)
-                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$b}}">Contacts</th>
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$b}}">@lang('employee.contacts')</th>
                                     @endif
                                     @if($c > 0)
-                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$c}}">Residence</th>
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$c}}">@lang('employee.residence')</th>
                                     @endif
                                     @if($d > 0)
-                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$d}}">Work</th>
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$d}}">@lang('employee.work')</th>
                                     @endif
                                     @if($e > 0)
-                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$e}}">School</th>
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$e}}">@lang('employee.school')</th>
                                     @endif
                                     @if($f > 0)
-                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$f}}">Bank</th>
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$f}}">@lang('employee.bank')</th>
                                     @endif
                                     @if($g > 0)
-                                        <th class="sticky" style="word-wrap: break-word" colspan="{{$g}}">Others</th>
+                                        <th class="sticky" style="word-wrap: break-word; border-bottom:1px solid black" colspan="{{$g}}">@lang('employee.others')</th>
                                     @endif
-                                    <th></th>
+                                    <th style="word-wrap: break-word; border-bottom:1px solid black"></th>
                                 </tr>
-                                <tr>
+                                <tr class="secondHead">
                                     @foreach($column as $columns_index)
                                         <th class="sticky"
-                                            style="word-wrap: break-word">{{trans('employee.'.$columns_index)}}
+                                            style="word-wrap: break-word; border-top:1px solid black">{{trans('employee.'.$columns_index)}}
                                         </th>
                                     @endforeach
-                                    <th class="sticky" style="word-wrap: break-word">@lang('employee.Skills')</th>
+                                    <th class="sticky" style="word-wrap: break-word; border-top:1px solid black">@lang('employee.Skills')</th>
 
                                 </tr>
                                 </thead>
@@ -91,7 +92,8 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="modified_by" value="{{ \Session::get('user_id') }}">
                         <input type="hidden" name="type" value="employee">
-                        @foreach($customize_columns->chunk(3) as $index=>$customize_columns_index)
+                        <h5>@lang('employee.basicInfo')</h5>
+                        @foreach($basicInfo->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
                                     @if($field->field_name!='psi_number')
@@ -115,6 +117,102 @@
                                             </div>
                                         </div>
                                     @endif
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5>@lang('employee.contacts')</h5>
+                        @foreach($contacts->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5>@lang('employee.residence')</h5>
+                    @foreach($residence->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5>@lang('employee.work')</h5>
+                    @foreach($work->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5>@lang('employee.school')</h5>
+                        @foreach($school->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5>@lang('employee.bank')</h5>
+                        @foreach($bank->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5>@lang('employee.others')</h5>
+                        @foreach($other->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
                                 @endforeach
                             </div>
                         @endforeach
@@ -191,6 +289,22 @@
 
             if (scroll > stickyOffset) sticky.addClass('sticky-top');
             else sticky.removeClass('sticky-top');
+
+            $(".firstHead th").css("font-size", "1.2em");
+            $( "tr td:nth-child({{$a}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$a}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$a+$b}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$a+$b}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$a+$b+$c}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$a+$b+$c}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$a+$b+$c+$d}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$a+$b+$c+$d}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$a+$b+$c+$d+$e}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$a+$b+$c+$d+$e}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$a+$b+$c+$d+$e+$f}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$a+$b+$c+$d+$e+$f}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$a+$b+$c+$d+$e+$f+$g}})" ).css( "border-right", "2px solid white" );
+            $("th").css("background", "#0d6aad");
         });
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');

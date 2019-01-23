@@ -82,7 +82,6 @@
                                 {!! Form::close() !!}
 
                             </li>
-
                         </ul>
                     </div>
 
@@ -193,16 +192,16 @@
                                                                 </a>
                                                             </li>
                                                             <li><a class="dropdown-item"
-                                                                   href="{{ route('manageSkills') }}"><i
-                                                                            class="fa fa-bullseye"></i> @lang('employee.Skills')
+                                                                   href="{{ route('hotels.employee') }}"><i
+                                                                            class="fa fa-hotel"></i>@lang('employee.hotelEmployee')
                                                                 </a></li>
-                                                            {{-- <li><a class="dropdown-item"
-                                                                   href="{{ route('employee.skill') }}"><i
-                                                                            class="fas fa-user-graduate"></i> @lang('employee.EmployeeSkills')
-                                                                </a></li> --}}
+                                                            <li><a class="dropdown-item"
+                                                                   href="{{ route('manageSkills') }}"><i
+                                                                            class="fa fa-bullseye"></i>@lang('employee.Skills')
+                                                                </a></li>
                                                             <li><a class="dropdown-item"
                                                                    href="{{ route('availability.index') }}"><i
-                                                                            class="fas fa-user-clock"></i> @lang('employee.EmployeeAvailability')
+                                                                            class="fas fa-user-clock"></i>@lang('employee.EmployeeAvailability')
                                                                 </a></li>
 
                                                         </ul>

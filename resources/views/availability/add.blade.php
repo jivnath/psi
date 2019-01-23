@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-1"></div>
+        <div class="col-md-2"></div>
         <div class="col-md-7">
             <div class="box" style="min-height: 70px">
                 <div class="box-header"><h4>@lang('employee.EmployeeAvailabilityAdd')</h4></div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-3"></div>
     </div>
 @endsection
 

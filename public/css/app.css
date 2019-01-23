@@ -10769,6 +10769,10 @@ button, input, select, textarea {
 }
 .i-am-centered { margin: auto; max-width: 80%;}
 
+#employee_details thead th{
+  background: #0d6aad;
+}
+
 /*.fc-event-title{*/
   /*font-size: 20px;*/
 /*}*/

@@ -467,6 +467,13 @@ return [
     'may'=>'5月',
     'november'=>'11月',
     'december'=>'12月',
+    'basicInfo' => '基本情報',
+    'residence' => 'レジデンス',
+    'contacts' => '連絡先',
+    'school' => '学校',
+    'bank' => 'バンク',
+    'work' => '作業',
+    'others' => 'その他',
 
     //hotels columns
     'employee_number' => '従業員番号',
@@ -490,6 +497,7 @@ return [
     'residence_status' => '在留資格',
     'memo' => 'メモ',
     'hotelEmployeesList' => 'ホテル従業員リスト',
+    'hotelEmployees' => 'ホテル従業員',
 
 
 ];

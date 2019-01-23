@@ -466,6 +466,13 @@ return [
     'may'=>'May',
     'november'=>'November',
     'december'=>'December',
+    'basicInfo' => 'Basic Info',
+    'residence' => 'Residence',
+    'contacts' => 'Contacts',
+    'school' => 'School',
+    'bank' => 'Bank',
+    'work' => 'Work',
+    'others' => 'Others',
 
     //hotels columns
     'employee_number' => 'Employee No.',
@@ -489,6 +496,7 @@ return [
     'residence_status' => 'Residence Status',
     'memo' => 'Memo',
     'hotelEmployeesList' => 'Hotel Employees List',
+    'hotelEmployee' => 'Hotel Employee',
 
 
 ];
