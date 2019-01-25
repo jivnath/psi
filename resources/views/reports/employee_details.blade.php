@@ -92,7 +92,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="modified_by" value="{{ \Session::get('user_id') }}">
                         <input type="hidden" name="type" value="employee">
-                        <h5>@lang('employee.basicInfo')</h5>
+                        <h5><u>@lang('employee.basicInfo')</u></h5>
                         @foreach($basicInfo->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
@@ -120,7 +120,7 @@
                                 @endforeach
                             </div>
                         @endforeach
-                        <h5>@lang('employee.contacts')</h5>
+                        <h5><u>@lang('employee.contacts')</u></h5>
                         @foreach($contacts->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
@@ -136,7 +136,7 @@
                                 @endforeach
                             </div>
                         @endforeach
-                        <h5>@lang('employee.residence')</h5>
+                        <h5><u>@lang('employee.residence')</u></h5>
                     @foreach($residence->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
@@ -152,7 +152,7 @@
                                 @endforeach
                             </div>
                         @endforeach
-                        <h5>@lang('employee.work')</h5>
+                        <h5><u>@lang('employee.work')</u></h5>
                     @foreach($work->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
@@ -168,7 +168,7 @@
                                 @endforeach
                             </div>
                         @endforeach
-                        <h5>@lang('employee.school')</h5>
+                        <h5><u>@lang('employee.school')</u></h5>
                         @foreach($school->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
@@ -184,7 +184,7 @@
                                 @endforeach
                             </div>
                         @endforeach
-                        <h5>@lang('employee.bank')</h5>
+                        <h5><u>@lang('employee.bank')</u></h5>
                         @foreach($bank->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
@@ -200,7 +200,7 @@
                                 @endforeach
                             </div>
                         @endforeach
-                        <h5>@lang('employee.others')</h5>
+                        <h5><u>@lang('employee.others')</u></h5>
                         @foreach($other->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
@@ -289,7 +289,8 @@
 
             if (scroll > stickyOffset) sticky.addClass('sticky-top');
             else sticky.removeClass('sticky-top');
-
+        });
+        $(document).ajaxComplete( function () {
             $(".firstHead th").css("font-size", "1.2em");
             $( "tr td:nth-child({{$a}})" ).css( "border-right", "2px solid black" );
             $( ".secondHead th:nth-child({{$a}})" ).css( "border-right", "2px solid black" );

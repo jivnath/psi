@@ -6,6 +6,12 @@
             padding: 3px;
             box-sizing: border-box;
         }
+        thead th{
+            color: white;
+        }
+        #example2 th{
+            background-color: #0d6aad;
+        }
     </style>
     <section class="content">
         @include('layouts.duplicate_employees')
@@ -37,19 +43,43 @@
                             <table class="display responsive nowrap table table-striped table-fixed table-condensed"
                                    style="text-align: center" id='example2'>
                                 <thead>
-                                <tr>
-                                    @foreach($all_col as $column)
+                                <tr class="firstHead">
+                                    @if($data['a'] > 0)
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$data['a']}}">@lang('employee.basicInfo')</th>
+                                    @endif
+                                    @if($data['b'] > 0)
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$data['b']}}">@lang('employee.contacts')</th>
+                                    @endif
+                                    @if($data['c'] > 0)
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$data['c']}}">@lang('employee.residence')</th>
+                                    @endif
+                                    @if($data['d'] > 0)
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$data['d']}}">@lang('employee.work')</th>
+                                    @endif
+                                    @if($data['e'] > 0)
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$data['e']}}">@lang('employee.school')</th>
+                                    @endif
+                                    @if($data['f'] > 0)
+                                        <th class="sticky" style="word-wrap: break-word; border-right:2px solid black; border-bottom:1px solid black" colspan="{{$data['f']}}">@lang('employee.bank')</th>
+                                    @endif
+                                    @if($data['g'] > 0)
+                                        <th class="sticky" style="word-wrap: break-word; border-bottom:1px solid black" colspan="{{$data['g']}}">@lang('employee.others')</th>
+                                    @endif
+                                    <th style="word-wrap: break-word; border-bottom:1px solid black"></th>
+                                </tr>
+                                <tr class="secondHead">
+                                    @foreach($data['data'] as $column)
                                         <th class=""
-                                            style="word-wrap: break-word">{{(trans('employee.'.$column->field_name))}}</th>
+                                            style="word-wrap: break-word; border-top:1px solid black">{{(trans('employee.'.$column))}}</th>
                                     @endforeach
-                                    <th class="" style="word-wrap: break-word">@lang('employee.Skills')</th>
+                                    <th class="" style="word-wrap: break-word; border-top:1px solid black">@lang('employee.Skills')</th>
 
                                 </tr>
                                 </thead>
                                 <thead>
                                 <tr>
-                                    @foreach($all_col as $count_key=>$column) @if ($column->field_name == 'sex')
-                                        <td style="padding: 1px;"><select style="width:70%" data-column="{{$count_key}}"
+                                    @foreach($data['data'] as $count_key=>$column) @if ($column == 'sex')
+                                        <td style="padding: 1px; border-bottom:2px solid black"><select style="width:70%" data-column="{{$count_key}}"
                                                                           class="search-input-select chosen-select"
                                                                           tabindex="{{$count_key+1}}">
                                                 <option value="">@lang('employee.All')</option>
@@ -57,22 +87,14 @@
                                                 <option value="女性">女性</option>
                                             </select></td>
                                     @else
-                                        <td style="padding: 1px;"><input style="width:70%" type="text"
+                                        <td style="padding: 1px; border-bottom:2px solid black"><input style="width:70%" type="text"
                                                                          data-column="{{$count_key}}"
                                                                          class="search-input-text"
                                                                          tabindex="{{$count_key+1}}"></td>
                                     @endif @endforeach
-
+                                    <td style="padding: 1px; border-bottom:2px solid black"></td>
                                 </tr>
                                 </thead>
-                                {{--<tfoot>--}}
-                                {{--<tr>--}}
-                                {{--@foreach($all_col as $column)--}}
-                                {{--<th class="sticky-top" style="word-wrap: break-word">{{(trans('employee.'.$column->field_name))}}</th>--}}
-                                {{--@endforeach--}}
-                                {{--<th class="sticky-top" style="word-wrap: break-word">@lang('employee.Skills')</th>--}}
-                                {{--</tr>--}}
-                                {{--</tfoot>--}}
                             </table>
                         </div>
                     </div>
@@ -127,26 +149,27 @@
                         <input type="hidden" name="_method" value="POST">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="modified_by" value="{{ \Session::get('user_id') }}">
-                        <input type="hidden" name="type"
-                               value="employee"> @foreach($customize_columns->chunk(3) as $index=>$customize_columns_index)
+                        <input type="hidden" name="type" value="employee">
+                        <h5><u>@lang('employee.basicInfo')</u></h5>
+                        @foreach($data['basicInfo']->chunk(3) as $index=>$customize_columns_index)
                             <div class="form-row">
                                 @foreach($customize_columns_index as $field)
                                     @if($field->field_name!='psi_number')
                                         <div class="col-md-4 mb-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'
-                                    ~~ '.$field->status}}' {{($field->status=='y')?'checked':''}}>
-                                            <label class="custom-control-label"
-                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input"
+                                                       id="customCheck{{$field->id}}" name='customized[]'
+                                                       value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                                <label class="custom-control-label"
+                                                       for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                            </div>
                                         </div>
-                                    </div>
                                     @else
                                         <div class="col-md-4 mb-3">
                                             <div class="custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input"
-                                                       id="customCheck{{$field->id}}" name='customized[]' value='{{$field->id.'
-                                    ~~ '.$field->status}}' checked onclick="return false;">
+                                                       id="customCheck{{$field->id}}" name='customized[]'
+                                                       value='{{$field->id.'~~'.$field->status}}' checked onclick="return false;">
                                                 <label class="custom-control-label"
                                                        for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
                                             </div>
@@ -155,11 +178,106 @@
                                 @endforeach
                             </div>
                         @endforeach
+                        <h5><u>@lang('employee.contacts')</u></h5>
+                        @foreach($data['contacts']->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5><u>@lang('employee.residence')</u></h5>
+                        @foreach($data['residence']->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5><u>@lang('employee.work')</u></h5>
+                        @foreach($data['work']->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5><u>@lang('employee.school')</u></h5>
+                        @foreach($data['school']->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5><u>@lang('employee.bank')</u></h5>
+                        @foreach($data['bank']->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
+                        <h5><u>@lang('employee.others')</u></h5>
+                        @foreach($data['other']->chunk(3) as $index=>$customize_columns_index)
+                            <div class="form-row">
+                                @foreach($customize_columns_index as $field)
+                                    <div class="col-md-4 mb-3">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input"
+                                                   id="customCheck{{$field->id}}" name='customized[]'
+                                                   value='{{$field->id.'~~'.$field->status}}' {{($field->status=='y')?'checked':''}}>
+                                            <label class="custom-control-label"
+                                                   for="customCheck{{$field->id}}">{{trans('employee.'.$field->field_name)}}</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endforeach
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('employee.Close')
                             </button>
                             <button type="submit" class="btn btn-primary">@lang('employee.SaveChanges')</button>
-
                         </div>
                     </form>
                 </div>
@@ -273,44 +391,9 @@
             });
         });
 
-        /*  $(document).ready(function () {
-             // Setup - add a text input to each footer cell
-             // Setup - add a text input to each footer cell
-
-
-             // DataTable
-             var locale = $("#locale").val();
-             if(locale == 'ja')
-             {
-                  var table = $('#example').DataTable( {
-                     "language": {
-                         "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Japanese.json"
-                     }
-                 });
-             }
-             else
-             {
-                 var table = $('#example').DataTable();
-             }
-             $("#example_filter").css("display", "none");  // hiding global search box
-
-             $('.search-input-text').keypress(function (e) {   // for text boxes
-                 if (e.which == 13) {
-                     var i = $(this).attr('data-column');  // getting column index
-                     var v = $(this).val();  // getting search input value
-                     //              if(v!='')
-                     table.columns(i).search(v).draw();
-                 }
-             });
-             $('.search-input-select').on('change', function () {   // for select box
-                 var i = $(this).attr('data-column');
-                 var v = $(this).val();
-                 table.columns(i).search(v).draw();
-             });
-         }); */
         $(document).ready(function () {
             $(".example2-grid-error").html("");
-            var column = '{{json_encode($data)}}';
+            var column = '{{json_encode($data['data'])}}';
             column = column.replace(/&quot;/g, '"');
             column = column.replace(/&#039;/g, '"');
 
@@ -361,20 +444,6 @@
                 });
             }
             $("#example_filter").css("display", "none");  // hiding global search box
-// 		$('.search-input-text').keypress( function (e) {   // for text boxes
-// 			if(e.which == 13) {
-// 			var i =$(this).attr('data-column');  // getting column index
-// 			var v =$(this).val();  // getting search input value
-// // 			if(v!='')
-// 			dataTable.columns(i).search(v).draw();
-// 			}
-// 		} );
-
-            /* $('.search-input-text').on( 'keyup change', function () {   // for text boxes
-                var i =$(this).attr('data-column');  // getting column index
-                var v =$(this).val();  // getting search input value
-                dataTable.columns(i).search(v).draw();
-            } ); */
             $('.search-input-select').on('change', function () {   // for select box
                 var i = $(this).attr('data-column');
                 var v = $(this).val();
@@ -446,6 +515,25 @@
                     $("#myModal").modal('hide');
                 }
             });
+        });
+
+        $(document).ajaxComplete(function(){
+            $(".firstHead th").css("font-size", "1.2em");
+            $( "tr td:nth-child({{$data['a']}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$data['a']}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$data['a']}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$data['a'] + $data['b']}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$data['a'] + $data['b']}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$data['a']+$data['b']+$data['c']}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$data['a']+$data['b']+$data['c']}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']+$data['e']}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']+$data['e']}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']+$data['e']+$data['f']}})" ).css( "border-right", "2px solid black" );
+            $( ".secondHead th:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']+$data['e']+$data['f']}})" ).css( "border-right", "2px solid black" );
+            $( "tr td:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']+$data['e']+$data['f']+$data['g']}})" ).css( "border-right", "2px solid white" );
+            $("th").css("background", "#0d6aad");
         });
 
     </script>
