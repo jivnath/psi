@@ -338,16 +338,8 @@ class EmployeeController extends Controller
                     else
                         $nestedData[$column] = $r->$column;
                 }
-//                $skills = EmployeeSkill::where('psi_num', $r->psi_number)->get();
-//                if($skills)
-//                {
-//                    $sk='';
-//                    foreach($skills as $skill)
-//                    {
-//                        $s = SkillMaster::find($skill->skill_id);
-                        $sk = '<span class="btn btn-primary employee_skills" id='.$r->psi_number.'>'.__("skills").'</span>';
-//                    }
-//                }
+                
+                $sk = '<span class="btn btn-primary employee_skills" id='.$r->psi_number.'>'.__("skills").'</span>';
                 $nestedData['skills'] = $sk;
                 $data[] = $nestedData;
             }

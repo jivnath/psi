@@ -61,10 +61,10 @@
                                 <tr class="secondHead">
                                     @foreach($column as $columns_index)
                                         <th class="sticky"
-                                            style="word-wrap: break-word; border-top:1px solid black">{{trans('employee.'.$columns_index)}}
+                                            style="word-wrap: break-word; border-top:1px solid black; border-right:1px solid black; border-bottom:1px solid black">{{trans('employee.'.$columns_index)}}
                                         </th>
                                     @endforeach
-                                    <th class="sticky" style="word-wrap: break-word; border-top:1px solid black">@lang('employee.Skills')</th>
+                                    <th class="sticky" style="word-wrap: break-word; border-top:1px solid black; border-bottom:1px solid black">@lang('employee.Skills')</th>
 
                                 </tr>
                                 </thead>
@@ -306,6 +306,8 @@
             $( ".secondHead th:nth-child({{$a+$b+$c+$d+$e+$f}})" ).css( "border-right", "2px solid black" );
             $( "tr td:nth-child({{$a+$b+$c+$d+$e+$f+$g}})" ).css( "border-right", "2px solid white" );
             $("th").css("background", "#0d6aad");
+            $("tr td").css("border-right", "1px solid black");
+            $("tr td:last-child").css("border-right", "none");
         });
         $('#view_columns').click(function () {
             $('#exampleModalLong').modal('show');

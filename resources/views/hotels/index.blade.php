@@ -187,7 +187,6 @@
         });
 
         $(document).on('change', '.gender', function () {
-            alert('hey');
             var sex = $(this).val();
             var no = $(this).attr('data-psi_data');
             $.ajax({
@@ -202,8 +201,7 @@
             });
         });
 
-    $(document).on('change', '.viber_install', function () {
-        alert('hey');
+        $(document).on('change', '.viber_install', function () {
             var viber = $(this).val();
             var no = $(this).attr('data-psi_data');
             $.ajax({
@@ -218,8 +216,7 @@
             });
         });
 
-    $(document).on('change', '.for_work', function () {
-        alert('hey');
+        $(document).on('change', '.for_work', function () {
             var work = $(this).val();
             var no = $(this).attr('data-psi_data');
             $.ajax({
@@ -234,8 +231,7 @@
             });
         });
 
-    $(document).on('change', '.operational_status', function () {
-        alert('hey');
+        $(document).on('change', '.operational_status', function () {
             var status = $(this).val();
             var no = $(this).attr('data-psi_data');
             $.ajax({
@@ -250,8 +246,7 @@
             });
         });
 
-    $(document).on('change', '.hourly_employee', function () {
-        alert('hey');
+        $(document).on('change', '.hourly_employee', function () {
             var hourly = $(this).val();
             var no = $(this).attr('data-psi_data');
             $.ajax({
@@ -265,6 +260,5 @@
                 }
             });
         });
-
     </script>
 @endpush

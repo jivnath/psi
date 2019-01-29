@@ -70,9 +70,9 @@
                                 <tr class="secondHead">
                                     @foreach($data['data'] as $column)
                                         <th class=""
-                                            style="word-wrap: break-word; border-top:1px solid black">{{(trans('employee.'.$column))}}</th>
+                                            style="word-wrap: break-word; border-top:1px solid black; border-right:1px solid black; border-bottom:1px solid black">{{(trans('employee.'.$column))}}</th>
                                     @endforeach
-                                    <th class="" style="word-wrap: break-word; border-top:1px solid black">@lang('employee.Skills')</th>
+                                    <th class="" style="word-wrap: break-word; border-top:1px solid black; border-bottom:1px solid black">@lang('employee.Skills')</th>
 
                                 </tr>
                                 </thead>
@@ -534,6 +534,8 @@
             $( ".secondHead th:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']+$data['e']+$data['f']}})" ).css( "border-right", "2px solid black" );
             $( "tr td:nth-child({{$data['a']+$data['b']+$data['c']+$data['d']+$data['e']+$data['f']+$data['g']}})" ).css( "border-right", "2px solid white" );
             $("th").css("background", "#0d6aad");
+            $("tr td").css("border-right", "1px solid black");
+            $("tr td:last-child").css("border-right", "none");
         });
 
     </script>

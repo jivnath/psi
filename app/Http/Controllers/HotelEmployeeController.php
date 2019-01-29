@@ -35,7 +35,7 @@ class HotelEmployeeController extends Controller
             ->iterateSheet()
             ->checkDuplicateAndStore();
         Session::flash('duplicate', $data['yes']);
-        return redirect()->back();
+        return redirect()->route("hotels.index");
     }
 
     public function getHotelEmployeeAjax(Request $request)
